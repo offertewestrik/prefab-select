@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Information provided by a potential customer via a contact form.",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["new", "contacted", "qualified", "closed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["firstName", "lastName", "email", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Public and private information about an authenticated user.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      }
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of customer inquiries."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles for internal management."
+    }
+  }
+}

@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Global Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Collection: Leads
+    match /leads/{leadId} {
+      allow create: if isValidId(leadId) 
+                    && request.resource.data.keys().hasAll(['firstName', 'lastName', 'email', 'createdAt'])
+                    && request.resource.data.firstName is string && request.resource.data.firstName.size() <= 100
+                    && request.resource.data.lastName is string && request.resource.data.lastName.size() <= 100
+                    && request.resource.data.email is string && request.resource.data.email.size() <= 100
+                    && request.resource.data.createdAt == request.time;
+      
+      allow get, list: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Collection: Users
+    match /users/{userId} {
+      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow create, update: if isSignedIn() && request.auth.uid == userId 
+                            && request.resource.data.role == "user" // Users cannot self-promote
+                            && request.resource.data.email == request.auth.token.email;
+      allow delete: if isAdmin();
+    }
+    
+    // Explicit Admin collection check
+    match /admins/{adminId} {
+      allow get: if isSignedIn() && request.auth.uid == adminId;
+      allow list, create, update, delete: if false; // Only manageable via Google Cloud Console/Admin SDK
+    }
+  }
+}

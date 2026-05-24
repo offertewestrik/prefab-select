@@ -1,0 +1,6 @@
+{
+  "name": "Prefab Select",
+  "description": "Architectural prefab solutions for high-end residential extensions, outbuildings, and care homes. Precision engineered, rapidly deployed.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

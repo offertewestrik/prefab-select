@@ -1,0 +1,10 @@
+filelist.txt
+index.html
+metadata.json
+node_modules
+package-lock.json
+package.json
+public
+src
+tsconfig.json
+vite.config.ts

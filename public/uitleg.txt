@@ -1,0 +1,2 @@
+Dit is de map voor statische bestanden zoals video's en afbeeldingen.
+Upload hier je video en noem deze 'intro-video.mp4'.
