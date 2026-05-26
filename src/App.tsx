@@ -1421,18 +1421,6 @@ function ScrollToTop() {
 
 const WhatsAppButton = () => (
   <div className="fixed bottom-24 right-6 z-40 flex flex-col gap-4">
-    {/* AI Assistant Floating */}
-    <Link
-      to="/ai-expert"
-      className="bg-blue-950 text-white p-4 rounded-full shadow-2xl hover:scale-125 transition-transform flex items-center justify-center border-4 border-white group relative"
-      title="AI Expert Assistent"
-    >
-      <Sparkles className="w-6 h-6 text-blue-400" />
-      <div className="absolute right-full mr-4 bg-blue-950 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow-2xl">
-        AI Expert Hulp
-      </div>
-    </Link>
-
     {/* WhatsApp Button */}
     <a 
       href="https://wa.me/31850607775" 
@@ -2264,7 +2252,6 @@ function Footer() {
             <ul className="space-y-4 text-blue-300 text-[10px] font-bold uppercase tracking-widest leading-none text-left">
               <li><Link to="/diensten" className="hover:text-white transition-colors">Diensten</Link></li>
               <li><Link to="/faq" className="hover:text-white transition-colors">Veelgestelde Vragen</Link></li>
-              <li><Link to="/ai-expert" className="hover:text-white transition-colors">AI Expert</Link></li>
               <li><Link to="/over-ons" className="hover:text-white transition-colors">Over ons</Link></li>
             </ul>
           </div>

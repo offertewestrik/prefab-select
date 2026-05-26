@@ -1,13 +1,16 @@
 # Stage 1: Build the client assets and compile the server
-FROM node:18-alpine AS builder
+FROM node:18-slim AS builder
 
 WORKDIR /app
+
+# Ensure devDependencies are installed even if NODE_ENV is set to production in CI environment
+ENV NODE_ENV=development
 
 # Copy package file configuration
 COPY package*.json ./
 
 # Install all development and build dependencies
-RUN npm ci
+RUN npm install
 
 # Copy the source code in
 COPY . .
@@ -16,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production runtime image
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /app
 
@@ -25,7 +28,7 @@ ENV PORT=3000
 
 # Install ONLY production dependencies to keep the image slim
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
 # Copy the compiled production outputs from builder (including SPA assets and compiled backend file)
 COPY --from=builder /app/dist ./dist
