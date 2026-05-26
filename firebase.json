@@ -11,7 +11,7 @@
         "source": "**",
         "run": {
           "serviceId": "prefab-select",
-          "region": "europe-west4"
+          "region": "europe-west2"
         }
       }
     ]
