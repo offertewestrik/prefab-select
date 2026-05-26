@@ -1,8 +1,8 @@
 import express from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
 import axios from "axios";
 import dotenv from "dotenv";
+import fs from "fs/promises";
 import { GoogleGenAI } from "@google/genai";
 import admin from "firebase-admin";
 import { Resend } from "resend";
@@ -12,22 +12,123 @@ dotenv.config();
 // Initialize Resend
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
+import fsSync from "fs";
+import { getFirestore } from "firebase-admin/firestore";
+
+// Find named database ID and project ID if set
+let firestoreDbId: string | undefined = process.env.FIRESTORE_DATABASE_ID;
+let firebaseProjectId: string | undefined = process.env.FIREBASE_PROJECT_ID;
+
+try {
+  const configPath = path.join(process.cwd(), "firebase-applet-config.json");
+  if (fsSync.existsSync(configPath)) {
+    const configJson = JSON.parse(fsSync.readFileSync(configPath, "utf-8"));
+    if (configJson.projectId) {
+      firebaseProjectId = configJson.projectId;
+      console.log("Loaded projectId from firebase-applet-config.json:", firebaseProjectId);
+    }
+    if (configJson.firestoreDatabaseId) {
+      firestoreDbId = configJson.firestoreDatabaseId;
+      console.log("Loaded firestoreDatabaseId from firebase-applet-config.json:", firestoreDbId);
+    }
+  }
+} catch (err: any) {
+  console.error("Failed to read firebaseconfig from firebase-applet-config.json:", err.message);
+}
+
 // Initialize Firebase Admin
 try {
-  if (process.env.FIREBASE_PROJECT_ID) {
+  if (firebaseProjectId) {
     admin.initializeApp({
       credential: admin.credential.applicationDefault(),
-      projectId: process.env.FIREBASE_PROJECT_ID,
+      projectId: firebaseProjectId,
     });
-    console.log("Firebase Admin successfully initialized.");
+    console.log("Firebase Admin successfully initialized on project:", firebaseProjectId);
   } else {
-    console.warn("FIREBASE_PROJECT_ID not found. Firebase Admin not initialized.");
+    console.warn("No Firebase Project ID found. Firebase Admin not initialized.");
   }
 } catch (error: any) {
   console.error("Firebase Admin initialization failed:", error.message);
 }
 
-const db = admin.apps.length ? admin.firestore() : null;
+const db = admin.apps.length 
+  ? (firestoreDbId ? getFirestore(admin.apps[0], firestoreDbId) : getFirestore()) 
+  : null;
+
+// Local leads cache definition
+let localLeads: any[] = [];
+const FALLBACK_FILE = path.join(process.cwd(), "leads_fallback.json");
+
+// Save helper
+async function saveLocalLeadsToDisk() {
+  try {
+    await fs.writeFile(FALLBACK_FILE, JSON.stringify(localLeads, null, 2), "utf-8");
+  } catch (err: any) {
+    console.error("Failed to write leads fallback file:", err.message);
+  }
+}
+
+// Load / Init helper
+async function initLeadsCache() {
+  // Load from disk fallback first
+  try {
+    const data = await fs.readFile(FALLBACK_FILE, "utf-8");
+    localLeads = JSON.parse(data);
+    console.log(`Loaded ${localLeads.length} leads from disk fallback archive.`);
+  } catch (err) {
+    // File doesn't exist yet, that's fine
+  }
+
+  // Try to sync with Firestore if enabled
+  if (db) {
+    try {
+      console.log("Fetching fresh leads from Firestore...");
+      const snapshot = await db.collection("leads").orderBy("createdAt", "desc").get();
+      const firestoreLeads = snapshot.docs.map(doc => {
+        const data = doc.data();
+        let createdAtStr = new Date().toISOString();
+        if (data.createdAt) {
+          if (typeof data.createdAt.toDate === "function") {
+            createdAtStr = data.createdAt.toDate().toISOString();
+          } else if (data.createdAt._seconds) {
+            createdAtStr = new Date(data.createdAt._seconds * 1000).toISOString();
+          } else {
+            createdAtStr = new Date(data.createdAt).toISOString();
+          }
+        }
+        return {
+          id: doc.id,
+          firstName: data.firstName || "",
+          lastName: data.lastName || "",
+          email: data.email || "",
+          phone: data.phone || "",
+          projectType: data.projectType || "",
+          message: data.message || "",
+          status: data.status || "new",
+          createdAt: createdAtStr
+        };
+      });
+
+      // Merge Firestore leads with local leads, avoiding duplicates
+      const merged: any[] = [...localLeads];
+      for (const fsL of firestoreLeads) {
+        if (!merged.some(m => m.id === fsL.id)) {
+          merged.push(fsL);
+        }
+      }
+      merged.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      localLeads = merged;
+      await saveLocalLeadsToDisk();
+      console.log(`Leads cache successfully initialized. Total merged leads: ${localLeads.length}`);
+    } catch (err: any) {
+      console.error("Firestore leads initial sync skipped:", err.message);
+      console.log("Proceeding with local files & disk cache.");
+    }
+  }
+}
+
+// Run background init
+initLeadsCache();
 
 const app = express();
 const PORT = parseInt(process.env.PORT || "3000", 10);
@@ -121,7 +222,7 @@ app.post("/api/leads", async (req, res) => {
             <p><strong>Bericht:</strong></p>
             <p>${message || "Geen bericht achtergelaten."}</p>
             <hr />
-            <p>Deze aanvraag is ook opgeslagen in Firebase en doorgestuurd naar Make.com.</p>
+            <p>Deze aanvraag is opgeslagen in ons dashboard en doorgezet naar Make.com.</p>
           `,
         });
         console.log("Lead notification email sent via Resend.");
@@ -152,21 +253,37 @@ app.post("/api/leads", async (req, res) => {
       }
     }
 
+    // Generate local fallback ID if Firestore is omitted or failed
+    const finalId = firestoreId || `lead_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+    const newLocalLead = {
+      id: finalId,
+      firstName: name.split(" ")[0] || name,
+      lastName: name.split(" ").slice(1).join(" ") || "-",
+      email,
+      phone,
+      projectType,
+      message: message || "Geen bericht achtergelaten.",
+      status: "new",
+      createdAt: new Date().toISOString()
+    };
+    
+    // Unshift to place in front, save to local disk fallbacks immediately
+    localLeads.unshift(newLocalLead);
+    await saveLocalLeadsToDisk();
+
     // 3. Sync to Make.com Webhook (Background task)
     let webhookStatus = "not_configured";
     const rawWebhookUrl = process.env.MAKE_WEBHOOK_URL;
     
     if (rawWebhookUrl) {
-      // Clean up the URL: trim whitespace and remove potential wraparound quotes
       const webhookUrl = rawWebhookUrl.trim().replace(/^["'](.+)["']$/, '$1');
-      
       webhookStatus = "sending";
       (async () => {
         try {
           console.log(`Attempting to send lead to Make webhook: ${webhookUrl.substring(0, 35)}...`);
           
           await axios.post(webhookUrl, {
-            id: firestoreId,
+            id: finalId,
             name,
             email,
             phone,
@@ -182,15 +299,8 @@ app.post("/api/leads", async (req, res) => {
           console.log("SUCCESS: Lead successfully reached Make.com.");
         } catch (makeError: any) {
           const status = makeError.response?.status;
-          const data = makeError.response?.data;
-          
           console.error(`ERROR: Make.com sync failed with status ${status || 'unknown'}.`);
           console.error("Full error message:", makeError.message);
-          
-          if (status === 404) {
-            console.error("DEBUG INFO: A 404 error means the URL is invalid. Please double-check the MAKE_WEBHOOK_URL in your environment settings.");
-            console.error(`Current URL being used (masked): ${webhookUrl.substring(0, 15)}...${webhookUrl.substring(webhookUrl.length - 10)}`);
-          }
         }
       })();
     } else {
@@ -212,12 +322,113 @@ app.post("/api/leads", async (req, res) => {
   }
 });
 
+// GET Endpoint to retrieve all leads (with Firestore fallback sync)
+app.get("/api/leads", async (req, res) => {
+  if (db) {
+    try {
+      const snapshot = await db.collection("leads").orderBy("createdAt", "desc").get();
+      const firestoreLeads = snapshot.docs.map(doc => {
+        const data = doc.data();
+        let createdAtStr = new Date().toISOString();
+        if (data.createdAt) {
+          if (typeof data.createdAt.toDate === "function") {
+            createdAtStr = data.createdAt.toDate().toISOString();
+          } else if (data.createdAt._seconds) {
+            createdAtStr = new Date(data.createdAt._seconds * 1000).toISOString();
+          } else {
+            createdAtStr = new Date(data.createdAt).toISOString();
+          }
+        }
+        return {
+          id: doc.id,
+          firstName: data.firstName || "",
+          lastName: data.lastName || "",
+          email: data.email || "",
+          phone: data.phone || "",
+          projectType: data.projectType || "",
+          message: data.message || "",
+          status: data.status || "new",
+          createdAt: createdAtStr
+        };
+      });
+
+      // Merge and filter duplicates
+      const merged = [...localLeads];
+      for (const fsL of firestoreLeads) {
+        const idx = merged.findIndex(m => m.id === fsL.id);
+        if (idx !== -1) {
+          merged[idx] = fsL;
+        } else {
+          merged.push(fsL);
+        }
+      }
+      merged.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      localLeads = merged;
+      await saveLocalLeadsToDisk();
+    } catch (err: any) {
+      console.error("Error reading fresh leads from Firestore, returning cached leads:", err.message);
+    }
+  }
+  res.json(localLeads);
+});
+
+// PATCH Endpoint to update lead status
+app.patch("/api/leads/:id", async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  if (!status) {
+    return res.status(400).json({ error: "status is required" });
+  }
+
+  console.log(`Updating lead ${id} status to ${status}`);
+
+  // Update locally first
+  const leadIndex = localLeads.findIndex(l => l.id === id);
+  if (leadIndex !== -1) {
+    localLeads[leadIndex].status = status;
+    await saveLocalLeadsToDisk();
+  }
+
+  // Sync to firestore in background if available
+  if (db) {
+    try {
+      const leadRef = db.collection("leads").doc(id);
+      const docSnap = await leadRef.get();
+      if (docSnap.exists) {
+        await leadRef.update({ status });
+        console.log(`Successfully updated lead ${id} in Firestore.`);
+      } else {
+        const localLead = localLeads[leadIndex];
+        if (localLead) {
+          await leadRef.set({
+            firstName: localLead.firstName,
+            lastName: localLead.lastName,
+            email: localLead.email,
+            phone: localLead.phone,
+            projectType: localLead.projectType,
+            message: localLead.message,
+            status,
+            createdAt: admin.firestore.FieldValue.serverTimestamp()
+          });
+          console.log(`Created missing lead ${id} in Firestore.`);
+        }
+      }
+    } catch (err: any) {
+      console.error(`Firestore lead ${id} update failed (silent bypass):`, err.message);
+    }
+  }
+
+  res.json({ success: true, message: `Lead status updated to ${status}` });
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",

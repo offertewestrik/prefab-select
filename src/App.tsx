@@ -1439,12 +1439,17 @@ const WhatsAppButton = () => (
 
 const StickyMobileCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsVisible(window.scrollY > 500);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Do not show sticky CTA on the actual offer page or configurator to avoid layout clutter
+  const isOfferPage = location.pathname.includes('offerte') || location.pathname.includes('configurator');
+  if (isOfferPage) return null;
 
   return (
     <AnimatePresence>
@@ -1453,11 +1458,11 @@ const StickyMobileCTA = () => {
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           exit={{ y: 100 }}
-          className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-6 bg-white/80 backdrop-blur-xl border-t-2 border-blue-50"
+          className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/90 backdrop-blur-xl border-t border-slate-100 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]"
         >
-          <a href="#footer" className="block w-full bg-blue-600 text-white text-center py-3.5 rounded-xl font-black uppercase tracking-[0.2em] shadow-2xl shadow-blue-600/20 text-[10px]">
+          <Link to="/offerte" className="block w-full bg-blue-600 text-white text-center py-4 rounded-xl font-black uppercase tracking-[0.2em] shadow-lg shadow-blue-600/25 text-[10px] active:scale-[0.98] transition-all">
             Vraag offerte aan
-          </a>
+          </Link>
         </motion.div>
       )}
     </AnimatePresence>
@@ -1468,6 +1473,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [kellyOpen, setKellyOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1479,6 +1485,20 @@ function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Reset mobile states on close / transition
+  useEffect(() => {
+    if (!isOpen) {
+      setMobileDropdownOpen({});
+    }
+  }, [isOpen]);
+
+  const toggleMobileDropdown = (name: string) => {
+    setMobileDropdownOpen(prev => ({
+      ...prev,
+      [name]: !prev[name]
+    }));
+  };
 
   const navLinks = [
     { 
@@ -1549,19 +1569,19 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className={`relative flex items-center justify-between px-4 py-5 rounded-[2.5rem] transition-all duration-1000 ${scrolled ? 'bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-200' : 'bg-blue-950/10 backdrop-blur-md border border-white/10'}`}>
-          <Link to="/" className="flex items-center gap-4 group">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6">
+        <div className={`relative flex items-center justify-between px-4 py-3 sm:py-5 rounded-[1.8rem] sm:rounded-[2.5rem] transition-all duration-1000 ${scrolled ? 'bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-200' : 'bg-blue-950/20 backdrop-blur-md border border-white/10'}`}>
+          <Link to="/" className="flex items-center gap-3 sm:gap-4 group">
             <div className="relative">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-2xl group-hover:rotate-12 transition-all duration-700 ${scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-600'}`}>
-                <Box className="w-5 h-5" />
+              <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-2xl group-hover:rotate-12 transition-all duration-700 ${scrolled ? 'bg-blue-600 text-white' : 'bg-white text-blue-600'}`}>
+                <Box className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className={`text-[14px] font-display font-black tracking-tighter uppercase leading-none transition-colors ${scrolled ? 'text-blue-950' : 'text-white'}`}>
+              <span className={`text-xs sm:text-[14px] font-display font-black tracking-tighter uppercase leading-none transition-colors ${scrolled ? 'text-blue-950' : 'text-white'}`}>
                 Prefab Select
               </span>
-              <span className={`text-[10px] font-bold uppercase tracking-[0.2em] mt-1 transition-colors ${scrolled ? 'text-blue-900/60' : 'text-white/60'}`}>
+              <span className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.2em] mt-1 transition-colors ${scrolled ? 'text-blue-900/60' : 'text-white/60'}`}>
                 Modulair bouwen
               </span>
             </div>
@@ -1681,10 +1701,13 @@ function Navbar() {
             )}
           </AnimatePresence>
 
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-2 sm:gap-3 lg:hidden">
             {/* Direct access button for Kelly on mobile */}
             <button 
-              onClick={() => setKellyOpen(true)}
+              onClick={() => {
+                setKellyOpen(!kellyOpen);
+                setIsOpen(false);
+              }}
               className="flex items-center gap-2 group relative active:scale-95 transition-all"
               title="Praat met Kelly"
             >
@@ -1692,15 +1715,18 @@ function Navbar() {
                 <img 
                   src="https://i.imgur.com/cXPWGDM.jpeg" 
                   alt="Kelly" 
-                  className={`w-11 h-11 rounded-full object-cover border-2 shadow-md transition-all duration-300 ${scrolled ? 'border-blue-600 bg-white shadow-blue-600/15' : 'border-white bg-blue-950/25 shadow-white/20'}`}
+                  className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover border-2 shadow-md transition-all duration-300 ${scrolled ? 'border-blue-600 bg-white shadow-blue-600/15' : 'border-white bg-blue-950/25 shadow-white/20'}`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute bottom-0.5 right-0.5 w-3 h-3 bg-green-500 rounded-full border border-white animate-pulse" />
+                <div className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-white animate-pulse" />
               </div>
             </button>
 
-            <button onClick={() => setIsOpen(!isOpen)} className={`w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-xl border transition-all ${scrolled ? 'bg-blue-900/5 text-blue-900 border-blue-100 shadow-sm' : 'bg-white/10 text-white border-white/10 shadow-sm'}`}>
-              {isOpen ? <X size={22} /> : <Menu size={22} />}
+            <button onClick={() => {
+              setIsOpen(!isOpen);
+              setKellyOpen(false);
+            }} className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center backdrop-blur-xl border transition-all ${scrolled ? 'bg-blue-900/5 text-blue-900 border-blue-100 shadow-sm' : 'bg-white/10 text-white border-white/10 shadow-sm'}`}>
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
@@ -1712,81 +1738,154 @@ function Navbar() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className="lg:hidden fixed inset-0 z-[60] bg-blue-950 p-10 flex flex-col justify-center"
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="lg:hidden fixed inset-0 z-[100] bg-blue-950 flex flex-col h-screen overflow-hidden"
           >
-            <button className="absolute top-10 right-10 w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-white border border-white/10 shadow-2xl" onClick={() => setIsOpen(false)}>
-              <X size={32} />
-            </button>
-            <div className="flex flex-col gap-10">
-              {navLinks.map((link: any) => (
-                link.action === 'kelly' ? (
-                  <button 
-                    key={link.name}
-                    onClick={() => {
-                        setKellyOpen(true);
-                        setIsOpen(false);
-                    }}
-                    className="flex items-center gap-4 transition-all"
-                  >
-                    <div className="relative inline-block">
-                        <img 
-                            src="https://i.imgur.com/cXPWGDM.jpeg" 
-                            alt="Kelly" 
-                            className="w-16 h-16 rounded-full object-cover border-2 border-white/20"
-                            referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-blue-950" />
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <span className="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter leading-none">
-                        {link.name}
-                      </span>
-                      <span className="text-sm text-blue-400 font-bold uppercase tracking-widest mt-2">
-                        Wij staan voor je klaar
-                      </span>
-                    </div>
-                  </button>
-                ) : link.dropdown ? (
-                  <div key={link.name} className="flex flex-col gap-4">
-                    <Link 
-                      to={link.href} 
-                      onClick={() => setIsOpen(false)}
-                      className="text-3xl md:text-5xl font-display font-black text-white hover:text-blue-400 transition-colors uppercase tracking-tighter leading-none"
-                    >
-                      {link.name}
-                    </Link>
-                    <div className="flex flex-col gap-3 pl-6 border-l-2 border-white/10 mt-2">
-                      {link.dropdown.map(item => (
-                        <Link 
-                          key={item.name} 
-                          to={item.href} 
-                          onClick={() => setIsOpen(false)}
-                          className="text-lg md:text-xl font-display font-black text-white/50 hover:text-white transition-colors uppercase tracking-widest"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <Link 
-                    key={link.name} 
-                    to={link.href} 
-                    onClick={() => setIsOpen(false)}
-                    className="text-3xl md:text-5xl font-display font-black text-white hover:text-blue-400 transition-colors uppercase tracking-tighter leading-none"
-                  >
-                    {link.name}
-                  </Link>
-                )
-              ))}
-
-              <Link 
-                to="/offerte"
-                onClick={() => setIsOpen(false)}
-                className="w-full bg-blue-600 text-white py-7 rounded-2xl text-[11px] font-black uppercase tracking-[0.4em] shadow-2xl mt-12 text-center hover:bg-blue-500 transition-colors"
-              >
-                Vraag offerte aan
+            {/* Brand Header Inside Menu */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 bg-blue-950">
+              <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center">
+                  <Box className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-base font-display font-black tracking-tighter uppercase text-white leading-none">
+                    Prefab Select
+                  </span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.15em] mt-0.5 text-white/50 leading-none">
+                    Modulair bouwen
+                  </span>
+                </div>
               </Link>
+              
+              <button 
+                className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white active:scale-95 transition-all" 
+                onClick={() => setIsOpen(false)}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Scrollable List */}
+            <div className="flex-1 overflow-y-auto px-6 py-8 space-y-8 pb-32">
+              {/* Premium Kelly Contact Area */}
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <img 
+                      src="https://i.imgur.com/cXPWGDM.jpeg" 
+                      alt="Kelly" 
+                      className="w-12 h-12 rounded-full object-cover border-2 border-blue-500/30"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute top-0 right-0 w-3 h-3 bg-green-500 border border-blue-950 rounded-full animate-pulse" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-[11px] font-black uppercase tracking-wider text-white">Kelly (Adviseur)</h4>
+                    <p className="text-[9px] font-bold text-blue-400 uppercase tracking-widest mt-0.5 leading-none">Nu online & bereikbaar</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <a href="tel:31850607775" className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center active:scale-95 transition-all shadow-md shadow-blue-600/20">
+                    <Phone size={14} />
+                  </a>
+                  <a href="mailto:info@prefabselect.nl" className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center active:scale-95 transition-all border border-white/10">
+                    <Mail size={14} />
+                  </a>
+                </div>
+              </div>
+
+              {/* Navigation links with nested accordions */}
+              <div className="flex flex-col space-y-1">
+                {navLinks.map((link: any) => {
+                  if (link.action === 'kelly') return null;
+                  
+                  const hasDropdown = !!link.dropdown;
+                  const isDropdownOpen = !!mobileDropdownOpen[link.name];
+                  
+                  return (
+                    <div key={link.name} className="border-b border-white/5 py-3 last:border-0 text-left">
+                      {hasDropdown ? (
+                        <div className="flex flex-col text-left">
+                          <button 
+                            onClick={() => toggleMobileDropdown(link.name)}
+                            className="w-full flex items-center justify-between text-left py-1 text-2xl font-display font-black text-white hover:text-blue-400 transition-colors uppercase tracking-tighter"
+                          >
+                            <span>{link.name}</span>
+                            <ChevronDown 
+                              size={18} 
+                              className={`text-white/40 transition-transform duration-300 ${isDropdownOpen ? '-rotate-180 text-blue-400' : ''}`} 
+                            />
+                          </button>
+                          
+                          <AnimatePresence initial={false}>
+                            {isDropdownOpen && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                                className="overflow-hidden"
+                              >
+                                <div className="flex flex-col gap-1 pl-4 py-3 mt-2 border-l border-white/10 space-y-1 text-left">
+                                  <Link 
+                                    to={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-[10px] font-black text-white/40 hover:text-white transition-colors uppercase tracking-[0.15em] py-2 flex items-center gap-2 text-left"
+                                  >
+                                    <ArrowRight size={10} className="text-white/20" />
+                                    <span>Totaaloverzicht {link.name}</span>
+                                  </Link>
+                                  
+                                  {link.dropdown.map((item: any) => (
+                                    <Link 
+                                      key={item.name} 
+                                      to={item.href} 
+                                      onClick={() => setIsOpen(false)}
+                                      className="text-xs font-bold text-blue-300 hover:text-white transition-colors uppercase tracking-widest py-2.5 flex items-center gap-2.5 text-left"
+                                    >
+                                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                                      <span>{item.name}</span>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <Link 
+                          to={link.href} 
+                          onClick={() => setIsOpen(false)}
+                          className="block py-1 text-2xl font-display font-black text-white hover:text-blue-400 transition-colors uppercase tracking-tighter text-left"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Action Buttons & Quick Contact */}
+              <div className="pt-4 space-y-5">
+                <Link 
+                  to="/offerte"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-4.5 rounded-[1.2rem] font-black uppercase tracking-[0.2em] shadow-xl shadow-blue-600/10 text-[11px] transition-all active:scale-[0.98]"
+                >
+                  Vraag offerte aan
+                </Link>
+                
+                <div className="flex flex-col items-center justify-center gap-2 pt-4 border-t border-white/5 text-[9px] font-bold text-white/40 uppercase tracking-widest">
+                  <a href="tel:31850607775" className="hover:text-white transition-colors flex items-center gap-1.5 py-1">
+                    <Phone size={10} /> +31 85 060 7775
+                  </a>
+                  <a href="mailto:info@prefabselect.nl" className="hover:text-white transition-colors flex items-center gap-1.5 py-1">
+                    <Mail size={10} /> info@prefabselect.nl
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -3044,7 +3143,7 @@ function OfferteLandingPage() {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Premium Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center pt-64 pb-24 overflow-hidden bg-blue-950">
+      <section className="relative min-h-[85vh] flex items-center pt-32 sm:pt-48 md:pt-64 pb-20 sm:pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
           <motion.div style={{ y: yHero }} className="absolute inset-0">
             <video 
@@ -3061,43 +3160,43 @@ function OfferteLandingPage() {
           <div className="absolute inset-0 bg-linear-to-b from-blue-950/40 via-blue-950/80 to-blue-950" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-start relative z-10 w-full text-left">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-start relative z-10 w-full text-left">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="inline-flex items-center gap-3 mb-8">
+            <div className="inline-flex items-center gap-3 mb-6 sm:mb-8">
               <div className="w-8 h-px bg-blue-400" />
               <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 leading-none">
                 {isConfigurator ? 'ONTWERP JE AANBOUW' : 'START UW PROJECT'}
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.85] mb-10 tracking-tighter uppercase whitespace-pre-line">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.9] sm:leading-[0.85] mb-8 sm:mb-10 tracking-tighter uppercase">
               {isConfigurator ? (
-                <>Ontwerp uw <br /> eigen prefab <br /> <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">op maat.</span></>
+                <>Ontwerp uw <br className="hidden sm:inline" /> eigen prefab <br className="hidden sm:inline" /> <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">op maat.</span></>
               ) : (
-                <>Vraag uw <br /> vrijblijvende <br /> <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">offerte aan.</span></>
+                <>Vraag uw <br className="hidden sm:inline" /> vrijblijvende <br className="hidden sm:inline" /> <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">offerte aan.</span></>
               )}
             </h1>
             
-            <p className="text-lg md:text-xl text-blue-100/60 mb-12 max-w-xl leading-relaxed font-medium border-l-4 border-blue-600 pl-8">
+            <p className="text-base sm:text-lg md:text-xl text-blue-100/60 mb-8 sm:mb-12 max-w-xl leading-relaxed font-medium border-l-4 border-blue-600 pl-4 sm:pl-8">
               {isConfigurator 
                 ? "Stel in enkele stappen uw ideale uitbouw of module samen en ontvang direct een heldere kostenindicatie en technisch ontwerp."
                 : "Ontvang binnen 24 uur een gedetailleerde prijsindicatie voor uw unieke prefab project. Transparant, deskundig en volledig op maat."
               }
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-10 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-8 sm:pt-10 border-t border-white/10">
               {[
                 { label: isConfigurator ? 'Direct Resultaat' : 'Snel Antwoord', value: isConfigurator ? 'Live' : '24u' },
                 { label: 'Volledig Gratis', value: '€0' },
                 { label: 'Geen Verplichting', value: 'Vrij' }
               ].map((stat, i) => (
                 <div key={i} className="space-y-1">
-                  <p className="text-3xl font-display font-black text-white tracking-tighter leading-none">{stat.value}</p>
-                  <p className="text-[9px] text-blue-400 uppercase tracking-widest font-black">{stat.label}</p>
+                  <p className="text-2xl sm:text-3xl font-display font-black text-white tracking-tighter leading-none">{stat.value}</p>
+                  <p className="text-[8px] sm:text-[9px] text-blue-400 uppercase tracking-widest font-black leading-tight">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -3109,7 +3208,7 @@ function OfferteLandingPage() {
             transition={{ duration: 1.2, delay: 0.2 }}
             className="relative"
           >
-            <div className="absolute -inset-10 bg-blue-600/20 blur-[120px] rounded-full animate-pulse" />
+            <div className="absolute -inset-6 sm:-inset-10 bg-blue-600/20 blur-[80px] sm:blur-[120px] rounded-full animate-pulse" />
             <OfferteForm className="relative z-10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border-white/5" />
           </motion.div>
         </div>
