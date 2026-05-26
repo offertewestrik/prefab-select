@@ -4,5 +4,6 @@ dist
 .git
 .gitignore
 .dockerignore
+package-lock.json
 *.log
 *.md

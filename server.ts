@@ -13,13 +13,18 @@ dotenv.config();
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Initialize Firebase Admin
-if (process.env.FIREBASE_PROJECT_ID) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-    projectId: process.env.FIREBASE_PROJECT_ID,
-  });
-} else {
-  console.warn("FIREBASE_PROJECT_ID not found. Firebase Admin not initialized.");
+try {
+  if (process.env.FIREBASE_PROJECT_ID) {
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+      projectId: process.env.FIREBASE_PROJECT_ID,
+    });
+    console.log("Firebase Admin successfully initialized.");
+  } else {
+    console.warn("FIREBASE_PROJECT_ID not found. Firebase Admin not initialized.");
+  }
+} catch (error: any) {
+  console.error("Firebase Admin initialization failed:", error.message);
 }
 
 const db = admin.apps.length ? admin.firestore() : null;
