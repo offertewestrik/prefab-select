@@ -257,7 +257,7 @@ const steps: Step[] = [
     title: 'Ontwerp je droom', 
     description: 'Ontwerp zelf je aanbouw of bezoek onze showroom.',
     cta: 'Ontwerp je aanbouw',
-    link: 'https://prefabselect-configurator-551195834943.europe-west2.run.app'
+    link: 'https://prefabselect-configurator-551195834943.europe-west2.run.app/'
   },
   { 
     title: 'Inmeten & Advies', 
@@ -566,7 +566,7 @@ Huiseigenaren in West-Brabant kiezen voor Prefab Select vanwege onze focus op kw
 2. **Weerbestendig**: Omdat we in de fabriek bouwen, heeft regen geen invloed op de kwaliteit van de constructie.
 3. **Hoogwaardige isolatie**: Onze wanden halen standaard een Rc-waarde van 6.0, wat zorgt voor een lagere energierekening.
 
-Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen](/prefab-bouwen) service of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app).`
+Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen](/prefab-bouwen) service of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/).`
   },
   {
     name: 'Tilburg',
@@ -586,7 +586,7 @@ Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen]
 ### Kosten indicatie regio Tilburg
 Voor un **prefab uitbouw van 15m² in Tilburg** kunt u rekenen op un vanafprijs van circa €45.000. Wilt u un complete woning laten bouwen? Bekijk dan onze pagina over [Prefab Bouwen](/prefab-bouwen).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Den Bosch',
@@ -712,7 +712,7 @@ Dankzij onze **modulaire bouwmethode** kunnen we in Amsterdam bouwen met minimal
 ### Kosten uitbouw Amsterdam
 Door the complexe logistiek in Amsterdam kunnen kosten variëren. Gemiddeld investeert u €3.000 tot €4.500 per m² for un luxe, zorgeloze uitvoering.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Den Haag',
@@ -742,7 +742,7 @@ Met un **hoogwaardige prefab aanbouw** in Amstelveen kiest u for un snelle, scho
 - **Luxe afwerking**: Inclusief opties for lichtstraten and grote glaspartijen.
 - **Toekomstbestendig**: Energieneutraal gebouwd met the hoogste isolatienormen.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Nijmegen',
@@ -762,7 +762,7 @@ Nijmegen is un stad van innovatie en duurzaamheid. Onze **modulaire aanbouw** op
 ### Wat kost un uitbouw in Nijmegen?
 Gemiddeld liggen de **uitbouw kosten per m²** in Nijmegen tussen de €2.500 en €4.000, afhankelijk van de luxe en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Antwerpen',
@@ -814,7 +814,7 @@ Wij realiseren **hoogwaardige aanbouw** projecten die naadloos aansluiten op the
 - **Hoogwaardige afwerking**: Strak gestucte wanden and luxe kozijnen naar keuze.
 - **Zorgeloos**: Wij regelen the vergunningscheck and het transport.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Utrecht',
@@ -856,7 +856,7 @@ Met een **prefab uitbouw in Almere** kiest u voor de hoogste isolatienormen (Rc 
 ### Kosten indicatie Almere
 Voor een kwalitatieve uitbouw in Almere kunt u rekenen op een vanafprijs van ca. €2.500 per m². Of u nu zoekt naar een [prefab uitbouw](/prefab-uitbouw-laten-plaatsen) of een [aanbouw woning](/prefab-aanbouw), wij helpen u verder.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Haarlem',
@@ -876,7 +876,7 @@ Een **prefab aanbouw in Haarlem** is de ideale manier om snel extra meters te wi
 ### Kosten uitbouw Haarlem
 Gemiddeld liggen de **kosten per m² voor een uitbouw** in Haarlem tussen de €2.600 en €4.500. Dit is inclusief onze volledige begeleiding van vergunningscheck tot oplevering.
 
-[Ontdek onze luxe chalets](/chalets) of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontdek onze luxe chalets](/chalets) of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Mantelzorgwoning',
@@ -920,7 +920,7 @@ Wij bieden diverse mogelijkheden voor de indeling:
 ### Vergunning nodig?
 In veel gevallen is een mantelzorgwoning vergunningsvrij, mits er sprake is van een zorgsituatie en de woning op eigen terrein staat. Wij helpen je met het controleren van de regels.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Recreatiewoning',
@@ -937,7 +937,7 @@ Of het nu gaat om un luxe chalet aan de kust of un moderne vakantiewoning in de 
 
 Ontdek onze verschillende [Vakantiewoningen](/vakantiewoningen) and [Chalets](/chalets).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Prefab Uitbouw',
@@ -1016,7 +1016,7 @@ Ja, een prefab uitbouw zorgt voor meer woonruimte, meer licht en een betere inde
 ### Waarom kiezen voor Prefabselect.nl?
 Wij zorgen voor een compleet traject: van maatwerk ontwerp tot snelle realisatie en hoogwaardige afwerking. Geen verrassingen achteraf, maar duidelijke communicatie en vakmanschap.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app)`
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Zeeland',
@@ -2854,7 +2854,7 @@ function Hero() {
               Vraag offerte aan <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <a 
-              href="https://prefabselect-configurator-551195834943.europe-west2.run.app" 
+              href="https://prefabselect-configurator-551195834943.europe-west2.run.app/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-full sm:w-auto bg-white/10 backdrop-blur-xl border border-white/20 text-white px-8 py-4 rounded-xl font-black uppercase tracking-[0.2em] transition-all duration-300 text-center text-[10px] active:scale-95 group flex items-center justify-center gap-3"

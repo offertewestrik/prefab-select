@@ -152,7 +152,7 @@ export default function Werkwijze() {
               </div>
 
               <div className="mt-10">
-                <Link to="https://prefabselect-configurator-551195834943.europe-west2.run.app" target="_blank" className="inline-flex items-center gap-3 px-10 py-5 bg-blue-950 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-900 transition-all">
+                <Link to="https://prefabselect-configurator-551195834943.europe-west2.run.app/" target="_blank" className="inline-flex items-center gap-3 px-10 py-5 bg-blue-950 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-900 transition-all">
                   Ontwerp je aanbouw <ArrowRight size={16} />
                 </Link>
               </div>
