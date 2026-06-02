@@ -3,6 +3,8 @@ import React, { useState, useEffect, useMemo, PropsWithChildren } from 'react';
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
+import { MetaPixel } from './components/MetaPixel';
+import { CookieConsent } from './components/CookieConsent';
 import Diensten from './pages/Diensten';
 import PrefabUitbouw from './pages/PrefabUitbouw';
 import PrefabAanbouw from './pages/PrefabAanbouw';
@@ -2257,7 +2259,7 @@ function SEOText() {
                <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
                <h4 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 text-blue-400 leading-none">Direct duidelijkheid</h4>
                <p className="text-[10px] text-white/40 leading-relaxed font-black uppercase tracking-[0.3em] mb-12">
-                 Benieuwd wat er bij jouw woning mogelijk is? Vraag vrijblijvend een offerte aan via www.prefabselect.nl
+                 Benieuwd wat er bij jouw woning mogelijk is? Vraag vrijblijvend een offerte aan via <a href="https://www.prefabselect.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-400 transition-colors">www.prefabselect.nl</a>
                </p>
                <Link to="/offerte" className="w-full bg-blue-600 text-white py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-blue-500 hover:translate-y-[-4px] hover:shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all duration-300 shadow-2xl active:scale-95 group flex items-center justify-center gap-4 border border-blue-400/20">
                  Vraag Offerte Aan <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -2415,6 +2417,15 @@ function Footer() {
           <div className="flex space-x-8">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/voorwaarden" className="hover:text-white transition-colors">Algemene Voorwaarden</Link>
+            <button 
+              id="footer-cookie-settings-btn"
+              onClick={() => {
+                window.dispatchEvent(new Event('openPrefabCookieConsent'));
+              }}
+              className="hover:text-white text-[9px] font-black uppercase tracking-[0.2em] transition-colors cursor-pointer bg-transparent border-none p-0 outline-none"
+            >
+              Cookie Instellingen
+            </button>
           </div>
         </div>
       </div>
@@ -3996,6 +4007,8 @@ function ProjectsPage() {
 export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
+      <MetaPixel />
+      <CookieConsent />
       <StructuredData />
       <ScrollToTop />
       <Navbar />
@@ -4006,6 +4019,18 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/offerte" element={<OfferteLandingPage />} />
           <Route path="/configurator" element={<OfferteLandingPage />} />
+          
+          {/* Legacy and SEO-friendly alternative paths */}
+          <Route path="/prefab-bouwen" element={<PrefabAanbouw />} />
+          <Route path="/chalets" element={<PrefabChalet />} />
+          <Route path="/prefab-chalets" element={<PrefabChalet />} />
+          <Route path="/vakantiewoningen" element={<Vakantiewoningen />} />
+          <Route path="/prefab-uitbouw" element={<PrefabUitbouw />} />
+          <Route path="/prefab-uitbouw-laten-plaatsen" element={<PrefabUitbouw />} />
+          <Route path="/prefab-aanbouw" element={<PrefabAanbouw />} />
+          <Route path="/mantelzorgwoning" element={<Mantelzorgwoning />} />
+          <Route path="/poolhouse" element={<Poolhouse />} />
+          
           <Route path="/diensten" element={<Diensten />} />
           <Route path="/diensten/prefab-uitbouw" element={<PrefabUitbouw />} />
           <Route path="/diensten/prefab-aanbouw" element={<PrefabAanbouw />} />
@@ -4029,6 +4054,9 @@ export default function App() {
           <Route path="/regio/zeeland/nieuwbouwproject" element={<ZeelandSchuurtjesProject />} />
           <Route path="/regio/:slug" element={<CityLandingPage />} />
           <Route path="/crm" element={<Dashboard />} />
+          
+          {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
       <Footer />

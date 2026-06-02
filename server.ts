@@ -130,20 +130,11 @@ async function initLeadsCache() {
 // Run background init
 initLeadsCache();
 
+// Express server configuration
 const app = express();
 const PORT = parseInt(process.env.PORT || "3000", 10);
 
 app.use(express.json());
-
-// Redirect www to non-www for premium domain consistency and clean SEO
-app.use((req, res, next) => {
-  const host = req.headers.host;
-  if (host && host.startsWith("www.")) {
-    const newHost = host.slice(4);
-    return res.redirect(301, `https://${newHost}${req.originalUrl}`);
-  }
-  next();
-});
 
 // Initialize AI
 const ai = new GoogleGenAI({
