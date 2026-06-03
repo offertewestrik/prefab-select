@@ -35,6 +35,7 @@ import {
   Hammer,
   Zap,
   Check,
+  Home,
   MapPin,
   Play,
   Clock,
@@ -53,7 +54,9 @@ import {
   Plus,
   TrendingUp,
   Shield,
-  Quote
+  Quote,
+  Settings,
+  FileText
 } from 'lucide-react';
 
 // --- Types ---
@@ -2860,18 +2863,36 @@ function Hero() {
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 md:gap-4 mb-2">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 mb-2">
             <Link to="/offerte" className="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-black uppercase tracking-[0.2em] transition-all duration-300 text-center text-[10px] active:scale-95 group flex items-center justify-center gap-3 border border-blue-400/20 shadow-xl">
               Vraag offerte aan <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <a 
-              href="https://prefabselect-configurator-551195834943.europe-west2.run.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-white/10 backdrop-blur-xl border border-white/20 text-white px-8 py-4 rounded-xl font-black uppercase tracking-[0.2em] transition-all duration-300 text-center text-[10px] active:scale-95 group flex items-center justify-center gap-3"
-            >
-              Ontwerp je aanbouw
-            </a>
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <a 
+                href="https://prefabselect-configurator-551195834943.europe-west2.run.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-blue-600 text-white hover:bg-blue-700 px-8 py-4 rounded-xl font-black uppercase tracking-[0.2em] transition-all duration-300 text-center text-[10px] active:scale-95 group flex items-center justify-center gap-3 border border-blue-500/20 shadow-xl"
+              >
+                <div className="flex items-center gap-1.5 bg-blue-700/50 p-1.5 rounded-lg border border-blue-400/20 group-hover:bg-blue-800/50 transition-colors">
+                  <Home size={14} className="text-white" />
+                  <Plus size={10} className="text-blue-300 stroke-[3]" />
+                </div>
+                Ontwerp je aanbouw
+              </a>
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl shadow-sm w-full sm:w-auto backdrop-blur-md">
+                <img 
+                  src="https://i.imgur.com/LxIER2P.png" 
+                  alt="Aanbouw Voorbeeld" 
+                  className="w-10 h-10 rounded-xl object-cover border border-white/10 shadow-xs flex-shrink-0" 
+                  referrerPolicy="no-referrer"
+                />
+                <div className="text-left pr-2">
+                  <span className="text-[7.5px] font-black uppercase tracking-widest text-blue-400 block leading-tight">Configurator Tool</span>
+                  <span className="text-[10px] font-bold text-white leading-tight block">Kies uw gewenste afmetingen</span>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -3518,10 +3539,84 @@ function ProjectsGallery() {
   );
 }
 
+export function ConfiguratorTeaser() {
+  return (
+    <section className="py-24 border-b border-slate-100 overflow-hidden bg-slate-50/30">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
+            <img 
+              src="https://i.imgur.com/LxIER2P.png" 
+              alt="Ontwerp je aanbouw" 
+              className="w-full aspect-[4/3] object-cover"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          <div>
+            <div className="max-w-3xl mb-12">
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-600 mb-4 block">PREFAB CONFIGURATOR</span>
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-blue-950 mb-6">
+                Volledige controle over uw ontwerp
+              </h2>
+              <p className="text-lg text-slate-500 leading-relaxed mb-8">
+                Met onze online tool krijgt u direct inzicht in de mogelijkheden. Kies uw gewenste afmetingen, materialen en opties en zie direct hoe uw prefab aanbouw eruit komt te zien.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="p-8 rounded-[2rem] bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
+                  <Settings size={20} />
+                </div>
+                <h3 className="font-bold text-base mb-2 tracking-tight text-blue-950">Volledig Maatwerk</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">Pas elk detail aan, van kozijnkleur tot gevelbekleding.</p>
+              </div>
+              
+              <div className="p-8 rounded-[2rem] bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
+                  <FileText size={20} />
+                </div>
+                <h3 className="font-bold text-base mb-2 tracking-tight text-blue-950">Directe Offerte</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">Geen verrassingen. Direct inzicht in de investering.</p>
+              </div>
+            </div>
+
+            {/* CTA and Small Image/Thumbnail next to it to visually represent what they config */}
+            <div className="flex flex-col sm:flex-row items-center gap-6 mt-10">
+              <a 
+                href="https://prefabselect-configurator-551195834943.europe-west2.run.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-700 transition-all border border-blue-500/20 group"
+              >
+                Ontwerp je aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
+                <img 
+                  src="https://i.imgur.com/LxIER2P.png" 
+                  alt="Aanbouw schaalmodel" 
+                  className="w-12 h-12 rounded-xl object-cover border border-slate-100 shadow-xs flex-shrink-0" 
+                  referrerPolicy="no-referrer"
+                />
+                <div>
+                  <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 block leading-tight">Configurator Tool</span>
+                  <span className="text-xs font-bold text-blue-950 leading-tight block">Kies afmetingen & kozijnen</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   return (
     <>
       <Hero />
+      <ConfiguratorTeaser />
       <PremiumIntro />
       <PrefabSteps />
       <ProjectsGallery />

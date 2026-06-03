@@ -10,7 +10,9 @@ import {
   FileText,
   MapPin,
   Hammer,
-  ClipboardCheck
+  ClipboardCheck,
+  Home,
+  Plus
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { KellyCTA } from '../KellyCTA';
@@ -111,12 +113,12 @@ export default function Werkwijze() {
       </section>
 
       {/* SECTION 2 — ONTWERP JE AANBOUW */}
-      <section className="py-24 border-b border-slate-100 overflow-hidden">
+      <section className="py-24 border-b border-slate-100 overflow-hidden bg-slate-50/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
+            <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
               <img 
-                src="https://i.imgur.com/IUOK0hb.jpeg" 
+                src="https://i.imgur.com/LxIER2P.png" 
                 alt="Ontwerp je aanbouw" 
                 className="w-full aspect-[4/3] object-cover"
                 referrerPolicy="no-referrer"
@@ -125,6 +127,7 @@ export default function Werkwijze() {
 
             <div>
               <div className="max-w-3xl mb-12">
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-600 mb-4 block">PREFAB CONFIGURATOR</span>
                 <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-blue-950 mb-6">
                   Volledige controle over uw ontwerp
                 </h2>
@@ -151,10 +154,23 @@ export default function Werkwijze() {
                 </div>
               </div>
 
-              <div className="mt-10">
-                <Link to="https://prefabselect-configurator-551195834943.europe-west2.run.app/" target="_blank" className="inline-flex items-center gap-3 px-10 py-5 bg-blue-950 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-900 transition-all">
-                  Ontwerp je aanbouw <ArrowRight size={16} />
+              {/* CTA and Small Image/Thumbnail next to it to visually represent what they config */}
+              <div className="flex flex-col sm:flex-row items-center gap-6 mt-10">
+                <Link to="https://prefabselect-configurator-551195834943.europe-west2.run.app/" target="_blank" className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-700 transition-all border border-blue-500/20 group">
+                  Ontwerp je aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
+                <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
+                  <img 
+                    src="https://i.imgur.com/LxIER2P.png" 
+                    alt="Aanbouw schaalmodel" 
+                    className="w-12 h-12 rounded-xl object-cover border border-slate-100 shadow-xs flex-shrink-0" 
+                    referrerPolicy="no-referrer"
+                  />
+                  <div>
+                    <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 block leading-tight">Configurator Tool</span>
+                    <span className="text-xs font-bold text-blue-950 leading-tight block">Kies afmetingen & kozijnen</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
