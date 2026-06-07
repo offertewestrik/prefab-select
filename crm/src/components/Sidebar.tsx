@@ -1,0 +1,78 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  KanbanSquare,
+  Users,
+  Inbox,
+  FileText,
+  CalendarDays,
+  CheckSquare,
+  BarChart3,
+  Plug,
+  Building2,
+} from "lucide-react";
+import clsx from "clsx";
+
+const NAV = [
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/pipeline", label: "Pijplijn", icon: KanbanSquare },
+  { href: "/leads", label: "Leads", icon: Users },
+  { href: "/offerte-aanvragen", label: "Offerte aanvragen", icon: Inbox },
+  { href: "/offertes", label: "Offertes", icon: FileText },
+  { href: "/afspraken", label: "Afspraken", icon: CalendarDays },
+  { href: "/taken", label: "Taken & reminders", icon: CheckSquare },
+  { href: "/rapportage", label: "Rapportage", icon: BarChart3 },
+  { href: "/integraties", label: "Integraties", icon: Plug },
+];
+
+export function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-slate-200 bg-white lg:flex">
+      <div className="flex items-center gap-3 px-6 py-5">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-950 text-white">
+          <Building2 className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-sm font-black uppercase tracking-tight text-brand-950">
+            Prefab Select
+          </p>
+          <p className="text-[11px] font-medium text-slate-400">CRM Dashboard</p>
+        </div>
+      </div>
+
+      <nav className="flex-1 space-y-1 px-3 py-2">
+        {NAV.map(({ href, label, icon: Icon }) => {
+          const actief = pathname === href || pathname.startsWith(href + "/");
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={clsx(
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition",
+                actief
+                  ? "bg-brand-50 text-brand-700"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-900",
+              )}
+            >
+              <Icon className="h-[18px] w-[18px]" />
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="border-t border-slate-100 px-6 py-4">
+        <p className="text-[11px] text-slate-400">
+          Prototype · dummy data
+          <br />
+          v0.1 — vervangt Teamleader
+        </p>
+      </div>
+    </aside>
+  );
+}
