@@ -133,6 +133,8 @@ export interface QuoteLine {
   id: string;
   omschrijving: string;
   aantal: number;
+  /** Eenheid, bv. "stuks", "m²", "uur", "post". */
+  eenheid: string;
   prijsPerStuk: number;
   btwPercentage: number;
 }
@@ -150,15 +152,39 @@ export interface Quote {
   nummer: string; // bv. PS-2026-0012
   leadId: string;
   status: QuoteStatus;
+  /** Projecttype (overgenomen van de lead, maar per offerte aanpasbaar). */
+  projecttype: ProductType;
+  /** Vrije projectomschrijving. */
+  projectomschrijving?: string;
+  /** Afmetingen, bv. "6 x 4 m, hoogte 3 m". */
+  afmetingen?: string;
+  /** Uit te voeren werkzaamheden (vrije tekst). */
+  werkzaamheden?: string;
   regels: QuoteLine[];
   /** Optionele korting in euro's op subtotaal (excl. btw). */
   korting: number;
   geldigTot: string; // ISO
+  /** Interne/externe opmerkingen. */
   notitie?: string;
+  /** Algemene voorwaarden / leveringsvoorwaarden. */
+  voorwaarden?: string;
   aangemaaktOp: string; // ISO
-  verstuurdOp?: string; // ISO
-  bekekenOp?: string; // ISO
-  beslistOp?: string; // ISO
+  verstuurdOp?: string; // ISO — moment van verzenden
+  bekekenOp?: string; // ISO — moment van openen door klant
+  beslistOp?: string; // ISO — moment van accepteren/afwijzen
+}
+
+/** Logregel van een verzonden offerte-e-mail (tabel quote_email_logs). */
+export interface QuoteEmailLog {
+  id: string;
+  quoteId: string;
+  naar: string;
+  onderwerp: string;
+  status: "verzonden" | "mislukt";
+  messageId?: string;
+  /** True wanneer via de mock is verzonden (geen echte Resend-call). */
+  mock: boolean;
+  verstuurdOp: string; // ISO
 }
 
 /** Status van een externe koppeling op het integraties-overzicht. */

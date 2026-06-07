@@ -1,14 +1,19 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { DEFAULT_BTW } from "@/lib/constants";
+import {
+  DEFAULT_BTW,
+  DEFAULT_VOORWAARDEN,
+  EENHEDEN,
+  PRODUCT_LABEL,
+} from "@/lib/constants";
 import { euroCent } from "@/lib/format";
 import { berekenTotalen } from "@/lib/quote-utils";
-import type { QuoteLine } from "@/lib/types";
+import type { ProductType, QuoteLine } from "@/lib/types";
 import { Plus, Trash2 } from "lucide-react";
 
 function leegRegel(): QuoteLine {
@@ -16,6 +21,7 @@ function leegRegel(): QuoteLine {
     id: Math.random().toString(36).slice(2, 9),
     omschrijving: "",
     aantal: 1,
+    eenheid: "stuks",
     prijsPerStuk: 0,
     btwPercentage: DEFAULT_BTW,
   };
@@ -37,14 +43,25 @@ function NieuweOfferteForm() {
   const createQuote = useCrm((s) => s.createQuote);
 
   const [leadId, setLeadId] = useState(searchParams.get("lead") ?? "");
+  const [projecttype, setProjecttype] = useState<ProductType>("mantelzorgwoning");
+  const [projectomschrijving, setProjectomschrijving] = useState("");
+  const [afmetingen, setAfmetingen] = useState("");
+  const [werkzaamheden, setWerkzaamheden] = useState("");
   const [regels, setRegels] = useState<QuoteLine[]>([leegRegel()]);
   const [korting, setKorting] = useState(0);
   const [notitie, setNotitie] = useState("");
+  const [voorwaarden, setVoorwaarden] = useState(DEFAULT_VOORWAARDEN);
   const [geldigTot, setGeldigTot] = useState(() => {
     const d = new Date();
     d.setDate(d.getDate() + 30);
     return d.toISOString().slice(0, 10);
   });
+
+  // Projecttype automatisch overnemen van de gekozen lead.
+  const gekozenLead = leads.find((l) => l.id === leadId);
+  useEffect(() => {
+    if (gekozenLead) setProjecttype(gekozenLead.product);
+  }, [gekozenLead?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateRegel(id: string, patch: Partial<QuoteLine>) {
     setRegels((rs) => rs.map((r) => (r.id === id ? { ...r, ...patch } : r)));
@@ -55,29 +72,37 @@ function NieuweOfferteForm() {
   function opslaan() {
     if (!leadId || regels.every((r) => !r.omschrijving.trim())) return;
     const schoneRegels = regels.filter((r) => r.omschrijving.trim());
-    const id = createQuote(
+    const id = createQuote({
       leadId,
-      schoneRegels,
+      projecttype,
+      projectomschrijving: projectomschrijving.trim() || undefined,
+      afmetingen: afmetingen.trim() || undefined,
+      werkzaamheden: werkzaamheden.trim() || undefined,
+      regels: schoneRegels,
       korting,
-      notitie,
-      new Date(geldigTot).toISOString(),
-    );
+      notitie: notitie.trim() || undefined,
+      voorwaarden: voorwaarden.trim() || undefined,
+      geldigTot: new Date(geldigTot).toISOString(),
+    });
     router.push(`/offertes/${id}`);
   }
 
   if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-slate-100" />;
 
   const inputCls = "w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-brand-500";
+  const labelCls = "mb-1 block text-xs font-semibold text-slate-500";
 
   return (
     <div className="mx-auto max-w-4xl">
       <PageHeader titel="Nieuwe offerte" subtitel="Stel een offerte samen voor een klant" />
 
       <div className="space-y-6">
+        {/* Klant & project */}
         <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
+          <h3 className="mb-4 font-bold text-slate-900">Klant &amp; project</h3>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Klant *</label>
+              <label className={labelCls}>Klant / lead *</label>
               <select value={leadId} onChange={(e) => setLeadId(e.target.value)} className={inputCls}>
                 <option value="">— Kies een lead —</option>
                 {leads.map((l) => (
@@ -86,16 +111,36 @@ function NieuweOfferteForm() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold text-slate-500">Geldig tot</label>
+              <label className={labelCls}>Projecttype</label>
+              <select value={projecttype} onChange={(e) => setProjecttype(e.target.value as ProductType)} className={inputCls}>
+                {Object.entries(PRODUCT_LABEL).map(([k, v]) => (
+                  <option key={k} value={k}>{v}</option>
+                ))}
+              </select>
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelCls}>Projectomschrijving</label>
+              <textarea value={projectomschrijving} onChange={(e) => setProjectomschrijving(e.target.value)} rows={2} className={inputCls} placeholder="Korte omschrijving van het project…" />
+            </div>
+            <div>
+              <label className={labelCls}>Afmetingen</label>
+              <input value={afmetingen} onChange={(e) => setAfmetingen(e.target.value)} className={inputCls} placeholder="Bijv. 6 x 4 m, hoogte 3 m" />
+            </div>
+            <div>
+              <label className={labelCls}>Geldig tot</label>
               <input type="date" value={geldigTot} onChange={(e) => setGeldigTot(e.target.value)} className={inputCls} />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelCls}>Werkzaamheden</label>
+              <textarea value={werkzaamheden} onChange={(e) => setWerkzaamheden(e.target.value)} rows={2} className={inputCls} placeholder="Welke werkzaamheden voeren we uit…" />
             </div>
           </div>
         </div>
 
-        {/* Regels */}
+        {/* Prijsregels */}
         <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="font-bold text-slate-900">Offerteregels</h3>
+            <h3 className="font-bold text-slate-900">Prijsregels</h3>
             <button onClick={() => setRegels((rs) => [...rs, leegRegel()])} className="inline-flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-200">
               <Plus className="h-4 w-4" /> Regel
             </button>
@@ -103,16 +148,17 @@ function NieuweOfferteForm() {
 
           <div className="space-y-2">
             <div className="hidden grid-cols-12 gap-2 px-1 text-xs font-semibold uppercase text-slate-400 sm:grid">
-              <div className="col-span-6">Omschrijving</div>
+              <div className="col-span-4">Omschrijving</div>
               <div className="col-span-1 text-right">Aantal</div>
+              <div className="col-span-2">Eenheid</div>
               <div className="col-span-2 text-right">Prijs/stuk</div>
-              <div className="col-span-1 text-right">Btw</div>
+              <div className="col-span-1 text-right">Btw%</div>
               <div className="col-span-2 text-right">Totaal</div>
             </div>
             {regels.map((r) => (
               <div key={r.id} className="grid grid-cols-12 items-center gap-2">
                 <input
-                  className="col-span-12 rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-brand-500 sm:col-span-6"
+                  className="col-span-12 rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-brand-500 sm:col-span-4"
                   placeholder="Omschrijving"
                   value={r.omschrijving}
                   onChange={(e) => updateRegel(r.id, { omschrijving: e.target.value })}
@@ -123,9 +169,18 @@ function NieuweOfferteForm() {
                   value={r.aantal}
                   onChange={(e) => updateRegel(r.id, { aantal: Number(e.target.value) || 0 })}
                 />
+                <select
+                  className="col-span-3 rounded-lg border border-slate-200 px-2 py-2 text-sm outline-none focus:border-brand-500 sm:col-span-2"
+                  value={r.eenheid}
+                  onChange={(e) => updateRegel(r.id, { eenheid: e.target.value })}
+                >
+                  {EENHEDEN.map((u) => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
+                </select>
                 <input
                   type="number"
-                  className="col-span-4 rounded-lg border border-slate-200 px-2 py-2 text-right text-sm outline-none focus:border-brand-500 sm:col-span-2"
+                  className="col-span-3 rounded-lg border border-slate-200 px-2 py-2 text-right text-sm outline-none focus:border-brand-500 sm:col-span-2"
                   value={r.prijsPerStuk}
                   onChange={(e) => updateRegel(r.id, { prijsPerStuk: Number(e.target.value) || 0 })}
                 />
@@ -163,14 +218,17 @@ function NieuweOfferteForm() {
               <span>Btw</span><span>{euroCent(totalen.btw)}</span>
             </div>
             <div className="mt-1 flex w-64 justify-between border-t border-slate-100 pt-1 text-base font-black text-slate-900">
-              <span>Totaal</span><span>{euroCent(totalen.totaal)}</span>
+              <span>Totaal incl. btw</span><span>{euroCent(totalen.totaal)}</span>
             </div>
           </div>
         </div>
 
+        {/* Opmerkingen & voorwaarden */}
         <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
-          <label className="mb-1 block text-xs font-semibold text-slate-500">Notitie / voorwaarden</label>
-          <textarea value={notitie} onChange={(e) => setNotitie(e.target.value)} rows={3} className={inputCls} placeholder="Bijv. levertijd, betalingsvoorwaarden…" />
+          <label className={labelCls}>Opmerkingen</label>
+          <textarea value={notitie} onChange={(e) => setNotitie(e.target.value)} rows={2} className={`${inputCls} mb-4`} placeholder="Bijv. levertijd, bijzonderheden…" />
+          <label className={labelCls}>Voorwaarden</label>
+          <textarea value={voorwaarden} onChange={(e) => setVoorwaarden(e.target.value)} rows={4} className={inputCls} />
         </div>
 
         <div className="flex justify-end gap-3">

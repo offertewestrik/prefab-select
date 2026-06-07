@@ -244,7 +244,7 @@ function OverzichtTab({ leadId, bericht, quoteRequests }: { leadId: string; beri
           </ul>
         )}
       </div>
-      <Link href="/offertes/nieuw" className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+      <Link href={`/offertes/nieuw?lead=${leadId}`} className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
         <FileText className="h-4 w-4" /> Offerte maken
       </Link>
     </div>
@@ -492,7 +492,7 @@ function BestandenTab({ leadId, files }: { leadId: string; files: any[] }) {
 function OffertesTab({ leadId, quotes }: { leadId: string; quotes: any[] }) {
   return (
     <div>
-      <Link href="/offertes/nieuw" className="mb-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+      <Link href={`/offertes/nieuw?lead=${leadId}`} className="mb-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
         <Plus className="h-4 w-4" /> Nieuwe offerte
       </Link>
       <ul className="space-y-2">
