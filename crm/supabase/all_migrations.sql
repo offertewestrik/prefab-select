@@ -1,7 +1,6 @@
 -- ============================================================================
--- Prefab Select CRM — ALLE migraties (fase 2 t/m 5) in juiste volgorde
--- Plak dit volledig in de Supabase SQL Editor en klik op RUN.
--- Veilig om opnieuw te draaien (create ... if not exists).
+-- Prefab Select CRM — ALLE migraties (fase 2 t/m 5 + leads-velden) in volgorde
+-- Plak dit volledig in de Supabase SQL Editor en klik op RUN. Veilig om te herhalen.
 -- ============================================================================
 
 
@@ -465,4 +464,21 @@ end $$;
 -- NB: het klantportaal (anonieme klant met token) leest data via een aparte
 -- beveiligde route / edge function die op de token matcht. Geef anon-rollen
 -- dus GEEN directe select-rechten op deze tabellen.
+
+
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0005_leads_velden.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+-- ============================================================================
+-- Prefab Select CRM — leads-tabel aanvullen met de velden die de app gebruikt
+-- ============================================================================
+
+alter table public.leads
+  add column if not exists bedrijf             text,
+  add column if not exists kans                numeric default 0,
+  add column if not exists toegewezen_aan      text,
+  add column if not exists tags                text[] default '{}',
+  add column if not exists bericht             text,
+  add column if not exists laatste_activiteit  timestamptz default now(),
+  add column if not exists positie             int default 0,
+  add column if not exists portal_token        text;
 

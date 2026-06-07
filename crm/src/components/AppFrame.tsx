@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useCrm } from "@/lib/store";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
 
@@ -10,6 +12,13 @@ import { Topbar } from "./Topbar";
  */
 export function AppFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const hydrate = useCrm((s) => s.hydrate);
+
+  // Laad de echte data uit Supabase zodra de app start.
+  useEffect(() => {
+    hydrate();
+  }, [hydrate]);
+
   const isPortaal = pathname?.startsWith("/portaal");
 
   if (isPortaal) return <>{children}</>;
