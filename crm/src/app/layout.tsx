@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/components/Sidebar";
-import { Topbar } from "@/components/Topbar";
+import { AppFrame } from "@/components/AppFrame";
 import { Providers } from "@/components/Providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -21,13 +20,7 @@ export default function RootLayout({
     <html lang="nl" className={inter.variable}>
       <body className="font-sans">
         <Providers>
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <div className="flex flex-1 flex-col lg:pl-64">
-              <Topbar />
-              <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
-            </div>
-          </div>
+          <AppFrame>{children}</AppFrame>
         </Providers>
       </body>
     </html>

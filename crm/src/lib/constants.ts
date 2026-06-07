@@ -290,3 +290,30 @@ export const NOTIFICATION_META: Record<
 
 /** Mogelijke opvolg-offsets in dagen. */
 export const REMINDER_DAGEN = [1, 3, 7, 14];
+
+// ============================================================================
+// Fase 5 — facturen & betalingen
+// ============================================================================
+import type { InvoiceStatus, PaymentMethode } from "./types";
+
+export const INVOICE_STATUS_META: Record<
+  InvoiceStatus,
+  { label: string; kleur: string }
+> = {
+  concept: { label: "Concept", kleur: "bg-slate-100 text-slate-700" },
+  verzonden: { label: "Verzonden", kleur: "bg-sky-100 text-sky-700" },
+  deels_betaald: { label: "Deels betaald", kleur: "bg-amber-100 text-amber-700" },
+  betaald: { label: "Betaald", kleur: "bg-emerald-100 text-emerald-700" },
+  te_laat: { label: "Te laat", kleur: "bg-rose-100 text-rose-700" },
+  gecrediteerd: { label: "Gecrediteerd", kleur: "bg-violet-100 text-violet-700" },
+};
+
+export const PAYMENT_METHODE_LABEL: Record<PaymentMethode, string> = {
+  ideal: "iDEAL",
+  overboeking: "Overboeking",
+  pin: "Pin",
+  contant: "Contant",
+};
+
+/** Pijplijn-stadia die als "lopend project" gelden (voor het klantportaal). */
+export const PROJECT_STAGES = ["akkoord", "in_productie", "geplaatst", "gewonnen"];

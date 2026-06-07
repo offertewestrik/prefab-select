@@ -9,8 +9,10 @@ import type {
   Appointment,
   AppNotification,
   Integration,
+  Invoice,
   Lead,
   Note,
+  Payment,
   Quote,
   QuoteEmailLog,
   QuoteRequest,
@@ -448,4 +450,40 @@ export const seedReminderRules: ReminderRule[] = [
   { id: "rem-lead", trigger: "nieuwe_lead", label: "Nieuwe lead opvolgen", offsetDagen: 1, actief: true },
   { id: "rem-offerte", trigger: "offerte_verstuurd", label: "Verstuurde offerte opvolgen", offsetDagen: 7, actief: true },
   { id: "rem-afspraak", trigger: "afspraak_gepland", label: "Herinnering vóór afspraak", offsetUrenVooraf: 24, actief: true },
+];
+
+export const seedInvoices: Invoice[] = [
+  {
+    id: "inv-1", nummer: "FACT-2026-0001", leadId: "lead-011", quoteId: "quote-3",
+    status: "verzonden", termijnLabel: "40% — aanbetaling bij opdracht",
+    regels: [{ id: "ir1", omschrijving: "Aanbetaling 40% — Poolhouse (PS-2026-0011)", aantal: 1, eenheid: "post", prijsPerStuk: 32400, btwPercentage: DEFAULT_BTW }],
+    korting: 0, vervaldatum: dag(-2), notitie: "Productie start na ontvangst van de aanbetaling.",
+    aangemaaktOp: dag(-8, 10, 0), verstuurdOp: dag(-8, 10, 5),
+  },
+  {
+    id: "inv-2", nummer: "FACT-2026-0002", leadId: "lead-011", quoteId: "quote-3",
+    status: "verzonden", termijnLabel: "30% — bij aanvang productie",
+    regels: [{ id: "ir1", omschrijving: "Termijn 30% — bij aanvang productie (PS-2026-0011)", aantal: 1, eenheid: "post", prijsPerStuk: 24300, btwPercentage: DEFAULT_BTW }],
+    korting: 0, vervaldatum: dag(6),
+    aangemaaktOp: dag(-1, 9, 0), verstuurdOp: dag(-1, 9, 5),
+  },
+  {
+    id: "inv-3", nummer: "FACT-2026-0003", leadId: "lead-013",
+    status: "verzonden",
+    regels: [{ id: "ir1", omschrijving: "Prefab uitbouw — eindafrekening", aantal: 1, eenheid: "post", prijsPerStuk: 43000, btwPercentage: DEFAULT_BTW }],
+    korting: 0, vervaldatum: dag(-12),
+    aangemaaktOp: dag(-20, 10, 0), verstuurdOp: dag(-20, 10, 5),
+  },
+  {
+    id: "inv-4", nummer: "FACT-2026-0004", leadId: "lead-014",
+    status: "verzonden",
+    regels: [{ id: "ir1", omschrijving: "Mantelzorgwoning — slottermijn 10%", aantal: 1, eenheid: "post", prijsPerStuk: 9200, btwPercentage: DEFAULT_BTW }],
+    korting: 0, vervaldatum: dag(-3),
+    aangemaaktOp: dag(-9, 10, 0), verstuurdOp: dag(-9, 10, 5),
+  },
+];
+
+export const seedPayments: Payment[] = [
+  { id: "pay-1", invoiceId: "inv-1", bedrag: 39204, methode: "ideal", datum: dag(-5, 12, 0) },
+  { id: "pay-3", invoiceId: "inv-3", bedrag: 52030, methode: "overboeking", datum: dag(-14, 9, 0) },
 ];

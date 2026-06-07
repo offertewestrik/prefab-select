@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -38,6 +38,8 @@ export default function OfferteDetailPage() {
   const setQuoteStatus = useCrm((s) => s.setQuoteStatus);
   const updateLead = useCrm((s) => s.updateLead);
   const addEmailLog = useCrm((s) => s.addEmailLog);
+  const genereerTermijnfacturen = useCrm((s) => s.genereerTermijnfacturen);
+  const router = useRouter();
 
   const [bezig, setBezig] = useState<"pdf" | "mail" | "preview" | null>(null);
   const [melding, setMelding] = useState<string | null>(null);
@@ -175,6 +177,24 @@ export default function OfferteDetailPage() {
           </button>
         </div>
       </div>
+
+      {quote.status === "geaccepteerd" && (
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4">
+          <p className="text-sm font-medium text-emerald-800">Offerte geaccepteerd — genereer de termijnfacturen (40/30/20/10).</p>
+          <button
+            onClick={() => {
+              const ids = genereerTermijnfacturen(quote.id);
+              if (ids.length) {
+                setMelding(`${ids.length} termijnfacturen aangemaakt.`);
+                router.push("/facturen");
+              }
+            }}
+            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+          >
+            Genereer termijnfacturen
+          </button>
+        </div>
+      )}
 
       {/* PDF-preview */}
       {previewUrl && (

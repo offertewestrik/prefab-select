@@ -18,6 +18,8 @@ import {
   CalendarDays,
   StickyNote,
   PhoneCall,
+  Receipt,
+  ExternalLink,
 } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
@@ -33,12 +35,15 @@ import {
   QUOTE_STATUS_META,
   TASK_STATUS_META,
   APPOINTMENT_TYPE_META,
+  INVOICE_STATUS_META,
 } from "@/lib/constants";
 import { euro, datum, datumTijd, relatief } from "@/lib/format";
 import { quoteTotaal } from "@/lib/quote-utils";
+import { invoiceTotaal, effectieveStatus } from "@/lib/invoice-utils";
+import { portalToken } from "@/lib/portal";
 import type { NoteType, PipelineStage } from "@/lib/types";
 
-const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes"] as const;
+const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes", "Facturen"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function LeadDetailPage() {
@@ -53,6 +58,7 @@ export default function LeadDetailPage() {
   const appointments = useCrm((s) => s.appointments.filter((a) => a.leadId === leadId));
   const files = useCrm((s) => s.files.filter((f) => f.leadId === leadId));
   const quotes = useCrm((s) => s.quotes.filter((q) => q.leadId === leadId));
+  const invoices = useCrm((s) => s.invoices.filter((i) => i.leadId === leadId));
   const quoteRequests = useCrm((s) => s.quoteRequests.filter((q) => q.leadId === leadId));
 
   const updateLead = useCrm((s) => s.updateLead);
@@ -113,6 +119,14 @@ export default function LeadDetailPage() {
                 ))}
               </div>
             )}
+
+            <a
+              href={`/portaal/${portalToken(lead)}`}
+              target="_blank"
+              className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-100"
+            >
+              <ExternalLink className="h-4 w-4" /> Open klantportaal
+            </a>
           </div>
 
           {/* Fase & gegevens bewerken */}
@@ -174,6 +188,7 @@ export default function LeadDetailPage() {
                 Afspraken: appointments.length,
                 Bestanden: files.length,
                 Offertes: quotes.length,
+                Facturen: invoices.length,
               };
               return (
                 <button
@@ -201,6 +216,7 @@ export default function LeadDetailPage() {
             {tab === "Afspraken" && <AfsprakenTab leadId={lead.id} appointments={appointments} />}
             {tab === "Bestanden" && <BestandenTab leadId={lead.id} files={files} />}
             {tab === "Offertes" && <OffertesTab leadId={lead.id} quotes={quotes} />}
+            {tab === "Facturen" && <FacturenTab leadId={lead.id} invoices={invoices} />}
           </div>
         </div>
       </div>
@@ -458,6 +474,41 @@ function OffertesTab({ leadId, quotes }: { leadId: string; quotes: any[] }) {
           </li>
         ))}
         {quotes.length === 0 && <p className="text-sm text-slate-400">Nog geen offertes.</p>}
+      </ul>
+    </div>
+  );
+}
+
+// --- Facturen ---
+function FacturenTab({ leadId, invoices }: { leadId: string; invoices: any[] }) {
+  const payments = useCrm((s) => s.payments);
+  return (
+    <div>
+      <Link href={`/facturen/nieuw?lead=${leadId}`} className="mb-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+        <Plus className="h-4 w-4" /> Nieuwe factuur
+      </Link>
+      <ul className="space-y-2">
+        {invoices.map((i) => {
+          const status = effectieveStatus(i, payments);
+          return (
+            <li key={i.id}>
+              <Link href={`/facturen/${i.id}`} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 transition hover:bg-slate-50/60">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
+                  <Receipt className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-slate-800">{i.nummer}</p>
+                  <p className="text-xs text-slate-400">{i.termijnLabel ?? "Factuur"} · vervalt {datum(i.vervaldatum)}</p>
+                </div>
+                <Badge className={INVOICE_STATUS_META[status as keyof typeof INVOICE_STATUS_META].kleur}>
+                  {INVOICE_STATUS_META[status as keyof typeof INVOICE_STATUS_META].label}
+                </Badge>
+                <span className="text-sm font-bold text-slate-900">{euro(invoiceTotaal(i))}</span>
+              </Link>
+            </li>
+          );
+        })}
+        {invoices.length === 0 && <p className="text-sm text-slate-400">Nog geen facturen.</p>}
       </ul>
     </div>
   );
