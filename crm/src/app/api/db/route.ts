@@ -1,0 +1,109 @@
+import { getSupabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase/server";
+import type { Invoice, Payment, Quote, QuoteLine } from "@/lib/types";
+
+// Generieke schrijf-route voor de gedeelde data (write-through vanuit de store).
+// Body: { table, op: "upsert" | "delete", data }
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+function quoteToRow(q: Quote) {
+  return {
+    id: q.id,
+    nummer: q.nummer,
+    lead_id: q.leadId,
+    status: q.status,
+    projecttype: q.projecttype,
+    projectomschrijving: q.projectomschrijving ?? null,
+    afmetingen: q.afmetingen ?? null,
+    werkzaamheden: q.werkzaamheden ?? null,
+    korting: q.korting,
+    notitie: q.notitie ?? null,
+    voorwaarden: q.voorwaarden ?? null,
+    geldig_tot: q.geldigTot ?? null,
+    verstuurd_op: q.verstuurdOp ?? null,
+    bekeken_op: q.bekekenOp ?? null,
+    beslist_op: q.beslistOp ?? null,
+  };
+}
+
+function invoiceToRow(i: Invoice) {
+  return {
+    id: i.id,
+    nummer: i.nummer,
+    lead_id: i.leadId,
+    quote_id: i.quoteId ?? null,
+    status: i.status,
+    termijn_label: i.termijnLabel ?? null,
+    korting: i.korting,
+    vervaldatum: i.vervaldatum ?? null,
+    notitie: i.notitie ?? null,
+    verstuurd_op: i.verstuurdOp ?? null,
+  };
+}
+
+function itemRows(parentKey: "quote_id" | "invoice_id", parentId: string, regels: QuoteLine[]) {
+  // De id van de regel laten we door de database genereren (uuid).
+  return regels.map((r, idx) => ({
+    [parentKey]: parentId,
+    omschrijving: r.omschrijving,
+    aantal: r.aantal,
+    eenheid: r.eenheid,
+    prijs_per_stuk: r.prijsPerStuk,
+    btw_percentage: r.btwPercentage,
+    positie: idx,
+  }));
+}
+
+export async function POST(req: Request) {
+  if (!isSupabaseAdminConfigured()) {
+    return Response.json({ error: "Supabase niet geconfigureerd" }, { status: 503 });
+  }
+  const db = getSupabaseAdmin();
+  try {
+    const { table, op, data } = await req.json();
+
+    if (op === "delete") {
+      const { error } = await db.from(table).delete().eq("id", data.id);
+      if (error) throw error;
+      return Response.json({ ok: true });
+    }
+
+    // op === "upsert"
+    if (table === "quotes") {
+      const q = data as Quote;
+      const { error } = await db.from("quotes").upsert(quoteToRow(q));
+      if (error) throw error;
+      await db.from("quote_items").delete().eq("quote_id", q.id);
+      if (q.regels?.length) {
+        const { error: e2 } = await db.from("quote_items").insert(itemRows("quote_id", q.id, q.regels));
+        if (e2) throw e2;
+      }
+    } else if (table === "invoices") {
+      const i = data as Invoice;
+      const { error } = await db.from("invoices").upsert(invoiceToRow(i));
+      if (error) throw error;
+      await db.from("invoice_items").delete().eq("invoice_id", i.id);
+      if (i.regels?.length) {
+        const { error: e2 } = await db.from("invoice_items").insert(itemRows("invoice_id", i.id, i.regels));
+        if (e2) throw e2;
+      }
+    } else if (table === "payments") {
+      const p = data as Payment;
+      const { error } = await db.from("payments").upsert({
+        id: p.id,
+        invoice_id: p.invoiceId,
+        bedrag: p.bedrag,
+        methode: p.methode,
+        datum: p.datum,
+      });
+      if (error) throw error;
+    } else {
+      return Response.json({ error: `Onbekende tabel: ${table}` }, { status: 400 });
+    }
+
+    return Response.json({ ok: true });
+  } catch (err) {
+    console.error("DB-schrijfactie mislukt:", err);
+    return Response.json({ error: (err as Error).message }, { status: 500 });
+  }
+}
