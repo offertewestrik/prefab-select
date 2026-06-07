@@ -1,0 +1,39 @@
+# ============================================================================
+# Firebase App Hosting — Prefab Select CRM
+# Docs: https://firebase.google.com/docs/app-hosting/configure
+# ----------------------------------------------------------------------------
+# Secrets (resend-api-key, supabase-service-key) zijn aangemaakt met:
+#   firebase apphosting:secrets:set <naam> --project crm-systeem-prefab-select
+# ============================================================================
+
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+
+env:
+  # --- Feature flag: echte koppelingen aanzetten (i.p.v. mocks) ---
+  - variable: USE_REAL_INTEGRATIONS
+    value: "true"
+    availability:
+      - RUNTIME
+
+  # --- Resend (offertes & facturen mailen) ---
+  - variable: RESEND_FROM_EMAIL
+    value: offerte@prefabselect.nl
+    availability:
+      - RUNTIME
+  - variable: RESEND_API_KEY
+    secret: resend-api-key
+    availability:
+      - RUNTIME
+
+  # --- Supabase (database) ---
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    value: https://numqnwpkvlcxtvkiytmi.supabase.co
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: SUPABASE_SERVICE_ROLE_KEY
+    secret: supabase-service-key
+    availability:
+      - RUNTIME
