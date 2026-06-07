@@ -31,12 +31,25 @@ export async function verstuurOfferteMail(opts: {
     await new Promise((r) => setTimeout(r, 400));
     return { ok: true, messageId: `mock-${Date.now()}`, mock: true };
   }
-  // ECHTE IMPLEMENTATIE (later):
-  // const { Resend } = await import("resend");
-  // const resend = new Resend(process.env.RESEND_API_KEY);
-  // const { data } = await resend.emails.send({ from: process.env.RESEND_FROM_EMAIL!, to: opts.naar, subject: opts.onderwerp, html: opts.html, attachments: opts.pdfBuffer ? [{ filename: opts.bestandsnaam!, content: opts.pdfBuffer }] : [] });
-  // return { ok: true, messageId: data?.id ?? "", mock: false };
-  throw new Error("Echte Resend-koppeling nog niet geactiveerd.");
+
+  // ECHTE IMPLEMENTATIE — Resend
+  const { Resend } = await import("resend");
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const { data, error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL ?? "offerte@prefabselect.nl",
+    to: opts.naar,
+    subject: opts.onderwerp,
+    html: opts.html,
+    attachments:
+      opts.pdfBuffer && opts.bestandsnaam
+        ? [{ filename: opts.bestandsnaam, content: opts.pdfBuffer }]
+        : undefined,
+  });
+  if (error) {
+    console.error("[Resend] versturen mislukt:", error);
+    return { ok: false, messageId: "", mock: false };
+  }
+  return { ok: true, messageId: data?.id ?? "", mock: false };
 }
 
 // ---------------------------------------------------------------------------
