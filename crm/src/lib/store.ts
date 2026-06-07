@@ -75,6 +75,16 @@ function syncLead(method: "POST" | "PATCH" | "DELETE", body: unknown, leadId?: s
   }).catch((e) => console.error("Lead-synchronisatie mislukt:", e));
 }
 
+/** Generieke write-through naar Supabase (offertes, facturen, betalingen). */
+function dbSync(table: string, op: "upsert" | "delete", data: unknown) {
+  if (typeof window === "undefined" || !data) return;
+  fetch("/api/db", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ table, op, data }),
+  }).catch((e) => console.error(`Synchronisatie van ${table} mislukt:`, e));
+}
+
 /** Velden om een nieuwe offerte aan te maken. */
 export interface CreateQuoteInput {
   leadId: string;
@@ -214,11 +224,15 @@ export const useCrm = create<CrmState>()(
       hydrate: async () => {
         if (typeof window === "undefined") return;
         try {
-          const res = await fetch("/api/leads");
-          if (res.ok) {
-            const leads = (await res.json()) as Lead[];
-            if (Array.isArray(leads)) set({ leads });
-          }
+          const res = await fetch("/api/bootstrap");
+          if (!res.ok) return;
+          const data = await res.json();
+          const patch: Partial<CrmState> = {};
+          if (Array.isArray(data.leads)) patch.leads = data.leads;
+          if (Array.isArray(data.quotes)) patch.quotes = data.quotes;
+          if (Array.isArray(data.invoices)) patch.invoices = data.invoices;
+          if (Array.isArray(data.payments)) patch.payments = data.payments;
+          set(patch);
         } catch (e) {
           console.error("Hydratatie mislukt:", e);
         }
@@ -361,25 +375,24 @@ export const useCrm = create<CrmState>()(
       createQuote: (input) => {
         const newId = id("quote");
         const nummer = volgendQuoteNummer(get().quotes);
-        set((s) => ({
-          quotes: [
-            ...s.quotes,
-            {
-              id: newId,
-              nummer,
-              status: "concept",
-              aangemaaktOp: new Date().toISOString(),
-              ...input,
-            },
-          ],
-        }));
+        const quote: Quote = {
+          id: newId,
+          nummer,
+          status: "concept",
+          aangemaaktOp: new Date().toISOString(),
+          ...input,
+        };
+        set((s) => ({ quotes: [...s.quotes, quote] }));
+        dbSync("quotes", "upsert", quote);
         return newId;
       },
 
-      updateQuote: (quoteId, patch) =>
+      updateQuote: (quoteId, patch) => {
         set((s) => ({
           quotes: s.quotes.map((q) => (q.id === quoteId ? { ...q, ...patch } : q)),
-        })),
+        }));
+        dbSync("quotes", "upsert", get().quotes.find((q) => q.id === quoteId));
+      },
 
       setQuoteStatus: (quoteId, status) => {
         const quote = get().quotes.find((q) => q.id === quoteId);
@@ -397,6 +410,7 @@ export const useCrm = create<CrmState>()(
             }),
           };
         });
+        dbSync("quotes", "upsert", get().quotes.find((q) => q.id === quoteId));
         if (status === "geaccepteerd" && !wasGeaccepteerd && quote) {
           const lead = get().leads.find((l) => l.id === quote.leadId);
           get().addNotification({
@@ -475,34 +489,39 @@ export const useCrm = create<CrmState>()(
       createInvoice: (input) => {
         const newId = id("inv");
         const nummer = volgendFactuurNummer(get().invoices);
-        set((s) => ({
-          invoices: [
-            ...s.invoices,
-            { id: newId, nummer, status: "concept", aangemaaktOp: new Date().toISOString(), ...input },
-          ],
-        }));
+        const invoice: Invoice = {
+          id: newId, nummer, status: "concept", aangemaaktOp: new Date().toISOString(), ...input,
+        };
+        set((s) => ({ invoices: [...s.invoices, invoice] }));
+        dbSync("invoices", "upsert", invoice);
         return newId;
       },
 
-      updateInvoice: (invoiceId, patch) =>
+      updateInvoice: (invoiceId, patch) => {
         set((s) => ({
           invoices: s.invoices.map((i) => (i.id === invoiceId ? { ...i, ...patch } : i)),
-        })),
+        }));
+        dbSync("invoices", "upsert", get().invoices.find((i) => i.id === invoiceId));
+      },
 
-      setInvoiceStatus: (invoiceId, status) =>
+      setInvoiceStatus: (invoiceId, status) => {
         set((s) => ({
           invoices: s.invoices.map((i) =>
             i.id === invoiceId
               ? { ...i, status, verstuurdOp: status === "verzonden" && !i.verstuurdOp ? new Date().toISOString() : i.verstuurdOp }
               : i,
           ),
-        })),
+        }));
+        dbSync("invoices", "upsert", get().invoices.find((i) => i.id === invoiceId));
+      },
 
-      deleteInvoice: (invoiceId) =>
+      deleteInvoice: (invoiceId) => {
         set((s) => ({
           invoices: s.invoices.filter((i) => i.id !== invoiceId),
           payments: s.payments.filter((p) => p.invoiceId !== invoiceId),
-        })),
+        }));
+        dbSync("invoices", "delete", { id: invoiceId });
+      },
 
       genereerTermijnfacturen: (quoteId) => {
         const quote = get().quotes.find((q) => q.id === quoteId);
@@ -536,15 +555,14 @@ export const useCrm = create<CrmState>()(
           };
         });
         set((s) => ({ invoices: [...s.invoices, ...nieuwe] }));
+        nieuwe.forEach((inv) => dbSync("invoices", "upsert", inv));
         return nieuwe.map((i) => i.id);
       },
 
-      registerPayment: (invoiceId, bedrag, methode) =>
+      registerPayment: (invoiceId, bedrag, methode) => {
+        const payment: Payment = { id: id("pay"), invoiceId, bedrag, methode, datum: new Date().toISOString() };
         set((s) => {
-          const payments = [
-            ...s.payments,
-            { id: id("pay"), invoiceId, bedrag, methode, datum: new Date().toISOString() },
-          ];
+          const payments = [...s.payments, payment];
           const invoice = s.invoices.find((i) => i.id === invoiceId);
           let invoices = s.invoices;
           if (invoice) {
@@ -554,7 +572,10 @@ export const useCrm = create<CrmState>()(
             invoices = s.invoices.map((i) => (i.id === invoiceId ? { ...i, status: nieuweStatus } : i));
           }
           return { payments, invoices };
-        }),
+        });
+        dbSync("payments", "upsert", payment);
+        dbSync("invoices", "upsert", get().invoices.find((i) => i.id === invoiceId));
+      },
 
       reset: () =>
         set({
