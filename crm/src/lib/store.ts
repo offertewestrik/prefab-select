@@ -55,7 +55,24 @@ import { volgendQuoteNummer, berekenTotalen } from "./quote-utils";
 import { volgendFactuurNummer, TERMIJN_SCHEMA } from "./invoice-utils";
 
 function id(prefix: string): string {
+  // UUID zodat de id direct compatibel is met de Supabase uuid-kolommen.
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
   return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+// ---------------------------------------------------------------------------
+// Write-through naar Supabase voor leads (optimistisch; fout = alleen loggen).
+// ---------------------------------------------------------------------------
+function syncLead(method: "POST" | "PATCH" | "DELETE", body: unknown, leadId?: string) {
+  if (typeof window === "undefined") return;
+  const url = leadId ? `/api/leads/${leadId}` : "/api/leads";
+  fetch(url, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
+  }).catch((e) => console.error("Lead-synchronisatie mislukt:", e));
 }
 
 /** Velden om een nieuwe offerte aan te maken. */
@@ -104,6 +121,8 @@ interface CrmState {
   payments: Payment[];
 
   // --- Leads / pijplijn ---
+  /** Laadt de echte data uit Supabase in de store (bij het opstarten). */
+  hydrate: () => void;
   moveLead: (leadId: string, stage: PipelineStage, positie: number) => void;
   reorderInStage: (stage: PipelineStage, geordendeIds: string[]) => void;
   updateLead: (leadId: string, patch: Partial<Lead>) => void;
@@ -173,60 +192,76 @@ interface CrmState {
 export const useCrm = create<CrmState>()(
   persist(
     (set, get) => ({
-      leads: seedLeads,
-      notes: seedNotes,
-      tasks: seedTasks,
-      appointments: seedAppointments,
-      files: seedFiles,
-      quoteRequests: seedQuoteRequests,
-      quotes: seedQuotes,
-      emailLogs: seedEmailLogs,
+      // Productie: transactionele data start leeg en wordt uit Supabase geladen
+      // (zie hydrate). Config-/referentiedata houden we als startwaarde aan.
+      leads: [],
+      notes: [],
+      tasks: [],
+      appointments: [],
+      files: [],
+      quoteRequests: [],
+      quotes: [],
+      emailLogs: [],
       integrations: seedIntegrations,
       users: seedUsers,
       currentUserId: "u-kelly",
-      taskComments: seedTaskComments,
-      notifications: seedNotifications,
+      taskComments: [],
+      notifications: [],
       reminderRules: seedReminderRules,
-      invoices: seedInvoices,
-      payments: seedPayments,
+      invoices: [],
+      payments: [],
 
-      moveLead: (leadId, stage, positie) =>
+      hydrate: async () => {
+        if (typeof window === "undefined") return;
+        try {
+          const res = await fetch("/api/leads");
+          if (res.ok) {
+            const leads = (await res.json()) as Lead[];
+            if (Array.isArray(leads)) set({ leads });
+          }
+        } catch (e) {
+          console.error("Hydratatie mislukt:", e);
+        }
+      },
+
+      moveLead: (leadId, stage, positie) => {
+        const laatsteActiviteit = new Date().toISOString();
         set((s) => ({
           leads: s.leads.map((l) =>
-            l.id === leadId
-              ? { ...l, stage, positie, laatsteActiviteit: new Date().toISOString() }
-              : l,
+            l.id === leadId ? { ...l, stage, positie, laatsteActiviteit } : l,
           ),
-        })),
+        }));
+        syncLead("PATCH", { stage, positie, laatsteActiviteit }, leadId);
+      },
 
-      reorderInStage: (stage, geordendeIds) =>
+      reorderInStage: (stage, geordendeIds) => {
         set((s) => ({
           leads: s.leads.map((l) =>
             l.stage === stage && geordendeIds.includes(l.id)
               ? { ...l, positie: geordendeIds.indexOf(l.id) }
               : l,
           ),
-        })),
+        }));
+        geordendeIds.forEach((lid, i) => syncLead("PATCH", { positie: i }, lid));
+      },
 
-      updateLead: (leadId, patch) =>
+      updateLead: (leadId, patch) => {
+        const laatsteActiviteit = new Date().toISOString();
         set((s) => ({
           leads: s.leads.map((l) =>
-            l.id === leadId
-              ? { ...l, ...patch, laatsteActiviteit: new Date().toISOString() }
-              : l,
+            l.id === leadId ? { ...l, ...patch, laatsteActiviteit } : l,
           ),
-        })),
+        }));
+        syncLead("PATCH", { ...patch, laatsteActiviteit }, leadId);
+      },
 
       addLead: (lead) => {
         const newId = id("lead");
         const now = new Date().toISOString();
         const positie = get().leads.filter((l) => l.stage === lead.stage).length;
-        set((s) => ({
-          leads: [
-            ...s.leads,
-            { ...lead, id: newId, positie, aangemaaktOp: now, laatsteActiviteit: now },
-          ],
-        }));
+        const nieuw = { ...lead, id: newId, positie, aangemaaktOp: now, laatsteActiviteit: now };
+        set((s) => ({ leads: [...s.leads, nieuw] }));
+        syncLead("POST", nieuw);
         // Notificatie + opvolg-reminder automatisch
         get().addNotification({
           type: "nieuwe_lead",
@@ -542,9 +577,9 @@ export const useCrm = create<CrmState>()(
         }),
     }),
     {
-      // v4: facturen, betalingen & klantportaal (fase 5)
+      // v5: live datalaag — leads uit Supabase, transactionele data start leeg
       name: "prefab-crm-store",
-      version: 4,
+      version: 5,
     },
   ),
 );
