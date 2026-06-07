@@ -9,20 +9,24 @@ import {
   Inbox,
   FileText,
   CalendarDays,
+  CalendarRange,
   CheckSquare,
   BarChart3,
   Plug,
   Building2,
+  Sun,
 } from "lucide-react";
 import clsx from "clsx";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/mijn-dag", label: "Mijn dag", icon: Sun },
   { href: "/pipeline", label: "Pijplijn", icon: KanbanSquare },
   { href: "/leads", label: "Leads", icon: Users },
   { href: "/offerte-aanvragen", label: "Offerte aanvragen", icon: Inbox },
   { href: "/offertes", label: "Offertes", icon: FileText },
-  { href: "/afspraken", label: "Afspraken", icon: CalendarDays },
+  { href: "/agenda", label: "Agenda", icon: CalendarDays },
+  { href: "/team-planning", label: "Team planning", icon: CalendarRange },
   { href: "/taken", label: "Taken & reminders", icon: CheckSquare },
   { href: "/rapportage", label: "Rapportage", icon: BarChart3 },
   { href: "/integraties", label: "Integraties", icon: Plug },

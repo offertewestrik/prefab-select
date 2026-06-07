@@ -234,3 +234,59 @@ export const TEAM = ["Kelly", "Mark", "Sanne", "Tom"];
 
 /** Standaard btw-percentage in NL. */
 export const DEFAULT_BTW = 21;
+
+// ============================================================================
+// Fase 3 — agenda, taken, rollen, reminders & notificaties
+// ============================================================================
+import type {
+  AppointmentType,
+  NotificationType,
+  TaskStatus,
+  UserRole,
+} from "./types";
+
+export const APPOINTMENT_TYPE_META: Record<
+  AppointmentType,
+  { label: string; kleur: string; hex: string }
+> = {
+  telefonisch: { label: "Telefonisch gesprek", kleur: "bg-sky-100 text-sky-700", hex: "#0ea5e9" },
+  offertebespreking: { label: "Offertebespreking", kleur: "bg-amber-100 text-amber-700", hex: "#f59e0b" },
+  inmeten: { label: "Inmeten", kleur: "bg-violet-100 text-violet-700", hex: "#8b5cf6" },
+  adviesgesprek: { label: "Adviesgesprek", kleur: "bg-indigo-100 text-indigo-700", hex: "#6366f1" },
+  werkvoorbereiding: { label: "Werkvoorbereiding", kleur: "bg-cyan-100 text-cyan-700", hex: "#06b6d4" },
+  plaatsing: { label: "Plaatsing", kleur: "bg-emerald-100 text-emerald-700", hex: "#10b981" },
+  oplevering: { label: "Oplevering", kleur: "bg-teal-100 text-teal-700", hex: "#14b8a6" },
+  overig: { label: "Overig", kleur: "bg-slate-100 text-slate-700", hex: "#64748b" },
+};
+
+export const TASK_STATUS_META: Record<
+  TaskStatus,
+  { label: string; kleur: string; dot: string }
+> = {
+  open: { label: "Open", kleur: "bg-slate-100 text-slate-700", dot: "bg-slate-400" },
+  bezig: { label: "Bezig", kleur: "bg-sky-100 text-sky-700", dot: "bg-sky-500" },
+  wachten: { label: "Wachten", kleur: "bg-amber-100 text-amber-700", dot: "bg-amber-500" },
+  gereed: { label: "Gereed", kleur: "bg-emerald-100 text-emerald-700", dot: "bg-emerald-600" },
+};
+
+export const TASK_STATUS_ORDER: TaskStatus[] = ["open", "bezig", "wachten", "gereed"];
+
+export const ROLE_META: Record<UserRole, { label: string; kleur: string }> = {
+  eigenaar: { label: "Eigenaar", kleur: "bg-brand-100 text-brand-700" },
+  verkoop: { label: "Verkoop", kleur: "bg-emerald-100 text-emerald-700" },
+  werkvoorbereiding: { label: "Werkvoorbereiding", kleur: "bg-cyan-100 text-cyan-700" },
+  administratie: { label: "Administratie", kleur: "bg-violet-100 text-violet-700" },
+};
+
+export const NOTIFICATION_META: Record<
+  NotificationType,
+  { label: string; kleur: string }
+> = {
+  nieuwe_lead: { label: "Nieuwe lead", kleur: "bg-sky-100 text-sky-700" },
+  nieuwe_afspraak: { label: "Nieuwe afspraak", kleur: "bg-violet-100 text-violet-700" },
+  offerte_geaccepteerd: { label: "Offerte geaccepteerd", kleur: "bg-emerald-100 text-emerald-700" },
+  taak_verlopen: { label: "Taak verlopen", kleur: "bg-rose-100 text-rose-700" },
+};
+
+/** Mogelijke opvolg-offsets in dagen. */
+export const REMINDER_DAGEN = [1, 3, 7, 14];

@@ -11,7 +11,7 @@ import {
   CheckSquare,
   CalendarDays,
 } from "lucide-react";
-import { useCrm } from "@/lib/store";
+import { useCrm, userNaam } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { StatCard } from "@/components/ui/StatCard";
@@ -21,7 +21,7 @@ import { euro, datumTijd, relatief } from "@/lib/format";
 
 export default function DashboardPage() {
   const mounted = useMounted();
-  const { leads, tasks, appointments, notes } = useCrm();
+  const { leads, tasks, appointments, notes, quotes, users } = useCrm();
 
   const stats = useMemo(() => {
     const open = leads.filter((l) => !["gewonnen", "verloren"].includes(l.stage));
@@ -62,9 +62,25 @@ export default function DashboardPage() {
     const eindVandaag = new Date();
     eindVandaag.setHours(23, 59, 59, 999);
     return tasks
-      .filter((t) => !t.voltooid && new Date(t.vervaldatum) <= eindVandaag)
-      .sort((a, b) => +new Date(a.vervaldatum) - +new Date(b.vervaldatum));
+      .filter((t) => t.status !== "gereed" && new Date(t.deadline) <= eindVandaag)
+      .sort((a, b) => +new Date(a.deadline) - +new Date(b.deadline));
   }, [tasks]);
+
+  // Fase 3 — dashboard widgets
+  const widgets = useMemo(() => {
+    const nu = new Date();
+    const startVandaag = new Date(new Date().setHours(0, 0, 0, 0));
+    const eindVandaag = new Date(new Date().setHours(23, 59, 59, 999));
+    const eindWeek = new Date(startVandaag);
+    eindWeek.setDate(eindWeek.getDate() + 7);
+    return {
+      afsprakenVandaag: appointments.filter((a) => new Date(a.start) >= startVandaag && new Date(a.start) <= eindVandaag).length,
+      takenVandaag: tasks.filter((t) => t.status !== "gereed" && new Date(t.deadline) <= eindVandaag).length,
+      openOffertes: quotes.filter((q) => ["verstuurd", "bekeken"].includes(q.status)).length,
+      leadsOpvolgen: leads.filter((l) => ["nieuwe_lead", "offerte_aanvraag", "gebeld"].includes(l.stage)).length,
+      plaatsingenWeek: appointments.filter((a) => a.type === "plaatsing" && new Date(a.start) >= startVandaag && new Date(a.start) <= eindWeek).length,
+    };
+  }, [appointments, tasks, quotes, leads]);
 
   const komendeAfspraken = useMemo(
     () =>
@@ -100,6 +116,15 @@ export default function DashboardPage() {
         <StatCard label="Pijplijnwaarde" waarde={euro(stats.pipelineWaarde)} icon={Euro} sub={`${euro(stats.gewogen)} gewogen`} accent="amber" />
         <StatCard label="Gewonnen (totaal)" waarde={euro(stats.gewonnenWaarde)} icon={Trophy} sub="omzet uit CRM" accent="emerald" trend={{ waarde: "+12%", positief: true }} />
         <StatCard label="Win-ratio" waarde={`${stats.winratio}%`} icon={FileText} sub="van afgeronde leads" accent="brand" />
+      </div>
+
+      {/* Fase 3 — dagwidgets */}
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-5">
+        <WidgetTegel href="/agenda" label="Afspraken vandaag" waarde={widgets.afsprakenVandaag} kleur="text-violet-600" />
+        <WidgetTegel href="/taken" label="Taken vandaag" waarde={widgets.takenVandaag} kleur="text-sky-600" />
+        <WidgetTegel href="/offertes" label="Open offertes" waarde={widgets.openOffertes} kleur="text-amber-600" />
+        <WidgetTegel href="/leads" label="Leads opvolgen" waarde={widgets.leadsOpvolgen} kleur="text-brand-600" />
+        <WidgetTegel href="/agenda" label="Plaatsingen deze week" waarde={widgets.plaatsingenWeek} kleur="text-emerald-600" />
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -153,7 +178,7 @@ export default function DashboardPage() {
                   <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${t.prioriteit === "hoog" ? "bg-rose-500" : t.prioriteit === "normaal" ? "bg-amber-500" : "bg-slate-300"}`} />
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-slate-700">{t.titel}</p>
-                    <p className="text-xs text-slate-400">{relatief(t.vervaldatum)} · {t.toegewezenAan}</p>
+                    <p className="text-xs text-slate-400">{relatief(t.deadline)} · {userNaam(users, t.medewerkerId)}</p>
                   </div>
                 </li>
               ))}
@@ -225,6 +250,15 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function WidgetTegel({ href, label, waarde, kleur }: { href: string; label: string; waarde: number; kleur: string }) {
+  return (
+    <Link href={href} className="rounded-2xl border border-slate-100 bg-white p-4 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md">
+      <p className={`text-2xl font-black ${kleur}`}>{waarde}</p>
+      <p className="mt-0.5 text-xs font-medium text-slate-500">{label}</p>
+    </Link>
   );
 }
 
