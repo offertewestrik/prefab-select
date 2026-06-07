@@ -15,16 +15,19 @@ env:
   - variable: USE_REAL_INTEGRATIONS
     value: "true"
     availability:
+      - BUILD
       - RUNTIME
 
   # --- Resend (offertes & facturen mailen) ---
   - variable: RESEND_FROM_EMAIL
     value: offerte@prefabselect.nl
     availability:
+      - BUILD
       - RUNTIME
   - variable: RESEND_API_KEY
     secret: resend-api-key
     availability:
+      - BUILD
       - RUNTIME
 
   # --- Supabase (database) ---
@@ -36,4 +39,5 @@ env:
   - variable: SUPABASE_SERVICE_ROLE_KEY
     secret: supabase-service-key
     availability:
+      - BUILD
       - RUNTIME
