@@ -31,6 +31,32 @@ export function quoteTotaal(quote: Quote): number {
   return berekenTotalen(quote.regels, quote.korting).totaal;
 }
 
+export interface BtwRegel {
+  percentage: number;
+  grondslag: number; // bedrag (excl. btw) na evenredige korting
+  btw: number;
+}
+
+/** Splitst de btw uit per tarief. Korting wordt evenredig over de regels verdeeld. */
+export function btwPerTarief(regels: QuoteLine[], korting = 0): BtwRegel[] {
+  const subtotaal = regels.reduce((som, r) => som + r.aantal * r.prijsPerStuk, 0);
+  const veiligeKorting = Math.min(korting, subtotaal);
+  const factor = subtotaal > 0 ? (subtotaal - veiligeKorting) / subtotaal : 0;
+
+  const perTarief = new Map<number, number>(); // percentage -> grondslag
+  for (const r of regels) {
+    const grondslag = r.aantal * r.prijsPerStuk * factor;
+    perTarief.set(r.btwPercentage, (perTarief.get(r.btwPercentage) ?? 0) + grondslag);
+  }
+  return Array.from(perTarief.entries())
+    .sort((a, b) => b[0] - a[0])
+    .map(([percentage, grondslag]) => ({
+      percentage,
+      grondslag,
+      btw: grondslag * (percentage / 100),
+    }));
+}
+
 /** Genereer het volgende offertenummer op basis van bestaande nummers. */
 export function volgendQuoteNummer(bestaande: Quote[]): string {
   const jaar = new Date().getFullYear();

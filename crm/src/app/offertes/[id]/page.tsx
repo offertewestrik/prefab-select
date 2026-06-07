@@ -17,7 +17,12 @@ import {
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { Badge } from "@/components/ui/Badge";
-import { QUOTE_STATUS_META, PRODUCT_LABEL } from "@/lib/constants";
+import {
+  QUOTE_STATUS_META,
+  PRODUCT_LABEL,
+  BETALINGSTERMIJNEN,
+  BETALINGSVOORWAARDEN_TEKST,
+} from "@/lib/constants";
 import { euroCent, datum, datumTijd } from "@/lib/format";
 import { berekenTotalen } from "@/lib/quote-utils";
 import type { QuoteStatus } from "@/lib/types";
@@ -224,7 +229,7 @@ export default function OfferteDetailPage() {
       </div>
 
       {/* Projectgegevens */}
-      {(quote.projectomschrijving || quote.afmetingen || quote.werkzaamheden) && (
+      {(quote.projectomschrijving || quote.afmetingen || quote.werkzaamheden || quote.planning) && (
         <div className="mb-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
           <h3 className="mb-3 text-sm font-bold text-slate-900">Projectgegevens</h3>
           <dl className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
@@ -232,6 +237,7 @@ export default function OfferteDetailPage() {
             {quote.afmetingen && <Veld label="Afmetingen" waarde={quote.afmetingen} />}
             {quote.projectomschrijving && <Veld label="Omschrijving" waarde={quote.projectomschrijving} breed />}
             {quote.werkzaamheden && <Veld label="Werkzaamheden" waarde={quote.werkzaamheden} breed />}
+            {quote.planning && <Veld label="Planning & levertijd" waarde={quote.planning} breed />}
           </dl>
         </div>
       )}
@@ -280,6 +286,21 @@ export default function OfferteDetailPage() {
             {quote.voorwaarden}
           </div>
         )}
+
+        <div className="mt-4 rounded-xl bg-slate-50 p-4">
+          <p className="mb-2 text-xs font-semibold uppercase text-slate-400">Betalingsvoorwaarden</p>
+          <ul className="space-y-1 text-sm">
+            {BETALINGSTERMIJNEN.map((term) => (
+              <li key={term.pct} className="flex items-center justify-between gap-3">
+                <span className="text-slate-600">
+                  <b className="text-slate-800">{term.pct}%</b> {term.moment}
+                </span>
+                <span className="shrink-0 font-semibold text-slate-800">{euroCent((t.totaal * term.pct) / 100)}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs leading-relaxed text-slate-400">{BETALINGSVOORWAARDEN_TEKST}</p>
+        </div>
       </div>
 
       {/* Verzendgeschiedenis */}
