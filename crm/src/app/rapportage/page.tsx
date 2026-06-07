@@ -1,193 +1,210 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  PieChart,
-  Pie,
-  Cell,
-  LineChart,
-  Line,
-  CartesianGrid,
-  Legend,
-} from "recharts";
+import { useMemo, useState } from "react";
+import { FileDown, FileSpreadsheet, FileText, Calendar, Clock } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { StatCard } from "@/components/ui/StatCard";
-import { SOURCE_LABEL, STAGE_META, STAGE_ORDER } from "@/lib/constants";
+import { ChartCard } from "@/components/ui/ChartCard";
+import { Badge } from "@/components/ui/Badge";
 import { euro } from "@/lib/format";
-import {
-  haalGaVerkeer,
-  haalMetaCampagnes,
-  type GaDagpunt,
-  type GaKanaal,
-  type MetaCampagne,
-} from "@/lib/integrations";
-import { Euro, Users, MousePointerClick, TrendingUp } from "lucide-react";
+import { quoteTotaal } from "@/lib/quote-utils";
+import { getLeadbronnen, getOmzet, getMetaCampaigns, getMetaTotalen, KANAAL_LABEL } from "@/lib/analytics";
+import type { RapportData } from "@/lib/pdf/RapportDocument";
 
-const KLEUREN = ["#2563eb", "#7c3aed", "#0891b2", "#f59e0b", "#10b981", "#f43f5e"];
+type RapportType = "Dagelijks" | "Wekelijks" | "Maandelijks";
 
 export default function RapportagePage() {
   const mounted = useMounted();
   const leads = useCrm((s) => s.leads);
+  const quotes = useCrm((s) => s.quotes);
 
-  const [meta, setMeta] = useState<MetaCampagne[]>([]);
-  const [ga, setGa] = useState<{ reeks: GaDagpunt[]; kanalen: GaKanaal[]; totaalBezoekers: number; totaalConversies: number } | null>(null);
+  const [type, setType] = useState<RapportType>("Wekelijks");
+  const [bezig, setBezig] = useState(false);
+  const [auto, setAuto] = useState<Record<RapportType, boolean>>({ Dagelijks: false, Wekelijks: true, Maandelijks: true });
 
-  useEffect(() => {
-    haalMetaCampagnes().then(setMeta);
-    haalGaVerkeer().then(setGa);
-  }, []);
+  const rapport: RapportData = useMemo(() => {
+    const nu = new Date();
+    const dagen = type === "Dagelijks" ? 1 : type === "Wekelijks" ? 7 : 30;
+    const start = new Date(nu.getTime() - dagen * 86400000);
+    const periodeLeads = leads.filter((l) => new Date(l.aangemaaktOp) >= start);
 
-  const funnel = useMemo(
-    () =>
-      STAGE_ORDER.filter((s) => s !== "verloren").map((stage) => ({
-        naam: STAGE_META[stage].label,
-        aantal: leads.filter((l) => l.stage === stage).length,
-      })),
-    [leads],
-  );
-
-  const perBron = useMemo(() => {
-    const map = new Map<string, number>();
-    leads.forEach((l) => map.set(l.source, (map.get(l.source) ?? 0) + 1));
-    return Array.from(map.entries()).map(([source, aantal]) => ({
-      naam: SOURCE_LABEL[source as keyof typeof SOURCE_LABEL],
-      aantal,
-    }));
-  }, [leads]);
-
-  const omzet = useMemo(() => {
+    const openOffertes = quotes.filter((q) => ["concept", "verstuurd", "bekeken"].includes(q.status));
+    const geaccepteerd = quotes.filter((q) => q.status === "geaccepteerd");
+    const omzetInOfferte = openOffertes.reduce((s, q) => s + quoteTotaal(q), 0);
+    const openLeads = leads.filter((l) => !["gewonnen", "verloren"].includes(l.stage));
+    const verwacht = openLeads.reduce((s, l) => s + (l.waarde * l.kans) / 100, 0);
+    const afgerond = leads.filter((l) => ["gewonnen", "verloren"].includes(l.stage));
     const gewonnen = leads.filter((l) => l.stage === "gewonnen");
-    const pipeline = leads.filter((l) => !["gewonnen", "verloren"].includes(l.stage));
+    const conversie = afgerond.length ? Math.round((gewonnen.length / afgerond.length) * 100) : 0;
+
+    const bronnen = getLeadbronnen();
+    const omzet = getOmzet();
+    const meta = getMetaTotalen(getMetaCampaigns());
+
+    const periode =
+      type === "Dagelijks"
+        ? nu.toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })
+        : `${start.toLocaleDateString("nl-NL", { day: "numeric", month: "short" })} – ${nu.toLocaleDateString("nl-NL", { day: "numeric", month: "short", year: "numeric" })}`;
+
     return {
-      gewonnen: gewonnen.reduce((s, l) => s + l.waarde, 0),
-      pipeline: pipeline.reduce((s, l) => s + l.waarde, 0),
-      metaLeads: meta.reduce((s, c) => s + c.leads, 0),
-      metaBesteed: meta.reduce((s, c) => s + c.besteed, 0),
+      type,
+      periode,
+      gegenereerdOp: nu.toISOString(),
+      kpis: [
+        { label: "Nieuwe leads", waarde: String(periodeLeads.length) },
+        { label: "Open offertes", waarde: String(openOffertes.length) },
+        { label: "Geaccepteerd", waarde: String(geaccepteerd.length) },
+        { label: "Omzet in offerte", waarde: euro(omzetInOfferte) },
+        { label: "Verwachte omzet", waarde: euro(verwacht) },
+        { label: "Conversie", waarde: `${conversie}%` },
+      ],
+      leadbronnen: bronnen.map((b) => ({ kanaal: KANAAL_LABEL[b.kanaal], leads: b.leads, omzet: euro(b.omzet), conversie: `${b.conversie}%` })),
+      omzetPerType: omzet.perType.map((o) => ({ type: o.type, omzet: euro(o.omzet) })),
+      marketing: [
+        { label: "Advertentiekosten", waarde: euro(meta.kosten) },
+        { label: "Leads uit ads", waarde: String(meta.leads) },
+        { label: "Gem. CPL", waarde: euro(meta.cpl) },
+      ],
     };
-  }, [leads, meta]);
+  }, [type, leads, quotes]);
+
+  async function exportPdf() {
+    setBezig(true);
+    try {
+      const res = await fetch("/api/rapportage/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(rapport),
+      });
+      if (!res.ok) throw new Error();
+      const blob = await res.blob();
+      window.open(URL.createObjectURL(blob), "_blank");
+    } catch {
+      alert("PDF-export mislukt.");
+    } finally {
+      setBezig(false);
+    }
+  }
+
+  function exportExcel() {
+    const lijnen: string[] = [];
+    lijnen.push(`${rapport.type} managementrapport;${rapport.periode}`);
+    lijnen.push("");
+    lijnen.push("Kerncijfers");
+    rapport.kpis.forEach((k) => lijnen.push(`${k.label};${k.waarde}`));
+    lijnen.push("");
+    lijnen.push("Leadbronnen;Leads;Omzet;Conversie");
+    rapport.leadbronnen.forEach((b) => lijnen.push(`${b.kanaal};${b.leads};${b.omzet};${b.conversie}`));
+    lijnen.push("");
+    lijnen.push("Omzet per projecttype;Omzet");
+    rapport.omzetPerType.forEach((o) => lijnen.push(`${o.type};${o.omzet}`));
+    lijnen.push("");
+    lijnen.push("Marketing");
+    rapport.marketing.forEach((m) => lijnen.push(`${m.label};${m.waarde}`));
+
+    const csv = "﻿" + lijnen.join("\n"); // BOM voor Excel + ; scheidingsteken
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `rapport-${rapport.type.toLowerCase()}.csv`;
+    a.click();
+  }
 
   if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-slate-100" />;
 
   return (
     <div>
-      <PageHeader titel="Rapportage" subtitel="Prestaties van leads, marketing en website" />
+      <PageHeader titel="Rapportages" subtitel="Genereer en exporteer management­rapporten" />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Gewonnen omzet" waarde={euro(omzet.gewonnen)} icon={Euro} accent="emerald" trend={{ waarde: "+12%", positief: true }} />
-        <StatCard label="Pijplijnwaarde" waarde={euro(omzet.pipeline)} icon={TrendingUp} accent="brand" />
-        <StatCard label="Meta Ads leads" waarde={String(omzet.metaLeads)} icon={Users} sub={`${euro(omzet.metaBesteed)} besteed`} accent="amber" />
-        <StatCard label="Website bezoekers" waarde={ga ? ga.totaalBezoekers.toLocaleString("nl-NL") : "—"} icon={MousePointerClick} sub={ga ? `${ga.totaalConversies} conversies` : ""} />
-      </div>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {/* Generator */}
+        <div className="lg:col-span-2 space-y-6">
+          <ChartCard titel="Rapport genereren" subtitel="Kies een periode en exporteer">
+            <div className="mb-4 flex flex-wrap gap-2">
+              {(["Dagelijks", "Wekelijks", "Maandelijks"] as RapportType[]).map((t) => (
+                <button key={t} onClick={() => setType(t)} className={`rounded-lg px-4 py-2 text-sm font-semibold ${type === t ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}>
+                  {t}
+                </button>
+              ))}
+              <div className="ml-auto flex gap-2">
+                <button onClick={exportExcel} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                  <FileSpreadsheet className="h-4 w-4" /> Excel
+                </button>
+                <button onClick={exportPdf} disabled={bezig} className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-50">
+                  <FileDown className="h-4 w-4" /> {bezig ? "Bezig…" : "PDF"}
+                </button>
+              </div>
+            </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Funnel */}
-        <ChartCard titel="Pijplijn-funnel (aantal leads)">
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={funnel} layout="vertical" margin={{ left: 20 }}>
-              <XAxis type="number" allowDecimals={false} stroke="#94a3b8" fontSize={11} />
-              <YAxis type="category" dataKey="naam" width={120} stroke="#94a3b8" fontSize={11} />
-              <Tooltip />
-              <Bar dataKey="aantal" fill="#2563eb" radius={[0, 6, 6, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartCard>
-
-        {/* Bron */}
-        <ChartCard titel="Leads per bron">
-          <ResponsiveContainer width="100%" height={280}>
-            <PieChart>
-              <Pie data={perBron} dataKey="aantal" nameKey="naam" cx="50%" cy="50%" outerRadius={95} label={(e: any) => e.naam}>
-                {perBron.map((_, i) => (
-                  <Cell key={i} fill={KLEUREN[i % KLEUREN.length]} />
+            {/* Preview */}
+            <div className="rounded-xl border border-slate-100 p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <h4 className="font-bold text-slate-900">{rapport.type} rapport</h4>
+                <span className="text-xs text-slate-400">{rapport.periode}</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {rapport.kpis.map((k) => (
+                  <div key={k.label} className="rounded-lg bg-slate-50 p-3">
+                    <p className="text-[11px] uppercase text-slate-400">{k.label}</p>
+                    <p className="mt-1 text-lg font-black text-slate-900">{k.waarde}</p>
+                  </div>
                 ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </ChartCard>
+              </div>
+            </div>
+          </ChartCard>
 
-        {/* GA verkeer */}
-        <ChartCard titel="Websiteverkeer (Google Analytics — 14 dagen)">
-          {ga && (
-            <ResponsiveContainer width="100%" height={280}>
-              <LineChart data={ga.reeks}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="datum" stroke="#94a3b8" fontSize={11} />
-                <YAxis stroke="#94a3b8" fontSize={11} />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="bezoekers" name="Bezoekers" stroke="#2563eb" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="conversies" name="Conversies" stroke="#10b981" strokeWidth={2} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          )}
-        </ChartCard>
-
-        {/* Meta campagnes */}
-        <ChartCard titel="Meta Ads — leads per campagne">
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={meta.map((c) => ({ naam: c.naam.split(" — ")[0], leads: c.leads, cpl: c.cpl }))}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="naam" stroke="#94a3b8" fontSize={10} />
-              <YAxis stroke="#94a3b8" fontSize={11} />
-              <Tooltip />
-              <Bar dataKey="leads" name="Leads" fill="#7c3aed" radius={[6, 6, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartCard>
-      </div>
-
-      {/* Meta tabel */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-soft">
-        <div className="border-b border-slate-100 px-6 py-4">
-          <h3 className="font-bold text-slate-900">Meta Ads campagnedetails</h3>
+          <ChartCard titel="Leadbronnen in dit rapport">
+            <table className="w-full text-left text-sm">
+              <thead className="text-xs uppercase tracking-wide text-slate-400">
+                <tr><th className="pb-2 font-semibold">Kanaal</th><th className="pb-2 text-right font-semibold">Leads</th><th className="pb-2 text-right font-semibold">Omzet</th><th className="pb-2 text-right font-semibold">Conversie</th></tr>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {rapport.leadbronnen.map((b) => (
+                  <tr key={b.kanaal}><td className="py-2 text-slate-700">{b.kanaal}</td><td className="py-2 text-right text-slate-600">{b.leads}</td><td className="py-2 text-right font-semibold text-slate-800">{b.omzet}</td><td className="py-2 text-right text-slate-600">{b.conversie}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </ChartCard>
         </div>
-        <table className="w-full text-left text-sm">
-          <thead className="bg-slate-50/60 text-xs uppercase tracking-wide text-slate-400">
-            <tr>
-              <th className="px-6 py-3 font-semibold">Campagne</th>
-              <th className="px-4 py-3 text-right font-semibold">Impressies</th>
-              <th className="px-4 py-3 text-right font-semibold">Klikken</th>
-              <th className="px-4 py-3 text-right font-semibold">Besteed</th>
-              <th className="px-4 py-3 text-right font-semibold">Leads</th>
-              <th className="px-6 py-3 text-right font-semibold">CPL</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-50">
-            {meta.map((c) => (
-              <tr key={c.naam} className="hover:bg-slate-50/60">
-                <td className="px-6 py-3 font-medium text-slate-700">{c.naam}</td>
-                <td className="px-4 py-3 text-right text-slate-600">{c.impressies.toLocaleString("nl-NL")}</td>
-                <td className="px-4 py-3 text-right text-slate-600">{c.klikken.toLocaleString("nl-NL")}</td>
-                <td className="px-4 py-3 text-right text-slate-600">{euro(c.besteed)}</td>
-                <td className="px-4 py-3 text-right font-semibold text-slate-800">{c.leads}</td>
-                <td className="px-6 py-3 text-right font-semibold text-slate-800">{euro(c.cpl)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+
+        {/* Automatische rapporten */}
+        <div className="space-y-6">
+          <ChartCard titel="Automatische rapporten" subtitel="Per e-mail naar de directie">
+            <ul className="space-y-3">
+              {(["Dagelijks", "Wekelijks", "Maandelijks"] as RapportType[]).map((t) => (
+                <li key={t} className="flex items-center justify-between rounded-xl border border-slate-100 p-3">
+                  <div className="flex items-center gap-2">
+                    {t === "Dagelijks" ? <Clock className="h-4 w-4 text-slate-400" /> : <Calendar className="h-4 w-4 text-slate-400" />}
+                    <span className="text-sm font-medium text-slate-700">{t}</span>
+                  </div>
+                  <label className="relative inline-flex cursor-pointer items-center">
+                    <input type="checkbox" checked={auto[t]} onChange={() => setAuto((s) => ({ ...s, [t]: !s[t] }))} className="peer sr-only" />
+                    <div className="h-5 w-9 rounded-full bg-slate-200 after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-all peer-checked:bg-brand-600 peer-checked:after:translate-x-4" />
+                  </label>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs text-slate-400">In het prototype worden deze niet echt verstuurd. Via Resend (fase 2) is dit eenvoudig te activeren.</p>
+          </ChartCard>
+
+          <ChartCard titel="Recente rapporten">
+            <ul className="space-y-2 text-sm">
+              {[
+                { naam: "Weekrapport wk 23", type: "Wekelijks" },
+                { naam: "Maandrapport mei", type: "Maandelijks" },
+                { naam: "Weekrapport wk 22", type: "Wekelijks" },
+              ].map((r) => (
+                <li key={r.naam} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3">
+                  <FileText className="h-4 w-4 text-brand-600" />
+                  <span className="flex-1 font-medium text-slate-700">{r.naam}</span>
+                  <Badge>{r.type}</Badge>
+                </li>
+              ))}
+            </ul>
+          </ChartCard>
+        </div>
       </div>
-
-      <p className="mt-4 text-center text-xs text-slate-400">
-        Marketing- en analytics-cijfers zijn dummy data. Koppel Meta &amp; Google Analytics via &apos;Integraties&apos; voor live data.
-      </p>
-    </div>
-  );
-}
-
-function ChartCard({ titel, children }: { titel: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
-      <h3 className="mb-4 font-bold text-slate-900">{titel}</h3>
-      {children}
     </div>
   );
 }
