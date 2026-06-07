@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -18,6 +18,7 @@ import type { PipelineStage } from "@/lib/types";
 export default function LeadsPage() {
   const mounted = useMounted();
   const leads = useCrm((s) => s.leads);
+  const router = useRouter();
   const [zoek, setZoek] = useState("");
   const [stageFilter, setStageFilter] = useState<PipelineStage | "alle">("alle");
 
@@ -75,11 +76,13 @@ export default function LeadsPage() {
           </thead>
           <tbody className="divide-y divide-slate-50">
             {gefilterd.map((l) => (
-              <tr key={l.id} className="transition hover:bg-slate-50/60">
+              <tr
+                key={l.id}
+                onClick={() => router.push(`/leads/${l.id}`)}
+                className="cursor-pointer transition hover:bg-slate-50/60"
+              >
                 <td className="px-4 py-3">
-                  <Link href={`/leads/${l.id}`} className="font-semibold text-slate-800 hover:text-brand-600">
-                    {l.naam}
-                  </Link>
+                  <span className="font-semibold text-slate-800 hover:text-brand-600">{l.naam}</span>
                   <p className="text-xs text-slate-400">{l.plaats ?? "—"}</p>
                 </td>
                 <td className="hidden px-4 py-3 text-slate-600 md:table-cell">{PRODUCT_LABEL[l.product]}</td>
