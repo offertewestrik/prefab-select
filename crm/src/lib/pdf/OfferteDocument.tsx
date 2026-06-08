@@ -8,6 +8,7 @@ import {
 } from "@react-pdf/renderer";
 import type { Lead, Quote } from "@/lib/types";
 import { berekenTotalen, btwPerTarief } from "@/lib/quote-utils";
+import { OFFERTE_SPECIFICATIES, OFFERTE_WERKWIJZE } from "@/lib/offerte-toelichting";
 import {
   ALGEMENE_VOORWAARDEN,
   BEDRIJF,
@@ -215,6 +216,36 @@ export function OfferteDocument({ quote, lead }: { quote: Quote; lead: Lead }) {
             <Text>{eur(t.totaal)}</Text>
           </View>
         </View>
+
+        {/* Specificaties & opties — keuzes en mogelijkheden */}
+        <View break>
+          <Text style={styles.sectionTitle}>Specificaties &amp; opties</Text>
+          <Text style={{ fontSize: 8.5, color: "#475569", lineHeight: 1.5, marginBottom: 6 }}>
+            {OFFERTE_SPECIFICATIES.intro}
+          </Text>
+          {OFFERTE_SPECIFICATIES.categorieen.map((cat) => (
+            <View key={cat.titel} wrap={false} style={{ marginBottom: 6 }}>
+              <Text style={{ fontSize: 8.5, fontFamily: "Helvetica-Bold", color: NAVY, marginBottom: 2 }}>{cat.titel}</Text>
+              {cat.items.map((it, i) => (
+                <Text key={i} style={{ fontSize: 8, color: "#475569", lineHeight: 1.45 }}>• {it}</Text>
+              ))}
+            </View>
+          ))}
+        </View>
+
+        {/* Onze werkwijze */}
+        <View wrap={false}>
+          <Text style={styles.sectionTitle}>Onze werkwijze</Text>
+          <Text style={{ fontSize: 8.5, color: "#475569", lineHeight: 1.5, marginBottom: 6 }}>
+            {OFFERTE_WERKWIJZE.intro}
+          </Text>
+        </View>
+        {OFFERTE_WERKWIJZE.secties.map((s) => (
+          <View key={s.titel} wrap={false} style={{ marginBottom: 5 }}>
+            <Text style={{ fontSize: 8.5, fontFamily: "Helvetica-Bold", color: NAVY, marginBottom: 1 }}>{s.titel}</Text>
+            <Text style={{ fontSize: 8, color: "#475569", lineHeight: 1.45 }}>{s.tekst}</Text>
+          </View>
+        ))}
 
         {/* Planning & levertijd */}
         {quote.planning ? (
