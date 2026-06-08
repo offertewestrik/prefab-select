@@ -8,7 +8,11 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
   const fout = url.searchParams.get("error");
-  const basis = `${url.protocol}//${url.host}`;
+  // Achter App Hosting/Cloud Run is url.host het interne adres (0.0.0.0:8080),
+  // dus bouwen we de publieke basis-URL op uit GOOGLE_REDIRECT_URI.
+  const basis = process.env.GOOGLE_REDIRECT_URI
+    ? new URL(process.env.GOOGLE_REDIRECT_URI).origin
+    : `${url.protocol}//${url.host}`;
 
   if (fout) return Response.redirect(`${basis}/integraties?gmail=geweigerd`, 302);
   if (!code) return Response.redirect(`${basis}/integraties?gmail=geen_code`, 302);
