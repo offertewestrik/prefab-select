@@ -14,7 +14,10 @@ const GMAIL_API = "https://gmail.googleapis.com/gmail/v1/users/me";
 export const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/gmail.send",
   "https://www.googleapis.com/auth/gmail.readonly",
+  "https://www.googleapis.com/auth/calendar.events",
 ];
+
+const CALENDAR_API = "https://www.googleapis.com/calendar/v3/calendars/primary/events";
 
 export function isGoogleConfigured(): boolean {
   return Boolean(
@@ -218,4 +221,57 @@ export async function sendGmail(opts: {
   if (!res.ok) throw new Error(`Gmail-verzending mislukt: ${await res.text()}`);
   const data = await res.json();
   return { ok: true, messageId: data.id ?? "" };
+}
+
+// ----------------------------------------------------------------------------
+// Google Agenda — afspraken uit het CRM synchroniseren naar de primaire agenda.
+// ----------------------------------------------------------------------------
+export interface AgendaAfspraak {
+  titel: string;
+  omschrijving?: string;
+  locatie?: string;
+  start: string;
+  eind: string;
+}
+
+function eventBody(a: AgendaAfspraak) {
+  return {
+    summary: a.titel,
+    description: a.omschrijving ?? undefined,
+    location: a.locatie ?? undefined,
+    start: { dateTime: a.start, timeZone: "Europe/Amsterdam" },
+    end: { dateTime: a.eind, timeZone: "Europe/Amsterdam" },
+  };
+}
+
+export async function createCalendarEvent(a: AgendaAfspraak): Promise<string> {
+  const token = await getAccessToken();
+  const res = await fetch(CALENDAR_API, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify(eventBody(a)),
+  });
+  if (!res.ok) throw new Error(`Agenda-event aanmaken mislukt: ${await res.text()}`);
+  return (await res.json()).id as string;
+}
+
+export async function updateCalendarEvent(eventId: string, a: AgendaAfspraak): Promise<void> {
+  const token = await getAccessToken();
+  const res = await fetch(`${CALENDAR_API}/${eventId}`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify(eventBody(a)),
+  });
+  if (!res.ok) throw new Error(`Agenda-event bijwerken mislukt: ${await res.text()}`);
+}
+
+export async function deleteCalendarEvent(eventId: string): Promise<void> {
+  const token = await getAccessToken();
+  const res = await fetch(`${CALENDAR_API}/${eventId}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok && res.status !== 404 && res.status !== 410) {
+    throw new Error(`Agenda-event verwijderen mislukt: ${await res.text()}`);
+  }
 }

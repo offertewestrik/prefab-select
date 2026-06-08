@@ -1,4 +1,5 @@
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase/server";
+import { isGmailConnected, createCalendarEvent, updateCalendarEvent, deleteCalendarEvent } from "@/lib/integrations/google";
 import type { Appointment, Invoice, Note, Payment, Quote, QuoteLine, Task, TaskComment } from "@/lib/types";
 
 // Generieke schrijf-route voor de gedeelde data (write-through vanuit de store).
@@ -63,6 +64,16 @@ export async function POST(req: Request) {
     const { table, op, data } = await req.json();
 
     if (op === "delete") {
+      if (table === "appointments") {
+        try {
+          const { data: row } = await db.from("appointments").select("google_event_id").eq("id", data.id).maybeSingle();
+          if (row?.google_event_id && (await isGmailConnected())) {
+            await deleteCalendarEvent(row.google_event_id);
+          }
+        } catch (e) {
+          console.error("Agenda-event verwijderen mislukt:", e);
+        }
+      }
       const { error } = await db.from(table).delete().eq("id", data.id);
       if (error) throw error;
       return Response.json({ ok: true });
@@ -105,10 +116,23 @@ export async function POST(req: Request) {
       if (error) throw error;
     } else if (table === "appointments") {
       const a = data as Appointment;
+      // Synchroniseer met Google Agenda als die gekoppeld is.
+      const { data: bestaand } = await db.from("appointments").select("google_event_id").eq("id", a.id).maybeSingle();
+      let googleEventId: string | null = bestaand?.google_event_id ?? null;
+      try {
+        if (await isGmailConnected()) {
+          const afspraak = { titel: a.titel, omschrijving: a.omschrijving, locatie: a.locatie, start: a.start, eind: a.eind };
+          if (googleEventId) await updateCalendarEvent(googleEventId, afspraak);
+          else googleEventId = await createCalendarEvent(afspraak);
+        }
+      } catch (e) {
+        console.error("Agenda-sync mislukt:", e);
+      }
       const { error } = await db.from("appointments").upsert({
         id: a.id, titel: a.titel, type: a.type, start_tijd: a.start, eind_tijd: a.eind,
         lead_id: a.leadId ?? null, quote_id: a.quoteId ?? null, medewerker_id: a.medewerkerId ?? null,
-        locatie: a.locatie ?? null, omschrijving: a.omschrijving ?? null, google_synced: a.googleSynced ?? false,
+        locatie: a.locatie ?? null, omschrijving: a.omschrijving ?? null,
+        google_event_id: googleEventId, google_synced: Boolean(googleEventId),
       });
       if (error) throw error;
     } else if (table === "tasks") {
