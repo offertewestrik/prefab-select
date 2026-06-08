@@ -1,6 +1,5 @@
 -- ============================================================================
--- Prefab Select CRM — ALLE migraties (fase 2 t/m 5 + leads-velden) in volgorde
--- Plak dit volledig in de Supabase SQL Editor en klik op RUN. Veilig om te herhalen.
+-- Prefab Select CRM — ALLE migraties in volgorde. Plak in Supabase SQL Editor → RUN.
 -- ============================================================================
 
 
@@ -481,4 +480,26 @@ alter table public.leads
   add column if not exists laatste_activiteit  timestamptz default now(),
   add column if not exists positie             int default 0,
   add column if not exists portal_token        text;
+
+
+-- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0006_google_oauth.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+-- ============================================================================
+-- Prefab Select CRM — Google/Gmail OAuth-tokens (gedeelde postbus)
+-- ============================================================================
+
+create table if not exists public.google_oauth (
+  id            uuid primary key default gen_random_uuid(),
+  email         text unique,
+  refresh_token text,
+  access_token  text,
+  token_expiry  timestamptz,
+  scope         text,
+  updated_at    timestamptz not null default now()
+);
+
+alter table public.google_oauth enable row level security;
+drop policy if exists "team full access google_oauth" on public.google_oauth;
+create policy "team full access google_oauth" on public.google_oauth
+  for all to authenticated using (true) with check (true);
 

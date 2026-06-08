@@ -4,6 +4,7 @@ import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { datumTijd } from "@/lib/format";
+import { GmailCard } from "@/components/GmailCard";
 import {
   Megaphone,
   BarChart3,
@@ -56,6 +57,8 @@ export default function IntegratiesPage() {
           </button>
         }
       />
+
+      <GmailCard />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {integrations.map((i) => {
