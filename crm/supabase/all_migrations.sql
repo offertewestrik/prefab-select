@@ -1,9 +1,6 @@
--- ============================================================================
--- Prefab Select CRM — ALLE migraties in volgorde. Plak in Supabase SQL Editor → RUN.
--- ============================================================================
+-- ALLE migraties — plak in Supabase SQL Editor → RUN. Veilig om te herhalen.
 
-
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0001_phase2_quotes.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-- >>> 0001_phase2_quotes.sql
 
 -- ============================================================================
 -- Prefab Select CRM — Fase 2: offertes
@@ -129,7 +126,7 @@ create policy "team full access quote_email_logs"
   on public.quote_email_logs for all to authenticated using (true) with check (true);
 
 
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0002_phase3_planning.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-- >>> 0002_phase3_planning.sql
 
 -- ============================================================================
 -- Prefab Select CRM — Fase 3: planning, agenda, taken & notificaties
@@ -260,7 +257,7 @@ begin
 end $$;
 
 
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0003_phase4_analytics.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-- >>> 0003_phase4_analytics.sql
 
 -- ============================================================================
 -- Prefab Select CRM — Fase 4: management, marketing & analytics
@@ -369,7 +366,7 @@ begin
 end $$;
 
 
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0004_phase5_facturen_portaal.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-- >>> 0004_phase5_facturen_portaal.sql
 
 -- ============================================================================
 -- Prefab Select CRM — Fase 5: facturen, betalingen & klantportaal
@@ -465,7 +462,7 @@ end $$;
 -- dus GEEN directe select-rechten op deze tabellen.
 
 
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0005_leads_velden.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-- >>> 0005_leads_velden.sql
 
 -- ============================================================================
 -- Prefab Select CRM — leads-tabel aanvullen met de velden die de app gebruikt
@@ -482,7 +479,7 @@ alter table public.leads
   add column if not exists portal_token        text;
 
 
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>> 0006_google_oauth.sql <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-- >>> 0006_google_oauth.sql
 
 -- ============================================================================
 -- Prefab Select CRM — Google/Gmail OAuth-tokens (gedeelde postbus)
@@ -502,4 +499,37 @@ alter table public.google_oauth enable row level security;
 drop policy if exists "team full access google_oauth" on public.google_oauth;
 create policy "team full access google_oauth" on public.google_oauth
   for all to authenticated using (true) with check (true);
+
+
+-- >>> 0007_notes_agenda_taken.sql
+
+-- ============================================================================
+-- Prefab Select CRM — notities-tabel + agenda/taken klaarmaken voor de app
+-- ============================================================================
+
+-- Notities (bestond nog niet)
+create table if not exists public.notes (
+  id          uuid primary key default gen_random_uuid(),
+  lead_id     uuid references public.leads(id) on delete cascade,
+  type        text not null default 'notitie',
+  tekst       text not null,
+  auteur      text,
+  created_at  timestamptz not null default now()
+);
+create index if not exists notes_lead_idx on public.notes(lead_id);
+alter table public.notes enable row level security;
+drop policy if exists "team full access notes" on public.notes;
+create policy "team full access notes" on public.notes for all to authenticated using (true) with check (true);
+
+-- Teamleden bewaren we in de app (niet in de DB). De verwijzende kolommen
+-- daarom van uuid+FK naar tekst, zodat ids als 'u-kelly' passen.
+alter table public.appointments drop constraint if exists appointments_medewerker_id_fkey;
+alter table public.appointments alter column medewerker_id type text using medewerker_id::text;
+
+alter table public.tasks drop constraint if exists tasks_medewerker_id_fkey;
+alter table public.tasks alter column medewerker_id type text using medewerker_id::text;
+alter table public.tasks alter column project_id type text using project_id::text;
+
+alter table public.task_comments drop constraint if exists task_comments_auteur_id_fkey;
+alter table public.task_comments alter column auteur_id type text using auteur_id::text;
 

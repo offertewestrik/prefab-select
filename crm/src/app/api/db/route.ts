@@ -1,5 +1,5 @@
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase/server";
-import type { Invoice, Payment, Quote, QuoteLine } from "@/lib/types";
+import type { Appointment, Invoice, Note, Payment, Quote, QuoteLine, Task, TaskComment } from "@/lib/types";
 
 // Generieke schrijf-route voor de gedeelde data (write-through vanuit de store).
 // Body: { table, op: "upsert" | "delete", data }
@@ -95,6 +95,35 @@ export async function POST(req: Request) {
         bedrag: p.bedrag,
         methode: p.methode,
         datum: p.datum,
+      });
+      if (error) throw error;
+    } else if (table === "notes") {
+      const n = data as Note;
+      const { error } = await db.from("notes").upsert({
+        id: n.id, lead_id: n.leadId, type: n.type, tekst: n.tekst, auteur: n.auteur,
+      });
+      if (error) throw error;
+    } else if (table === "appointments") {
+      const a = data as Appointment;
+      const { error } = await db.from("appointments").upsert({
+        id: a.id, titel: a.titel, type: a.type, start_tijd: a.start, eind_tijd: a.eind,
+        lead_id: a.leadId ?? null, quote_id: a.quoteId ?? null, medewerker_id: a.medewerkerId ?? null,
+        locatie: a.locatie ?? null, omschrijving: a.omschrijving ?? null, google_synced: a.googleSynced ?? false,
+      });
+      if (error) throw error;
+    } else if (table === "tasks") {
+      const t = data as Task;
+      const { error } = await db.from("tasks").upsert({
+        id: t.id, titel: t.titel, omschrijving: t.omschrijving ?? null, prioriteit: t.prioriteit,
+        status: t.status, deadline: t.deadline ?? null, medewerker_id: t.medewerkerId ?? null,
+        lead_id: t.leadId ?? null, quote_id: t.quoteId ?? null, project_id: t.projectId ?? null,
+        reminder_minuten: t.reminderMinuten ?? null,
+      });
+      if (error) throw error;
+    } else if (table === "task_comments") {
+      const c = data as TaskComment;
+      const { error } = await db.from("task_comments").upsert({
+        id: c.id, task_id: c.taskId, auteur_id: c.auteurId, tekst: c.tekst,
       });
       if (error) throw error;
     } else {
