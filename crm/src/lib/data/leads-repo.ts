@@ -9,7 +9,7 @@ import "server-only";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 import type { Lead, LeadSource, PipelineStage, ProductType } from "@/lib/types";
 
-function mapLead(row: any): Lead {
+export function mapLead(row: any): Lead {
   return {
     id: row.id,
     naam: row.naam,

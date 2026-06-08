@@ -4,6 +4,7 @@ import {
   Page,
   Text,
   View,
+  Image,
   StyleSheet,
 } from "@react-pdf/renderer";
 import type { Lead, Quote } from "@/lib/types";
@@ -302,10 +303,24 @@ export function OfferteDocument({ quote, lead }: { quote: Quote; lead: Lead }) {
         <View style={styles.signRow} wrap={false}>
           <View style={styles.signBox}>
             <Text style={styles.signTitle}>Voor akkoord — Opdrachtgever</Text>
-            <View style={styles.signLine} />
-            <Text style={styles.signLabel}>Naam &amp; datum</Text>
-            <View style={styles.signLine} />
-            <Text style={styles.signLabel}>Handtekening</Text>
+            {quote.ondertekendOp ? (
+              <>
+                <Text style={[styles.signLabel, { marginTop: 4 }]}>
+                  {quote.ondertekendDoor} · {dat(quote.ondertekendOp)}
+                </Text>
+                {quote.handtekening ? (
+                  <Image src={quote.handtekening} style={{ height: 48, marginTop: 4, objectFit: "contain" }} />
+                ) : null}
+                <Text style={[styles.signLabel, { color: "#059669", marginTop: 2 }]}>Digitaal ondertekend via het klantportaal</Text>
+              </>
+            ) : (
+              <>
+                <View style={styles.signLine} />
+                <Text style={styles.signLabel}>Naam &amp; datum</Text>
+                <View style={styles.signLine} />
+                <Text style={styles.signLabel}>Handtekening</Text>
+              </>
+            )}
           </View>
           <View style={styles.signBox}>
             <Text style={styles.signTitle}>Namens {BEDRIJF.naam}</Text>

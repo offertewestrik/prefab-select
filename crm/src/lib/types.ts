@@ -201,6 +201,10 @@ export interface Quote {
   verstuurdOp?: string; // ISO — moment van verzenden
   bekekenOp?: string; // ISO — moment van openen door klant
   beslistOp?: string; // ISO — moment van accepteren/afwijzen
+  /** Online ondertekening door de klant. */
+  ondertekendOp?: string; // ISO
+  ondertekendDoor?: string; // naam die de klant invulde
+  handtekening?: string; // base64 PNG van de getekende handtekening
 }
 
 /** Logregel van een verzonden offerte-e-mail (tabel quote_email_logs). */

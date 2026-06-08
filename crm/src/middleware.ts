@@ -10,6 +10,9 @@ import { sha256hex, AUTH_COOKIE } from "@/lib/auth-token";
 const OPENBAAR = [
   "/login",
   "/portaal",
+  "/api/portaal",
+  "/api/offertes/pdf",
+  "/api/facturen/pdf",
   "/api/webhooks",
   "/api/auth",
   "/api/integrations/google/callback",

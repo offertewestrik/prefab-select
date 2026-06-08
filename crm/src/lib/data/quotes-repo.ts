@@ -20,7 +20,7 @@ import type {
 } from "@/lib/types";
 
 // --- Mappers: database-rij (snake_case) -> domeintype (camelCase) ---
-function mapQuote(row: any, items: any[]): Quote {
+export function mapQuote(row: any, items: any[]): Quote {
   return {
     id: row.id,
     nummer: row.nummer,
@@ -50,6 +50,9 @@ function mapQuote(row: any, items: any[]): Quote {
     verstuurdOp: row.verstuurd_op ?? undefined,
     bekekenOp: row.bekeken_op ?? undefined,
     beslistOp: row.beslist_op ?? undefined,
+    ondertekendOp: row.ondertekend_op ?? undefined,
+    ondertekendDoor: row.ondertekend_door ?? undefined,
+    handtekening: row.handtekening ?? undefined,
   };
 }
 

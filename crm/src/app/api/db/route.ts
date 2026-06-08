@@ -24,6 +24,9 @@ function quoteToRow(q: Quote) {
     verstuurd_op: q.verstuurdOp ?? null,
     bekeken_op: q.bekekenOp ?? null,
     beslist_op: q.beslistOp ?? null,
+    ondertekend_op: q.ondertekendOp ?? null,
+    ondertekend_door: q.ondertekendDoor ?? null,
+    handtekening: q.handtekening ?? null,
   };
 }
 

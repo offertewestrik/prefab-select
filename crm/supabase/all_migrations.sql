@@ -533,3 +533,15 @@ alter table public.tasks alter column project_id type text using project_id::tex
 alter table public.task_comments drop constraint if exists task_comments_auteur_id_fkey;
 alter table public.task_comments alter column auteur_id type text using auteur_id::text;
 
+
+-- >>> 0008_offerte_handtekening.sql
+
+-- ============================================================================
+-- Prefab Select CRM — online ondertekening van offertes
+-- ============================================================================
+
+alter table public.quotes
+  add column if not exists ondertekend_op   timestamptz,
+  add column if not exists ondertekend_door text,
+  add column if not exists handtekening     text;
+
