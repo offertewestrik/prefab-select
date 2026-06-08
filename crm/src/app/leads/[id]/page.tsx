@@ -40,10 +40,11 @@ import {
 import { euro, datum, datumTijd, relatief } from "@/lib/format";
 import { quoteTotaal } from "@/lib/quote-utils";
 import { invoiceTotaal, effectieveStatus } from "@/lib/invoice-utils";
+import { omzetVanLead, inkoopVanLead } from "@/lib/finance";
 import { portalToken } from "@/lib/portal";
 import type { NoteType, PipelineStage } from "@/lib/types";
 
-const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes", "Facturen", "E-mails"] as const;
+const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes", "Facturen", "Inkoop", "E-mails"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function LeadDetailPage() {
@@ -59,6 +60,7 @@ export default function LeadDetailPage() {
   const files = useCrm((s) => s.files.filter((f) => f.leadId === leadId));
   const quotes = useCrm((s) => s.quotes.filter((q) => q.leadId === leadId));
   const invoices = useCrm((s) => s.invoices.filter((i) => i.leadId === leadId));
+  const purchases = useCrm((s) => s.purchases.filter((p) => p.leadId === leadId));
   const quoteRequests = useCrm((s) => s.quoteRequests.filter((q) => q.leadId === leadId));
 
   const updateLead = useCrm((s) => s.updateLead);
@@ -189,6 +191,7 @@ export default function LeadDetailPage() {
                 Bestanden: files.length,
                 Offertes: quotes.length,
                 Facturen: invoices.length,
+                Inkoop: purchases.length,
                 "E-mails": 0,
               };
               return (
@@ -218,6 +221,7 @@ export default function LeadDetailPage() {
             {tab === "Bestanden" && <BestandenTab leadId={lead.id} files={files} />}
             {tab === "Offertes" && <OffertesTab leadId={lead.id} quotes={quotes} />}
             {tab === "Facturen" && <FacturenTab leadId={lead.id} invoices={invoices} />}
+            {tab === "Inkoop" && <InkoopTab leadId={lead.id} purchases={purchases} quotes={quotes} />}
             {tab === "E-mails" && <EmailsTab email={lead.email} />}
           </div>
         </div>
@@ -517,6 +521,61 @@ function FacturenTab({ leadId, invoices }: { leadId: string; invoices: any[] }) 
 }
 
 // --- E-mails (Gmail-wisseling met de klant) ---
+// --- Inkoop (kosten per project) ---
+function InkoopTab({ leadId, purchases, quotes }: { leadId: string; purchases: any[]; quotes: any[] }) {
+  const addPurchase = useCrm((s) => s.addPurchase);
+  const deletePurchase = useCrm((s) => s.deletePurchase);
+  const [leverancier, setLeverancier] = useState("");
+  const [omschrijving, setOmschrijving] = useState("");
+  const [bedrag, setBedrag] = useState("");
+  const [inkoopDatum, setInkoopDatum] = useState(() => new Date().toISOString().slice(0, 10));
+
+  const inkoop = inkoopVanLead(purchases, leadId);
+  const omzet = omzetVanLead(quotes, leadId);
+  const winst = omzet - inkoop;
+
+  function toevoegen() {
+    const b = Number(bedrag);
+    if (!leverancier.trim() || !b) return;
+    addPurchase({ leadId, leverancier: leverancier.trim(), omschrijving: omschrijving.trim() || undefined, bedrag: b, datum: new Date(inkoopDatum).toISOString() });
+    setLeverancier(""); setOmschrijving(""); setBedrag("");
+  }
+
+  const inputCls = "rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-brand-500";
+
+  return (
+    <div>
+      <div className="mb-4 grid grid-cols-3 gap-3">
+        <div className="rounded-xl bg-emerald-50 p-3"><p className="text-[11px] font-semibold uppercase text-emerald-700">Omzet</p><p className="text-lg font-black text-emerald-700">{euro(omzet)}</p></div>
+        <div className="rounded-xl bg-amber-50 p-3"><p className="text-[11px] font-semibold uppercase text-amber-700">Inkoop</p><p className="text-lg font-black text-amber-700">{euro(inkoop)}</p></div>
+        <div className={`rounded-xl p-3 ${winst >= 0 ? "bg-brand-50" : "bg-rose-50"}`}><p className={`text-[11px] font-semibold uppercase ${winst >= 0 ? "text-brand-700" : "text-rose-700"}`}>Winst</p><p className={`text-lg font-black ${winst >= 0 ? "text-brand-700" : "text-rose-700"}`}>{euro(winst)}</p></div>
+      </div>
+
+      <div className="mb-4 flex flex-wrap items-end gap-2 rounded-xl border border-slate-100 bg-slate-50/60 p-3">
+        <input className={`${inputCls} min-w-[140px] flex-1`} placeholder="Leverancier" value={leverancier} onChange={(e) => setLeverancier(e.target.value)} />
+        <input className={`${inputCls} min-w-[140px] flex-1`} placeholder="Omschrijving" value={omschrijving} onChange={(e) => setOmschrijving(e.target.value)} />
+        <input type="number" className={`${inputCls} w-28`} placeholder="Bedrag €" value={bedrag} onChange={(e) => setBedrag(e.target.value)} />
+        <input type="date" className={inputCls} value={inkoopDatum} onChange={(e) => setInkoopDatum(e.target.value)} />
+        <button onClick={toevoegen} disabled={!leverancier.trim() || !Number(bedrag)} className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-40">Toevoegen</button>
+      </div>
+
+      <ul className="space-y-2">
+        {purchases.map((p) => (
+          <li key={p.id} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3">
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-slate-800">{p.leverancier}</p>
+              <p className="truncate text-xs text-slate-400">{p.omschrijving ?? "—"} · {datum(p.datum)}</p>
+            </div>
+            <span className="font-bold text-slate-900">{euro(p.bedrag)}</span>
+            <button onClick={() => deletePurchase(p.id)} className="text-slate-300 hover:text-rose-500" title="Verwijderen">✕</button>
+          </li>
+        ))}
+        {purchases.length === 0 && <p className="text-sm text-slate-400">Nog geen inkoopkosten geregistreerd voor dit project.</p>}
+      </ul>
+    </div>
+  );
+}
+
 function EmailsTab({ email }: { email: string }) {
   const [staat, setStaat] = useState<"laden" | "klaar" | "niet_verbonden">("laden");
   const [berichten, setBerichten] = useState<any[]>([]);
