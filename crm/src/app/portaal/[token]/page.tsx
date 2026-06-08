@@ -1,46 +1,66 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import {
   CheckCircle2, Circle, FileText, Receipt, CalendarDays, Paperclip,
-  Phone, Mail, MapPin, Download, Check, X, ExternalLink,
+  Phone, Mail, MapPin, Download, Check, X, ExternalLink, PenLine,
 } from "lucide-react";
-import { useCrm } from "@/lib/store";
-import { useMounted } from "@/lib/use-mounted";
 import { Badge } from "@/components/ui/Badge";
-import { leadByToken, PORTAL_MILESTONES, stageNaarMilestone } from "@/lib/portal";
-import {
-  QUOTE_STATUS_META, INVOICE_STATUS_META, PRODUCT_LABEL, APPOINTMENT_TYPE_META, BEDRIJF,
-} from "@/lib/constants";
+import { Modal } from "@/components/ui/Modal";
+import { SignaturePad } from "@/components/SignaturePad";
+import { PORTAL_MILESTONES, stageNaarMilestone } from "@/lib/portal";
+import { QUOTE_STATUS_META, INVOICE_STATUS_META, PRODUCT_LABEL, APPOINTMENT_TYPE_META, BEDRIJF } from "@/lib/constants";
 import { euro, datum, datumTijd } from "@/lib/format";
 import { quoteTotaal } from "@/lib/quote-utils";
 import { invoiceTotaal, openstaand, effectieveStatus } from "@/lib/invoice-utils";
-import type { Appointment, Invoice, Payment, Quote, UploadedFile } from "@/lib/types";
+import type { Appointment, Invoice, Payment, Quote, Lead } from "@/lib/types";
 
-const TABS = ["Overzicht", "Offertes", "Facturen", "Afspraken", "Documenten", "Contact"] as const;
+const TABS = ["Overzicht", "Offertes", "Facturen", "Afspraken", "Contact"] as const;
 type Tab = (typeof TABS)[number];
 
+interface PortaalData {
+  lead: Lead;
+  quotes: Quote[];
+  invoices: Invoice[];
+  payments: Payment[];
+  appointments: Appointment[];
+}
+
 export default function PortaalPage() {
-  const mounted = useMounted();
   const params = useParams();
   const token = params.token as string;
-
-  const leads = useCrm((s) => s.leads);
-  const lead = leadByToken(leads, token);
-  const quotes = useCrm((s) => s.quotes.filter((q) => q.leadId === lead?.id));
-  const invoices = useCrm((s) => s.invoices.filter((i) => i.leadId === lead?.id));
-  const payments = useCrm((s) => s.payments);
-  const appointments = useCrm((s) => s.appointments.filter((a) => a.leadId === lead?.id));
-  const files = useCrm((s) => s.files.filter((f) => f.leadId === lead?.id));
-
+  const [staat, setStaat] = useState<"laden" | "klaar" | "ongeldig">("laden");
+  const [data, setData] = useState<PortaalData | null>(null);
   const [tab, setTab] = useState<Tab>("Overzicht");
+  const [tekenQuote, setTekenQuote] = useState<Quote | null>(null);
 
-  if (!mounted) {
-    return <div className="min-h-screen bg-slate-50" />;
+  const laad = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/portaal/${token}`);
+      if (!res.ok) return setStaat("ongeldig");
+      setData(await res.json());
+      setStaat("klaar");
+    } catch {
+      setStaat("ongeldig");
+    }
+  }, [token]);
+
+  useEffect(() => {
+    laad();
+  }, [laad]);
+
+  async function doeActie(body: Record<string, unknown>) {
+    await fetch(`/api/portaal/${token}/actie`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    await laad();
   }
 
-  if (!lead) {
+  if (staat === "laden") return <div className="min-h-screen bg-slate-50" />;
+  if (staat === "ongeldig" || !data) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50 p-6">
         <div className="rounded-2xl border border-slate-100 bg-white p-10 text-center shadow-soft">
@@ -51,12 +71,12 @@ export default function PortaalPage() {
     );
   }
 
+  const { lead, quotes, invoices, payments, appointments } = data;
   const milestone = stageNaarMilestone(lead.stage);
   const verloren = lead.stage === "verloren";
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Portaal-header */}
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
           <div className="flex items-center gap-2">
@@ -74,7 +94,6 @@ export default function PortaalPage() {
         <h1 className="text-2xl font-black tracking-tight text-slate-900">Welkom, {lead.naam}</h1>
         <p className="mt-1 text-sm text-slate-500">Volg hier uw {PRODUCT_LABEL[lead.product].toLowerCase()}-project bij Prefab Select.</p>
 
-        {/* Statusbalk */}
         <div className="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
           <h2 className="mb-5 text-sm font-bold text-slate-900">Status van uw project</h2>
           {verloren ? (
@@ -99,7 +118,6 @@ export default function PortaalPage() {
           )}
         </div>
 
-        {/* Tabs */}
         <div className="mt-6 flex flex-wrap gap-1 rounded-xl border border-slate-100 bg-white p-1 shadow-soft">
           {TABS.map((t) => (
             <button key={t} onClick={() => setTab(t)} className={`rounded-lg px-3.5 py-2 text-sm font-semibold transition ${tab === t ? "bg-brand-600 text-white" : "text-slate-500 hover:bg-slate-50"}`}>
@@ -109,16 +127,26 @@ export default function PortaalPage() {
         </div>
 
         <div className="mt-6">
-          {tab === "Overzicht" && <Overzicht lead={lead} quotes={quotes} invoices={invoices} payments={payments} appointments={appointments} onTab={setTab} />}
-          {tab === "Offertes" && <Offertes quotes={quotes} leadId={lead.id} />}
-          {tab === "Facturen" && <Facturen invoices={invoices} payments={payments} leadId={lead.id} />}
+          {tab === "Overzicht" && <Overzicht quotes={quotes} invoices={invoices} payments={payments} appointments={appointments} onTab={setTab} />}
+          {tab === "Offertes" && <Offertes quotes={quotes} lead={lead} onTeken={setTekenQuote} onAfwijzen={(id) => doeActie({ type: "afwijzen", quoteId: id })} />}
+          {tab === "Facturen" && <Facturen invoices={invoices} payments={payments} lead={lead} onBetaal={(id) => doeActie({ type: "betalen", invoiceId: id })} />}
           {tab === "Afspraken" && <Afspraken appointments={appointments} />}
-          {tab === "Documenten" && <Documenten files={files} />}
           {tab === "Contact" && <Contact />}
         </div>
 
         <p className="mt-10 text-center text-xs text-slate-400">Prefab Select · {BEDRIJF.web} · {BEDRIJF.telefoon}</p>
       </main>
+
+      {tekenQuote && (
+        <OndertekenModal
+          quote={tekenQuote}
+          onClose={() => setTekenQuote(null)}
+          onBevestig={async (naam, handtekening) => {
+            await doeActie({ type: "accepteren", quoteId: tekenQuote.id, naam, handtekening });
+            setTekenQuote(null);
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -127,10 +155,10 @@ function Kaart({ children, className }: { children: React.ReactNode; className?:
   return <div className={`rounded-2xl border border-slate-100 bg-white p-6 shadow-soft ${className ?? ""}`}>{children}</div>;
 }
 
-function Overzicht({ lead, quotes, invoices, payments, appointments, onTab }: any) {
-  const openOfferte = quotes.find((q: any) => ["verstuurd", "bekeken"].includes(q.status));
-  const openFactuur = invoices.find((i: any) => openstaand(i, payments) > 0);
-  const volgende = [...appointments].filter((a: any) => new Date(a.start) >= new Date()).sort((a: any, b: any) => +new Date(a.start) - +new Date(b.start))[0];
+function Overzicht({ quotes, invoices, payments, appointments, onTab }: { quotes: Quote[]; invoices: Invoice[]; payments: Payment[]; appointments: Appointment[]; onTab: (t: Tab) => void }) {
+  const openOfferte = quotes.find((q) => ["verstuurd", "bekeken"].includes(q.status));
+  const openFactuur = invoices.find((i) => openstaand(i, payments) > 0);
+  const volgende = [...appointments].filter((a) => new Date(a.start) >= new Date()).sort((a, b) => +new Date(a.start) - +new Date(b.start))[0];
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       <button onClick={() => onTab("Offertes")} className="text-left">
@@ -138,7 +166,7 @@ function Overzicht({ lead, quotes, invoices, payments, appointments, onTab }: an
           <FileText className="h-5 w-5 text-brand-600" />
           <p className="mt-2 text-xs uppercase text-slate-400">Openstaande offerte</p>
           <p className="mt-1 font-bold text-slate-900">{openOfferte ? euro(quoteTotaal(openOfferte)) : "Geen"}</p>
-          {openOfferte && <p className="text-xs text-brand-600">Bekijk &amp; accepteer →</p>}
+          {openOfferte && <p className="text-xs text-brand-600">Bekijk &amp; onderteken →</p>}
         </Kaart>
       </button>
       <button onClick={() => onTab("Facturen")} className="text-left">
@@ -161,16 +189,12 @@ function Overzicht({ lead, quotes, invoices, payments, appointments, onTab }: an
   );
 }
 
-async function bekijkPdf(endpoint: string, body: any) {
+async function bekijkPdf(endpoint: string, body: unknown) {
   const res = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (res.ok) window.open(URL.createObjectURL(await res.blob()), "_blank");
 }
 
-function Offertes({ quotes, leadId }: { quotes: Quote[]; leadId: string }) {
-  const lead = useCrm((s) => s.leads.find((l) => l.id === leadId));
-  const setQuoteStatus = useCrm((s) => s.setQuoteStatus);
-  const updateLead = useCrm((s) => s.updateLead);
-
+function Offertes({ quotes, lead, onTeken, onAfwijzen }: { quotes: Quote[]; lead: Lead; onTeken: (q: Quote) => void; onAfwijzen: (id: string) => void }) {
   if (quotes.length === 0) return <Kaart><p className="text-sm text-slate-400">Er staan nog geen offertes voor u klaar.</p></Kaart>;
   return (
     <div className="space-y-3">
@@ -194,15 +218,19 @@ function Offertes({ quotes, leadId }: { quotes: Quote[]; leadId: string }) {
               </button>
               {teBeslissen && (
                 <>
-                  <button onClick={() => { setQuoteStatus(q.id, "geaccepteerd"); if (lead) updateLead(lead.id, { stage: "akkoord" }); }} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700">
-                    <Check className="h-4 w-4" /> Akkoord geven
+                  <button onClick={() => onTeken(q)} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700">
+                    <PenLine className="h-4 w-4" /> Akkoord & ondertekenen
                   </button>
-                  <button onClick={() => setQuoteStatus(q.id, "afgewezen")} className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-semibold text-rose-600 hover:bg-rose-50">
+                  <button onClick={() => { if (confirm("Weet u zeker dat u deze offerte wilt afwijzen?")) onAfwijzen(q.id); }} className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-semibold text-rose-600 hover:bg-rose-50">
                     <X className="h-4 w-4" /> Afwijzen
                   </button>
                 </>
               )}
-              {q.status === "geaccepteerd" && <span className="inline-flex items-center gap-1.5 self-center text-sm font-semibold text-emerald-600"><Check className="h-4 w-4" /> U heeft deze offerte geaccepteerd</span>}
+              {q.status === "geaccepteerd" && (
+                <span className="inline-flex items-center gap-1.5 self-center text-sm font-semibold text-emerald-600">
+                  <Check className="h-4 w-4" /> Ondertekend{q.ondertekendDoor ? ` door ${q.ondertekendDoor}` : ""}{q.ondertekendOp ? ` op ${datum(q.ondertekendOp)}` : ""}
+                </span>
+              )}
             </div>
           </Kaart>
         );
@@ -211,11 +239,7 @@ function Offertes({ quotes, leadId }: { quotes: Quote[]; leadId: string }) {
   );
 }
 
-function Facturen({ invoices, payments, leadId }: { invoices: Invoice[]; payments: Payment[]; leadId: string }) {
-  const lead = useCrm((s) => s.leads.find((l) => l.id === leadId));
-  const registerPayment = useCrm((s) => s.registerPayment);
-  const setInvoiceStatus = useCrm((s) => s.setInvoiceStatus);
-
+function Facturen({ invoices, payments, lead, onBetaal }: { invoices: Invoice[]; payments: Payment[]; lead: Lead; onBetaal: (id: string) => void }) {
   if (invoices.length === 0) return <Kaart><p className="text-sm text-slate-400">Er staan nog geen facturen voor u klaar.</p></Kaart>;
   return (
     <div className="space-y-3">
@@ -239,7 +263,7 @@ function Facturen({ invoices, payments, leadId }: { invoices: Invoice[]; payment
                 <Download className="h-4 w-4" /> Bekijk PDF
               </button>
               {open > 0 ? (
-                <button onClick={() => { registerPayment(i.id, open, "ideal"); setInvoiceStatus(i.id, "betaald"); }} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700">
+                <button onClick={() => onBetaal(i.id)} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700">
                   Betaal {euro(open)} met iDEAL
                 </button>
               ) : (
@@ -274,24 +298,6 @@ function Afspraken({ appointments }: { appointments: Appointment[] }) {
   );
 }
 
-function Documenten({ files }: { files: UploadedFile[] }) {
-  if (files.length === 0) return <Kaart><p className="text-sm text-slate-400">Er zijn nog geen documenten gedeeld.</p></Kaart>;
-  return (
-    <div className="space-y-2">
-      {files.map((f) => (
-        <Kaart key={f.id} className="!p-4">
-          <div className="flex items-center gap-3">
-            <Paperclip className="h-4 w-4 text-slate-400" />
-            <span className="flex-1 text-sm font-medium text-slate-700">{f.naam}</span>
-            <span className="text-xs text-slate-400">{f.grootteKb} KB</span>
-            <button className="text-slate-400 hover:text-brand-600"><Download className="h-4 w-4" /></button>
-          </div>
-        </Kaart>
-      ))}
-    </div>
-  );
-}
-
 function Contact() {
   return (
     <Kaart>
@@ -304,5 +310,46 @@ function Contact() {
         <a href={`https://${BEDRIJF.web}`} target="_blank" className="flex items-center gap-2 text-slate-600 hover:text-brand-600"><ExternalLink className="h-4 w-4 text-slate-400" /> {BEDRIJF.web}</a>
       </div>
     </Kaart>
+  );
+}
+
+function OndertekenModal({ quote, onClose, onBevestig }: { quote: Quote; onClose: () => void; onBevestig: (naam: string, handtekening: string) => Promise<void> }) {
+  const [naam, setNaam] = useState("");
+  const [handtekening, setHandtekening] = useState<string | null>(null);
+  const [akkoord, setAkkoord] = useState(false);
+  const [bezig, setBezig] = useState(false);
+
+  return (
+    <Modal open title={`Offerte ${quote.nummer} ondertekenen`} onClose={onClose} breed>
+      <p className="text-sm text-slate-500">
+        U gaat akkoord met offerte <strong>{quote.nummer}</strong> ter waarde van <strong>{euro(quoteTotaal(quote))}</strong>. Onderteken hieronder om de opdracht digitaal te bevestigen.
+      </p>
+
+      <div className="mt-4">
+        <label className="mb-1 block text-xs font-semibold text-slate-500">Uw naam *</label>
+        <input value={naam} onChange={(e) => setNaam(e.target.value)} className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-brand-500" placeholder="Voor- en achternaam" />
+      </div>
+
+      <div className="mt-4">
+        <label className="mb-1 block text-xs font-semibold text-slate-500">Handtekening *</label>
+        <SignaturePad onChange={setHandtekening} />
+      </div>
+
+      <label className="mt-4 flex items-start gap-2 text-sm text-slate-600">
+        <input type="checkbox" checked={akkoord} onChange={(e) => setAkkoord(e.target.checked)} className="mt-0.5" />
+        <span>Ik ga akkoord met de offerte en de bijbehorende voorwaarden, en geef opdracht tot uitvoering.</span>
+      </label>
+
+      <div className="mt-6 flex justify-end gap-3">
+        <button onClick={onClose} className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100">Annuleren</button>
+        <button
+          onClick={async () => { setBezig(true); await onBevestig(naam.trim(), handtekening!); }}
+          disabled={!naam.trim() || !handtekening || !akkoord || bezig}
+          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-40"
+        >
+          <PenLine className="h-4 w-4" /> {bezig ? "Bezig…" : "Onderteken & accepteer"}
+        </button>
+      </div>
+    </Modal>
   );
 }

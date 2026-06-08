@@ -200,6 +200,20 @@ export default function OfferteDetailPage() {
         </div>
       )}
 
+      {/* Online ondertekend */}
+      {quote.ondertekendOp && (
+        <div className="mb-6 flex flex-wrap items-center gap-4 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4">
+          <div className="flex-1">
+            <p className="text-sm font-bold text-emerald-800">Digitaal ondertekend via het klantportaal</p>
+            <p className="text-xs text-emerald-700">Door {quote.ondertekendDoor} op {datumTijd(quote.ondertekendOp)}</p>
+          </div>
+          {quote.handtekening && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={quote.handtekening} alt="Handtekening" className="h-16 rounded-lg border border-emerald-200 bg-white px-2" />
+          )}
+        </div>
+      )}
+
       {/* PDF-preview */}
       {previewUrl && (
         <div className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft">
