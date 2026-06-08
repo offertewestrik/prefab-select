@@ -1,4 +1,5 @@
 import { createLead } from "@/lib/data/leads-repo";
+import { createQuote } from "@/lib/data/quotes-repo";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/server";
 import { PRODUCT_LABEL } from "@/lib/constants";
 import type { LeadSource, ProductType } from "@/lib/types";
@@ -113,7 +114,51 @@ export async function POST(req: Request) {
       tags,
       bericht,
     });
-    return Response.json({ ok: true, id: lead.id }, { status: 201 });
+
+    // Optioneel: automatisch een concept-offerte maken van de aangeleverde regels.
+    let quoteId: string | undefined;
+    const regelsRaw = body.offerteRegels ?? body.regels;
+    if (Array.isArray(regelsRaw) && regelsRaw.length) {
+      const inclBtw = body.btwInclusief !== false; // configurator rekent meestal incl. btw
+      const regels = regelsRaw
+        .map((r: any) => {
+          const omschrijving = str(r?.omschrijving) ?? str(r?.naam) ?? str(r?.label);
+          if (!omschrijving) return null;
+          const prijs = Number(r?.prijs ?? r?.bedrag ?? r?.price ?? 0) || 0;
+          const prijsPerStuk = inclBtw ? Math.round(prijs / 1.21) : Math.round(prijs);
+          return {
+            id: crypto.randomUUID(),
+            omschrijving,
+            aantal: Number(r?.aantal ?? 1) || 1,
+            eenheid: str(r?.eenheid) ?? "post",
+            prijsPerStuk,
+            btwPercentage: 21,
+          };
+        })
+        .filter(Boolean) as any[];
+
+      if (regels.length) {
+        try {
+          const geldig = new Date();
+          geldig.setDate(geldig.getDate() + 30);
+          const quote = await createQuote({
+            leadId: lead.id,
+            projecttype: mapProduct(str(body.product) ?? str(body.producttype)),
+            projectomschrijving: "Aanvraag via configurator",
+            afmetingen: str(body.afmetingen),
+            regels,
+            korting: 0,
+            notitie: bericht,
+            geldigTot: geldig.toISOString(),
+          });
+          quoteId = quote.id;
+        } catch (e) {
+          console.error("Automatische offerte aanmaken mislukt:", e);
+        }
+      }
+    }
+
+    return Response.json({ ok: true, id: lead.id, quoteId }, { status: 201 });
   } catch (err) {
     console.error("Webhook-lead aanmaken mislukt:", err);
     return Response.json({ ok: false, error: (err as Error).message }, { status: 500 });
