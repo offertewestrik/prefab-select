@@ -38,8 +38,8 @@ export function GmailCard() {
             <Mail className="h-5 w-5" />
           </span>
           <div>
-            <h3 className="font-bold text-slate-900">Gmail (mailen vanuit het CRM)</h3>
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">E-mail · Google Workspace</p>
+            <h3 className="font-bold text-slate-900">Google — Gmail &amp; Agenda</h3>
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">E-mail + Agenda · Google Workspace</p>
           </div>
         </div>
         <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${status?.connected ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>
@@ -54,7 +54,7 @@ export function GmailCard() {
       )}
 
       <p className="mt-3 text-sm text-slate-500">
-        Verstuur offertes en facturen rechtstreeks vanaf je eigen Gmail-adres. Ze verschijnen dan ook in je "Verzonden".
+        Verstuur offertes en facturen vanaf je eigen Gmail-adres, en laat CRM-afspraken automatisch in je Google Agenda verschijnen.
       </p>
 
       {status && !status.configured && (
@@ -66,6 +66,9 @@ export function GmailCard() {
       {status?.connected ? (
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <span className="text-sm text-slate-600">Gekoppeld als <strong>{status.email}</strong></span>
+          <a href="/api/integrations/google/connect" className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+            Opnieuw koppelen (voor agenda)
+          </a>
           <button onClick={ontkoppel} className="rounded-lg bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200">
             Ontkoppelen
           </button>
