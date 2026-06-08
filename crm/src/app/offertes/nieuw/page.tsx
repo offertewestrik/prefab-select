@@ -41,6 +41,11 @@ function NieuweOfferteForm() {
   const searchParams = useSearchParams();
   const leads = useCrm((s) => s.leads);
   const createQuote = useCrm((s) => s.createQuote);
+  const updateQuote = useCrm((s) => s.updateQuote);
+
+  const bewerkId = searchParams.get("bewerk");
+  const bestaand = useCrm((s) => s.quotes.find((q) => q.id === bewerkId));
+  const [voorgeladen, setVoorgeladen] = useState(false);
 
   const [leadId, setLeadId] = useState(searchParams.get("lead") ?? "");
   const [projecttype, setProjecttype] = useState<ProductType>("mantelzorgwoning");
@@ -58,10 +63,28 @@ function NieuweOfferteForm() {
     return d.toISOString().slice(0, 10);
   });
 
-  // Projecttype automatisch overnemen van de gekozen lead.
+  // Bestaande offerte inladen bij bewerken (eenmalig, zodra beschikbaar).
+  useEffect(() => {
+    if (bewerkId && bestaand && !voorgeladen) {
+      setLeadId(bestaand.leadId);
+      setProjecttype(bestaand.projecttype);
+      setProjectomschrijving(bestaand.projectomschrijving ?? "");
+      setAfmetingen(bestaand.afmetingen ?? "");
+      setWerkzaamheden(bestaand.werkzaamheden ?? "");
+      setPlanning(bestaand.planning ?? "");
+      setRegels(bestaand.regels.length ? bestaand.regels : [leegRegel()]);
+      setKorting(bestaand.korting ?? 0);
+      setNotitie(bestaand.notitie ?? "");
+      setVoorwaarden(bestaand.voorwaarden ?? DEFAULT_VOORWAARDEN);
+      if (bestaand.geldigTot) setGeldigTot(bestaand.geldigTot.slice(0, 10));
+      setVoorgeladen(true);
+    }
+  }, [bewerkId, bestaand, voorgeladen]);
+
+  // Projecttype automatisch overnemen van de gekozen lead (alleen bij nieuw).
   const gekozenLead = leads.find((l) => l.id === leadId);
   useEffect(() => {
-    if (gekozenLead) setProjecttype(gekozenLead.product);
+    if (gekozenLead && !bewerkId) setProjecttype(gekozenLead.product);
   }, [gekozenLead?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateRegel(id: string, patch: Partial<QuoteLine>) {
@@ -73,7 +96,7 @@ function NieuweOfferteForm() {
   function opslaan() {
     if (!leadId || regels.every((r) => !r.omschrijving.trim())) return;
     const schoneRegels = regels.filter((r) => r.omschrijving.trim());
-    const id = createQuote({
+    const payload = {
       leadId,
       projecttype,
       projectomschrijving: projectomschrijving.trim() || undefined,
@@ -85,8 +108,14 @@ function NieuweOfferteForm() {
       notitie: notitie.trim() || undefined,
       voorwaarden: voorwaarden.trim() || undefined,
       geldigTot: new Date(geldigTot).toISOString(),
-    });
-    router.push(`/offertes/${id}`);
+    };
+    if (bewerkId) {
+      updateQuote(bewerkId, payload);
+      router.push(`/offertes/${bewerkId}`);
+    } else {
+      const id = createQuote(payload);
+      router.push(`/offertes/${id}`);
+    }
   }
 
   if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-slate-100" />;
@@ -96,7 +125,10 @@ function NieuweOfferteForm() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <PageHeader titel="Nieuwe offerte" subtitel="Stel een offerte samen voor een klant" />
+      <PageHeader
+        titel={bewerkId ? "Offerte bewerken" : "Nieuwe offerte"}
+        subtitel={bewerkId ? "Pas de regels, prijzen of teksten aan" : "Stel een offerte samen voor een klant"}
+      />
 
       <div className="space-y-6">
         {/* Klant & project */}
@@ -244,7 +276,7 @@ function NieuweOfferteForm() {
             disabled={!leadId || regels.every((r) => !r.omschrijving.trim())}
             className="rounded-xl bg-brand-600 px-5 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-40"
           >
-            Offerte opslaan
+            {bewerkId ? "Wijzigingen opslaan" : "Offerte opslaan"}
           </button>
         </div>
       </div>

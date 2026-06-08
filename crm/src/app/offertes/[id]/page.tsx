@@ -13,6 +13,7 @@ import {
   Send,
   FileText,
   History,
+  Pencil,
 } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
@@ -166,6 +167,9 @@ export default function OfferteDetailPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Link href={`/offertes/nieuw?bewerk=${quote.id}`} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+            <Pencil className="h-4 w-4" /> Bewerken
+          </Link>
           <button onClick={togglePreview} disabled={bezig !== null} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50">
             <Eye className="h-4 w-4" /> {bezig === "preview" ? "Bezig…" : previewUrl ? "Sluit preview" : "Preview"}
           </button>
