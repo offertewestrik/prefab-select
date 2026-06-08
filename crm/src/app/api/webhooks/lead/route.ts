@@ -1,5 +1,6 @@
 import { createLead } from "@/lib/data/leads-repo";
 import { createQuote } from "@/lib/data/quotes-repo";
+import { verrijkRegel } from "@/lib/optie-beschrijvingen";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/server";
 import { PRODUCT_LABEL } from "@/lib/constants";
 import type { LeadSource, ProductType } from "@/lib/types";
@@ -128,7 +129,7 @@ export async function POST(req: Request) {
           const prijsPerStuk = inclBtw ? Math.round(prijs / 1.21) : Math.round(prijs);
           return {
             id: crypto.randomUUID(),
-            omschrijving,
+            omschrijving: verrijkRegel(omschrijving),
             aantal: Number(r?.aantal ?? 1) || 1,
             eenheid: str(r?.eenheid) ?? "post",
             prijsPerStuk,
