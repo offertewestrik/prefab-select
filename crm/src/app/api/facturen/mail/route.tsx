@@ -3,6 +3,8 @@ import { FactuurDocument } from "@/lib/pdf/FactuurDocument";
 import { verstuurOfferteMail } from "@/lib/integrations";
 import { berekenTotalen } from "@/lib/quote-utils";
 import { BEDRIJF } from "@/lib/constants";
+import { appBaseUrl } from "@/lib/app-url";
+import { portalToken } from "@/lib/portal";
 import type { Invoice, Lead } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -14,6 +16,7 @@ export async function POST(req: Request) {
 
     const pdf = await renderToBuffer(<FactuurDocument invoice={invoice} lead={lead} />);
     const totaal = berekenTotalen(invoice.regels, invoice.korting).totaal;
+    const portaalUrl = `${appBaseUrl()}/portaal/${portalToken(lead)}`;
     const onderwerp = `Factuur ${invoice.nummer} — Prefab Select`;
     const html = `
       <div style="font-family:Arial,sans-serif;color:#1e293b;max-width:600px;margin:0 auto">
@@ -25,8 +28,11 @@ export async function POST(req: Request) {
           <p>In de bijlage vindt u factuur <strong>${invoice.nummer}</strong> met een bedrag van
           <strong>€ ${totaal.toLocaleString("nl-NL", { minimumFractionDigits: 2 })}</strong>.</p>
           <p>Wij verzoeken u vriendelijk dit bedrag te voldoen vóór
-          ${new Date(invoice.vervaldatum).toLocaleDateString("nl-NL")} op IBAN ${BEDRIJF.iban}
-          o.v.v. het factuurnummer.</p>
+          ${new Date(invoice.vervaldatum).toLocaleDateString("nl-NL")}. U kunt de factuur ook direct online bekijken en <strong>betalen via uw klantportaal</strong>:</p>
+          <div style="margin:20px 0;text-align:center">
+            <a href="${portaalUrl}" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:13px 26px;border-radius:8px;font-weight:bold;font-size:15px">Bekijk &amp; betaal online</a>
+          </div>
+          <p style="margin:0 0 14px;font-size:12px;color:#64748b">Of voldoe het bedrag op IBAN ${BEDRIJF.iban} o.v.v. ${invoice.nummer}. Liever de link? <a href="${portaalUrl}" style="color:#2563eb">${portaalUrl}</a></p>
           <p>Met vriendelijke groet,<br/><strong>Prefab Select</strong></p>
         </div>
       </div>`;
