@@ -148,6 +148,55 @@ function buildMime(opts: {
   return kop.join("\r\n");
 }
 
+export interface GmailBericht {
+  id: string;
+  threadId: string;
+  van: string;
+  naar: string;
+  onderwerp: string;
+  datum: string;
+  snippet: string;
+  uitgaand: boolean;
+}
+
+/** Haalt de recente e-mails op die naar/van een bepaald adres gingen. */
+export async function getGmailMessages(email: string, max = 15): Promise<GmailBericht[]> {
+  const accessToken = await getAccessToken();
+  const eigenAdres = (await getGoogleTokens())?.email?.toLowerCase() ?? "";
+  const q = encodeURIComponent(`from:${email} OR to:${email}`);
+  const listRes = await fetch(`${GMAIL_API}/messages?q=${q}&maxResults=${max}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!listRes.ok) throw new Error(`Gmail-lijst ophalen mislukt: ${await listRes.text()}`);
+  const list = await listRes.json();
+  const ids: string[] = (list.messages ?? []).map((m: { id: string }) => m.id);
+
+  const berichten = await Promise.all(
+    ids.map(async (id) => {
+      const r = await fetch(
+        `${GMAIL_API}/messages/${id}?format=metadata&metadataHeaders=From&metadataHeaders=To&metadataHeaders=Subject&metadataHeaders=Date`,
+        { headers: { Authorization: `Bearer ${accessToken}` } },
+      );
+      const m = await r.json();
+      const h: Record<string, string> = Object.fromEntries(
+        (m.payload?.headers ?? []).map((x: { name: string; value: string }) => [x.name.toLowerCase(), x.value]),
+      );
+      const van = h.from ?? "";
+      return {
+        id: m.id,
+        threadId: m.threadId,
+        van,
+        naar: h.to ?? "",
+        onderwerp: h.subject ?? "(geen onderwerp)",
+        datum: m.internalDate ? new Date(Number(m.internalDate)).toISOString() : h.date ?? "",
+        snippet: m.snippet ?? "",
+        uitgaand: eigenAdres ? van.toLowerCase().includes(eigenAdres) : false,
+      } as GmailBericht;
+    }),
+  );
+  return berichten.sort((a, b) => +new Date(b.datum) - +new Date(a.datum));
+}
+
 export async function sendGmail(opts: {
   naar: string;
   onderwerp: string;
