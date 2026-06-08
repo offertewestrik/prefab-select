@@ -19,6 +19,7 @@ import type {
   Note,
   NotificationType,
   Payment,
+  Purchase,
   PaymentMethode,
   PipelineStage,
   ProductType,
@@ -129,6 +130,7 @@ interface CrmState {
   reminderRules: ReminderRule[];
   invoices: Invoice[];
   payments: Payment[];
+  purchases: Purchase[];
 
   // --- Leads / pijplijn ---
   /** Laadt de echte data uit Supabase in de store (bij het opstarten). */
@@ -178,6 +180,10 @@ interface CrmState {
   // --- Betalingen ---
   registerPayment: (invoiceId: string, bedrag: number, methode: PaymentMethode) => void;
 
+  // --- Inkoop ---
+  addPurchase: (input: { leadId: string; leverancier: string; omschrijving?: string; bedrag: number; datum: string }) => void;
+  deletePurchase: (purchaseId: string) => void;
+
   // --- Bestanden ---
   addFile: (file: Omit<UploadedFile, "id" | "geuploadOp">) => void;
   deleteFile: (fileId: string) => void;
@@ -220,6 +226,7 @@ export const useCrm = create<CrmState>()(
       reminderRules: seedReminderRules,
       invoices: [],
       payments: [],
+      purchases: [],
 
       hydrate: async () => {
         if (typeof window === "undefined") return;
@@ -236,6 +243,7 @@ export const useCrm = create<CrmState>()(
           if (Array.isArray(data.appointments)) patch.appointments = data.appointments;
           if (Array.isArray(data.tasks)) patch.tasks = data.tasks;
           if (Array.isArray(data.taskComments)) patch.taskComments = data.taskComments;
+          if (Array.isArray(data.purchases)) patch.purchases = data.purchases;
           set(patch);
         } catch (e) {
           console.error("Hydratatie mislukt:", e);
@@ -589,6 +597,17 @@ export const useCrm = create<CrmState>()(
         dbSync("invoices", "upsert", get().invoices.find((i) => i.id === invoiceId));
       },
 
+      addPurchase: (input) => {
+        const purchase: Purchase = { id: id("inkoop"), aangemaaktOp: new Date().toISOString(), ...input };
+        set((s) => ({ purchases: [purchase, ...s.purchases] }));
+        dbSync("purchases", "upsert", purchase);
+      },
+
+      deletePurchase: (purchaseId) => {
+        set((s) => ({ purchases: s.purchases.filter((p) => p.id !== purchaseId) }));
+        dbSync("purchases", "delete", { id: purchaseId });
+      },
+
       reset: () =>
         set({
           leads: seedLeads,
@@ -607,6 +626,7 @@ export const useCrm = create<CrmState>()(
           reminderRules: seedReminderRules,
           invoices: seedInvoices,
           payments: seedPayments,
+          purchases: [],
         }),
     }),
     {

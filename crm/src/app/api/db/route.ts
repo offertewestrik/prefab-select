@@ -1,6 +1,6 @@
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase/server";
 import { isGmailConnected, createCalendarEvent, updateCalendarEvent, deleteCalendarEvent } from "@/lib/integrations/google";
-import type { Appointment, Invoice, Note, Payment, Quote, QuoteLine, Task, TaskComment } from "@/lib/types";
+import type { Appointment, Invoice, Note, Payment, Purchase, Quote, QuoteLine, Task, TaskComment } from "@/lib/types";
 
 // Generieke schrijf-route voor de gedeelde data (write-through vanuit de store).
 // Body: { table, op: "upsert" | "delete", data }
@@ -151,6 +151,13 @@ export async function POST(req: Request) {
       const c = data as TaskComment;
       const { error } = await db.from("task_comments").upsert({
         id: c.id, task_id: c.taskId, auteur_id: c.auteurId, tekst: c.tekst,
+      });
+      if (error) throw error;
+    } else if (table === "purchases") {
+      const p = data as Purchase;
+      const { error } = await db.from("purchases").upsert({
+        id: p.id, lead_id: p.leadId, leverancier: p.leverancier,
+        omschrijving: p.omschrijving ?? null, bedrag: p.bedrag, datum: p.datum,
       });
       if (error) throw error;
     } else {

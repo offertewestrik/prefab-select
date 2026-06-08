@@ -320,3 +320,15 @@ export interface Payment {
   methode: PaymentMethode;
   datum: string; // ISO
 }
+
+/** Inkoopkosten (materiaal, onderaannemer, transport) per project/lead. */
+export interface Purchase {
+  id: string;
+  leadId: string; // gekoppeld project/klant
+  leverancier: string;
+  omschrijving?: string;
+  /** Inkoopbedrag in euro's (kosten). */
+  bedrag: number;
+  datum: string; // ISO
+  aangemaaktOp: string; // ISO
+}
