@@ -20,6 +20,7 @@ import {
   PhoneCall,
   Receipt,
   ExternalLink,
+  Copy,
 } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
@@ -66,6 +67,7 @@ export default function LeadDetailPage() {
   const updateLead = useCrm((s) => s.updateLead);
   const deleteLead = useCrm((s) => s.deleteLead);
   const [tab, setTab] = useState<Tab>("Overzicht");
+  const [linkGekopieerd, setLinkGekopieerd] = useState(false);
 
   if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-slate-100" />;
 
@@ -130,6 +132,16 @@ export default function LeadDetailPage() {
             >
               <ExternalLink className="h-4 w-4" /> Open klantportaal
             </a>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(`${window.location.origin}/portaal/${portalToken(lead)}`);
+                setLinkGekopieerd(true);
+                setTimeout(() => setLinkGekopieerd(false), 2000);
+              }}
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+            >
+              <Copy className="h-4 w-4" /> {linkGekopieerd ? "Link gekopieerd!" : "Kopieer portaallink"}
+            </button>
 
             <button
               onClick={() => {
