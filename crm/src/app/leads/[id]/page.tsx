@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -43,7 +43,7 @@ import { invoiceTotaal, effectieveStatus } from "@/lib/invoice-utils";
 import { portalToken } from "@/lib/portal";
 import type { NoteType, PipelineStage } from "@/lib/types";
 
-const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes", "Facturen"] as const;
+const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes", "Facturen", "E-mails"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function LeadDetailPage() {
@@ -189,6 +189,7 @@ export default function LeadDetailPage() {
                 Bestanden: files.length,
                 Offertes: quotes.length,
                 Facturen: invoices.length,
+                "E-mails": 0,
               };
               return (
                 <button
@@ -217,6 +218,7 @@ export default function LeadDetailPage() {
             {tab === "Bestanden" && <BestandenTab leadId={lead.id} files={files} />}
             {tab === "Offertes" && <OffertesTab leadId={lead.id} quotes={quotes} />}
             {tab === "Facturen" && <FacturenTab leadId={lead.id} invoices={invoices} />}
+            {tab === "E-mails" && <EmailsTab email={lead.email} />}
           </div>
         </div>
       </div>
@@ -511,5 +513,61 @@ function FacturenTab({ leadId, invoices }: { leadId: string; invoices: any[] }) 
         {invoices.length === 0 && <p className="text-sm text-slate-400">Nog geen facturen.</p>}
       </ul>
     </div>
+  );
+}
+
+// --- E-mails (Gmail-wisseling met de klant) ---
+function EmailsTab({ email }: { email: string }) {
+  const [staat, setStaat] = useState<"laden" | "klaar" | "niet_verbonden">("laden");
+  const [berichten, setBerichten] = useState<any[]>([]);
+
+  useEffect(() => {
+    let actief = true;
+    fetch(`/api/gmail/messages?email=${encodeURIComponent(email)}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (!actief) return;
+        if (!d.connected) setStaat("niet_verbonden");
+        else {
+          setBerichten(d.messages ?? []);
+          setStaat("klaar");
+        }
+      })
+      .catch(() => actief && setStaat("klaar"));
+    return () => {
+      actief = false;
+    };
+  }, [email]);
+
+  if (staat === "laden") return <p className="text-sm text-slate-400">E-mails laden…</p>;
+  if (staat === "niet_verbonden") {
+    return (
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+        Gmail is nog niet gekoppeld. Ga naar <Link href="/integraties" className="font-semibold underline">Integraties</Link> om je Gmail te verbinden.
+      </div>
+    );
+  }
+  if (berichten.length === 0) {
+    return <p className="text-sm text-slate-400">Geen e-mails gevonden met {email}.</p>;
+  }
+
+  return (
+    <ul className="space-y-2">
+      {berichten.map((m) => (
+        <li key={m.id} className="rounded-xl border border-slate-100 p-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${m.uitgaand ? "bg-brand-50 text-brand-700" : "bg-emerald-50 text-emerald-700"}`}>
+                {m.uitgaand ? "Verzonden" : "Ontvangen"}
+              </span>
+              <p className="truncate text-sm font-semibold text-slate-800">{m.onderwerp}</p>
+            </div>
+            <span className="shrink-0 text-xs text-slate-400">{m.datum ? datum(m.datum) : ""}</span>
+          </div>
+          <p className="mt-1 truncate text-xs text-slate-400">{m.uitgaand ? `Aan: ${m.naar}` : `Van: ${m.van}`}</p>
+          <p className="mt-1 line-clamp-2 text-sm text-slate-500">{m.snippet}</p>
+        </li>
+      ))}
+    </ul>
   );
 }
