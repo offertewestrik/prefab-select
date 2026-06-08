@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { ROLE_META } from "@/lib/constants";
@@ -67,6 +67,16 @@ export function UserSwitcher() {
                 {u.googleConnected && <span className="text-[10px] font-semibold text-emerald-600">G</span>}
               </button>
             ))}
+            <div className="my-1 border-t border-slate-100" />
+            <button
+              onClick={async () => {
+                await fetch("/api/auth/logout", { method: "POST" });
+                window.location.href = "/login";
+              }}
+              className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm text-slate-600 transition hover:bg-slate-50"
+            >
+              <LogOut className="h-4 w-4 text-slate-400" /> Uitloggen
+            </button>
           </div>
         </>
       )}

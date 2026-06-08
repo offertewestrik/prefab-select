@@ -19,9 +19,9 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
     hydrate();
   }, [hydrate]);
 
-  const isPortaal = pathname?.startsWith("/portaal");
+  const isKaal = pathname?.startsWith("/portaal") || pathname?.startsWith("/login");
 
-  if (isPortaal) return <>{children}</>;
+  if (isKaal) return <>{children}</>;
 
   return (
     <div className="flex min-h-screen">
