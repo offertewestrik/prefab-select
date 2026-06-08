@@ -57,4 +57,11 @@ env:
       - BUILD
       - RUNTIME
 
+  # --- Team-toegang (inlogwachtwoord) ---
+  - variable: CRM_PASSWORD
+    secret: crm-password
+    availability:
+      - BUILD
+      - RUNTIME
+
 # Google-secrets bijgewerkt naar versie 2 (juiste client-id/secret).
