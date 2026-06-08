@@ -232,6 +232,10 @@ export const useCrm = create<CrmState>()(
           if (Array.isArray(data.quotes)) patch.quotes = data.quotes;
           if (Array.isArray(data.invoices)) patch.invoices = data.invoices;
           if (Array.isArray(data.payments)) patch.payments = data.payments;
+          if (Array.isArray(data.notes)) patch.notes = data.notes;
+          if (Array.isArray(data.appointments)) patch.appointments = data.appointments;
+          if (Array.isArray(data.tasks)) patch.tasks = data.tasks;
+          if (Array.isArray(data.taskComments)) patch.taskComments = data.taskComments;
           set(patch);
         } catch (e) {
           console.error("Hydratatie mislukt:", e);
@@ -286,52 +290,54 @@ export const useCrm = create<CrmState>()(
         return newId;
       },
 
-      addNote: (leadId, tekst, type = "notitie", auteur = "Jij") =>
+      addNote: (leadId, tekst, type = "notitie", auteur = "Jij") => {
+        const now = new Date().toISOString();
+        const note = { id: id("note"), leadId, type, tekst, auteur, aangemaaktOp: now };
         set((s) => ({
-          notes: [
-            { id: id("note"), leadId, type, tekst, auteur, aangemaaktOp: new Date().toISOString() },
-            ...s.notes,
-          ],
-          leads: s.leads.map((l) =>
-            l.id === leadId ? { ...l, laatsteActiviteit: new Date().toISOString() } : l,
-          ),
-        })),
+          notes: [note, ...s.notes],
+          leads: s.leads.map((l) => (l.id === leadId ? { ...l, laatsteActiviteit: now } : l)),
+        }));
+        dbSync("notes", "upsert", note);
+        syncLead("PATCH", { laatsteActiviteit: now }, leadId);
+      },
 
       addTask: (task) => {
         const newId = id("task");
-        set((s) => ({
-          tasks: [...s.tasks, { ...task, id: newId, aangemaaktOp: new Date().toISOString() }],
-        }));
+        const nieuw = { ...task, id: newId, aangemaaktOp: new Date().toISOString() };
+        set((s) => ({ tasks: [...s.tasks, nieuw] }));
+        dbSync("tasks", "upsert", nieuw);
         return newId;
       },
 
-      updateTask: (taskId, patch) =>
-        set((s) => ({
-          tasks: s.tasks.map((t) => (t.id === taskId ? { ...t, ...patch } : t)),
-        })),
+      updateTask: (taskId, patch) => {
+        set((s) => ({ tasks: s.tasks.map((t) => (t.id === taskId ? { ...t, ...patch } : t)) }));
+        dbSync("tasks", "upsert", get().tasks.find((t) => t.id === taskId));
+      },
 
-      setTaskStatus: (taskId, status) =>
-        set((s) => ({
-          tasks: s.tasks.map((t) => (t.id === taskId ? { ...t, status } : t)),
-        })),
+      setTaskStatus: (taskId, status) => {
+        set((s) => ({ tasks: s.tasks.map((t) => (t.id === taskId ? { ...t, status } : t)) }));
+        dbSync("tasks", "upsert", get().tasks.find((t) => t.id === taskId));
+      },
 
-      deleteTask: (taskId) =>
+      deleteTask: (taskId) => {
         set((s) => ({
           tasks: s.tasks.filter((t) => t.id !== taskId),
           taskComments: s.taskComments.filter((c) => c.taskId !== taskId),
-        })),
+        }));
+        dbSync("tasks", "delete", { id: taskId });
+      },
 
-      addTaskComment: (taskId, tekst, auteurId) =>
-        set((s) => ({
-          taskComments: [
-            ...s.taskComments,
-            { id: id("tc"), taskId, auteurId: auteurId ?? s.currentUserId, tekst, aangemaaktOp: new Date().toISOString() },
-          ],
-        })),
+      addTaskComment: (taskId, tekst, auteurId) => {
+        const comment = { id: id("tc"), taskId, auteurId: auteurId ?? get().currentUserId, tekst, aangemaaktOp: new Date().toISOString() };
+        set((s) => ({ taskComments: [...s.taskComments, comment] }));
+        dbSync("task_comments", "upsert", comment);
+      },
 
       addAppointment: (afspraak) => {
         const newId = id("afspr");
-        set((s) => ({ appointments: [...s.appointments, { ...afspraak, id: newId }] }));
+        const nieuw = { ...afspraak, id: newId };
+        set((s) => ({ appointments: [...s.appointments, nieuw] }));
+        dbSync("appointments", "upsert", nieuw);
         get().addNotification({
           type: "nieuwe_afspraak",
           titel: "Nieuwe afspraak",
@@ -342,20 +348,26 @@ export const useCrm = create<CrmState>()(
         return newId;
       },
 
-      updateAppointment: (afspraakId, patch) =>
+      updateAppointment: (afspraakId, patch) => {
         set((s) => ({
           appointments: s.appointments.map((a) => (a.id === afspraakId ? { ...a, ...patch } : a)),
-        })),
+        }));
+        dbSync("appointments", "upsert", get().appointments.find((a) => a.id === afspraakId));
+      },
 
-      deleteAppointment: (afspraakId) =>
-        set((s) => ({ appointments: s.appointments.filter((a) => a.id !== afspraakId) })),
+      deleteAppointment: (afspraakId) => {
+        set((s) => ({ appointments: s.appointments.filter((a) => a.id !== afspraakId) }));
+        dbSync("appointments", "delete", { id: afspraakId });
+      },
 
-      toggleGoogleSync: (afspraakId) =>
+      toggleGoogleSync: (afspraakId) => {
         set((s) => ({
           appointments: s.appointments.map((a) =>
             a.id === afspraakId ? { ...a, googleSynced: !a.googleSynced } : a,
           ),
-        })),
+        }));
+        dbSync("appointments", "upsert", get().appointments.find((a) => a.id === afspraakId));
+      },
 
       addFile: (file) =>
         set((s) => ({
