@@ -64,6 +64,7 @@ export default function LeadDetailPage() {
   const quoteRequests = useCrm((s) => s.quoteRequests.filter((q) => q.leadId === leadId));
 
   const updateLead = useCrm((s) => s.updateLead);
+  const deleteLead = useCrm((s) => s.deleteLead);
   const [tab, setTab] = useState<Tab>("Overzicht");
 
   if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-slate-100" />;
@@ -129,6 +130,18 @@ export default function LeadDetailPage() {
             >
               <ExternalLink className="h-4 w-4" /> Open klantportaal
             </a>
+
+            <button
+              onClick={() => {
+                if (confirm(`Lead "${lead.naam}" en bijbehorende offertes/facturen/notities definitief verwijderen?`)) {
+                  deleteLead(lead.id);
+                  router.push("/leads");
+                }
+              }}
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-50"
+            >
+              <Trash2 className="h-4 w-4" /> Lead verwijderen
+            </button>
           </div>
 
           {/* Fase & gegevens bewerken */}

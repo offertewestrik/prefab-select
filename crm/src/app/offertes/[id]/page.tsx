@@ -14,6 +14,7 @@ import {
   FileText,
   History,
   Pencil,
+  Trash2,
 } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
@@ -40,6 +41,7 @@ export default function OfferteDetailPage() {
   const updateLead = useCrm((s) => s.updateLead);
   const addEmailLog = useCrm((s) => s.addEmailLog);
   const genereerTermijnfacturen = useCrm((s) => s.genereerTermijnfacturen);
+  const deleteQuote = useCrm((s) => s.deleteQuote);
   const router = useRouter();
 
   const [bezig, setBezig] = useState<"pdf" | "mail" | "preview" | null>(null);
@@ -178,6 +180,12 @@ export default function OfferteDetailPage() {
           </button>
           <button onClick={mailOfferte} disabled={bezig !== null} className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 disabled:opacity-50">
             <Mail className="h-4 w-4" /> {bezig === "mail" ? "Versturen…" : "Mail offerte"}
+          </button>
+          <button
+            onClick={() => { if (confirm(`Offerte ${quote.nummer} definitief verwijderen?`)) { deleteQuote(quote.id); router.push("/offertes"); } }}
+            className="inline-flex items-center gap-2 rounded-xl border border-rose-200 bg-white px-4 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-50"
+          >
+            <Trash2 className="h-4 w-4" /> Verwijderen
           </button>
         </div>
       </div>

@@ -139,6 +139,7 @@ interface CrmState {
   reorderInStage: (stage: PipelineStage, geordendeIds: string[]) => void;
   updateLead: (leadId: string, patch: Partial<Lead>) => void;
   addLead: (lead: Omit<Lead, "id" | "positie" | "aangemaaktOp" | "laatsteActiviteit">) => string;
+  deleteLead: (leadId: string) => void;
 
   // --- Notities ---
   addNote: (leadId: string, tekst: string, type?: Note["type"], auteur?: string) => void;
@@ -194,6 +195,7 @@ interface CrmState {
   // --- Offertes ---
   createQuote: (input: CreateQuoteInput) => string;
   updateQuote: (quoteId: string, patch: Partial<Quote>) => void;
+  deleteQuote: (quoteId: string) => void;
   setQuoteStatus: (quoteId: string, status: Quote["status"]) => void;
 
   // --- E-maillogs ---
@@ -296,6 +298,19 @@ export const useCrm = create<CrmState>()(
           link: `/leads/${newId}`,
         });
         return newId;
+      },
+
+      deleteLead: (leadId) => {
+        set((s) => ({
+          leads: s.leads.filter((l) => l.id !== leadId),
+          quotes: s.quotes.filter((q) => q.leadId !== leadId),
+          invoices: s.invoices.filter((i) => i.leadId !== leadId),
+          notes: s.notes.filter((n) => n.leadId !== leadId),
+          tasks: s.tasks.filter((t) => t.leadId !== leadId),
+          appointments: s.appointments.filter((a) => a.leadId !== leadId),
+          purchases: s.purchases.filter((p) => p.leadId !== leadId),
+        }));
+        syncLead("DELETE", null, leadId);
       },
 
       addNote: (leadId, tekst, type = "notitie", auteur = "Jij") => {
@@ -412,6 +427,11 @@ export const useCrm = create<CrmState>()(
           quotes: s.quotes.map((q) => (q.id === quoteId ? { ...q, ...patch } : q)),
         }));
         dbSync("quotes", "upsert", get().quotes.find((q) => q.id === quoteId));
+      },
+
+      deleteQuote: (quoteId) => {
+        set((s) => ({ quotes: s.quotes.filter((q) => q.id !== quoteId) }));
+        dbSync("quotes", "delete", { id: quoteId });
       },
 
       setQuoteStatus: (quoteId, status) => {
