@@ -41,3 +41,20 @@ env:
     availability:
       - BUILD
       - RUNTIME
+
+  # --- Google / Gmail (mailen vanuit CRM) ---
+  - variable: GOOGLE_REDIRECT_URI
+    value: https://prefab-select--crm-systeem-prefab-select.europe-west4.hosted.app/api/integrations/google/callback
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GOOGLE_CLIENT_ID
+    secret: google-client-id
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GOOGLE_CLIENT_SECRET
+    secret: google-client-secret
+    availability:
+      - BUILD
+      - RUNTIME

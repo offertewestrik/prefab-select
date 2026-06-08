@@ -25,6 +25,18 @@ export async function verstuurOfferteMail(opts: {
   pdfBuffer?: Buffer;
   bestandsnaam?: string;
 }): Promise<MailResultaat> {
+  // 1) Gmail gebruiken als de postbus is gekoppeld (mailen vanuit het CRM).
+  try {
+    const { isGmailConnected, sendGmail } = await import("./google");
+    if (await isGmailConnected()) {
+      const r = await sendGmail(opts);
+      return { ok: r.ok, messageId: r.messageId, mock: false };
+    }
+  } catch (e) {
+    console.error("Gmail-verzending mislukt, val terug op Resend:", e);
+  }
+
+  // 2) Anders: Resend (of mock zolang er geen key is).
   if (!useRealIntegrations || !process.env.RESEND_API_KEY) {
     // MOCK: in het prototype versturen we niet echt.
     console.info(`[MOCK Resend] mail naar ${opts.naar} — "${opts.onderwerp}"`);
