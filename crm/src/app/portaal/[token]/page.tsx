@@ -37,7 +37,7 @@ export default function PortaalPage() {
 
   const laad = useCallback(async () => {
     try {
-      const res = await fetch(`/api/portaal/${token}`);
+      const res = await fetch(`/api/portaal/${token}`, { cache: "no-store" });
       if (!res.ok) return setStaat("ongeldig");
       setData(await res.json());
       setStaat("klaar");

@@ -24,7 +24,10 @@ export async function GET() {
       listTaskComments(),
       listPurchases(),
     ]);
-    return Response.json({ leads, quotes, invoices, payments, notes, appointments, tasks, taskComments, purchases });
+    return Response.json(
+      { leads, quotes, invoices, payments, notes, appointments, tasks, taskComments, purchases },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch (err) {
     console.error("Bootstrap mislukt:", err);
     return Response.json({ error: (err as Error).message }, { status: 500 });

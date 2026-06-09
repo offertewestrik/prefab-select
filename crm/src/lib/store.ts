@@ -233,7 +233,7 @@ export const useCrm = create<CrmState>()(
       hydrate: async () => {
         if (typeof window === "undefined") return;
         try {
-          const res = await fetch("/api/bootstrap");
+          const res = await fetch("/api/bootstrap", { cache: "no-store" });
           if (!res.ok) return;
           const data = await res.json();
           const patch: Partial<CrmState> = {};
