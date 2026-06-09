@@ -22,6 +22,7 @@ import {
   Receipt,
   ExternalLink,
   Boxes,
+  Share2,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -47,6 +48,7 @@ const SECTIES: { titel: string | null; items: { href: string; label: string; ico
       { href: "/management", label: "Management", icon: Gauge },
       { href: "/projecten", label: "Projecten", icon: Boxes },
       { href: "/marketing", label: "Marketing", icon: Megaphone },
+      { href: "/social", label: "Social media", icon: Share2 },
       { href: "/omzet", label: "Omzet", icon: TrendingUp },
       { href: "/kpi", label: "KPI's", icon: Target },
       { href: "/rapportage", label: "Rapportages", icon: BarChart3 },
