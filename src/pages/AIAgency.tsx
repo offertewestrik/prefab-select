@@ -284,7 +284,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.05 }}
           className="text-4xl font-black leading-[1.05] tracking-tighter text-white sm:text-6xl lg:text-7xl"
         >
-          Scale Your Business With <GradientText>AI, Marketing &amp; Sales</GradientText> Automation
+          Website, Marketing &amp; Sales Growth For <GradientText>Ambitious Businesses</GradientText>
         </motion.h1>
 
         <motion.p
@@ -293,7 +293,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.18 }}
           className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl"
         >
-          We build intelligent systems that generate leads, automate operations, and accelerate business growth.
+          We design high-converting websites and build the marketing &amp; sales systems that generate leads, automate operations, and accelerate growth.
         </motion.p>
 
         <motion.div
