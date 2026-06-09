@@ -24,11 +24,11 @@ export default function DashboardPage() {
   const { leads, tasks, appointments, notes, quotes, users } = useCrm();
 
   const stats = useMemo(() => {
-    const open = leads.filter((l) => !["gewonnen", "verloren"].includes(l.stage));
-    const gewonnen = leads.filter((l) => l.stage === "gewonnen");
+    const open = leads.filter((l) => !["opdracht_afgerond", "offerte_afgewezen"].includes(l.stage));
+    const gewonnen = leads.filter((l) => l.stage === "opdracht_afgerond");
     const pipelineWaarde = open.reduce((s, l) => s + l.waarde, 0);
     const gewogen = open.reduce((s, l) => s + (l.waarde * l.kans) / 100, 0);
-    const afgerond = leads.filter((l) => ["gewonnen", "verloren"].includes(l.stage));
+    const afgerond = leads.filter((l) => ["opdracht_afgerond", "offerte_afgewezen"].includes(l.stage));
     const winratio = afgerond.length
       ? Math.round((gewonnen.length / afgerond.length) * 100)
       : 0;
@@ -77,7 +77,7 @@ export default function DashboardPage() {
       afsprakenVandaag: appointments.filter((a) => new Date(a.start) >= startVandaag && new Date(a.start) <= eindVandaag).length,
       takenVandaag: tasks.filter((t) => t.status !== "gereed" && new Date(t.deadline) <= eindVandaag).length,
       openOffertes: quotes.filter((q) => ["verstuurd", "bekeken"].includes(q.status)).length,
-      leadsOpvolgen: leads.filter((l) => ["nieuwe_lead", "offerte_aanvraag", "gebeld"].includes(l.stage)).length,
+      leadsOpvolgen: leads.filter((l) => ["nieuwe_lead", "offerte_opgenomen", "gebeld_3x"].includes(l.stage)).length,
       plaatsingenWeek: appointments.filter((a) => a.type === "plaatsing" && new Date(a.start) >= startVandaag && new Date(a.start) <= eindWeek).length,
     };
   }, [appointments, tasks, quotes, leads]);

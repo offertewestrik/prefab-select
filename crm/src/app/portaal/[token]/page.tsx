@@ -73,7 +73,7 @@ export default function PortaalPage() {
 
   const { lead, quotes, invoices, payments, appointments } = data;
   const milestone = stageNaarMilestone(lead.stage);
-  const verloren = lead.stage === "verloren";
+  const verloren = lead.stage === "offerte_afgewezen";
 
   return (
     <div className="min-h-screen bg-slate-50">
