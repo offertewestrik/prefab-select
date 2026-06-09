@@ -70,7 +70,7 @@ export async function ondertekenOfferte(token: string, quoteId: string, naam: st
     .update({ status: "geaccepteerd", beslist_op: now, ondertekend_op: now, ondertekend_door: naam, handtekening })
     .eq("id", quoteId);
   if (error) throw error;
-  await db.from("leads").update({ stage: "akkoord", laatste_activiteit: now }).eq("id", lead.id);
+  await db.from("leads").update({ stage: "offerte_akkoord", laatste_activiteit: now }).eq("id", lead.id);
 }
 
 export async function wijsOfferteAf(token: string, quoteId: string) {

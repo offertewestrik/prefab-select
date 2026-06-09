@@ -10,23 +10,23 @@ export function leadByToken(leads: Lead[], token: string): Lead | undefined {
 }
 
 /** Klantvriendelijke mijlpalen (afgeleid van de interne pijplijn-fase). */
-export const PORTAL_MILESTONES = ["Aanvraag", "Offerte", "Akkoord", "In productie", "Opgeleverd"];
+export const PORTAL_MILESTONES = ["Aanvraag", "Offerte", "Akkoord", "In uitvoering", "Afgerond"];
 
 export function stageNaarMilestone(stage: PipelineStage): number {
   switch (stage) {
     case "nieuwe_lead":
-    case "offerte_aanvraag":
-    case "gebeld":
-    case "afspraak_ingepland":
+    case "gebeld_3x":
       return 0;
+    case "offerte_opgenomen":
     case "offerte_verstuurd":
+    case "afspraak_ingepland":
       return 1;
-    case "akkoord":
+    case "offerte_akkoord":
       return 2;
-    case "in_productie":
+    case "tekeningen_maken":
+    case "facturen_verstuurd":
       return 3;
-    case "geplaatst":
-    case "gewonnen":
+    case "opdracht_afgerond":
       return 4;
     default:
       return 0;

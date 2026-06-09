@@ -53,12 +53,12 @@ export default function ManagementPage() {
     const geaccepteerd = quotes.filter((q) => q.status === "geaccepteerd");
     const omzetInOfferte = openOffertes.reduce((s, q) => s + quoteTotaal(q), 0);
 
-    const openLeads = leads.filter((l) => !["gewonnen", "verloren"].includes(l.stage));
+    const openLeads = leads.filter((l) => !["opdracht_afgerond", "offerte_afgewezen"].includes(l.stage));
     const verwachteOmzet = openLeads.reduce((s, l) => s + (l.waarde * l.kans) / 100, 0);
 
-    const geplaatst = leads.filter((l) => ["geplaatst", "gewonnen"].includes(l.stage)).length;
-    const afgerond = leads.filter((l) => ["gewonnen", "verloren"].includes(l.stage));
-    const gewonnen = leads.filter((l) => l.stage === "gewonnen");
+    const geplaatst = leads.filter((l) => ["facturen_verstuurd", "opdracht_afgerond"].includes(l.stage)).length;
+    const afgerond = leads.filter((l) => ["opdracht_afgerond", "offerte_afgewezen"].includes(l.stage));
+    const gewonnen = leads.filter((l) => l.stage === "opdracht_afgerond");
     const conversie = afgerond.length ? Math.round((gewonnen.length / afgerond.length) * 100) : 0;
 
     return {

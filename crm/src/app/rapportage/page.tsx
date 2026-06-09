@@ -32,10 +32,10 @@ export default function RapportagePage() {
     const openOffertes = quotes.filter((q) => ["concept", "verstuurd", "bekeken"].includes(q.status));
     const geaccepteerd = quotes.filter((q) => q.status === "geaccepteerd");
     const omzetInOfferte = openOffertes.reduce((s, q) => s + quoteTotaal(q), 0);
-    const openLeads = leads.filter((l) => !["gewonnen", "verloren"].includes(l.stage));
+    const openLeads = leads.filter((l) => !["opdracht_afgerond", "offerte_afgewezen"].includes(l.stage));
     const verwacht = openLeads.reduce((s, l) => s + (l.waarde * l.kans) / 100, 0);
-    const afgerond = leads.filter((l) => ["gewonnen", "verloren"].includes(l.stage));
-    const gewonnen = leads.filter((l) => l.stage === "gewonnen");
+    const afgerond = leads.filter((l) => ["opdracht_afgerond", "offerte_afgewezen"].includes(l.stage));
+    const gewonnen = leads.filter((l) => l.stage === "opdracht_afgerond");
     const conversie = afgerond.length ? Math.round((gewonnen.length / afgerond.length) * 100) : 0;
 
     const bronnen = getLeadbronnen();

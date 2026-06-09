@@ -111,7 +111,7 @@ export default function OfferteDetailPage() {
       if (data.ok) {
         // 1) offerte-status → Verzonden (+ verzonddatum), 2) lead → Offerte verstuurd
         setQuoteStatus(quote!.id, "verstuurd");
-        if (lead && ["nieuwe_lead", "offerte_aanvraag", "gebeld", "afspraak_ingepland"].includes(lead.stage)) {
+        if (lead && ["nieuwe_lead", "offerte_opgenomen", "gebeld_3x", "afspraak_ingepland"].includes(lead.stage)) {
           updateLead(lead.id, { stage: "offerte_verstuurd" });
         }
         // 3) e-maillog vastleggen (tabel quote_email_logs)
@@ -264,7 +264,7 @@ export default function OfferteDetailPage() {
               key={s}
               onClick={() => {
                 setQuoteStatus(quote.id, s);
-                if (s === "geaccepteerd" && lead) updateLead(lead.id, { stage: "akkoord" });
+                if (s === "geaccepteerd" && lead) updateLead(lead.id, { stage: "offerte_akkoord" });
               }}
               className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${quote.status === s ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
             >

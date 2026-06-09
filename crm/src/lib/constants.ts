@@ -11,15 +11,15 @@ import type {
 // ----------------------------------------------------------------------------
 export const STAGE_ORDER: PipelineStage[] = [
   "nieuwe_lead",
-  "offerte_aanvraag",
-  "gebeld",
-  "afspraak_ingepland",
+  "gebeld_3x",
+  "offerte_opgenomen",
   "offerte_verstuurd",
-  "akkoord",
-  "in_productie",
-  "geplaatst",
-  "gewonnen",
-  "verloren",
+  "afspraak_ingepland",
+  "offerte_akkoord",
+  "offerte_afgewezen",
+  "tekeningen_maken",
+  "facturen_verstuurd",
+  "opdracht_afgerond",
 ];
 
 export const STAGE_META: Record<
@@ -27,15 +27,15 @@ export const STAGE_META: Record<
   { label: string; kleur: string; dot: string }
 > = {
   nieuwe_lead: { label: "Nieuwe lead", kleur: "bg-slate-100 text-slate-700", dot: "bg-slate-400" },
-  offerte_aanvraag: { label: "Offerte aanvraag", kleur: "bg-sky-100 text-sky-700", dot: "bg-sky-500" },
-  gebeld: { label: "Gebeld", kleur: "bg-indigo-100 text-indigo-700", dot: "bg-indigo-500" },
-  afspraak_ingepland: { label: "Afspraak ingepland", kleur: "bg-violet-100 text-violet-700", dot: "bg-violet-500" },
+  gebeld_3x: { label: "3x gebeld", kleur: "bg-indigo-100 text-indigo-700", dot: "bg-indigo-500" },
+  offerte_opgenomen: { label: "Offerte opgenomen", kleur: "bg-sky-100 text-sky-700", dot: "bg-sky-500" },
   offerte_verstuurd: { label: "Offerte verstuurd", kleur: "bg-amber-100 text-amber-700", dot: "bg-amber-500" },
-  akkoord: { label: "Akkoord", kleur: "bg-emerald-100 text-emerald-700", dot: "bg-emerald-500" },
-  in_productie: { label: "In productie", kleur: "bg-cyan-100 text-cyan-700", dot: "bg-cyan-500" },
-  geplaatst: { label: "Geplaatst", kleur: "bg-teal-100 text-teal-700", dot: "bg-teal-500" },
-  gewonnen: { label: "Gewonnen", kleur: "bg-green-100 text-green-700", dot: "bg-green-600" },
-  verloren: { label: "Verloren", kleur: "bg-rose-100 text-rose-700", dot: "bg-rose-500" },
+  afspraak_ingepland: { label: "Afspraak ingepland", kleur: "bg-violet-100 text-violet-700", dot: "bg-violet-500" },
+  offerte_akkoord: { label: "Offerte akkoord", kleur: "bg-emerald-100 text-emerald-700", dot: "bg-emerald-500" },
+  offerte_afgewezen: { label: "Offerte afgewezen", kleur: "bg-rose-100 text-rose-700", dot: "bg-rose-500" },
+  tekeningen_maken: { label: "Tekeningen maken", kleur: "bg-cyan-100 text-cyan-700", dot: "bg-cyan-500" },
+  facturen_verstuurd: { label: "Facturen verstuurd", kleur: "bg-teal-100 text-teal-700", dot: "bg-teal-500" },
+  opdracht_afgerond: { label: "Opdracht volledig afgerond", kleur: "bg-green-100 text-green-700", dot: "bg-green-600" },
 };
 
 export const SOURCE_LABEL: Record<LeadSource, string> = {
@@ -316,4 +316,4 @@ export const PAYMENT_METHODE_LABEL: Record<PaymentMethode, string> = {
 };
 
 /** Pijplijn-stadia die als "lopend project" gelden (voor het klantportaal). */
-export const PROJECT_STAGES = ["akkoord", "in_productie", "geplaatst", "gewonnen"];
+export const PROJECT_STAGES = ["offerte_akkoord", "tekeningen_maken", "facturen_verstuurd", "opdracht_afgerond"];

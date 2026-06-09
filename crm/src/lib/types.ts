@@ -9,15 +9,15 @@
 /** De 10 vaste pijplijn-stadia van Prefab Select. */
 export type PipelineStage =
   | "nieuwe_lead"
-  | "offerte_aanvraag"
-  | "gebeld"
-  | "afspraak_ingepland"
+  | "gebeld_3x"
+  | "offerte_opgenomen"
   | "offerte_verstuurd"
-  | "akkoord"
-  | "in_productie"
-  | "geplaatst"
-  | "gewonnen"
-  | "verloren";
+  | "afspraak_ingepland"
+  | "offerte_akkoord"
+  | "offerte_afgewezen"
+  | "tekeningen_maken"
+  | "facturen_verstuurd"
+  | "opdracht_afgerond";
 
 /** Waar komt de lead vandaan. */
 export type LeadSource =
