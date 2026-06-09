@@ -19,6 +19,7 @@ import {
   useInView,
   useMotionValue,
   useSpring,
+  useReducedMotion,
 } from 'motion/react';
 import {
   Sparkles, Bot, Zap, Target, Globe, Filter, Workflow, MessageSquare, Code2,
@@ -67,6 +68,7 @@ interface Content {
   pricing: { tag: string; t1: string; tg: string; sub: string; popular: string; items: { name: string; tagline: string; cta: string; features: string[] }[] };
   faq: { tag: string; t1: string; tg: string; items: { q: string; a: string }[] };
   contact: { tag: string; t1: string; tg: string; sub: string; benefits: string[]; fields: string[]; submit: string; privacy: string; okTitle: string; okBody: string };
+  dashboard: { title: string; live: string; kpis: string[]; chart: string };
   footer: string; // rights line tagline
   tagline: string;
 }
@@ -168,6 +170,7 @@ const CONTENT: Record<Lang, Content> = {
       submit: 'Plan strategiegesprek', privacy: 'We respecteren je privacy. Je gegevens worden nooit gedeeld.',
       okTitle: 'Bedankt — we nemen contact op!', okBody: 'We hebben je aanvraag ontvangen en reageren binnen één werkdag.',
     },
+    dashboard: { title: 'Nexora Groei-dashboard', live: 'Live', kpis: ['Omzet', 'Leads', 'Conversie'], chart: 'Omzetgroei' },
     footer: 'Alle rechten voorbehouden.',
     tagline: 'Website-, marketing- en salesgroei voor ambitieuze bedrijven',
   },
@@ -268,6 +271,7 @@ const CONTENT: Record<Lang, Content> = {
       submit: 'Book Strategy Call', privacy: 'We respect your privacy. Your details are never shared.',
       okTitle: 'Thanks — we’ll be in touch!', okBody: 'We’ve received your request and will reach out within one business day.',
     },
+    dashboard: { title: 'Nexora Growth Dashboard', live: 'Live', kpis: ['Revenue', 'Leads', 'Conversion'], chart: 'Revenue growth' },
     footer: 'All rights reserved.',
     tagline: 'Website, Marketing & Sales growth for ambitious businesses',
   },
@@ -368,6 +372,7 @@ const CONTENT: Record<Lang, Content> = {
       submit: 'احجز جلسة استراتيجية', privacy: 'نحترم خصوصيتك. لا تتم مشاركة بياناتك أبدًا.',
       okTitle: 'شكرًا — سنتواصل معك!', okBody: 'استلمنا طلبك وسنعاود التواصل خلال يوم عمل واحد.',
     },
+    dashboard: { title: 'لوحة نمو Nexora', live: 'مباشر', kpis: ['الإيرادات', 'العملاء', 'التحويل'], chart: 'نمو الإيرادات' },
     footer: 'جميع الحقوق محفوظة.',
     tagline: 'نمو الموقع والتسويق والمبيعات للشركات الطموحة',
   },
@@ -407,6 +412,13 @@ const TIER_META = [
   { price: 'Custom', highlight: false },
 ];
 const PERIOD_BY_LANG: Record<Lang, string> = { nl: '/mnd', en: '/mo', ar: '/شهر' };
+
+// Live dashboard KPIs (language-independent numbers; labels come from CONTENT).
+const DASHBOARD_KPIS = [
+  { to: 48, prefix: '€', suffix: 'K', delta: '+24%' },
+  { to: 1284, decimals: 0, suffix: '', delta: '+18%' },
+  { to: 6.4, decimals: 1, suffix: '%', delta: '+12%' },
+];
 
 /* ------------------------------------------------------------------ */
 /* Language context                                                    */
@@ -624,6 +636,140 @@ function Nav() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Live dashboard (animated demo visual)                               */
+/* ------------------------------------------------------------------ */
+const BAR_COUNT = 16;
+
+function LiveDashboard() {
+  const { t } = useLang();
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+
+  // Bars that keep shifting to give a "live" feel (rising trend + noise).
+  const seed = useMemo(
+    () => Array.from({ length: BAR_COUNT }, (_, i) => 0.32 + (i / BAR_COUNT) * 0.5 + Math.random() * 0.12),
+    [],
+  );
+  const [bars, setBars] = useState(seed);
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => {
+      setBars(() => Array.from({ length: BAR_COUNT }, (_, i) => {
+        const trend = 0.3 + (i / BAR_COUNT) * 0.55;
+        return Math.max(0.14, Math.min(1, trend + (Math.random() - 0.5) * 0.26));
+      }));
+    }, 2200);
+    return () => clearInterval(id);
+  }, [reduce]);
+
+  // Fixed, nice rising area-chart curve.
+  const linePts = '0,33 14,29 28,31 42,21 56,24 70,13 84,16 100,5';
+  const areaPath = `M0,33 L14,29 L28,31 L42,21 L56,24 L70,13 L84,16 L100,5 L100,40 L0,40 Z`;
+
+  return (
+    <div ref={ref} dir="ltr" className="relative mx-auto mt-16 max-w-4xl">
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] shadow-[0_40px_120px_-30px_rgba(37,99,235,0.6)] backdrop-blur-2xl">
+        {/* window top bar */}
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+          <div className="flex items-center gap-1.5">
+            <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+            <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+            <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+          </div>
+          <span className="text-xs font-medium text-white/50">{t.dashboard.title}</span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-300">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            </span>
+            {t.dashboard.live}
+          </span>
+        </div>
+
+        {/* body */}
+        <div className="p-4 sm:p-6">
+          {/* KPI row */}
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            {DASHBOARD_KPIS.map((k, i) => (
+              <div key={i} className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-left sm:p-4">
+                <div className="text-[11px] font-medium text-white/50">{t.dashboard.kpis[i]}</div>
+                <div className="mt-1 text-lg font-black text-white sm:text-2xl">
+                  <Counter to={k.to} decimals={k.decimals ?? 0} prefix={k.prefix ?? ''} suffix={k.suffix} />
+                </div>
+                <div className="mt-1 inline-flex items-center gap-1 text-[11px] font-bold text-emerald-300">
+                  <TrendingUp size={12} /> {k.delta}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* chart panel */}
+          <div className="relative mt-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-xs font-semibold text-white/70">{t.dashboard.chart}</span>
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-300"><TrendingUp size={13} /> 32%</span>
+            </div>
+
+            {/* area + line chart */}
+            <div className="relative h-24 w-full sm:h-28">
+              <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="h-full w-full">
+                <defs>
+                  <linearGradient id="ndArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor={PALETTE.blue2} stopOpacity="0.45" />
+                    <stop offset="1" stopColor={PALETTE.blue2} stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient id="ndLine" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stopColor={PALETTE.blue} />
+                    <stop offset="0.6" stopColor={PALETTE.cyan} />
+                    <stop offset="1" stopColor={PALETTE.sky} />
+                  </linearGradient>
+                </defs>
+                <motion.path d={areaPath} fill="url(#ndArea)" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1, delay: 0.3 }} />
+                <motion.polyline
+                  points={linePts}
+                  fill="none"
+                  stroke="url(#ndLine)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                  initial={{ pathLength: 0 }}
+                  animate={inView ? { pathLength: 1 } : {}}
+                  transition={{ duration: 1.6, ease: 'easeInOut' }}
+                />
+              </svg>
+              {/* pulsing endpoint dot (top-right) */}
+              <span className="absolute right-1 top-1 flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: PALETTE.sky }} />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ background: PALETTE.sky }} />
+              </span>
+            </div>
+
+            {/* live bars */}
+            <div className="mt-4 flex h-16 items-end gap-1 sm:gap-1.5">
+              {bars.map((v, i) => (
+                <motion.div
+                  key={i}
+                  className="h-full flex-1 rounded-t-sm"
+                  style={{ background: GRAD, transformOrigin: 'bottom', opacity: 0.55 + (i / BAR_COUNT) * 0.45 }}
+                  initial={{ scaleY: 0 }}
+                  animate={{ scaleY: inView ? v : 0 }}
+                  transition={{ duration: 1.1, ease: 'easeInOut' }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* soft glow under the window */}
+      <div className="pointer-events-none absolute inset-x-10 -bottom-6 -z-10 h-16 rounded-full opacity-50 blur-2xl" style={{ background: GRAD }} />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Hero                                                                */
 /* ------------------------------------------------------------------ */
 function Hero() {
@@ -688,6 +834,9 @@ function Hero() {
             {t.hero.cta2}
           </button>
         </motion.div>
+
+        {/* animated live dashboard demo */}
+        <LiveDashboard />
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }} className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md sm:grid-cols-4">
           {HERO_STATS.map((s, i) => (
