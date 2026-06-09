@@ -117,6 +117,46 @@ function scrollToId(id: string) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Logo                                                                */
+/* ------------------------------------------------------------------ */
+// Brand mark: a rising chart line with an upward arrow — "growth".
+function LogoMark({ size = 36 }: { size?: number }) {
+  return (
+    <span
+      className="grid flex-shrink-0 place-items-center rounded-xl text-white shadow-lg"
+      style={{ width: size, height: size, background: GRAD }}
+      aria-hidden
+    >
+      <svg
+        width={size * 0.58}
+        height={size * 0.58}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="3 17 9 11 13 15 21 7" />
+        <polyline points="15 7 21 7 21 13" />
+      </svg>
+    </span>
+  );
+}
+
+// Full logo: mark + wordmark ("Nexora" + gradient "Growth").
+function Logo({ markSize = 36 }: { markSize?: number }) {
+  return (
+    <span className="flex items-center gap-2.5">
+      <LogoMark size={markSize} />
+      <span className="text-lg font-black tracking-tight text-white">
+        Nexora <GradientText>Growth</GradientText>
+      </span>
+    </span>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 const NAV_LINKS = [
@@ -154,14 +194,8 @@ function Nav() {
               : 'border-transparent bg-transparent'
           }`}
         >
-          <button onClick={() => scrollToId('top')} className="flex items-center gap-2.5">
-            <span
-              className="grid h-9 w-9 place-items-center rounded-xl text-white shadow-lg"
-              style={{ background: GRAD }}
-            >
-              <Sparkles size={18} />
-            </span>
-            <span className="text-lg font-black tracking-tight text-white">{BRAND}</span>
+          <button onClick={() => scrollToId('top')} aria-label={BRAND}>
+            <Logo markSize={38} />
           </button>
 
           <nav className="hidden items-center gap-1 lg:flex">
@@ -963,12 +997,7 @@ function SiteFooter() {
     <footer className="border-t border-white/10 bg-[#05070f] py-14">
       <div className="container-custom">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl text-white" style={{ background: GRAD }}>
-              <Sparkles size={18} />
-            </span>
-            <span className="text-lg font-black tracking-tight text-white">{BRAND}</span>
-          </div>
+          <Logo markSize={36} />
           <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {NAV_LINKS.map((l) => (
               <button key={l.id} onClick={() => scrollToId(l.id)} className="text-sm text-white/50 transition-colors hover:text-white">
@@ -1033,9 +1062,18 @@ const PageStyles = () => (
 /* ------------------------------------------------------------------ */
 export default function AIAgency() {
   useEffect(() => {
-    const prev = document.title;
+    const prevTitle = document.title;
     document.title = `${BRAND} — ${TAGLINE}`;
-    return () => { document.title = prev; };
+
+    // Swap the favicon to the Nexora mark while on this standalone-brand page.
+    const link = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
+    const prevIcon = link?.getAttribute('href') ?? null;
+    if (link) link.setAttribute('href', '/nexora-logo.svg');
+
+    return () => {
+      document.title = prevTitle;
+      if (link && prevIcon !== null) link.setAttribute('href', prevIcon);
+    };
   }, []);
 
   return (
