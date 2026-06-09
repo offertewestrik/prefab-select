@@ -798,7 +798,22 @@ function Hero() {
       }}
       className="relative isolate overflow-hidden bg-[#05070f] pt-40 pb-28 sm:pt-48 sm:pb-36"
     >
-      <div className="ai-animated-bg absolute inset-0 -z-20 opacity-70" />
+      {/* animated gradient fallback (shown if the video can't load) */}
+      <div className="ai-animated-bg absolute inset-0 -z-30 opacity-70" />
+      {/* moving background video — decorative, never captures clicks */}
+      <video
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/nexora-hero.mp4" type="video/mp4" />
+      </video>
+      {/* dark overlay so headline + buttons stay readable on top of the video */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(5,7,15,0.45),rgba(5,7,15,0.82))]" />
       <motion.div
         className="pointer-events-none absolute -z-10 h-[60vw] w-[60vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
         style={{ left: glowX, top: glowY, background: `radial-gradient(circle, ${PALETTE.blue}55, transparent 60%)` }}
@@ -808,7 +823,7 @@ function Hero() {
       <motion.div style={{ y: yFast }} className="ai-float pointer-events-none absolute right-[20%] bottom-[12%] -z-10 h-20 w-20 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md" />
       <div className="ai-grid absolute inset-0 -z-10 opacity-[0.15]" />
 
-      <motion.div style={{ opacity: fade }} className="mx-auto max-w-5xl px-6 text-center">
+      <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-md">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
