@@ -332,3 +332,19 @@ export interface Purchase {
   datum: string; // ISO
   aangemaaktOp: string; // ISO
 }
+
+// ----------------------------------------------------------------------------
+// Social media — posten naar meerdere platforms tegelijk (via Make).
+// ----------------------------------------------------------------------------
+export type SocialPlatform = "instagram" | "facebook" | "tiktok" | "linkedin";
+
+export interface SocialPost {
+  id: string;
+  tekst: string;
+  afbeelding?: string;
+  platforms: SocialPlatform[];
+  status: "verzonden" | "gepland" | "mislukt";
+  geplandOp?: string;
+  verzondenOp?: string;
+  aangemaaktOp: string;
+}
