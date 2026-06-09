@@ -29,7 +29,8 @@ import {
 /* ------------------------------------------------------------------ */
 /* Brand + palette                                                     */
 /* ------------------------------------------------------------------ */
-const BRAND = 'Nexora AI';
+const BRAND = 'Nexora Growth';
+const TAGLINE = 'Website, Marketing & Sales growth for ambitious businesses';
 
 const PALETTE = {
   blue: '#2563EB',
@@ -274,7 +275,7 @@ function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
           </span>
-          AI Automation • Marketing • Sales
+          Website • Marketing • Sales Growth
         </motion.div>
 
         <motion.h1
@@ -897,7 +898,7 @@ function Contact() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-2 text-sm text-white/50 sm:flex-row sm:gap-6">
-              <span className="inline-flex items-center gap-2"><Mail size={15} /> hello@nexora.ai</span>
+              <span className="inline-flex items-center gap-2"><Mail size={15} /> hello@nexoragrowth.com</span>
               <span className="inline-flex items-center gap-2"><Phone size={15} /> +31 (0)20 123 4567</span>
             </div>
           </Reveal>
@@ -984,7 +985,7 @@ function SiteFooter() {
           </button>
         </div>
         <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} {BRAND}. All rights reserved. · AI Automation, Marketing &amp; Sales.
+          © {new Date().getFullYear()} {BRAND}. All rights reserved. · {TAGLINE}.
         </div>
       </div>
     </footer>
@@ -1033,7 +1034,7 @@ const PageStyles = () => (
 export default function AIAgency() {
   useEffect(() => {
     const prev = document.title;
-    document.title = `${BRAND} — AI Automation, Marketing & Sales Agency`;
+    document.title = `${BRAND} — ${TAGLINE}`;
     return () => { document.title = prev; };
   }, []);
 
