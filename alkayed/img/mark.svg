@@ -1,0 +1,21 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="الكايد">
+  <defs>
+    <linearGradient id="m-green" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6cc23f"/><stop offset="1" stop-color="#1f7a1f"/>
+    </linearGradient>
+    <linearGradient id="m-gold" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0d894"/><stop offset="1" stop-color="#c39a3f"/>
+    </linearGradient>
+    <radialGradient id="m-cream" cx="0.5" cy="0.4" r="0.7">
+      <stop stop-color="#fffdf7"/><stop offset="1" stop-color="#f6edd9"/>
+    </radialGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="url(#m-green)"/>
+  <circle cx="60" cy="60" r="51" fill="none" stroke="url(#m-gold)" stroke-width="3"/>
+  <circle cx="60" cy="60" r="44" fill="url(#m-cream)"/>
+  <!-- milk drop -->
+  <path d="M60 34c9 12 15 20 15 28a15 15 0 1 1-30 0c0-8 6-16 15-28z" fill="#ffffff" stroke="#c8261c" stroke-width="2.5"/>
+  <path d="M53 64a7 7 0 0 0 7 7" stroke="#e6b3ac" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- leaf accent -->
+  <path d="M86 40c-4 10-12 15-22 16 3-11 11-16 22-16z" fill="#3aa02a"/>
+</svg>
