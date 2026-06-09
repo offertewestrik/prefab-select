@@ -20,6 +20,7 @@ import Werkwijze from './pages/Werkwijze';
 import Dashboard from './pages/Dashboard';
 import ZeelandLandingPage from './pages/ZeelandLandingPage';
 import ZeelandSchuurtjesProject from './pages/ZeelandSchuurtjesProject';
+import AIAgency from './pages/AIAgency';
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -4100,6 +4101,23 @@ function ProjectsPage() {
 }
 
 export default function App() {
+  const location = useLocation();
+  // The AI agency landing page is a separate brand: render it standalone,
+  // without the Prefab Select navbar, footer, and CTAs.
+  const isStandaloneBrand = location.pathname.startsWith('/ai-agency');
+
+  if (isStandaloneBrand) {
+    return (
+      <>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/ai-agency" element={<AIAgency />} />
+          <Route path="/ai-agency/*" element={<AIAgency />} />
+        </Routes>
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
       <MetaPixel />
