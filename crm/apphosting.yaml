@@ -5,7 +5,8 @@
 # ============================================================================
 
 runConfig:
-  minInstances: 0
+  # Altijd minimaal 1 warme instance: geen koude starts, CRM direct bereikbaar.
+  minInstances: 1
   maxInstances: 2
 
 env:
