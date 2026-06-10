@@ -13,9 +13,13 @@ import { persist } from "zustand/middleware";
 import type {
   Appointment,
   AppNotification,
+  Invoice,
+  InvoiceStatus,
   Lead,
   Note,
   NotificationType,
+  Payment,
+  PaymentMethode,
   PipelineStage,
   ProductType,
   Quote,
@@ -34,9 +38,11 @@ import {
   seedEmailLogs,
   seedFiles,
   seedIntegrations,
+  seedInvoices,
   seedLeads,
   seedNotes,
   seedNotifications,
+  seedPayments,
   seedQuoteRequests,
   seedQuotes,
   seedReminderRules,
@@ -45,7 +51,8 @@ import {
   seedUsers,
 } from "./seed";
 import type { Integration } from "./types";
-import { volgendQuoteNummer } from "./quote-utils";
+import { volgendQuoteNummer, berekenTotalen } from "./quote-utils";
+import { volgendFactuurNummer, TERMIJN_SCHEMA } from "./invoice-utils";
 
 function id(prefix: string): string {
   return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
@@ -66,6 +73,17 @@ export interface CreateQuoteInput {
   geldigTot: string;
 }
 
+/** Velden om een nieuwe factuur aan te maken. */
+export interface CreateInvoiceInput {
+  leadId: string;
+  quoteId?: string;
+  termijnLabel?: string;
+  regels: QuoteLine[];
+  korting: number;
+  vervaldatum: string;
+  notitie?: string;
+}
+
 interface CrmState {
   leads: Lead[];
   notes: Note[];
@@ -82,6 +100,8 @@ interface CrmState {
   taskComments: TaskComment[];
   notifications: AppNotification[];
   reminderRules: ReminderRule[];
+  invoices: Invoice[];
+  payments: Payment[];
 
   // --- Leads / pijplijn ---
   moveLead: (leadId: string, stage: PipelineStage, positie: number) => void;
@@ -117,6 +137,17 @@ interface CrmState {
   // --- Reminders ---
   toggleReminderRule: (ruleId: string) => void;
   updateReminderRule: (ruleId: string, patch: Partial<ReminderRule>) => void;
+
+  // --- Facturen ---
+  createInvoice: (input: CreateInvoiceInput) => string;
+  updateInvoice: (invoiceId: string, patch: Partial<Invoice>) => void;
+  setInvoiceStatus: (invoiceId: string, status: InvoiceStatus) => void;
+  deleteInvoice: (invoiceId: string) => void;
+  /** Genereert de 4 termijnfacturen (40/30/20/10) uit een geaccepteerde offerte. */
+  genereerTermijnfacturen: (quoteId: string) => string[];
+
+  // --- Betalingen ---
+  registerPayment: (invoiceId: string, bedrag: number, methode: PaymentMethode) => void;
 
   // --- Bestanden ---
   addFile: (file: Omit<UploadedFile, "id" | "geuploadOp">) => void;
@@ -156,6 +187,8 @@ export const useCrm = create<CrmState>()(
       taskComments: seedTaskComments,
       notifications: seedNotifications,
       reminderRules: seedReminderRules,
+      invoices: seedInvoices,
+      payments: seedPayments,
 
       moveLead: (leadId, stage, positie) =>
         set((s) => ({
@@ -404,6 +437,90 @@ export const useCrm = create<CrmState>()(
           ),
         })),
 
+      createInvoice: (input) => {
+        const newId = id("inv");
+        const nummer = volgendFactuurNummer(get().invoices);
+        set((s) => ({
+          invoices: [
+            ...s.invoices,
+            { id: newId, nummer, status: "concept", aangemaaktOp: new Date().toISOString(), ...input },
+          ],
+        }));
+        return newId;
+      },
+
+      updateInvoice: (invoiceId, patch) =>
+        set((s) => ({
+          invoices: s.invoices.map((i) => (i.id === invoiceId ? { ...i, ...patch } : i)),
+        })),
+
+      setInvoiceStatus: (invoiceId, status) =>
+        set((s) => ({
+          invoices: s.invoices.map((i) =>
+            i.id === invoiceId
+              ? { ...i, status, verstuurdOp: status === "verzonden" && !i.verstuurdOp ? new Date().toISOString() : i.verstuurdOp }
+              : i,
+          ),
+        })),
+
+      deleteInvoice: (invoiceId) =>
+        set((s) => ({
+          invoices: s.invoices.filter((i) => i.id !== invoiceId),
+          payments: s.payments.filter((p) => p.invoiceId !== invoiceId),
+        })),
+
+      genereerTermijnfacturen: (quoteId) => {
+        const quote = get().quotes.find((q) => q.id === quoteId);
+        if (!quote) return [];
+        const grondslag = berekenTotalen(quote.regels, quote.korting).subtotaalNaKorting; // excl. btw
+        const jaar = new Date().getFullYear();
+        const prefix = `FACT-${jaar}-`;
+        const bestaand = get().invoices
+          .map((i) => i.nummer)
+          .filter((n) => n.startsWith(prefix))
+          .map((n) => parseInt(n.slice(prefix.length), 10))
+          .filter((n) => !Number.isNaN(n));
+        let volgnr = bestaand.length ? Math.max(...bestaand) : 0;
+
+        const nieuwe: Invoice[] = TERMIJN_SCHEMA.map((term, idx) => {
+          volgnr++;
+          const bedragExcl = Math.round((grondslag * term.pct) / 100);
+          const due = new Date();
+          due.setDate(due.getDate() + idx * 14);
+          return {
+            id: id("inv"),
+            nummer: `${prefix}${String(volgnr).padStart(4, "0")}`,
+            leadId: quote.leadId,
+            quoteId: quote.id,
+            status: "concept" as InvoiceStatus,
+            termijnLabel: term.label,
+            regels: [{ id: id("ir"), omschrijving: `Termijn ${term.pct}% — ${quote.nummer}`, aantal: 1, eenheid: "post", prijsPerStuk: bedragExcl, btwPercentage: 21 }],
+            korting: 0,
+            vervaldatum: due.toISOString(),
+            aangemaaktOp: new Date().toISOString(),
+          };
+        });
+        set((s) => ({ invoices: [...s.invoices, ...nieuwe] }));
+        return nieuwe.map((i) => i.id);
+      },
+
+      registerPayment: (invoiceId, bedrag, methode) =>
+        set((s) => {
+          const payments = [
+            ...s.payments,
+            { id: id("pay"), invoiceId, bedrag, methode, datum: new Date().toISOString() },
+          ];
+          const invoice = s.invoices.find((i) => i.id === invoiceId);
+          let invoices = s.invoices;
+          if (invoice) {
+            const totaal = berekenTotalen(invoice.regels, invoice.korting).totaal;
+            const betaald = payments.filter((p) => p.invoiceId === invoiceId).reduce((sum, p) => sum + p.bedrag, 0);
+            const nieuweStatus: InvoiceStatus = betaald >= totaal ? "betaald" : "deels_betaald";
+            invoices = s.invoices.map((i) => (i.id === invoiceId ? { ...i, status: nieuweStatus } : i));
+          }
+          return { payments, invoices };
+        }),
+
       reset: () =>
         set({
           leads: seedLeads,
@@ -420,12 +537,14 @@ export const useCrm = create<CrmState>()(
           taskComments: seedTaskComments,
           notifications: seedNotifications,
           reminderRules: seedReminderRules,
+          invoices: seedInvoices,
+          payments: seedPayments,
         }),
     }),
     {
-      // v3: agenda, taken-workflow, medewerkers, reminders & notificaties (fase 3)
+      // v4: facturen, betalingen & klantportaal (fase 5)
       name: "prefab-crm-store",
-      version: 3,
+      version: 4,
     },
   ),
 );

@@ -64,6 +64,8 @@ export interface Lead {
   laatsteActiviteit: string; // ISO datum
   /** Volgorde binnen een pijplijn-kolom (voor drag & drop). */
   positie: number;
+  /** Persoonlijke токen voor toegang tot het klantportaal (optioneel; valt terug op id). */
+  portalToken?: string;
 }
 
 export type NoteType = "notitie" | "telefoon" | "email" | "systeem";
@@ -275,4 +277,42 @@ export interface ReminderRule {
   /** Offset in uren vóór het moment (voor afspraken). */
   offsetUrenVooraf?: number;
   actief: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Fase 5 — facturen, betalingen & klantportaal
+// ----------------------------------------------------------------------------
+
+export type InvoiceStatus =
+  | "concept"
+  | "verzonden"
+  | "deels_betaald"
+  | "betaald"
+  | "te_laat"
+  | "gecrediteerd";
+
+export interface Invoice {
+  id: string;
+  nummer: string; // bv. FACT-2026-0042
+  leadId: string;
+  quoteId?: string;
+  status: InvoiceStatus;
+  /** Termijn-label bij termijnfacturen, bv. "40% — aanbetaling". */
+  termijnLabel?: string;
+  regels: QuoteLine[];
+  korting: number;
+  vervaldatum: string; // ISO
+  notitie?: string;
+  aangemaaktOp: string; // ISO
+  verstuurdOp?: string; // ISO
+}
+
+export type PaymentMethode = "ideal" | "overboeking" | "pin" | "contant";
+
+export interface Payment {
+  id: string;
+  invoiceId: string;
+  bedrag: number;
+  methode: PaymentMethode;
+  datum: string; // ISO
 }
