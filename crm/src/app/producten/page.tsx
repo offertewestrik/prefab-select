@@ -6,6 +6,7 @@ import { useMounted } from "@/lib/use-mounted";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { EENHEDEN, DEFAULT_BTW } from "@/lib/constants";
 import { euroCent } from "@/lib/format";
+import { PRODUCT_LIJNEN, categorieVolgorde } from "@/lib/product-catalogus";
 import type { Product } from "@/lib/types";
 import { DownloadCloud, Package, Plus, Search, Trash2 } from "lucide-react";
 
@@ -31,28 +32,46 @@ export default function ProductenPage() {
           (p) =>
             p.naam.toLowerCase().includes(norm) ||
             p.categorie.toLowerCase().includes(norm) ||
+            (p.lijn ?? "").toLowerCase().includes(norm) ||
             (p.beschrijving ?? "").toLowerCase().includes(norm),
         )
       : products;
   }, [products, zoek]);
 
-  const perCategorie = useMemo(() => {
-    const map = new Map<string, Product[]>();
+  // Groeperen per productlijn (prijslijst) en daarbinnen per categorie, in de
+  // volgorde van de prijslijst. Producten zonder lijn vallen onder "Eigen producten".
+  const perLijn = useMemo(() => {
+    const lijnen = new Map<string, Map<string, Product[]>>();
     for (const p of gefilterd) {
-      const lijst = map.get(p.categorie) ?? [];
+      const lijn = p.lijn ?? "Eigen producten";
+      const cats = lijnen.get(lijn) ?? new Map<string, Product[]>();
+      const lijst = cats.get(p.categorie) ?? [];
       lijst.push(p);
-      map.set(p.categorie, lijst);
+      cats.set(p.categorie, lijst);
+      lijnen.set(lijn, cats);
     }
-    for (const lijst of map.values()) lijst.sort((a, b) => a.naam.localeCompare(b.naam));
-    return [...map.entries()].sort(([a], [b]) => a.localeCompare(b));
+    const lijnRang = (l: string) => {
+      const i = PRODUCT_LIJNEN.indexOf(l);
+      return i === -1 ? 999 : i;
+    };
+    return [...lijnen.entries()]
+      .sort(([a], [b]) => lijnRang(a) - lijnRang(b) || a.localeCompare(b))
+      .map(([lijn, cats]) => {
+        const categorieen = [...cats.entries()].sort(
+          ([a], [b]) =>
+            categorieVolgorde(lijn, a) - categorieVolgorde(lijn, b) || a.localeCompare(b),
+        );
+        for (const [, lijst] of categorieen) lijst.sort((a, b) => a.naam.localeCompare(b.naam));
+        return [lijn, categorieen] as const;
+      });
   }, [gefilterd]);
 
   function doeImport() {
-    const n = importCatalogus();
+    const { toegevoegd, bijgewerkt } = importCatalogus();
     setImportMelding(
-      n > 0
-        ? `${n} configurator-producten toegevoegd. Vul nu de prijzen in.`
-        : "Alle configurator-producten staan al in de catalogus.",
+      toegevoegd > 0 || bijgewerkt > 0
+        ? `Prijslijst geïmporteerd: ${toegevoegd} producten toegevoegd${bijgewerkt > 0 ? `, ${bijgewerkt} prijzen ingevuld` : ""}.`
+        : "De volledige prijslijst staat al in de catalogus.",
     );
   }
 
@@ -62,14 +81,14 @@ export default function ProductenPage() {
     <div>
       <PageHeader
         titel="Producten"
-        subtitel="Eigen productcatalogus — dezelfde opties als de configurator, aanklikbaar in offertes"
+        subtitel="Prijslijsten per productlijn — uitbouw & aanbouw, poolhouses, mantelzorg- & vakantiewoningen — aanklikbaar in offertes"
         actie={
           <div className="flex items-center gap-2">
             <button
               onClick={doeImport}
               className="inline-flex items-center gap-1.5 rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
             >
-              <DownloadCloud className="h-4 w-4" /> Configurator-producten importeren
+              <DownloadCloud className="h-4 w-4" /> Prijslijsten importeren
             </button>
             <button
               onClick={() => setNieuwOpen((v) => !v)}
@@ -112,37 +131,44 @@ export default function ProductenPage() {
           <Package className="mx-auto mb-3 h-10 w-10 text-slate-300" />
           <h3 className="font-bold text-slate-900">Nog geen producten</h3>
           <p className="mx-auto mt-1 max-w-md text-sm text-slate-500">
-            Importeer in één klik alle opties uit de configurator (gevels, daken, kozijnen,
-            installaties…) en vul daarna je eigen prijzen in. Of voeg handmatig een product toe.
+            Importeer in één klik de complete prijslijsten (uitbouw &amp; aanbouw, poolhouses,
+            mantelzorg- &amp; vakantiewoningen) inclusief prijzen. Of voeg handmatig een product toe.
           </p>
           <button
             onClick={doeImport}
             className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
           >
-            <DownloadCloud className="h-4 w-4" /> Configurator-producten importeren
+            <DownloadCloud className="h-4 w-4" /> Prijslijsten importeren
           </button>
         </div>
       ) : (
-        <div className="space-y-6">
-          {perCategorie.map(([categorie, lijst]) => (
-            <div key={categorie} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
-              <h3 className="mb-3 font-bold text-slate-900">
-                {categorie} <span className="ml-1 text-sm font-medium text-slate-400">({lijst.length})</span>
-              </h3>
-              <div className="space-y-2">
-                <div className="hidden grid-cols-12 gap-2 px-1 text-xs font-semibold uppercase text-slate-400 sm:grid">
-                  <div className="col-span-5">Product</div>
-                  <div className="col-span-2">Eenheid</div>
-                  <div className="col-span-2 text-right">Prijs (excl. btw)</div>
-                  <div className="col-span-1 text-right">Btw%</div>
-                  <div className="col-span-1 text-center">Actief</div>
-                  <div className="col-span-1" />
-                </div>
-                {lijst.map((p) => (
-                  <ProductRij key={p.id} product={p} onUpdate={updateProduct} onDelete={deleteProduct} />
+        <div className="space-y-10">
+          {perLijn.map(([lijn, categorieen]) => (
+            <section key={lijn}>
+              <h2 className="mb-3 text-lg font-black tracking-tight text-slate-900">{lijn}</h2>
+              <div className="space-y-6">
+                {categorieen.map(([categorie, lijst]) => (
+                  <div key={categorie} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
+                    <h3 className="mb-3 font-bold text-slate-900">
+                      {categorie} <span className="ml-1 text-sm font-medium text-slate-400">({lijst.length})</span>
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="hidden grid-cols-12 gap-2 px-1 text-xs font-semibold uppercase text-slate-400 sm:grid">
+                        <div className="col-span-5">Product</div>
+                        <div className="col-span-2">Eenheid</div>
+                        <div className="col-span-2 text-right">Prijs (excl. btw)</div>
+                        <div className="col-span-1 text-right">Btw%</div>
+                        <div className="col-span-1 text-center">Actief</div>
+                        <div className="col-span-1" />
+                      </div>
+                      {lijst.map((p) => (
+                        <ProductRij key={p.id} product={p} onUpdate={updateProduct} onDelete={deleteProduct} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
+            </section>
           ))}
         </div>
       )}
@@ -185,9 +211,15 @@ function ProductRij({
       <input
         type="number"
         className={`col-span-4 rounded-lg border px-2 py-2 text-right text-sm outline-none focus:border-brand-500 sm:col-span-2 ${
-          product.prijsPerStuk === 0 ? "border-amber-300 bg-amber-50" : "border-slate-200"
+          product.prijsPerStuk === 0 && !product.lijn ? "border-amber-300 bg-amber-50" : "border-slate-200"
         }`}
-        title={product.prijsPerStuk === 0 ? "Prijs nog invullen" : euroCent(product.prijsPerStuk)}
+        title={
+          product.prijsPerStuk === 0
+            ? product.lijn
+              ? "Standaard / inbegrepen"
+              : "Prijs nog invullen"
+            : euroCent(product.prijsPerStuk)
+        }
         value={product.prijsPerStuk}
         onChange={(e) => onUpdate(product.id, { prijsPerStuk: Number(e.target.value) || 0 })}
       />

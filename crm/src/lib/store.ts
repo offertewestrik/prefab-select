@@ -192,8 +192,8 @@ interface CrmState {
   addProduct: (input: Omit<Product, "id" | "aangemaaktOp">) => string;
   updateProduct: (productId: string, patch: Partial<Product>) => void;
   deleteProduct: (productId: string) => void;
-  /** Vult de catalogus aan met alle configurator-opties die nog ontbreken. */
-  importCatalogus: () => number;
+  /** Vult de catalogus met de prijslijsten (alle ontbrekende opties + prijzen). */
+  importCatalogus: () => { toegevoegd: number; bijgewerkt: number };
 
   // --- Bestanden ---
   addFile: (file: Omit<UploadedFile, "id" | "geuploadOp">) => void;
@@ -661,24 +661,43 @@ export const useCrm = create<CrmState>()(
       },
 
       importCatalogus: () => {
-        const bestaande = new Set(get().products.map((p) => p.naam.toLowerCase()));
+        // Zelfde optie kan in meerdere prijslijsten staan (met andere prijs),
+        // dus dedupliceren op lijn + categorie + naam.
+        const sleutel = (lijn: string | undefined, categorie: string, naam: string) =>
+          `${(lijn ?? "").toLowerCase()}|${categorie.toLowerCase()}|${naam.toLowerCase()}`;
+        const bestaande = new Map(get().products.map((p) => [sleutel(p.lijn, p.categorie, p.naam), p]));
         let toegevoegd = 0;
+        let bijgewerkt = 0;
         for (const groep of PRODUCT_CATALOGUS) {
-          for (const item of groep.items) {
-            if (bestaande.has(item.naam.toLowerCase())) continue;
-            get().addProduct({
-              naam: item.naam,
-              beschrijving: catalogusBeschrijving(item.naam),
-              categorie: groep.categorie,
-              eenheid: item.eenheid ?? "stuks",
-              prijsPerStuk: 0,
-              btwPercentage: 21,
-              actief: true,
-            });
-            toegevoegd++;
+          for (const cat of groep.categorieen) {
+            for (const item of cat.items) {
+              const bestaand = bestaande.get(sleutel(groep.lijn, cat.categorie, item.naam));
+              if (bestaand) {
+                // Prijslijst is leidend voor nog niet ingevulde prijzen.
+                if (bestaand.prijsPerStuk === 0 && item.prijs > 0) {
+                  get().updateProduct(bestaand.id, { prijsPerStuk: item.prijs });
+                  bijgewerkt++;
+                }
+                continue;
+              }
+              const basis = catalogusBeschrijving(item.naam);
+              get().addProduct({
+                naam: item.naam,
+                beschrijving: item.inbegrepen
+                  ? `${basis ? `${basis} ` : ""}Standaard inbegrepen in de basisprijs.`
+                  : basis,
+                lijn: groep.lijn,
+                categorie: cat.categorie,
+                eenheid: item.eenheid ?? "stuks",
+                prijsPerStuk: item.prijs,
+                btwPercentage: 21,
+                actief: true,
+              });
+              toegevoegd++;
+            }
           }
         }
-        return toegevoegd;
+        return { toegevoegd, bijgewerkt };
       },
 
       reset: () =>

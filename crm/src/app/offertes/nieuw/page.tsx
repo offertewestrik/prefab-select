@@ -13,6 +13,7 @@ import {
   PRODUCT_LABEL,
 } from "@/lib/constants";
 import { euroCent } from "@/lib/format";
+import { PRODUCT_LIJNEN, categorieVolgorde, lijnVoorProjecttype } from "@/lib/product-catalogus";
 import { berekenTotalen } from "@/lib/quote-utils";
 import type { Product, ProductType, QuoteLine } from "@/lib/types";
 import { ChevronDown, Package, Plus, Search, Trash2 } from "lucide-react";
@@ -199,7 +200,7 @@ function NieuweOfferteForm() {
           <div className="mb-3 flex items-center justify-between">
             <h3 className="font-bold text-slate-900">Prijsregels</h3>
             <div className="flex items-center gap-2">
-              <ProductPicker onKies={voegProductToe} />
+              <ProductPicker onKies={voegProductToe} projecttype={projecttype} />
               <button onClick={() => setRegels((rs) => [...rs, leegRegel()])} className="inline-flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-200">
                 <Plus className="h-4 w-4" /> Regel
               </button>
@@ -309,7 +310,13 @@ function NieuweOfferteForm() {
 // ---------------------------------------------------------------------------
 // Productkiezer: aanklikbare producten uit de eigen catalogus (/producten).
 // ---------------------------------------------------------------------------
-function ProductPicker({ onKies }: { onKies: (p: Product) => void }) {
+function ProductPicker({
+  onKies,
+  projecttype,
+}: {
+  onKies: (p: Product) => void;
+  projecttype: ProductType;
+}) {
   const products = useCrm((s) => s.products);
   const [open, setOpen] = useState(false);
   const [zoek, setZoek] = useState("");
@@ -327,22 +334,40 @@ function ProductPicker({ onKies }: { onKies: (p: Product) => void }) {
 
   const actief = useMemo(() => products.filter((p) => p.actief), [products]);
 
+  // De prijslijst van het gekozen projecttype komt vooraan (kop = categorie);
+  // andere lijnen en eigen producten volgen daarna (kop = lijn · categorie).
+  const voorkeurLijn = lijnVoorProjecttype(projecttype);
+
   const perCategorie = useMemo(() => {
     const norm = zoek.toLowerCase().trim();
     const lijst = norm
       ? actief.filter(
-          (p) => p.naam.toLowerCase().includes(norm) || p.categorie.toLowerCase().includes(norm),
+          (p) =>
+            p.naam.toLowerCase().includes(norm) ||
+            p.categorie.toLowerCase().includes(norm) ||
+            (p.lijn ?? "").toLowerCase().includes(norm),
         )
       : actief;
+    const lijnRang = (lijn?: string) => {
+      if (voorkeurLijn && lijn === voorkeurLijn) return 0;
+      if (!lijn) return 1;
+      const i = PRODUCT_LIJNEN.indexOf(lijn);
+      return i === -1 ? 2 : 2 + i;
+    };
     const map = new Map<string, Product[]>();
+    const rang = new Map<string, number>();
     for (const p of lijst) {
-      const groep = map.get(p.categorie) ?? [];
+      const kop = !p.lijn || p.lijn === voorkeurLijn ? p.categorie : `${p.lijn} · ${p.categorie}`;
+      const groep = map.get(kop) ?? [];
       groep.push(p);
-      map.set(p.categorie, groep);
+      map.set(kop, groep);
+      rang.set(kop, lijnRang(p.lijn) * 1000 + categorieVolgorde(p.lijn, p.categorie));
     }
     for (const groep of map.values()) groep.sort((a, b) => a.naam.localeCompare(b.naam));
-    return [...map.entries()].sort(([a], [b]) => a.localeCompare(b));
-  }, [actief, zoek]);
+    return [...map.entries()].sort(
+      ([a], [b]) => (rang.get(a)! - rang.get(b)!) || a.localeCompare(b),
+    );
+  }, [actief, zoek, voorkeurLijn]);
 
   return (
     <div className="relative" ref={ref}>
@@ -397,8 +422,16 @@ function ProductPicker({ onKies }: { onKies: (p: Product) => void }) {
                       <span className="truncate font-medium text-slate-700" title={p.beschrijving}>
                         {p.naam}
                       </span>
-                      <span className={`shrink-0 text-xs font-semibold ${p.prijsPerStuk === 0 ? "text-amber-500" : "text-slate-500"}`}>
-                        {p.prijsPerStuk === 0 ? "prijs invullen" : `${euroCent(p.prijsPerStuk)} / ${p.eenheid}`}
+                      <span
+                        className={`shrink-0 text-xs font-semibold ${
+                          p.prijsPerStuk === 0 && !p.lijn ? "text-amber-500" : "text-slate-500"
+                        }`}
+                      >
+                        {p.prijsPerStuk > 0
+                          ? `${euroCent(p.prijsPerStuk)} / ${p.eenheid}`
+                          : p.lijn
+                            ? "inbegrepen"
+                            : "prijs invullen"}
                       </span>
                     </button>
                   ))}

@@ -12,6 +12,7 @@ function mapProduct(row: any): Product {
     id: row.id,
     naam: row.naam,
     beschrijving: row.beschrijving ?? undefined,
+    lijn: row.lijn ?? undefined,
     categorie: row.categorie ?? "Overig",
     eenheid: row.eenheid ?? "stuks",
     prijsPerStuk: Number(row.prijs_per_stuk) || 0,

@@ -166,11 +166,13 @@ export interface QuoteLine {
   btwPercentage: number;
 }
 
-/** Product uit de eigen catalogus (configurator-opties + eigen producten). */
+/** Product uit de eigen catalogus (prijslijst-opties + eigen producten). */
 export interface Product {
   id: string;
   naam: string;
   beschrijving?: string;
+  /** Productlijn / prijslijst, bv. "Prefab Uitbouw & Aanbouw" (leeg = eigen product). */
+  lijn?: string;
   categorie: string;
   eenheid: string;
   /** Prijs per stuk in euro's, exclusief btw. */

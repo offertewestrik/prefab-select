@@ -164,7 +164,7 @@ export async function POST(req: Request) {
       const p = data as Product;
       const { error } = await db.from("products").upsert({
         id: p.id, naam: p.naam, beschrijving: p.beschrijving ?? null,
-        categorie: p.categorie, eenheid: p.eenheid,
+        lijn: p.lijn ?? null, categorie: p.categorie, eenheid: p.eenheid,
         prijs_per_stuk: p.prijsPerStuk, btw_percentage: p.btwPercentage,
         actief: p.actief,
       });
