@@ -48,6 +48,7 @@ export interface CreateQuoteInput {
   projectomschrijving?: string;
   afmetingen?: string;
   werkzaamheden?: string;
+  planning?: string;
   regels: QuoteLine[];
   korting: number;
   notitie?: string;

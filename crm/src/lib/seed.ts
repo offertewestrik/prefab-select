@@ -385,6 +385,7 @@ export const seedQuotes: Quote[] = [
     projectomschrijving: "Vrijstaand poolhouse met overkapping en technische ruimte naast het zwembad.",
     afmetingen: "8 x 5 m, vloeroppervlak 40 m², incl. overkapping 3 m",
     werkzaamheden: "Productie, transport, fundering, plaatsing, sanitair en technische ruimte volledig aangesloten.",
+    planning: "Start productie ca. 4 weken na akkoord · plaatsing in week 12 · oplevering in week 14 (indicatief, onder voorbehoud van vergunning).",
     regels: [
       { id: "r1", omschrijving: "Poolhouse 8x5m incl. overkapping", aantal: 1, eenheid: "stuks", prijsPerStuk: 62000, btwPercentage: DEFAULT_BTW },
       { id: "r2", omschrijving: "Sanitair & technische ruimte", aantal: 1, eenheid: "post", prijsPerStuk: 14000, btwPercentage: DEFAULT_BTW },

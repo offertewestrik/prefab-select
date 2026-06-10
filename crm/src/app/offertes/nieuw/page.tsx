@@ -47,6 +47,7 @@ function NieuweOfferteForm() {
   const [projectomschrijving, setProjectomschrijving] = useState("");
   const [afmetingen, setAfmetingen] = useState("");
   const [werkzaamheden, setWerkzaamheden] = useState("");
+  const [planning, setPlanning] = useState("");
   const [regels, setRegels] = useState<QuoteLine[]>([leegRegel()]);
   const [korting, setKorting] = useState(0);
   const [notitie, setNotitie] = useState("");
@@ -78,6 +79,7 @@ function NieuweOfferteForm() {
       projectomschrijving: projectomschrijving.trim() || undefined,
       afmetingen: afmetingen.trim() || undefined,
       werkzaamheden: werkzaamheden.trim() || undefined,
+      planning: planning.trim() || undefined,
       regels: schoneRegels,
       korting,
       notitie: notitie.trim() || undefined,
@@ -133,6 +135,10 @@ function NieuweOfferteForm() {
             <div className="sm:col-span-2">
               <label className={labelCls}>Werkzaamheden</label>
               <textarea value={werkzaamheden} onChange={(e) => setWerkzaamheden(e.target.value)} rows={2} className={inputCls} placeholder="Welke werkzaamheden voeren we uit…" />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelCls}>Planning &amp; levertijd</label>
+              <textarea value={planning} onChange={(e) => setPlanning(e.target.value)} rows={2} className={inputCls} placeholder="Bijv. start productie 4 weken na akkoord, plaatsing week 12…" />
             </div>
           </div>
         </div>

@@ -160,6 +160,8 @@ export interface Quote {
   afmetingen?: string;
   /** Uit te voeren werkzaamheden (vrije tekst). */
   werkzaamheden?: string;
+  /** Indicatieve planning & levertijd (vrije tekst). */
+  planning?: string;
   regels: QuoteLine[];
   /** Optionele korting in euro's op subtotaal (excl. btw). */
   korting: number;
