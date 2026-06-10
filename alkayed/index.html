@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>لبان الكايد — أجبان وألبان طبيعية طازجة كل يوم</title>
   <meta name="description" content="لبان الكايد متجر محلي للألبان والأجبان الطبيعية الطازجة، نُحضّر منتجاتنا يومياً بعناية، مع كل المواد الأساسية التي يحتاجها بيتك." />
-  <meta name="theme-color" content="#2c8a1f" />
+  <meta name="theme-color" content="#173f1b" />
   <link rel="icon" href="img/mark.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,85 +29,137 @@
           <li><a href="producten.html">منتجاتنا</a></li>
           <li><a href="boodschappen.html">المواد الأساسية</a></li>
           <li><a href="contact.html">اتصل بنا</a></li>
-          <li><a class="btn btn--wa header-cta" href="https://wa.me/31791804639?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8" target="_blank" rel="noopener">واتساب</a></li>
+          <li><a class="btn btn--gold header-cta" href="contact.html">تواصل معنا</a></li>
         </ul>
       </nav>
-      <a class="btn btn--wa header-cta header-cta--desktop" href="https://wa.me/31791804639?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8" target="_blank" rel="noopener">اطلب الآن</a>
+      <a class="btn btn--gold header-cta header-cta--desktop" href="contact.html">تواصل معنا</a>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy reveal">
-        <span class="eyebrow hero-eyebrow">طازج يومياً • صناعة محلية</span>
-        <h1>أجبان وألبان <b>طبيعية طازجة</b> كل يوم</h1>
-        <p class="hero-sub">منتجات ألبان طازجة تُحضّر يومياً بعناية، مع كل ما تحتاجه لبيتك من المواد الأساسية.</p>
-        <div class="hero-actions">
-          <a class="btn btn--primary btn--lg" href="contact.html">اتصل بنا</a>
-          <a class="btn btn--ghost btn--lg" href="producten.html">شاهد منتجاتنا</a>
-        </div>
-        <div class="hero-trust">
-          <div><b>١٠٠٪</b><span>طبيعي وطازج</span></div>
-          <div><b>يومياً</b><span>تحضير جديد</span></div>
-          <div><b>محلي</b><span>قريب منك</span></div>
-        </div>
+    <div class="hero-inner">
+      <img class="hero-logo" src="img/logo.svg" alt="لبان الكايد" />
+      <h1>أجبان وألبان <b>طبيعية طازجة</b> كل يوم</h1>
+      <p class="hero-sub">منتجات ألبان طازجة تُحضّر يومياً بعناية، مع كل ما تحتاجه لبيتك من المواد الأساسية.</p>
+      <div class="hero-actions">
+        <a class="btn btn--gold btn--lg" href="contact.html">اتصل بنا</a>
+        <a class="btn btn--outline-light btn--lg" href="producten.html">شاهد منتجاتنا</a>
       </div>
-      <div class="hero-visual reveal" style="--d:120ms">
-        <div class="hero-disc">
-          <img src="img/logo.svg" alt="لبان الكايد" />
-        </div>
-        <span class="hero-chip hero-chip--1"><i></i> لبنة كريمية</span>
-        <span class="hero-chip hero-chip--2"><i></i> حليب طازج</span>
-        <span class="hero-chip hero-chip--3"><i></i> جبنة بيضاء</span>
+      <div class="hero-stats">
+        <div><b>١٠٠٪</b><span>طبيعي بلا إضافات</span></div>
+        <div><b>كل صباح</b><span>تحضير طازج</span></div>
+        <div><b>متجر محلي</b><span>قريب منك</span></div>
       </div>
     </div>
+    <div class="hero-plates" id="heroPlates"></div>
+    <div class="hero-after" aria-hidden="true"></div>
   </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>لبن بلدي</span><span>لبنة بزيت الزيتون</span><span>جبنة بيضاء</span><span>زبادي طبيعي</span><span>حليب طازج</span><span>زيتون مكبوس</span><span>بيض بلدي</span><span>شاي ورز وسكر وزيت</span>
+      <span>لبن بلدي</span><span>لبنة بزيت الزيتون</span><span>جبنة بيضاء</span><span>زبادي طبيعي</span><span>حليب طازج</span><span>زيتون مكبوس</span><span>بيض بلدي</span><span>شاي ورز وسكر وزيت</span>
+    </div>
+  </div>
 
   <!-- WAAROM -->
-  <section class="section section--paper">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <span class="eyebrow">لماذا تختارنا</span>
-        <h2 class="section-title">جودة تثق بها <b>كل يوم</b></h2>
-        <p class="section-lead">نهتم بكل تفصيل من المزرعة إلى مائدتك، لنقدّم لك طعماً أصيلاً وجودة لا تتغيّر.</p>
-      </div>
-      <div class="features">
-        <div class="feature reveal">
-          <div class="feature-ico"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2"/><path d="M12 19v2"/><path d="M5 12H3"/><path d="M21 12h-2"/><circle cx="12" cy="12" r="5"/></svg></div>
-          <h3>طازج كل يوم</h3>
-          <p>نحضّر منتجاتنا يومياً لتصلك بأقصى درجات النضارة.</p>
-        </div>
-        <div class="feature reveal" style="--d:80ms">
-          <div class="feature-ico"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20a7 7 0 0 1-7-7c0-4 3-8 7-9 4 1 7 5 7 9a7 7 0 0 1-7 7z"/><path d="M11 20v2"/></svg></div>
-          <h3>منتجات طبيعية</h3>
-          <p>مكوّنات نقية بلا إضافات، كما عرفتها الموائد الأصيلة.</p>
-        </div>
-        <div class="feature reveal" style="--d:160ms">
-          <div class="feature-ico"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.5 5 5.5.8-4 3.9 1 5.5L12 16.8 7 17.2l1-5.5-4-3.9 5.5-.8z"/></svg></div>
-          <h3>جودة عالية</h3>
-          <p>اختيار دقيق ومعايير صارمة في كل دفعة نُنتجها.</p>
-        </div>
-        <div class="feature reveal" style="--d:240ms">
-          <div class="feature-ico"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-          <h3>خدمة محلية</h3>
-          <p>متجر قريب منك بخدمة ودودة وثقة دائمة.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTEN -->
   <section class="section section--cream">
     <div class="container">
       <div class="section-head section-head--center">
-        <span class="eyebrow">منتجاتنا</span>
-        <h2 class="section-title">من <b>ألباننا الطازجة</b> إلى مائدتك</h2>
-        <p class="section-lead">تشكيلة من أجود الألبان والأجبان المُحضّرة يومياً. اطلب ما تحب مباشرة عبر واتساب.</p>
+        <span class="eyebrow">لماذا الكايد</span>
+        <h2 class="section-title">جودة تثق بها <b>كل يوم</b></h2>
+        <p class="section-lead">من المزرعة إلى مائدتك، نهتم بكل تفصيلة لنقدّم لك طعماً أصيلاً لا يتغيّر.</p>
       </div>
-      <div class="products-grid" id="homeProducts"></div>
-      <div style="text-align:center; margin-top:42px;">
-        <a class="btn btn--gold btn--lg" href="producten.html">عرض كل المنتجات</a>
+      <div class="arch-grid">
+        <div class="arch-card reveal">
+          <div class="arch-ico"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+          <h3>طازج كل يوم</h3>
+          <p>نُحضّر ألباننا فجر كل يوم لتصلك بأقصى نضارتها.</p>
+        </div>
+        <div class="arch-card reveal" style="--d:90ms">
+          <div class="arch-ico"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.5-1.5-7.5-5.5-7.5-10C4.5 7 7 4 12 3c5 1 7.5 4 7.5 8 0 4.5-3 8.5-7.5 10z"/><path d="M12 8c-1.5 1.5-1.5 4 0 6 1.5-2 1.5-4.5 0-6z"/></svg></div>
+          <h3>منتجات طبيعية</h3>
+          <p>مكوّنات نقية بلا إضافات، كما عرفتها الموائد الأصيلة.</p>
+        </div>
+        <div class="arch-card reveal" style="--d:180ms">
+          <div class="arch-ico"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.5 2.6 5.3 5.9.9-4.3 4.1 1 5.9L12 16l-5.2 2.7 1-5.9-4.3-4.1 5.9-.9z"/></svg></div>
+          <h3>جودة عالية</h3>
+          <p>معايير دقيقة واختيار صارم في كل دفعة نُنتجها.</p>
+        </div>
+        <div class="arch-card reveal" style="--d:270ms">
+          <div class="arch-ico"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s-7.5-5.5-7.5-11.5a7.5 7.5 0 0 1 15 0c0 6-7.5 11.5-7.5 11.5z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+          <h3>خدمة محلية قريبة منك</h3>
+          <p>متجر حيّ تعرفه ويعرفك، بخدمة ودودة كل يوم.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALBAN SHOWCASE -->
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">ألباننا وأجباننا</span>
+        <h2 class="section-title">ما تجده <b>طازجاً</b> عندنا</h2>
+        <p class="section-lead">هذه أشهر منتجاتنا التي نُحضّرها يومياً — تفضّل بزيارتنا لتذوّقها طازجة.</p>
+      </div>
+      <div class="show-grid" id="homeDairy"></div>
+      <div style="text-align:center; margin-top:46px;">
+        <a class="btn btn--green btn--lg" href="producten.html">شاهد كل المنتجات</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAGVERS VERHAAL -->
+  <section class="section section--green">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">قصة كل صباح</span>
+        <h2 class="section-title">من الفجر إلى <b>رفوف المتجر</b></h2>
+        <p class="section-lead">هكذا نضمن أن يكون كل ما تشتريه منا طازجاً حقاً.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><path d="M12 9V3M4.2 10.2l1.4 1.4M1 18h2M21 18h2M18.4 11.6l1.4-1.4M23 22H1"/></svg></span>
+          <span class="step-time">الفجر</span>
+          <h3>حليب المزرعة يصل</h3>
+          <p>نستلم الحليب الطازج من مزارع محلية نثق بها منذ سنوات.</p>
+        </div>
+        <div class="step reveal" style="--d:110ms">
+          <span class="step-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10M9 21V11l-3-4h12l-3 4v10"/><path d="M9 14h6"/></svg></span>
+          <span class="step-time">الصباح الباكر</span>
+          <h3>نُحضّر بأيدينا</h3>
+          <p>لبن ولبنة وجبنة وزبادي تُصنع يومياً بالطريقة التقليدية وبعناية فائقة.</p>
+        </div>
+        <div class="step reveal" style="--d:220ms">
+          <span class="step-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5"/><path d="M5 11v8h14v-8"/><path d="M9 19v-5h6v5"/></svg></span>
+          <span class="step-time">٨ صباحاً</span>
+          <h3>طازج على الرفوف</h3>
+          <p>كل شيء معروض طازجاً بانتظارك — ما لا يُباع اليوم لا يُعرض غداً.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BASICS BANNER -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">إلى جانب الألبان</span>
+        <h2 class="section-title">كل ما يحتاجه <b>بيتك</b></h2>
+        <p class="section-lead">نوفّر أيضاً المواد الأساسية اليومية بجودة نختارها بأنفسنا.</p>
+      </div>
+      <div class="show-grid" id="homeBasics"></div>
+      <div style="margin-top:34px;">
+        <div class="cat-banner reveal">
+          <div>
+            <h3>زيت، رز، سكر، شاي، بيض وغيرها…</h3>
+            <p>تعرّف على كل المواد الأساسية المتوفرة في متجرنا — كل شيء في مكان واحد قريب منك.</p>
+          </div>
+          <a class="btn btn--gold btn--lg" href="boodschappen.html">المواد الأساسية</a>
+        </div>
       </div>
     </div>
   </section>
@@ -117,47 +169,33 @@
     <div class="container about-grid">
       <div class="reveal">
         <span class="eyebrow">من نحن</span>
-        <h2 class="section-title">متجر محلي <b>بطعمٍ أصيل</b></h2>
+        <h2 class="section-title">متجر محلي <b>بطعم أصيل</b></h2>
         <p class="section-lead">الكايد هو متجر محلي متخصص في الألبان والأجبان الطبيعية الطازجة. نقوم بتحضير منتجاتنا يومياً بعناية لنقدّم لعملائنا طعماً أصيلاً وجودة عالية.</p>
         <ul class="about-list">
           <li><span class="tick"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>تحضير يومي بعناية</b><span>كل دفعة طازجة ومصنوعة بحب.</span></div></li>
           <li><span class="tick"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>مواد أساسية لبيتك</b><span>زيت، أرز، سكر، شاي، بيض وغيرها.</span></div></li>
-          <li><span class="tick"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>خدمة قريبة وموثوقة</b><span>نعرف عملاءنا ونهتم بكل طلب.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>خدمة قريبة وموثوقة</b><span>نعرف عملاءنا ونهتم بكل تفصيلة.</span></div></li>
         </ul>
-        <div style="margin-top:26px;"><a class="btn btn--primary" href="over-ons.html">اقرأ قصتنا</a></div>
+        <div style="margin-top:28px;"><a class="btn btn--green" href="over-ons.html">اقرأ قصتنا</a></div>
       </div>
-      <div class="about-card reveal" style="--d:120ms">
+      <div class="about-visual reveal" style="--d:120ms">
         <img src="img/logo.svg" alt="لبان الكايد" />
       </div>
     </div>
   </section>
 
-  <!-- STATS band -->
+  <!-- CTA -->
   <section class="section section--cream">
     <div class="container">
-      <div class="cta-band" style="background:linear-gradient(135deg,#1f6a16,#2c8a1f);">
-        <div class="stats">
-          <div class="stat reveal"><b>+١٢</b><span>منتج طازج</span></div>
-          <div class="stat reveal" style="--d:80ms"><b>٧/٧</b><span>أيام خدمة</span></div>
-          <div class="stat reveal" style="--d:160ms"><b>١٠٠٪</b><span>طبيعي</span></div>
-          <div class="stat reveal" style="--d:240ms"><b>يومياً</b><span>إنتاج طازج</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA WhatsApp -->
-  <section class="section section--paper">
-    <div class="container">
       <div class="cta-band reveal">
-        <h2>اطلب منتجاتك الطازجة الآن</h2>
-        <p>تواصل معنا مباشرة عبر واتساب وسنجهّز طلبك بكل عناية. نحن قريبون منك دائماً.</p>
-        <div style="margin-top:24px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-          <a class="btn btn--wa btn--lg" href="https://wa.me/31791804639?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8" target="_blank" rel="noopener">
+        <h2>زرنا أو <b>تواصل معنا</b></h2>
+        <p>لأي سؤال عن منتجاتنا أو توفّرها، اتصل بنا أو راسلنا عبر واتساب — يسعدنا خدمتك دائماً.</p>
+        <div class="cta-actions">
+          <a class="btn btn--wa btn--lg" href="https://wa.me/31791804639?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.683-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.207z"/></svg>
-            اطلب الآن عبر واتساب
+            راسلنا عبر واتساب
           </a>
-          <a class="btn btn--gold btn--lg" href="tel:+31791804639">٠٧٩١٨٠٤٦٣٩</a>
+          <a class="btn btn--outline-light btn--lg" href="tel:+31791804639" dir="ltr">079 180 4639</a>
         </div>
       </div>
     </div>
@@ -197,17 +235,21 @@
       </div>
       <div class="footer-bottom">
         <span>© <span data-year>2026</span> لبان الكايد — جميع الحقوق محفوظة.</span>
-        <span>صُنع بحب لمائدتك 🤍</span>
+        <span>أجبان وألبان طبيعية، كل يوم.</span>
       </div>
     </div>
   </footer>
 
-  <a class="fab-wa" href="https://wa.me/31791804639?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8" target="_blank" rel="noopener" aria-label="اطلب عبر واتساب">
+  <a class="fab-wa" href="https://wa.me/31791804639?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.683-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.207z"/></svg>
   </a>
 
   <script src="js/products.js"></script>
   <script src="js/main.js"></script>
-  <script>akRenderProducts("homeProducts", { limit: 8 });</script>
+  <script>
+    akRenderPlates("heroPlates", ["labneh", "milk", "cheese", "olives", "tea"]);
+    akRenderProducts("homeDairy", { keys: ["leban", "labneh", "cheese", "yoghurt", "milk", "olives"] });
+    akRenderProducts("homeBasics", { keys: ["eggs", "tea", "oil"] });
+  </script>
 </body>
 </html>
