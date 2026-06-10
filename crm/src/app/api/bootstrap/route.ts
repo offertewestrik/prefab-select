@@ -4,6 +4,7 @@ import { listInvoices } from "@/lib/data/invoices-repo";
 import { listPayments } from "@/lib/data/payments-repo";
 import { listNotes, listAppointments, listTasks, listTaskComments } from "@/lib/data/agenda-repo";
 import { listPurchases } from "@/lib/data/finance-repo";
+import { listProducts } from "@/lib/data/products-repo";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/server";
 
 // Laadt alle gedeelde data in één keer (voor het hydrateren van de app).
@@ -24,8 +25,11 @@ export async function GET() {
       listTaskComments(),
       listPurchases(),
     ]);
+    // Apart, zodat een ontbrekende products-tabel (migratie 0011 nog niet
+    // uitgevoerd) de rest van de bootstrap niet blokkeert.
+    const products = await listProducts().catch(() => []);
     return Response.json(
-      { leads, quotes, invoices, payments, notes, appointments, tasks, taskComments, purchases },
+      { leads, quotes, invoices, payments, notes, appointments, tasks, taskComments, purchases, products },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (err) {

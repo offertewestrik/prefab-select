@@ -166,6 +166,20 @@ export interface QuoteLine {
   btwPercentage: number;
 }
 
+/** Product uit de eigen catalogus (configurator-opties + eigen producten). */
+export interface Product {
+  id: string;
+  naam: string;
+  beschrijving?: string;
+  categorie: string;
+  eenheid: string;
+  /** Prijs per stuk in euro's, exclusief btw. */
+  prijsPerStuk: number;
+  btwPercentage: number;
+  actief: boolean;
+  aangemaaktOp: string; // ISO
+}
+
 export type QuoteStatus =
   | "concept"
   | "verstuurd"

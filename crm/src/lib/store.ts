@@ -19,6 +19,7 @@ import type {
   Note,
   NotificationType,
   Payment,
+  Product,
   Purchase,
   PaymentMethode,
   PipelineStage,
@@ -54,6 +55,7 @@ import {
 import type { Integration } from "./types";
 import { volgendQuoteNummer, berekenTotalen } from "./quote-utils";
 import { volgendFactuurNummer, TERMIJN_SCHEMA } from "./invoice-utils";
+import { PRODUCT_CATALOGUS, catalogusBeschrijving } from "./product-catalogus";
 
 function id(prefix: string): string {
   // UUID zodat de id direct compatibel is met de Supabase uuid-kolommen.
@@ -131,6 +133,7 @@ interface CrmState {
   invoices: Invoice[];
   payments: Payment[];
   purchases: Purchase[];
+  products: Product[];
 
   // --- Leads / pijplijn ---
   /** Laadt de echte data uit Supabase in de store (bij het opstarten). */
@@ -185,6 +188,13 @@ interface CrmState {
   addPurchase: (input: { leadId: string; leverancier: string; omschrijving?: string; bedrag: number; datum: string }) => void;
   deletePurchase: (purchaseId: string) => void;
 
+  // --- Productcatalogus ---
+  addProduct: (input: Omit<Product, "id" | "aangemaaktOp">) => string;
+  updateProduct: (productId: string, patch: Partial<Product>) => void;
+  deleteProduct: (productId: string) => void;
+  /** Vult de catalogus aan met alle configurator-opties die nog ontbreken. */
+  importCatalogus: () => number;
+
   // --- Bestanden ---
   addFile: (file: Omit<UploadedFile, "id" | "geuploadOp">) => void;
   deleteFile: (fileId: string) => void;
@@ -229,6 +239,7 @@ export const useCrm = create<CrmState>()(
       invoices: [],
       payments: [],
       purchases: [],
+      products: [],
 
       hydrate: async () => {
         if (typeof window === "undefined") return;
@@ -246,6 +257,7 @@ export const useCrm = create<CrmState>()(
           if (Array.isArray(data.tasks)) patch.tasks = data.tasks;
           if (Array.isArray(data.taskComments)) patch.taskComments = data.taskComments;
           if (Array.isArray(data.purchases)) patch.purchases = data.purchases;
+          if (Array.isArray(data.products)) patch.products = data.products;
           set(patch);
         } catch (e) {
           console.error("Hydratatie mislukt:", e);
@@ -628,6 +640,47 @@ export const useCrm = create<CrmState>()(
         dbSync("purchases", "delete", { id: purchaseId });
       },
 
+      addProduct: (input) => {
+        const product: Product = { id: id("prod"), aangemaaktOp: new Date().toISOString(), ...input };
+        set((s) => ({ products: [...s.products, product] }));
+        dbSync("products", "upsert", product);
+        return product.id;
+      },
+
+      updateProduct: (productId, patch) => {
+        set((s) => ({
+          products: s.products.map((p) => (p.id === productId ? { ...p, ...patch } : p)),
+        }));
+        const product = get().products.find((p) => p.id === productId);
+        if (product) dbSync("products", "upsert", product);
+      },
+
+      deleteProduct: (productId) => {
+        set((s) => ({ products: s.products.filter((p) => p.id !== productId) }));
+        dbSync("products", "delete", { id: productId });
+      },
+
+      importCatalogus: () => {
+        const bestaande = new Set(get().products.map((p) => p.naam.toLowerCase()));
+        let toegevoegd = 0;
+        for (const groep of PRODUCT_CATALOGUS) {
+          for (const item of groep.items) {
+            if (bestaande.has(item.naam.toLowerCase())) continue;
+            get().addProduct({
+              naam: item.naam,
+              beschrijving: catalogusBeschrijving(item.naam),
+              categorie: groep.categorie,
+              eenheid: item.eenheid ?? "stuks",
+              prijsPerStuk: 0,
+              btwPercentage: 21,
+              actief: true,
+            });
+            toegevoegd++;
+          }
+        }
+        return toegevoegd;
+      },
+
       reset: () =>
         set({
           leads: seedLeads,
@@ -647,6 +700,7 @@ export const useCrm = create<CrmState>()(
           invoices: seedInvoices,
           payments: seedPayments,
           purchases: [],
+          products: [],
         }),
     }),
     {
