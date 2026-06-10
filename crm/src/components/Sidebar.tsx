@@ -23,6 +23,7 @@ import {
   ExternalLink,
   Boxes,
   Share2,
+  Package,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -36,6 +37,7 @@ const SECTIES: { titel: string | null; items: { href: string; label: string; ico
       { href: "/leads", label: "Leads", icon: Users },
       { href: "/offerte-aanvragen", label: "Offerte aanvragen", icon: Inbox },
       { href: "/offertes", label: "Offertes", icon: FileText },
+      { href: "/producten", label: "Producten", icon: Package },
       { href: "/facturen", label: "Facturen", icon: Receipt },
       { href: "/agenda", label: "Agenda", icon: CalendarDays },
       { href: "/team-planning", label: "Team planning", icon: CalendarRange },
