@@ -78,29 +78,54 @@ export interface Note {
 }
 
 export type TaskPriority = "laag" | "normaal" | "hoog";
+export type TaskStatus = "open" | "bezig" | "wachten" | "gereed";
 
 export interface Task {
   id: string;
-  leadId?: string;
   titel: string;
   omschrijving?: string;
-  vervaldatum: string; // ISO
   prioriteit: TaskPriority;
-  toegewezenAan: string;
-  voltooid: boolean;
-  /** Reminder x minuten voor vervaldatum (null = geen). */
+  deadline: string; // ISO
+  status: TaskStatus;
+  medewerkerId: string;
+  /** Koppeling aan lead / offerte / project (project = lead in productie). */
+  leadId?: string;
+  quoteId?: string;
+  projectId?: string;
+  /** Reminder x minuten voor deadline (null = geen). */
   reminderMinuten: number | null;
+  aangemaaktOp: string; // ISO
 }
+
+export interface TaskComment {
+  id: string;
+  taskId: string;
+  auteurId: string;
+  tekst: string;
+  aangemaaktOp: string; // ISO
+}
+
+export type AppointmentType =
+  | "telefonisch"
+  | "offertebespreking"
+  | "inmeten"
+  | "adviesgesprek"
+  | "werkvoorbereiding"
+  | "plaatsing"
+  | "oplevering"
+  | "overig";
 
 export interface Appointment {
   id: string;
-  leadId?: string;
   titel: string;
-  type: "intake" | "showroom" | "locatiebezoek" | "oplevering" | "overig";
+  type: AppointmentType;
   start: string; // ISO
   eind: string; // ISO
+  leadId?: string; // gekoppelde klant/lead
+  quoteId?: string; // optioneel gekoppelde offerte
   locatie?: string;
-  notitie?: string;
+  omschrijving?: string;
+  medewerkerId: string; // verantwoordelijke medewerker
   /** Of de afspraak gesynchroniseerd is met Google Calendar. */
   googleSynced: boolean;
 }
@@ -197,4 +222,57 @@ export interface Integration {
   verbonden: boolean;
   beschrijving: string;
   laatsteSync?: string;
+}
+
+// ----------------------------------------------------------------------------
+// Fase 3 — medewerkers, agenda, taken, reminders & notificaties
+// ----------------------------------------------------------------------------
+
+export type UserRole = "eigenaar" | "verkoop" | "werkvoorbereiding" | "administratie";
+
+export interface User {
+  id: string;
+  naam: string;
+  email: string;
+  rol: UserRole;
+  /** Kleur voor agenda-weergave. */
+  kleur: string;
+  /** Of de Google Calendar van deze medewerker gekoppeld is. */
+  googleConnected: boolean;
+}
+
+export type NotificationType =
+  | "nieuwe_lead"
+  | "nieuwe_afspraak"
+  | "offerte_geaccepteerd"
+  | "taak_verlopen";
+
+export interface AppNotification {
+  id: string;
+  type: NotificationType;
+  titel: string;
+  tekst: string;
+  /** Doel-URL in het CRM. */
+  link?: string;
+  gelezen: boolean;
+  /** Voor welke medewerker (leeg = iedereen). */
+  voorUserId?: string;
+  aangemaaktOp: string; // ISO
+}
+
+/** Wanneer een opvolg-reminder getriggerd wordt. */
+export type ReminderTrigger =
+  | "nieuwe_lead"
+  | "offerte_verstuurd"
+  | "afspraak_gepland";
+
+export interface ReminderRule {
+  id: string;
+  trigger: ReminderTrigger;
+  label: string;
+  /** Offset in dagen na de trigger (voor lead/offerte). */
+  offsetDagen?: number;
+  /** Offset in uren vóór het moment (voor afspraken). */
+  offsetUrenVooraf?: number;
+  actief: boolean;
 }

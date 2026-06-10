@@ -7,14 +7,18 @@
 
 import type {
   Appointment,
+  AppNotification,
   Integration,
   Lead,
   Note,
   Quote,
   QuoteEmailLog,
   QuoteRequest,
+  ReminderRule,
   Task,
+  TaskComment,
   UploadedFile,
+  User,
 } from "./types";
 import { DEFAULT_BTW, DEFAULT_VOORWAARDEN } from "./constants";
 
@@ -299,23 +303,39 @@ export const seedNotes: Note[] = [
   { id: "note-5", leadId: "lead-011", type: "notitie", tekst: "Akkoord op offerte! Aanbetaling 30% afgesproken. Productie kan starten zodra vergunning rond is.", auteur: "Sanne", aangemaaktOp: dag(-1, 11, 0) },
 ];
 
+export const seedUsers: User[] = [
+  { id: "u-kelly", naam: "Kelly", email: "kelly@prefabselect.nl", rol: "eigenaar", kleur: "#2563eb", googleConnected: true },
+  { id: "u-mark", naam: "Mark", email: "mark@prefabselect.nl", rol: "verkoop", kleur: "#10b981", googleConnected: false },
+  { id: "u-sanne", naam: "Sanne", email: "sanne@prefabselect.nl", rol: "verkoop", kleur: "#8b5cf6", googleConnected: true },
+  { id: "u-tom", naam: "Tom", email: "tom@prefabselect.nl", rol: "werkvoorbereiding", kleur: "#f59e0b", googleConnected: false },
+  { id: "u-lisa", naam: "Lisa", email: "lisa@prefabselect.nl", rol: "administratie", kleur: "#06b6d4", googleConnected: false },
+];
+
 export const seedTasks: Task[] = [
-  { id: "task-1", leadId: "lead-001", titel: "Familie De Vries terugbellen", omschrijving: "Eerste contact, behoefte inventariseren", vervaldatum: dag(0, 11, 0), prioriteit: "hoog", toegewezenAan: "Kelly", voltooid: false, reminderMinuten: 30 },
-  { id: "task-2", leadId: "lead-003", titel: "Offerte opstellen aanbouw", vervaldatum: dag(1, 9, 0), prioriteit: "normaal", toegewezenAan: "Kelly", voltooid: false, reminderMinuten: 60 },
-  { id: "task-3", leadId: "lead-005", titel: "Showroomafspraak inplannen", vervaldatum: dag(-1, 16, 0), prioriteit: "normaal", toegewezenAan: "Sanne", voltooid: false, reminderMinuten: null },
-  { id: "task-4", leadId: "lead-009", titel: "Offerte opvolgen — bellen", omschrijving: "Offerte staat 2 dagen open", vervaldatum: dag(1, 14, 0), prioriteit: "hoog", toegewezenAan: "Mark", voltooid: false, reminderMinuten: 15 },
-  { id: "task-5", leadId: "lead-012", titel: "Productieplanning bevestigen", vervaldatum: dag(3, 10, 0), prioriteit: "normaal", toegewezenAan: "Tom", voltooid: false, reminderMinuten: null },
-  { id: "task-6", leadId: "lead-011", titel: "Aanbetaling factureren", vervaldatum: dag(2, 9, 0), prioriteit: "hoog", toegewezenAan: "Sanne", voltooid: false, reminderMinuten: 60 },
-  { id: "task-7", titel: "Wekelijkse pipeline-review met team", vervaldatum: dag(2, 16, 0), prioriteit: "laag", toegewezenAan: "Kelly", voltooid: false, reminderMinuten: null },
-  { id: "task-8", leadId: "lead-014", titel: "Review vragen aan familie Willems", vervaldatum: dag(-2, 10, 0), prioriteit: "laag", toegewezenAan: "Kelly", voltooid: true, reminderMinuten: null },
+  { id: "task-1", leadId: "lead-001", titel: "Familie De Vries terugbellen", omschrijving: "Eerste contact, behoefte inventariseren", deadline: dag(0, 11, 0), prioriteit: "hoog", medewerkerId: "u-kelly", status: "open", reminderMinuten: 30, aangemaaktOp: dag(-1, 14, 12) },
+  { id: "task-2", leadId: "lead-003", quoteId: undefined, titel: "Offerte opstellen aanbouw", deadline: dag(1, 9, 0), prioriteit: "normaal", medewerkerId: "u-kelly", status: "bezig", reminderMinuten: 60, aangemaaktOp: dag(-2, 10, 0) },
+  { id: "task-3", leadId: "lead-005", titel: "Showroomafspraak inplannen", deadline: dag(-1, 16, 0), prioriteit: "normaal", medewerkerId: "u-sanne", status: "open", reminderMinuten: null, aangemaaktOp: dag(-3, 9, 0) },
+  { id: "task-4", leadId: "lead-009", quoteId: "quote-1", titel: "Offerte opvolgen — bellen", omschrijving: "Offerte staat 2 dagen open", deadline: dag(1, 14, 0), prioriteit: "hoog", medewerkerId: "u-mark", status: "wachten", reminderMinuten: 15, aangemaaktOp: dag(-2, 11, 0) },
+  { id: "task-5", leadId: "lead-012", projectId: "lead-012", titel: "Productieplanning bevestigen", deadline: dag(3, 10, 0), prioriteit: "normaal", medewerkerId: "u-tom", status: "bezig", reminderMinuten: null, aangemaaktOp: dag(-4, 9, 0) },
+  { id: "task-6", leadId: "lead-011", quoteId: "quote-3", titel: "Aanbetaling factureren", deadline: dag(2, 9, 0), prioriteit: "hoog", medewerkerId: "u-lisa", status: "open", reminderMinuten: 60, aangemaaktOp: dag(-1, 11, 0) },
+  { id: "task-7", titel: "Wekelijkse pipeline-review met team", deadline: dag(2, 16, 0), prioriteit: "laag", medewerkerId: "u-kelly", status: "open", reminderMinuten: null, aangemaaktOp: dag(-2, 8, 0) },
+  { id: "task-8", leadId: "lead-014", titel: "Review vragen aan familie Willems", deadline: dag(-2, 10, 0), prioriteit: "laag", medewerkerId: "u-kelly", status: "gereed", reminderMinuten: null, aangemaaktOp: dag(-5, 10, 0) },
+];
+
+export const seedTaskComments: TaskComment[] = [
+  { id: "tc-1", taskId: "task-2", auteurId: "u-kelly", tekst: "Configuratie ontvangen, ik begin met de calculatie.", aangemaaktOp: dag(-1, 10, 0) },
+  { id: "tc-2", taskId: "task-4", auteurId: "u-mark", tekst: "Voicemail ingesproken, wacht op terugbelverzoek.", aangemaaktOp: dag(0, 9, 30) },
+  { id: "tc-3", taskId: "task-5", auteurId: "u-tom", tekst: "Productieslot week 14 gereserveerd onder voorbehoud.", aangemaaktOp: dag(-1, 15, 0) },
 ];
 
 export const seedAppointments: Appointment[] = [
-  { id: "afspr-1", leadId: "lead-007", titel: "Intake familie El Amrani", type: "intake", start: dag(2, 10, 0), eind: dag(2, 11, 0), locatie: "Bij klant thuis, Bergen op Zoom", notitie: "Mantelzorgwoning bespreken", googleSynced: true },
-  { id: "afspr-2", leadId: "lead-008", titel: "Showroombezoek Linda Hoogendoorn", type: "showroom", start: dag(3, 14, 0), eind: dag(3, 15, 30), locatie: "Showroom Prefab Select", googleSynced: true },
-  { id: "afspr-3", leadId: "lead-011", titel: "Locatiebezoek familie Visser", type: "locatiebezoek", start: dag(5, 9, 0), eind: dag(5, 11, 0), locatie: "Breda", notitie: "Opmeten + grond inspecteren", googleSynced: false },
-  { id: "afspr-4", leadId: "lead-013", titel: "Oplevering familie Koning", type: "oplevering", start: dag(7, 13, 0), eind: dag(7, 14, 0), locatie: "Etten-Leur", googleSynced: true },
-  { id: "afspr-5", leadId: "lead-005", titel: "Showroom familie Mulder", type: "showroom", start: dag(1, 11, 0), eind: dag(1, 12, 0), locatie: "Showroom Prefab Select", googleSynced: false },
+  { id: "afspr-1", leadId: "lead-007", titel: "Adviesgesprek familie El Amrani", type: "adviesgesprek", start: dag(2, 10, 0), eind: dag(2, 11, 0), locatie: "Bij klant thuis, Bergen op Zoom", omschrijving: "Mantelzorgwoning bespreken", medewerkerId: "u-kelly", googleSynced: true },
+  { id: "afspr-2", leadId: "lead-008", titel: "Offertebespreking Linda Hoogendoorn", type: "offertebespreking", start: dag(3, 14, 0), eind: dag(3, 15, 30), locatie: "Showroom Prefab Select", medewerkerId: "u-sanne", googleSynced: true },
+  { id: "afspr-3", leadId: "lead-011", quoteId: "quote-3", titel: "Inmeten familie Visser", type: "inmeten", start: dag(5, 9, 0), eind: dag(5, 11, 0), locatie: "Breda", omschrijving: "Opmeten + grond inspecteren", medewerkerId: "u-tom", googleSynced: false },
+  { id: "afspr-4", leadId: "lead-013", titel: "Oplevering familie Koning", type: "oplevering", start: dag(7, 13, 0), eind: dag(7, 14, 0), locatie: "Etten-Leur", medewerkerId: "u-tom", googleSynced: true },
+  { id: "afspr-5", leadId: "lead-005", titel: "Telefonisch gesprek familie Mulder", type: "telefonisch", start: dag(1, 11, 0), eind: dag(1, 11, 30), medewerkerId: "u-sanne", googleSynced: false },
+  { id: "afspr-6", leadId: "lead-012", titel: "Plaatsing tuinkantoor Robert Maas", type: "plaatsing", start: dag(4, 8, 0), eind: dag(4, 16, 0), locatie: "Oosterhout", omschrijving: "Plaatsing in 1 dag", medewerkerId: "u-tom", googleSynced: false },
+  { id: "afspr-7", leadId: "lead-004", titel: "Werkvoorbereiding Janssen Bouw", type: "werkvoorbereiding", start: dag(0, 13, 0), eind: dag(0, 14, 0), locatie: "Kantoor", medewerkerId: "u-tom", googleSynced: false },
 ];
 
 export const seedFiles: UploadedFile[] = [
@@ -415,4 +435,17 @@ export const seedIntegrations: Integration[] = [
   { id: "int-resend", naam: "Resend", categorie: "email", verbonden: false, beschrijving: "Offertes en e-mails versturen vanuit het CRM." },
   { id: "int-form", naam: "Website formulier", categorie: "website", verbonden: true, beschrijving: "Contact- en offerteformulieren van prefabselect.nl.", laatsteSync: dag(0, 8, 30) },
   { id: "int-config", naam: "Configurator", categorie: "website", verbonden: true, beschrijving: "Leads uit de online product-configurator.", laatsteSync: dag(-1, 9, 45) },
+];
+
+export const seedNotifications: AppNotification[] = [
+  { id: "notif-1", type: "nieuwe_lead", titel: "Nieuwe lead", tekst: "Jeroen Bakker via Meta Ads (tuinkantoor).", link: "/leads/lead-002", gelezen: false, voorUserId: "u-tom", aangemaaktOp: dag(0, 8, 30) },
+  { id: "notif-2", type: "offerte_geaccepteerd", titel: "Offerte geaccepteerd", tekst: "Familie Visser accepteerde offerte PS-2026-0011.", link: "/offertes/quote-3", gelezen: false, voorUserId: "u-sanne", aangemaaktOp: dag(-1, 11, 0) },
+  { id: "notif-3", type: "nieuwe_afspraak", titel: "Nieuwe afspraak", tekst: "Inmeten familie Visser ingepland.", link: "/agenda", gelezen: true, voorUserId: "u-tom", aangemaaktOp: dag(-1, 9, 0) },
+  { id: "notif-4", type: "taak_verlopen", titel: "Taak verlopen", tekst: "Showroomafspraak inplannen (familie Mulder) is over de deadline.", link: "/taken", gelezen: false, voorUserId: "u-sanne", aangemaaktOp: dag(-1, 16, 0) },
+];
+
+export const seedReminderRules: ReminderRule[] = [
+  { id: "rem-lead", trigger: "nieuwe_lead", label: "Nieuwe lead opvolgen", offsetDagen: 1, actief: true },
+  { id: "rem-offerte", trigger: "offerte_verstuurd", label: "Verstuurde offerte opvolgen", offsetDagen: 7, actief: true },
+  { id: "rem-afspraak", trigger: "afspraak_gepland", label: "Herinnering vóór afspraak", offsetUrenVooraf: 24, actief: true },
 ];

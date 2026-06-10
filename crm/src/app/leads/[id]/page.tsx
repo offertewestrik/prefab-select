@@ -22,6 +22,8 @@ import {
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { Badge, Avatar } from "@/components/ui/Badge";
+import { TaskDialog } from "@/components/TaskDialog";
+import { AppointmentDialog } from "@/components/AppointmentDialog";
 import {
   PRODUCT_LABEL,
   SOURCE_LABEL,
@@ -29,10 +31,12 @@ import {
   STAGE_ORDER,
   TEAM,
   QUOTE_STATUS_META,
+  TASK_STATUS_META,
+  APPOINTMENT_TYPE_META,
 } from "@/lib/constants";
 import { euro, datum, datumTijd, relatief } from "@/lib/format";
 import { quoteTotaal } from "@/lib/quote-utils";
-import type { NoteType, PipelineStage, TaskPriority } from "@/lib/types";
+import type { NoteType, PipelineStage } from "@/lib/types";
 
 const TABS = ["Overzicht", "Notities", "Taken", "Afspraken", "Bestanden", "Offertes"] as const;
 type Tab = (typeof TABS)[number];
@@ -317,121 +321,61 @@ function NotitiesTab({ leadId, notes }: { leadId: string; notes: any[] }) {
 
 // --- Taken ---
 function TakenTab({ leadId, tasks }: { leadId: string; tasks: any[] }) {
-  const addTask = useCrm((s) => s.addTask);
-  const toggleTask = useCrm((s) => s.toggleTask);
-  const deleteTask = useCrm((s) => s.deleteTask);
-  const [titel, setTitel] = useState("");
-  const [datumVeld, setDatumVeld] = useState("");
-  const [prio, setPrio] = useState<TaskPriority>("normaal");
-
+  const [dialog, setDialog] = useState(false);
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/60 p-3">
-        <input
-          value={titel}
-          onChange={(e) => setTitel(e.target.value)}
-          placeholder="Nieuwe taak…"
-          className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500"
-        />
-        <input
-          type="datetime-local"
-          value={datumVeld}
-          onChange={(e) => setDatumVeld(e.target.value)}
-          className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm outline-none"
-        />
-        <select value={prio} onChange={(e) => setPrio(e.target.value as TaskPriority)} className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm">
-          <option value="laag">Laag</option>
-          <option value="normaal">Normaal</option>
-          <option value="hoog">Hoog</option>
-        </select>
-        <button
-          onClick={() => {
-            if (!titel.trim()) return;
-            addTask({
-              leadId,
-              titel: titel.trim(),
-              vervaldatum: datumVeld ? new Date(datumVeld).toISOString() : new Date().toISOString(),
-              prioriteit: prio,
-              toegewezenAan: "Jij",
-              reminderMinuten: 30,
-            });
-            setTitel("");
-            setDatumVeld("");
-          }}
-          className="rounded-lg bg-brand-600 p-2 text-white hover:bg-brand-700"
-        >
-          <Plus className="h-4 w-4" />
-        </button>
-      </div>
-
+      <button onClick={() => setDialog(true)} className="mb-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+        <Plus className="h-4 w-4" /> Nieuwe taak
+      </button>
       <ul className="space-y-2">
         {tasks.map((t) => (
-          <li key={t.id} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3">
-            <button onClick={() => toggleTask(t.id)} className="text-brand-600">
-              {t.voltooid ? <CheckCircle2 className="h-5 w-5" /> : <Circle className="h-5 w-5 text-slate-300" />}
-            </button>
-            <div className="min-w-0 flex-1">
-              <p className={`text-sm font-medium ${t.voltooid ? "text-slate-400 line-through" : "text-slate-700"}`}>{t.titel}</p>
-              <p className="text-xs text-slate-400">{datumTijd(t.vervaldatum)} · {t.prioriteit}</p>
-            </div>
-            <button onClick={() => deleteTask(t.id)} className="text-slate-300 hover:text-rose-500">
-              <Trash2 className="h-4 w-4" />
-            </button>
+          <li key={t.id}>
+            <Link href={`/taken/${t.id}`} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 transition hover:bg-slate-50/60">
+              <Badge className={TASK_STATUS_META[t.status as keyof typeof TASK_STATUS_META].kleur}>
+                {TASK_STATUS_META[t.status as keyof typeof TASK_STATUS_META].label}
+              </Badge>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-slate-700">{t.titel}</p>
+                <p className="text-xs text-slate-400">{datumTijd(t.deadline)} · {t.prioriteit}</p>
+              </div>
+            </Link>
           </li>
         ))}
         {tasks.length === 0 && <p className="text-sm text-slate-400">Geen taken voor deze lead.</p>}
       </ul>
+      <TaskDialog open={dialog} onClose={() => setDialog(false)} preset={{ leadId }} />
     </div>
   );
 }
 
 // --- Afspraken ---
 function AfsprakenTab({ leadId, appointments }: { leadId: string; appointments: any[] }) {
-  const addAppointment = useCrm((s) => s.addAppointment);
-  const toggleGoogleSync = useCrm((s) => s.toggleGoogleSync);
-  const [titel, setTitel] = useState("");
-  const [start, setStart] = useState("");
-
+  const [dialog, setDialog] = useState(false);
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/60 p-3">
-        <input value={titel} onChange={(e) => setTitel(e.target.value)} placeholder="Afspraak…" className="flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500" />
-        <input type="datetime-local" value={start} onChange={(e) => setStart(e.target.value)} className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm" />
-        <button
-          onClick={() => {
-            if (!titel.trim() || !start) return;
-            const s = new Date(start);
-            const e = new Date(s.getTime() + 60 * 60 * 1000);
-            addAppointment({ leadId, titel: titel.trim(), type: "overig", start: s.toISOString(), eind: e.toISOString(), googleSynced: false });
-            setTitel("");
-            setStart("");
-          }}
-          className="rounded-lg bg-brand-600 p-2 text-white hover:bg-brand-700"
-        >
-          <Plus className="h-4 w-4" />
-        </button>
-      </div>
-
+      <button onClick={() => setDialog(true)} className="mb-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+        <Plus className="h-4 w-4" /> Nieuwe afspraak
+      </button>
       <ul className="space-y-2">
         {appointments.map((a) => (
-          <li key={a.id} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
-              <CalendarDays className="h-4 w-4" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-slate-700">{a.titel}</p>
-              <p className="text-xs text-slate-400">{datumTijd(a.start)}{a.locatie ? ` · ${a.locatie}` : ""}</p>
-            </div>
-            <button
-              onClick={() => toggleGoogleSync(a.id)}
-              className={`rounded-full px-2.5 py-1 text-xs font-semibold ${a.googleSynced ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}
-            >
-              {a.googleSynced ? "✓ Google" : "Sync"}
-            </button>
+          <li key={a.id}>
+            <Link href={`/agenda/${a.id}`} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 transition hover:bg-slate-50/60">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
+                <CalendarDays className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-slate-700">{a.titel}</p>
+                <p className="text-xs text-slate-400">
+                  {APPOINTMENT_TYPE_META[a.type as keyof typeof APPOINTMENT_TYPE_META].label} · {datumTijd(a.start)}{a.locatie ? ` · ${a.locatie}` : ""}
+                </p>
+              </div>
+              {a.googleSynced && <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700">✓ Google</span>}
+            </Link>
           </li>
         ))}
         {appointments.length === 0 && <p className="text-sm text-slate-400">Geen afspraken.</p>}
       </ul>
+      <AppointmentDialog open={dialog} onClose={() => setDialog(false)} preset={{ leadId }} />
     </div>
   );
 }
