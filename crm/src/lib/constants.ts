@@ -65,11 +65,34 @@ export const QUOTE_STATUS_META: Record<
   { label: string; kleur: string }
 > = {
   concept: { label: "Concept", kleur: "bg-slate-100 text-slate-700" },
-  verstuurd: { label: "Verstuurd", kleur: "bg-sky-100 text-sky-700" },
-  bekeken: { label: "Bekeken", kleur: "bg-indigo-100 text-indigo-700" },
+  verstuurd: { label: "Verzonden", kleur: "bg-sky-100 text-sky-700" },
+  bekeken: { label: "Geopend", kleur: "bg-indigo-100 text-indigo-700" },
   geaccepteerd: { label: "Geaccepteerd", kleur: "bg-emerald-100 text-emerald-700" },
   afgewezen: { label: "Afgewezen", kleur: "bg-rose-100 text-rose-700" },
   verlopen: { label: "Verlopen", kleur: "bg-amber-100 text-amber-700" },
+};
+
+/** Eenheden voor offerteregels. */
+export const EENHEDEN = ["stuks", "m²", "m¹", "m³", "uur", "dag", "post", "set"];
+
+/** Standaard leverings-/betalingsvoorwaarden op een nieuwe offerte. */
+export const DEFAULT_VOORWAARDEN =
+  "Deze offerte is vrijblijvend en geldig tot de bovengenoemde datum. Genoemde " +
+  "prijzen zijn inclusief btw, tenzij anders vermeld. Levertijd in overleg en onder " +
+  "voorbehoud van vergunningverlening. Aanbetaling 30% bij akkoord, het restant in " +
+  "termijnen conform de bouwfasen. Op al onze offertes en overeenkomsten zijn onze " +
+  "algemene voorwaarden van toepassing.";
+
+/** Bedrijfsgegevens voor PDF & e-mail. */
+export const BEDRIJF = {
+  naam: "Prefab Select",
+  slogan: "Artisans of Space",
+  email: "offerte@prefabselect.nl",
+  telefoon: "085 - 060 9000",
+  web: "www.prefabselect.nl",
+  kvk: "00000000",
+  btw: "NL000000000B00",
+  plaats: "Zeeland, Nederland",
 };
 
 export const QUOTE_REQUEST_STATUS_META: Record<

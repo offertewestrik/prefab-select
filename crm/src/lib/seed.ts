@@ -11,11 +11,12 @@ import type {
   Lead,
   Note,
   Quote,
+  QuoteEmailLog,
   QuoteRequest,
   Task,
   UploadedFile,
 } from "./types";
-import { DEFAULT_BTW } from "./constants";
+import { DEFAULT_BTW, DEFAULT_VOORWAARDEN } from "./constants";
 
 // Datums relatief t.o.v. nu, zodat het dashboard altijd "levend" oogt.
 function dag(offset: number, uur = 9, minuut = 0): string {
@@ -338,14 +339,19 @@ export const seedQuotes: Quote[] = [
     nummer: "PS-2026-0009",
     leadId: "lead-009",
     status: "verstuurd",
+    projecttype: "vakantiewoning",
+    projectomschrijving: "Recreatiewoning voor verhuur op een park in Renesse. Energiezuinige prefab woning, instapklaar opgeleverd.",
+    afmetingen: "10 x 6 m, vloeroppervlak ca. 60 m², nokhoogte 4,5 m",
+    werkzaamheden: "Productie casco, transport, plaatsing op bestaande fundering, complete afwerking interieur en aansluiten installaties.",
     regels: [
-      { id: "r1", omschrijving: "Vakantiewoning prefab casco 60m²", aantal: 1, prijsPerStuk: 78000, btwPercentage: DEFAULT_BTW },
-      { id: "r2", omschrijving: "Complete afwerking interieur", aantal: 1, prijsPerStuk: 24000, btwPercentage: DEFAULT_BTW },
-      { id: "r3", omschrijving: "Fundering & plaatsing", aantal: 1, prijsPerStuk: 12000, btwPercentage: DEFAULT_BTW },
+      { id: "r1", omschrijving: "Vakantiewoning prefab casco 60m²", aantal: 1, eenheid: "stuks", prijsPerStuk: 78000, btwPercentage: DEFAULT_BTW },
+      { id: "r2", omschrijving: "Complete afwerking interieur", aantal: 1, eenheid: "post", prijsPerStuk: 24000, btwPercentage: DEFAULT_BTW },
+      { id: "r3", omschrijving: "Fundering & plaatsing", aantal: 1, eenheid: "post", prijsPerStuk: 12000, btwPercentage: DEFAULT_BTW },
     ],
     korting: 0,
     geldigTot: dag(25),
     notitie: "Levertijd ca. 16 weken na akkoord en vergunning.",
+    voorwaarden: DEFAULT_VOORWAARDEN,
     aangemaaktOp: dag(-3, 10, 0),
     verstuurdOp: dag(-2, 10, 30),
   },
@@ -354,13 +360,18 @@ export const seedQuotes: Quote[] = [
     nummer: "PS-2026-0010",
     leadId: "lead-010",
     status: "bekeken",
+    projecttype: "prefab_aanbouw",
+    projectomschrijving: "Aanbouw aan de achterzijde van de woning ter vergroting van de woonkamer.",
+    afmetingen: "5 x 4 m, vloeroppervlak 20 m², plat dak",
+    werkzaamheden: "Productie en plaatsing prefab aanbouw casco, dakraam, isolatie en afwerking.",
     regels: [
-      { id: "r1", omschrijving: "Prefab aanbouw 5x4m casco", aantal: 1, prijsPerStuk: 34000, btwPercentage: DEFAULT_BTW },
-      { id: "r2", omschrijving: "Dakraam + extra isolatie", aantal: 1, prijsPerStuk: 6500, btwPercentage: DEFAULT_BTW },
-      { id: "r3", omschrijving: "Plaatsing & afwerking", aantal: 1, prijsPerStuk: 8500, btwPercentage: DEFAULT_BTW },
+      { id: "r1", omschrijving: "Prefab aanbouw 5x4m casco", aantal: 1, eenheid: "stuks", prijsPerStuk: 34000, btwPercentage: DEFAULT_BTW },
+      { id: "r2", omschrijving: "Dakraam + extra isolatie", aantal: 1, eenheid: "post", prijsPerStuk: 6500, btwPercentage: DEFAULT_BTW },
+      { id: "r3", omschrijving: "Plaatsing & afwerking", aantal: 1, eenheid: "post", prijsPerStuk: 8500, btwPercentage: DEFAULT_BTW },
     ],
     korting: 1000,
     geldigTot: dag(22),
+    voorwaarden: DEFAULT_VOORWAARDEN,
     aangemaaktOp: dag(-4, 9, 0),
     verstuurdOp: dag(-3, 14, 0),
     bekekenOp: dag(-2, 18, 12),
@@ -370,19 +381,30 @@ export const seedQuotes: Quote[] = [
     nummer: "PS-2026-0011",
     leadId: "lead-011",
     status: "geaccepteerd",
+    projecttype: "poolhouse",
+    projectomschrijving: "Vrijstaand poolhouse met overkapping en technische ruimte naast het zwembad.",
+    afmetingen: "8 x 5 m, vloeroppervlak 40 m², incl. overkapping 3 m",
+    werkzaamheden: "Productie, transport, fundering, plaatsing, sanitair en technische ruimte volledig aangesloten.",
     regels: [
-      { id: "r1", omschrijving: "Poolhouse 8x5m incl. overkapping", aantal: 1, prijsPerStuk: 62000, btwPercentage: DEFAULT_BTW },
-      { id: "r2", omschrijving: "Sanitair & technische ruimte", aantal: 1, prijsPerStuk: 14000, btwPercentage: DEFAULT_BTW },
-      { id: "r3", omschrijving: "Plaatsing & fundering", aantal: 1, prijsPerStuk: 9000, btwPercentage: DEFAULT_BTW },
+      { id: "r1", omschrijving: "Poolhouse 8x5m incl. overkapping", aantal: 1, eenheid: "stuks", prijsPerStuk: 62000, btwPercentage: DEFAULT_BTW },
+      { id: "r2", omschrijving: "Sanitair & technische ruimte", aantal: 1, eenheid: "post", prijsPerStuk: 14000, btwPercentage: DEFAULT_BTW },
+      { id: "r3", omschrijving: "Plaatsing & fundering", aantal: 1, eenheid: "post", prijsPerStuk: 9000, btwPercentage: DEFAULT_BTW },
     ],
     korting: 4000,
     geldigTot: dag(10),
     notitie: "Aanbetaling 30% bij akkoord.",
+    voorwaarden: DEFAULT_VOORWAARDEN,
     aangemaaktOp: dag(-7, 11, 0),
     verstuurdOp: dag(-6, 9, 0),
     bekekenOp: dag(-5, 20, 0),
     beslistOp: dag(-1, 11, 0),
   },
+];
+
+export const seedEmailLogs: QuoteEmailLog[] = [
+  { id: "mail-1", quoteId: "quote-1", naar: "smit.recreatie@gmail.com", onderwerp: "Uw offerte van Prefab Select", status: "verzonden", messageId: "seed-0009", mock: true, verstuurdOp: dag(-2, 10, 30) },
+  { id: "mail-2", quoteId: "quote-2", naar: "kdegroot@gmail.com", onderwerp: "Uw offerte van Prefab Select", status: "verzonden", messageId: "seed-0010", mock: true, verstuurdOp: dag(-3, 14, 0) },
+  { id: "mail-3", quoteId: "quote-3", naar: "visser@home.nl", onderwerp: "Uw offerte van Prefab Select", status: "verzonden", messageId: "seed-0011", mock: true, verstuurdOp: dag(-6, 9, 0) },
 ];
 
 export const seedIntegrations: Integration[] = [

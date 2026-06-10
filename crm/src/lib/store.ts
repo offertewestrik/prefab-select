@@ -15,7 +15,9 @@ import type {
   Lead,
   Note,
   PipelineStage,
+  ProductType,
   Quote,
+  QuoteEmailLog,
   QuoteLine,
   QuoteRequest,
   Task,
@@ -23,6 +25,7 @@ import type {
 } from "./types";
 import {
   seedAppointments,
+  seedEmailLogs,
   seedFiles,
   seedIntegrations,
   seedLeads,
@@ -38,6 +41,20 @@ function id(prefix: string): string {
   return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
+/** Velden om een nieuwe offerte aan te maken. */
+export interface CreateQuoteInput {
+  leadId: string;
+  projecttype: ProductType;
+  projectomschrijving?: string;
+  afmetingen?: string;
+  werkzaamheden?: string;
+  regels: QuoteLine[];
+  korting: number;
+  notitie?: string;
+  voorwaarden?: string;
+  geldigTot: string;
+}
+
 interface CrmState {
   leads: Lead[];
   notes: Note[];
@@ -46,6 +63,7 @@ interface CrmState {
   files: UploadedFile[];
   quoteRequests: QuoteRequest[];
   quotes: Quote[];
+  emailLogs: QuoteEmailLog[];
   integrations: Integration[];
 
   // --- Leads / pijplijn ---
@@ -74,9 +92,12 @@ interface CrmState {
   updateQuoteRequest: (reqId: string, patch: Partial<QuoteRequest>) => void;
 
   // --- Offertes ---
-  createQuote: (leadId: string, regels: QuoteLine[], korting: number, notitie: string, geldigTot: string) => string;
+  createQuote: (input: CreateQuoteInput) => string;
   updateQuote: (quoteId: string, patch: Partial<Quote>) => void;
   setQuoteStatus: (quoteId: string, status: Quote["status"]) => void;
+
+  // --- E-maillogs ---
+  addEmailLog: (log: Omit<QuoteEmailLog, "id" | "verstuurdOp">) => void;
 
   // --- Integraties ---
   toggleIntegration: (intId: string) => void;
@@ -94,6 +115,7 @@ export const useCrm = create<CrmState>()(
       files: seedFiles,
       quoteRequests: seedQuoteRequests,
       quotes: seedQuotes,
+      emailLogs: seedEmailLogs,
       integrations: seedIntegrations,
 
       moveLead: (leadId, stage, positie) =>
@@ -185,7 +207,7 @@ export const useCrm = create<CrmState>()(
           ),
         })),
 
-      createQuote: (leadId, regels, korting, notitie, geldigTot) => {
+      createQuote: (input) => {
         const newId = id("quote");
         const nummer = volgendQuoteNummer(get().quotes);
         set((s) => ({
@@ -194,13 +216,9 @@ export const useCrm = create<CrmState>()(
             {
               id: newId,
               nummer,
-              leadId,
               status: "concept",
-              regels,
-              korting,
-              notitie,
-              geldigTot,
               aangemaaktOp: new Date().toISOString(),
+              ...input,
             },
           ],
         }));
@@ -227,6 +245,14 @@ export const useCrm = create<CrmState>()(
           };
         }),
 
+      addEmailLog: (log) =>
+        set((s) => ({
+          emailLogs: [
+            { ...log, id: id("mail"), verstuurdOp: new Date().toISOString() },
+            ...s.emailLogs,
+          ],
+        })),
+
       toggleIntegration: (intId) =>
         set((s) => ({
           integrations: s.integrations.map((i) =>
@@ -249,12 +275,14 @@ export const useCrm = create<CrmState>()(
           files: seedFiles,
           quoteRequests: seedQuoteRequests,
           quotes: seedQuotes,
+          emailLogs: seedEmailLogs,
           integrations: seedIntegrations,
         }),
     }),
     {
+      // v2: offertes uitgebreid met projectvelden, eenheid & e-maillogs (fase 2)
       name: "prefab-crm-store",
-      version: 1,
+      version: 2,
     },
   ),
 );

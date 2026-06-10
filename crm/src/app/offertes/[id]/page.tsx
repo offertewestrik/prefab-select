@@ -12,14 +12,15 @@ import {
   Eye,
   Send,
   FileText,
+  History,
 } from "lucide-react";
 import { useCrm } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { Badge } from "@/components/ui/Badge";
-import { QUOTE_STATUS_META } from "@/lib/constants";
+import { QUOTE_STATUS_META, PRODUCT_LABEL } from "@/lib/constants";
 import { euroCent, datum, datumTijd } from "@/lib/format";
 import { berekenTotalen } from "@/lib/quote-utils";
-import type { Quote, QuoteStatus } from "@/lib/types";
+import type { QuoteStatus } from "@/lib/types";
 
 export default function OfferteDetailPage() {
   const mounted = useMounted();
@@ -28,11 +29,14 @@ export default function OfferteDetailPage() {
 
   const quote = useCrm((s) => s.quotes.find((q) => q.id === quoteId));
   const lead = useCrm((s) => s.leads.find((l) => l.id === quote?.leadId));
+  const emailLogs = useCrm((s) => s.emailLogs.filter((e) => e.quoteId === quoteId));
   const setQuoteStatus = useCrm((s) => s.setQuoteStatus);
   const updateLead = useCrm((s) => s.updateLead);
+  const addEmailLog = useCrm((s) => s.addEmailLog);
 
-  const [bezig, setBezig] = useState<"pdf" | "mail" | null>(null);
+  const [bezig, setBezig] = useState<"pdf" | "mail" | "preview" | null>(null);
   const [melding, setMelding] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-slate-100" />;
 
@@ -47,20 +51,39 @@ export default function OfferteDetailPage() {
 
   const t = berekenTotalen(quote.regels, quote.korting);
 
+  async function haalPdf(): Promise<Blob> {
+    const res = await fetch("/api/offertes/pdf", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quote, lead }),
+    });
+    if (!res.ok) throw new Error("pdf");
+    return res.blob();
+  }
+
   async function downloadPdf() {
     setBezig("pdf");
     try {
-      const res = await fetch("/api/offertes/pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ quote, lead }),
-      });
-      if (!res.ok) throw new Error();
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      window.open(url, "_blank");
+      const blob = await haalPdf();
+      window.open(URL.createObjectURL(blob), "_blank");
     } catch {
       setMelding("PDF genereren mislukt.");
+    } finally {
+      setBezig(null);
+    }
+  }
+
+  async function togglePreview() {
+    if (previewUrl) {
+      setPreviewUrl(null);
+      return;
+    }
+    setBezig("preview");
+    try {
+      const blob = await haalPdf();
+      setPreviewUrl(URL.createObjectURL(blob));
+    } catch {
+      setMelding("PDF-preview mislukt.");
     } finally {
       setBezig(null);
     }
@@ -76,13 +99,23 @@ export default function OfferteDetailPage() {
       });
       const data = await res.json();
       if (data.ok) {
+        // 1) offerte-status → Verzonden (+ verzonddatum), 2) lead → Offerte verstuurd
         setQuoteStatus(quote!.id, "verstuurd");
-        // lead mee laten lopen in de pijplijn
         if (lead && ["nieuwe_lead", "offerte_aanvraag", "gebeld", "afspraak_ingepland"].includes(lead.stage)) {
           updateLead(lead.id, { stage: "offerte_verstuurd" });
         }
+        // 3) e-maillog vastleggen (tabel quote_email_logs)
+        addEmailLog({
+          quoteId: quote!.id,
+          naar: lead!.email,
+          onderwerp: data.onderwerp ?? "Uw offerte van Prefab Select",
+          status: "verzonden",
+          messageId: data.messageId,
+          mock: !!data.mock,
+        });
         setMelding(data.mock ? `Offerte ge-maild naar ${lead!.email} (mock — geen echte mail verstuurd).` : `Offerte verstuurd naar ${lead!.email}.`);
       } else {
+        addEmailLog({ quoteId: quote!.id, naar: lead!.email, onderwerp: "Uw offerte van Prefab Select", status: "mislukt", mock: true });
         setMelding("Mailen mislukt.");
       }
     } catch {
@@ -121,10 +154,14 @@ export default function OfferteDetailPage() {
             <Badge className={QUOTE_STATUS_META[quote.status].kleur}>{QUOTE_STATUS_META[quote.status].label}</Badge>
           </div>
           <p className="mt-1 text-sm text-slate-500">
-            Voor <Link href={`/leads/${lead.id}`} className="font-semibold text-brand-600">{lead.naam}</Link> · geldig tot {datum(quote.geldigTot)}
+            {PRODUCT_LABEL[quote.projecttype]} voor{" "}
+            <Link href={`/leads/${lead.id}`} className="font-semibold text-brand-600">{lead.naam}</Link> · geldig tot {datum(quote.geldigTot)}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <button onClick={togglePreview} disabled={bezig !== null} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50">
+            <Eye className="h-4 w-4" /> {bezig === "preview" ? "Bezig…" : previewUrl ? "Sluit preview" : "Preview"}
+          </button>
           <button onClick={downloadPdf} disabled={bezig !== null} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50">
             <Download className="h-4 w-4" /> {bezig === "pdf" ? "Bezig…" : "PDF"}
           </button>
@@ -133,6 +170,13 @@ export default function OfferteDetailPage() {
           </button>
         </div>
       </div>
+
+      {/* PDF-preview */}
+      {previewUrl && (
+        <div className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft">
+          <iframe src={previewUrl} title="PDF-preview" className="h-[600px] w-full" />
+        </div>
+      )}
 
       {/* Status-tijdlijn */}
       <div className="mb-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
@@ -179,6 +223,19 @@ export default function OfferteDetailPage() {
         </div>
       </div>
 
+      {/* Projectgegevens */}
+      {(quote.projectomschrijving || quote.afmetingen || quote.werkzaamheden) && (
+        <div className="mb-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
+          <h3 className="mb-3 text-sm font-bold text-slate-900">Projectgegevens</h3>
+          <dl className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+            <Veld label="Projecttype" waarde={PRODUCT_LABEL[quote.projecttype]} />
+            {quote.afmetingen && <Veld label="Afmetingen" waarde={quote.afmetingen} />}
+            {quote.projectomschrijving && <Veld label="Omschrijving" waarde={quote.projectomschrijving} breed />}
+            {quote.werkzaamheden && <Veld label="Werkzaamheden" waarde={quote.werkzaamheden} breed />}
+          </dl>
+        </div>
+      )}
+
       {/* Offerte-inhoud */}
       <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
         <table className="w-full text-left text-sm">
@@ -186,6 +243,7 @@ export default function OfferteDetailPage() {
             <tr>
               <th className="pb-2 font-semibold">Omschrijving</th>
               <th className="pb-2 text-right font-semibold">Aantal</th>
+              <th className="pb-2 text-center font-semibold">Eenheid</th>
               <th className="pb-2 text-right font-semibold">Prijs</th>
               <th className="pb-2 text-right font-semibold">Totaal</th>
             </tr>
@@ -195,6 +253,7 @@ export default function OfferteDetailPage() {
               <tr key={r.id}>
                 <td className="py-2.5 text-slate-700">{r.omschrijving}</td>
                 <td className="py-2.5 text-right text-slate-600">{r.aantal}</td>
+                <td className="py-2.5 text-center text-slate-600">{r.eenheid}</td>
                 <td className="py-2.5 text-right text-slate-600">{euroCent(r.prijsPerStuk)}</td>
                 <td className="py-2.5 text-right font-semibold text-slate-800">{euroCent(r.aantal * r.prijsPerStuk)}</td>
               </tr>
@@ -206,16 +265,58 @@ export default function OfferteDetailPage() {
           <div className="flex w-56 justify-between text-slate-500"><span>Subtotaal</span><span>{euroCent(t.subtotaal)}</span></div>
           {t.korting > 0 && <div className="flex w-56 justify-between text-slate-500"><span>Korting</span><span>- {euroCent(t.korting)}</span></div>}
           <div className="flex w-56 justify-between text-slate-500"><span>Btw</span><span>{euroCent(t.btw)}</span></div>
-          <div className="mt-1 flex w-56 justify-between border-t border-slate-100 pt-1 text-base font-black text-slate-900"><span>Totaal</span><span>{euroCent(t.totaal)}</span></div>
+          <div className="mt-1 flex w-56 justify-between border-t border-slate-100 pt-1 text-base font-black text-slate-900"><span>Totaal incl. btw</span><span>{euroCent(t.totaal)}</span></div>
         </div>
 
         {quote.notitie && (
           <div className="mt-6 rounded-xl bg-slate-50 p-4 text-sm text-slate-600">
-            <p className="mb-1 text-xs font-semibold uppercase text-slate-400">Notitie</p>
+            <p className="mb-1 text-xs font-semibold uppercase text-slate-400">Opmerkingen</p>
             {quote.notitie}
           </div>
         )}
+        {quote.voorwaarden && (
+          <div className="mt-4 rounded-xl bg-slate-50 p-4 text-xs leading-relaxed text-slate-500">
+            <p className="mb-1 text-xs font-semibold uppercase text-slate-400">Voorwaarden</p>
+            {quote.voorwaarden}
+          </div>
+        )}
       </div>
+
+      {/* Verzendgeschiedenis */}
+      <div className="mt-6 rounded-2xl border border-slate-100 bg-white p-6 shadow-soft">
+        <h3 className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-900">
+          <History className="h-4 w-4 text-brand-600" /> Verzendgeschiedenis
+        </h3>
+        {emailLogs.length === 0 ? (
+          <p className="text-sm text-slate-400">Deze offerte is nog niet per e-mail verzonden.</p>
+        ) : (
+          <ul className="space-y-2">
+            {emailLogs.map((log) => (
+              <li key={log.id} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 text-sm">
+                <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${log.status === "verzonden" ? "bg-emerald-50 text-emerald-600" : "bg-rose-50 text-rose-600"}`}>
+                  <Mail className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-slate-700">{log.onderwerp} → <span className="font-medium">{log.naar}</span></p>
+                  <p className="text-xs text-slate-400">{datumTijd(log.verstuurdOp)}{log.mock ? " · mock" : ""}</p>
+                </div>
+                <Badge className={log.status === "verzonden" ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"}>
+                  {log.status === "verzonden" ? "Verzonden" : "Mislukt"}
+                </Badge>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Veld({ label, waarde, breed }: { label: string; waarde: string; breed?: boolean }) {
+  return (
+    <div className={breed ? "sm:col-span-3" : ""}>
+      <dt className="text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</dt>
+      <dd className="mt-0.5 text-slate-700">{waarde}</dd>
     </div>
   );
 }
