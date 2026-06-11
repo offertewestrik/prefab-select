@@ -18,7 +18,6 @@ import AIExpert from './pages/AIExpert';
 import AboutPage from './pages/About';
 import FAQPage from './pages/FAQPage';
 import Werkwijze from './pages/Werkwijze';
-import Dashboard from './pages/Dashboard';
 import ZeelandLandingPage from './pages/ZeelandLandingPage';
 import ZeelandSchuurtjesProject from './pages/ZeelandSchuurtjesProject';
 import { 
@@ -4329,8 +4328,7 @@ export default function App() {
           <Route path="/regio/zeeland" element={<ZeelandLandingPage />} />
           <Route path="/regio/zeeland/nieuwbouwproject" element={<ZeelandSchuurtjesProject />} />
           <Route path="/regio/:slug" element={<CityLandingPage />} />
-          <Route path="/crm" element={<Dashboard />} />
-          
+
           {/* 404 pagina voor onbekende routes */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

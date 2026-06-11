@@ -156,22 +156,6 @@ const escapeHtml = (value: unknown): string =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string)
   );
 
-const ADMIN_API_KEY = process.env.ADMIN_API_KEY || "";
-
-function requireAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
-  if (!ADMIN_API_KEY) {
-    return res.status(503).json({ error: "Admin access is not configured on this server." });
-  }
-  const provided = req.headers.authorization?.replace(/^Bearer\s+/i, "") || "";
-  const expected = Buffer.from(ADMIN_API_KEY);
-  const received = Buffer.from(provided);
-  const valid = expected.length === received.length && crypto.timingSafeEqual(expected, received);
-  if (!valid) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-  next();
-}
-
 const aiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 20,
@@ -409,107 +393,6 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
     console.error("Process lead failed:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
-
-// GET Endpoint to retrieve all leads (with Firestore fallback sync)
-app.get("/api/leads", requireAdmin, async (req, res) => {
-  if (db) {
-    try {
-      const snapshot = await db.collection("leads").orderBy("createdAt", "desc").get();
-      const firestoreLeads = snapshot.docs.map(doc => {
-        const data = doc.data();
-        let createdAtStr = new Date().toISOString();
-        if (data.createdAt) {
-          if (typeof data.createdAt.toDate === "function") {
-            createdAtStr = data.createdAt.toDate().toISOString();
-          } else if (data.createdAt._seconds) {
-            createdAtStr = new Date(data.createdAt._seconds * 1000).toISOString();
-          } else {
-            createdAtStr = new Date(data.createdAt).toISOString();
-          }
-        }
-        return {
-          id: doc.id,
-          firstName: data.firstName || "",
-          lastName: data.lastName || "",
-          email: data.email || "",
-          phone: data.phone || "",
-          projectType: data.projectType || "",
-          message: data.message || "",
-          status: data.status || "new",
-          createdAt: createdAtStr
-        };
-      });
-
-      // Merge and filter duplicates
-      const merged = [...localLeads];
-      for (const fsL of firestoreLeads) {
-        const idx = merged.findIndex(m => m.id === fsL.id);
-        if (idx !== -1) {
-          merged[idx] = fsL;
-        } else {
-          merged.push(fsL);
-        }
-      }
-      merged.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      localLeads = merged;
-      await saveLocalLeadsToDisk();
-    } catch (err: any) {
-      console.error("Error reading fresh leads from Firestore, returning cached leads:", err.message);
-    }
-  }
-  res.json(localLeads);
-});
-
-// PATCH Endpoint to update lead status
-app.patch("/api/leads/:id", requireAdmin, async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-
-  const allowedStatuses = ["new", "contacted", "qualified", "closed", "lost"];
-  if (typeof status !== "string" || !allowedStatuses.includes(status)) {
-    return res.status(400).json({ error: "Invalid status" });
-  }
-
-  console.log(`Updating lead ${id} status to ${status}`);
-
-  // Update locally first
-  const leadIndex = localLeads.findIndex(l => l.id === id);
-  if (leadIndex !== -1) {
-    localLeads[leadIndex].status = status;
-    await saveLocalLeadsToDisk();
-  }
-
-  // Sync to firestore in background if available
-  if (db) {
-    try {
-      const leadRef = db.collection("leads").doc(id);
-      const docSnap = await leadRef.get();
-      if (docSnap.exists) {
-        await leadRef.update({ status });
-        console.log(`Successfully updated lead ${id} in Firestore.`);
-      } else {
-        const localLead = localLeads[leadIndex];
-        if (localLead) {
-          await leadRef.set({
-            firstName: localLead.firstName,
-            lastName: localLead.lastName,
-            email: localLead.email,
-            phone: localLead.phone,
-            projectType: localLead.projectType,
-            message: localLead.message,
-            status,
-            createdAt: admin.firestore.FieldValue.serverTimestamp()
-          });
-          console.log(`Created missing lead ${id} in Firestore.`);
-        }
-      }
-    } catch (err: any) {
-      console.error(`Firestore lead ${id} update failed (silent bypass):`, err.message);
-    }
-  }
-
-  res.json({ success: true, message: `Lead status updated to ${status}` });
 });
 
 app.get("/api/health", (req, res) => {
