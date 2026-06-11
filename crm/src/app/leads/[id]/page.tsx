@@ -429,46 +429,81 @@ function AfsprakenTab({ leadId, appointments }: { leadId: string; appointments: 
 
 // --- Bestanden ---
 function BestandenTab({ leadId, files }: { leadId: string; files: any[] }) {
-  const addFile = useCrm((s) => s.addFile);
+  const registerFile = useCrm((s) => s.registerFile);
   const deleteFile = useCrm((s) => s.deleteFile);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [bezig, setBezig] = useState(false);
+  const [fout, setFout] = useState<string | null>(null);
 
-  function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const lijst = e.target.files;
-    if (!lijst) return;
-    for (const f of Array.from(lijst)) {
-      addFile({
-        leadId,
-        naam: f.name,
-        type: f.type.includes("pdf") ? "pdf" : f.type.startsWith("image") ? "afbeelding" : "bestand",
-        grootteKb: Math.round(f.size / 1024),
-        geuploadDoor: "Jij",
-      });
+    if (!lijst?.length) return;
+    setBezig(true);
+    setFout(null);
+    try {
+      for (const f of Array.from(lijst)) {
+        const form = new FormData();
+        form.append("file", f);
+        form.append("leadId", leadId);
+        form.append("geuploadDoor", "Jij");
+        const res = await fetch("/api/files", { method: "POST", body: form });
+        if (!res.ok) {
+          const body = await res.json().catch(() => null);
+          throw new Error(body?.error ?? `Upload van "${f.name}" mislukt`);
+        }
+        registerFile(await res.json());
+      }
+    } catch (err) {
+      setFout((err as Error).message);
+    } finally {
+      setBezig(false);
+      if (inputRef.current) inputRef.current.value = "";
     }
-    if (inputRef.current) inputRef.current.value = "";
   }
 
   return (
     <div>
       <button
         onClick={() => inputRef.current?.click()}
-        className="mb-4 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-slate-200 py-6 text-sm font-semibold text-slate-500 transition hover:border-brand-400 hover:text-brand-600"
+        disabled={bezig}
+        className="mb-4 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-slate-200 py-6 text-sm font-semibold text-slate-500 transition hover:border-brand-400 hover:text-brand-600 disabled:opacity-50"
       >
-        <Upload className="h-5 w-5" /> Klik om bestanden te uploaden
+        <Upload className={`h-5 w-5 ${bezig ? "animate-bounce" : ""}`} />
+        {bezig ? "Bezig met uploaden…" : "Klik om bestanden te uploaden"}
       </button>
       <input ref={inputRef} type="file" multiple className="hidden" onChange={onUpload} />
 
+      {fout && (
+        <div className="mb-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+          {fout}
+        </div>
+      )}
+
       <ul className="space-y-2">
         {files.map((f) => (
-          <li key={f.id} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
-              <FileText className="h-4 w-4" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-slate-700">{f.naam}</p>
-              <p className="text-xs text-slate-400">{f.grootteKb} KB · {f.geuploadDoor} · {datum(f.geuploadOp)}</p>
-            </div>
-            <button onClick={() => deleteFile(f.id)} className="text-slate-300 hover:text-rose-500">
+          <li key={f.id} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 transition hover:border-brand-200 hover:bg-brand-50/30">
+            <a
+              href={`/api/files/${f.id}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex min-w-0 flex-1 items-center gap-3"
+              title={`"${f.naam}" openen`}
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
+                <FileText className="h-4 w-4" />
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-medium text-slate-700">{f.naam}</span>
+                <span className="block text-xs text-slate-400">{f.grootteKb} KB · {f.geuploadDoor} · {datum(f.geuploadOp)}</span>
+              </span>
+              <ExternalLink className="ml-auto h-4 w-4 shrink-0 text-slate-300" />
+            </a>
+            <button
+              onClick={() => {
+                if (confirm(`"${f.naam}" verwijderen?`)) deleteFile(f.id);
+              }}
+              className="text-slate-300 hover:text-rose-500"
+            >
               <Trash2 className="h-4 w-4" />
             </button>
           </li>

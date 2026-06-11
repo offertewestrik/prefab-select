@@ -138,6 +138,8 @@ export interface UploadedFile {
   naam: string;
   type: string; // mime / categorie
   grootteKb: number;
+  /** Pad in de Supabase storage-bucket (lead-files). */
+  storagePath?: string;
   geuploadOp: string; // ISO
   geuploadDoor: string;
 }
