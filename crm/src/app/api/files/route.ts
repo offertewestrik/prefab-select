@@ -38,9 +38,16 @@ export async function POST(req: Request) {
 
   try {
     const buf = Buffer.from(await file.arrayBuffer());
-    const { error: upErr } = await db.storage.from(FILES_BUCKET).upload(pad, buf, {
+    let { error: upErr } = await db.storage.from(FILES_BUCKET).upload(pad, buf, {
       contentType: file.type || "application/octet-stream",
     });
+    // Bucket bestaat nog niet? Eenmalig zelf aanmaken en opnieuw proberen.
+    if (upErr && /bucket.*not.*found/i.test(upErr.message ?? "")) {
+      await db.storage.createBucket(FILES_BUCKET, { public: false }).catch(() => undefined);
+      ({ error: upErr } = await db.storage.from(FILES_BUCKET).upload(pad, buf, {
+        contentType: file.type || "application/octet-stream",
+      }));
+    }
     if (upErr) throw upErr;
 
     const { data, error } = await db
@@ -55,7 +62,17 @@ export async function POST(req: Request) {
       })
       .select("*")
       .single();
-    if (error) throw error;
+    if (error) {
+      // Half gelukte upload niet laten zwerven in storage.
+      await db.storage.from(FILES_BUCKET).remove([pad]).catch(() => undefined);
+      if (/relation.*files|files.*not exist|schema cache/i.test(error.message ?? "")) {
+        return Response.json(
+          { error: "De database-tabel 'files' ontbreekt nog. Voer migratie 0012_bestanden.sql uit in de Supabase SQL Editor." },
+          { status: 500 },
+        );
+      }
+      throw error;
+    }
 
     return Response.json(mapFile(data), { status: 201 });
   } catch (err) {
