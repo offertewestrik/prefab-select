@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import React, { useState, useEffect, useMemo, PropsWithChildren } from 'react';
+import React, { useState, useEffect, useMemo, useRef, PropsWithChildren } from 'react';
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
@@ -39,6 +39,7 @@ import {
   Home,
   MapPin,
   Play,
+  Pause,
   Clock,
   Factory,
   ShieldCheck,
@@ -1208,7 +1209,7 @@ function CityLandingPage() {
                       className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5"
                     >
                       <div className="text-2xl font-black text-blue-400 uppercase tracking-tighter">{stat.value}</div>
-                      <div className="text-[9px] font-black uppercase tracking-widest text-white/40">{stat.label}</div>
+                      <div className="text-[9px] font-black uppercase tracking-widest text-white/70">{stat.label}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -1302,7 +1303,7 @@ function CityLandingPage() {
               <div className="p-10 rounded-[3rem] bg-blue-950 text-white shadow-3xl sticky top-32 overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px] -mr-16 -mt-16" />
                 <h4 className="text-2xl font-display font-black mb-6 tracking-tighter uppercase leading-none">Vrijblijvende <br /> Prijsopgave</h4>
-                <p className="text-sm text-blue-300/60 mb-10 leading-relaxed font-bold uppercase tracking-widest">
+                <p className="text-sm text-blue-200 mb-10 leading-relaxed font-bold uppercase tracking-widest">
                   Ontvang binnen 24 uur een voorstel voor uw project in {page.name}.
                 </p>
                 <Link 
@@ -1442,11 +1443,12 @@ const WhatsAppButton = () => (
   <div className="fixed bottom-24 right-6 z-40 flex flex-col gap-4">
     {/* WhatsApp Button */}
     <a 
-      href="https://wa.me/31850607775" 
-      target="_blank" 
+      href="https://wa.me/31850607775"
+      target="_blank"
       rel="noreferrer"
       className="bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-125 transition-transform flex items-center justify-center border-4 border-white group relative"
       title="Chat via WhatsApp"
+      aria-label="Chat via WhatsApp"
     >
       <MessageCircle className="w-6 h-6" />
       <div className="absolute right-full mr-4 bg-green-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow-2xl">
@@ -1744,7 +1746,7 @@ function Navbar() {
             <button onClick={() => {
               setIsOpen(!isOpen);
               setKellyOpen(false);
-            }} className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center backdrop-blur-xl border transition-all ${scrolled ? 'bg-blue-900/5 text-blue-900 border-blue-100 shadow-sm' : 'bg-white/10 text-white border-white/10 shadow-sm'}`}>
+            }} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'} aria-expanded={isOpen} className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center backdrop-blur-xl border transition-all ${scrolled ? 'bg-blue-900/5 text-blue-900 border-blue-100 shadow-sm' : 'bg-white/10 text-white border-white/10 shadow-sm'}`}>
               {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
@@ -1776,9 +1778,10 @@ function Navbar() {
                 </div>
               </Link>
               
-              <button 
-                className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white active:scale-95 transition-all" 
+              <button
+                className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white active:scale-95 transition-all"
                 onClick={() => setIsOpen(false)}
+                aria-label="Menu sluiten"
               >
                 <X size={20} />
               </button>
@@ -1805,10 +1808,10 @@ function Navbar() {
                 </div>
                 
                 <div className="flex gap-2">
-                  <a href="tel:31850607775" className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center active:scale-95 transition-all shadow-md shadow-blue-600/20">
+                  <a href="tel:31850607775" aria-label="Bel Prefab Select" className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center active:scale-95 transition-all shadow-md shadow-blue-600/20">
                     <Phone size={14} />
                   </a>
-                  <a href="mailto:info@prefabselect.nl" className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center active:scale-95 transition-all border border-white/10">
+                  <a href="mailto:info@prefabselect.nl" aria-label="E-mail Prefab Select" className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center active:scale-95 transition-all border border-white/10">
                     <Mail size={14} />
                   </a>
                 </div>
@@ -1826,14 +1829,15 @@ function Navbar() {
                     <div key={link.name} className="border-b border-white/5 py-3 last:border-0 text-left">
                       {hasDropdown ? (
                         <div className="flex flex-col text-left">
-                          <button 
+                          <button
                             onClick={() => toggleMobileDropdown(link.name)}
+                            aria-expanded={isDropdownOpen}
                             className="w-full flex items-center justify-between text-left py-1 text-2xl font-display font-black text-white hover:text-blue-400 transition-colors uppercase tracking-tighter"
                           >
                             <span>{link.name}</span>
                             <ChevronDown 
                               size={18} 
-                              className={`text-white/40 transition-transform duration-300 ${isDropdownOpen ? '-rotate-180 text-blue-400' : ''}`} 
+                              className={`text-white/70 transition-transform duration-300 ${isDropdownOpen ? '-rotate-180 text-blue-400' : ''}`} 
                             />
                           </button>
                           
@@ -1850,7 +1854,7 @@ function Navbar() {
                                   <Link 
                                     to={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-[10px] font-black text-white/40 hover:text-white transition-colors uppercase tracking-[0.15em] py-2 flex items-center gap-2 text-left"
+                                    className="text-[10px] font-black text-white/70 hover:text-white transition-colors uppercase tracking-[0.15em] py-2 flex items-center gap-2 text-left"
                                   >
                                     <ArrowRight size={10} className="text-white/20" />
                                     <span>Totaaloverzicht {link.name}</span>
@@ -1896,7 +1900,7 @@ function Navbar() {
                   Vraag offerte aan
                 </Link>
                 
-                <div className="flex flex-col items-center justify-center gap-2 pt-4 border-t border-white/5 text-[9px] font-bold text-white/40 uppercase tracking-widest">
+                <div className="flex flex-col items-center justify-center gap-2 pt-4 border-t border-white/5 text-[9px] font-bold text-white/70 uppercase tracking-widest">
                   <a href="tel:31850607775" className="hover:text-white transition-colors flex items-center gap-1.5 py-1">
                     <Phone size={10} /> +31 85 060 7775
                   </a>
@@ -2275,7 +2279,7 @@ function SEOText() {
             <div className="bg-white/5 backdrop-blur-[80px] p-10 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden border border-white/10 group">
                <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
                <h4 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 text-blue-400 leading-none">Direct duidelijkheid</h4>
-               <p className="text-[10px] text-white/40 leading-relaxed font-black uppercase tracking-[0.3em] mb-12">
+               <p className="text-[10px] text-white/70 leading-relaxed font-black uppercase tracking-[0.3em] mb-12">
                  Benieuwd wat er bij jouw woning mogelijk is? Vraag vrijblijvend een offerte aan via <a href="https://www.prefabselect.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-400 transition-colors">www.prefabselect.nl</a>
                </p>
                <Link to="/offerte" className="w-full bg-blue-600 text-white py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-blue-500 hover:translate-y-[-4px] hover:shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all duration-300 shadow-2xl active:scale-95 group flex items-center justify-center gap-4 border border-blue-400/20">
@@ -2383,7 +2387,7 @@ function Footer() {
                     <Phone size={14} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-300/50 mb-1">Telefoon</p>
+                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-200 mb-1">Telefoon</p>
                     <a href="tel:+31850607775" className="text-sm font-display font-bold text-white hover:text-blue-400 transition-colors tracking-tight">
                       +31 85 060 7775
                     </a>
@@ -2394,7 +2398,7 @@ function Footer() {
                     <Mail size={14} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-300/50 mb-1">Email</p>
+                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-200 mb-1">Email</p>
                     <a href="mailto:info@prefabselect.nl" className="text-sm font-display font-bold text-white hover:text-blue-400 transition-colors">
                       info@prefabselect.nl
                     </a>
@@ -2405,7 +2409,7 @@ function Footer() {
                     <MapPin size={14} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-300/50 mb-1">Locatie</p>
+                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-200 mb-1">Locatie</p>
                     <p className="text-sm font-display font-bold text-white leading-tight">
                       Steenspil 24<br />
                       4661 TZ Halsteren
@@ -2531,33 +2535,48 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input 
-                required
-                name="name"
-                type="text" 
-                placeholder="Volledige Naam" 
-                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest" 
-              />
-              <input 
-                required
-                name="phone"
-                type="tel" 
-                placeholder="Telefoonnummer" 
-                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest" 
-              />
+              <div>
+                <label htmlFor="offerte-name" className="sr-only">Volledige naam</label>
+                <input
+                  required
+                  id="offerte-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Volledige Naam"
+                  className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest"
+                />
+              </div>
+              <div>
+                <label htmlFor="offerte-phone" className="sr-only">Telefoonnummer</label>
+                <input
+                  required
+                  id="offerte-phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder="Telefoonnummer"
+                  className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest"
+                />
+              </div>
             </div>
-            <input 
+            <label htmlFor="offerte-email" className="sr-only">E-mailadres</label>
+            <input
               required
+              id="offerte-email"
               name="email"
-              type="email" 
-              placeholder="E-mailadres" 
-              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest" 
+              type="email"
+              autoComplete="email"
+              placeholder="E-mailadres"
+              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest"
             />
             <div className="relative group">
-              <select 
+              <label htmlFor="offerte-projectType" className="sr-only">Projecttype</label>
+              <select
                 required
+                id="offerte-projectType"
                 name="projectType"
-                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 appearance-none uppercase tracking-widest cursor-pointer"
+                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 appearance-none uppercase tracking-widest cursor-pointer"
                 defaultValue=""
               >
                 <option value="" disabled className="bg-white font-bold uppercase">Selecteer ProjectType</option>
@@ -2567,22 +2586,25 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
                 <ChevronDown size={14} />
               </div>
             </div>
-            <textarea 
+            <label htmlFor="offerte-message" className="sr-only">Bericht (optioneel)</label>
+            <textarea
+              id="offerte-message"
               name="message"
-              placeholder="Bericht (optioneel)" 
+              placeholder="Bericht (optioneel)"
               rows={3}
-              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 resize-none uppercase tracking-widest leading-relaxed" 
+              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 resize-none uppercase tracking-widest leading-relaxed"
             />
-            
+
             {error && (
-              <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-[10px] font-bold uppercase tracking-widest">
+              <div role="alert" aria-live="polite" className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-[10px] font-bold uppercase tracking-widest">
                 {error}
               </div>
             )}
 
-            <button 
+            <button
               type="submit"
               disabled={loading}
+              aria-busy={loading}
               className={`w-full bg-blue-700 text-white py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[10px] shadow-[0_20px_40px_-15px_rgba(29,78,216,0.5)] border border-blue-400/20 hover:bg-blue-600 hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(29,78,216,0.6)] transition-all duration-300 active:scale-95 group flex items-center justify-center gap-3 mt-4 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? 'Bezig met verzenden...' : (
@@ -2825,16 +2847,32 @@ function PremiumIntro() {
 function Hero() {
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoPlaying, setVideoPlaying] = useState(true);
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setVideoPlaying(true);
+    } else {
+      video.pause();
+      setVideoPlaying(false);
+    }
+  };
 
   return (
     <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center pt-32 md:pt-48 pb-16 md:pb-24 overflow-hidden bg-blue-950">
       <div className="absolute inset-0 z-0">
         <motion.div style={{ y: yHero }} className="absolute inset-0">
-          <video 
-            autoPlay 
-            muted 
-            loop 
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
             playsInline
+            preload="metadata"
             poster="https://i.imgur.com/NuWPxEj.jpg"
             className="w-full h-full object-cover opacity-100 grayscale-0 contrast-[1.1] scale-105"
           >
@@ -2843,6 +2881,15 @@ function Hero() {
         </motion.div>
         <div className="absolute inset-0 bg-linear-to-b from-blue-950/20 via-blue-950/40 to-blue-950/80" />
       </div>
+
+      <button
+        type="button"
+        onClick={toggleVideo}
+        aria-label={videoPlaying ? 'Video pauzeren' : 'Video afspelen'}
+        className="absolute bottom-4 right-4 z-20 bg-black/40 backdrop-blur text-white rounded-full p-3 hover:bg-black/60 transition-colors"
+      >
+        {videoPlaying ? <Pause size={16} /> : <Play size={16} />}
+      </button>
 
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10 md:gap-12 items-start relative z-10 w-full text-left">
         <motion.div
@@ -3185,6 +3232,20 @@ function OfferteLandingPage() {
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
   const location = useLocation();
   const isConfigurator = location.pathname.includes('configurator');
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoPlaying, setVideoPlaying] = useState(true);
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setVideoPlaying(true);
+    } else {
+      video.pause();
+      setVideoPlaying(false);
+    }
+  };
 
   return (
     <div className="bg-white min-h-screen font-sans">
@@ -3197,11 +3258,13 @@ function OfferteLandingPage() {
       <section className="relative min-h-[85vh] flex items-center pt-32 sm:pt-48 md:pt-64 pb-20 sm:pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
           <motion.div style={{ y: yHero }} className="absolute inset-0">
-            <video 
-              autoPlay 
-              muted 
-              loop 
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
               playsInline
+              preload="metadata"
               poster="https://i.imgur.com/NuWPxEj.jpg"
               className="w-full h-full object-cover opacity-60 grayscale scale-105"
             >
@@ -3210,6 +3273,15 @@ function OfferteLandingPage() {
           </motion.div>
           <div className="absolute inset-0 bg-linear-to-b from-blue-950/40 via-blue-950/80 to-blue-950" />
         </div>
+
+        <button
+          type="button"
+          onClick={toggleVideo}
+          aria-label={videoPlaying ? 'Video pauzeren' : 'Video afspelen'}
+          className="absolute bottom-4 right-4 z-20 bg-black/40 backdrop-blur text-white rounded-full p-3 hover:bg-black/60 transition-colors"
+        >
+          {videoPlaying ? <Pause size={16} /> : <Play size={16} />}
+        </button>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-start relative z-10 w-full text-left">
           <motion.div
@@ -3701,7 +3773,7 @@ function WhyChooseUsPage() {
               <Link to="/offerte" className="bg-blue-600 text-white px-12 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] shadow-2xl hover:bg-blue-500 hover:-translate-y-1 transition-all active:scale-95 group flex items-center gap-4 border border-blue-400/20">
                 Start jouw project <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="#benefits" className="text-white/40 hover:text-white text-[11px] font-black uppercase tracking-[0.3em] transition-all flex items-center gap-3 group">
+              <a href="#benefits" className="text-white/70 hover:text-white text-[11px] font-black uppercase tracking-[0.3em] transition-all flex items-center gap-3 group">
                 <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/40 transition-all">
                   <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
                 </div>
@@ -3720,7 +3792,7 @@ function WhyChooseUsPage() {
             className="bg-white/5 backdrop-blur-3xl border border-white/10 p-10 rounded-[3rem] shadow-2xl"
           >
             <p className="text-4xl font-display font-black text-blue-400 mb-1 tracking-tighter uppercase leading-none">100%</p>
-            <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/40 leading-none">Eigen Beheer</p>
+            <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/70 leading-none">Eigen Beheer</p>
           </motion.div>
         </div>
       </section>
@@ -3850,7 +3922,7 @@ function BlogPage() {
                 {blog.category}
               </span>
               <div className="w-1 h-1 rounded-full bg-white/20" />
-              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
+              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-white/70">
                 <Clock size={12} strokeWidth={3} /> {blog.readTime}
               </div>
             </div>
@@ -4205,6 +4277,12 @@ function NotFoundPage() {
 export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-600 focus:text-white focus:px-6 focus:py-3 focus:rounded-2xl"
+      >
+        Direct naar inhoud
+      </a>
       <MetaPixel />
       <CookieConsent />
       <StructuredData />
@@ -4212,7 +4290,7 @@ export default function App() {
       <Navbar />
       <WhatsAppButton />
       <StickyMobileCTA />
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/offerte" element={<OfferteLandingPage />} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import Seo from '../components/Seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, Search, HelpCircle, MessageCircle, ArrowRight } from 'lucide-react';
@@ -295,14 +295,17 @@ const faqJsonLd = JSON.stringify({
 
 const FAQItemComponent = ({ item, index }: { item: FAQItem; index: number }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
 
   return (
-    <motion.div 
+    <motion.div
       layout
       className={`border-b border-slate-100 last:border-0 transition-colors ${isOpen ? 'bg-blue-50/30' : 'hover:bg-slate-50/50'}`}
     >
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
         className="w-full px-6 py-5 flex items-center justify-between text-left group"
       >
         <span className={`text-sm md:text-base font-bold tracking-tight transition-colors ${isOpen ? 'text-blue-600' : 'text-blue-950 group-hover:text-blue-600'}`}>
@@ -319,6 +322,7 @@ const FAQItemComponent = ({ item, index }: { item: FAQItem; index: number }) => 
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id={panelId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
