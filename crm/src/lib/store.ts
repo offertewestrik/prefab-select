@@ -196,7 +196,8 @@ interface CrmState {
   importCatalogus: () => number;
 
   // --- Bestanden ---
-  addFile: (file: Omit<UploadedFile, "id" | "geuploadOp">) => void;
+  /** Voegt een (via /api/files geüpload) bestand toe aan de lijst. */
+  registerFile: (file: UploadedFile) => void;
   deleteFile: (fileId: string) => void;
 
   // --- Offerte-aanvragen ---
@@ -258,6 +259,7 @@ export const useCrm = create<CrmState>()(
           if (Array.isArray(data.taskComments)) patch.taskComments = data.taskComments;
           if (Array.isArray(data.purchases)) patch.purchases = data.purchases;
           if (Array.isArray(data.products)) patch.products = data.products;
+          if (Array.isArray(data.files)) patch.files = data.files;
           set(patch);
         } catch (e) {
           console.error("Hydratatie mislukt:", e);
@@ -404,13 +406,17 @@ export const useCrm = create<CrmState>()(
         dbSync("appointments", "upsert", get().appointments.find((a) => a.id === afspraakId));
       },
 
-      addFile: (file) =>
-        set((s) => ({
-          files: [...s.files, { ...file, id: id("file"), geuploadOp: new Date().toISOString() }],
-        })),
+      registerFile: (file) =>
+        set((s) => ({ files: [file, ...s.files] })),
 
-      deleteFile: (fileId) =>
-        set((s) => ({ files: s.files.filter((f) => f.id !== fileId) })),
+      deleteFile: (fileId) => {
+        set((s) => ({ files: s.files.filter((f) => f.id !== fileId) }));
+        if (typeof window !== "undefined") {
+          fetch(`/api/files/${fileId}`, { method: "DELETE" }).catch((e) =>
+            console.error("Bestand verwijderen mislukt:", e),
+          );
+        }
+      },
 
       updateQuoteRequest: (reqId, patch) =>
         set((s) => ({
