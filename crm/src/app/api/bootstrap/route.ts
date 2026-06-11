@@ -26,11 +26,12 @@ export async function GET() {
       listTaskComments(),
       listPurchases(),
     ]);
-    // Apart, zodat een ontbrekende products-tabel (migratie 0011 nog niet
-    // uitgevoerd) de rest van de bootstrap niet blokkeert.
-    const products = await listProducts().catch(() => []);
-    // Idem voor de files-tabel (migratie 0012).
-    const files = await listFiles().catch(() => []);
+    // Apart, zodat een ontbrekende products-/files-tabel (migratie 0011/0012
+    // nog niet uitgevoerd) de rest van de bootstrap niet blokkeert. Bij een
+    // leesfout sturen we het veld niet mee (null), zodat de client zijn
+    // lokale lijst niet onterecht leegmaakt.
+    const products = await listProducts().catch(() => null);
+    const files = await listFiles().catch(() => null);
     return Response.json(
       { leads, quotes, invoices, payments, notes, appointments, tasks, taskComments, purchases, products, files },
       { headers: { "Cache-Control": "no-store" } },
