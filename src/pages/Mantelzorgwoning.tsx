@@ -1,5 +1,4 @@
 import React from 'react';
-import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Clock, Box, ShieldCheck, Leaf, ArrowRight, CheckCircle2, ChevronRight, Zap } from 'lucide-react';
@@ -9,12 +8,6 @@ import { PrefabSteps } from '../App';
 const Mantelzorgwoning = () => {
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
-      <Seo
-        title="Prefab Mantelzorgwoning in de Tuin | Prefab Select"
-        description="Comfortabele prefab mantelzorgwoning in de tuin. Volledig uitgerust, snel geplaatst en vaak vergunningsvrij. Vraag vrijblijvend advies aan bij Prefab Select."
-        canonical="/mantelzorgwoning"
-        image="https://i.imgur.com/RMmRx1j.jpeg"
-      />
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-blue-950">
         <div className="absolute inset-0">
@@ -75,7 +68,7 @@ const Mantelzorgwoning = () => {
               <img 
                 src="https://i.imgur.com/tGXkhAS.jpeg" 
                 alt="Prefab mantelzorgwoning realisatie" 
-                className="w-full object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/5]" loading="lazy"
+                className="w-full object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/5]"
               />
             </motion.div>
             
@@ -160,7 +153,7 @@ const Mantelzorgwoning = () => {
       {/* SECTIE 4 — MODERNE PREFAB MANTELZORGWONINGEN */}
       <section className="py-24 md:py-32 bg-blue-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-40">
-          <img src="https://i.imgur.com/RMmRx1j.jpeg" alt="Moderne prefab mantelzorgwoningen" className="w-full h-full object-cover" loading="lazy" />
+          <img src="https://i.imgur.com/RMmRx1j.jpeg" alt="Moderne prefab mantelzorgwoningen" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-blue-950/80" />
         </div>
         
@@ -226,7 +219,7 @@ const Mantelzorgwoning = () => {
               <img 
                 src="https://i.imgur.com/RMmRx1j.jpeg" 
                 alt="Modulair en duurzaam bouwen" 
-                className="w-full object-cover aspect-[4/5]" loading="lazy"
+                className="w-full object-cover aspect-[4/5]"
               />
             </motion.div>
           </div>

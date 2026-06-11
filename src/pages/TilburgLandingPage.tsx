@@ -16,67 +16,67 @@ import {
 import { Link } from 'react-router-dom';
 import { KellyCTA } from '../KellyCTA';
 
-export default function ZeelandLandingPage() {
+export default function TilburgLandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    document.title = "Uitbouw in Zeeland | Prefab uitbouw op maat — Prefab Select";
+    document.title = "Uitbouw in Tilburg | Prefab uitbouw op maat — Prefab Select";
     window.scrollTo({ top: 0, behavior: 'instant' });
     
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         "content", 
-        "Een uitbouw in Zeeland laten bouwen? Lees alles over prefab uitbouw in de hele provincie: vergunning per gemeente, beschermde stadsgezichten, kosten, bouwtijd en de voordelen aan de kust. Prefab Select bouwt snel en vakkundig."
+        "Een uitbouw in Tilburg laten bouwen? Lees alles over prefab uitbouw: vergunning, de Nota Omgevingskwaliteit en welstandsvrije gebieden, kosten, bouwtijd en regels per wijk. Prefab Select bouwt snel en vakkundig."
       );
     }
 
-    // Dynamic JSON-LD Schema injection for Zeeland
+    // Dynamic JSON-LD Schema injection for Tilburg
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.id = 'json-ld-zeeland-schema';
+    script.id = 'json-ld-tilburg-schema';
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebPage",
-          "@id": "https://www.prefabselect.nl/regio/zeeland",
-          "url": "https://www.prefabselect.nl/regio/zeeland",
-          "name": "Uitbouw in Zeeland | Prefab uitbouw op maat — Prefab Select",
-          "description": "Een uitbouw in Zeeland laten bouwen? Lees alles over prefab uitbouw in de hele provincie: vergunning per gemeente, beschermde stadsgezichten, kosten, bouwtijd en de voordelen aan de kust. Prefab Select bouwt snel en vakkundig.",
+          "@id": "https://www.prefabselect.nl/regio/tilburg",
+          "url": "https://www.prefabselect.nl/regio/tilburg",
+          "name": "Uitbouw in Tilburg | Prefab uitbouw op maat — Prefab Select",
+          "description": "Een uitbouw in Tilburg laten bouwen? Lees alles over prefab uitbouw: vergunning, de Nota Omgevingskwaliteit en welstandsvrije gebieden, kosten, bouwtijd en regels per wijk. Prefab Select bouwt snel en vakkundig.",
           "inLanguage": "nl-NL",
           "isPartOf": { "@type": "WebSite", "name": "Prefab Select", "url": "https://www.prefabselect.nl" },
           "about": { 
             "@type": "Service", 
-            "name": "Prefab uitbouw Zeeland", 
+            "name": "Prefab uitbouw Tilburg", 
             "provider": { "@type": "GeneralContractor", "name": "Prefab Select" } 
           },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.prefabselect.nl" },
-              { "@type": "ListItem", "position": 2, "name": "Zeeland", "item": "https://www.prefabselect.nl/regio/zeeland" }
+              { "@type": "ListItem", "position": 2, "name": "Tilburg", "item": "https://www.prefabselect.nl/regio/tilburg" }
             ]
           }
         },
         {
           "@type": "FAQPage",
-          "@id": "https://www.prefabselect.nl/regio/zeeland#faq",
+          "@id": "https://www.prefabselect.nl/regio/tilburg#faq",
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Heb ik een vergunning nodig voor een uitbouw in Zeeland?",
+              "name": "Heb ik een vergunning nodig voor een uitbouw in Tilburg?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. De landelijke regels gelden in heel Zeeland, maar het welstandsbeleid verschilt per gemeente. In de vele beschermde stadsgezichten (zoals Middelburg, Veere en Zierikzee) of bij monumenten is bijna altijd een vergunning nodig. Doe altijd de vergunningcheck voor uw adres."
+                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. In Tilburg geldt bovendien dat voor ingrepen aan de achterzijde die niet aan de openbare ruimte grenzen meestal geen welstandstoets nodig is. Doe altijd de vergunningcheck voor uw adres."
               }
             },
             {
               "@type": "Question",
-              "name": "Is prefab geschikt voor het Zeeuwse kustklimaat?",
+              "name": "Wat is de Nota Omgevingskwaliteit in Tilburg?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Juist wel. Doordat een prefab uitbouw in de werkplaats wordt gemaakt, heeft wind, regen en zilte zeelucht tijdens de bouw nauwelijks invloed. De elementen worden onder constante omstandigheden geproduceerd en op locatie snel en strak gemonteerd."
+                "text": "Dat is het kwaliteits- en welstandsbeleid van Tilburg, met als motto 'meer aandacht waar dat moet, meer vrijheid waar dat kan'. Er zijn welstandsvrije gebieden waar geen welstandstoets geldt; elders adviseert de Omgevingscommissie over het uiterlijk van een bouwplan."
               }
             },
             {
@@ -89,7 +89,7 @@ export default function ZeelandLandingPage() {
             },
             {
               "@type": "Question",
-              "name": "Wat kost een uitbouw in Zeeland ongeveer?",
+              "name": "Wat kost een uitbouw in Tilburg ongeveer?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Reken op een richtprijs van ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van de afwerking. Een compacte uitbouw begint rond de € 40.000. Een offerte op maat geeft het exacte bedrag voor uw woning."
@@ -102,7 +102,7 @@ export default function ZeelandLandingPage() {
     document.head.appendChild(script);
 
     return () => {
-      const existingScript = document.getElementById('json-ld-zeeland-schema');
+      const existingScript = document.getElementById('json-ld-tilburg-schema');
       if (existingScript) {
         existingScript.remove();
       }
@@ -112,58 +112,57 @@ export default function ZeelandLandingPage() {
   const stappen = [
     {
       nr: '1',
-      title: 'Zeeuws Maatwerk & Advies',
-      desc: 'We analyseren uw woning, bespreken uw wensen en stemmen het concept af op de logistiek op de Zeeuwse eilanden. U ontvangt een heldere, vaste prijsopgave.'
+      title: 'Persoonlijk Advies & Ontwerp',
+      desc: 'We bekijken uw woning in Tilburg, bespreken uw wensen en maken een doordacht ontwerp. U ontvangt direct een heldere, transparante offerte.'
     },
     {
       nr: '2',
-      title: 'Vergunning & Welstand',
-      desc: 'Bouwt u in een historisch stadsgezicht of bij de duinen? Wij handelen de complete omgevingsvergunning en welstandstoets af bij uw Zeeuwse gemeente.'
+      title: 'Vergunningscheck & Welstand',
+      desc: 'We controleren gratis of uw uitbouw in een welstandsvrij gebied valt. Moet er toch een vergunning komen? Dan regelen wij alles bij de gemeente.'
     },
     {
       nr: '3',
       title: 'Modulaire Prefabricage',
-      desc: 'Uw aanbouw wordt millimeterprecies en volledig droog gebouwd in onze geklimatiseerde fabriekshal, ver weg van de gure kustwind of zilte weersinvloeden.'
+      desc: 'Elementen zoals de wanden, het dak en de kozijnen worden in onze werkplaats tot op de millimeter nauwkeurig gebouwd onder perfecte omstandigheden.'
     },
     {
       nr: '4',
-      title: 'Zeeuwse Klei & Schroefmontage',
-      desc: 'We steken een stabiele fundering (zeer nauwkeurig berekend naar de Zeeuwse klei- of zandbodems) en monteren de gehele opbouw wind- en waterdicht binnen één dag.'
+      title: 'Snelle Montage op Locatie',
+      desc: 'Na de voorbereiding van de fundering op de Brabantse zandgrond plaatsen we de gehele uitbouw binnen één dag. De ruwbouw staat direct windvast.'
     },
     {
       nr: '5',
-      title: 'Sluitende Oplevering',
-      desc: 'We monteren alle elektra, glaspartijen, eventuele vloerverwarming of daklichten direct af. Uw nieuwe, lichte Zeeuwse ruimte is gereed voor gebruik.'
+      title: 'Fijne Afwerking & Oplevering',
+      desc: 'We sluiten elektra aan, monteren beglazing, eventuele vloerverwarming of een lichtstraat, en leveren de gehele ruimte keurig gebruiksklaar op.'
     }
   ];
 
   const wijken = [
-    { name: 'Walcheren (Middelburg, Vlissingen, Veere)', desc: 'Prachtig historisch erfgoed met strenge eisen rond de monumentenzorg en beschermde stadsgezichten. We ontwerpen met uiterst esthetische precisie die perfect past bij het historische karakter.' },
-    { name: 'Zuid-Beveland & Goes', desc: 'Regio’s met veel royale gezinswoningen en ruime kavels; hier benutten we de vergunningsvrije normen optimaal tot wel 4 meter diep voor een grote, zonnige tuinkamer of een riante leefkeuken.' },
-    { name: 'Schouwen-Duiveland & Zierikzee', desc: 'Prachtige kustgebieden waar zowel vaste woningen als vakantiehuizen profiteren van de stormbestendige en uiterst duurzame isolatiekwaliteit van onze prefab-profielen.' },
-    { name: 'Zeeuws-Vlaanderen & Terneuzen', desc: 'Logistiek slim georganiseerd; we transporteren en plaatsen prefab aanbouwen vlot op locaties nabij de Belgische grens en aan de kust van Cadzand tot Hulst.' }
+    { name: 'Reeshof & Moderne Wijken', desc: 'Sfeervolle, ruime gezinswijken met flinke achtertuinen en een goede achterom. Hier optimaliseren we vergunningsvrije normen tot wel 4 meter diep voor een grote, zonnige tuinkamer of een riante leefkeuken.' },
+    { name: 'Oud-Noord, Korvel & Broekhoven', desc: 'Dichterbebouwde, sfeervolle historische wijken met soms smallere straatjes en specifieke erfgrenzen. Onze prefab methode is hier ideaal om logistieke overlast in de straat tot een minimum te beperken.' },
+    { name: 'Berkel-Enschot & Udenhout', desc: 'Dorpse, karakteristieke kernen die bij de gemeente Tilburg horen. Hier stemmen we de uitstraling uiterst zorgvuldig af op de omgevingsvisie, zodat uw uitbouw perfect past in het traditionele straatbeeld.' }
   ];
 
   const faqs = [
     {
-      question: 'Heb ik een vergunning nodig voor een uitbouw in Zeeland?',
-      answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. De landelijke regels gelden in heel Zeeland, maar het welstandsbeleid verschilt per gemeente. In de vele beschermde stadsgezichten (zoals Middelburg, Veere en Zierikzee) of bij monumenten is bijna altijd een vergunning vereisen. Doe altijd de vergunningcheck voor uw adres.'
+      question: 'Heb ik een vergunning nodig voor een uitbouw in Tilburg?',
+      answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. In Tilburg geldt bovendien dat voor ingrepen aan de achterzijde die niet aan de openbare ruimte grenzen meestal geen welstandstoets nodig is. Doe altijd de vergunningcheck voor uw adres.'
     },
     {
-      question: 'Is prefab geschikt voor het Zeeuwse kustklimaat?',
-      answer: 'Juist wel. Doordat een prefab uitbouw onder gecontroleerde omstandigheden in de werkplaats wordt geproduceerd, hebben wind, regen en zilte zeelucht tijdens de constructiefase geen enkele invloed. Bovendien staat de ruwbouw binnen één dag op locatie wind- en waterdicht gemonteerd.'
+      question: 'Wat is de Nota Omgevingskwaliteit in Tilburg?',
+      answer: 'Dat is het kwaliteits- en welstandsbeleid van Tilburg, met als motto "meer aandacht waar dat moet, meer vrijheid waar dat kan". Er zijn grote welstandsvrije gebieden waar geen welstandstoets geldt; elders adviseert de Omgevingscommissie over het uiterlijk van een bouwplan.'
     },
     {
       question: 'Hoelang duurt het plaatsen van een prefab uitbouw?',
-      answer: 'De montage van de vooraf gemaakte elementen op uw locatie duurt slechts één dag. Inclusief grondwerk, de gecorrigeerde fundering en de binnenzijde-afwerking bent u doorgaans binnen enkele dagen tot een week helemaal klaar.'
+      answer: 'De montage van de prefab elementen op locatie duurt slechts één dag. Inclusief grondwerk, fundering op de Brabantse zandgrond en de fijne binnenafwerking bent u doorgaans binnen een week helemaal gereed.'
     },
     {
-      question: 'Is een prefab aanbouw stormbestendig en goed geïsoleerd?',
-      answer: 'Absoluut. Onze prefab wanden, vloeren en daken bezitten uitmuntende thermische waarden tot wel Rc 6.0. De constructies zijn uiterst robuust, uitstekend geïsoleerd en ontworpen om de zwaarste Zeeuwse najaarsstormen moeiteloos te weerstaan.'
+      question: 'Is prefab net zo stevig en mooi als traditioneel metselwerk?',
+      answer: 'Zeker. Fabrieksproductie betekent gecontroleerde omstandigheden, en dat zorgt voor een constante kwaliteit en strakke maatvoering. De uitstraling bepaalt u zelf, van een moderne glaswand of houtlook profielen tot een uitvoering die naatloos aansluit op uw bestaande metselwerk.'
     },
     {
-      question: 'Wat kost een uitbouw in Zeeland ongeveer?',
-      answer: 'Reken op een gemiddelde richtprijs van ongeveer €2.500 tot €4.500 per vierkante meter, afhankelijk van uw gekozen luxeniveau, de bodemgesteldheid en de specifieke afmetingen. Een compacte uitbouw begint rond de €40.000.'
+      question: 'Wat kost een uitbouw in Tilburg ongeveer?',
+      answer: 'Reken op een gemiddelde richtprijs van ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van uw gekozen materiaalniveau, bodemgesteldheid en afwerking. Een compacte uitbouw begint rond de € 40.000.'
     }
   ];
 
@@ -172,7 +171,7 @@ export default function ZeelandLandingPage() {
   };
 
   return (
-    <div className="bg-white text-blue-950 font-sans selection:bg-blue-100 selection:text-blue-900" id="zeeland-landing-page">
+    <div className="bg-white text-blue-950 font-sans selection:bg-blue-100 selection:text-blue-900" id="tilburg-landing-page">
       
       {/* HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950" id="hero-section">
@@ -188,7 +187,7 @@ export default function ZeelandLandingPage() {
             <span>&rsaquo;</span>
             <Link to="/diensten" className="hover:text-white transition-colors">Regio's</Link>
             <span>&rsaquo;</span>
-            <span className="text-blue-300">Zeeland</span>
+            <span className="text-blue-300">Tilburg</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -204,20 +203,20 @@ export default function ZeelandLandingPage() {
                 <div className="inline-flex items-center gap-3 mb-6 bg-blue-900/40 border border-blue-500/20 rounded-full px-4 py-2" id="hero-badge">
                   <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-blue-300">
-                    PREFAB SELECT ZEELAND
+                    PREFAB SELECT TILBURG
                   </span>
                 </div>
 
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.9] mb-8 tracking-tighter uppercase" id="hero-title">
-                  Uitbouw in Zeeland <br />
+                  Uitbouw in Tilburg <br />
                   <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">
-                    meer ruimte met uitzicht
+                    meer ruimte in een stad
                   </span> <br />
-                  op zee en polder
+                  die blijft groeien
                 </h1>
 
                 <p className="text-base md:text-lg text-blue-100/70 mb-10 max-w-2xl leading-relaxed pl-6 border-l-4 border-blue-600 font-medium font-sans" id="hero-description">
-                  Wonen in Zeeland betekent rust, prachtige vergezichten en weidse stranden. Mocht u extra meters wooncomfort wensen aan uw vaste woning of recreatieve kustwoning, dan bouwt Prefab Select een stormbestendige, perfect geïsoleerde aanbouw — zonder maandenlange bouwoverlast.
+                  Tilburg is nuchter, levendig en volop in beweging — van de Spoorzone tot de Reeshof. Mocht uw Brabantse woning om extra leefmeters vragen, dan bouwt Prefab Select een perfect geïntegreerde, weersbestendige aanbouw met minimale rompslomp en uitstekende isolatie.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-12" id="hero-ctas">
@@ -245,7 +244,7 @@ export default function ZeelandLandingPage() {
                     </div>
                     <div>
                       <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Constructie in 1 dag</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Ideaal t.b.v. het veranderlijke kustklimaat</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Ruwbouw direct wind- &amp; waterdicht</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3" id="usp-security">
@@ -253,8 +252,8 @@ export default function ZeelandLandingPage() {
                       <ShieldCheck size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Zeeuwse Spelregels</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Deskundige vergunningbegeleiding</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Tilburgs Beleid</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Vrijheid dankzij welstandsvrijheid</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3" id="usp-isolation">
@@ -262,8 +261,8 @@ export default function ZeelandLandingPage() {
                       <Gem size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Tochtvrij &amp; Behaaglijk</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Uitstekende thermische Rc 6.0 isolatie</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Zandgrondfundatie</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Gunstig, berekend &amp; stabiel</p>
                     </div>
                   </div>
                 </div>
@@ -284,8 +283,8 @@ export default function ZeelandLandingPage() {
                 {/* Main image container */}
                 <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-slate-900 relative" id="hero-image-container">
                   <img 
-                    src="https://i.imgur.com/oMxZxiY.jpeg" 
-                    alt="Zeeland Prefab Uitbouw" 
+                    src="https://i.imgur.com/dHnph3R.jpeg" 
+                    alt="Tilburg Prefab Uitbouw" 	
                     className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />
@@ -324,10 +323,10 @@ export default function ZeelandLandingPage() {
               </h2>
               <div className="text-slate-500 text-base md:text-lg leading-relaxed font-medium space-y-6">
                 <p>
-                  Of u nu permanent geniet van het gemoedelijke Walcheren, de weidsheid van de Bevelanden of een heerlijk tweede recreatiewoning bezit aan de kust van Schouwen of Zeeuws-Vlaanderen: verhuizen brengt zware kosten en rompslomp met zich mee.
+                  Tilburg is een fantastische stad om in te wonen dankzij de rijke cultuur, gezellige sfeer en moderne stadsdeelvoorzieningen. Na verloop van tijd kan de vertrouwde woning door gezinsuitbreiding of behoefte aan een ruime thuiswerkplek net wat te krap gaan voelen.
                 </p>
                 <p>
-                  Met een hoogwaardige prefab uitbouw van Prefab Select breidt u op een uiterst soepele en vakkundige manier uw benedenverdieping uit. Dat herbergt direct meer leefcomfort voor uw gezin en telt overtuigend mee in de waardebepaling en taxaties van uw onroerend goed.
+                  Met een hoogwaardige prefab uitbouw van Prefab Select vergroot u uw benedenverdieping op een vakkundige manier. Dit herbergt direct meer leefcomfort voor uw gezin en telt overtuigend mee in de waardebepaling van uw woning op de groeiende Tilburgse woningmarkt.
                 </p>
               </div>
             </div>
@@ -337,14 +336,14 @@ export default function ZeelandLandingPage() {
                 Waarom kiezen voor prefab?
               </h3>
               <p className="text-slate-500 text-sm leading-relaxed font-semibold mb-8">
-                De overduidelijke voordelen van onze geavanceerde modulaire bouwmethode:
+                De unieke voordelen van onze geavanceerde modulaire bouwmethode:
               </p>
               <ul className="space-y-4" id="benefits-list">
                 {[
-                  'Binnen 1 dag op locatie opgesteld, direct wind- en waterdicht',
-                  'Ongevoelig voor gure wind, regen of zilte kustinvloeden t.b.v. productie',
-                  'Foutloze en strakke millimeterkwaliteit rechtstreeks uit de fabriek',
-                  'Ideale match met vergunningsvrije normen of welstandsrichtlijnen'
+                  'Binnen 1 dag op locatie opgebouwd, direct volledig wind- en waterdicht',
+                  'Geproduceerd in een droge, weersonafhankelijke fabriekshal',
+                  'Gegarandeerd strakke millimeterkwaliteit rechtstreeks uit de werkplaats',
+                  'Minimale overlast in uw wijk of voor uw buren tijdens de opbouwfase'
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-slate-700 text-xs font-bold uppercase tracking-wider">
                     <CheckCircle2 size={16} className="text-blue-600 shrink-0 mt-0.5" />
@@ -366,8 +365,8 @@ export default function ZeelandLandingPage() {
             <div className="lg:col-span-5" id="process-visual">
               <div className="rounded-[3.5rem] overflow-hidden border border-slate-200/80 shadow-md">
                 <img 
-                  src="https://i.imgur.com/GIRelwV.jpeg" 
-                  alt="Prefab Select Fabriek Zeeland" 
+                  src="https://i.imgur.com/DLaFkHx.jpeg" 
+                  alt="Prefab Select Fabriek Tilburg" 	
                   className="w-full aspect-[4/3] object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -379,17 +378,17 @@ export default function ZeelandLandingPage() {
                 ZONDER DRIE SEIZOENEN BOUWSTOF IN UW TUIN
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-                Volledig weerbestendige <br />
+                Volledig droge fabricage <br />
                 <span className="text-blue-600 italic font-light lowercase">
                   en uiterst snelle opbouw
                 </span>
               </h2>
               <div className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold space-y-6">
                 <p>
-                  Traditionele bouw ligt aan de kust dikwijls wekenlang stil vanwege onvoorspelbaar weer, harde stormen of weersgevoelige droogtijden. Onze prefab elementen worden beschut in de fabriekshal gefabriceerd.
+                  Traditionele bouw ter plaatse heeft dikwijls te maken met droogtijden, weersrisico's en langdurig lawaai. Prefab Select bereidt alle constructiedelen zorgvuldig voor in onze eigen werkplaats.
                 </p>
                 <p>
-                  Terwijl wij uw wanden, glaspuien en dakelementen millimeterprecies in elkaar zetten, realiseren onze monteurs op locatie een berekende fundering. Op de montagedag hijsen we de constructie op haar plek. Uw woning is razendsnel weer veilig wind- en waterdicht.
+                  Terwijl uw wanden en dakelementen millimeterprecies in elkaar worden gezet, bereiden onze monteurs de fundering op locatie voor. Op de montagedag hijsen we de uitbouw op haar plek. Uw woning is razendsnel weer veilig wind- en waterdicht.
                 </p>
               </div>
             </div>
@@ -398,30 +397,30 @@ export default function ZeelandLandingPage() {
         </div>
       </section>
 
-      {/* REGULATION & WELSTAND Zeeland */}
-      <section className="py-24 bg-blue-950 text-white relative overflow-hidden mx-0 sm:mx-6 rounded-[4rem]" id="welstand-zeeland-section">
+      {/* REGULATION & WELSTAND Tilburg */}
+      <section className="py-24 bg-blue-950 text-white relative overflow-hidden mx-0 sm:mx-6 rounded-[4rem]" id="welstand-tilburg-section">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.15),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-8 md:px-16 relative z-10">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
-            <div className="lg:col-span-7" id="welstand-zeeland-content">
+            <div className="lg:col-span-7" id="welstand-tilburg-content">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-4 block">
-                VAKKUNDIGE GEMEENTELIJK BEGELEIDING PER REGIO
+                MEER AANDACHT WAAR DAT MOET, MEER VRIJHEID WAAR DAT KAN
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-8">
-                Gemeentelijke Vergunningen <br />
+                Nota Omgevingskwaliteit <br />
                 <span className="text-blue-400 italic font-light lowercase">
-                  inhistorische &amp; kustgebieden
+                  en welstandsvrije gebieden
                 </span>
               </h2>
               
               <div className="text-blue-100/60 leading-relaxed font-semibold space-y-6 text-sm md:text-base max-w-2xl">
                 <p>
-                  De landelijke wetten bieden veel vergunningsvrije ruimte aan de achterkant. Echter herbergt Zeeland veel waardevolle, rijksbeschermde stads- en dorpsgezichten. Denk hierbij aan de historische monumentale kernen van <strong>Middelburg, Veere, Zierikzee, Hulst en Sluis</strong>.
+                  De landelijke wetgeving biedt uitstekende vergunningsvrije mogelijkheden aan de achterkant van uw woning tot 4 meter diep. In Tilburg komt daar een gunstig uiterlijkbeleid bij: dankzij de <strong>Nota Omgevingskwaliteit</strong> zijn er grote gebieden volledig welstandsvrij, of gelden er geen uiterlijke eisen voor aanbouwen aan de achterkant die niet direct grenzen aan de openbare weg.
                 </p>
                 <p>
-                  Als u binnen een dergelijke zone of aan een monument bouwt, gelden er specifieke richtlijnen en is een welstandstoets (Nota Ruimtelijke Kwaliteit) vereist. Prefab Select beschikt over ruime lokale ervaring met de Zeeuwse loketprocedures. Wij ontwerpen uw aanbouw met uiterste esthetische vakkundigheid voor een vlot verloop van uw omgevingsvergunning.
+                  Dit biedt buitengewoon veel architectonische ontwerpvrijheid voor uw droomuitbouw. Valt uw woning in Berkel-Enschot, Udenhout of nabij een beschermd stadsgezicht in het centrum? Dan begeleiden wij het ontwerptraject en de gemeentelijke procedures uiterst zorgvuldig.
                 </p>
               </div>
 
@@ -443,7 +442,7 @@ export default function ZeelandLandingPage() {
                 Laat ons uw adres gratis nakijken
               </h3>
               <p className="text-blue-100/60 text-xs leading-relaxed font-semibold mb-6">
-                Valt uw woning of kavel onder een beschermd welstandsregime of bent u juist vergunningsvrij? Wij zoeken het snel en kosteloos voor u uit.
+                Benieuwd of uw gewenste uitbouw valt onder een welstandsvrij regime of dat een omgevingsvergunning nodig is? Onze adviseurs zoeken het graag kosteloos voor u uit.
               </p>
               <Link 
                 to="/offerte" 
@@ -467,10 +466,10 @@ export default function ZeelandLandingPage() {
               KOSTEN EN CALCULATIE
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Wat kost een uitbouw in Zeeland?
+              Wat kost een uitbouw in Tilburg?
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-2xl mx-auto">
-              Uw gewenste materiaalkwaliteit en de transportspecificaties over de Zeeuwse eilanden bepalen de calculatie. Richtprijzen:
+              Uw gewenste materiaalkwaliteit, luxeniveau en de specifieke afmetingen bepalen de calculatie. Richtprijzen:
             </p>
           </div>
 
@@ -498,7 +497,7 @@ export default function ZeelandLandingPage() {
           </div>
 
           <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed" id="cost-footer-note">
-            * Dit betreft richtbedragen incl. btw en installatie. Sommige laaggelegen zeekleibodems in Zeeland verplichten een specifiek gemodificeerde fundatiemethode, om de constructie op termijn perfect water- en verzakkingsvrij te houden.
+            * Dit betreft richtbedragen incl. btw en installatie. Tilburg en omgeving liggen grotendeels op stabiele zandgronden, wat doorgaans uiterst gunstig is voor de fundering; dit minimaliseert de voorbereidende constructiekosten in vergelijking met laaggelegen polder- of kleigebieden.
           </p>
 
         </div>
@@ -510,10 +509,10 @@ export default function ZeelandLandingPage() {
           
           <div className="max-w-3xl mb-20 text-left" id="steps-header">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-              ZORGELOZE REALSATIE
+              ZORGELOZE REALISATIE
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Uw Zeeuwse bouwtraject stap-voor-stap <br />
+              Uw Tilburgs bouwtraject stap-voor-stap <br />
               <span className="text-blue-600 italic font-light lowercase">
                 geheel gestructureerd en vlekkeloos
               </span>
@@ -554,14 +553,14 @@ export default function ZeelandLandingPage() {
               LOKALE ANALYSE
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Bouwen per regio in Zeeland
+              Bouwen per stadsgebied in Tilburg
             </h2>
             <p className="text-base text-slate-500 leading-relaxed font-medium">
-              Zeeland herbergt verschillende landschappen en bebouwingen. Ontdek de logistieke en stedenbouwkundige kenmerken per gebied:
+              Tilburg is een stad met uiteenlopende wijken, wat mede bepaalt wat verstandig en toegestaan is. Ontdek de logistieke kenmerken per zone:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" id="districts-grid">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8" id="districts-grid">
             {wijken.map((wk, i) => (
               <div key={i} className="bg-slate-50/50 border border-slate-100/80 rounded-[2rem] p-8 hover:bg-slate-50 transition-colors" id={`district-card-${i}`}>
                 <h3 className="text-lg font-display font-black uppercase tracking-tighter text-blue-950 mb-3 flex items-center gap-3">
@@ -590,10 +589,10 @@ export default function ZeelandLandingPage() {
                 Is een aanbouw de beste oplossing voor uw gezin?
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Als u nood heeft aan extra meters leefruimte op het gelijkvloers (voor het realiseren van een royale leefkeuken, een gezellige eethoek of een lichte tuinkamer), dan is een uitbouw veruit de meest gewenste en multifunctionele methode.
+                Als u nood heeft aan extra meters leefruimte op de begane grond (voor het realiseren van een royale leefkeuken, een gezellige eethoek of een lichte tuinkamer), dan is een uitbouw veruit de meest gewenste en multifunctionele methode.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Zoekt u echter een dakkapel of dakkapverhoging om een extra slaap- of speelkamer op zolder te winnen? Of bent u op zoek naar een los prefab chalet op recreatiegrond? Wij adviseren u graag volstrekt objectief over alle facetten.
+                Zoekt u echter een dakkapel of dakkapverhoging om een extra slaapkamer op zolder te winnen? Wij adviseren u graag volstrekt objectief over de meest efficiënte oplossing voor uw unieke woonsituatie.
               </p>
             </div>
 
@@ -604,10 +603,10 @@ export default function ZeelandLandingPage() {
                 Grondige voorbereiding garandeert rust
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is raadzaam om vooraf kritieke factoren zoals de logistieke kraantoegankelijkheid op uw kavel, de exacte erfgrenzen en de bodemstabiliteit nauwkeurig in kaart te laten brengen.
+                Het is raadzaam om vooraf kritieke factoren zoals de logistieke kraantoegankelijkheid op uw perceel, de exacte erfgrenzen en de bodemstabiliteit nauwkeurig in kaart te laten brengen.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Onze constructieve engineers en ontwerpers lopen al deze randvoorwaarden grondig met u door voordat we in de werkplaats overgaan tot productie, om alle risico's volledig uit te sluiten.
+                Onze engineers en ontwerpers lopen al deze randvoorwaarden grondig met u door voordat we in de werkplaats overgaan tot productie, om alle risico's volledig uit te sluiten.
               </p>
             </div>
 
@@ -618,7 +617,7 @@ export default function ZeelandLandingPage() {
                 Daglicht vangen en de sfeer verrijken
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Een aanbouw levert niet alleen extra leefmeters op, maar herbergt sfeer. Veel Zeeuwse herenhuizen of rijwoningen kunnen door dichte bebouwing donkerder zijn gesitueerd.
+                Een aanbouw levert niet alleen extra leefmeters op, maar herbergt sfeer. Veel Tilburgse woningen kunnen door dichte bebouwing in oudere wijken donkerder zijn gesitueerd.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Met een royale glazen achtergevel, vouwdeuren of een royale lichtstraat in het platte dak herbergt u het natuurlijke zonlicht diep binnenshuis en verbindt u de tuin nauwer met uw living.
@@ -632,7 +631,7 @@ export default function ZeelandLandingPage() {
                 Tochtvrij, stormbestendig &amp; buitengewoon behaaglijk
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Tocht of warmteverlies in koude periodes aan de kust behoort definitief tot het verleden. Onze geavanceerde prefab systemen bezitten uitmuntende thermische isolatiewaarden tot wel Rc 6.0.
+                Tocht of warmteverlies in koude periodes behoort definitief tot het verleden. Onze geavanceerde prefab systemen bezitten uitmuntende thermische isolatiewaarden tot wel Rc 6.0.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Dit draagt direct bij aan een aanzienlijk lagere energierekening en is optimaal en eenvoudig te combineren met systemen zoals vloerverwarming of warmtepompen.
@@ -653,7 +652,7 @@ export default function ZeelandLandingPage() {
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter mb-6 leading-none">
               Veelgestelde vragen <br />
-              over uitbouwen in Zeeland
+              over uitbouwen in Tilburg
             </h2>
           </div>
 
@@ -722,9 +721,9 @@ export default function ZeelandLandingPage() {
       {/* Fallback article for client render bots */}
       <noscript>
         <article className="max-w-3xl mx-auto px-6 py-12 prose text-slate-700">
-          <h1>Uitbouw in Zeeland — prefab uitbouw op maat</h1>
-          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Zeeland en omgeving, waaronder Middelburg, Vlissingen, Goes, Terneuzen en Zierikzee. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. In de historische stadsgezichten en bij monumenten gelden strengere eisen via de Nota Ruimtelijke Kwaliteit en erfgoed- of welstandscommissies.</p>
-          <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject hangt op locatie af van de vergunningsprocedure en transportspecificaties over de Zeeuwse eilanden. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
+          <h1>Uitbouw in Tilburg — prefab uitbouw op maat</h1>
+          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Tilburg en omgeving, waaronder de Reeshof, Berkel-Enschot en Udenhout. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. Tilburg hanteert het beleid 'meer aandacht waar dat moet, meer vrijheid waar dat kan': er zijn welstandsvrije gebieden, en voor ingrepen aan de achterzijde is meestal geen welstandstoets nodig.</p>
+          <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject hangt op locatie af van de vergunningsprocedure en transportspecificaties over de regio Tilburg. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
         </article>
       </noscript>
 

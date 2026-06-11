@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Seo from '../components/Seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, Bot, User, Sparkles, ArrowLeft, RefreshCcw, Layout, Ruler, Palette } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -66,11 +65,6 @@ export default function AIExpert() {
 
   return (
     <div className="min-h-screen bg-blue-950 font-sans text-white flex flex-col pt-40 pb-20">
-      <Seo
-        title="AI Bouwexpert – Direct Antwoord op uw Vragen | Prefab Select"
-        description="Stel uw vraag over prefab bouwen aan onze AI bouwexpert en ontvang direct persoonlijk advies over kosten, vergunningen en mogelijkheden."
-        canonical="/ai-expert"
-      />
       <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col p-6 md:p-10">
         {/* Intro */}
         <div className="text-center mb-10">

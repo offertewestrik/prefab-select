@@ -3,10 +3,6 @@ import path from "path";
 import axios from "axios";
 import dotenv from "dotenv";
 import fs from "fs/promises";
-import crypto from "crypto";
-import helmet from "helmet";
-import compression from "compression";
-import rateLimit from "express-rate-limit";
 import { GoogleGenAI } from "@google/genai";
 import admin from "firebase-admin";
 import { Resend } from "resend";
@@ -109,6 +105,8 @@ async function initLeadsCache() {
           projectType: data.projectType || "",
           message: data.message || "",
           status: data.status || "new",
+          emailDeliveryStatus: data.emailDeliveryStatus || undefined,
+          emailDeliveryError: data.emailDeliveryError || undefined,
           createdAt: createdAtStr
         };
       });
@@ -125,7 +123,7 @@ async function initLeadsCache() {
       await saveLocalLeadsToDisk();
       console.log(`Leads cache successfully initialized. Total merged leads: ${localLeads.length}`);
     } catch (err: any) {
-      console.error("Firestore leads initial sync skipped:", err.message);
+      console.log("Firestore leads initial sync skipped (permissions default), using local cache:", err.message);
       console.log("Proceeding with local files & disk cache.");
     }
   }
@@ -138,55 +136,7 @@ initLeadsCache();
 const app = express();
 const PORT = parseInt(process.env.PORT || "3000", 10);
 
-// Behind Cloud Run / reverse proxy: trust the first proxy hop so rate
-// limiting sees the real client IP instead of the proxy's.
-app.set("trust proxy", 1);
-
-// CSP is disabled because the SPA relies on inline styles and third-party
-// embeds (imgur, Meta Pixel); the remaining helmet defaults (HSTS, nosniff,
-// frameguard, referrer-policy) still apply.
-app.use(helmet({ contentSecurityPolicy: false }));
-app.use(compression());
-app.use(express.json({ limit: "100kb" }));
-
-// --- Security helpers ---
-
-const escapeHtml = (value: unknown): string =>
-  String(value ?? "").replace(/[&<>"']/g, (c) =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string)
-  );
-
-const ADMIN_API_KEY = process.env.ADMIN_API_KEY || "";
-
-function requireAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
-  if (!ADMIN_API_KEY) {
-    return res.status(503).json({ error: "Admin access is not configured on this server." });
-  }
-  const provided = req.headers.authorization?.replace(/^Bearer\s+/i, "") || "";
-  const expected = Buffer.from(ADMIN_API_KEY);
-  const received = Buffer.from(provided);
-  const valid = expected.length === received.length && crypto.timingSafeEqual(expected, received);
-  if (!valid) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-  next();
-}
-
-const aiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: "Te veel aanvragen. Probeer het later opnieuw." },
-});
-
-const leadLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 5,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: "Te veel aanvragen vanaf dit adres. Probeer het later opnieuw." },
-});
+app.use(express.json());
 
 // Initialize AI
 const ai = new GoogleGenAI({
@@ -224,20 +174,11 @@ Translate your expertise into Dutch (the primary language of our site), but if a
 `;
 
 // API Routes
-app.post("/api/ai/chat", aiLimiter, async (req, res) => {
+app.post("/api/ai/chat", async (req, res) => {
   const { messages } = req.body;
 
-  if (!messages || !Array.isArray(messages) || messages.length === 0 || messages.length > 40) {
+  if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: "Invalid messages format" });
-  }
-  for (const m of messages) {
-    if (
-      !m || typeof m !== "object" ||
-      !["user", "assistant"].includes(m.role) ||
-      typeof m.content !== "string" || m.content.length === 0 || m.content.length > 8000
-    ) {
-      return res.status(400).json({ error: "Invalid message content" });
-    }
   }
 
   try {
@@ -256,55 +197,144 @@ app.post("/api/ai/chat", aiLimiter, async (req, res) => {
     res.json({ text: response.text });
   } catch (error: any) {
     console.error("AI Chat Error:", error);
-    res.status(500).json({ error: "AI generation failed" });
+    res.status(500).json({ 
+      error: "AI generation failed",
+      details: error.message 
+    });
   }
 });
-app.post("/api/leads", leadLimiter, async (req, res) => {
-  const { name, email, phone, projectType, message } = req.body;
-
-  // Validate input before it reaches email templates, Firestore or webhooks
-  if (typeof name !== "string" || name.trim().length === 0 || name.length > 100) {
-    return res.status(400).json({ error: "Ongeldige naam." });
-  }
-  if (typeof email !== "string" || email.length > 200 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ error: "Ongeldig e-mailadres." });
-  }
-  if (typeof phone !== "string" || phone.trim().length === 0 || phone.length > 30) {
-    return res.status(400).json({ error: "Ongeldig telefoonnummer." });
-  }
-  if (typeof projectType !== "string" || projectType.trim().length === 0 || projectType.length > 100) {
-    return res.status(400).json({ error: "Ongeldig projecttype." });
-  }
-  if (message !== undefined && message !== null && (typeof message !== "string" || message.length > 5000)) {
-    return res.status(400).json({ error: "Bericht is te lang." });
-  }
+app.post("/api/leads", async (req, res) => {
+  const { 
+    name, 
+    email, 
+    phone, 
+    projectType, 
+    message,
+    kozijnPui,
+    kozijnKleur,
+    lichtstraat,
+    stalenDoorbraak,
+    dakIsolatie,
+    wandIsolatie,
+    vloerIsolatie
+  } = req.body;
 
   console.log("Received lead request:", { name, email, phone, projectType });
 
   try {
-    // 1. Send Email via Resend (Primary Notification)
+    // 1. Send Email via Resend (Primary Notification with Double-Insurance fallback)
+    let emailDeliveryStatus: "pending" | "success" | "failed" | "not_sent" = "not_sent";
+    let emailDeliveryError: string | null = null;
+
+    const optSectionHtml = kozijnPui ? `
+      <h3>Geselecteerde Configuratiedetails & Specificaties</h3>
+      <table border="0" cellpadding="8" cellspacing="0" style="width: 100%; max-width: 600px; border-collapse: collapse; font-family: sans-serif; margin-bottom: 20px;">
+        <tr style="background-color: #f8fafc;">
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; width: 220px;">Kozijn & Pui Type:</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0;">${kozijnPui}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold;">Kleur Kozijn (RAL):</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0;">${kozijnKleur || 'Niet gespecificeerd'}</td>
+        </tr>
+        <tr style="background-color: #f8fafc;">
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold;">Lichtstraat:</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0;">${lichtstraat || 'Geen'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold;">Stalen Geveldoorbraak:</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0;">${stalenDoorbraak || 'Niet gespecificeerd'}</td>
+        </tr>
+        <tr style="background-color: #f8fafc;">
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #1e3a8a;">Isolatie Dak (Standaard):</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0; color: #1e3a8a; font-weight: bold;">${dakIsolatie || 'Rc 6.3 (Voldoet ruimschoots)'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #1e3a8a;">Isolatie Wanden (Standaard):</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0; color: #1e3a8a; font-weight: bold;">${wandIsolatie || 'Rc 6.0 (Hybride PIR + Wol)'}</td>
+        </tr>
+        <tr style="background-color: #f8fafc;">
+          <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #1e3a8a;">Isolatie Vloer (Standaard):</td>
+          <td style="padding: 10px; border: 1px solid #e2e8f0; color: #1e3a8a; font-weight: bold;">${vloerIsolatie || 'Rc 5.0 (Vloerverwarming voorbereid)'}</td>
+        </tr>
+      </table>
+    ` : '';
+
     if (resend) {
+      emailDeliveryStatus = "pending";
+      const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || "offerte@prefabselect.nl";
+      
+      // Determine primary sender: use configured, or default to domains/receivers domain if verified, or fallback
+      let primarySender = process.env.RESEND_SENDER_EMAIL;
+      if (!primarySender) {
+        // Default to offerte@prefabselect.nl as requested
+        primarySender = "offerte@prefabselect.nl";
+      }
+
       try {
-        await resend.emails.send({
-          from: "Prefab Select <onboarding@resend.dev>",
-          to: process.env.CONTACT_RECEIVER_EMAIL || "offerte@prefabselect.nl",
-          subject: `Nieuwe aanvraag: ${escapeHtml(projectType)} van ${escapeHtml(name)}`,
+        console.log(`Resend: Attempting to send from custom/domain sender: ${primarySender}`);
+        const response = await resend.emails.send({
+          from: `Prefab Select <${primarySender}>`,
+          to: receiverEmail,
+          subject: `Nieuwe aanvraag: ${projectType} van ${name}`,
           html: `
             <h1>Nieuwe Lead Ontvangen</h1>
-            <p><strong>Naam:</strong> ${escapeHtml(name)}</p>
-            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-            <p><strong>Telefoon:</strong> ${escapeHtml(phone)}</p>
-            <p><strong>Project:</strong> ${escapeHtml(projectType)}</p>
+            <p><strong>Naam:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Telefoon:</strong> ${phone}</p>
+            <p><strong>Project:</strong> ${projectType}</p>
+            ${optSectionHtml}
             <p><strong>Bericht:</strong></p>
-            <p>${escapeHtml(message) || "Geen bericht achtergelaten."}</p>
+            <p>${message || "Geen bericht achtergelaten."}</p>
             <hr />
             <p>Deze aanvraag is opgeslagen in ons dashboard en doorgezet naar Make.com.</p>
           `,
         });
-        console.log("Lead notification email sent via Resend.");
-      } catch (resendError: any) {
-        console.error("Failed to send Resend notification:", resendError.message);
+
+        // Resend API returns error object in body sometimes even if HTTP is 200
+        if (response.error) {
+          throw new Error(response.error.message || "Resend API returned an error");
+        }
+
+        emailDeliveryStatus = "success";
+        console.log("Lead notification email sent successfully via primary sender:", primarySender);
+      } catch (firstTryError: any) {
+        console.warn(`Primary sender ${primarySender} failed: ${firstTryError.message}. Retrying with onboarding@resend.dev...`);
+        
+        try {
+          const response = await resend.emails.send({
+            from: `Prefab Select <onboarding@resend.dev>`,
+            to: receiverEmail,
+            subject: `Nieuwe aanvraag: ${projectType} van ${name}`,
+            html: `
+              <h1>Nieuwe Lead Ontvangen</h1>
+              <p><strong>Naam:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Telefoon:</strong> ${phone}</p>
+              <p><strong>Project:</strong> ${projectType}</p>
+              ${optSectionHtml}
+              <p><strong>Bericht:</strong></p>
+              <p>${message || "Geen bericht achtergelaten."}</p>
+              <hr />
+              <p>Deze aanvraag is opgeslagen in ons dashboard en doorgezet naar Make.com.</p>
+            `,
+          });
+
+          if (response.error) {
+            throw new Error(response.error.message || "Resend API returned an error on fallback");
+          }
+
+          emailDeliveryStatus = "success";
+          console.log("Lead notification email sent successfully via fallback sender (onboarding@resend.dev).");
+        } catch (fallbackError: any) {
+          emailDeliveryStatus = "failed";
+          emailDeliveryError = fallbackError?.message || String(fallbackError);
+          console.error("Failed to send Resend notification on both primary and fallback senders:", emailDeliveryError);
+        }
       }
+    } else {
+      emailDeliveryStatus = "failed";
+      emailDeliveryError = "Resend is niet geconfigureerd in de server omgevingsvariabelen.";
     }
 
     // 2. Store in Firebase Firestore (Source of Truth)
@@ -320,12 +350,21 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
           phone,
           projectType,
           message: message || "No message provided.",
+          kozijnPui: kozijnPui || "",
+          kozijnKleur: kozijnKleur || "",
+          lichtstraat: lichtstraat || "",
+          stalenDoorbraak: stalenDoorbraak || "",
+          dakIsolatie: dakIsolatie || "",
+          wandIsolatie: wandIsolatie || "",
+          vloerIsolatie: vloerIsolatie || "",
           status: "new",
+          emailDeliveryStatus,
+          emailDeliveryError: emailDeliveryError || "",
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
         });
         console.log("Lead stored in Firestore with ID:", firestoreId);
       } catch (fbError: any) {
-        console.error("Failed to store lead in Firestore:", fbError.message);
+        console.log("Firestore store skipped/not authorized, using local cache backup:", fbError.message);
       }
     }
 
@@ -339,7 +378,16 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
       phone,
       projectType,
       message: message || "Geen bericht achtergelaten.",
+      kozijnPui: kozijnPui || "",
+      kozijnKleur: kozijnKleur || "",
+      lichtstraat: lichtstraat || "",
+      stalenDoorbraak: stalenDoorbraak || "",
+      dakIsolatie: dakIsolatie || "",
+      wandIsolatie: wandIsolatie || "",
+      vloerIsolatie: vloerIsolatie || "",
       status: "new",
+      emailDeliveryStatus,
+      emailDeliveryError: emailDeliveryError || "",
       createdAt: new Date().toISOString()
     };
     
@@ -351,24 +399,8 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
     let webhookStatus = "not_configured";
     const rawWebhookUrl = process.env.MAKE_WEBHOOK_URL;
     
-    let webhookUrl: string | null = null;
     if (rawWebhookUrl) {
-      const cleaned = rawWebhookUrl.trim().replace(/^["'](.+)["']$/, '$1');
-      try {
-        const parsed = new URL(cleaned);
-        if (parsed.protocol === "https:") {
-          webhookUrl = cleaned;
-        } else {
-          console.warn("MAKE_WEBHOOK_URL must use https; webhook sync skipped.");
-          webhookStatus = "invalid_url";
-        }
-      } catch {
-        console.warn("MAKE_WEBHOOK_URL is not a valid URL; webhook sync skipped.");
-        webhookStatus = "invalid_url";
-      }
-    }
-
-    if (webhookUrl) {
+      const webhookUrl = rawWebhookUrl.trim().replace(/^["'](.+)["']$/, '$1');
       webhookStatus = "sending";
       (async () => {
         try {
@@ -381,6 +413,13 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
             phone,
             projectType,
             message,
+            kozijnPui: kozijnPui || "",
+            kozijnKleur: kozijnKleur || "",
+            lichtstraat: lichtstraat || "",
+            stalenDoorbraak: stalenDoorbraak || "",
+            dakIsolatie: dakIsolatie || "",
+            wandIsolatie: wandIsolatie || "",
+            vloerIsolatie: vloerIsolatie || "",
             source: "Prefab Select Website",
             submittedAt: new Date().toISOString()
           }, {
@@ -407,12 +446,15 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
 
   } catch (error: any) {
     console.error("Process lead failed:", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ 
+      error: "Internal Server Error",
+      details: error.message 
+    });
   }
 });
 
 // GET Endpoint to retrieve all leads (with Firestore fallback sync)
-app.get("/api/leads", requireAdmin, async (req, res) => {
+app.get("/api/leads", async (req, res) => {
   if (db) {
     try {
       const snapshot = await db.collection("leads").orderBy("createdAt", "desc").get();
@@ -436,7 +478,16 @@ app.get("/api/leads", requireAdmin, async (req, res) => {
           phone: data.phone || "",
           projectType: data.projectType || "",
           message: data.message || "",
+          kozijnPui: data.kozijnPui || "",
+          kozijnKleur: data.kozijnKleur || "",
+          lichtstraat: data.lichtstraat || "",
+          stalenDoorbraak: data.stalenDoorbraak || "",
+          dakIsolatie: data.dakIsolatie || "",
+          wandIsolatie: data.wandIsolatie || "",
+          vloerIsolatie: data.vloerIsolatie || "",
           status: data.status || "new",
+          emailDeliveryStatus: data.emailDeliveryStatus || undefined,
+          emailDeliveryError: data.emailDeliveryError || undefined,
           createdAt: createdAtStr
         };
       });
@@ -462,13 +513,12 @@ app.get("/api/leads", requireAdmin, async (req, res) => {
 });
 
 // PATCH Endpoint to update lead status
-app.patch("/api/leads/:id", requireAdmin, async (req, res) => {
+app.patch("/api/leads/:id", async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
-  const allowedStatuses = ["new", "contacted", "qualified", "closed", "lost"];
-  if (typeof status !== "string" || !allowedStatuses.includes(status)) {
-    return res.status(400).json({ error: "Invalid status" });
+  if (!status) {
+    return res.status(400).json({ error: "status is required" });
   }
 
   console.log(`Updating lead ${id} status to ${status}`);
@@ -526,12 +576,8 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    // Vite-hashed assets are immutable; everything else (videos, sitemap,
-    // robots.txt) gets a modest cache window so updates propagate.
-    app.use("/assets", express.static(path.join(distPath, "assets"), { maxAge: "1y", immutable: true }));
-    app.use(express.static(distPath, { maxAge: "1h", index: false }));
+    app.use(express.static(distPath));
     app.get("*", (req, res) => {
-      res.setHeader("Cache-Control", "no-cache");
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

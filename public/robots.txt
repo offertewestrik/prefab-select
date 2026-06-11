@@ -1,5 +1,22 @@
-User-agent: *
+# ChatGPT zoekfunctie toestaan (citaties)
+User-agent: OAI-SearchBot
 Allow: /
-Disallow: /crm
 
-Sitemap: https://prefabselect.nl/sitemap.xml
+# ChatGPT live ophalen van pagina's toestaan
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI / Gemini toestaan
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity toestaan
+User-agent: PerplexityBot
+Allow: /
+
+# (Optioneel) trainingsbot van OpenAI. Op 'Allow' = mag voor training,
+# op 'Disallow' = niet voor training (heeft GEEN invloed op citaties).
+User-agent: GPTBot
+Allow: /
+
+Sitemap: https://www.prefabselect.nl/sitemap.xml

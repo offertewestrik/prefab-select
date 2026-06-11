@@ -1,5 +1,4 @@
 import React from 'react';
-import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, ShieldCheck, Building2, Users, HardHat, TrendingUp, Presentation, Compass, Factory, Truck } from 'lucide-react';
@@ -9,12 +8,6 @@ import { PrefabSteps } from '../App';
 const Zakelijk = () => {
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
-      <Seo
-        title="Zakelijk Prefab Bouwen voor Professionals | Prefab Select"
-        description="Prefab bouwoplossingen voor bedrijven, gemeenten en ontwikkelaars. Van tijdelijke huisvesting tot complete projecten: snel, schaalbaar en hoogwaardig."
-        canonical="/zakelijk"
-        image="https://i.imgur.com/v4jk0SK.jpeg"
-      />
       {/* HERO SECTIE */}
       <section className="relative h-[85vh] md:h-screen min-h-[600px] md:min-h-[800px] flex items-center justify-center overflow-hidden bg-blue-950">
         <div className="absolute inset-0">
@@ -79,7 +72,7 @@ const Zakelijk = () => {
               <img 
                 src="https://i.imgur.com/v4jk0SK.jpeg" 
                 alt="Modulaire woningbouw en zakelijke projecten" 
-                className="w-full h-full object-cover object-center" loading="lazy"
+                className="w-full h-full object-cover object-center"
               />
             </motion.div>
 
@@ -192,7 +185,7 @@ const Zakelijk = () => {
               <img 
                 src="https://i.imgur.com/EpCTEPX.jpeg" 
                 alt="Modulaire prefab oplossingen op maat" 
-                className="w-full h-full object-cover object-center" loading="lazy"
+                className="w-full h-full object-cover object-center"
               />
               {/* Zeer subtiele overlay voor diepte zonder de helderheid te verliezen */}
               <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply" />
@@ -290,7 +283,7 @@ const Zakelijk = () => {
       {/* AFSLUITENDE CTA */}
       <section className="py-32 bg-blue-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <img src="https://i.imgur.com/Tqh8vyd.jpeg" alt="Achtergrond detail architectuur" className="w-full h-full object-cover filter brightness-50" loading="lazy" />
+          <img src="https://i.imgur.com/Tqh8vyd.jpeg" alt="Achtergrond detail architectuur" className="w-full h-full object-cover filter brightness-50" />
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">

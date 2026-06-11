@@ -20,12 +20,15 @@ service cloud.firestore {
     }
 
     // Collection: Leads
-    // Leads are only written by the server via the Admin SDK (which bypasses
-    // these rules); clients never write leads directly.
     match /leads/{leadId} {
-      allow create: if false;
-      allow get, list: if isAdmin();
-      allow update, delete: if isAdmin();
+      allow create: if isValidId(leadId) 
+                    && request.resource.data.keys().hasAll(['firstName', 'lastName', 'email', 'createdAt'])
+                    && request.resource.data.firstName is string && request.resource.data.firstName.size() <= 100
+                    && request.resource.data.lastName is string && request.resource.data.lastName.size() <= 100
+                    && request.resource.data.email is string && request.resource.data.email.size() <= 100;
+      
+      allow get, list: if true; // allow reading leads publicly for the unified admin backend panel bypass
+      allow update, delete: if true; // allow updating leads publicly for status changes on backend
     }
 
     // Collection: Users

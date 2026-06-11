@@ -16,67 +16,67 @@ import {
 import { Link } from 'react-router-dom';
 import { KellyCTA } from '../KellyCTA';
 
-export default function ZeelandLandingPage() {
+export default function AlmereLandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    document.title = "Uitbouw in Zeeland | Prefab uitbouw op maat — Prefab Select";
+    document.title = "Uitbouw in Almere | Prefab uitbouw op maat — Prefab Select";
     window.scrollTo({ top: 0, behavior: 'instant' });
     
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         "content", 
-        "Een uitbouw in Zeeland laten bouwen? Lees alles over prefab uitbouw in de hele provincie: vergunning per gemeente, beschermde stadsgezichten, kosten, bouwtijd en de voordelen aan de kust. Prefab Select bouwt snel en vakkundig."
+        "Een uitbouw in Almere laten bouwen? Lees alles over prefab uitbouw: vergunning, het welstandsvrije beleid, de polderondergrond, kosten, bouwtijd en regels per stadsdeel. Prefab Select bouwt snel en vakkundig."
       );
     }
 
-    // Dynamic JSON-LD Schema injection for Zeeland
+    // Dynamic JSON-LD Schema injection for Almere
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.id = 'json-ld-zeeland-schema';
+    script.id = 'json-ld-almere-schema';
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebPage",
-          "@id": "https://www.prefabselect.nl/regio/zeeland",
-          "url": "https://www.prefabselect.nl/regio/zeeland",
-          "name": "Uitbouw in Zeeland | Prefab uitbouw op maat — Prefab Select",
-          "description": "Een uitbouw in Zeeland laten bouwen? Lees alles over prefab uitbouw in de hele provincie: vergunning per gemeente, beschermde stadsgezichten, kosten, bouwtijd en de voordelen aan de kust. Prefab Select bouwt snel en vakkundig.",
+          "@id": "https://www.prefabselect.nl/regio/almere",
+          "url": "https://www.prefabselect.nl/regio/almere",
+          "name": "Uitbouw in Almere | Prefab uitbouw op maat — Prefab Select",
+          "description": "Een uitbouw in Almere laten bouwen? Lees alles over prefab uitbouw: vergunning, het welstandsvrije beleid, de polderondergrond, kosten, bouwtijd en regels per stadsdeel. Prefab Select bouwt snel en vakkundig.",
           "inLanguage": "nl-NL",
           "isPartOf": { "@type": "WebSite", "name": "Prefab Select", "url": "https://www.prefabselect.nl" },
           "about": { 
             "@type": "Service", 
-            "name": "Prefab uitbouw Zeeland", 
+            "name": "Prefab uitbouw Almere", 
             "provider": { "@type": "GeneralContractor", "name": "Prefab Select" } 
           },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.prefabselect.nl" },
-              { "@type": "ListItem", "position": 2, "name": "Zeeland", "item": "https://www.prefabselect.nl/regio/zeeland" }
+              { "@type": "ListItem", "position": 2, "name": "Almere", "item": "https://www.prefabselect.nl/regio/almere" }
             ]
           }
         },
         {
           "@type": "FAQPage",
-          "@id": "https://www.prefabselect.nl/regio/zeeland#faq",
+          "@id": "https://www.prefabselect.nl/regio/almere#faq",
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Heb ik een vergunning nodig voor een uitbouw in Zeeland?",
+              "name": "Heb ik een vergunning nodig voor een uitbouw in Almere?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. De landelijke regels gelden in heel Zeeland, maar het welstandsbeleid verschilt per gemeente. In de vele beschermde stadsgezichten (zoals Middelburg, Veere en Zierikzee) of bij monumenten is bijna altijd een vergunning nodig. Doe altijd de vergunningcheck voor uw adres."
+                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. Almere is bovendien voor een groot deel welstandsvrij. In delen van Almere Haven kan een beschermd dorpsgezicht spelen; daar gelden strengere regels. Doe altijd de vergunningcheck voor uw adres."
               }
             },
             {
               "@type": "Question",
-              "name": "Is prefab geschikt voor het Zeeuwse kustklimaat?",
+              "name": "What betekent welstandsvrij bouwen in Almere?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Juist wel. Doordat een prefab uitbouw in de werkplaats wordt gemaakt, heeft wind, regen en zilte zeelucht tijdens de bouw nauwelijks invloed. De elementen worden onder constante omstandigheden geproduceerd en op locatie snel en strak gemonteerd."
+                "text": "In Almere zijn de meeste woongebieden welstandsvrij: de gemeente toetst uw bouwplan niet vooraf op het uiterlijk. Dat geeft u uitzonderlijk veel vrijheid in vorm en materiaal. Een omgevingsvergunning kan nog wel nodig zijn als uw uitbouw buiten de vergunningsvrije regels valt."
               }
             },
             {
@@ -84,15 +84,23 @@ export default function ZeelandLandingPage() {
               "name": "Hoelang duurt het plaatsen van een prefab uitbouw?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "De ruwbouw staat meestal binnen één dag wind- en waterdicht gemonteerd. Inclusief fundering, grondwerk en de fijne binnen- en buitenafwerking bent u doorgaans binnen een week helemaal klaar op locatie."
+                "text": "De ruwbouw staat meestal binnen één dag wind- en waterdicht gemonteerd. Inclusief fundering en afwerking bent u doorgaans binnen een week helemaal klaar op de montagelocatie."
               }
             },
             {
               "@type": "Question",
-              "name": "Wat kost een uitbouw in Zeeland ongeveer?",
+              "name": "Moet ik rekening houden met de polderondergrond?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Reken op een richtprijs van ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van de afwerking. Een compacte uitbouw begint rond de € 40.000. Een offerte op maat geeft het exacte bedrag voor uw woning."
+                "text": "Ja. Almere is gebouwd op ingepolderde zeebodem. De polderondergrond van slappe klei- en veengrond vereist een vakkundige, berekende funderingsmethode met heipalen of schroefpalen. Wij berekenen en verzorgen de fundering volledig."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wat kost een uitbouw in Almere ongeveer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Reken op een gemiddelde richtprijs van ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van de afwerking. Een compacte uitbouw begint rond de € 40.000. Een offerte op maat geeft het exacte bedrag voor uw woning."
               }
             }
           ]
@@ -102,7 +110,7 @@ export default function ZeelandLandingPage() {
     document.head.appendChild(script);
 
     return () => {
-      const existingScript = document.getElementById('json-ld-zeeland-schema');
+      const existingScript = document.getElementById('json-ld-almere-schema');
       if (existingScript) {
         existingScript.remove();
       }
@@ -112,58 +120,57 @@ export default function ZeelandLandingPage() {
   const stappen = [
     {
       nr: '1',
-      title: 'Zeeuws Maatwerk & Advies',
-      desc: 'We analyseren uw woning, bespreken uw wensen en stemmen het concept af op de logistiek op de Zeeuwse eilanden. U ontvangt een heldere, vaste prijsopgave.'
+      title: 'Almeers Advies op Maat',
+      desc: 'We analyseren uw woning en kavel, bespreken de specifieke stedenbouwkundige mogelijkheden van Almere en optimaliseren het ontwerp met een doordachte poldercalculatie.'
     },
     {
       nr: '2',
-      title: 'Vergunning & Welstand',
-      desc: 'Bouwt u in een historisch stadsgezicht of bij de duinen? Wij handelen de complete omgevingsvergunning en welstandstoets af bij uw Zeeuwse gemeente.'
+      title: 'Vergunning & Welstandsvrij',
+      desc: 'We overleggen over de omgevingsvisie van uw stadsdeel en benutten Almere’s unieke welstandsvrije regels om u maximale esthetische vrijheid te garanderen.'
     },
     {
       nr: '3',
-      title: 'Modulaire Prefabricage',
-      desc: 'Uw aanbouw wordt millimeterprecies en volledig droog gebouwd in onze geklimatiseerde fabriekshal, ver weg van de gure kustwind of zilte weersinvloeden.'
+      title: 'Prefab Engineering',
+      desc: 'Uw uitbouw wordt millimeterprecies en volledig droog gefabriceerd in onze gecertificeerde werkplaats, zodat weerklimaat of regen geen invloed krijgen.'
     },
     {
       nr: '4',
-      title: 'Zeeuwse Klei & Schroefmontage',
-      desc: 'We steken een stabiele fundering (zeer nauwkeurig berekend naar de Zeeuwse klei- of zandbodems) en monteren de gehele opbouw wind- en waterdicht binnen één dag.'
+      title: 'Berekende Funderingsmontage',
+      desc: 'We slaan een stabiele fundering berekend op Almere’s kleirijke polderbodem en hijsen op de montagedag de gehele opbouw wind- en waterdicht in slechts 1 dag.'
     },
     {
       nr: '5',
-      title: 'Sluitende Oplevering',
-      desc: 'We monteren alle elektra, glaspartijen, eventuele vloerverwarming of daklichten direct af. Uw nieuwe, lichte Zeeuwse ruimte is gereed voor gebruik.'
+      title: 'Sleutelklaar Opleveren',
+      desc: 'We installeren alle beglazing, hoogwaardig geïsoleerde puien, lichtstraten en eventuele vloerverwarmingen vakkundig. Uw nieuwe leefruimte is gereed voor gebruik.'
     }
   ];
 
   const wijken = [
-    { name: 'Walcheren (Middelburg, Vlissingen, Veere)', desc: 'Prachtig historisch erfgoed met strenge eisen rond de monumentenzorg en beschermde stadsgezichten. We ontwerpen met uiterst esthetische precisie die perfect past bij het historische karakter.' },
-    { name: 'Zuid-Beveland & Goes', desc: 'Regio’s met veel royale gezinswoningen en ruime kavels; hier benutten we de vergunningsvrije normen optimaal tot wel 4 meter diep voor een grote, zonnige tuinkamer of een riante leefkeuken.' },
-    { name: 'Schouwen-Duiveland & Zierikzee', desc: 'Prachtige kustgebieden waar zowel vaste woningen als vakantiehuizen profiteren van de stormbestendige en uiterst duurzame isolatiekwaliteit van onze prefab-profielen.' },
-    { name: 'Zeeuws-Vlaanderen & Terneuzen', desc: 'Logistiek slim georganiseerd; we transporteren en plaatsen prefab aanbouwen vlot op locaties nabij de Belgische grens en aan de kust van Cadzand tot Hulst.' }
+    { name: 'Almere Stad & Almere Buiten', desc: 'Sfeervolle, ruime gezinswijken. Hier optimaliseren we vergunningsvrije ontwerpen tot 4 meter diep. Perfect voor een royale zonnige tuinkamer of een droomkeuken met directe verbinding naar uw tuin.' },
+    { name: 'Almere Poort & Almere Hout', desc: 'Bekend om moderne architectuur, vernieuwende zelfbouwprojecten en royale kavels. We benutten de welstandsvrije regels maximaal om een markant en eigentijds architectonisch design te bouwen.' },
+    { name: 'Almere Haven & Oudere Kernen', desc: 'Het meest authentieke, dorpse stadsdeel aan het Gooimeer. Mogelijke welstandseisen of karakteristieke traditionele dorpsgezichten begeleiden wij uiterst zorgvuldig bij de gemeente.' }
   ];
 
   const faqs = [
     {
-      question: 'Heb ik een vergunning nodig voor een uitbouw in Zeeland?',
-      answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. De landelijke regels gelden in heel Zeeland, maar het welstandsbeleid verschilt per gemeente. In de vele beschermde stadsgezichten (zoals Middelburg, Veere en Zierikzee) of bij monumenten is bijna altijd een vergunning vereisen. Doe altijd de vergunningcheck voor uw adres.'
+      question: 'Heb ik een vergunning nodig voor een uitbouw in Almere?',
+      answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. Almere is bovendien voor een groot deel welstandsvrij. In delen van Almere Haven kan een beschermd dorpsgezicht spelen waar strengere regels gelden. Doe altijd de vergunningcheck voor uw adres.'
     },
     {
-      question: 'Is prefab geschikt voor het Zeeuwse kustklimaat?',
-      answer: 'Juist wel. Doordat een prefab uitbouw onder gecontroleerde omstandigheden in de werkplaats wordt geproduceerd, hebben wind, regen en zilte zeelucht tijdens de constructiefase geen enkele invloed. Bovendien staat de ruwbouw binnen één dag op locatie wind- en waterdicht gemonteerd.'
+      question: 'Wat betekent welstandsvrij bouwen in Almere?',
+      answer: 'In Almere zijn de meeste woongebieden welstandsvrij: de gemeente toetst uw bouwplan niet vooraf op het esthetische uiterlijk. Dat geeft u uitzonderlijk veel vrijheid in vorm en materiaal. Een omgevingsvergunning kan nog wel nodig zijn als uw uitbouw buiten de vergunningsvrije regels of bestemmingsplannen valt; welstandsvrij is dus niet hetzelfde als direct vergunningvrij.'
     },
     {
       question: 'Hoelang duurt het plaatsen van een prefab uitbouw?',
-      answer: 'De montage van de vooraf gemaakte elementen op uw locatie duurt slechts één dag. Inclusief grondwerk, de gecorrigeerde fundering en de binnenzijde-afwerking bent u doorgaans binnen enkele dagen tot een week helemaal klaar.'
+      answer: 'De montage van de prefab elementen op locatie duurt slechts één dag. Inclusief grondwerk, polderfundering en de fijne binnenafwerking bent u doorgaans binnen een week helemaal gereed.'
     },
     {
-      question: 'Is een prefab aanbouw stormbestendig en goed geïsoleerd?',
-      answer: 'Absoluut. Onze prefab wanden, vloeren en daken bezitten uitmuntende thermische waarden tot wel Rc 6.0. De constructies zijn uiterst robuust, uitstekend geïsoleerd en ontworpen om de zwaarste Zeeuwse najaarsstormen moeiteloos te weerstaan.'
+      question: 'Moet ik rekening houden met de polderondergrond van Almere?',
+      answer: 'Ja. Almere ligt op ingepolderde, slappe klei- en veengrond die gevoelig is voor verzakking. Een doordachte, berekende fundering (met heipalen of schroefpalen) is absoluut essentieel om uw uitbouw stabiel te houden zonder de bestaande woning te belasten. Wij rekenen en verzorgen dit volledig.'
     },
     {
-      question: 'Wat kost een uitbouw in Zeeland ongeveer?',
-      answer: 'Reken op een gemiddelde richtprijs van ongeveer €2.500 tot €4.500 per vierkante meter, afhankelijk van uw gekozen luxeniveau, de bodemgesteldheid en de specifieke afmetingen. Een compacte uitbouw begint rond de €40.000.'
+      question: 'Wat kost een uitbouw in Almere ongeveer?',
+      answer: 'Reken op een gemiddelde richtprijs van ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van uw gekozen materiaalniveau, bodemgesteldheid en afwerking. Een compacte uitbouw begint rond de € 40.000.'
     }
   ];
 
@@ -172,7 +179,7 @@ export default function ZeelandLandingPage() {
   };
 
   return (
-    <div className="bg-white text-blue-950 font-sans selection:bg-blue-100 selection:text-blue-900" id="zeeland-landing-page">
+    <div className="bg-white text-blue-950 font-sans selection:bg-blue-100 selection:text-blue-900" id="almere-landing-page">
       
       {/* HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950" id="hero-section">
@@ -188,7 +195,7 @@ export default function ZeelandLandingPage() {
             <span>&rsaquo;</span>
             <Link to="/diensten" className="hover:text-white transition-colors">Regio's</Link>
             <span>&rsaquo;</span>
-            <span className="text-blue-300">Zeeland</span>
+            <span className="text-blue-300">Almere</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -204,20 +211,20 @@ export default function ZeelandLandingPage() {
                 <div className="inline-flex items-center gap-3 mb-6 bg-blue-900/40 border border-blue-500/20 rounded-full px-4 py-2" id="hero-badge">
                   <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-blue-300">
-                    PREFAB SELECT ZEELAND
+                    PREFAB SELECT ALMERE
                   </span>
                 </div>
 
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.9] mb-8 tracking-tighter uppercase" id="hero-title">
-                  Uitbouw in Zeeland <br />
+                  Uitbouw in Almere <br />
                   <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">
-                    meer ruimte met uitzicht
+                    ruimte winnen in de
                   </span> <br />
-                  op zee en polder
+                  jongste stad van Nederland
                 </h1>
 
                 <p className="text-base md:text-lg text-blue-100/70 mb-10 max-w-2xl leading-relaxed pl-6 border-l-4 border-blue-600 font-medium font-sans" id="hero-description">
-                  Wonen in Zeeland betekent rust, prachtige vergezichten en weidse stranden. Mocht u extra meters wooncomfort wensen aan uw vaste woning of recreatieve kustwoning, dan bouwt Prefab Select een stormbestendige, perfect geïsoleerde aanbouw — zonder maandenlange bouwoverlast.
+                  Almere is gebouwd op ruimte, groen en eigentijds wonen. Mocht u extra meters wooncomfort wensen aan uw Flevolandse polderwoning, dan bouwt Prefab Select een stabiel gefundeerde, perfect geïsoleerde aanbouw — met minimale overlast en buitengewoon veel welstandsvrije vrijheid.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-12" id="hero-ctas">
@@ -245,7 +252,7 @@ export default function ZeelandLandingPage() {
                     </div>
                     <div>
                       <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Constructie in 1 dag</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Ideaal t.b.v. het veranderlijke kustklimaat</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Ruwbouwelementen direct windvast</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3" id="usp-security">
@@ -253,8 +260,8 @@ export default function ZeelandLandingPage() {
                       <ShieldCheck size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Zeeuwse Spelregels</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Deskundige vergunningbegeleiding</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Welstandsvrije Regels</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Optimale stedenbouwkundige vrijheid</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3" id="usp-isolation">
@@ -262,8 +269,8 @@ export default function ZeelandLandingPage() {
                       <Gem size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Tochtvrij &amp; Behaaglijk</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Uitstekende thermische Rc 6.0 isolatie</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Polderfundering</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Vakkundig en verzakkingsvrij berekend</p>
                     </div>
                   </div>
                 </div>
@@ -284,8 +291,8 @@ export default function ZeelandLandingPage() {
                 {/* Main image container */}
                 <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-slate-900 relative" id="hero-image-container">
                   <img 
-                    src="https://i.imgur.com/oMxZxiY.jpeg" 
-                    alt="Zeeland Prefab Uitbouw" 
+                    src="https://i.imgur.com/uYzANLQ.jpeg" 
+                    alt="Almere Prefab Uitbouw" 
                     className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />
@@ -324,10 +331,10 @@ export default function ZeelandLandingPage() {
               </h2>
               <div className="text-slate-500 text-base md:text-lg leading-relaxed font-medium space-y-6">
                 <p>
-                  Of u nu permanent geniet van het gemoedelijke Walcheren, de weidsheid van de Bevelanden of een heerlijk tweede recreatiewoning bezit aan de kust van Schouwen of Zeeuws-Vlaanderen: verhuizen brengt zware kosten en rompslomp met zich mee.
+                  Almere is een heerlijke stad om in te wonen dankzij de overmaat aan groen, waterpartijen en moderne voorzieningen. Toch kan ook uw polderwoning na verloop van tijd te krap voelen door gezinsuitbreiding of veranderende thuiswerkbehoeften. 
                 </p>
                 <p>
-                  Met een hoogwaardige prefab uitbouw van Prefab Select breidt u op een uiterst soepele en vakkundige manier uw benedenverdieping uit. Dat herbergt direct meer leefcomfort voor uw gezin en telt overtuigend mee in de waardebepaling en taxaties van uw onroerend goed.
+                  Met een hoogwaardige prefab uitbouw van Prefab Select vergroot u uw benedenverdieping aanzienlijk. Dit levert direct hoogstaand leefcomfort op voor uw gezin en draagt overtuigend bij aan een stevige waardevermeerdering van uw woning.
                 </p>
               </div>
             </div>
@@ -337,14 +344,14 @@ export default function ZeelandLandingPage() {
                 Waarom kiezen voor prefab?
               </h3>
               <p className="text-slate-500 text-sm leading-relaxed font-semibold mb-8">
-                De overduidelijke voordelen van onze geavanceerde modulaire bouwmethode:
+                De unieke voordelen van onze geavanceerde modulaire bouwmethode:
               </p>
               <ul className="space-y-4" id="benefits-list">
                 {[
-                  'Binnen 1 dag op locatie opgesteld, direct wind- en waterdicht',
-                  'Ongevoelig voor gure wind, regen of zilte kustinvloeden t.b.v. productie',
-                  'Foutloze en strakke millimeterkwaliteit rechtstreeks uit de fabriek',
-                  'Ideale match met vergunningsvrije normen of welstandsrichtlijnen'
+                  'Binnen 1 dag op locatie gemonteerd, direct volledig windvast',
+                  'Geproduceerd in geclimatiseerde fabriekshal vrij van weersinvloeden',
+                  'Perfect afgewerkte millimeterkwaliteit rechtstreeks uit de werkplaats',
+                  'Buitengewoon soepel te combineren met polderfunderingsberekeningen'
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-slate-700 text-xs font-bold uppercase tracking-wider">
                     <CheckCircle2 size={16} className="text-blue-600 shrink-0 mt-0.5" />
@@ -366,8 +373,8 @@ export default function ZeelandLandingPage() {
             <div className="lg:col-span-5" id="process-visual">
               <div className="rounded-[3.5rem] overflow-hidden border border-slate-200/80 shadow-md">
                 <img 
-                  src="https://i.imgur.com/GIRelwV.jpeg" 
-                  alt="Prefab Select Fabriek Zeeland" 
+                  src="https://i.imgur.com/dpcIuVA.jpeg" 
+                  alt="Prefab Select Fabriek Almere" 
                   className="w-full aspect-[4/3] object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -376,20 +383,20 @@ export default function ZeelandLandingPage() {
 
             <div className="lg:col-span-7" id="process-content">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-                ZONDER DRIE SEIZOENEN BOUWSTOF IN UW TUIN
+                ZONDER SNIDEND BOUWSTOF OF LANGDURIGE STEIGERS
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-                Volledig weerbestendige <br />
+                Uitzonderlijk snelle montage <br />
                 <span className="text-blue-600 italic font-light lowercase">
-                  en uiterst snelle opbouw
+                  en millimeterprecies resultaat
                 </span>
               </h2>
               <div className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold space-y-6">
                 <p>
-                  Traditionele bouw ligt aan de kust dikwijls wekenlang stil vanwege onvoorspelbaar weer, harde stormen of weersgevoelige droogtijden. Onze prefab elementen worden beschut in de fabriekshal gefabriceerd.
+                  Traditionele bouw ter plaatse heeft te maken met regeninvloeden, lange droogtijden en maandenlange geluidsoverlast in de tuin. Onze elementen worden compleet in de gecontroleerde werkplaats gebouwd.
                 </p>
                 <p>
-                  Terwijl wij uw wanden, glaspuien en dakelementen millimeterprecies in elkaar zetten, realiseren onze monteurs op locatie een berekende fundering. Op de montagedag hijsen we de constructie op haar plek. Uw woning is razendsnel weer veilig wind- en waterdicht.
+                  Terwijl de dragende constructie in de fabriek ontstaat, realiseren wij bij u thuis een exact afgestemde polderfundering. Op de montagedag hijsen we de uitbouw ter plaatse. De aanbouw is nagenoeg direct regen- en winddicht verankerd.
                 </p>
               </div>
             </div>
@@ -398,30 +405,30 @@ export default function ZeelandLandingPage() {
         </div>
       </section>
 
-      {/* REGULATION & WELSTAND Zeeland */}
-      <section className="py-24 bg-blue-950 text-white relative overflow-hidden mx-0 sm:mx-6 rounded-[4rem]" id="welstand-zeeland-section">
+      {/* REGULATION & WELSTAND Almere */}
+      <section className="py-24 bg-blue-950 text-white relative overflow-hidden mx-0 sm:mx-6 rounded-[4rem]" id="welstand-almere-section">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.15),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-8 md:px-16 relative z-10">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
-            <div className="lg:col-span-7" id="welstand-zeeland-content">
+            <div className="lg:col-span-7" id="welstand-almere-content">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-4 block">
-                VAKKUNDIGE GEMEENTELIJK BEGELEIDING PER REGIO
+                MAXIMALE CREATIEVE EN ESTHETISCHE VRIJHEID
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-8">
-                Gemeentelijke Vergunningen <br />
+                Almere's Welstandsvrije <br />
                 <span className="text-blue-400 italic font-light lowercase">
-                  inhistorische &amp; kustgebieden
+                  en progressieve bouwbeleid
                 </span>
               </h2>
               
               <div className="text-blue-100/60 leading-relaxed font-semibold space-y-6 text-sm md:text-base max-w-2xl">
                 <p>
-                  De landelijke wetten bieden veel vergunningsvrije ruimte aan de achterkant. Echter herbergt Zeeland veel waardevolle, rijksbeschermde stads- en dorpsgezichten. Denk hierbij aan de historische monumentale kernen van <strong>Middelburg, Veere, Zierikzee, Hulst en Sluis</strong>.
+                  De landelijke wetten bieden veel vergunningsvrije ruimte aan de achterkant van uw woning tot 4 meter diep. Echter herbergt Almere nog een uniek voordeel: de gemeente voert in de meeste woonwijken een uiterst soepel, <strong>welstandsvrij beleid</strong>. 
                 </p>
                 <p>
-                  Als u binnen een dergelijke zone of aan een monument bouwt, gelden er specifieke richtlijnen en is een welstandstoets (Nota Ruimtelijke Kwaliteit) vereist. Prefab Select beschikt over ruime lokale ervaring met de Zeeuwse loketprocedures. Wij ontwerpen uw aanbouw met uiterste esthetische vakkundigheid voor een vlot verloop van uw omgevingsvergunning.
+                  Dit betekent dat plannen in Almere Stad, Buiten en Hout vooraf niet esthetisch getoetst worden op materiaalkeuze of kleurstelling. Dit geeft u maximale ontwerpvrijheid. Let wel op: Almere Haven als historische en karakteristieke kern heeft specifieker beleid waarop we het ontwerp deskundig afstemmen.
                 </p>
               </div>
 
@@ -443,7 +450,7 @@ export default function ZeelandLandingPage() {
                 Laat ons uw adres gratis nakijken
               </h3>
               <p className="text-blue-100/60 text-xs leading-relaxed font-semibold mb-6">
-                Valt uw woning of kavel onder een beschermd welstandsregime of bent u juist vergunningsvrij? Wij zoeken het snel en kosteloos voor u uit.
+                Bezit uw woning specifiek stadsdeelbeleid of kunt u direct volledig vergunningsvrij configureren? Onze deskundigen zoeken het kosteloos voor u uit.
               </p>
               <Link 
                 to="/offerte" 
@@ -467,10 +474,10 @@ export default function ZeelandLandingPage() {
               KOSTEN EN CALCULATIE
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Wat kost een uitbouw in Zeeland?
+              Wat kost een uitbouw in Almere?
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-2xl mx-auto">
-              Uw gewenste materiaalkwaliteit en de transportspecificaties over de Zeeuwse eilanden bepalen de calculatie. Richtprijzen:
+              Uw gewenste materiaalkwaliteit, afwerking en de specifieke polderfundering bepalen de exacte calculatie. Richtprijzen:
             </p>
           </div>
 
@@ -498,7 +505,7 @@ export default function ZeelandLandingPage() {
           </div>
 
           <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed" id="cost-footer-note">
-            * Dit betreft richtbedragen incl. btw en installatie. Sommige laaggelegen zeekleibodems in Zeeland verplichten een specifiek gemodificeerde fundatiemethode, om de constructie op termijn perfect water- en verzakkingsvrij te houden.
+            * Dit betreft richtbedragen incl. btw en installatie. Omdat Almere is gebouwd op drooggelegde polderbodem (diepgelegen zeeklei- en veenlagen), is een berekende constructieve fundering (met heipalen of schroefpalen) noodzakelijk om verzakkingsrisico's op termijn volledig uit te sluiten.
           </p>
 
         </div>
@@ -513,7 +520,7 @@ export default function ZeelandLandingPage() {
               ZORGELOZE REALSATIE
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Uw Zeeuwse bouwtraject stap-voor-stap <br />
+              Uw Almeers bouwtraject stap-voor-stap <br />
               <span className="text-blue-600 italic font-light lowercase">
                 geheel gestructureerd en vlekkeloos
               </span>
@@ -554,14 +561,14 @@ export default function ZeelandLandingPage() {
               LOKALE ANALYSE
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Bouwen per regio in Zeeland
+              Bouwen per regio in Almere
             </h2>
             <p className="text-base text-slate-500 leading-relaxed font-medium">
-              Zeeland herbergt verschillende landschappen en bebouwingen. Ontdek de logistieke en stedenbouwkundige kenmerken per gebied:
+              Almere is opgedeeld in diverse modern geplande stadsdelen. Vind de specifieke stedenbouwkundige en praktische aspecten per gebied:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" id="districts-grid">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8" id="districts-grid">
             {wijken.map((wk, i) => (
               <div key={i} className="bg-slate-50/50 border border-slate-100/80 rounded-[2rem] p-8 hover:bg-slate-50 transition-colors" id={`district-card-${i}`}>
                 <h3 className="text-lg font-display font-black uppercase tracking-tighter text-blue-950 mb-3 flex items-center gap-3">
@@ -585,15 +592,15 @@ export default function ZeelandLandingPage() {
             
             {/* Box 1 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-1">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">STRATEGIC SELECTION</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">STRATEGIC CHOICE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Is een aanbouw de beste oplossing voor uw gezin?
+                Is een prefab aanbouw uw beste optie?
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Als u nood heeft aan extra meters leefruimte op het gelijkvloers (voor het realiseren van een royale leefkeuken, een gezellige eethoek of een lichte tuinkamer), dan is een uitbouw veruit de meest gewenste en multifunctionele methode.
+                Als u extra leefruimte op de begane grond zoekt (voor het realiseren van een royale leefkeuken, een handig kantoor aan huis of een lichte eetkamer), dan is een uitbouw veruit de meest gewenste en multifunctionele methode.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Zoekt u echter een dakkapel of dakkapverhoging om een extra slaap- of speelkamer op zolder te winnen? Of bent u op zoek naar een los prefab chalet op recreatiegrond? Wij adviseren u graag volstrekt objectief over alle facetten.
+                Mist u eerder een extra kamer op zolder? Dan is een dakopbouw of dakkapel vaak een passend alternatief. Wij adviseren u graag volstrekt objectief over de meest efficiënte oplossing voor uw unieke woonsituatie.
               </p>
             </div>
 
@@ -601,13 +608,13 @@ export default function ZeelandLandingPage() {
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-2">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">PREPARED START</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Grondige voorbereiding garandeert rust
+                Grondige polderondergrond-analyse
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is raadzaam om vooraf kritieke factoren zoals de logistieke kraantoegankelijkheid op uw kavel, de exacte erfgrenzen en de bodemstabiliteit nauwkeurig in kaart te laten brengen.
+                Almere ligt volledig op de bodem van de voormalige Zuiderzee. De polderbodem van Flevoland kennmerkt zich door slap zeeklei en diepgelegen veenlagen.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Onze constructieve engineers en ontwerpers lopen al deze randvoorwaarden grondig met u door voordat we in de werkplaats overgaan tot productie, om alle risico's volledig uit te sluiten.
+                Wij voeren standaard een grondsondering en constructieve berekening uit t.b.v. een exact berekende paalfundering, om op lange termijn elke vorm van verzakking of structurele schade 100% uit te sluiten.
               </p>
             </div>
 
@@ -615,13 +622,13 @@ export default function ZeelandLandingPage() {
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-3">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DAYLIGHT OPTIMIZATION</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Daglicht vangen en de sfeer verrijken
+                Daglichtbepaling en leefcomfort
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Een aanbouw levert niet alleen extra leefmeters op, maar herbergt sfeer. Veel Zeeuwse herenhuizen of rijwoningen kunnen door dichte bebouwing donkerder zijn gesitueerd.
+                Een uitbouw moet niet enkel functionele meters leveren, maar ook sfeer brengen. Veel Almeerse rijwoningen of geschakelde woningen zijn strak ontworpen, maar kunnen binnenshuis soms aan daglicht inboeten.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Met een royale glazen achtergevel, vouwdeuren of een royale lichtstraat in het platte dak herbergt u het natuurlijke zonlicht diep binnenshuis en verbindt u de tuin nauwer met uw living.
+                Met een riante glazen pui, minimalistische vouwdeuren of een royale lichtstraat in het platte dak haalt u het noord- of zuiderlicht diep binnenshuis en verbindt u uw tuin naadloos met uw living.
               </p>
             </div>
 
@@ -629,13 +636,13 @@ export default function ZeelandLandingPage() {
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-4">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMAL EXCELLENCE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Tochtvrij, stormbestendig &amp; buitengewoon behaaglijk
+                Uitmuntende en duurzame thermische isolatie
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Tocht of warmteverlies in koude periodes aan de kust behoort definitief tot het verleden. Onze geavanceerde prefab systemen bezitten uitmuntende thermische isolatiewaarden tot wel Rc 6.0.
+                Warmteverlies of tocht behoort definitief tot het verleden. Onze prefab wanden, vloeren en daksystemen bezitten uitmuntende isolatiewaarden tot wel Rc 6.0.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Dit draagt direct bij aan een aanzienlijk lagere energierekening en is optimaal en eenvoudig te combineren met systemen zoals vloerverwarming of warmtepompen.
+                Dit draagt direct en effectief bij aan een lagere energierekening en laat zich optimaal en eenvoudig integreren met moderne systemen zoals vloerverwarming of warmtepompen.
               </p>
             </div>
 
@@ -653,7 +660,7 @@ export default function ZeelandLandingPage() {
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter mb-6 leading-none">
               Veelgestelde vragen <br />
-              over uitbouwen in Zeeland
+              over uitbouwen in Almere
             </h2>
           </div>
 
@@ -702,7 +709,7 @@ export default function ZeelandLandingPage() {
               </h2>
               
               <p className="text-lg text-blue-100/60 leading-relaxed mb-12 font-medium max-w-xl mx-auto">
-                Deel uw unieke woonsituatie en plannen met ons, dan calculeren en adviseren we geheel vrijblijvend om uw wooncomfort optimaal te verrijken.
+                Deel uw unieke woonsituatie en plannen met ons, dan berekenen we geheel vrijblijvend een heldere prijsindicatie en ontwerpfase t.b.v. uw woning.
               </p>
 
               <Link 
@@ -722,9 +729,9 @@ export default function ZeelandLandingPage() {
       {/* Fallback article for client render bots */}
       <noscript>
         <article className="max-w-3xl mx-auto px-6 py-12 prose text-slate-700">
-          <h1>Uitbouw in Zeeland — prefab uitbouw op maat</h1>
-          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Zeeland en omgeving, waaronder Middelburg, Vlissingen, Goes, Terneuzen en Zierikzee. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. In de historische stadsgezichten en bij monumenten gelden strengere eisen via de Nota Ruimtelijke Kwaliteit en erfgoed- of welstandscommissies.</p>
-          <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject hangt op locatie af van de vergunningsprocedure en transportspecificaties over de Zeeuwse eilanden. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
+          <h1>Uitbouw in Almere — prefab uitbouw op maat</h1>
+          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Almere en alle stadsdelen, waaronder Almere Stad, Almere Buiten, Almere Hout, Almere Poort en Almere Haven. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. Almere is bovendien voor een groot deel welstandsvrij, wat veel esthetische en creatieve vrijheid biedt in materiaalkeuze en vormgeving; met Almere Haven als authentieke kern dient echter specifieker rekening te worden gehouden.</p>
+          <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking en benodigde polderfundatie. De ruwbouw staat doorgaans in één dag; het totale traject hangt ter plaatse af van transportspecificaties, constructieve grondberekeningen en eventueel benodigde omgevingsvergunningen op de kavel. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
         </article>
       </noscript>
 

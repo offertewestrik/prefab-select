@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Seo from '../components/Seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Users, 
@@ -26,6 +25,15 @@ interface Lead {
   message: string;
   status: 'new' | 'contacted' | 'qualified' | 'closed' | 'lost';
   createdAt: string;
+  emailDeliveryStatus?: 'pending' | 'success' | 'failed' | 'not_sent';
+  emailDeliveryError?: string;
+  kozijnPui?: string;
+  kozijnKleur?: string;
+  lichtstraat?: string;
+  stalenDoorbraak?: string;
+  dakIsolatie?: string;
+  wandIsolatie?: string;
+  vloerIsolatie?: string;
 }
 
 const statusColors = {
@@ -62,52 +70,22 @@ const formatLeadDateTime = (createdAt: any) => {
   return 'Onbekend';
 };
 
-const ADMIN_KEY_STORAGE = 'ps_admin_key';
-
 const Dashboard: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [adminKey, setAdminKey] = useState<string | null>(() => sessionStorage.getItem(ADMIN_KEY_STORAGE));
-  const [keyInput, setKeyInput] = useState('');
-  const [authError, setAuthError] = useState<string | null>(null);
-
-  const authHeaders = (key: string): Record<string, string> => ({
-    'Authorization': `Bearer ${key}`,
-  });
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    const trimmed = keyInput.trim();
-    if (!trimmed) return;
-    sessionStorage.setItem(ADMIN_KEY_STORAGE, trimmed);
-    setAdminKey(trimmed);
-    setAuthError(null);
-    setLoading(true);
-  };
-
-  const handleUnauthorized = () => {
-    sessionStorage.removeItem(ADMIN_KEY_STORAGE);
-    setAdminKey(null);
-    setLeads([]);
-    setAuthError('Ongeldige toegangssleutel. Probeer het opnieuw.');
-  };
 
   const fetchLeads = async (showLoadingIndicator = false) => {
-    const key = sessionStorage.getItem(ADMIN_KEY_STORAGE);
-    if (!key) return;
     if (showLoadingIndicator) {
       setRefreshing(true);
     }
     try {
-      const res = await fetch('/api/leads', { headers: authHeaders(key) });
+      const res = await fetch('/api/leads');
       if (res.ok) {
         const data = await res.json();
         setLeads(data);
-      } else if (res.status === 401 || res.status === 503) {
-        handleUnauthorized();
       } else {
         console.error("Fout bij het ophalen van leads:", res.statusText);
       }
@@ -120,7 +98,6 @@ const Dashboard: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!adminKey) return;
     fetchLeads(true);
 
     // Auto-poll every 15 seconds to simulate real-time performance reliably
@@ -129,15 +106,13 @@ const Dashboard: React.FC = () => {
     }, 15000);
 
     return () => clearInterval(interval);
-  }, [adminKey]);
+  }, []);
 
   const updateLeadStatus = async (leadId: string, newStatus: Lead['status']) => {
-    const key = sessionStorage.getItem(ADMIN_KEY_STORAGE);
-    if (!key) return;
     try {
       const res = await fetch(`/api/leads/${leadId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', ...authHeaders(key) },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
       });
       
@@ -148,8 +123,6 @@ const Dashboard: React.FC = () => {
         if (selectedLead?.id === leadId) {
           setSelectedLead({ ...selectedLead, status: newStatus });
         }
-      } else if (res.status === 401 || res.status === 503) {
-        handleUnauthorized();
       } else {
         console.error("Fout bij bijwerken status op de server:", res.statusText);
       }
@@ -158,63 +131,14 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const filteredLeads = leads.filter(lead =>
+  const filteredLeads = leads.filter(lead => 
     `${lead.firstName} ${lead.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
     lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     lead.projectType.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (!adminKey) {
-    return (
-      <div className="min-h-screen bg-[#f8fafc]/60 pt-24 pb-12 flex items-center justify-center px-4">
-        <Seo
-          title="CRM Dashboard | Prefab Select"
-          description="Intern CRM-dashboard van Prefab Select voor het beheren van leads en aanvragen."
-          canonical="/crm"
-          noindex
-        />
-        <form
-          onSubmit={handleLogin}
-          className="w-full max-w-md bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm"
-        >
-          <h1 className="text-2xl font-black uppercase tracking-tighter text-blue-950 mb-2">
-            CRM <span className="text-blue-600 italic font-light">Login</span>
-          </h1>
-          <p className="text-slate-500 text-sm mb-6">Voer je toegangssleutel in om het dashboard te openen.</p>
-          <label htmlFor="admin-key" className="sr-only">Toegangssleutel</label>
-          <input
-            id="admin-key"
-            type="password"
-            value={keyInput}
-            onChange={(e) => setKeyInput(e.target.value)}
-            placeholder="Toegangssleutel"
-            autoComplete="current-password"
-            className="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all mb-4"
-          />
-          {authError && (
-            <div role="alert" aria-live="polite" className="p-3 mb-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-xs font-bold">
-              {authError}
-            </div>
-          )}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-blue-700 transition-colors"
-          >
-            Inloggen
-          </button>
-        </form>
-      </div>
-    );
-  }
-
   return (
     <div id="crm-dashboard-container" className="min-h-screen bg-[#f8fafc]/60 pt-24 pb-12">
-      <Seo
-        title="CRM Dashboard | Prefab Select"
-        description="Intern CRM-dashboard van Prefab Select voor het beheren van leads en aanvragen."
-        canonical="/crm"
-        noindex
-      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -370,6 +294,84 @@ const Dashboard: React.FC = () => {
                         </span>
                       </div>
                     </div>
+
+                    {selectedLead.emailDeliveryStatus && (
+                      <div className="pt-6 border-t border-slate-100">
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">E-mail Koppeling</h4>
+                        {selectedLead.emailDeliveryStatus === 'success' && (
+                          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-100 p-3 rounded-2xl">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block shrink-0" />
+                            <span>Verzonden naar offerte@prefabselect.nl</span>
+                          </div>
+                        )}
+                        {selectedLead.emailDeliveryStatus === 'pending' && (
+                          <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 p-3 rounded-2xl">
+                            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse inline-block shrink-0" />
+                            <span>Verzenden via Resend...</span>
+                          </div>
+                        )}
+                        {selectedLead.emailDeliveryStatus === 'failed' && (
+                          <div className="space-y-2 text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-100 p-3 rounded-2xl">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block shrink-0" />
+                              <span>E-mail verzending mislukt</span>
+                            </div>
+                            {selectedLead.emailDeliveryError && (
+                              <p className="text-[10px] text-rose-600 opacity-90 bg-white/60 p-2 rounded-xl font-mono leading-tight whitespace-pre-wrap break-all border border-rose-100/50">
+                                {selectedLead.emailDeliveryError}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Render Options if any custom choice is made */}
+                    {(selectedLead.kozijnPui || selectedLead.lichtstraat || selectedLead.stalenDoorbraak) && (
+                      <div className="pt-6 border-t border-slate-100 space-y-4">
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Geselecteerde Opties</h4>
+                        <div className="grid grid-cols-1 gap-3">
+                          {selectedLead.kozijnPui && (
+                            <div className="p-3.5 bg-blue-50/20 rounded-2xl border border-blue-100 flex flex-col">
+                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 leading-none mb-1.5">Pui-oplossing (Met HR++ Glas)</span>
+                              <span className="text-xs text-blue-950 font-black uppercase tracking-tight leading-normal">{selectedLead.kozijnPui}</span>
+                              {selectedLead.kozijnKleur && (
+                                <span className="text-[10px] font-black uppercase text-blue-600 tracking-wider mt-1.5 bg-blue-50 px-2 py-0.5 rounded-lg w-max leading-none">RAL Kleur: {selectedLead.kozijnKleur}</span>
+                              )}
+                            </div>
+                          )}
+                          {selectedLead.lichtstraat && selectedLead.lichtstraat !== "Geen" && selectedLead.lichtstraat !== "Geen lichtstraat" && (
+                            <div className="p-3.5 bg-blue-50/20 rounded-2xl border border-blue-100 flex flex-col">
+                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 leading-none mb-1.5">Lichtstraat (Inclusief HR++ Glas)</span>
+                              <span className="text-xs text-blue-950 font-black uppercase tracking-tight leading-normal">{selectedLead.lichtstraat}</span>
+                            </div>
+                          )}
+                          {selectedLead.stalenDoorbraak && (
+                            <div className="p-3.5 bg-blue-50/20 rounded-2xl border border-blue-100 flex flex-col">
+                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 leading-none mb-1.5">Stalen Doorbraak</span>
+                              <span className="text-xs text-blue-950 font-black uppercase tracking-tight leading-normal">{selectedLead.stalenDoorbraak}</span>
+                            </div>
+                          )}
+                          <div className="p-3.5 bg-emerald-50/30 rounded-2xl border border-emerald-50 flex flex-col">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 leading-none mb-2">Gegarandeerde Isolatiewaardes (Bbl)</span>
+                            <div className="grid grid-cols-3 gap-2 text-center text-[10px] font-bold text-slate-600">
+                              <div className="bg-white/80 border border-slate-100 p-1.5 rounded-xl">
+                                <span className="block text-slate-400 text-[8px] uppercase font-black tracking-wider leading-none mb-1">Dak</span>
+                                <span className="text-emerald-700 font-black">{selectedLead.dakIsolatie || "Rc 6.3"}</span>
+                              </div>
+                              <div className="bg-white/80 border border-slate-100 p-1.5 rounded-xl">
+                                <span className="block text-slate-400 text-[8px] uppercase font-black tracking-wider leading-none mb-1">Wand</span>
+                                <span className="text-emerald-700 font-black">{selectedLead.wandIsolatie || "Rc 6.0"}</span>
+                              </div>
+                              <div className="bg-white/80 border border-slate-100 p-1.5 rounded-xl">
+                                <span className="block text-slate-400 text-[8px] uppercase font-black tracking-wider leading-none mb-1">Vloer</span>
+                                <span className="text-emerald-700 font-black">{selectedLead.vloerIsolatie || "Rc 5.0"}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="pt-6 border-t border-slate-100">
                       <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-3">Bericht</h4>

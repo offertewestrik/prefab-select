@@ -54,15 +54,3 @@
     @apply bg-white border border-blue-50 shadow-xl shadow-blue-900/5 p-6 rounded-2xl;
   }
 }
-
-/* Respecteer de voorkeur voor verminderde beweging */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
