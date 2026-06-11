@@ -1,4 +1,5 @@
 import React from 'react';
+import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Building2, Timer, ShieldCheck, Box } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,12 @@ import { Link } from 'react-router-dom';
 export default function ZeelandSchuurtjesProject() {
   return (
     <div className="bg-white text-blue-950 font-sans">
+      <Seo
+        title="Nieuwbouwproject Zeeland – Prefab Bergingen | Prefab Select"
+        description="Bekijk ons nieuwbouwproject in Zeeland: hoogwaardige prefab bergingen en schuren, seriematig geproduceerd en vakkundig geplaatst voor de nieuwbouwwijk."
+        canonical="/regio/zeeland/nieuwbouwproject"
+        image="https://i.imgur.com/p3qz8V3.jpeg"
+      />
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 overflow-hidden bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
@@ -90,13 +97,13 @@ export default function ZeelandSchuurtjesProject() {
                   src="https://i.imgur.com/qEZsZu3.jpeg"
                   alt="Nieuwbouwproject Zeeland"
                   className="rounded-[2.5rem] object-cover h-[320px] w-full mt-12 shadow-2xl border-4 border-white"
-                  referrerPolicy="no-referrer"
+                  referrerPolicy="no-referrer" loading="lazy"
                 />
                 <img
                   src="https://i.imgur.com/ERKyWiV.jpeg"
                   alt="Prefab bergingen Zeeland"
                   className="rounded-[3rem] object-cover h-[400px] w-full col-span-2 shadow-2xl border-4 border-white mt-6"
-                  referrerPolicy="no-referrer"
+                  referrerPolicy="no-referrer" loading="lazy"
                 />
               </div>
             </motion.div>

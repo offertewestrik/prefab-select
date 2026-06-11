@@ -1,4 +1,5 @@
 import React from 'react';
+import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Zap, Layout, Maximize, Star, ShieldCheck } from 'lucide-react';
@@ -8,6 +9,12 @@ import { KellyCTA } from '../KellyCTA';
 const PrefabChalet = () => {
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
+      <Seo
+        title="Luxe Prefab Chalets – Wonen & Recreatie | Prefab Select"
+        description="Hoogwaardige prefab chalets, volledig op maat ontworpen en optimaal geïsoleerd. Snel geplaatst voor permanente bewoning of recreatie. Bekijk de mogelijkheden."
+        canonical="/prefab-chalets"
+        image="https://i.imgur.com/Tqh8vyd.jpeg"
+      />
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-blue-950">
         <div className="absolute inset-0">
@@ -66,7 +73,7 @@ const PrefabChalet = () => {
               <img 
                 src="https://i.imgur.com/EQmzkmQ.jpeg" 
                 alt="Moderne architectuur prefab chalet" 
-                className="w-full object-cover aspect-[4/5] object-center"
+                className="w-full object-cover aspect-[4/5] object-center" loading="lazy"
               />
             </motion.div>
             
@@ -140,7 +147,7 @@ const PrefabChalet = () => {
                 <img 
                   src="https://i.imgur.com/iUP4upI.jpeg" 
                   alt="Luxe buitenleven prefab chalet" 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center" loading="lazy"
                 />
                 <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply" />
               </div>
@@ -190,7 +197,7 @@ const PrefabChalet = () => {
       {/* SECTIE 5 — ARCHITECTUUR STATEMENT */}
       <section className="py-32 bg-blue-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src="https://i.imgur.com/EQmzkmQ.jpeg" alt="Achtergrond detail architectuur" className="w-full h-full object-cover filter brightness-50" />
+          <img src="https://i.imgur.com/EQmzkmQ.jpeg" alt="Achtergrond detail architectuur" className="w-full h-full object-cover filter brightness-50" loading="lazy" />
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">

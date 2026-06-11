@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Seo from '../components/Seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Users, 
@@ -61,22 +62,52 @@ const formatLeadDateTime = (createdAt: any) => {
   return 'Onbekend';
 };
 
+const ADMIN_KEY_STORAGE = 'ps_admin_key';
+
 const Dashboard: React.FC = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [adminKey, setAdminKey] = useState<string | null>(() => sessionStorage.getItem(ADMIN_KEY_STORAGE));
+  const [keyInput, setKeyInput] = useState('');
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  const authHeaders = (key: string): Record<string, string> => ({
+    'Authorization': `Bearer ${key}`,
+  });
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = keyInput.trim();
+    if (!trimmed) return;
+    sessionStorage.setItem(ADMIN_KEY_STORAGE, trimmed);
+    setAdminKey(trimmed);
+    setAuthError(null);
+    setLoading(true);
+  };
+
+  const handleUnauthorized = () => {
+    sessionStorage.removeItem(ADMIN_KEY_STORAGE);
+    setAdminKey(null);
+    setLeads([]);
+    setAuthError('Ongeldige toegangssleutel. Probeer het opnieuw.');
+  };
 
   const fetchLeads = async (showLoadingIndicator = false) => {
+    const key = sessionStorage.getItem(ADMIN_KEY_STORAGE);
+    if (!key) return;
     if (showLoadingIndicator) {
       setRefreshing(true);
     }
     try {
-      const res = await fetch('/api/leads');
+      const res = await fetch('/api/leads', { headers: authHeaders(key) });
       if (res.ok) {
         const data = await res.json();
         setLeads(data);
+      } else if (res.status === 401 || res.status === 503) {
+        handleUnauthorized();
       } else {
         console.error("Fout bij het ophalen van leads:", res.statusText);
       }
@@ -89,6 +120,7 @@ const Dashboard: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!adminKey) return;
     fetchLeads(true);
 
     // Auto-poll every 15 seconds to simulate real-time performance reliably
@@ -97,13 +129,15 @@ const Dashboard: React.FC = () => {
     }, 15000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [adminKey]);
 
   const updateLeadStatus = async (leadId: string, newStatus: Lead['status']) => {
+    const key = sessionStorage.getItem(ADMIN_KEY_STORAGE);
+    if (!key) return;
     try {
       const res = await fetch(`/api/leads/${leadId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders(key) },
         body: JSON.stringify({ status: newStatus })
       });
       
@@ -114,6 +148,8 @@ const Dashboard: React.FC = () => {
         if (selectedLead?.id === leadId) {
           setSelectedLead({ ...selectedLead, status: newStatus });
         }
+      } else if (res.status === 401 || res.status === 503) {
+        handleUnauthorized();
       } else {
         console.error("Fout bij bijwerken status op de server:", res.statusText);
       }
@@ -122,14 +158,63 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const filteredLeads = leads.filter(lead => 
+  const filteredLeads = leads.filter(lead =>
     `${lead.firstName} ${lead.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
     lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     lead.projectType.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  if (!adminKey) {
+    return (
+      <div className="min-h-screen bg-[#f8fafc]/60 pt-24 pb-12 flex items-center justify-center px-4">
+        <Seo
+          title="CRM Dashboard | Prefab Select"
+          description="Intern CRM-dashboard van Prefab Select voor het beheren van leads en aanvragen."
+          canonical="/crm"
+          noindex
+        />
+        <form
+          onSubmit={handleLogin}
+          className="w-full max-w-md bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm"
+        >
+          <h1 className="text-2xl font-black uppercase tracking-tighter text-blue-950 mb-2">
+            CRM <span className="text-blue-600 italic font-light">Login</span>
+          </h1>
+          <p className="text-slate-500 text-sm mb-6">Voer je toegangssleutel in om het dashboard te openen.</p>
+          <label htmlFor="admin-key" className="sr-only">Toegangssleutel</label>
+          <input
+            id="admin-key"
+            type="password"
+            value={keyInput}
+            onChange={(e) => setKeyInput(e.target.value)}
+            placeholder="Toegangssleutel"
+            autoComplete="current-password"
+            className="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all mb-4"
+          />
+          {authError && (
+            <div role="alert" aria-live="polite" className="p-3 mb-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-xs font-bold">
+              {authError}
+            </div>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-blue-700 transition-colors"
+          >
+            Inloggen
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div id="crm-dashboard-container" className="min-h-screen bg-[#f8fafc]/60 pt-24 pb-12">
+      <Seo
+        title="CRM Dashboard | Prefab Select"
+        description="Intern CRM-dashboard van Prefab Select voor het beheren van leads en aanvragen."
+        canonical="/crm"
+        noindex
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

@@ -3,6 +3,10 @@ import path from "path";
 import axios from "axios";
 import dotenv from "dotenv";
 import fs from "fs/promises";
+import crypto from "crypto";
+import helmet from "helmet";
+import compression from "compression";
+import rateLimit from "express-rate-limit";
 import { GoogleGenAI } from "@google/genai";
 import admin from "firebase-admin";
 import { Resend } from "resend";
@@ -134,7 +138,55 @@ initLeadsCache();
 const app = express();
 const PORT = parseInt(process.env.PORT || "3000", 10);
 
-app.use(express.json());
+// Behind Cloud Run / reverse proxy: trust the first proxy hop so rate
+// limiting sees the real client IP instead of the proxy's.
+app.set("trust proxy", 1);
+
+// CSP is disabled because the SPA relies on inline styles and third-party
+// embeds (imgur, Meta Pixel); the remaining helmet defaults (HSTS, nosniff,
+// frameguard, referrer-policy) still apply.
+app.use(helmet({ contentSecurityPolicy: false }));
+app.use(compression());
+app.use(express.json({ limit: "100kb" }));
+
+// --- Security helpers ---
+
+const escapeHtml = (value: unknown): string =>
+  String(value ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string)
+  );
+
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY || "";
+
+function requireAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (!ADMIN_API_KEY) {
+    return res.status(503).json({ error: "Admin access is not configured on this server." });
+  }
+  const provided = req.headers.authorization?.replace(/^Bearer\s+/i, "") || "";
+  const expected = Buffer.from(ADMIN_API_KEY);
+  const received = Buffer.from(provided);
+  const valid = expected.length === received.length && crypto.timingSafeEqual(expected, received);
+  if (!valid) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  next();
+}
+
+const aiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Te veel aanvragen. Probeer het later opnieuw." },
+});
+
+const leadLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Te veel aanvragen vanaf dit adres. Probeer het later opnieuw." },
+});
 
 // Initialize AI
 const ai = new GoogleGenAI({
@@ -172,11 +224,20 @@ Translate your expertise into Dutch (the primary language of our site), but if a
 `;
 
 // API Routes
-app.post("/api/ai/chat", async (req, res) => {
+app.post("/api/ai/chat", aiLimiter, async (req, res) => {
   const { messages } = req.body;
 
-  if (!messages || !Array.isArray(messages)) {
+  if (!messages || !Array.isArray(messages) || messages.length === 0 || messages.length > 40) {
     return res.status(400).json({ error: "Invalid messages format" });
+  }
+  for (const m of messages) {
+    if (
+      !m || typeof m !== "object" ||
+      !["user", "assistant"].includes(m.role) ||
+      typeof m.content !== "string" || m.content.length === 0 || m.content.length > 8000
+    ) {
+      return res.status(400).json({ error: "Invalid message content" });
+    }
   }
 
   try {
@@ -195,14 +256,28 @@ app.post("/api/ai/chat", async (req, res) => {
     res.json({ text: response.text });
   } catch (error: any) {
     console.error("AI Chat Error:", error);
-    res.status(500).json({ 
-      error: "AI generation failed",
-      details: error.message 
-    });
+    res.status(500).json({ error: "AI generation failed" });
   }
 });
-app.post("/api/leads", async (req, res) => {
+app.post("/api/leads", leadLimiter, async (req, res) => {
   const { name, email, phone, projectType, message } = req.body;
+
+  // Validate input before it reaches email templates, Firestore or webhooks
+  if (typeof name !== "string" || name.trim().length === 0 || name.length > 100) {
+    return res.status(400).json({ error: "Ongeldige naam." });
+  }
+  if (typeof email !== "string" || email.length > 200 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: "Ongeldig e-mailadres." });
+  }
+  if (typeof phone !== "string" || phone.trim().length === 0 || phone.length > 30) {
+    return res.status(400).json({ error: "Ongeldig telefoonnummer." });
+  }
+  if (typeof projectType !== "string" || projectType.trim().length === 0 || projectType.length > 100) {
+    return res.status(400).json({ error: "Ongeldig projecttype." });
+  }
+  if (message !== undefined && message !== null && (typeof message !== "string" || message.length > 5000)) {
+    return res.status(400).json({ error: "Bericht is te lang." });
+  }
 
   console.log("Received lead request:", { name, email, phone, projectType });
 
@@ -213,15 +288,15 @@ app.post("/api/leads", async (req, res) => {
         await resend.emails.send({
           from: "Prefab Select <onboarding@resend.dev>",
           to: process.env.CONTACT_RECEIVER_EMAIL || "offerte@prefabselect.nl",
-          subject: `Nieuwe aanvraag: ${projectType} van ${name}`,
+          subject: `Nieuwe aanvraag: ${escapeHtml(projectType)} van ${escapeHtml(name)}`,
           html: `
             <h1>Nieuwe Lead Ontvangen</h1>
-            <p><strong>Naam:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Telefoon:</strong> ${phone}</p>
-            <p><strong>Project:</strong> ${projectType}</p>
+            <p><strong>Naam:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Telefoon:</strong> ${escapeHtml(phone)}</p>
+            <p><strong>Project:</strong> ${escapeHtml(projectType)}</p>
             <p><strong>Bericht:</strong></p>
-            <p>${message || "Geen bericht achtergelaten."}</p>
+            <p>${escapeHtml(message) || "Geen bericht achtergelaten."}</p>
             <hr />
             <p>Deze aanvraag is opgeslagen in ons dashboard en doorgezet naar Make.com.</p>
           `,
@@ -276,8 +351,24 @@ app.post("/api/leads", async (req, res) => {
     let webhookStatus = "not_configured";
     const rawWebhookUrl = process.env.MAKE_WEBHOOK_URL;
     
+    let webhookUrl: string | null = null;
     if (rawWebhookUrl) {
-      const webhookUrl = rawWebhookUrl.trim().replace(/^["'](.+)["']$/, '$1');
+      const cleaned = rawWebhookUrl.trim().replace(/^["'](.+)["']$/, '$1');
+      try {
+        const parsed = new URL(cleaned);
+        if (parsed.protocol === "https:") {
+          webhookUrl = cleaned;
+        } else {
+          console.warn("MAKE_WEBHOOK_URL must use https; webhook sync skipped.");
+          webhookStatus = "invalid_url";
+        }
+      } catch {
+        console.warn("MAKE_WEBHOOK_URL is not a valid URL; webhook sync skipped.");
+        webhookStatus = "invalid_url";
+      }
+    }
+
+    if (webhookUrl) {
       webhookStatus = "sending";
       (async () => {
         try {
@@ -316,15 +407,12 @@ app.post("/api/leads", async (req, res) => {
 
   } catch (error: any) {
     console.error("Process lead failed:", error.message);
-    res.status(500).json({ 
-      error: "Internal Server Error",
-      details: error.message 
-    });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 // GET Endpoint to retrieve all leads (with Firestore fallback sync)
-app.get("/api/leads", async (req, res) => {
+app.get("/api/leads", requireAdmin, async (req, res) => {
   if (db) {
     try {
       const snapshot = await db.collection("leads").orderBy("createdAt", "desc").get();
@@ -374,12 +462,13 @@ app.get("/api/leads", async (req, res) => {
 });
 
 // PATCH Endpoint to update lead status
-app.patch("/api/leads/:id", async (req, res) => {
+app.patch("/api/leads/:id", requireAdmin, async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
-  if (!status) {
-    return res.status(400).json({ error: "status is required" });
+  const allowedStatuses = ["new", "contacted", "qualified", "closed", "lost"];
+  if (typeof status !== "string" || !allowedStatuses.includes(status)) {
+    return res.status(400).json({ error: "Invalid status" });
   }
 
   console.log(`Updating lead ${id} status to ${status}`);
@@ -437,8 +526,12 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    // Vite-hashed assets are immutable; everything else (videos, sitemap,
+    // robots.txt) gets a modest cache window so updates propagate.
+    app.use("/assets", express.static(path.join(distPath, "assets"), { maxAge: "1y", immutable: true }));
+    app.use(express.static(distPath, { maxAge: "1h", index: false }));
     app.get("*", (req, res) => {
+      res.setHeader("Cache-Control", "no-cache");
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
