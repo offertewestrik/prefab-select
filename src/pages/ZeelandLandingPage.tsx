@@ -105,7 +105,7 @@ export default function ZeelandLandingPage() {
               </span>
 
               <h2 className="text-4xl md:text-5xl font-display font-black text-blue-950 leading-none mb-8 tracking-tighter uppercase">
-                Waarom kiezen voor un <br />
+                Waarom kiezen voor een <br />
                 <span className="text-blue-600 italic font-light lowercase">prefab uitbouw?</span>
               </h2>
 
@@ -286,7 +286,7 @@ export default function ZeelandLandingPage() {
             <div className="relative z-10 max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-7xl font-display font-black text-white leading-[0.85] mb-8 tracking-tighter uppercase">
                 Vraag vrijblijvend <br />
-                un <span className="text-blue-400 italic font-light lowercase decoration-blue-400/20 underline underline-offset-8">offerte aan.</span>
+                een <span className="text-blue-400 italic font-light lowercase decoration-blue-400/20 underline underline-offset-8">offerte aan.</span>
               </h2>
 
               <p className="text-xl text-blue-100/60 leading-relaxed mb-12 max-w-2xl mx-auto font-medium">

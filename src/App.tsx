@@ -457,7 +457,7 @@ Dit wordt allemaal vooraf meegenomen in het ontwerp. Het resultaat is vaak een v
   },
   {
     id: 8,
-    title: "Wat beïnvloedt the prijs van een uitbouw het meest?",
+    title: "Wat beïnvloedt de prijs van een uitbouw het meest?",
     excerpt: "Niet iedereen weet waar de grootste kosten zitten.",
     content: `Niet iedereen weet waar de grootste kosten zitten. Dit zijn de belangrijkste factoren:
 - Grootte van de uitbouw
@@ -583,7 +583,7 @@ Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen]
     title: 'Prefab Aanbouw Tilburg – Snel Extra Woonruimte met Prefab Select',
     content: `Bent u op zoek naar een expert voor uw **prefab aanbouw in Tilburg**? Of u nu woont in de Reeshof, de Blaak of in een karakteristiek pand bij het Wilhelminapark, wij realiseren hoogwaardige uitbreidingen die naadloos aansluiten op uw bestaande woning. 
 
-**Prefab bouwen in Tilburg** is de oplossing voor wie niet wil verhuizen, maar wel behoefte heeft aan die extra slaapkamer, leefkeuken of een modern thuiskantoor. Onze constructies zijn gebaseerd op un oersterk staalskelet, wat zorgt voor maximale flexibiliteit in ontwerp.
+**Prefab bouwen in Tilburg** is de oplossing voor wie niet wil verhuizen, maar wel behoefte heeft aan die extra slaapkamer, leefkeuken of een modern thuiskantoor. Onze constructies zijn gebaseerd op een oersterk staalskelet, wat zorgt voor maximale flexibiliteit in ontwerp.
 
 ### Waarom Prefab in Tilburg?
 - **Minimale overlast**: Geen maandenlang vrachtverkeer en lawaai in uw straat.
@@ -591,7 +591,7 @@ Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen]
 - **Energiezuinig**: Klaar voor de toekomst met uitstekende isolatiewaarden.
 
 ### Kosten indicatie regio Tilburg
-Voor un **prefab uitbouw van 15m² in Tilburg** kunt u rekenen op un vanafprijs van circa €45.000. Wilt u un complete woning laten bouwen? Bekijk dan onze pagina over [Prefab Bouwen](/prefab-bouwen).
+Voor een **prefab uitbouw van 15m² in Tilburg** kunt u rekenen op een vanafprijs van circa €45.000. Wilt u een complete woning laten bouwen? Bekijk dan onze pagina over [Prefab Bouwen](/prefab-bouwen).
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
@@ -624,65 +624,65 @@ Benieuwd naar onze andere diensten? Ontdek onze [Luxe Chalets](/chalets) of [Vak
     image: 'https://i.imgur.com/covRQg3.jpeg',
     category: 'Zuid-Holland',
     title: 'Uitbouw Rotterdam – Slimme Ruimteoplossingen in de Havenstad',
-    content: `Woon je in Rotterdam en merk je dat je woning te klein begint te worden? In un stad waar space is schaars, zoeken steeds meer huiseigenaren naar manieren om hun woning slimmer te benutten met un **prefab uitbouw in Rotterdam**.
+    content: `Woon je in Rotterdam en merk je dat je woning te klein begint te worden? In een stad waar ruimte schaars is, zoeken steeds meer huiseigenaren naar manieren om hun woning slimmer te benutten met een **prefab uitbouw in Rotterdam**.
 
-Een uitbouw laten plaatsen is in Rotterdam vaak de meest logische stap. In plaats van verhuizen — wat in Rotterdam vaak duur en lastig is — kun je je huidige woning uitbreiden met un **hoogwaardige aanbouw**. Wij zijn ook uw partner in nabijgelegen steden zoals [Den Haag](/regio/den-haag) en [Leidschendam](/regio/leidschendam).
+Een uitbouw laten plaatsen is in Rotterdam vaak de meest logische stap. In plaats van verhuizen — wat in Rotterdam vaak duur en lastig is — kun je je huidige woning uitbreiden met een **hoogwaardige aanbouw**. Wij zijn ook uw partner in nabijgelegen steden zoals [Den Haag](/regio/den-haag) en [Leidschendam](/regio/leidschendam).
 
-### Waarom un uitbouw in Rotterdam?
-In Rotterdam draait alles om efficiënt gebruik van ruimte. Met un **prefab aanbouw woning** kun je:
+### Waarom een uitbouw in Rotterdam?
+In Rotterdam draait alles om efficiënt gebruik van ruimte. Met een **prefab aanbouw woning** kun je:
 - Je woonkamer aanzienlijk vergroten
 - Een open woonkeuken creëren met kookeiland
 - Meer lichtinval realiseren door grote schuifpuien
 - De woningwaarde direct verhogen
 
-### Wat kost un uitbouw in Rotterdam?
+### Wat kost een uitbouw in Rotterdam?
 De prijs hangt af van jouw keuzes, maar gemiddeld liggen de **uitbouw kosten per m²** in Rotterdam op:
-- **€2.600 per m²** voor un standaard uitvoering
-- **€4.000 per m²** voor un luxe architectonische uitvoering
+- **€2.600 per m²** voor een standaard uitvoering
+- **€4.000 per m²** voor een luxe architectonische uitvoering
 
-Voor un uitbouw van ongeveer 15 m² in Rotterdam betekent dit un investering tussen de **€50.000 en €65.000**, afhankelijk van de complexiteit in de stad.
+Voor een uitbouw van ongeveer 15 m² in Rotterdam betekent dit een investering tussen de **€50.000 en €65.000**, afhankelijk van de complexiteit in de stad.
 
 ### Prefab uitbouw Rotterdam – Snelheid en minimale overlast
-In un drukke stad als Rotterdam wilt u zo min mogelijk overlast. Daarom kiezen steeds meer huiseigenaren voor de **prefab bouwmethode**. Voordelen zijn un snelle plaatsing (vaak binnen 1-2 dagen) en minimale logistieke hinder in de buurt.
+In een drukke stad als Rotterdam wilt u zo min mogelijk overlast. Daarom kiezen steeds meer huiseigenaren voor de **prefab bouwmethode**. Voordelen zijn een snelle plaatsing (vaak binnen 1-2 dagen) en minimale logistieke hinder in de buurt.
 
-[Vraag un vrijblijvende offerte aan voor regio Rotterdam](/offerte)`
+[Vraag een vrijblijvende offerte aan voor regio Rotterdam](/offerte)`
   },
   {
     name: 'Bergen op Zoom',
     slug: 'bergen-op-zoom',
     title: 'Prefab Uitbouw Bergen op Zoom – Hoogwaardige Woninguitbreiding',
-    content: `Woon je in Bergen op Zoom of Halsteren en merk je dat je woning niet meer voldoende ruimte biedt? Een **prefab uitbouw in Bergen op Zoom** is de perfecte manier om uw leefomgeving te vergroten zonder de stress van un lange verbouwing.
+    content: `Woon je in Bergen op Zoom of Halsteren en merk je dat je woning niet meer voldoende ruimte biedt? Een **prefab uitbouw in Bergen op Zoom** is de perfecte manier om uw leefomgeving te vergroten zonder de stress van een lange verbouwing.
 
-In Bergen op Zoom zien we vooral un grote vraag naar **moderne aanbouw** oplossingen voor gezinswoningen. Of het nu gaat om un kantoor aan huis of un verlenging van uw woonkamer, Prefab Select levert topkwaliteit met un Rc-waarde van 6.0.
+In Bergen op Zoom zien we vooral een grote vraag naar **moderne aanbouw** oplossingen voor gezinswoningen. Of het nu gaat om een kantoor aan huis of een verlenging van uw woonkamer, Prefab Select levert topkwaliteit met een Rc-waarde van 6.0.
 
-### Waarom un uitbouw in Bergen op Zoom?
+### Waarom een uitbouw in Bergen op Zoom?
 Onze klanten in West-Brabant kiezen voor zekerheid:
 - **Gegarandeerde kwaliteit**: Gebouwd onder gecontroleerde fabrieksomstandigheden.
 - **Vaste planning**: Wij plaatsen uw uitbouw vaak binnen **1 tot 2 dagen**.
-- **Duurzaam**: Maximale isolatie voor un lagere energierekening.
+- **Duurzaam**: Maximale isolatie voor een lagere energierekening.
 
 ### Kosten indicatie Bergen op Zoom
-Een **prefab uitbouw** van 15 m² in Bergen op Zoom begint vanaf ca. **€45.000**. Dit is inclusief transport, plaatsing en un hoogwaardige afwerking.
+Een **prefab uitbouw** van 15 m² in Bergen op Zoom begint vanaf ca. **€45.000**. Dit is inclusief transport, plaatsing en een hoogwaardige afwerking.
 
-Bekijk onze [Prefab Uitbouw](/prefab-uitbouw) projecten of [Vraag un offerte aan](/offerte).`
+Bekijk onze [Prefab Uitbouw](/prefab-uitbouw) projecten of [Vraag een offerte aan](/offerte).`
   },
   {
     name: 'Oss',
     slug: 'oss',
     title: 'Prefab Uitbouw Oss – Slim Uitbreiden & Waardevermeerdering',
-    content: `Wilt u uw woning in Oss verduurzamen en vergroten? Een **prefab uitbouw in Oss** biedt de uitkomst. In plaats van verhuizen, wat in de huidige markt lastig is, kiest u voor un hoogwaardige aanbouw die jarenlang meegaat.
+    content: `Wilt u uw woning in Oss verduurzamen en vergroten? Een **prefab uitbouw in Oss** biedt de uitkomst. In plaats van verhuizen, wat in de huidige markt lastig is, kiest u voor een hoogwaardige aanbouw die jarenlang meegaat.
 
-Oss heeft veel woningen die zich uitstekend lenen voor un **modulaire uitbouw**. Door te kiezen voor prefab, voorkomt u maandenlange bouwoverlast voor uzelf en uw buren.
+Oss heeft veel woningen die zich uitstekend lenen voor een **modulaire uitbouw**. Door te kiezen voor prefab, voorkomt u maandenlange bouwoverlast voor uzelf en uw buren.
 
 ### Voordelen uitbouw Oss
 - **Snelle realisatie**: Van fundering tot oplevering in recordtijd.
 - **All-in service**: Wij verzorgen het ontwerp, de productie en de plaatsing.
-- **Hoog rendement**: Een uitbouw is un van de beste investeringen voor de waarde van uw woning.
+- **Hoog rendement**: Een uitbouw is een van de beste investeringen voor de waarde van uw woning.
 
-### Wat kost un aanbouw in Oss?
-De gemiddelde **kosten per m² voor un uitbouw** in Oss liggen rond de €2.500 tot €3.500. Benieuwd naar de exacte prijs voor uw situatie?
+### Wat kost een aanbouw in Oss?
+De gemiddelde **kosten per m² voor een uitbouw** in Oss liggen rond de €2.500 tot €3.500. Benieuwd naar de exacte prijs voor uw situatie?
 
-[Vraag direct un offerte aan voor regio Oss](/offerte)`
+[Vraag direct een offerte aan voor regio Oss](/offerte)`
   },
   {
     name: 'Laren',
@@ -697,9 +697,9 @@ Onze **hoogwaardige aanbouw** modules maken gebruik van ultraslanke profielen en
 - **Minimale bouwduur**: Wij plaatsen uw nieuwe leefruimte in slechts **48 uur**.
 - **Maatwerk**: Volledige vrijheid in gevelbekleding en indeling.
 
-Bekijk onze [Prefab Bouwen](/prefab-bouwen) projecten for inspiratie.
+Bekijk onze [Prefab Bouwen](/prefab-bouwen) projecten voor inspiratie.
 
-[Vraag un persoonlijk adviesgesprek aan for Laren](/offerte)`
+[Vraag een persoonlijk adviesgesprek aan voor Laren](/offerte)`
   },
   {
     name: 'Amsterdam',
@@ -707,17 +707,17 @@ Bekijk onze [Prefab Bouwen](/prefab-bouwen) projecten for inspiratie.
     image: 'https://i.imgur.com/fmQecXk.jpeg',
     category: 'Hoofdstad',
     title: 'Prefab Uitbouw Amsterdam – Slimme Ruimteoplossingen in de Stad',
-    content: `Wonen in Amsterdam betekent vaak creatief omgaan met ruimte. Een **prefab uitbouw in Amsterdam** is dé manier om extra meters te winnen zonder uw geliefde buurt te verlaten. Of het nu gaat om un dakterras-opbouw of un uitbreiding in uw stadstuin, wij weten hoe we in un compacte omgeving moeten bouwen. Ook in de directe omgeving van de hoofdstad, zoals in [Amstelveen](/regio/amstelveen), [Haarlem](/regio/haarlem), [Almere](/regio/almere) en [Utrecht](/regio/utrecht) realiseren wij hoogwaardige projecten.
+    content: `Wonen in Amsterdam betekent vaak creatief omgaan met ruimte. Een **prefab uitbouw in Amsterdam** is dé manier om extra meters te winnen zonder uw geliefde buurt te verlaten. Of het nu gaat om een dakterras-opbouw of een uitbreiding in uw stadstuin, wij weten hoe we in een compacte omgeving moeten bouwen. Ook in de directe omgeving van de hoofdstad, zoals in [Amstelveen](/regio/amstelveen), [Haarlem](/regio/haarlem), [Almere](/regio/almere) en [Utrecht](/regio/utrecht) realiseren wij hoogwaardige projecten.
 
-Dankzij onze **modulaire bouwmethode** kunnen we in Amsterdam bouwen met minimale logistieke hinder. De meeste onderdelen worden kant-en-klaar geleverd and met un kraan op hun plek gehesen.
+Dankzij onze **modulaire bouwmethode** kunnen we in Amsterdam bouwen met minimale logistieke hinder. De meeste onderdelen worden kant-en-klaar geleverd en met een kraan op hun plek gehesen.
 
-### Waarom Amsterdam kiest for prefab:
+### Waarom Amsterdam kiest voor prefab:
 - **Snelheid**: Binnen 1 dag wind- en waterdicht.
-- **Geen bouwstof**: Geen maandenlang zagen and boren op locatie.
-- **Hoogwaardig**: Onze isolatiewaarden overtreffen the standaard bouwbesluit eisen.
+- **Geen bouwstof**: Geen maandenlang zagen en boren op locatie.
+- **Hoogwaardig**: Onze isolatiewaarden overtreffen de standaard bouwbesluit eisen.
 
 ### Kosten uitbouw Amsterdam
-Door the complexe logistiek in Amsterdam kunnen kosten variëren. Gemiddeld investeert u €3.000 tot €4.500 per m² for un luxe, zorgeloze uitvoering.
+Door de complexe logistiek in Amsterdam kunnen kosten variëren. Gemiddeld investeert u €3.000 tot €4.500 per m² voor een luxe, zorgeloze uitvoering.
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
@@ -725,29 +725,29 @@ Door the complexe logistiek in Amsterdam kunnen kosten variëren. Gemiddeld inve
     name: 'Den Haag',
     slug: 'den-haag',
     title: 'Prefab Uitbouw Den Haag – Meer Ruimte met Behoud van Karakter',
-    content: `Uw woning in Den Haag uitbreiden met respect for de architectuur? Prefab Select is gespecialiseerd in **prefab uitbouw in Den Haag**. Van de statige woningen in het Statenkwartier tot de moderne bouw in Leidschenveen, wij bieden un passende oplossing.
+    content: `Uw woning in Den Haag uitbreiden met respect voor de architectuur? Prefab Select is gespecialiseerd in **prefab uitbouw in Den Haag**. Van de statige woningen in het Statenkwartier tot de moderne bouw in Leidschenveen, wij bieden een passende oplossing.
 
-Een **aanbouw aan de woning** in Den Haag zorgt for de nodige extra leefruimte for uw gezin of thuiskantoor. Onze prefab technologie garandeert un snelle plaatsing and un afwerking van topniveau.
+Een **aanbouw aan de woning** in Den Haag zorgt voor de nodige extra leefruimte voor uw gezin of thuiskantoor. Onze prefab technologie garandeert een snelle plaatsing en een afwerking van topniveau.
 
-### De voordelen for Den Haag:
+### De voordelen voor Den Haag:
 - **Architectonisch maatwerk**: Wij zorgen dat de aanbouw past bij uw huidige gevel.
 - **Snelle plaatsing**: Vaak binnen **één dag** gerealiseerd.
-- **Duurzaam & Geïsoleerd**: Rc-waarde van 6.0 for optimaal comfort.
+- **Duurzaam & Geïsoleerd**: Rc-waarde van 6.0 voor optimaal comfort.
 
-[Ontdek onze werkwijze](/diensten) or [vraag un offerte aan](/offerte)`
+[Ontdek onze werkwijze](/diensten) of [vraag een offerte aan](/offerte)`
   },
   {
     name: 'Amstelveen',
     slug: 'amstelveen',
     title: 'Prefab Uitbouw Amstelveen – Luxe & Comfort voor Uw Woning',
-    content: `Op zoek naar un **prefab uitbouw in Amstelveen**? Prefab Select realiseert luxe woninguitbreidingen die uw wooncomfort direct naar un hoger niveau tillen. Onze modules zijn perfect for gezinnen die behoefte hebben aan un ruimere keuken of un lichte woonkamer met zicht op the tuin.
+    content: `Op zoek naar een **prefab uitbouw in Amstelveen**? Prefab Select realiseert luxe woninguitbreidingen die uw wooncomfort direct naar een hoger niveau tillen. Onze modules zijn perfect voor gezinnen die behoefte hebben aan een ruimere keuken of een lichte woonkamer met zicht op de tuin.
 
-Met un **hoogwaardige prefab aanbouw** in Amstelveen kiest u for un snelle, schone and kwalitatieve bouwoplossing. Wij werken uitsluitend met the beste materialen and un oersterk staalskelet.
+Met een **hoogwaardige prefab aanbouw** in Amstelveen kiest u voor een snelle, schone en kwalitatieve bouwoplossing. Wij werken uitsluitend met de beste materialen en een oersterk staalskelet.
 
 ### Voordelen prefab in Amstelveen:
-- **Snelle verwerking**: Minimale overlast for uw directe omgeving.
-- **Luxe afwerking**: Inclusief opties for lichtstraten and grote glaspartijen.
-- **Toekomstbestendig**: Energieneutraal gebouwd met the hoogste isolatienormen.
+- **Snelle verwerking**: Minimale overlast voor uw directe omgeving.
+- **Luxe afwerking**: Inclusief opties voor lichtstraten en grote glaspartijen.
+- **Toekomstbestendig**: Energieneutraal gebouwd met de hoogste isolatienormen.
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
@@ -757,16 +757,16 @@ Met un **hoogwaardige prefab aanbouw** in Amstelveen kiest u for un snelle, scho
     image: 'https://i.imgur.com/v4jk0SK.jpeg',
     category: 'Gelderland',
     title: 'Prefab Uitbouw Nijmegen – Duurzaam Extra Woonruimte Creëren',
-    content: `Woont u in Nijmegen en wilt u meer leefruimte creëren zonder de overlast van un traditionele verbouwing? Een **prefab uitbouw in Nijmegen** is de oplossing. Wij bouwen hoogwaardige, geïsoleerde modules die in recordtijd staan.
+    content: `Woont u in Nijmegen en wilt u meer leefruimte creëren zonder de overlast van een traditionele verbouwing? Een **prefab uitbouw in Nijmegen** is de oplossing. Wij bouwen hoogwaardige, geïsoleerde modules die in recordtijd staan.
 
-Nijmegen is un stad van innovatie en duurzaamheid. Onze **modulaire aanbouw** oplossingen sluiten hier perfect bij aan door het gebruik van circulaire materialen en un uistekende isolatiewaarde (Rc 6.0).
+Nijmegen is een stad van innovatie en duurzaamheid. Onze **modulaire aanbouw** oplossingen sluiten hier perfect bij aan door het gebruik van circulaire materialen en een uitstekende isolatiewaarde (Rc 6.0).
 
 ### Uw voordelen in Nijmegen:
 - **Zwitserse precisie**: Prefab bouw van de hoogste kwaliteit.
 - **Plaatsing in 1-2 dagen**: Snel genieten van uw nieuwe ruimte.
 - **Vaste prijs**: Geen verrassingen, 100% transparantie.
 
-### Wat kost un uitbouw in Nijmegen?
+### Wat kost een uitbouw in Nijmegen?
 Gemiddeld liggen de **uitbouw kosten per m²** in Nijmegen tussen de €2.500 en €4.000, afhankelijk van de luxe en afwerking.
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
@@ -812,14 +812,14 @@ Onze prefab dakkapellen worden volledig op maat geproduceerd en zijn beschikbaar
     image: 'https://i.imgur.com/covRQg3.jpeg',
     category: 'Zuid-Holland',
     title: 'Prefab Uitbouw Leidschendam – Luxe Woninguitbreiding op Maat',
-    content: `Wilt u uw woning in Leidschendam vergroten met un moderne, lichte leefruimte? Een **prefab uitbouw in Leidschendam** van Prefab Select biedt the perfecte balans tussen snelheid and kwaliteit.
+    content: `Wilt u uw woning in Leidschendam vergroten met een moderne, lichte leefruimte? Een **prefab uitbouw in Leidschendam** van Prefab Select biedt de perfecte balans tussen snelheid en kwaliteit.
 
-Wij realiseren **hoogwaardige aanbouw** projecten die naadloos aansluiten op the architectuur van uw woning in Leidschendam-Voorburg. Of u nu kiest for un riante uitbouw van the woonkamer of un moderne kantoorruimte.
+Wij realiseren **hoogwaardige aanbouw** projecten die naadloos aansluiten op de architectuur van uw woning in Leidschendam-Voorburg. Of u nu kiest voor een riante uitbouw van de woonkamer of een moderne kantoorruimte.
 
-### Waarom kiezen for prefab in Leidschendam?
+### Waarom kiezen voor prefab in Leidschendam?
 - **Minimale bouwtijd**: Wij plaatsen uw nieuwe module vaak binnen **24 tot 48 uur**.
-- **Hoogwaardige afwerking**: Strak gestucte wanden and luxe kozijnen naar keuze.
-- **Zorgeloos**: Wij regelen the vergunningscheck and het transport.
+- **Hoogwaardige afwerking**: Strak gestucte wanden en luxe kozijnen naar keuze.
+- **Zorgeloos**: Wij regelen de vergunningscheck en het transport.
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
@@ -933,16 +933,16 @@ In veel gevallen is een mantelzorgwoning vergunningsvrij, mits er sprake is van 
     name: 'Recreatiewoning',
     slug: 'recreatiewoning-prefab',
     title: 'Prefab Recreatiewoning Laten Plaatsen – Luxe & Duurzaam',
-    content: `Droomt u van un eigen vakantieplek of un verhuurobject met un hoog rendement? Een **prefab recreatiewoning** van Prefab Select combineert modern design met de hoogste bouwkwaliteit.
+    content: `Droomt u van een eigen vakantieplek of een verhuurobject met een hoog rendement? Een **prefab recreatiewoning** van Prefab Select combineert modern design met de hoogste bouwkwaliteit.
 
-Of het nu gaat om un luxe chalet aan de kust of un moderne vakantiewoning in de bossen, onze **modulaire recreatiewoningen** zijn direct klaar voor gebruik.
+Of het nu gaat om een luxe chalet aan de kust of een moderne vakantiewoning in de bossen, onze **modulaire recreatiewoningen** zijn direct klaar voor gebruik.
 
-### Waarom kiezen for un prefab recreatiewoning?
+### Waarom kiezen voor een prefab recreatiewoning?
 - **All-season comfort**: Dankzij top-isolatie het hele jaar door behaaglijk.
-- **Snel operationeel**: Ideaal for vakantieparken of particuliere kavels.
+- **Snel operationeel**: Ideaal voor vakantieparken of particuliere kavels.
 - **Onderhoudsarm**: Gebruik van duurzame materialen die jarenlang mooi blijven.
 
-Ontdek onze verschillende [Vakantiewoningen](/vakantiewoningen) and [Chalets](/chalets).
+Ontdek onze verschillende [Vakantiewoningen](/vakantiewoningen) en [Chalets](/chalets).
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
@@ -1463,7 +1463,7 @@ const StickyMobileCTA = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsVisible(window.scrollY > 500);
+    const handleScroll = () => setIsVisible(window.scrollY > 200);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -2140,7 +2140,7 @@ function StructuredData() {
     "name": "Prefab Uitbouw Laten Plaatsen",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Prefabselect.nl",
+      "name": "Prefab Select",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Steenspil 24",
@@ -2149,10 +2149,19 @@ function StructuredData() {
         "addressRegion": "Noord-Brabant",
         "addressCountry": "NL"
       },
+      "telephone": "+31850607775",
+      "email": "offerte@prefabselect.nl",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.5263,
+        "longitude": 4.2725
+      },
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=Steenspil+24+4661+TZ+Halsteren",
+      "priceRange": "€€€",
       "url": "https://www.prefabselect.nl"
     },
     "description": "Wilt u extra woonruimte creëren zonder te verhuizen? Met een prefab uitbouw van Prefabselect.nl vergroot u uw woning snel, efficiënt en zonder langdurige verbouwing.",
-    "areaServed": ["Eindhoven", "Breda", "Tilburg", "Den Bosch", "Rotterdam", "Bergen op Zoom", "Nederland"],
+    "areaServed": ["Eindhoven", "Breda", "Tilburg", "Den Bosch", "Rotterdam", "Bergen op Zoom", "Oss", "Laren", "Amsterdam", "Den Haag", "Amstelveen", "Nijmegen", "Antwerpen", "Leidschendam", "Utrecht", "Almere", "Haarlem", "Zeeland", "Nederland"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Prefab Uitbouw Diensten",
@@ -2254,7 +2263,7 @@ function SEOText() {
                 { step: "2", title: "Woning & Wensen", desc: "Wat is mogelijk? Wat past het beste bij uw situatie?" },
                 { step: "3", title: "Ontwerp op maat", desc: "Geen standaard oplossing, maar afgestemd op u." },
                 { step: "4", title: "Productie", desc: "Alles gebeurt gecontroleerd in onze eigen fabriek." },
-                { step: "5", title: "Plaatsing", desc: "Binnen 1 dag staat the uitbouw er vaak al!" }
+                { step: "5", title: "Plaatsing", desc: "Binnen 1 dag staat de uitbouw er vaak al!" }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/5 backdrop-blur-2xl p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 shadow-2xl transition-all hover:translate-y-[-10px] group">
                   <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.5em] mb-4 md:mb-6 block leading-none">Stap 0{item.step}</span>
@@ -2520,10 +2529,22 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
           <div className="w-20 h-20 bg-blue-600 rounded-[1.5rem] flex items-center justify-center text-white mx-auto mb-8 shadow-2xl border border-blue-400">
             <Check size={36} strokeWidth={3} />
           </div>
-          <h4 className="text-2xl font-display font-black text-blue-950 mb-4 tracking-tighter uppercase">Bedankt!</h4>
-          <p className="text-base text-blue-900/60 leading-relaxed font-black uppercase tracking-widest leading-tight">
-            We hebben uw aanvraag ontvangen.<br />
-            Binnen 24 uur contact.
+          <h4 className="text-2xl font-display font-black text-blue-950 mb-4 tracking-tighter uppercase">Aanvraag ontvangen!</h4>
+          <div className="text-left max-w-sm mx-auto space-y-3 mb-8">
+            {[
+              'Ons team bekijkt uw project vandaag nog.',
+              'Een specialist belt u binnen 24 uur met persoonlijk advies.',
+              'U ontvangt een offerte op maat per e-mail.',
+            ].map((stap, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="w-6 h-6 shrink-0 rounded-full bg-blue-600 text-white text-xs font-black flex items-center justify-center mt-0.5">{i + 1}</span>
+                <p className="text-sm text-blue-900/70 leading-relaxed font-medium">{stap}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-[11px] text-blue-900/50 font-bold uppercase tracking-widest">
+            Geheel vrijblijvend · Geen verborgen kosten<br />
+            Liever direct contact? <a href="tel:31850607775" className="text-blue-600 underline underline-offset-4">Bel 085 060 7775</a>
           </p>
         </motion.div>
       ) : (
@@ -2613,13 +2634,17 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
                 </>
               )}
             </button>
-            <div className="flex items-center justify-center gap-6 mt-8">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-8">
                <div className="flex items-center gap-2 text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
                  <CheckCircle2 size={14} /> 24u Respons
                </div>
                <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
                <div className="flex items-center gap-2 text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
-                 <ShieldCheck size={14} /> AVG-Veilig
+                 <ShieldCheck size={14} /> 10 Jaar Garantie
+               </div>
+               <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+               <div className="flex items-center gap-2 text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
+                 <CheckCircle2 size={14} /> 100% Vrijblijvend
                </div>
             </div>
           </form>
