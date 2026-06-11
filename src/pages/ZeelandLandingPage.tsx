@@ -1,4 +1,5 @@
 import React from 'react';
+import Seo from '../components/Seo';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Check, MapPin, Home, Layout, Maximize2, ShieldCheck, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,6 +10,12 @@ export default function ZeelandLandingPage() {
 
   return (
     <div className="bg-white text-blue-950 font-sans">
+      <Seo
+        title="Prefab Uitbouw & Dakkapel in Zeeland | Prefab Select"
+        description="Prefab Select realiseert hoogwaardige prefab uitbouwen en dakkapellen in heel Zeeland: Middelburg, Vlissingen, Goes en omgeving. Snel en vakkundig geplaatst."
+        canonical="/regio/zeeland"
+        image="https://i.imgur.com/6VuTqto.jpeg"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0 text-left">
@@ -83,7 +90,7 @@ export default function ZeelandLandingPage() {
                 src="https://i.imgur.com/Mcivs2I.jpeg"
                 alt="Prefab uitbouw Zeeland"
                 className="rounded-[3rem] shadow-2xl w-full"
-                referrerPolicy="no-referrer"
+                referrerPolicy="no-referrer" loading="lazy"
               />
             </motion.div>
 
@@ -184,7 +191,7 @@ export default function ZeelandLandingPage() {
                 src="https://i.imgur.com/Sz7tRBj.jpeg"
                 alt="Prefab dakkapel"
                 className="rounded-[3rem] shadow-2xl w-full aspect-square object-cover"
-                referrerPolicy="no-referrer"
+                referrerPolicy="no-referrer" loading="lazy"
               />
             </motion.div>
           </div>
@@ -263,7 +270,7 @@ export default function ZeelandLandingPage() {
                   src="https://i.imgur.com/p3qz8V3.jpeg" 
                   alt="Nieuwbouwproject Zeeland" 
                   className="absolute inset-0 w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
+                  referrerPolicy="no-referrer" loading="lazy"
                 />
               </div>
             </div>

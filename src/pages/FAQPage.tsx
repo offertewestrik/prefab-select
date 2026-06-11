@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Seo from '../components/Seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, Search, HelpCircle, MessageCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -268,6 +269,30 @@ const faqData: FAQCategory[] = [
   }
 ];
 
+// Zet React-nodes om naar platte tekst voor de FAQPage structured data
+function nodeToText(node: React.ReactNode): string {
+  if (node === null || node === undefined || typeof node === 'boolean') return '';
+  if (typeof node === 'string' || typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(nodeToText).join(' ');
+  if (React.isValidElement(node)) return nodeToText((node.props as { children?: React.ReactNode }).children);
+  return '';
+}
+
+const faqJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqData.flatMap(category =>
+    category.items.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: nodeToText(item.answer).replace(/\s+/g, ' ').trim()
+      }
+    }))
+  )
+});
+
 const FAQItemComponent = ({ item, index }: { item: FAQItem; index: number }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -323,6 +348,12 @@ export default function FAQPage() {
 
   return (
     <div className="pt-32 pb-24 bg-white min-h-screen">
+      <Seo
+        title="Veelgestelde Vragen over Prefab Bouwen | Prefab Select"
+        description="Antwoorden op de meestgestelde vragen over prefab bouwen: vergunningen, kosten, planning, garantie en de bouw zelf. Vind snel het antwoord op uw vraag."
+        canonical="/faq"
+      />
+      <script type="application/ld+json">{faqJsonLd}</script>
       {/* Hero Header */}
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
@@ -464,7 +495,7 @@ export default function FAQPage() {
                   src="https://i.imgur.com/cXPWGDM.jpeg" 
                   alt="Kelly - Prefab Select Specialist" 
                   className="w-full h-full object-cover grayscale-[0.2] group-hover/kelly:grayscale-0 transition-all duration-[2.5s] group-hover/kelly:scale-110"
-                  referrerPolicy="no-referrer"
+                  referrerPolicy="no-referrer" loading="lazy"
                 />
                 <div className="absolute inset-x-0 bottom-0 p-10 bg-linear-to-t from-blue-950 via-blue-950/40 to-transparent">
                   <p className="text-white font-display font-black text-2xl uppercase tracking-tighter leading-none mb-1">Kelly</p>

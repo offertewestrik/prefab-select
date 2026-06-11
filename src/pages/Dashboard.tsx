@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Seo from '../components/Seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Users, 
@@ -130,6 +131,12 @@ const Dashboard: React.FC = () => {
 
   return (
     <div id="crm-dashboard-container" className="min-h-screen bg-[#f8fafc]/60 pt-24 pb-12">
+      <Seo
+        title="CRM Dashboard | Prefab Select"
+        description="Intern CRM-dashboard van Prefab Select voor het beheren van leads en aanvragen."
+        canonical="/crm"
+        noindex
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

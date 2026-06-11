@@ -5,6 +5,7 @@ import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
 import { MetaPixel } from './components/MetaPixel';
 import { CookieConsent } from './components/CookieConsent';
+import { Seo } from './components/Seo';
 import Diensten from './pages/Diensten';
 import PrefabUitbouw from './pages/PrefabUitbouw';
 import PrefabAanbouw from './pages/PrefabAanbouw';
@@ -1048,6 +1049,13 @@ function CityLandingPage() {
 
   const heroImage = page.image || 'https://i.imgur.com/6VuTqto.jpeg';
 
+  const metaDescription = page.content
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[*#_`>~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 155);
+
   // Custom Eindhoven layout components
   const EindhovenHero = () => (
     <section className="bg-white py-24 pt-40 overflow-hidden relative">
@@ -1129,6 +1137,12 @@ function CityLandingPage() {
 
   return (
     <div className="bg-white text-blue-950">
+      <Seo
+        title={page.title}
+        description={metaDescription}
+        canonical={`/regio/${page.slug}`}
+        image={heroImage}
+      />
       {page.slug === 'eindhoven' ? <EindhovenHero /> : (
         /* Premium Hero Section */
         <section className="relative min-h-[70vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950">
@@ -1915,7 +1929,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             src={service.image} 
             alt={service.title} 
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-            referrerPolicy="no-referrer"
+            referrerPolicy="no-referrer" loading="lazy"
           />
           <div className="absolute inset-0 bg-blue-950/5 group-hover:bg-blue-950/0 transition-all duration-1000" />
           
@@ -2288,7 +2302,7 @@ function FinalCTA() {
         <img 
           src="https://i.imgur.com/AC0hk9k.jpg" 
           alt="Modern Architecture" 
-          className="w-full h-full object-cover opacity-20 grayscale"
+          className="w-full h-full object-cover opacity-20 grayscale" loading="lazy"
         />
         <div className="absolute inset-0 bg-linear-to-b from-blue-950/80 via-blue-900/60 to-blue-950" />
       </div>
@@ -2672,7 +2686,7 @@ export function PrefabSteps() {
                     src={step.image} 
                     alt={step.title} 
                     className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
-                    referrerPolicy="no-referrer"
+                    referrerPolicy="no-referrer" loading="lazy"
                   />
                   <div className="absolute inset-0 bg-blue-950/20 group-hover:bg-blue-950/10 transition-colors duration-700" />
                   
@@ -2739,7 +2753,7 @@ function PremiumIntro() {
                 <img 
                   src="https://i.imgur.com/6v4bsrj.jpeg" 
                   alt="Modern Architecture Prefab" 
-                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105" loading="lazy"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-blue-950/40 via-transparent to-transparent" />
               </div>
@@ -3054,7 +3068,7 @@ function ModularCircularSection() {
                 src="https://i.imgur.com/2uyJ2rP.jpeg" 
                 alt="Modulair Bouwen Prefab Select" 
                 className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
-                referrerPolicy="no-referrer"
+                referrerPolicy="no-referrer" loading="lazy"
               />
               <div className="absolute inset-0 bg-linear-to-t from-blue-950/40 via-transparent to-transparent" />
             </div>
@@ -3174,6 +3188,11 @@ function OfferteLandingPage() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
+      <Seo
+        title="Offerte Aanvragen – Vrijblijvend & Snel | Prefab Select"
+        description="Vraag binnen één minuut een vrijblijvende offerte aan voor uw prefab uitbouw, aanbouw of bijgebouw. Binnen 24 uur persoonlijk antwoord van onze experts."
+        canonical="/offerte"
+      />
       {/* Premium Hero Section */}
       <section className="relative min-h-[85vh] flex items-center pt-32 sm:pt-48 md:pt-64 pb-20 sm:pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
@@ -3367,6 +3386,7 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
             key={index}
             src={project.images[index]} 
             alt={project.title} 
+            loading="lazy"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
@@ -3549,7 +3569,7 @@ export function ConfiguratorTeaser() {
               src="https://i.imgur.com/LxIER2P.png" 
               alt="Ontwerp je aanbouw" 
               className="w-full aspect-[4/3] object-cover"
-              referrerPolicy="no-referrer"
+              referrerPolicy="no-referrer" loading="lazy"
             />
           </div>
 
@@ -3597,7 +3617,7 @@ export function ConfiguratorTeaser() {
                   src="https://i.imgur.com/LxIER2P.png" 
                   alt="Aanbouw schaalmodel" 
                   className="w-12 h-12 rounded-xl object-cover border border-slate-100 shadow-xs flex-shrink-0" 
-                  referrerPolicy="no-referrer"
+                  referrerPolicy="no-referrer" loading="lazy"
                 />
                 <div>
                   <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 block leading-tight">Configurator Tool</span>
@@ -3615,6 +3635,12 @@ export function ConfiguratorTeaser() {
 function HomePage() {
   return (
     <>
+      <Seo
+        title="Prefab Uitbouw, Aanbouw & Chalets op Maat | Prefab Select"
+        description="Hoogwaardige prefab uitbouwen, aanbouwen, chalets en vakantiewoningen. In eigen fabriek geproduceerd en in 1 dag geplaatst. Vraag vrijblijvend een offerte aan."
+        canonical="/"
+        image="https://i.imgur.com/6VuTqto.jpeg"
+      />
       <Hero />
       <ConfiguratorTeaser />
       <PremiumIntro />
@@ -3631,6 +3657,12 @@ function HomePage() {
 function WhyChooseUsPage() {
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+      <Seo
+        title="Waarom Prefab Select – Onze Voordelen op een Rij"
+        description="Ontdek waarom klanten kiezen voor Prefab Select: eigen fabriek, vaste prijzen, snelle plaatsing en jarenlange ervaring in hoogwaardig prefab bouwen."
+        canonical="/waarom-prefab-select"
+        image="https://i.imgur.com/PZcZ8X8.jpeg"
+      />
       {/* Huge Premium Hero Section */}
       <section className="relative min-h-screen flex items-center pt-64 pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
@@ -3714,7 +3746,7 @@ function WhyChooseUsPage() {
               <img 
                 src="https://i.imgur.com/AC0hk9k.jpg" 
                 alt="Architectural Quality" 
-                className="w-full h-full object-cover grayscale contrast-[1.1]"
+                className="w-full h-full object-cover grayscale contrast-[1.1]" loading="lazy"
               />
               <div className="absolute inset-0 bg-blue-950/20" />
             </div>
@@ -3786,6 +3818,13 @@ function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+      <Seo
+        title={`${blog.title} | Prefab Select`}
+        description={blog.excerpt}
+        canonical={`/blog/${blog.slug}`}
+        image={blog.image}
+        type="article"
+      />
       {/* Reading Progress */}
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1.5 bg-blue-600 z-[100] origin-left"
@@ -4004,6 +4043,12 @@ function ContactPage() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
+      <Seo
+        title="Contact & Showroom – Plan uw Afspraak | Prefab Select"
+        description="Neem contact op met Prefab Select voor advies op maat of plan een showroombezoek in Halsteren. Wij reageren binnen 24 uur op uw aanvraag."
+        canonical="/contact"
+        image="https://i.imgur.com/vOltRN1.jpg"
+      />
       {/* Contact Hero with the Homepage Form style */}
       <section className="relative min-h-[85vh] flex items-center pt-48 pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0 text-left">
@@ -4079,6 +4124,11 @@ function ContactPage() {
 function ProjectsPage() {
   return (
     <>
+      <Seo
+        title="Gerealiseerde Prefab Projecten | Prefab Select"
+        description="Bekijk onze gerealiseerde prefab projecten: uitbouwen, tuinkantoren, vakantiewoningen en zakelijke bouwprojecten door heel Nederland."
+        canonical="/projecten"
+      />
       <Hero />
       <PremiumIntro />
       <PrefabSteps />
@@ -4096,6 +4146,59 @@ function ProjectsPage() {
       
       <FinalCTA />
     </>
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <div className="min-h-screen bg-white pt-40 pb-24">
+      <Seo
+        title="Pagina Niet Gevonden (404) | Prefab Select"
+        description="Deze pagina bestaat niet (meer) of is verplaatst. Ga terug naar de homepage of bekijk onze prefab diensten."
+        canonical="/"
+        noindex
+      />
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="bg-blue-950 rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-20 relative overflow-hidden text-center">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/10 blur-[120px] rounded-full -mr-32 -mt-32" />
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 mb-8 block leading-none">FOUT 404</span>
+            <h1 className="text-6xl md:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8">
+              Pagina niet <br />
+              <span className="text-blue-400 italic font-light lowercase">gevonden.</span>
+            </h1>
+            <p className="text-lg text-blue-100/60 leading-relaxed mb-12 font-medium max-w-xl mx-auto">
+              De pagina die u zoekt bestaat niet (meer) of is verplaatst. Geen zorgen: via onderstaande knoppen vindt u snel uw weg terug.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/" className="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-1">
+                Naar de homepage <ArrowRight size={14} />
+              </Link>
+              <Link to="/offerte" className="inline-flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-white/10 transition-all">
+                Offerte aanvragen
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Populaire pagina's */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          {[
+            { title: 'Prefab Uitbouw', desc: 'Vergroot uw woonkamer of keuken in 1 dag.', link: '/prefab-uitbouw' },
+            { title: 'Prefab Aanbouw', desc: 'Extra ruimte voor keuken, kantoor of slaapkamer.', link: '/prefab-aanbouw' },
+            { title: 'Mantelzorgwoning', desc: 'Comfortabel wonen, dichtbij uw naasten.', link: '/mantelzorgwoning' }
+          ].map((item, i) => (
+            <Link key={i} to={item.link} className="group bg-white border border-slate-100 rounded-[2.5rem] p-10 shadow-sm hover:shadow-[0_40px_80px_rgba(29,78,216,0.1)] hover:-translate-y-2 transition-all">
+              <h2 className="text-xl font-display font-black text-blue-950 uppercase tracking-tighter mb-3 group-hover:text-blue-600 transition-colors">{item.title}</h2>
+              <p className="text-sm text-slate-500 leading-relaxed mb-6">{item.desc}</p>
+              <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600">
+                Bekijk pagina <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -4150,8 +4253,8 @@ export default function App() {
           <Route path="/regio/:slug" element={<CityLandingPage />} />
           <Route path="/crm" element={<Dashboard />} />
           
-          {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}
-          <Route path="*" element={<HomePage />} />
+          {/* 404 pagina voor onbekende routes */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

@@ -1,4 +1,5 @@
 import React from 'react';
+import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Factory, ShieldCheck, Zap, Timer, ArrowRight, MessageCircle, PenTool, Layout, Shield, Quote, Leaf, Plus } from 'lucide-react';
@@ -8,6 +9,12 @@ import { KellyCTA } from '../KellyCTA';
 const AboutPage = () => {
   return (
     <div className="bg-white min-h-screen">
+      <Seo
+        title="Over Ons – Specialist in Prefab Bouwen | Prefab Select"
+        description="Maak kennis met Prefab Select: vakmensen met passie voor modulair bouwen. Eigen productie, korte lijnen en hoogwaardige afwerking door heel Nederland."
+        canonical="/over-ons"
+        image="https://i.imgur.com/covRQg3.jpeg"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] flex items-center pt-32 md:pt-48 pb-12 md:pb-20 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0 text-left">
@@ -51,7 +58,7 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
             <div className="relative aspect-[4/3] rounded-[2rem] md:rounded-[3rem] overflow-hidden">
-                <img src="https://i.imgur.com/IUOK0hb.jpeg" alt="Wie wij zijn" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src="https://i.imgur.com/IUOK0hb.jpeg" alt="Wie wij zijn" className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
             </div>
             <div className="space-y-6 md:space-y-8">
                 <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 tracking-tighter uppercase leading-none">Wie wij zijn</h2>
@@ -105,7 +112,7 @@ const AboutPage = () => {
                     { title: "Modulaire woningen", img: "https://i.imgur.com/covRQg3.jpeg" }
                 ].map(item => (
                     <div key={item.title} className="group cursor-pointer aspect-[4/5] rounded-[2rem] overflow-hidden relative">
-                        <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
                         <div className="absolute inset-0 bg-blue-950/40 group-hover:bg-blue-950/20 transition-all"></div>
                         <div className="absolute bottom-10 left-10 text-white font-display font-black text-2xl uppercase tracking-tighter leading-none">{item.title}</div>
                     </div>
@@ -131,7 +138,7 @@ const AboutPage = () => {
                 </div>
             </div>
             <div className="relative aspect-square rounded-[3rem] overflow-hidden">
-                <img src="https://i.imgur.com/fmQecXk.jpeg" alt="Modulair" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src="https://i.imgur.com/fmQecXk.jpeg" alt="Modulair" className="w-full h-full object-cover" referrerPolicy="no-referrer" loading="lazy" />
             </div>
         </div>
       </section>

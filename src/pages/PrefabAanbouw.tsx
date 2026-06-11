@@ -1,4 +1,5 @@
 import React from 'react';
+import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Clock, Box, ShieldCheck, Leaf, ArrowRight, CheckCircle2, ChevronRight, Zap, Sun, Utensils, Home, Layers, Palette, PenTool } from 'lucide-react';
@@ -8,6 +9,12 @@ import { PrefabSteps } from '../App';
 const PrefabAanbouw = () => {
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
+      <Seo
+        title="Prefab Aanbouw – Snel Extra Woonruimte | Prefab Select"
+        description="Creëer extra ruimte met een moderne prefab aanbouw: leefkeuken, kantoor of slaapkamer. Vaste prijs, korte bouwtijd en luxe afwerking door Prefab Select."
+        canonical="/prefab-aanbouw"
+        image="https://i.imgur.com/fmQecXk.jpeg"
+      />
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-blue-950">
         <div className="absolute inset-0">
@@ -68,7 +75,7 @@ const PrefabAanbouw = () => {
               <img 
                 src="https://i.imgur.com/Mcivs2I.jpeg" 
                 alt="Prefab aanbouw realisatie" 
-                className="w-full object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/5]"
+                className="w-full object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/5]" loading="lazy"
               />
             </motion.div>
             
@@ -239,7 +246,7 @@ const PrefabAanbouw = () => {
               <img 
                 src="https://i.imgur.com/covRQg3.jpeg" 
                 alt="Modulair en circulair bouwen" 
-                className="w-full object-cover aspect-[4/5]"
+                className="w-full object-cover aspect-[4/5]" loading="lazy"
               />
             </motion.div>
           </div>

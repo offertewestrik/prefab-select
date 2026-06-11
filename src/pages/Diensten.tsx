@@ -1,4 +1,5 @@
 import React from 'react';
+import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { 
   ArrowRight, 
@@ -161,6 +162,12 @@ const constructionModules = [
 export default function Diensten() {
   return (
     <div className="bg-white text-blue-950 font-sans selection:bg-blue-600 selection:text-white">
+      <Seo
+        title="Onze Prefab Diensten & Modules | Prefab Select"
+        description="Bekijk alle prefab oplossingen van Prefab Select: uitbouw, aanbouw, mantelzorgwoning, chalet, poolhouse en vakantiewoning. Hoogwaardig en snel geplaatst."
+        canonical="/diensten"
+        image="https://i.imgur.com/2uyJ2rP.jpeg"
+      />
       {/* Premium Architectural Hero - Cinematic Improvements */}
       <section className="relative min-h-[60vh] md:min-h-[75vh] flex items-center pt-32 md:pt-24 pb-12 md:pb-20 overflow-hidden bg-blue-950">
         {/* Background Video with refined overlays */}
@@ -344,7 +351,7 @@ export default function Diensten() {
                     src={module.image} 
                     alt={module.title} 
                     className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110"
-                    referrerPolicy="no-referrer"
+                    referrerPolicy="no-referrer" loading="lazy"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-blue-950/20 to-transparent group-hover:opacity-0 transition-opacity duration-1000" />
                 </motion.div>
@@ -392,7 +399,7 @@ export default function Diensten() {
                       src={step.image} 
                       alt={step.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[3s]"
-                      referrerPolicy="no-referrer"
+                      referrerPolicy="no-referrer" loading="lazy"
                     />
                     <div className="absolute inset-0 bg-blue-950/10 group-hover:bg-transparent transition-all duration-1000" />
                     <div className="absolute top-8 left-8 bg-white/20 backdrop-blur-xl rounded-2xl w-12 h-12 flex items-center justify-center text-[10px] font-black text-white uppercase tracking-widest border border-white/20 shadow-2xl">
@@ -496,7 +503,7 @@ export default function Diensten() {
                   src="https://i.imgur.com/2uyJ2rP.jpeg" 
                   alt="Modulair Bouwen Prefab Select" 
                   className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110"
-                  referrerPolicy="no-referrer"
+                  referrerPolicy="no-referrer" loading="lazy"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-blue-950/40 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-1000" />
               </div>
