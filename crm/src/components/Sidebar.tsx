@@ -26,6 +26,7 @@ import {
   Package,
 } from "lucide-react";
 import clsx from "clsx";
+import { APP_VERSIE } from "@/lib/versie";
 
 const SECTIES: { titel: string | null; items: { href: string; label: string; icon: any }[] }[] = [
   {
@@ -105,9 +106,9 @@ export function Sidebar() {
 
       <div className="border-t border-slate-100 px-6 py-4">
         <p className="text-[11px] text-slate-400">
-          Prototype · dummy data
+          Prefab Select CRM
           <br />
-          v0.4 — vervangt Teamleader
+          Versie: {APP_VERSIE}
         </p>
       </div>
     </aside>
