@@ -2452,6 +2452,7 @@ function StructuredData() {
         "longitude": 4.2725
       },
       "hasMap": "https://www.google.com/maps/search/?api=1&query=Steenspil+24+4661+TZ+Halsteren",
+      "sameAs": ["https://share.google/Ky6sK5qFbBzvUm8u9"],
       "priceRange": "€€€",
       "url": "https://www.prefabselect.nl"
     },
@@ -2680,6 +2681,16 @@ function Footer() {
               <li><Link to="/regio" className="hover:text-white transition-colors">Regio's</Link></li>
               <li><Link to="/faq" className="hover:text-white transition-colors">Veelgestelde Vragen</Link></li>
               <li><Link to="/over-ons" className="hover:text-white transition-colors">Over ons</Link></li>
+              <li>
+                <a
+                  href="https://share.google/Ky6sK5qFbBzvUm8u9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-400 hover:text-white transition-colors"
+                >
+                  <Star size={12} className="fill-current" /> Beoordeel ons op Google
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -4644,6 +4655,33 @@ function ContactPage() {
 
       {/* Kelly bar immediately after form/hero as requested */}
       <KellyCTA />
+
+      {/* Google review CTA */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-blue-50/50 border border-blue-100 rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+            <div>
+              <div className="flex items-center justify-center md:justify-start gap-1 text-blue-600 mb-4">
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 fill-current" />)}
+              </div>
+              <h3 className="text-2xl md:text-3xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-3">
+                Al klant bij <span className="text-blue-600 italic font-light lowercase">ons?</span>
+              </h3>
+              <p className="text-slate-500 font-medium max-w-xl leading-relaxed">
+                Uw ervaring helpt anderen bij het kiezen van de juiste bouwpartner. Wij waarderen elke beoordeling enorm.
+              </p>
+            </div>
+            <a
+              href="https://share.google/Ky6sK5qFbBzvUm8u9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-3 bg-blue-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-lg shadow-blue-600/25 hover:bg-blue-700 transition-colors"
+            >
+              <Star size={14} className="fill-current" /> Beoordeel ons op Google
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Optional extra section to keep page balanced */}
       <FAQSection />
