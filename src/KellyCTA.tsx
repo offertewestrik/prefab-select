@@ -54,7 +54,7 @@ export function KellyCTA() {
                   src="https://i.imgur.com/cXPWGDM.jpeg" 
                   alt="Kelly - Prefab Select Specialist" 
                   className="w-full h-full object-cover grayscale-[0.2] group-hover/kelly:grayscale-0 transition-all duration-[2.5s] group-hover/kelly:scale-110"
-                  referrerPolicy="no-referrer" loading="lazy"
+                  referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-x-0 bottom-0 p-10 bg-linear-to-t from-blue-950 via-blue-950/40 to-transparent">
                   <p className="text-white font-display font-black text-2xl uppercase tracking-tighter leading-none">Kelly</p>

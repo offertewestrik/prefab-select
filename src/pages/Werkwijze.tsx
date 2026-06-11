@@ -1,5 +1,4 @@
 import React from 'react';
-import Seo from '../components/Seo';
 import { 
   ArrowRight, 
   Settings, 
@@ -72,12 +71,6 @@ export default function Werkwijze() {
 
   return (
     <div className="bg-white">
-      <Seo
-        title="Onze Werkwijze – Van Ontwerp tot Plaatsing | Prefab Select"
-        description="Zo werkt prefab bouwen bij Prefab Select: vrijblijvend advies, ontwerp op maat, productie in eigen fabriek en plaatsing in slechts enkele dagen."
-        canonical="/werkwijze"
-        image="https://i.imgur.com/2L9Zj3z.jpeg"
-      />
       {/* HERO SECTION - CLEAN & PROFESSIONAL */}
       <section className="relative pt-32 md:pt-48 pb-12 md:pb-24 border-b border-slate-100 bg-slate-50/50">
         <div className="max-w-7xl mx-auto px-6">
@@ -125,10 +118,10 @@ export default function Werkwijze() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
               <img 
-                src="https://i.imgur.com/LxIER2P.png" 
+                src="https://i.imgur.com/ueZgFnN.jpeg" 
                 alt="Ontwerp je aanbouw" 
                 className="w-full aspect-[4/3] object-cover"
-                referrerPolicy="no-referrer" loading="lazy"
+                referrerPolicy="no-referrer"
               />
             </div>
 
@@ -168,10 +161,10 @@ export default function Werkwijze() {
                 </Link>
                 <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
                   <img 
-                    src="https://i.imgur.com/LxIER2P.png" 
+                    src="https://i.imgur.com/zfWAbPd.jpeg" 
                     alt="Aanbouw schaalmodel" 
                     className="w-12 h-12 rounded-xl object-cover border border-slate-100 shadow-xs flex-shrink-0" 
-                    referrerPolicy="no-referrer" loading="lazy"
+                    referrerPolicy="no-referrer"
                   />
                   <div>
                     <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 block leading-tight">Configurator Tool</span>

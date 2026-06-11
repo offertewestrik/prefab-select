@@ -1,5 +1,4 @@
 import React from 'react';
-import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Clock, Box, ShieldCheck, Leaf, ArrowRight, CheckCircle2, ChevronRight, Zap, Droplets, Utensils, Sofa, Sun } from 'lucide-react';
@@ -9,12 +8,6 @@ import { KellyCTA } from '../KellyCTA';
 const Poolhouse = () => {
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
-      <Seo
-        title="Luxe Prefab Poolhouse op Maat | Prefab Select"
-        description="Een architectonisch poolhouse als verlengstuk van uw tuin. Prefab gebouwd, snel geplaatst en luxe afgewerkt met bar, lounge of buitenkeuken."
-        canonical="/poolhouse"
-        image="https://i.imgur.com/X3n5XIc.jpeg"
-      />
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-blue-950">
         <div className="absolute inset-0">
@@ -77,7 +70,7 @@ const Poolhouse = () => {
               <img 
                 src="https://i.imgur.com/gGBOzjd.jpeg" 
                 alt="Prefab poolhouse realisatie" 
-                className="w-full object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/5]" loading="lazy"
+                className="w-full object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/5]"
               />
             </motion.div>
             
@@ -162,7 +155,7 @@ const Poolhouse = () => {
       {/* SECTIE 4 — MODERNE ARCHITECTUUR & BUITENLEVEN */}
       <section className="py-24 md:py-32 bg-blue-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-40">
-          <img src="https://i.imgur.com/gGBOzjd.jpeg" alt="Moderne poolhouse architectuur" className="w-full h-full object-cover filter brightness-75" loading="lazy" />
+          <img src="https://i.imgur.com/gGBOzjd.jpeg" alt="Moderne poolhouse architectuur" className="w-full h-full object-cover filter brightness-75" />
           <div className="absolute inset-0 bg-blue-950/80" />
         </div>
         
@@ -228,7 +221,7 @@ const Poolhouse = () => {
               <img 
                 src="https://i.imgur.com/gGBOzjd.jpeg" 
                 alt="Duurzaam en modulair bouwen poolhouse" 
-                className="w-full object-cover aspect-[4/5] object-center" loading="lazy"
+                className="w-full object-cover aspect-[4/5] object-center"
               />
             </motion.div>
           </div>

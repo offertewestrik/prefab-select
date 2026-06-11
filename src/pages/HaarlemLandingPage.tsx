@@ -16,67 +16,67 @@ import {
 import { Link } from 'react-router-dom';
 import { KellyCTA } from '../KellyCTA';
 
-export default function ZeelandLandingPage() {
+export default function HaarlemLandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    document.title = "Uitbouw in Zeeland | Prefab uitbouw op maat — Prefab Select";
+    document.title = "Uitbouw in Haarlem | Prefab uitbouw op maat — Prefab Select";
     window.scrollTo({ top: 0, behavior: 'instant' });
     
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         "content", 
-        "Een uitbouw in Zeeland laten bouwen? Lees alles over prefab uitbouw in de hele provincie: vergunning per gemeente, beschermde stadsgezichten, kosten, bouwtijd en de voordelen aan de kust. Prefab Select bouwt snel en vakkundig."
+        "Een uitbouw in Haarlem laten bouwen? Lees alles over prefab uitbouw: vergunning, de Nota Ruimtelijke Kwaliteit, het beschermde stadsgezicht, kosten, bouwtijd en regels per wijk. Prefab Select bouwt snel en vakkundig."
       );
     }
 
-    // Dynamic JSON-LD Schema injection for Zeeland
+    // Dynamic JSON-LD Schema injection for Haarlem
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.id = 'json-ld-zeeland-schema';
+    script.id = 'json-ld-haarlem-schema';
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebPage",
-          "@id": "https://www.prefabselect.nl/regio/zeeland",
-          "url": "https://www.prefabselect.nl/regio/zeeland",
-          "name": "Uitbouw in Zeeland | Prefab uitbouw op maat — Prefab Select",
-          "description": "Een uitbouw in Zeeland laten bouwen? Lees alles over prefab uitbouw in de hele provincie: vergunning per gemeente, beschermde stadsgezichten, kosten, bouwtijd en de voordelen aan de kust. Prefab Select bouwt snel en vakkundig.",
+          "@id": "https://www.prefabselect.nl/regio/haarlem",
+          "url": "https://www.prefabselect.nl/regio/haarlem",
+          "name": "Uitbouw in Haarlem | Prefab uitbouw op maat — Prefab Select",
+          "description": "Een uitbouw in Haarlem laten bouwen? Lees alles over prefab uitbouw: vergunning, de Nota Ruimtelijke Kwaliteit, het beschermde stadsgezicht, kosten, bouwtijd en regels per wijk. Prefab Select bouwt snel en vakkundig.",
           "inLanguage": "nl-NL",
           "isPartOf": { "@type": "WebSite", "name": "Prefab Select", "url": "https://www.prefabselect.nl" },
           "about": { 
             "@type": "Service", 
-            "name": "Prefab uitbouw Zeeland", 
+            "name": "Prefab uitbouw Haarlem", 
             "provider": { "@type": "GeneralContractor", "name": "Prefab Select" } 
           },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.prefabselect.nl" },
-              { "@type": "ListItem", "position": 2, "name": "Zeeland", "item": "https://www.prefabselect.nl/regio/zeeland" }
+              { "@type": "ListItem", "position": 2, "name": "Haarlem", "item": "https://www.prefabselect.nl/regio/haarlem" }
             ]
           }
         },
         {
           "@type": "FAQPage",
-          "@id": "https://www.prefabselect.nl/regio/zeeland#faq",
+          "@id": "https://www.prefabselect.nl/regio/haarlem#faq",
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Heb ik een vergunning nodig voor een uitbouw in Zeeland?",
+              "name": "Heb ik een vergunning nodig voor een uitbouw in Haarlem?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. De landelijke regels gelden in heel Zeeland, maar het welstandsbeleid verschilt per gemeente. In de vele beschermde stadsgezichten (zoals Middelburg, Veere en Zierikzee) of bij monumenten is bijna altijd een vergunning nodig. Doe altijd de vergunningcheck voor uw adres."
+                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. In het beschermde stadsgezicht van de Haarlemse binnenstad of bij een monument is wel een vergunning nodig. Doe de vergunningcheck voor uw adres."
               }
             },
             {
               "@type": "Question",
-              "name": "Is prefab geschikt voor het Zeeuwse kustklimaat?",
+              "name": "Wat is de Nota Ruimtelijke Kwaliteit in Haarlem?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Juist wel. Doordat een prefab uitbouw in de werkplaats wordt gemaakt, heeft wind, regen en zilte zeelucht tijdens de bouw nauwelijks invloed. De elementen worden onder constante omstandigheden geproduceerd en op locatie snel en strak gemonteerd."
+                "text": "Dat is het welstandsbeleid van Haarlem: een visie op ruimtelijke kwaliteit met 'gouden regels' en een toetsingskader. Hierin staat per gebied hoe een bouwplan op uiterlijk wordt beoordeeld. De Adviescommissie Ruimtelijke Kwaliteit toetst aanvragen aan deze criteria."
               }
             },
             {
@@ -84,12 +84,12 @@ export default function ZeelandLandingPage() {
               "name": "Hoelang duurt het plaatsen van een prefab uitbouw?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "De ruwbouw staat meestal binnen één dag wind- en waterdicht gemonteerd. Inclusief fundering, grondwerk en de fijne binnen- en buitenafwerking bent u doorgaans binnen een week helemaal klaar op locatie."
+                "text": "De ruwbouw staat meestal binnen één dag. Inclusief fundering en afwerking rekent u op enkele dagen tot een week op locatie, en een totale doorlooptijd van vier tot acht weken inclusief voorbereiding."
               }
             },
             {
               "@type": "Question",
-              "name": "Wat kost een uitbouw in Zeeland ongeveer?",
+              "name": "Wat kost een uitbouw in Haarlem ongeveer?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Reken op een richtprijs van ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van de afwerking. Een compacte uitbouw begint rond de € 40.000. Een offerte op maat geeft het exacte bedrag voor uw woning."
@@ -102,7 +102,7 @@ export default function ZeelandLandingPage() {
     document.head.appendChild(script);
 
     return () => {
-      const existingScript = document.getElementById('json-ld-zeeland-schema');
+      const existingScript = document.getElementById('json-ld-haarlem-schema');
       if (existingScript) {
         existingScript.remove();
       }
@@ -112,58 +112,58 @@ export default function ZeelandLandingPage() {
   const stappen = [
     {
       nr: '1',
-      title: 'Zeeuws Maatwerk & Advies',
-      desc: 'We analyseren uw woning, bespreken uw wensen en stemmen het concept af op de logistiek op de Zeeuwse eilanden. U ontvangt een heldere, vaste prijsopgave.'
+      title: 'Kennismaking & Ontwerp',
+      desc: 'We bekijken uw woning, bespreken uw wensen en de mogelijkheden op uw plek, en maken een ontwerp met een transparante en vaste offerte.'
     },
     {
       nr: '2',
-      title: 'Vergunning & Welstand',
-      desc: 'Bouwt u in een historisch stadsgezicht of bij de duinen? Wij handelen de complete omgevingsvergunning en welstandstoets af bij uw Zeeuwse gemeente.'
+      title: 'Vergunning Behandelen',
+      desc: 'Valt uw plan buiten de vergunningsvrije normen — bijvoorbeeld in de historische binnenstad? Wij verzorgen de complete aanvraag bij de gemeente Haarlem.'
     },
     {
       nr: '3',
-      title: 'Modulaire Prefabricage',
-      desc: 'Uw aanbouw wordt millimeterprecies en volledig droog gebouwd in onze geklimatiseerde fabriekshal, ver weg van de gure kustwind of zilte weersinvloeden.'
+      title: 'Maken in de Fabriek',
+      desc: 'In onze moderne werkplaats fabriceren we de elementen droog en windvrij onder perfect gecontroleerde omstandigheden, helemaal onafhankelijk van het weer.'
     },
     {
       nr: '4',
-      title: 'Zeeuwse Klei & Schroefmontage',
-      desc: 'We steken een stabiele fundering (zeer nauwkeurig berekend naar de Zeeuwse klei- of zandbodems) en monteren de gehele opbouw wind- en waterdicht binnen één dag.'
+      title: 'Grondwerk & Montage',
+      desc: 'Eerst leggen we de schroeffundering aan, waarna we de prefab uitbouw binnen één enkele dag hijsen en wind- en waterdicht monteren.'
     },
     {
       nr: '5',
-      title: 'Sluitende Oplevering',
-      desc: 'We monteren alle elektra, glaspartijen, eventuele vloerverwarming of daklichten direct af. Uw nieuwe, lichte Zeeuwse ruimte is gereed voor gebruik.'
+      title: 'Afwerking & Oplevering',
+      desc: 'Binnen enkele dagen monteren we alle installaties af en zorgen we voor een naadloze binnenzijde en buitenafwerking. Uw nieuwe ruimte is direct klaar.'
     }
   ];
 
   const wijken = [
-    { name: 'Walcheren (Middelburg, Vlissingen, Veere)', desc: 'Prachtig historisch erfgoed met strenge eisen rond de monumentenzorg en beschermde stadsgezichten. We ontwerpen met uiterst esthetische precisie die perfect past bij het historische karakter.' },
-    { name: 'Zuid-Beveland & Goes', desc: 'Regio’s met veel royale gezinswoningen en ruime kavels; hier benutten we de vergunningsvrije normen optimaal tot wel 4 meter diep voor een grote, zonnige tuinkamer of een riante leefkeuken.' },
-    { name: 'Schouwen-Duiveland & Zierikzee', desc: 'Prachtige kustgebieden waar zowel vaste woningen als vakantiehuizen profiteren van de stormbestendige en uiterst duurzame isolatiekwaliteit van onze prefab-profielen.' },
-    { name: 'Zeeuws-Vlaanderen & Terneuzen', desc: 'Logistiek slim georganiseerd; we transporteren en plaatsen prefab aanbouwen vlot op locaties nabij de Belgische grens en aan de kust van Cadzand tot Hulst.' }
+    { name: 'Centrum, Vijfhoek & Burgwal', desc: 'Historische straatjes, rijksbeschermd stadsgezicht en karakteristieke panden; hier is nauwkeurig ontwerpwerk vereist. We zetten slimme kraanlogistiek in om de elementen vlot en veilig over het dak te plaatsen.' },
+    { name: 'Kleverpark, Garenkokerskwartier & Bomenbuurt', desc: 'Prachtige en gewilde jaren-30-wijken met stijlvolle woningen; prefab uitbouwen sluiten hier esthetisch feilloos op aan met kwalitatief hoogwaardig metselwerk of moderne glaspuien.' },
+    { name: 'Haarlem-Noord & Ramplaankwartier', desc: 'Ruimer opgezette gezinsbuurten met diepe tuinen; hier kunt u optimaal profiteren van vergunningsvrije regelgeving tot 4 meter diep voor een flinke woonkeuken of tuikamer.' },
+    { name: 'Schalkwijk (Europawijk & Molenwijk)', desc: 'Naoorlogse wijken met uitstekende bereikbaarheid en royale achtertuinen waar een prefab uitbouw of leefkeuken direct extra leefkwaliteit en forse waardestijging oplevert.' }
   ];
 
   const faqs = [
     {
-      question: 'Heb ik een vergunning nodig voor een uitbouw in Zeeland?',
-      answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. De landelijke regels gelden in heel Zeeland, maar het welstandsbeleid verschilt per gemeente. In de vele beschermde stadsgezichten (zoals Middelburg, Veere en Zierikzee) of bij monumenten is bijna altijd een vergunning vereisen. Doe altijd de vergunningcheck voor uw adres.'
+      question: 'Heb ik een vergunning nodig voor een uitbouw in Haarlem?',
+      answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. In het beschermde stadsgezicht van de Haarlemse binnenstad of bij een monument is wel een vergunning nodig. Doe altijd de vergunningcheck voor uw adres.'
     },
     {
-      question: 'Is prefab geschikt voor het Zeeuwse kustklimaat?',
-      answer: 'Juist wel. Doordat een prefab uitbouw onder gecontroleerde omstandigheden in de werkplaats wordt geproduceerd, hebben wind, regen en zilte zeelucht tijdens de constructiefase geen enkele invloed. Bovendien staat de ruwbouw binnen één dag op locatie wind- en waterdicht gemonteerd.'
+      question: 'Wat is de Nota Ruimtelijke Kwaliteit in Haarlem?',
+      answer: 'Dat is het welstandsbeleid van Haarlem: een visie op ruimtelijke kwaliteit met "gouden regels" en een toetsingskader. Hierin staat per gebied hoe een bouwplan op uiterlijk wordt beoordeeld. De Adviescommissie Ruimtelijke Kwaliteit toetst aanvragen aan deze criteria.'
     },
     {
       question: 'Hoelang duurt het plaatsen van een prefab uitbouw?',
-      answer: 'De montage van de vooraf gemaakte elementen op uw locatie duurt slechts één dag. Inclusief grondwerk, de gecorrigeerde fundering en de binnenzijde-afwerking bent u doorgaans binnen enkele dagen tot een week helemaal klaar.'
+      answer: 'De ruwbouw staat meestal binnen één dag. Inclusief fundering en afwerking rekent u op enkele dagen tot een week op locatie, en een totale doorlooptijd van vier tot acht weken inclusief voorbereiding vanaf de ontwerpfase.'
     },
     {
-      question: 'Is een prefab aanbouw stormbestendig en goed geïsoleerd?',
-      answer: 'Absoluut. Onze prefab wanden, vloeren en daken bezitten uitmuntende thermische waarden tot wel Rc 6.0. De constructies zijn uiterst robuust, uitstekend geïsoleerd en ontworpen om de zwaarste Zeeuwse najaarsstormen moeiteloos te weerstaan.'
+      question: 'Is prefab net zo stevig en mooi als traditioneel metselwerk?',
+      answer: 'Zeker. Fabrieksproductie betekent gecontroleerde omstandigheden, en dat zorgt voor een constante kwaliteit en strakke maatvoering. De uitstraling bepaalt u helemaal zelf, van een moderne glaswand en strak stucwerk tot authentiek metselwerk passend bij een historisch pand.'
     },
     {
-      question: 'Wat kost een uitbouw in Zeeland ongeveer?',
-      answer: 'Reken op een gemiddelde richtprijs van ongeveer €2.500 tot €4.500 per vierkante meter, afhankelijk van uw gekozen luxeniveau, de bodemgesteldheid en de specifieke afmetingen. Een compacte uitbouw begint rond de €40.000.'
+      question: 'Wat kost een uitbouw in Haarlem ongeveer?',
+      answer: 'Reken op een gemiddelde richtprijs van ongeveer €2.500 tot €4.500 per vierkante meter, afhankelijk van de complexiteit, bodemgesteldheid en afwerking. Een compacte uitbouw begint rond de €40.000. Een offerte op maat geeft het exacte bedrag.'
     }
   ];
 
@@ -172,10 +172,10 @@ export default function ZeelandLandingPage() {
   };
 
   return (
-    <div className="bg-white text-blue-950 font-sans selection:bg-blue-100 selection:text-blue-900" id="zeeland-landing-page">
+    <div className="bg-white text-blue-950 font-sans selection:bg-blue-100 selection:text-blue-900">
       
       {/* HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950" id="hero-section">
+      <section className="relative min-h-[90vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(37,99,235,0.12),transparent_60%)]" />
           <div className="absolute inset-0 bg-linear-to-b from-blue-950/40 via-blue-950/85 to-blue-950" />
@@ -183,54 +183,52 @@ export default function ZeelandLandingPage() {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-blue-200/40 mb-8" id="breadcrumbs">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-blue-200/40 mb-8">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <span>&rsaquo;</span>
             <Link to="/diensten" className="hover:text-white transition-colors">Regio's</Link>
             <span>&rsaquo;</span>
-            <span className="text-blue-300">Zeeland</span>
+            <span className="text-blue-300">Haarlem</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             {/* Hero Left */}
-            <div className="lg:col-span-7" id="hero-left-content">
+            <div className="lg:col-span-7">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="max-w-3xl"
               >
-                <div className="inline-flex items-center gap-3 mb-6 bg-blue-900/40 border border-blue-500/20 rounded-full px-4 py-2" id="hero-badge">
+                <div className="inline-flex items-center gap-3 mb-6 bg-blue-900/40 border border-blue-500/20 rounded-full px-4 py-2">
                   <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-blue-300">
-                    PREFAB SELECT ZEELAND
+                    PREFAB SELECT HAARLEM
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.9] mb-8 tracking-tighter uppercase" id="hero-title">
-                  Uitbouw in Zeeland <br />
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.9] mb-8 tracking-tighter uppercase">
+                  Uitbouw in Haarlem <br />
                   <span className="text-blue-400 italic font-light lowercase underline decoration-blue-400/20 underline-offset-8">
-                    meer ruimte met uitzicht
+                    ruimer wonen in een stad
                   </span> <br />
-                  op zee en polder
+                  vol karakter
                 </h1>
 
-                <p className="text-base md:text-lg text-blue-100/70 mb-10 max-w-2xl leading-relaxed pl-6 border-l-4 border-blue-600 font-medium font-sans" id="hero-description">
-                  Wonen in Zeeland betekent rust, prachtige vergezichten en weidse stranden. Mocht u extra meters wooncomfort wensen aan uw vaste woning of recreatieve kustwoning, dan bouwt Prefab Select een stormbestendige, perfect geïsoleerde aanbouw — zonder maandenlange bouwoverlast.
+                <p className="text-base md:text-lg text-blue-100/70 mb-10 max-w-2xl leading-relaxed pl-6 border-l-4 border-blue-600 font-medium font-sans">
+                  Haarlem is een prachtige stad boordevol historie en karakteristieke wijken. Een prefab uitbouw of aanbouw van Prefab Select biedt u de extra leefruimte om volop te kunnen blijven wonen op uw geliefde plek, zonder verhuisoverlast.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 mb-12" id="hero-ctas">
+                <div className="flex flex-col sm:flex-row gap-4 mb-12">
                   <Link 
                     to="/offerte" 
-                    id="hero-primary-btn"
                     className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-2xl hover:bg-blue-500 hover:-translate-y-1 transition-all duration-300 active:scale-95 group"
                   >
                     Vraag direct een offerte aan <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <a 
                     href="#faq" 
-                    id="hero-secondary-btn"
                     className="inline-flex items-center justify-center gap-3 px-10 py-5 border-2 border-white/20 bg-white/5 backdrop-blur-3xl text-white rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-white/10 hover:border-white/40 transition-all duration-300 active:scale-95"
                   >
                     Veelgestelde Vragen
@@ -238,32 +236,32 @@ export default function ZeelandLandingPage() {
                 </div>
 
                 {/* Micro USPs */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10" id="micro-usps">
-                  <div className="flex items-center gap-3" id="usp-duration">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10">
+                  <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-blue-900/60 flex items-center justify-center text-blue-400 border border-blue-500/20">
                       <Timer size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Constructie in 1 dag</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Ideaal t.b.v. het veranderlijke kustklimaat</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Ruwbouw in 1 dag</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Minimale bouwoverlast in uw buurt</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3" id="usp-security">
+                  <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-blue-900/60 flex items-center justify-center text-blue-400 border border-blue-500/20">
                       <ShieldCheck size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Zeeuwse Spelregels</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Deskundige vergunningbegeleiding</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Zekerheid Vooraf</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Vaste, transparante offerteprijzen</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3" id="usp-isolation">
+                  <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-blue-900/60 flex items-center justify-center text-blue-400 border border-blue-500/20">
                       <Gem size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Tochtvrij &amp; Behaaglijk</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Uitstekende thermische Rc 6.0 isolatie</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Uitstekend Geïsoleerd</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Rc 6.0 isolatie t.b.v. lagere lasten</p>
                     </div>
                   </div>
                 </div>
@@ -272,7 +270,7 @@ export default function ZeelandLandingPage() {
             </div>
 
             {/* Hero Right Visual */}
-            <div className="lg:col-span-5 relative mt-6 lg:mt-0" id="hero-right-visual">
+            <div className="lg:col-span-5 relative mt-6 lg:mt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -282,10 +280,10 @@ export default function ZeelandLandingPage() {
                 <div className="absolute -inset-4 bg-blue-500/10 rounded-[3rem] blur-2xl -z-10" />
 
                 {/* Main image container */}
-                <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-slate-900 relative" id="hero-image-container">
+                <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 bg-slate-900 relative">
                   <img 
-                    src="https://i.imgur.com/oMxZxiY.jpeg" 
-                    alt="Zeeland Prefab Uitbouw" 
+                    src="https://i.imgur.com/WHjDz3I.jpeg" 
+                    alt="Haarlem Prefab Uitbouw" 
                     className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />
@@ -293,10 +291,10 @@ export default function ZeelandLandingPage() {
                 </div>
 
                 {/* Badge layout */}
-                <div className="absolute -bottom-6 -left-6 bg-blue-600 text-white rounded-[2rem] px-6 py-5 shadow-2xl border border-white/10" id="hero-percent-badge">
+                <div className="absolute -bottom-6 -left-6 bg-blue-600 text-white rounded-[2rem] px-6 py-5 shadow-2xl border border-white/10">
                   <span className="block font-display font-black text-2xl leading-none">100%</span>
                   <span className="block text-[8px] font-black uppercase tracking-widest leading-none mt-1 opacity-80">
-                    Ontzorgde Realisatie
+                    Ontzorgde Bouw
                   </span>
                 </div>
 
@@ -308,43 +306,43 @@ export default function ZeelandLandingPage() {
       </section>
 
       {/* INTRODUCTION STORY */}
-      <section className="py-24 md:py-32 bg-white" id="introduction-section">
+      <section className="py-24 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            <div className="max-w-xl" id="intro-left-text">
+            <div className="max-w-xl">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-                UITBREIDEN IN PLAATS VAN VERTREKKEN
+                RUIMER WONEN MET COMMITTED KWALITEIT
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-8">
-                Investeren op de plek <br />
+                Investeren in eigen huis <br />
                 <span className="text-blue-600 italic font-light lowercase">
-                  die u al helemaal koestert
+                  is de meest logische stap
                 </span>
               </h2>
               <div className="text-slate-500 text-base md:text-lg leading-relaxed font-medium space-y-6">
                 <p>
-                  Of u nu permanent geniet van het gemoedelijke Walcheren, de weidsheid van de Bevelanden of een heerlijk tweede recreatiewoning bezit aan de kust van Schouwen of Zeeuws-Vlaanderen: verhuizen brengt zware kosten en rompslomp met zich mee.
+                  Een grotere woning kopen is in de krappe Haarlemse markt een dure grap. U krijgt te maken met forse overdrachtsbelasting, makelaarskosten, notarissen en de herhaaldelijke verhuisstress.
                 </p>
                 <p>
-                  Met een hoogwaardige prefab uitbouw van Prefab Select breidt u op een uiterst soepele en vakkundige manier uw benedenverdieping uit. Dat herbergt direct meer leefcomfort voor uw gezin en telt overtuigend mee in de waardebepaling en taxaties van uw onroerend goed.
+                  Met een hoogwaardig ontworpen prefab uitbouw op maat van Prefab Select vergroot u direct de leefmeters op de begane grond. Dit voegt direct maximaal wooncomfort toe aan uw sfeervolle jaren-30-woning of rijtjeshuis, en telt zwaar mee in de toekomstige taxatiewaarde.
                 </p>
               </div>
             </div>
 
-            <div className="bg-slate-50 border border-slate-100 rounded-[2.5rem] p-10 md:p-14 shadow-xs" id="intro-right-benefits">
+            <div className="bg-slate-50 border border-slate-100 rounded-[2.5rem] p-10 md:p-14 shadow-xs">
               <h3 className="text-xl font-display font-black uppercase tracking-tighter text-blue-950 mb-6">
-                Waarom kiezen voor prefab?
+                Onze kwaliteitsgaranties
               </h3>
               <p className="text-slate-500 text-sm leading-relaxed font-semibold mb-8">
-                De overduidelijke voordelen van onze geavanceerde modulaire bouwmethode:
+                De overduidelijke voordelen van onze modulaire aanpak:
               </p>
-              <ul className="space-y-4" id="benefits-list">
+              <ul className="space-y-4">
                 {[
-                  'Binnen 1 dag op locatie opgesteld, direct wind- en waterdicht',
-                  'Ongevoelig voor gure wind, regen of zilte kustinvloeden t.b.v. productie',
-                  'Foutloze en strakke millimeterkwaliteit rechtstreeks uit de fabriek',
-                  'Ideale match met vergunningsvrije normen of welstandsrichtlijnen'
+                  'Binnen 1 dag op locatie opgebouwd, wind- en waterdicht',
+                  'Inclusief fundering, constructieve erfgrensafspraken en afwerking',
+                  'Foutloze en gecontroleerde constructiekwaliteit uit de fabriek',
+                  'Perfecte afstemming op de Nota Ruimtelijke Kwaliteit'
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-slate-700 text-xs font-bold uppercase tracking-wider">
                     <CheckCircle2 size={16} className="text-blue-600 shrink-0 mt-0.5" />
@@ -359,37 +357,37 @@ export default function ZeelandLandingPage() {
       </section>
 
       {/* PROCESS IN DETAIL */}
-      <section className="py-24 bg-slate-50/50 border-y border-slate-100" id="prefab-process-section">
+      <section className="py-24 bg-slate-50/50 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
-            <div className="lg:col-span-5" id="process-visual">
+            <div className="lg:col-span-5">
               <div className="rounded-[3.5rem] overflow-hidden border border-slate-200/80 shadow-md">
                 <img 
-                  src="https://i.imgur.com/GIRelwV.jpeg" 
-                  alt="Prefab Select Fabriek Zeeland" 
+                  src="https://i.imgur.com/PJZ8dy9.jpeg" 
+                  alt="Prefab Select Fabriek Haarlem" 
                   className="w-full aspect-[4/3] object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
             </div>
 
-            <div className="lg:col-span-7" id="process-content">
+            <div className="lg:col-span-7">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-                ZONDER DRIE SEIZOENEN BOUWSTOF IN UW TUIN
+                MINIMALE BOUWOVERLAST
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-                Volledig weerbestendige <br />
+                Prefab bouwen is <br />
                 <span className="text-blue-600 italic font-light lowercase">
-                  en uiterst snelle opbouw
+                  veilig en doordacht
                 </span>
               </h2>
               <div className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold space-y-6">
                 <p>
-                  Traditionele bouw ligt aan de kust dikwijls wekenlang stil vanwege onvoorspelbaar weer, harde stormen of weersgevoelige droogtijden. Onze prefab elementen worden beschut in de fabriekshal gefabriceerd.
+                  Waar traditioneel bouwen gepaard gaat met wekenlange overlast, weersafhankelijke droogtijden en stapels bouwafval in uw tuin, bouwen wij de complete elementen in onze droge fabriekshal voor.
                 </p>
                 <p>
-                  Terwijl wij uw wanden, glaspuien en dakelementen millimeterprecies in elkaar zetten, realiseren onze monteurs op locatie een berekende fundering. Op de montagedag hijsen we de constructie op haar plek. Uw woning is razendsnel weer veilig wind- en waterdicht.
+                  Zodra het schroeffunderingssysteem in uw achtertuin gereed is, hijsen wij de wand- en dakelementen met precisie op hun plaats. Binnen één dag staat de constructie. Uw woning is snel weer wind- en waterdicht.
                 </p>
               </div>
             </div>
@@ -398,34 +396,34 @@ export default function ZeelandLandingPage() {
         </div>
       </section>
 
-      {/* REGULATION & WELSTAND Zeeland */}
-      <section className="py-24 bg-blue-950 text-white relative overflow-hidden mx-0 sm:mx-6 rounded-[4rem]" id="welstand-zeeland-section">
+      {/* REGULATION & WELSTAND haarlem */}
+      <section className="py-24 bg-blue-950 text-white relative overflow-hidden mx-0 sm:mx-6 rounded-[4rem]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.15),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-8 md:px-16 relative z-10">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
-            <div className="lg:col-span-7" id="welstand-zeeland-content">
+            <div className="lg:col-span-7">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-4 block">
-                VAKKUNDIGE GEMEENTELIJK BEGELEIDING PER REGIO
+                ZORGVULDIGE TOETSING BIJ DE GEMEENTE HAARLEM
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-8">
-                Gemeentelijke Vergunningen <br />
+                Nota Ruimtelijke Kwaliteit <br />
                 <span className="text-blue-400 italic font-light lowercase">
-                  inhistorische &amp; kustgebieden
+                  en de Adviescommissie getackeld
                 </span>
               </h2>
               
               <div className="text-blue-100/60 leading-relaxed font-semibold space-y-6 text-sm md:text-base max-w-2xl">
                 <p>
-                  De landelijke wetten bieden veel vergunningsvrije ruimte aan de achterkant. Echter herbergt Zeeland veel waardevolle, rijksbeschermde stads- en dorpsgezichten. Denk hierbij aan de historische monumentale kernen van <strong>Middelburg, Veere, Zierikzee, Hulst en Sluis</strong>.
+                  Gemeente Haarlem streeft naar behoud van het unieke historische karakter via de <strong>Nota Ruimtelijke Kwaliteit</strong>. De Adviescommissie Ruimtelijke Kwaliteit toetst plannen in beeldbepalende regio's of beschermde stadsgezichten zorgvuldig.
                 </p>
                 <p>
-                  Als u binnen een dergelijke zone of aan een monument bouwt, gelden er specifieke richtlijnen en is een welstandstoets (Nota Ruimtelijke Kwaliteit) vereist. Prefab Select beschikt over ruime lokale ervaring met de Zeeuwse loketprocedures. Wij ontwerpen uw aanbouw met uiterste esthetische vakkundigheid voor een vlot verloop van uw omgevingsvergunning.
+                  Bouwt u in de historische binnenstad, het Kleverpark of de Bomenbuurt? Dan zorgt Prefab Select voor de volledige indiening met vakkundige bouwtekeningen en constructieberekeningen die naadloos voldoen aan de gestelde criteria van de commissie.
                 </p>
               </div>
 
-              <div className="mt-10" id="welstand-ctas">
+              <div className="mt-10">
                 <a 
                   href="https://omgevingswet.overheid.nl/checken" 
                   target="_blank" 
@@ -437,13 +435,13 @@ export default function ZeelandLandingPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-white/5 border border-white/10 backdrop-blur-md rounded-[2.5rem] p-10" id="free-check-card">
+            <div className="lg:col-span-5 bg-white/5 border border-white/10 backdrop-blur-md rounded-[2.5rem] p-10">
               <Compass className="text-blue-400 w-8 h-8 mb-6" />
               <h3 className="text-lg font-display font-black uppercase tracking-tighter text-white mb-4">
-                Laat ons uw adres gratis nakijken
+                Laat ons uw adres gratis controleren
               </h3>
               <p className="text-blue-100/60 text-xs leading-relaxed font-semibold mb-6">
-                Valt uw woning of kavel onder een beschermd welstandsregime of bent u juist vergunningsvrij? Wij zoeken het snel en kosteloos voor u uit.
+                Valt uw woning binnen het beschermde stadsgezicht of is uw uitbouw vergunningsvrij? Onze experts checken uw specifieke adres gratis en snel.
               </p>
               <Link 
                 to="/offerte" 
@@ -459,25 +457,25 @@ export default function ZeelandLandingPage() {
       </section>
 
       {/* COST ANALYSIS */}
-      <section className="py-24 md:py-32 bg-white" id="cost-analysis-section">
+      <section className="py-24 md:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           
-          <div className="text-center mb-16" id="cost-header">
+          <div className="text-center mb-16">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
               KOSTEN EN CALCULATIE
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Wat kost een uitbouw in Zeeland?
+              Wat kost een uitbouw in Haarlem?
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-2xl mx-auto">
-              Uw gewenste materiaalkwaliteit en de transportspecificaties over de Zeeuwse eilanden bepalen de calculatie. Richtprijzen:
+              Naast de afmetingen bepalen ook de bodemspecificaties en transportlogistiek (kraaninzet in smalle straatjes) de kostencalculatie:
             </p>
           </div>
 
-          <div className="border border-slate-100 rounded-[2.5rem] overflow-hidden shadow-xs mb-10" id="cost-table">
+          <div className="border border-slate-100 rounded-[2.5rem] overflow-hidden shadow-xs mb-10">
             <div className="grid grid-cols-2 bg-blue-950 text-white p-6 md:px-10 text-xs font-black uppercase tracking-widest">
               <span>Type Uitbouw</span>
-              <span className="text-right">Indicatieve Richtprijs</span>
+              <span className="text-right">Prijsindicatie</span>
             </div>
             
             {[
@@ -497,32 +495,32 @@ export default function ZeelandLandingPage() {
             ))}
           </div>
 
-          <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed" id="cost-footer-note">
-            * Dit betreft richtbedragen incl. btw en installatie. Sommige laaggelegen zeekleibodems in Zeeland verplichten een specifiek gemodificeerde fundatiemethode, om de constructie op termijn perfect water- en verzakkingsvrij te houden.
+          <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed">
+            * Dit betreft indicatieve richtbedragen incl. btw en installatie. Sommige locaties in Haarlem liggen op stevige zandige strandwal, terwijl slappe veengronden elders de heiverplichtingen en fundering beïnvloeden.
           </p>
 
         </div>
       </section>
 
       {/* STEPS PROCESS */}
-      <section className="py-24 bg-slate-50/50 border-t border-slate-100" id="steps-process-section">
+      <section className="py-24 bg-slate-50/50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           
-          <div className="max-w-3xl mb-20 text-left" id="steps-header">
+          <div className="max-w-3xl mb-20 text-left">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-              ZORGELOZE REALSATIE
+              ZORGELOOS STAPPENPLAN
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Uw Zeeuwse bouwtraject stap-voor-stap <br />
+              Uw bouwproces van begin tot einde <br />
               <span className="text-blue-600 italic font-light lowercase">
                 geheel gestructureerd en vlekkeloos
               </span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8" id="steps-grid">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {stappen.map((stap, i) => (
-              <div key={i} className="relative" id={`step-item-${stap.nr}`}>
+              <div key={i} className="relative">
                 {i < 4 && (
                   <div className="hidden lg:block absolute top-12 left-full w-full h-[2px] bg-slate-100 border-t-2 border-dashed border-slate-200 -z-10 -translate-x-6" />
                 )}
@@ -546,24 +544,24 @@ export default function ZeelandLandingPage() {
       </section>
 
       {/* DISTRICTS / WIJK ANALYSIS */}
-      <section className="py-24 bg-white" id="districts-section">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           
-          <div className="max-w-3xl mb-16 text-left" id="districts-header">
+          <div className="max-w-3xl mb-16 text-left">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-              LOKALE ANALYSE
+              LOKALE LOGISTIEK
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
-              Bouwen per regio in Zeeland
+              Uitbouwen per wijk in Haarlem
             </h2>
             <p className="text-base text-slate-500 leading-relaxed font-medium">
-              Zeeland herbergt verschillende landschappen en bebouwingen. Ontdek de logistieke en stedenbouwkundige kenmerken per gebied:
+              Haarlem kent een rijke variëteit aan wijken. Dit stelt specifieke logistieke en welstandseisen aan uw aanbouw:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" id="districts-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {wijken.map((wk, i) => (
-              <div key={i} className="bg-slate-50/50 border border-slate-100/80 rounded-[2rem] p-8 hover:bg-slate-50 transition-colors" id={`district-card-${i}`}>
+              <div key={i} className="bg-slate-50/50 border border-slate-100/80 rounded-[2rem] p-8 hover:bg-slate-50 transition-colors">
                 <h3 className="text-lg font-display font-black uppercase tracking-tighter text-blue-950 mb-3 flex items-center gap-3">
                   <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
                   {wk.name}
@@ -579,63 +577,63 @@ export default function ZeelandLandingPage() {
       </section>
 
       {/* ADDITIONAL ANALYSIS MODULES */}
-      <section className="py-24 bg-slate-50/30 border-y border-slate-100" id="additional-analysis-section">
+      <section className="py-24 bg-slate-50/30 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12" id="analysis-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             
             {/* Box 1 */}
-            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-1">
+            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">STRATEGIC SELECTION</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Is een aanbouw de beste oplossing voor uw gezin?
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Als u nood heeft aan extra meters leefruimte op het gelijkvloers (voor het realiseren van een royale leefkeuken, een gezellige eethoek of een lichte tuinkamer), dan is een uitbouw veruit de meest gewenste en multifunctionele methode.
+                Slaat u uw slag op de begane grond met een riante en gezellige leefkeuken of uitgebouwde tuinkamer? Een uitbouw is veruit de meest gewenste en multifunctionele methode om extra meters te winnen.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Zoekt u echter een dakkapel of dakkapverhoging om een extra slaap- of speelkamer op zolder te winnen? Of bent u op zoek naar een los prefab chalet op recreatiegrond? Wij adviseren u graag volstrekt objectief over alle facetten.
+                Zoekt u daarentegen specifiek naar een extra slaapkamer of luxe badkamer hogerop? Dan is een prefab dakkapel of complete dakopbouw een meer logische en rendabele richting. Wij adviseren u graag volkomen objectief.
               </p>
             </div>
 
             {/* Box 2 */}
-            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-2">
+            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">PREPARED START</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Grondige voorbereiding garandeert rust
+                Nauwkeurig voorbereid van start gaan
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is raadzaam om vooraf kritieke factoren zoals de logistieke kraantoegankelijkheid op uw kavel, de exacte erfgrenzen en de bodemstabiliteit nauwkeurig in kaart te laten brengen.
+                Het is belangrijk om vooraf de logistieke routes via de lucht, uw erfgrenzen en de bodemstabiliteit nauwgezet te laten analyseren.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Onze constructieve engineers en ontwerpers lopen al deze randvoorwaarden grondig met u door voordat we in de werkplaats overgaan tot productie, om alle risico's volledig uit te sluiten.
+                Onze constructieve engineers en architecten lopen deze kritieke punten vakkundig met u door voordat we in de werkplaats overgaan tot productie, om alle risico's volledig uit te sluiten.
               </p>
             </div>
 
             {/* Box 3 */}
-            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-3">
+            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DAYLIGHT OPTIMIZATION</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Daglicht vangen en de sfeer verrijken
+                Prachtig daglicht vangen en de sfeer verrijken
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Een aanbouw levert niet alleen extra leefmeters op, maar herbergt sfeer. Veel Zeeuwse herenhuizen of rijwoningen kunnen door dichte bebouwing donkerder zijn gesitueerd.
+                Een aanbouw voegt niet alleen pure vierkante meters toe, maar herbergt ook sfeer. Veel sfeervolle Haarlemse woningen kunnen door dichtbebouwde buurten donkerder zijn gesitueerd.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Met een royale glazen achtergevel, vouwdeuren of een royale lichtstraat in het platte dak herbergt u het natuurlijke zonlicht diep binnenshuis en verbindt u de tuin nauwer met uw living.
+                Dankzij een royale glazen achtergevel, vouwkozijnen of een stijlvolle lichtstraat in het platte dak haalt u het natuurlijke zonlicht diep binnenshuis en haalt u de sfeer van uw tuin naar binnen.
               </p>
             </div>
 
             {/* Box 4 */}
-            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-4">
+            <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMAL EXCELLENCE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Tochtvrij, stormbestendig &amp; buitengewoon behaaglijk
+                Tochtvrij, duurzaam en buitengewoon behaaglijk
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Tocht of warmteverlies in koude periodes aan de kust behoort definitief tot het verleden. Onze geavanceerde prefab systemen bezitten uitmuntende thermische isolatiewaarden tot wel Rc 6.0.
+                Tocht of warmteverlies in koudere periodes is uitgesloten. Onze prefab wanden, vloeren en daken bezitten uitmuntende thermische Rc-isolatiewaarden tot wel 6.0.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Dit draagt direct bij aan een aanzienlijk lagere energierekening en is optimaal en eenvoudig te combineren met systemen zoals vloerverwarming of warmtepompen.
+                Dit draagt direct bij aan een aanzienlijk lagere energierekening en is optimaal te combineren met verantwoorde systemen zoals vloerverwarming en warmtepompen.
               </p>
             </div>
 
@@ -647,24 +645,23 @@ export default function ZeelandLandingPage() {
       <section id="faq" className="py-24 md:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           
-          <div className="text-center mb-20" id="faq-header">
+          <div className="text-center mb-20">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block leading-none">
               REGELGEVING EN VRAGEN
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter mb-6 leading-none">
               Veelgestelde vragen <br />
-              over uitbouwen in Zeeland
+              over uitbouwen in Haarlem
             </h2>
           </div>
 
-          <div className="space-y-4" id="faq-list">
+          <div className="space-y-4">
             {faqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
                 <div 
                   key={idx} 
                   className="bg-white border border-slate-100/80 rounded-[2rem] p-8 shadow-xs hover:shadow-md transition-all duration-300"
-                  id={`faq-item-${idx}`}
                 >
                   <button 
                     onClick={() => toggleFaq(idx)}
@@ -689,7 +686,7 @@ export default function ZeelandLandingPage() {
       </section>
 
       {/* FINAL CALL TO ACTION */}
-      <section className="py-24 pt-0" id="final-cta-section">
+      <section className="py-24 pt-0">
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-blue-950 rounded-[4rem] px-8 py-20 md:p-24 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15),transparent_60%)]" />
@@ -702,12 +699,11 @@ export default function ZeelandLandingPage() {
               </h2>
               
               <p className="text-lg text-blue-100/60 leading-relaxed mb-12 font-medium max-w-xl mx-auto">
-                Deel uw unieke woonsituatie en plannen met ons, dan calculeren en adviseren we geheel vrijblijvend om uw wooncomfort optimaal te verrijken.
+                Deel uw unieke woonsituatie en uw plannen met ons, dan berekenen en adviseren we geheel vrijblijvend t.b.v. een betrouwbare en realistische prijsindicatie.
               </p>
 
               <Link 
                 to="/offerte" 
-                id="final-cta-btn"
                 className="inline-flex items-center justify-center gap-3 px-12 py-6 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl hover:bg-blue-500 hover:-translate-y-1 transition-all duration-300 active:scale-95 group"
               >
                 Gratis Prijsopgave Ontvangen <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -722,9 +718,9 @@ export default function ZeelandLandingPage() {
       {/* Fallback article for client render bots */}
       <noscript>
         <article className="max-w-3xl mx-auto px-6 py-12 prose text-slate-700">
-          <h1>Uitbouw in Zeeland — prefab uitbouw op maat</h1>
-          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Zeeland en omgeving, waaronder Middelburg, Vlissingen, Goes, Terneuzen en Zierikzee. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. In de historische stadsgezichten en bij monumenten gelden strengere eisen via de Nota Ruimtelijke Kwaliteit en erfgoed- of welstandscommissies.</p>
-          <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject hangt op locatie af van de vergunningsprocedure en transportspecificaties over de Zeeuwse eilanden. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
+          <h1>Uitbouw in Haarlem — prefab uitbouw op maat</h1>
+          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Haarlem en omgeving, waaronder Centrum, Vijfhoek, Kleverpark, Bomenbuurt, Haarlem-Noord en Schalkwijk. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. In het beschermde stadsgezicht van de Haarlemse binnenstad en bij monumenten gelden strengere eisen via de Nota Ruimtelijke Kwaliteit en de Adviescommissie Ruimtelijke Kwaliteit.</p>
+          <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject duurt vier tot acht weken. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
         </article>
       </noscript>
 

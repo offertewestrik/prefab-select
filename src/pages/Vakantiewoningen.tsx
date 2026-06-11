@@ -1,5 +1,4 @@
 import React from 'react';
-import Seo from '../components/Seo';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Leaf, View, BedDouble, ShieldCheck } from 'lucide-react';
@@ -9,12 +8,6 @@ import { KellyCTA } from '../KellyCTA';
 const Vakantiewoningen = () => {
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
-      <Seo
-        title="Prefab Vakantiewoningen – Duurzaam & Luxe | Prefab Select"
-        description="Moderne prefab vakantiewoningen voor eigen gebruik of verhuur. Energiezuinig, snel geplaatst en volledig op maat gebouwd. Ontdek de mogelijkheden."
-        canonical="/vakantiewoningen"
-        image="https://i.imgur.com/ZsBPHxQ.jpeg"
-      />
       {/* HERO SECTION */}
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-blue-950">
         <div className="absolute inset-0">
@@ -73,7 +66,7 @@ const Vakantiewoningen = () => {
               <img 
                 src="https://i.imgur.com/gNOQiIy.jpeg" 
                 alt="Moderne architectuur vakantiewoning" 
-                className="w-full object-cover aspect-[4/5] object-center" loading="lazy"
+                className="w-full object-cover aspect-[4/5] object-center"
               />
             </motion.div>
             
@@ -147,7 +140,7 @@ const Vakantiewoningen = () => {
                 <img 
                   src="https://i.imgur.com/mcdq1P8.jpeg" 
                   alt="Interieur en exterieur connectie vakantiewoning" 
-                  className="w-full h-full object-cover object-center" loading="lazy"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply" />
               </div>
@@ -209,7 +202,7 @@ const Vakantiewoningen = () => {
                 <img 
                   src="https://i.imgur.com/PWFDiZZ.jpeg" 
                   alt="Hoogwaardige prefab vakantiewoning" 
-                  className="w-full h-full object-cover object-center" loading="lazy"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-blue-900/5 mix-blend-multiply" />
               </div>
@@ -239,7 +232,7 @@ const Vakantiewoningen = () => {
       {/* SECTIE 6 — ARCHITECTUUR STATEMENT */}
       <section className="py-32 bg-blue-950 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src="https://i.imgur.com/PWFDiZZ.jpeg" alt="Achtergrond detail architectuur" className="w-full h-full object-cover filter brightness-50" loading="lazy" />
+          <img src="https://i.imgur.com/PWFDiZZ.jpeg" alt="Achtergrond detail architectuur" className="w-full h-full object-cover filter brightness-50" />
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -252,6 +245,27 @@ const Vakantiewoningen = () => {
           </p>
           <Link to="/offerte" className="inline-block bg-white text-blue-950 px-12 py-6 rounded-2xl font-black uppercase tracking-[0.3em] hover:bg-slate-100 transition-all text-xs shadow-2xl">
             Neem contact op
+          </Link>
+        </div>
+      </section>
+
+      {/* EXCLUSIEVE LINK NAAR PREFAB RECREATIEWONINGEN */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-600 mb-6 block">
+            Ontdek recreatiewoningen
+          </span>
+          <h3 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
+            Luxe Recreatiewoningen en regelgeving
+          </h3>
+          <p className="text-slate-500 max-w-2xl mx-auto font-normal leading-relaxed mb-10 text-sm md:text-base">
+            Bent u benieuwd naar de specifieke landelijke regels rondom vergunningsvrij bouwen, bestemmingsplannen en de bouwkosten van een premium prefab recreatiewoning? Bezoek onze speciale informatiepagina voor een diepgaand overzicht.
+          </p>
+          <Link 
+            to="/prefab-recreatiewoning" 
+            className="inline-flex items-center gap-3 bg-blue-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-blue-500 hover:-translate-y-1 transition-all duration-500 shadow-lg"
+          >
+            Lees alles over Recreatiewoningen <ArrowRight size={12} />
           </Link>
         </div>
       </section>

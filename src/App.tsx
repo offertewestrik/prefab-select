@@ -1,11 +1,10 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import React, { useState, useEffect, useMemo, useRef, PropsWithChildren } from 'react';
+import React, { useState, useEffect, useMemo, PropsWithChildren } from 'react';
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
 import { MetaPixel } from './components/MetaPixel';
 import { CookieConsent } from './components/CookieConsent';
-import { Seo } from './components/Seo';
 import Diensten from './pages/Diensten';
 import PrefabUitbouw from './pages/PrefabUitbouw';
 import PrefabAanbouw from './pages/PrefabAanbouw';
@@ -13,13 +12,33 @@ import Mantelzorgwoning from './pages/Mantelzorgwoning';
 import Poolhouse from './pages/Poolhouse';
 import PrefabChalet from './pages/PrefabChalet';
 import Vakantiewoningen from './pages/Vakantiewoningen';
+import PrefabRecreatiewoning from './pages/PrefabRecreatiewoning';
+import PrefabPoolhouse from './pages/PrefabPoolhouse';
 import Zakelijk from './pages/Zakelijk';
 import AIExpert from './pages/AIExpert';
 import AboutPage from './pages/About';
 import FAQPage from './pages/FAQPage';
 import Werkwijze from './pages/Werkwijze';
+import Dashboard from './pages/Dashboard';
 import ZeelandLandingPage from './pages/ZeelandLandingPage';
 import ZeelandSchuurtjesProject from './pages/ZeelandSchuurtjesProject';
+import HalsterenLandingPage from './pages/HalsterenLandingPage';
+import EindhovenLandingPage from './pages/EindhovenLandingPage';
+import AmsterdamLandingPage from './pages/AmsterdamLandingPage';
+import BredaLandingPage from './pages/BredaLandingPage';
+import BergenOpZoomLandingPage from './pages/BergenOpZoomLandingPage';
+import OssLandingPage from './pages/OssLandingPage';
+import AmstelveenLandingPage from './pages/AmstelveenLandingPage';
+import UtrechtLandingPage from './pages/UtrechtLandingPage';
+import AntwerpenLandingPage from './pages/AntwerpenLandingPage';
+import HaarlemLandingPage from './pages/HaarlemLandingPage';
+import LarenLandingPage from './pages/LarenLandingPage';
+import AlmereLandingPage from './pages/AlmereLandingPage';
+import TilburgLandingPage from './pages/TilburgLandingPage';
+import DenBoschLandingPage from './pages/DenBoschLandingPage';
+import DenHaagLandingPage from './pages/DenHaagLandingPage';
+import LeidschendamLandingPage from './pages/LeidschendamLandingPage';
+import RotterdamLandingPage from './pages/RotterdamLandingPage';
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -38,7 +57,6 @@ import {
   Home,
   MapPin,
   Play,
-  Pause,
   Clock,
   Factory,
   ShieldCheck,
@@ -666,6 +684,14 @@ Een **prefab uitbouw** van 15 m² in Bergen op Zoom begint vanaf ca. **€45.000
 Bekijk onze [Prefab Uitbouw](/prefab-uitbouw) projecten of [Vraag un offerte aan](/offerte).`
   },
   {
+    name: 'Halsteren',
+    slug: 'halsteren',
+    title: 'Prefab Uitbouw Halsteren – Binnen 1 Dag Geplaatst',
+    content: `Bent u op zoek naar een hoogwaardige **prefab uitbouw in Halsteren**? Prefab Select is uw specialist voor stijlvolle, kant-en-klare uitbouwen en aanbouwen die binnen één dag worden geplaatst. 
+
+Met een vaste totaalprijs, hoogwaardige isolatie en 10 jaar constructiegarantie creëert u in een handomdraai extra leefruimte.`
+  },
+  {
     name: 'Oss',
     slug: 'oss',
     title: 'Prefab Uitbouw Oss – Slim Uitbreiden & Waardevermeerdering',
@@ -1049,13 +1075,6 @@ function CityLandingPage() {
 
   const heroImage = page.image || 'https://i.imgur.com/6VuTqto.jpeg';
 
-  const metaDescription = page.content
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/[*#_`>~]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 155);
-
   // Custom Eindhoven layout components
   const EindhovenHero = () => (
     <section className="bg-white py-24 pt-40 overflow-hidden relative">
@@ -1137,12 +1156,6 @@ function CityLandingPage() {
 
   return (
     <div className="bg-white text-blue-950">
-      <Seo
-        title={page.title}
-        description={metaDescription}
-        canonical={`/regio/${page.slug}`}
-        image={heroImage}
-      />
       {page.slug === 'eindhoven' ? <EindhovenHero /> : (
         /* Premium Hero Section */
         <section className="relative min-h-[70vh] flex items-center pt-32 pb-24 overflow-hidden bg-blue-950">
@@ -1208,7 +1221,7 @@ function CityLandingPage() {
                       className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5"
                     >
                       <div className="text-2xl font-black text-blue-400 uppercase tracking-tighter">{stat.value}</div>
-                      <div className="text-[9px] font-black uppercase tracking-widest text-white/70">{stat.label}</div>
+                      <div className="text-[9px] font-black uppercase tracking-widest text-white/40">{stat.label}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -1302,7 +1315,7 @@ function CityLandingPage() {
               <div className="p-10 rounded-[3rem] bg-blue-950 text-white shadow-3xl sticky top-32 overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px] -mr-16 -mt-16" />
                 <h4 className="text-2xl font-display font-black mb-6 tracking-tighter uppercase leading-none">Vrijblijvende <br /> Prijsopgave</h4>
-                <p className="text-sm text-blue-200 mb-10 leading-relaxed font-bold uppercase tracking-widest">
+                <p className="text-sm text-blue-300/60 mb-10 leading-relaxed font-bold uppercase tracking-widest">
                   Ontvang binnen 24 uur een voorstel voor uw project in {page.name}.
                 </p>
                 <Link 
@@ -1442,12 +1455,11 @@ const WhatsAppButton = () => (
   <div className="fixed bottom-24 right-6 z-40 flex flex-col gap-4">
     {/* WhatsApp Button */}
     <a 
-      href="https://wa.me/31850607775"
-      target="_blank"
+      href="https://wa.me/31850607775" 
+      target="_blank" 
       rel="noreferrer"
       className="bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-125 transition-transform flex items-center justify-center border-4 border-white group relative"
       title="Chat via WhatsApp"
-      aria-label="Chat via WhatsApp"
     >
       <MessageCircle className="w-6 h-6" />
       <div className="absolute right-full mr-4 bg-green-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow-2xl">
@@ -1745,7 +1757,7 @@ function Navbar() {
             <button onClick={() => {
               setIsOpen(!isOpen);
               setKellyOpen(false);
-            }} aria-label={isOpen ? 'Menu sluiten' : 'Menu openen'} aria-expanded={isOpen} className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center backdrop-blur-xl border transition-all ${scrolled ? 'bg-blue-900/5 text-blue-900 border-blue-100 shadow-sm' : 'bg-white/10 text-white border-white/10 shadow-sm'}`}>
+            }} className={`w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center backdrop-blur-xl border transition-all ${scrolled ? 'bg-blue-900/5 text-blue-900 border-blue-100 shadow-sm' : 'bg-white/10 text-white border-white/10 shadow-sm'}`}>
               {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
@@ -1777,10 +1789,9 @@ function Navbar() {
                 </div>
               </Link>
               
-              <button
-                className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white active:scale-95 transition-all"
+              <button 
+                className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white active:scale-95 transition-all" 
                 onClick={() => setIsOpen(false)}
-                aria-label="Menu sluiten"
               >
                 <X size={20} />
               </button>
@@ -1807,10 +1818,10 @@ function Navbar() {
                 </div>
                 
                 <div className="flex gap-2">
-                  <a href="tel:31850607775" aria-label="Bel Prefab Select" className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center active:scale-95 transition-all shadow-md shadow-blue-600/20">
+                  <a href="tel:31850607775" className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center active:scale-95 transition-all shadow-md shadow-blue-600/20">
                     <Phone size={14} />
                   </a>
-                  <a href="mailto:info@prefabselect.nl" aria-label="E-mail Prefab Select" className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center active:scale-95 transition-all border border-white/10">
+                  <a href="mailto:info@prefabselect.nl" className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center active:scale-95 transition-all border border-white/10">
                     <Mail size={14} />
                   </a>
                 </div>
@@ -1828,15 +1839,14 @@ function Navbar() {
                     <div key={link.name} className="border-b border-white/5 py-3 last:border-0 text-left">
                       {hasDropdown ? (
                         <div className="flex flex-col text-left">
-                          <button
+                          <button 
                             onClick={() => toggleMobileDropdown(link.name)}
-                            aria-expanded={isDropdownOpen}
                             className="w-full flex items-center justify-between text-left py-1 text-2xl font-display font-black text-white hover:text-blue-400 transition-colors uppercase tracking-tighter"
                           >
                             <span>{link.name}</span>
                             <ChevronDown 
                               size={18} 
-                              className={`text-white/70 transition-transform duration-300 ${isDropdownOpen ? '-rotate-180 text-blue-400' : ''}`} 
+                              className={`text-white/40 transition-transform duration-300 ${isDropdownOpen ? '-rotate-180 text-blue-400' : ''}`} 
                             />
                           </button>
                           
@@ -1853,7 +1863,7 @@ function Navbar() {
                                   <Link 
                                     to={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-[10px] font-black text-white/70 hover:text-white transition-colors uppercase tracking-[0.15em] py-2 flex items-center gap-2 text-left"
+                                    className="text-[10px] font-black text-white/40 hover:text-white transition-colors uppercase tracking-[0.15em] py-2 flex items-center gap-2 text-left"
                                   >
                                     <ArrowRight size={10} className="text-white/20" />
                                     <span>Totaaloverzicht {link.name}</span>
@@ -1899,7 +1909,7 @@ function Navbar() {
                   Vraag offerte aan
                 </Link>
                 
-                <div className="flex flex-col items-center justify-center gap-2 pt-4 border-t border-white/5 text-[9px] font-bold text-white/70 uppercase tracking-widest">
+                <div className="flex flex-col items-center justify-center gap-2 pt-4 border-t border-white/5 text-[9px] font-bold text-white/40 uppercase tracking-widest">
                   <a href="tel:31850607775" className="hover:text-white transition-colors flex items-center gap-1.5 py-1">
                     <Phone size={10} /> +31 85 060 7775
                   </a>
@@ -1932,7 +1942,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             src={service.image} 
             alt={service.title} 
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-            referrerPolicy="no-referrer" loading="lazy"
+            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-blue-950/5 group-hover:bg-blue-950/0 transition-all duration-1000" />
           
@@ -2278,7 +2288,7 @@ function SEOText() {
             <div className="bg-white/5 backdrop-blur-[80px] p-10 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden border border-white/10 group">
                <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
                <h4 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 text-blue-400 leading-none">Direct duidelijkheid</h4>
-               <p className="text-[10px] text-white/70 leading-relaxed font-black uppercase tracking-[0.3em] mb-12">
+               <p className="text-[10px] text-white/40 leading-relaxed font-black uppercase tracking-[0.3em] mb-12">
                  Benieuwd wat er bij jouw woning mogelijk is? Vraag vrijblijvend een offerte aan via <a href="https://www.prefabselect.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-400 transition-colors">www.prefabselect.nl</a>
                </p>
                <Link to="/offerte" className="w-full bg-blue-600 text-white py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-blue-500 hover:translate-y-[-4px] hover:shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all duration-300 shadow-2xl active:scale-95 group flex items-center justify-center gap-4 border border-blue-400/20">
@@ -2305,7 +2315,7 @@ function FinalCTA() {
         <img 
           src="https://i.imgur.com/AC0hk9k.jpg" 
           alt="Modern Architecture" 
-          className="w-full h-full object-cover opacity-20 grayscale" loading="lazy"
+          className="w-full h-full object-cover opacity-20 grayscale"
         />
         <div className="absolute inset-0 bg-linear-to-b from-blue-950/80 via-blue-900/60 to-blue-950" />
       </div>
@@ -2386,7 +2396,7 @@ function Footer() {
                     <Phone size={14} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-200 mb-1">Telefoon</p>
+                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-300/50 mb-1">Telefoon</p>
                     <a href="tel:+31850607775" className="text-sm font-display font-bold text-white hover:text-blue-400 transition-colors tracking-tight">
                       +31 85 060 7775
                     </a>
@@ -2397,7 +2407,7 @@ function Footer() {
                     <Mail size={14} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-200 mb-1">Email</p>
+                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-300/50 mb-1">Email</p>
                     <a href="mailto:info@prefabselect.nl" className="text-sm font-display font-bold text-white hover:text-blue-400 transition-colors">
                       info@prefabselect.nl
                     </a>
@@ -2408,7 +2418,7 @@ function Footer() {
                     <MapPin size={14} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-200 mb-1">Locatie</p>
+                    <p className="text-[9px] uppercase font-black tracking-widest text-blue-300/50 mb-1">Locatie</p>
                     <p className="text-sm font-display font-bold text-white leading-tight">
                       Steenspil 24<br />
                       4661 TZ Halsteren
@@ -2458,6 +2468,14 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Premium Options states
+  const [selectedProject, setSelectedProject] = useState("");
+  const [kozijnPui, setKozijnPui] = useState("Kunststof schuifpui (Schuco profiel - HR++ Glas)");
+  const [kozijnKleur, setKozijnKleur] = useState("Antraciet (RAL 7016)");
+  const [stalenDoorbraak, setStalenDoorbraak] = useState("Geen stalen doorbraak vereist");
+  const [lichtstraat, setLichtstraat] = useState("Geen lichtstraat op het dak");
+  const [lichtstraatGlas, setLichtstraatGlas] = useState("Standaard HR++ Letselveilig Glas (U-waarde 1.1)");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -2468,8 +2486,15 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
       name: formData.get("name"),
       phone: formData.get("phone"),
       email: formData.get("email"),
-      projectType: formData.get("projectType"),
+      projectType: formData.get("projectType") || selectedProject,
       message: formData.get("message"),
+      kozijnPui,
+      kozijnKleur,
+      stalenDoorbraak,
+      lichtstraat: lichtstraat === "Geen lichtstraat op het dak" ? "Geen lichtstraat op het dak" : `${lichtstraat} (${lichtstraatGlas})`,
+      dakIsolatie: "Rc 6.3 m²K/W (PIR-isolatie)",
+      wandIsolatie: "Rc 6.0 m²K/W (Hybride PIR & minerale wol)",
+      vloerIsolatie: "Rc 5.0 m²K/W (Eco-isolatiesysteem met betonvloer)"
     };
 
     try {
@@ -2498,8 +2523,6 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
       setTimeout(() => setSubmitted(false), 8000);
     } catch (err: any) {
       console.error("Form submission error:", err);
-      // We show a user-friendly error but still allow the "success" state if it's just an API config issue 
-      // OR we just show the error. Given the user's focus on Exact CRM, let's show the error if it fails.
       setError(err.message);
     } finally {
       setLoading(false);
@@ -2534,49 +2557,35 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="offerte-name" className="sr-only">Volledige naam</label>
-                <input
-                  required
-                  id="offerte-name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="Volledige Naam"
-                  className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest"
-                />
-              </div>
-              <div>
-                <label htmlFor="offerte-phone" className="sr-only">Telefoonnummer</label>
-                <input
-                  required
-                  id="offerte-phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="Telefoonnummer"
-                  className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest"
-                />
-              </div>
+              <input 
+                required
+                name="name"
+                type="text" 
+                placeholder="Volledige Naam" 
+                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest" 
+              />
+              <input 
+                required
+                name="phone"
+                type="tel" 
+                placeholder="Telefoonnummer" 
+                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest" 
+              />
             </div>
-            <label htmlFor="offerte-email" className="sr-only">E-mailadres</label>
-            <input
+            <input 
               required
-              id="offerte-email"
               name="email"
-              type="email"
-              autoComplete="email"
-              placeholder="E-mailadres"
-              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest"
+              type="email" 
+              placeholder="E-mailadres" 
+              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 uppercase tracking-widest" 
             />
             <div className="relative group">
-              <label htmlFor="offerte-projectType" className="sr-only">Projecttype</label>
-              <select
+              <select 
                 required
-                id="offerte-projectType"
                 name="projectType"
-                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 appearance-none uppercase tracking-widest cursor-pointer"
-                defaultValue=""
+                onChange={(e) => setSelectedProject(e.target.value)}
+                value={selectedProject}
+                className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 appearance-none uppercase tracking-widest cursor-pointer"
               >
                 <option value="" disabled className="bg-white font-bold uppercase">Selecteer ProjectType</option>
                 {services.map(s => <option key={s.id} value={s.title} className="bg-white font-bold">{s.title}</option>)}
@@ -2585,25 +2594,163 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
                 <ChevronDown size={14} />
               </div>
             </div>
-            <label htmlFor="offerte-message" className="sr-only">Bericht (optioneel)</label>
-            <textarea
-              id="offerte-message"
-              name="message"
-              placeholder="Bericht (optioneel)"
-              rows={3}
-              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 resize-none uppercase tracking-widest leading-relaxed"
-            />
 
+            {selectedProject && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="space-y-4 border-t border-blue-100/50 pt-5 mt-4"
+              >
+                <div className="bg-blue-50/30 p-4 rounded-3xl border border-blue-100/30">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-3 block text-left">Gegarandeerde Isolatie (Basis inbegrepen)</span>
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="bg-white p-2.5 rounded-2xl border border-blue-50/80 shadow-sm flex flex-col justify-center">
+                      <span className="block text-[8px] font-black uppercase text-slate-400 leading-none mb-1">Dak</span>
+                      <span className="text-xs font-black text-blue-900">Rc 6.3</span>
+                      <span className="block text-[7px] font-bold text-slate-400 mt-1 leading-none">PIR Therm</span>
+                    </div>
+                    <div className="bg-white p-2.5 rounded-2xl border border-blue-50/80 shadow-sm flex flex-col justify-center">
+                      <span className="block text-[8px] font-black uppercase text-slate-400 leading-none mb-1">Wanden</span>
+                      <span className="text-xs font-black text-blue-900">Rc 6.0</span>
+                      <span className="block text-[7px] font-bold text-slate-400 mt-1 leading-none">Hybride</span>
+                    </div>
+                    <div className="bg-white p-2.5 rounded-2xl border border-blue-50/80 shadow-sm flex flex-col justify-center">
+                      <span className="block text-[8px] font-black uppercase text-slate-400 leading-none mb-1">Vloer</span>
+                      <span className="text-xs font-black text-blue-900">Rc 5.0</span>
+                      <span className="block text-[7px] font-bold text-slate-400 mt-1 leading-none">Beton</span>
+                    </div>
+                  </div>
+                  <p className="text-[8.5px] text-slate-400 italic text-left mt-2.5 font-medium leading-normal">
+                    * Onze isolatiewaarden overtreffen ruimschoots de Nederlandse Bbl/Bouwbesluit normen!
+                  </p>
+                </div>
+
+                {/* Option 1: Kozijn & Pui Type */}
+                <div className="space-y-1.5 text-left">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 block">Type Kozijn & Pui</label>
+                  <div className="relative">
+                    <select
+                      value={kozijnPui}
+                      onChange={(e) => setKozijnPui(e.target.value)}
+                      className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-5 py-3.5 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 appearance-none uppercase tracking-widest cursor-pointer"
+                    >
+                      <option value="Kunststof schuifpui (Schuco profiel - HR++ Glas)">Kunststof schuifpui (Schuco - HR++ Glas)</option>
+                      <option value="Aluminium schuifpui (Aliplast profiel - HR++ Glas)">Aluminium schuifpui (Aliplast - HR++ Glas)</option>
+                      <option value="Hardhouten openslaande tuindeuren (Klassiek - HR++ Glas)">Hardhouten openslaande tuindeuren (Klassiek - HR++ Glas)</option>
+                      <option value="Geen gevelpui (Volledig dichte achtergevel wand)">Geen gevelpui (Volledig dichte achtergevel wand)</option>
+                    </select>
+                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600/40">
+                      <ChevronDown size={14} />
+                    </div>
+                  </div>
+                  <p className="text-[9px] text-slate-400 italic mt-1 leading-normal font-medium">
+                    Standaard voorzien van thermisch geïsoleerd veiligheidsglas **HR++ (U-waarde 1.1)**. Opgebouwd volgens hoogste normen.
+                  </p>
+                </div>
+
+                {/* Option 1b: Kleur (Indien schuifpui gekozen) */}
+                {kozijnPui !== "Geen gevelpui (Volledig dichte achtergevel wand)" && (
+                  <div className="space-y-1.5 text-left">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 block">RAL Kleur Kozijn</label>
+                    <div className="relative">
+                      <select
+                        value={kozijnKleur}
+                        onChange={(e) => setKozijnKleur(e.target.value)}
+                        className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-5 py-3.5 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 appearance-none uppercase tracking-widest cursor-pointer"
+                      >
+                        <option value="Antraciet (RAL 7016)">Antraciet (RAL 7016) - Populair</option>
+                        <option value="Gitzwart (RAL 9005)">Gitzwart (RAL 9005) - Modern</option>
+                        <option value="Crèmewit (RAL 9001)">Crèmewit (RAL 9001)</option>
+                        <option value="Verkeerswit (RAL 9016)">Verkeerswit (RAL 9016)</option>
+                      </select>
+                      <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600/40">
+                        <ChevronDown size={14} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Option 2: Lichtstraat */}
+                <div className="space-y-1.5 text-left">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 block">Glazen Lichtstraat Optie</label>
+                  <div className="relative">
+                    <select
+                      value={lichtstraat}
+                      onChange={(e) => setLichtstraat(e.target.value)}
+                      className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-5 py-3.5 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 appearance-none uppercase tracking-widest cursor-pointer"
+                    >
+                      <option value="Geen lichtstraat op het dak">Geen lichtstraat op het dak</option>
+                      <option value="Lessenaarsdak Lichtstraat (Vlak heli-glas)">Lessenaarsdak Lichtstraat (Vlak heli-glas - HR++)</option>
+                      <option value="Zadeldak Lichtstraat (Schilddak - Symmetrisch)">Zadeldak Lichtstraat (Schilddak - Luxe HR++)</option>
+                    </select>
+                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600/40">
+                      <ChevronDown size={14} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Option 2b: Lichtstraat Glas Type (Indien lichtstraat gekozen) */}
+                {lichtstraat !== "Geen lichtstraat op het dak" && (
+                  <div className="space-y-1.5 text-left">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 block">Beglazing Lichtstraat</label>
+                    <div className="relative">
+                      <select
+                        value={lichtstraatGlas}
+                        onChange={(e) => setLichtstraatGlas(e.target.value)}
+                        className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-5 py-3.5 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 appearance-none uppercase tracking-widest cursor-pointer"
+                      >
+                        <option value="Standaard HR++ Letselveilig Glas (U-waarde 1.1)">Standaard HR++ Letselveilig Glas</option>
+                        <option value="Optioneel: Zonwerend HR+++ Triple Glas (U-waarde 0.6)">Zonwerend / Warmtewerend HR+++ Triple Glas</option>
+                      </select>
+                      <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600/40">
+                        <ChevronDown size={14} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Option 3: Stalen Geveldoorbraak */}
+                <div className="space-y-1.5 text-left">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400/80 block">Constructieve Stalen Doorbraak</label>
+                  <div className="relative">
+                    <select
+                      value={stalenDoorbraak}
+                      onChange={(e) => setStalenDoorbraak(e.target.value)}
+                      className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-5 py-3.5 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 appearance-none uppercase tracking-widest cursor-pointer"
+                    >
+                      <option value="Geen stalen doorbraak vereist">Geen stalen doorbraak vereist</option>
+                      <option value="Standaard stalen portaalkonstructie">Standaard stalen bintenportaal (Berekend)</option>
+                      <option value="Zware constructieve geveldoorbraak">Zware doorbraak (Gehele achtergevel open)</option>
+                    </select>
+                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600/40">
+                      <ChevronDown size={14} />
+                    </div>
+                  </div>
+                  <p className="text-[9px] text-slate-400 italic mt-1 leading-normal font-medium">
+                    {stalenDoorbraak === "Geen stalen doorbraak vereist" 
+                      ? "Er hoeft geen dragende gevelwand te worden opgevangen." 
+                      : "Wat wij voor u uitvoeren: Statische constructieberekening door erkend bureau. Professioneel stempelen & opvangen verdiepingsvloer, doorbreken kalkzandsteen/achtermuur, leveren & monteren van HEA/HEB stalen portaal, puinafvoer en oplevering."}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
+            <textarea 
+              name="message"
+              placeholder="Aanvullende wensen of opmerkingen (optioneel)" 
+              rows={3}
+              className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-6 py-4 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 placeholder:text-blue-300 resize-none uppercase tracking-widest leading-relaxed" 
+            />
+            
             {error && (
-              <div role="alert" aria-live="polite" className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-[10px] font-bold uppercase tracking-widest">
+              <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-[10px] font-bold uppercase tracking-widest">
                 {error}
               </div>
             )}
 
-            <button
+            <button 
               type="submit"
               disabled={loading}
-              aria-busy={loading}
               className={`w-full bg-blue-700 text-white py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[10px] shadow-[0_20px_40px_-15px_rgba(29,78,216,0.5)] border border-blue-400/20 hover:bg-blue-600 hover:-translate-y-1 hover:shadow-[0_25px_50px_-12px_rgba(29,78,216,0.6)] transition-all duration-300 active:scale-95 group flex items-center justify-center gap-3 mt-4 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? 'Bezig met verzenden...' : (
@@ -2707,7 +2854,7 @@ export function PrefabSteps() {
                     src={step.image} 
                     alt={step.title} 
                     className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
-                    referrerPolicy="no-referrer" loading="lazy"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-blue-950/20 group-hover:bg-blue-950/10 transition-colors duration-700" />
                   
@@ -2774,7 +2921,7 @@ function PremiumIntro() {
                 <img 
                   src="https://i.imgur.com/6v4bsrj.jpeg" 
                   alt="Modern Architecture Prefab" 
-                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105" loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-blue-950/40 via-transparent to-transparent" />
               </div>
@@ -2846,32 +2993,16 @@ function PremiumIntro() {
 function Hero() {
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoPlaying, setVideoPlaying] = useState(true);
-
-  const toggleVideo = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play();
-      setVideoPlaying(true);
-    } else {
-      video.pause();
-      setVideoPlaying(false);
-    }
-  };
 
   return (
     <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center pt-32 md:pt-48 pb-16 md:pb-24 overflow-hidden bg-blue-950">
       <div className="absolute inset-0 z-0">
         <motion.div style={{ y: yHero }} className="absolute inset-0">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
+          <video 
+            autoPlay 
+            muted 
+            loop 
             playsInline
-            preload="metadata"
             poster="https://i.imgur.com/NuWPxEj.jpg"
             className="w-full h-full object-cover opacity-100 grayscale-0 contrast-[1.1] scale-105"
           >
@@ -2880,15 +3011,6 @@ function Hero() {
         </motion.div>
         <div className="absolute inset-0 bg-linear-to-b from-blue-950/20 via-blue-950/40 to-blue-950/80" />
       </div>
-
-      <button
-        type="button"
-        onClick={toggleVideo}
-        aria-label={videoPlaying ? 'Video pauzeren' : 'Video afspelen'}
-        className="absolute bottom-4 right-4 z-20 bg-black/40 backdrop-blur text-white rounded-full p-3 hover:bg-black/60 transition-colors"
-      >
-        {videoPlaying ? <Pause size={16} /> : <Play size={16} />}
-      </button>
 
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10 md:gap-12 items-start relative z-10 w-full text-left">
         <motion.div
@@ -2942,7 +3064,7 @@ function Hero() {
               </a>
               <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl shadow-sm w-full sm:w-auto backdrop-blur-md">
                 <img 
-                  src="https://i.imgur.com/LxIER2P.png" 
+                  src="https://i.imgur.com/zfWAbPd.jpeg" 
                   alt="Aanbouw Voorbeeld" 
                   className="w-10 h-10 rounded-xl object-cover border border-white/10 shadow-xs flex-shrink-0" 
                   referrerPolicy="no-referrer"
@@ -3114,7 +3236,7 @@ function ModularCircularSection() {
                 src="https://i.imgur.com/2uyJ2rP.jpeg" 
                 alt="Modulair Bouwen Prefab Select" 
                 className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105"
-                referrerPolicy="no-referrer" loading="lazy"
+                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-linear-to-t from-blue-950/40 via-transparent to-transparent" />
             </div>
@@ -3153,6 +3275,18 @@ function WhyPrefabSelectStats() {
                   {city.name}
                 </Link>
               ))}
+              <Link 
+                to="/prefab-poolhouse"
+                className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-all block hover:translate-x-1 duration-300"
+              >
+                Prefab Poolhouse
+              </Link>
+              <Link 
+                to="/prefab-recreatiewoning"
+                className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-all block hover:translate-x-1 duration-300"
+              >
+                Prefab Recreatiewoning
+              </Link>
             </div>
           </div>
         </div>
@@ -3231,39 +3365,18 @@ function OfferteLandingPage() {
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
   const location = useLocation();
   const isConfigurator = location.pathname.includes('configurator');
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoPlaying, setVideoPlaying] = useState(true);
-
-  const toggleVideo = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play();
-      setVideoPlaying(true);
-    } else {
-      video.pause();
-      setVideoPlaying(false);
-    }
-  };
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      <Seo
-        title="Offerte Aanvragen – Vrijblijvend & Snel | Prefab Select"
-        description="Vraag binnen één minuut een vrijblijvende offerte aan voor uw prefab uitbouw, aanbouw of bijgebouw. Binnen 24 uur persoonlijk antwoord van onze experts."
-        canonical="/offerte"
-      />
       {/* Premium Hero Section */}
       <section className="relative min-h-[85vh] flex items-center pt-32 sm:pt-48 md:pt-64 pb-20 sm:pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
           <motion.div style={{ y: yHero }} className="absolute inset-0">
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
+            <video 
+              autoPlay 
+              muted 
+              loop 
               playsInline
-              preload="metadata"
               poster="https://i.imgur.com/NuWPxEj.jpg"
               className="w-full h-full object-cover opacity-60 grayscale scale-105"
             >
@@ -3272,15 +3385,6 @@ function OfferteLandingPage() {
           </motion.div>
           <div className="absolute inset-0 bg-linear-to-b from-blue-950/40 via-blue-950/80 to-blue-950" />
         </div>
-
-        <button
-          type="button"
-          onClick={toggleVideo}
-          aria-label={videoPlaying ? 'Video pauzeren' : 'Video afspelen'}
-          className="absolute bottom-4 right-4 z-20 bg-black/40 backdrop-blur text-white rounded-full p-3 hover:bg-black/60 transition-colors"
-        >
-          {videoPlaying ? <Pause size={16} /> : <Play size={16} />}
-        </button>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-start relative z-10 w-full text-left">
           <motion.div
@@ -3457,7 +3561,6 @@ function ProjectCard({ project, i }: { project: any; i: number }) {
             key={index}
             src={project.images[index]} 
             alt={project.title} 
-            loading="lazy"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
@@ -3637,10 +3740,10 @@ export function ConfiguratorTeaser() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
             <img 
-              src="https://i.imgur.com/LxIER2P.png" 
+              src="https://i.imgur.com/SCJSCLJ.jpeg" 
               alt="Ontwerp je aanbouw" 
               className="w-full aspect-[4/3] object-cover"
-              referrerPolicy="no-referrer" loading="lazy"
+              referrerPolicy="no-referrer"
             />
           </div>
 
@@ -3685,10 +3788,10 @@ export function ConfiguratorTeaser() {
               </a>
               <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
                 <img 
-                  src="https://i.imgur.com/LxIER2P.png" 
+                  src="https://i.imgur.com/zfWAbPd.jpeg" 
                   alt="Aanbouw schaalmodel" 
                   className="w-12 h-12 rounded-xl object-cover border border-slate-100 shadow-xs flex-shrink-0" 
-                  referrerPolicy="no-referrer" loading="lazy"
+                  referrerPolicy="no-referrer"
                 />
                 <div>
                   <span className="text-[8px] font-black uppercase tracking-widest text-blue-600 block leading-tight">Configurator Tool</span>
@@ -3706,12 +3809,6 @@ export function ConfiguratorTeaser() {
 function HomePage() {
   return (
     <>
-      <Seo
-        title="Prefab Uitbouw, Aanbouw & Chalets op Maat | Prefab Select"
-        description="Hoogwaardige prefab uitbouwen, aanbouwen, chalets en vakantiewoningen. In eigen fabriek geproduceerd en in 1 dag geplaatst. Vraag vrijblijvend een offerte aan."
-        canonical="/"
-        image="https://i.imgur.com/6VuTqto.jpeg"
-      />
       <Hero />
       <ConfiguratorTeaser />
       <PremiumIntro />
@@ -3728,12 +3825,6 @@ function HomePage() {
 function WhyChooseUsPage() {
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
-      <Seo
-        title="Waarom Prefab Select – Onze Voordelen op een Rij"
-        description="Ontdek waarom klanten kiezen voor Prefab Select: eigen fabriek, vaste prijzen, snelle plaatsing en jarenlange ervaring in hoogwaardig prefab bouwen."
-        canonical="/waarom-prefab-select"
-        image="https://i.imgur.com/PZcZ8X8.jpeg"
-      />
       {/* Huge Premium Hero Section */}
       <section className="relative min-h-screen flex items-center pt-64 pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0">
@@ -3772,7 +3863,7 @@ function WhyChooseUsPage() {
               <Link to="/offerte" className="bg-blue-600 text-white px-12 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] shadow-2xl hover:bg-blue-500 hover:-translate-y-1 transition-all active:scale-95 group flex items-center gap-4 border border-blue-400/20">
                 Start jouw project <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="#benefits" className="text-white/70 hover:text-white text-[11px] font-black uppercase tracking-[0.3em] transition-all flex items-center gap-3 group">
+              <a href="#benefits" className="text-white/40 hover:text-white text-[11px] font-black uppercase tracking-[0.3em] transition-all flex items-center gap-3 group">
                 <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/40 transition-all">
                   <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
                 </div>
@@ -3791,7 +3882,7 @@ function WhyChooseUsPage() {
             className="bg-white/5 backdrop-blur-3xl border border-white/10 p-10 rounded-[3rem] shadow-2xl"
           >
             <p className="text-4xl font-display font-black text-blue-400 mb-1 tracking-tighter uppercase leading-none">100%</p>
-            <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/70 leading-none">Eigen Beheer</p>
+            <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/40 leading-none">Eigen Beheer</p>
           </motion.div>
         </div>
       </section>
@@ -3817,7 +3908,7 @@ function WhyChooseUsPage() {
               <img 
                 src="https://i.imgur.com/AC0hk9k.jpg" 
                 alt="Architectural Quality" 
-                className="w-full h-full object-cover grayscale contrast-[1.1]" loading="lazy"
+                className="w-full h-full object-cover grayscale contrast-[1.1]"
               />
               <div className="absolute inset-0 bg-blue-950/20" />
             </div>
@@ -3889,13 +3980,6 @@ function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
-      <Seo
-        title={`${blog.title} | Prefab Select`}
-        description={blog.excerpt}
-        canonical={`/blog/${blog.slug}`}
-        image={blog.image}
-        type="article"
-      />
       {/* Reading Progress */}
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1.5 bg-blue-600 z-[100] origin-left"
@@ -3921,7 +4005,7 @@ function BlogPage() {
                 {blog.category}
               </span>
               <div className="w-1 h-1 rounded-full bg-white/20" />
-              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-white/70">
+              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
                 <Clock size={12} strokeWidth={3} /> {blog.readTime}
               </div>
             </div>
@@ -4114,12 +4198,6 @@ function ContactPage() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      <Seo
-        title="Contact & Showroom – Plan uw Afspraak | Prefab Select"
-        description="Neem contact op met Prefab Select voor advies op maat of plan een showroombezoek in Halsteren. Wij reageren binnen 24 uur op uw aanvraag."
-        canonical="/contact"
-        image="https://i.imgur.com/vOltRN1.jpg"
-      />
       {/* Contact Hero with the Homepage Form style */}
       <section className="relative min-h-[85vh] flex items-center pt-48 pb-24 overflow-hidden bg-blue-950">
         <div className="absolute inset-0 z-0 text-left">
@@ -4195,11 +4273,6 @@ function ContactPage() {
 function ProjectsPage() {
   return (
     <>
-      <Seo
-        title="Gerealiseerde Prefab Projecten | Prefab Select"
-        description="Bekijk onze gerealiseerde prefab projecten: uitbouwen, tuinkantoren, vakantiewoningen en zakelijke bouwprojecten door heel Nederland."
-        canonical="/projecten"
-      />
       <Hero />
       <PremiumIntro />
       <PrefabSteps />
@@ -4220,68 +4293,9 @@ function ProjectsPage() {
   );
 }
 
-function NotFoundPage() {
-  return (
-    <div className="min-h-screen bg-white pt-40 pb-24">
-      <Seo
-        title="Pagina Niet Gevonden (404) | Prefab Select"
-        description="Deze pagina bestaat niet (meer) of is verplaatst. Ga terug naar de homepage of bekijk onze prefab diensten."
-        canonical="/"
-        noindex
-      />
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-blue-950 rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-20 relative overflow-hidden text-center">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/10 blur-[120px] rounded-full -mr-32 -mt-32" />
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 mb-8 block leading-none">FOUT 404</span>
-            <h1 className="text-6xl md:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8">
-              Pagina niet <br />
-              <span className="text-blue-400 italic font-light lowercase">gevonden.</span>
-            </h1>
-            <p className="text-lg text-blue-100/60 leading-relaxed mb-12 font-medium max-w-xl mx-auto">
-              De pagina die u zoekt bestaat niet (meer) of is verplaatst. Geen zorgen: via onderstaande knoppen vindt u snel uw weg terug.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/" className="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-1">
-                Naar de homepage <ArrowRight size={14} />
-              </Link>
-              <Link to="/offerte" className="inline-flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-white/10 transition-all">
-                Offerte aanvragen
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Populaire pagina's */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          {[
-            { title: 'Prefab Uitbouw', desc: 'Vergroot uw woonkamer of keuken in 1 dag.', link: '/prefab-uitbouw' },
-            { title: 'Prefab Aanbouw', desc: 'Extra ruimte voor keuken, kantoor of slaapkamer.', link: '/prefab-aanbouw' },
-            { title: 'Mantelzorgwoning', desc: 'Comfortabel wonen, dichtbij uw naasten.', link: '/mantelzorgwoning' }
-          ].map((item, i) => (
-            <Link key={i} to={item.link} className="group bg-white border border-slate-100 rounded-[2.5rem] p-10 shadow-sm hover:shadow-[0_40px_80px_rgba(29,78,216,0.1)] hover:-translate-y-2 transition-all">
-              <h2 className="text-xl font-display font-black text-blue-950 uppercase tracking-tighter mb-3 group-hover:text-blue-600 transition-colors">{item.title}</h2>
-              <p className="text-sm text-slate-500 leading-relaxed mb-6">{item.desc}</p>
-              <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600">
-                Bekijk pagina <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-600 focus:text-white focus:px-6 focus:py-3 focus:rounded-2xl"
-      >
-        Direct naar inhoud
-      </a>
       <MetaPixel />
       <CookieConsent />
       <StructuredData />
@@ -4289,7 +4303,7 @@ export default function App() {
       <Navbar />
       <WhatsAppButton />
       <StickyMobileCTA />
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/offerte" element={<OfferteLandingPage />} />
@@ -4300,11 +4314,13 @@ export default function App() {
           <Route path="/chalets" element={<PrefabChalet />} />
           <Route path="/prefab-chalets" element={<PrefabChalet />} />
           <Route path="/vakantiewoningen" element={<Vakantiewoningen />} />
+          <Route path="/prefab-recreatiewoning" element={<PrefabRecreatiewoning />} />
           <Route path="/prefab-uitbouw" element={<PrefabUitbouw />} />
           <Route path="/prefab-uitbouw-laten-plaatsen" element={<PrefabUitbouw />} />
           <Route path="/prefab-aanbouw" element={<PrefabAanbouw />} />
           <Route path="/mantelzorgwoning" element={<Mantelzorgwoning />} />
           <Route path="/poolhouse" element={<Poolhouse />} />
+          <Route path="/prefab-poolhouse" element={<PrefabPoolhouse />} />
           
           <Route path="/diensten" element={<Diensten />} />
           <Route path="/diensten/prefab-uitbouw" element={<PrefabUitbouw />} />
@@ -4313,6 +4329,7 @@ export default function App() {
           <Route path="/diensten/poolhouse" element={<Poolhouse />} />
           <Route path="/diensten/prefab-chalets" element={<PrefabChalet />} />
           <Route path="/diensten/vakantiewoningen" element={<Vakantiewoningen />} />
+          <Route path="/diensten/prefab-recreatiewoning" element={<PrefabRecreatiewoning />} />
           <Route path="/zakelijk" element={<Zakelijk />} />
           <Route path="/onze-modules" element={<Diensten />} />
           <Route path="/werkwijze" element={<Werkwijze />} />
@@ -4326,11 +4343,46 @@ export default function App() {
           <Route path="/veelgestelde-vragen" element={<FAQPage />} />
           <Route path="/blog/:slug" element={<BlogPage />} />
           <Route path="/regio/zeeland" element={<ZeelandLandingPage />} />
+          <Route path="/uitbouw-zeeland" element={<ZeelandLandingPage />} />
           <Route path="/regio/zeeland/nieuwbouwproject" element={<ZeelandSchuurtjesProject />} />
+          <Route path="/regio/halsteren" element={<HalsterenLandingPage />} />
+          <Route path="/prefab-uitbouw-halsteren" element={<HalsterenLandingPage />} />
+          <Route path="/regio/eindhoven" element={<EindhovenLandingPage />} />
+          <Route path="/regio/amsterdam" element={<AmsterdamLandingPage />} />
+          <Route path="/uitbouw-amsterdam" element={<AmsterdamLandingPage />} />
+          <Route path="/regio/breda" element={<BredaLandingPage />} />
+          <Route path="/uitbouw-breda" element={<BredaLandingPage />} />
+          <Route path="/regio/bergen-op-zoom" element={<BergenOpZoomLandingPage />} />
+          <Route path="/uitbouw-bergen-op-zoom" element={<BergenOpZoomLandingPage />} />
+          <Route path="/regio/oss" element={<OssLandingPage />} />
+          <Route path="/uitbouw-oss" element={<OssLandingPage />} />
+          <Route path="/regio/amstelveen" element={<AmstelveenLandingPage />} />
+          <Route path="/uitbouw-amstelveen" element={<AmstelveenLandingPage />} />
+          <Route path="/regio/utrecht" element={<UtrechtLandingPage />} />
+          <Route path="/uitbouw-utrecht" element={<UtrechtLandingPage />} />
+          <Route path="/regio/antwerpen" element={<AntwerpenLandingPage />} />
+          <Route path="/uitbouw-antwerpen" element={<AntwerpenLandingPage />} />
+          <Route path="/regio/haarlem" element={<HaarlemLandingPage />} />
+          <Route path="/uitbouw-haarlem" element={<HaarlemLandingPage />} />
+          <Route path="/regio/laren" element={<LarenLandingPage />} />
+          <Route path="/uitbouw-laren" element={<LarenLandingPage />} />
+          <Route path="/regio/almere" element={<AlmereLandingPage />} />
+          <Route path="/uitbouw-almere" element={<AlmereLandingPage />} />
+          <Route path="/regio/tilburg" element={<TilburgLandingPage />} />
+          <Route path="/uitbouw-tilburg" element={<TilburgLandingPage />} />
+          <Route path="/regio/den-bosch" element={<DenBoschLandingPage />} />
+          <Route path="/uitbouw-den-bosch" element={<DenBoschLandingPage />} />
+          <Route path="/regio/den-haag" element={<DenHaagLandingPage />} />
+          <Route path="/uitbouw-den-haag" element={<DenHaagLandingPage />} />
+          <Route path="/regio/leidschendam" element={<LeidschendamLandingPage />} />
+          <Route path="/uitbouw-leidschendam" element={<LeidschendamLandingPage />} />
+          <Route path="/regio/rotterdam" element={<RotterdamLandingPage />} />
+          <Route path="/uitbouw-rotterdam" element={<RotterdamLandingPage />} />
           <Route path="/regio/:slug" element={<CityLandingPage />} />
-
-          {/* 404 pagina voor onbekende routes */}
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/crm" element={<Dashboard />} />
+          
+          {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
       <Footer />
