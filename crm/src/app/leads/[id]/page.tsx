@@ -22,7 +22,7 @@ import {
   ExternalLink,
   Copy,
 } from "lucide-react";
-import { useCrm } from "@/lib/store";
+import { useCrm, setUploadActief } from "@/lib/store";
 import { useMounted } from "@/lib/use-mounted";
 import { Badge, Avatar } from "@/components/ui/Badge";
 import { TaskDialog } from "@/components/TaskDialog";
@@ -431,6 +431,7 @@ function AfsprakenTab({ leadId, appointments }: { leadId: string; appointments: 
 function BestandenTab({ leadId, files }: { leadId: string; files: any[] }) {
   const registerFile = useCrm((s) => s.registerFile);
   const deleteFile = useCrm((s) => s.deleteFile);
+  const hydrate = useCrm((s) => s.hydrate);
   const inputRef = useRef<HTMLInputElement>(null);
   const [bezig, setBezig] = useState(false);
   const [fout, setFout] = useState<string | null>(null);
@@ -440,6 +441,9 @@ function BestandenTab({ leadId, files }: { leadId: string; files: any[] }) {
     if (!lijst?.length) return;
     setBezig(true);
     setFout(null);
+    // Blokkeer de automatische verversing zolang de upload loopt, anders
+    // veegt een verouderd antwoord de zojuist geüploade bestanden uit beeld.
+    setUploadActief(true);
     try {
       for (const f of Array.from(lijst)) {
         const form = new FormData();
@@ -456,8 +460,11 @@ function BestandenTab({ leadId, files }: { leadId: string; files: any[] }) {
     } catch (err) {
       setFout((err as Error).message);
     } finally {
+      setUploadActief(false);
       setBezig(false);
       if (inputRef.current) inputRef.current.value = "";
+      // Eén verse ophaalronde zodat de lijst exact gelijkloopt met de database.
+      hydrate();
     }
   }
 
