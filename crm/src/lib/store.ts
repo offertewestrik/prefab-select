@@ -88,6 +88,18 @@ function dbSync(table: string, op: "upsert" | "delete", data: unknown) {
   }).catch((e) => console.error(`Synchronisatie van ${table} mislukt:`, e));
 }
 
+// ---------------------------------------------------------------------------
+// Bescherming tegen race-conditions bij het automatisch verversen:
+// - tijdens een upload wordt er niet ge-hydrate (anders veegt een nét te vroeg
+//   gestarte verversing zojuist geüploade bestanden uit beeld);
+// - verouderde antwoorden (gestart vóór een nieuwere hydrate) worden genegeerd.
+// ---------------------------------------------------------------------------
+let uploadActief = false;
+let hydrateVolgnr = 0;
+export function setUploadActief(actief: boolean) {
+  uploadActief = actief;
+}
+
 /** Velden om een nieuwe offerte aan te maken. */
 export interface CreateQuoteInput {
   leadId: string;
@@ -244,10 +256,15 @@ export const useCrm = create<CrmState>()(
 
       hydrate: async () => {
         if (typeof window === "undefined") return;
+        if (uploadActief) return; // niet verversen midden in een upload
+        const volgnr = ++hydrateVolgnr;
         try {
           const res = await fetch("/api/bootstrap", { cache: "no-store" });
           if (!res.ok) return;
           const data = await res.json();
+          // Inmiddels een nieuwere verversing gestart of upload bezig?
+          // Dan dit (mogelijk verouderde) antwoord negeren.
+          if (volgnr !== hydrateVolgnr || uploadActief) return;
           const patch: Partial<CrmState> = {};
           if (Array.isArray(data.leads)) patch.leads = data.leads;
           if (Array.isArray(data.quotes)) patch.quotes = data.quotes;
