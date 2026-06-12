@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import React, { useState, useEffect, useMemo, PropsWithChildren } from 'react';
-import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useParams, useLocation } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
 import { MetaPixel } from './components/MetaPixel';
@@ -76,6 +76,26 @@ import {
   Settings,
   FileText
 } from 'lucide-react';
+
+// --- SEO: paginatitel, meta description en canonical per route ---
+function usePageMeta(title?: string, description?: string, canonicalPath?: string) {
+  useEffect(() => {
+    if (title) document.title = title;
+    if (description) {
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', description);
+    }
+    if (canonicalPath) {
+      let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'canonical';
+        document.head.appendChild(link);
+      }
+      link.href = `https://www.prefabselect.nl${canonicalPath}`;
+    }
+  }, [title, description, canonicalPath]);
+}
 
 // --- Types ---
 interface Service {
@@ -301,18 +321,19 @@ const faqs: FAQ[] = [
   { question: 'Is een vergunning nodig voor een uitbouw?', answer: 'Dat hangt af van je woning en gemeente. In veel gevallen is een uitbouw aan de achterzijde vergunningsvrij, maar we checken dit altijd voor je bij jouw gemeente.' },
   { question: 'Hoe snel wordt een uitbouw geplaatst?', answer: 'Omdat wij het grootste deel vooraf in de fabriek maken, kunnen we de uitbouw vaak binnen 1 tot 2 dagen plaatsen en binnen 4 tot 6 weken compleet opleveren.' },
   { question: 'Kan ik een keuken in de uitbouw plaatsen?', answer: 'Ja, dat doen we regelmatig. Wij zorgen dat alle benodigde leidingen en elektra al technisch goed voorbereid zijn in de fabriek.' },
+  { question: 'Wat kost een prefab mantelzorgwoning?', answer: 'Compacte mantelzorgwoningen (± 30-40 m²) zijn er vanaf €40.000 tot €60.000, compleet afgewerkt en geplaatst. Ruimere en luxere uitvoeringen beginnen vanaf €70.000.' },
   { question: 'Is prefab wel stevig genoeg?', answer: 'Ja — alles wordt onder gecontroleerde omstandigheden in de fabriek gebouwd, wat vaak een betere en constantere kwaliteit oplevert dan traditionele bouw op locatie.' }
 ];
 
 const blogs = [
   {
     id: 1,
-    title: "Wat kost een uitbouw van 15m² in 2026?",
+    title: "Prefab uitbouw kosten 2026: alle prijzen per m²",
     category: "Investering",
-    date: "12 Mei, 2024",
-    readTime: "5 min",
+    date: "12 Juni, 2026",
+    readTime: "7 min",
     image: "https://i.imgur.com/fmQecXk.jpeg",
-    excerpt: "Als je overweegt om een uitbouw te laten plaatsen, is dit waarschijnlijk je eerste vraag: wat kost het eigenlijk?",
+    excerpt: "Wat kost een prefab uitbouw in 2026? De complete prijsgids: prijzen per m², voorbeeldprijzen per formaat (10, 15, 20 en 30 m²) en wat er wel en niet is inbegrepen.",
     content: `Prefab bouwen is de afgelopen jaren enorm populair geworden. Niet alleen vanwege de snelheid, maar ook door de voorspelbare kosten en hoge kwaliteit. 
 
 Toch is één vraag het belangrijkst: **wat kost prefab bouwen per m²?** In deze gids leggen we alles duidelijk uit, zodat je precies weet waar je aan toe bent.
@@ -356,11 +377,27 @@ De prijs bestaat uit meer dan alleen de constructie alleen:
 - Luxe interieur afwerking
 - *Voor wie echt kwaliteit en uitstraling wil*
 
-### 🏠 Wat kost een prefab uitbouw van 15 m²?
+### 🏠 Voorbeeldprijzen per formaat (2026)
 
-Een veel gekozen formaat in Nederland is 15 m².
-- **Basis uitvoering**: ± €45.000
-- **Luxe uitvoering**: €55.000 – €65.000+
+Een veel gekozen formaat in Nederland is 15 m², maar elk formaat is mogelijk. Richtprijzen voor een complete, geïnstalleerde prefab uitbouw:
+
+- **10 m²** (bijv. uitbouw van 2,5 × 4 meter): ± €28.000 – €42.000
+- **15 m²** (bijv. 3 × 5 meter, het populairste formaat): ± €45.000 basis, €55.000 – €65.000+ luxe
+- **20 m²** (bijv. 4 × 5 meter, ruime leefkeuken): ± €55.000 – €85.000
+- **30 m²** (volledige breedte van de woning): ± €80.000 – €130.000
+
+> **Tip**: een grotere uitbouw is per m² relatief goedkoper, omdat vaste kosten zoals transport, kraan en aansluitingen maar één keer terugkomen.
+
+### ✅ Wat is inbegrepen — en wat niet?
+
+Bij een complete prefab uitbouw van Prefab Select zit in de prijs: constructie, isolatie (Rc 6.0), kozijnen, dak, transport, kraan en plaatsing, en de afgesproken afwerking. Houd daarnaast rekening met mogelijke bijkomende kosten:
+
+- **Fundering**: afhankelijk van de grondsoort (schroeffundering of betonpoeren)
+- **Doorbraak** naar de bestaande woning (bijv. stalen lateibalk)
+- **Keuken of sanitair** in de uitbouw
+- **Eventuele vergunningskosten** (leges gemeente)
+
+Vraag altijd een gespecificeerde offerte aan, dan weet u exact waar u aan toe bent — bij ons altijd met vaste prijs vooraf.
 
 ### ⚙️ Waarom prefab vaak goedkoper is
 
@@ -376,9 +413,23 @@ Een traditionele bouw kan 8–12 weken duren. Bij prefab is de doorlooptijd:
 - **Productie**: 2–4 weken (in de fabriek)
 - **Plaatsing**: 1–2 dagen (op locatie)
 
+### ❓ Veelgestelde vragen over uitbouwkosten
+
+**Wat kost een prefab uitbouw per m² in 2026?**
+Gemiddeld €2.500 tot €4.500 per m², geïnstalleerd. Het exacte bedrag hangt af van formaat, kozijnen en afwerkingsniveau.
+
+**Is een prefab uitbouw goedkoper dan traditioneel bouwen?**
+Vaak wel: door de korte bouwtijd op locatie (1–2 dagen in plaats van 8–12 weken) bespaart u fors op arbeidskosten, en de vaste prijs vooraf voorkomt verrassingen.
+
+**Kan ik de kosten financieren?**
+Ja — een uitbouw verhoogt de woningwaarde en kan vaak meegefinancierd worden via de hypotheek of een bouwdepot. Lees onze gids over [het financieren van een prefab uitbouw](/blog/financiering-prefab-uitbouw).
+
+**Hoe krijg ik een exacte prijs?**
+[Vraag een gratis offerte aan](/offerte) — u ontvangt een vaste prijs op basis van uw situatie en wensen.
+
 ### 🚀 Conclusie
 
-Prefab bouwen is de toekomst. Het biedt de perfecte balans tussen snelheid, kwaliteit en prijszekerheid. Of u nu meer leefruimte wilt voor uw gezin of een modern thuiskantoor, prefab is dé oplossing.`,
+Prefab bouwen biedt de perfecte balans tussen snelheid, kwaliteit en prijszekerheid. Reken in 2026 op €2.500 – €4.500 per m², met een uitbouw van 15 m² vanaf circa €45.000. Benieuwd wat het voor uw woning kost? [Vraag vrijblijvend een offerte aan](/offerte).`,
     slug: "kosten-uitbouw-15m2"
   },
   {
@@ -418,16 +469,43 @@ Dat is vaak het moment waar klanten van schrikken — hoe snel het ineens gaat. 
   },
   {
     id: 4,
-    title: "Heb je een vergunning nodig voor een uitbouw?",
-    excerpt: "Dit is een vraag die bijna iedereen stelt — en het antwoord is: soms.",
-    content: `Dit is een vraag die bijna iedereen stelt — en het antwoord is: soms. In veel gevallen is een uitbouw aan de achterkant van de woning vergunningsvrij, zolang je binnen bepaalde afmetingen blijft.
+    title: "Hoeveel m² mag je uitbouwen zonder vergunning? (regels 2026)",
+    category: "Vergunning",
+    date: "12 Juni, 2026",
+    readTime: "6 min",
+    image: "https://i.imgur.com/fmQecXk.jpeg",
+    excerpt: "In veel gevallen mag je aan de achterkant van je woning vergunningsvrij uitbouwen. Dit zijn de regels in 2026: maximale diepte, hoogte en oppervlakte op een rij.",
+    content: `Goed nieuws voor wie een uitbouw overweegt: **in veel gevallen mag je aan de achterkant van je woning vergunningsvrij uitbouwen**. Maar er zijn duidelijke grenzen aan diepte, hoogte en oppervlakte. In deze gids zetten we de regels van 2026 op een rij.
 
-Maar let op:
-- Regels verschillen per gemeente
-- Hoekwoningen hebben vaak andere regels
-- Hoogte en diepte zijn bepalend
+### 📏 De hoofdregels voor vergunningsvrij uitbouwen
 
-Daarom is het slim om dit altijd vooraf te laten checken door een expert.`,
+Een uitbouw aan de achterzijde valt onder "bijbehorende bouwwerken" en is vaak vergunningsvrij als deze:
+
+- **Maximaal 4 meter diep** is, gemeten vanaf de oorspronkelijke achtergevel
+- **Niet hoger** is dan 5 meter, én niet hoger dan 30 cm boven de vloer van de eerste verdieping
+- In het **achtererfgebied** staat (de achtertuin, niet grenzend aan de openbare weg)
+- Samen met andere bijgebouwen **niet meer dan 50% van het achtererf** bebouwt
+
+Let op: het totaal aan vergunningsvrije bebouwing is óók gebonden aan een maximum dat afhangt van de grootte van uw perceel (oplopend tot 150 m² bij zeer grote percelen).
+
+### ⚠️ Wanneer is wél een vergunning nodig?
+
+- Bij een uitbouw **dieper dan 4 meter**
+- Aan de **voor- of zijkant** van de woning (zeker bij hoekwoningen grenzend aan openbaar gebied)
+- Bij een **monument** of in een **beschermd stads- of dorpsgezicht**
+- Als het **bestemmingsplan/omgevingsplan** van uw gemeente strengere regels stelt
+
+Sinds de invoering van de Omgevingswet verschillen de regels meer per gemeente dan vroeger. Controleer uw situatie altijd via het [Omgevingsloket](https://omgevingswet.overheid.nl/home) of laat het ons gratis voor u uitzoeken.
+
+### 🏠 Wat betekent dit in de praktijk?
+
+Bij een gemiddelde tussenwoning (beukmaat 5,4 meter) betekent 4 meter diep vergunningsvrij uitbouwen ruim **20 m² extra leefruimte** — genoeg voor een ruime leefkeuken of extra woonkamer. Benieuwd naar de kosten? Lees onze [prijsgids prefab uitbouw 2026](/blog/kosten-uitbouw-15m2).
+
+### ✅ Wij regelen de vergunningscheck voor u
+
+Bij elke offerte controleren wij of uw uitbouw vergunningsvrij geplaatst kan worden. Is er wél een vergunning nodig, dan begeleiden we de aanvraag van A tot Z. Zo weet u zeker dat uw uitbouw aan alle regels voldoet.
+
+[Vraag een gratis offerte met vergunningscheck aan](/offerte).`,
     slug: "vergunning-uitbouw"
   },
   {
@@ -655,6 +733,222 @@ De fundering is het onzichtbare maar cruciale begin van elke uitbouw. Welk type 
 
 Meer weten over het complete traject? Bekijk onze [werkwijze](/werkwijze) en [prefab uitbouw](/prefab-uitbouw), of [vraag een vrijblijvende offerte aan](/offerte).`,
     slug: "fundering-prefab-uitbouw"
+  },
+  {
+    id: 14,
+    title: "Mantelzorgwoning kosten 2026: complete prijsgids",
+    category: "Investering",
+    date: "12 Juni, 2026",
+    readTime: "7 min",
+    image: "https://i.imgur.com/egN8Nm5.jpeg",
+    excerpt: "Wat kost een prefab mantelzorgwoning in 2026? Richtprijzen per formaat, bijkomende kosten en alles over vergunningen en plaatsing — overzichtelijk op een rij.",
+    content: `Een mantelzorgwoning in de tuin is dé manier om zorg dichtbij te organiseren zonder dat iemand zijn zelfstandigheid verliest. Maar wat kost dat eigenlijk? In deze prijsgids zetten we alle kosten voor 2026 op een rij.
+
+### 💰 Richtprijzen mantelzorgwoning 2026
+
+De prijs van een prefab mantelzorgwoning hangt af van grootte, indeling en afwerkingsniveau:
+
+- **Compacte modellen** (± 30–40 m², woonkamer met keuken, slaapkamer en badkamer): vanaf **€40.000 – €60.000**
+- **Ruimere en luxere uitvoeringen** (± 50 m² en groter, hoogwaardige afwerking): vanaf **€70.000+**
+
+Alle modellen zijn gelijkvloers — essentieel voor een zorgsituatie — en worden compleet afgewerkt opgeleverd, inclusief badkamer en keukenaansluitingen.
+
+### 🧱 Wat bepaalt de prijs?
+
+- **Oppervlakte en indeling**: één- of tweepersoons, aparte slaapkamer, bergruimte
+- **Afwerkingsniveau**: van praktisch en degelijk tot luxe gevelafwerking met grote glaspartijen
+- **Zorgvoorzieningen**: drempelloze toegang, aangepaste badkamer, bredere deuren
+- **Installaties**: vloerverwarming, airco, ventilatie met warmteterugwinning
+
+### 📋 Bijkomende kosten waar u op moet rekenen
+
+Naast de woning zelf komen er meestal nog kosten bij:
+
+- **Fundering**: afhankelijk van de grond (schroeffundering of betonplaat)
+- **Aansluitingen**: water, elektra en riolering vanaf de hoofdwoning of het net
+- **Transport en kraan**: afhankelijk van de bereikbaarheid van uw tuin
+- **Eventuele leges** als er toch een vergunning nodig is
+
+Bij Prefab Select krijgt u altijd een complete offerte met vaste prijs, zodat u vooraf precies weet waar u aan toe bent.
+
+### 📝 Is een vergunning nodig?
+
+In veel gevallen is een mantelzorgwoning **vergunningsvrij** te plaatsen, mits er sprake is van een zorgrelatie en de woning in het achtererfgebied staat. De regels verschillen per gemeente — lees onze gids over [de regels voor een mantelzorgwoning in de tuin](/blog/mantelzorgwoning-in-tuin-regels) of laat ons de check gratis voor u doen.
+
+### ⏱️ Hoe snel kan het?
+
+Omdat de woning volledig in onze fabriek in Halsteren wordt gebouwd, is de doorlooptijd kort:
+
+- **Productie**: 2–4 weken in de fabriek
+- **Plaatsing**: vaak binnen 1–2 dagen
+- **Gebruiksklaar**: inclusief afwerking meestal binnen enkele weken na plaatsing
+
+### ❓ Veelgestelde vragen
+
+**Wat kost een mantelzorgwoning van 40 m²?**
+Reken voor een compleet afgewerkte prefab mantelzorgwoning van circa 40 m² op €50.000 tot €70.000, afhankelijk van afwerking en voorzieningen.
+
+**Kan de mantelzorgwoning later weg?**
+Ja — een prefab mantelzorgwoning is verplaatsbaar. Als de zorgsituatie eindigt, kan de woning verwijderd, verkocht of elders geplaatst worden.
+
+**Wordt een mantelzorgwoning vergoed?**
+Er is geen landelijke subsidie, maar in sommige situaties zijn er gemeentelijke regelingen of kan financiering via de overwaarde van de woning. Informeer bij uw gemeente.
+
+Benieuwd wat een mantelzorgwoning in uw situatie kost? [Vraag een gratis offerte aan](/offerte) of bekijk onze [mantelzorgwoningen](/mantelzorgwoning).`,
+    slug: "mantelzorgwoning-kosten"
+  },
+  {
+    id: 15,
+    title: "Mantelzorgwoning in de tuin: regels en vergunning in 2026",
+    category: "Vergunning",
+    date: "12 Juni, 2026",
+    readTime: "6 min",
+    image: "https://i.imgur.com/tGXkhAS.jpeg",
+    excerpt: "Mag je zomaar een mantelzorgwoning in de tuin plaatsen? Dit zijn de regels in 2026: wanneer het vergunningsvrij kan, wat de voorwaarden zijn en waar je op moet letten.",
+    content: `Steeds meer families kiezen ervoor om zorg dichtbij huis te organiseren met een mantelzorgwoning in de tuin. Maar mag dat zomaar? Het korte antwoord: **vaak wel — mits aan een aantal voorwaarden wordt voldaan**. Dit zijn de regels in 2026.
+
+### ✅ Wanneer is een mantelzorgwoning vergunningsvrij?
+
+Een mantelzorgwoning kan vergunningsvrij geplaatst worden als:
+
+- Er sprake is van een **zorgrelatie**: degene die in de woning woont heeft zorg nodig, of verleent juist zorg aan de bewoners van het hoofdgebouw
+- De woning in het **achtererfgebied** staat (de achtertuin, niet aan de straatkant)
+- De woning **functioneel ondergeschikt** blijft aan de hoofdwoning
+- De maximale oppervlakte- en hoogteregels voor bijbehorende bouwwerken worden gerespecteerd
+
+De zorgrelatie hoeft meestal niet zwaar bewezen te worden: een verklaring van een huisarts of wijkverpleegkundige volstaat doorgaans.
+
+### ⚠️ Let op: regels verschillen per gemeente
+
+Sinds de Omgevingswet bepalen gemeenten meer zelf. De ene gemeente is soepel, de andere stelt extra eisen aan oppervlakte, uiterlijk of locatie. Bovendien wordt er **in 2026 aan nieuwe landelijke wetgeving gewerkt** om het plaatsen van mantelzorgwoningen verder te vereenvoudigen — houd de berichtgeving in de gaten of vraag het ons.
+
+Controleer uw situatie altijd via het [Omgevingsloket](https://omgevingswet.overheid.nl/home) — of laat ons de vergunningscheck gratis uitvoeren bij uw offerte.
+
+### 🏠 Wat gebeurt er als de zorgsituatie eindigt?
+
+Dit is een belangrijk aandachtspunt: eindigt de zorgrelatie, dan mag de unit meestal **niet meer als zelfstandige woning gebruikt** worden. Opties zijn dan:
+
+- De woning **verwijderen of verplaatsen** (een prefab woning is hier ideaal voor)
+- De keuken/badkamer verwijderen en het gebouw als **bijgebouw** blijven gebruiken
+- In sommige gemeenten: een **vergunning aanvragen** voor ander gebruik
+
+### 📐 Praktische tips voor plaatsing
+
+- Zorg voor **bereikbaarheid voor een kraan** bij de plaatsing
+- Denk aan de **aansluitingen** (water, elektra, riool) — vaak via de hoofdwoning
+- Kies een **gelijkvloerse, drempelloze indeling** met oog op de zorgvraag
+- Overleg vooraf met de buren: dat voorkomt bezwaren
+
+### 💶 En de kosten?
+
+Een complete prefab mantelzorgwoning is er vanaf circa €40.000. Lees onze [prijsgids mantelzorgwoning 2026](/blog/mantelzorgwoning-kosten) voor alle richtprijzen.
+
+Wilt u weten wat er in uw tuin en uw gemeente mogelijk is? [Vraag een gratis offerte met vergunningscheck aan](/offerte) of bekijk onze [mantelzorgwoningen](/mantelzorgwoning).`,
+    slug: "mantelzorgwoning-in-tuin-regels"
+  },
+  {
+    id: 16,
+    title: "Uitbouw van 3 of 4 meter: kosten, regels en voorbeelden",
+    category: "Investering",
+    date: "12 Juni, 2026",
+    readTime: "6 min",
+    image: "https://i.imgur.com/fmQecXk.jpeg",
+    excerpt: "Een uitbouw van 3 of 4 meter diep is de populairste keuze in Nederland. Wat kost het, wat zijn de regels en wat levert elke meter extra eigenlijk op?",
+    content: `De meeste uitbouwen in Nederland zijn **3 of 4 meter diep** — niet toevallig, want tot 4 meter diep is een uitbouw aan de achterzijde vaak vergunningsvrij. Maar wat is het verschil in kosten en woonbeleving? We zetten het op een rij.
+
+### 📏 Uitbouw van 3 meter: de veilige allrounder
+
+Bij een gemiddelde tussenwoning (beukmaat ± 5,4 meter) levert een uitbouw van 3 meter diep ruim **16 m² extra leefruimte** op.
+
+- **Kosten prefab**: circa €40.000 – €58.000, afhankelijk van afwerking
+- **Ideaal voor**: een ruimere woonkamer of een eethoek aan de tuin
+- **Vergunning**: vrijwel altijd vergunningsvrij aan de achterzijde
+
+### 📏 Uitbouw van 4 meter: maximale ruimte, vaak nog vergunningsvrij
+
+Een uitbouw van 4 meter diep geeft bij dezelfde woning ruim **21 m² extra** — het verschil tussen "een grotere kamer" en een volwaardige leefkeuken.
+
+- **Kosten prefab**: circa €52.000 – €75.000, afhankelijk van afwerking
+- **Ideaal voor**: een leefkeuken met kookeiland of een extra leefruimte met schuifpui
+- **Vergunning**: tot exact 4 meter vanaf de oorspronkelijke achtergevel meestal vergunningsvrij — daarboven is een vergunning nodig
+
+> **Goed om te weten**: die laatste meter is relatief goedkoop. De vaste kosten (kraan, transport, doorbraak, aansluitingen) blijven gelijk; alleen de constructie wordt iets groter. Per m² wordt een grotere uitbouw dus voordeliger.
+
+### ⚖️ 3 of 4 meter: hoe kiest u?
+
+- **Tuingrootte**: houd voldoende tuin over — als vuistregel minimaal de helft van het achtererf
+- **Lichtinval**: bij 4 meter diep adviseren wij vaak een lichtstraat of daklicht, zodat ook het midden van de woning licht blijft
+- **Budget**: het verschil tussen 3 en 4 meter is doorgaans €10.000 – €15.000
+- **Woningwaarde**: extra woonoppervlak betaalt zich in vrijwel alle regio's terug in de verkoopwaarde
+
+### 🏗️ Zo snel gaat het met prefab
+
+Of u nu 3 of 4 meter kiest: bij prefab wordt uw uitbouw in 2–4 weken in onze fabriek gebouwd en in **1–2 dagen geplaatst**. Geen maandenlange bouwplaats in uw tuin.
+
+### ❓ Veelgestelde vragen
+
+**Mag een uitbouw van 4 meter zonder vergunning?**
+Aan de achterzijde meestal wel, gemeten vanaf de oorspronkelijke achtergevel. Lees alle voorwaarden in onze [vergunningsgids 2026](/blog/vergunning-uitbouw).
+
+**Wat kost een uitbouw van 3 meter?**
+Bij een gemiddelde woningbreedte circa €40.000 – €58.000 compleet geplaatst. Bekijk de [volledige prijsgids](/blog/kosten-uitbouw-15m2) voor alle prijzen per m².
+
+Benieuwd wat er bij uw woning past? [Vraag een gratis offerte aan](/offerte) — wij denken mee over de ideale maat.`,
+    slug: "uitbouw-3-of-4-meter"
+  },
+  {
+    id: 17,
+    title: "Prefab uitbouw ervaringen: voordelen, nadelen en wat u kunt verwachten",
+    category: "Inspiratie",
+    date: "12 Juni, 2026",
+    readTime: "6 min",
+    image: "https://i.imgur.com/fmQecXk.jpeg",
+    excerpt: "Overweegt u een prefab uitbouw maar wilt u eerst weten hoe anderen het ervaren? De eerlijke voor- en nadelen en wat u stap voor stap kunt verwachten.",
+    content: `Wie een prefab uitbouw overweegt, wil eerst weten: **hoe bevalt het anderen eigenlijk?** In dit artikel delen we eerlijk wat klanten als de grootste voordelen ervaren — én waar u rekening mee moet houden.
+
+### 👍 Wat klanten als grootste voordelen ervaren
+
+**1. De snelheid verrast iedereen**
+Dit horen we het vaakst terug: het contrast tussen maandenlang een bouwplaats verwachten en in werkelijkheid 1–2 dagen plaatsing. 's Ochtends komt de kraan, 's avonds staat de ruwbouw.
+
+**2. Geen bouwplaats in de tuin**
+Omdat ± 90% van het werk in onze fabriek in Halsteren gebeurt, blijft de tuin netjes en is er nauwelijks overlast voor het gezin én de buren.
+
+**3. De vaste prijs geeft rust**
+Geen meerwerk-verrassingen achteraf: de offerte is de prijs. Voor veel klanten was dit, naast de snelheid, de doorslaggevende reden om voor prefab te kiezen.
+
+**4. De kwaliteit is constant**
+In de fabriek wordt elke wand onder dezelfde gecontroleerde omstandigheden gebouwd — geen regen op open constructies, geen vochtproblemen, strakke naden.
+
+### 👎 De eerlijke aandachtspunten
+
+**1. Een kraan moet erbij kunnen**
+De prefab elementen worden over (of langs) de woning getild. In de meeste straten kan dit prima, maar bij smalle binnenterreinen of bomen boven de tuin kijken we vooraf goed naar de mogelijkheden.
+
+**2. Wijzigingen achteraf zijn lastiger**
+Bij traditionele bouw kunt u tijdens de bouw nog schuiven. Bij prefab ligt het ontwerp vóór productie vast — daarom besteden wij juist veel tijd aan de ontwerpfase.
+
+**3. De voorbereiding bepaalt het succes**
+De fundering, doorbraak en aansluitingen moeten kloppen vóór de plaatsingsdag. Goed om te weten: dit is precies wat ons team voor u regisseert.
+
+### 📅 Zo verloopt het traject stap voor stap
+
+1. **Offerte en advies** — wensen, budget en vergunningscheck
+2. **Ontwerp op maat** — definitief ontwerp en vaste prijs
+3. **Productie** — 2–4 weken in de fabriek, terwijl uw leven gewoon doorgaat
+4. **Plaatsing** — ruwbouw in 1 dag, compleet in 1–2 dagen
+5. **Afwerking** — binnen enkele weken volledig klaar
+
+Meer weten over hoe wij werken? Bekijk onze [werkwijze](/werkwijze) en onze [projecten](/projecten).
+
+### ⭐ Zelf ervaringen lezen?
+
+Bekijk onze [Google-reviews](https://share.google/Ky6sK5qFbBzvUm8u9) van klanten die u voorgingen, of bezoek onze fabriek in Halsteren om de kwaliteit zelf te zien en te voelen.
+
+### 🚀 Conclusie
+
+De ervaring van de meeste klanten laat zich samenvatten als: *meer rust dan verwacht*. De combinatie van vaste prijs, korte plaatsingstijd en fabriekskwaliteit maakt een prefab uitbouw voorspelbaar — en dat is precies wat u wilt bij zo'n grote investering. Vergelijk zelf de [voor- en nadelen ten opzichte van traditionele bouw](/blog/prefab-vs-traditioneel) of [vraag vrijblijvend een offerte aan](/offerte).`,
+    slug: "prefab-uitbouw-ervaringen"
   }
 ];
 
@@ -779,7 +1073,7 @@ Waarom Prefab Select de favoriete keuze is in de regio 's-Hertogenbosch:
 ### Wat kost een luxe uitbouw in Den Bosch?
 De **kosten voor een uitbouw** in 's-Hertogenbosch liggen gemiddeld tussen de **€2.500 en €4.000 per m²**. Een investering die zich direct terugbetaalt in woonplezier en een hogere taxatiewaarde van uw vastgoed.
 
-Benieuwd naar onze andere diensten? Ontdek onze [Luxe Chalets](/chalets) of [Vakantiewoningen](/vakantiewoningen).
+Benieuwd naar onze andere diensten? Ontdek onze [Luxe Chalets](/prefab-chalets) of [Vakantiewoningen](/vakantiewoningen).
 
 [Ontvang binnen 24 uur een offerte voor Den Bosch](/offerte)`
   },
@@ -1011,7 +1305,7 @@ De **kosten voor een uitbouw** in Utrecht variëren per type afwerking. Gemiddel
 - **€2.600 per m²** voor een hoogwaardige basisuitvoering
 - **€4.200 per m²** voor een exclusieve architectonische aanbouw
 
-Voor een gemiddelde Utrechtse woning betekent een uitbouw van 15 m² een investering tussen de €48.000 en €65.000, een bedrag dat zich direct terugbetaalt in de woningwaarde. Bekijk ook onze [Prefab Uitbouw projecten](/prefab-uitbouw-laten-plaatsen) voor meer inspiratie.
+Voor een gemiddelde Utrechtse woning betekent een uitbouw van 15 m² een investering tussen de €48.000 en €65.000, een bedrag dat zich direct terugbetaalt in de woningwaarde. Bekijk ook onze [Prefab Uitbouw projecten](/prefab-uitbouw) voor meer inspiratie.
 
 ### Vergunningsvrij uitbouwen in Utrecht
 In Utrecht gelden specifieke regels voor vergunningsvrij bouwen. Vaak is een uitbouw aan de achterzijde tot 4 meter diep vergunningsvrij. Wij checken dit altijd gratis voor u via de officiële kanalen van de gemeente Utrecht.
@@ -1034,7 +1328,7 @@ Met een **prefab uitbouw in Almere** kiest u voor de hoogste isolatienormen (Rc 
 - **Vaste prijs**: Volledige transparantie over de **uitbouw kosten** vooraf.
 
 ### Kosten indicatie Almere
-Voor een kwalitatieve uitbouw in Almere kunt u rekenen op een vanafprijs van ca. €2.500 per m². Of u nu zoekt naar een [prefab uitbouw](/prefab-uitbouw-laten-plaatsen) of een [aanbouw woning](/prefab-aanbouw), wij helpen u verder.
+Voor een kwalitatieve uitbouw in Almere kunt u rekenen op een vanafprijs van ca. €2.500 per m². Of u nu zoekt naar een [prefab uitbouw](/prefab-uitbouw) of een [aanbouw woning](/prefab-aanbouw), wij helpen u verder.
 
 [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
@@ -1056,7 +1350,7 @@ Een **prefab aanbouw in Haarlem** is de ideale manier om snel extra meters te wi
 ### Kosten uitbouw Haarlem
 Gemiddeld liggen de **kosten per m² voor een uitbouw** in Haarlem tussen de €2.600 en €4.500. Dit is inclusief onze volledige begeleiding van vergunningscheck tot oplevering.
 
-[Ontdek onze luxe chalets](/chalets) of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontdek onze luxe chalets](/prefab-chalets) of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Roosendaal',
@@ -1205,146 +1499,6 @@ Een uitbouw aan de achterzijde is in veel gevallen vergunningsvrij, maar in Midd
 Ontdek ook onze pagina's voor [Zeeland](/regio/zeeland) en [Goes](/regio/goes). Lees meer over onze [prefab uitbouw](/prefab-uitbouw) of [vraag vrijblijvend een offerte aan](/offerte).`
   },
   {
-    name: 'Mantelzorgwoning',
-    slug: 'mantelzorgwoning-prefab',
-    title: 'Mantelzorgwoning prefab – comfortabel wonen dichtbij huis',
-    content: `Wil je een mantelzorgwoning laten plaatsen voor een ouder, familielid of naaste? Dan is een prefab mantelzorgwoning een snelle en praktische oplossing om zorg dichtbij huis te organiseren.
-
-Bij Prefabselect.nl realiseren wij mantelzorgwoningen op maat, volledig afgestemd op jouw situatie. Zo creëer je een zelfstandige woonruimte in de tuin, zonder dat iemand zijn vertrouwde omgeving hoeft te verlaten.
-
-### Wat is een mantelzorgwoning?
-Een mantelzorgwoning is een zelfstandige woonruimte op eigen terrein, bedoeld voor iemand die zorg nodig heeft of juist zorg verleent. Het grote voordeel: je woont dicht bij elkaar, maar behoudt toch privacy en zelfstandigheid.
-
-### Waarom kiezen voor een prefab mantelzorgwoning?
-Steeds meer mensen kiezen voor een prefab mantelzorgwoning in plaats van traditionele bouw. Voordelen:
-- **Snelle plaatsing** – vaak binnen enkele dagen
-- Minder overlast tijdens de bouw
-- Vaste prijs vooraf
-- Hoogwaardige afwerking
-- Energiezuinige bouw
-
-### Wat kost een mantelzorgwoning?
-De kosten hangen af van grootte, afwerking en indeling. Gemiddeld kun je denken aan:
-- Vanaf **€40.000 – €60.000** voor compacte modellen
-- Grotere en luxe uitvoeringen vanaf **€70.000+**
-
-### Mogelijkheden op maat
-Wij bieden diverse mogelijkheden voor de indeling:
-- 1- of 2-persoons woning
-- Woonkamer met keuken
-- Slaapkamer en badkamer
-- Gelijkvloerse indeling (essentieel voor zorg)
-- **Extra opties**: drempelloze toegang, aangepaste badkamer, airco en verwarming.
-
-### Hoe werkt het traject?
-1. **Offerte aanvragen**: Ontvang een eerste indicatie.
-2. **Advies en ontwerp**: We maken een maatwerk ontwerp voor jouw situatie.
-3. **Productie**: De woning wordt volledig voorbereid in de fabriek.
-4. **Plaatsing**: Binnen korte tijd wordt de woning geplaatst.
-5. **Afwerking**: De woning wordt gebruiksklaar gemaakt.
-
-### Vergunning nodig?
-In veel gevallen is een mantelzorgwoning vergunningsvrij, mits er sprake is van een zorgsituatie en de woning op eigen terrein staat. Wij helpen je met het controleren van de regels.
-
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
-  },
-  {
-    name: 'Recreatiewoning',
-    slug: 'recreatiewoning-prefab',
-    title: 'Prefab Recreatiewoning Laten Plaatsen – Luxe & Duurzaam',
-    content: `Droomt u van een eigen vakantieplek of een verhuurobject met een hoog rendement? Een **prefab recreatiewoning** van Prefab Select combineert modern design met de hoogste bouwkwaliteit.
-
-Of het nu gaat om een luxe chalet aan de kust of een moderne vakantiewoning in de bossen, onze **modulaire recreatiewoningen** zijn direct klaar voor gebruik.
-
-### Waarom kiezen voor een prefab recreatiewoning?
-- **All-season comfort**: Dankzij top-isolatie het hele jaar door behaaglijk.
-- **Snel operationeel**: Ideaal voor vakantieparken of particuliere kavels.
-- **Onderhoudsarm**: Gebruik van duurzame materialen die jarenlang mooi blijven.
-
-Ontdek onze verschillende [Vakantiewoningen](/vakantiewoningen) en [Chalets](/chalets).
-
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
-  },
-  {
-    name: 'Prefab Uitbouw',
-    slug: 'prefab-uitbouw-laten-plaatsen',
-    title: 'Prefab uitbouw laten plaatsen – snel extra ruimte zonder lange verbouwing',
-    content: `Wil je jouw woning vergroten zonder maandenlang in een verbouwing te zitten? Dan is een prefab uitbouw de slimste oplossing.
-
-Bij Prefabselect.nl realiseren wij complete prefab uitbouwen op maat, die binnen korte tijd geplaatst worden en direct zorgen voor meer ruimte, licht en comfort.
-
-👉 **Vaak al binnen 1 tot 2 dagen geplaatst**
-
-### Wat is een prefab uitbouw?
-Een prefab uitbouw is een woninguitbreiding die grotendeels in de fabriek wordt gemaakt. Denk aan wanden, kozijnen, isolatie en afwerking — alles wordt vooraf voorbereid. Daarna wordt de uitbouw in één keer bij jouw woning geplaatst.
-
-**Het resultaat:**
-- Snellere bouw
-- Hogere kwaliteit
-- Minder overlast
-
-### Waarom kiezen voor een prefab uitbouw?
-Steeds meer huiseigenaren kiezen voor prefab in plaats van traditionele bouw. 
-
-**De belangrijkste voordelen:**
-- **Snelle plaatsing** – vaak binnen 1 tot 2 dagen
-- Tot 60% kortere bouwtijd
-- Minder overlast rondom de woning
-- Vaste prijs vooraf
-- Strakke en consistente afwerking
-
-Vooral als je snel resultaat wilt zonder gedoe, is prefab de beste keuze.
-
-### Wat kost een prefab uitbouw?
-De prijs van een prefab uitbouw laten plaatsen hangt af van jouw wensen. Gemiddeld liggen de prefab uitbouw kosten per m² op:
-- Vanaf **€2.500 per m²** (standaard uitvoering)
-- Vanaf **€3.000 per m²** (luxe uitvoering)
-
-Voor een prefab uitbouw van 15 m² betekent dit een investering van ongeveer **€45.000 tot €55.000**. De uiteindelijke prijs wordt bepaald door de grootte, type kozijnen, afwerking en extra opties zoals een lichtstraat of vloerverwarming.
-
-👉 **Je ontvangt altijd een duidelijke offerte vooraf.**
-
-### Hoe lang duurt een prefab uitbouw?
-Een traditionele uitbouw kan 6 tot 10 weken duren. Bij prefab is dit veel sneller:
-- **Productie**: 2–4 weken
-- **Plaatsing**: 1–2 dagen
-- **Totale doorlooptijd**: 4–6 weken
-
-Dit is voor veel mensen de belangrijkste reden om voor prefab te kiezen.
-
-### Hoe werkt een prefab uitbouw laten plaatsen?
-Wij houden het proces overzichtelijk:
-1. **Offerte aanvragen**: Je geeft je wensen door en ontvangt een prijsindicatie.
-2. **Advies en inmeten**: We bekijken jouw woning en bespreken de mogelijkheden.
-3. **Ontwerp op maat**: Je krijgt een ontwerp dat perfect aansluit op jouw situatie.
-4. **Productie van de uitbouw**: De prefab uitbouw wordt in de fabriek gemaakt.
-5. **Plaatsing op locatie**: Binnen korte tijd wordt de uitbouw geplaatst.
-6. **Afwerking en oplevering**: Alles wordt netjes afgewerkt en gebruiksklaar gemaakt.
-
-### Welke mogelijkheden zijn er?
-Een prefab uitbouw kan volledig op maat worden gemaakt. Veel gekozen opties zijn een woonkamer uitbouw, keuken uitbouw of een grote open leefruimte.
-
-**Extra opties:**
-- Grote schuifpuien (tot 5 meter)
-- Lichtstraten voor extra daglicht
-- Vloerverwarming en luxe afwerking
-- Elektra en waterleidingen volledig voorbereid
-
-### Heb je een vergunning nodig?
-In veel gevallen is een uitbouw vergunningsvrij, vooral aan de achterzijde van de woning. Dit hangt af van de grootte, locatie en gemeentelijke regels. Wij helpen je met het controleren hiervan.
-
-### Prefab uitbouw vs traditionele uitbouw
-Bij prefab kies je voor snelheid, minder overlast en een vaste planning. Bij traditionele bouw heb je vaak te maken met een langere bouwtijd, meer rommel en meer afhankelijkheid van het weer. Voor wie snelheid en duidelijkheid wil, is prefab meestal de beste keuze.
-
-### Is een prefab uitbouw een goede investering?
-Ja, een prefab uitbouw zorgt voor meer woonruimte, meer licht en een betere indeling. Dit vertaalt zich direct in een waardeverhoging van je woning en meer dagelijks wooncomfort.
-
-### Waarom kiezen voor Prefabselect.nl?
-Wij zorgen voor een compleet traject: van maatwerk ontwerp tot snelle realisatie en hoogwaardige afwerking. Geen verrassingen achteraf, maar duidelijke communicatie en vakmanschap.
-
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
-  },
-  {
     name: 'Zeeland',
     slug: 'zeeland',
     image: 'https://i.imgur.com/6VuTqto.jpeg',
@@ -1359,6 +1513,12 @@ function CityLandingPage() {
   const page = useMemo(() => cityPages.find(p => p.slug === slug), [slug]);
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
+
+  usePageMeta(
+    page ? `${page.title} | Prefab Select` : undefined,
+    page ? page.content.replace(/[#*\[\]>_`]/g, '').replace(/\(\/[^)]*\)/g, '').split('\n').map(l => l.trim()).filter(Boolean)[0]?.slice(0, 155) : undefined,
+    page ? `/regio/${page.slug}` : undefined
+  );
 
   if (!page) return (
     <div className="h-screen flex flex-col items-center justify-center bg-blue-950 text-white">
@@ -3287,7 +3447,7 @@ function PremiumIntro() {
                   Prefab Select realiseert hoogwaardige prefab bouwoplossingen met focus op kwaliteit, duurzaamheid en snelle realisatie.
                 </p>
                 <p className="text-[11px] font-black text-blue-600 uppercase tracking-[0.2em] italic border-l-2 border-blue-600 pl-6 py-1">
-                  “<Link to="/diensten/prefab-uitbouw" className="hover:text-blue-400 transition-colors">Prefab uitbouwen</Link>, <Link to="/diensten/mantelzorgwoning" className="hover:text-blue-400 transition-colors">mantelzorgwoningen</Link>, <Link to="/diensten/prefab-chalets" className="hover:text-blue-400 transition-colors">chalets</Link>, <Link to="/diensten/poolhouse" className="hover:text-blue-400 transition-colors">poolhouses</Link> en <Link to="/diensten/prefab-aanbouw" className="hover:text-blue-400 transition-colors">modulaire woningen</Link> volledig op maat gerealiseerd.”
+                  “<Link to="/prefab-uitbouw" className="hover:text-blue-400 transition-colors">Prefab uitbouwen</Link>, <Link to="/mantelzorgwoning" className="hover:text-blue-400 transition-colors">mantelzorgwoningen</Link>, <Link to="/prefab-chalets" className="hover:text-blue-400 transition-colors">chalets</Link>, <Link to="/poolhouse" className="hover:text-blue-400 transition-colors">poolhouses</Link> en <Link to="/prefab-aanbouw" className="hover:text-blue-400 transition-colors">modulaire woningen</Link> volledig op maat gerealiseerd.”
                 </p>
               </div>
             </div>
@@ -4442,6 +4602,12 @@ function BlogPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
+  usePageMeta(
+    blog ? `${blog.title} | Prefab Select` : undefined,
+    blog?.excerpt,
+    blog ? `/blog/${blog.slug}` : undefined
+  );
+
   if (!blog) return <div className="py-24 text-center text-blue-950 font-bold font-display uppercase tracking-widest text-[10px]">Artikel niet gevonden.</div>;
 
   return (
@@ -4802,76 +4968,80 @@ export default function App() {
           <Route path="/offerte" element={<OfferteLandingPage />} />
           <Route path="/configurator" element={<OfferteLandingPage />} />
           
-          {/* Legacy and SEO-friendly alternative paths */}
-          <Route path="/prefab-bouwen" element={<PrefabAanbouw />} />
-          <Route path="/chalets" element={<PrefabChalet />} />
+          {/* Legacy paths: redirect naar één hoofd-URL per onderwerp (voorkomt duplicate content) */}
+          <Route path="/prefab-bouwen" element={<Navigate to="/prefab-aanbouw" replace />} />
+          <Route path="/chalets" element={<Navigate to="/prefab-chalets" replace />} />
           <Route path="/prefab-chalets" element={<PrefabChalet />} />
           <Route path="/vakantiewoningen" element={<Vakantiewoningen />} />
           <Route path="/prefab-recreatiewoning" element={<PrefabRecreatiewoning />} />
           <Route path="/prefab-uitbouw" element={<PrefabUitbouw />} />
-          <Route path="/prefab-uitbouw-laten-plaatsen" element={<PrefabUitbouw />} />
+          <Route path="/prefab-uitbouw-laten-plaatsen" element={<Navigate to="/prefab-uitbouw" replace />} />
           <Route path="/prefab-aanbouw" element={<PrefabAanbouw />} />
           <Route path="/mantelzorgwoning" element={<Mantelzorgwoning />} />
           <Route path="/poolhouse" element={<Poolhouse />} />
           <Route path="/prefab-poolhouse" element={<PrefabPoolhouse />} />
           
           <Route path="/diensten" element={<Diensten />} />
-          <Route path="/diensten/prefab-uitbouw" element={<PrefabUitbouw />} />
-          <Route path="/diensten/prefab-aanbouw" element={<PrefabAanbouw />} />
-          <Route path="/diensten/mantelzorgwoning" element={<Mantelzorgwoning />} />
-          <Route path="/diensten/poolhouse" element={<Poolhouse />} />
-          <Route path="/diensten/prefab-chalets" element={<PrefabChalet />} />
-          <Route path="/diensten/vakantiewoningen" element={<Vakantiewoningen />} />
-          <Route path="/diensten/prefab-recreatiewoning" element={<PrefabRecreatiewoning />} />
+          <Route path="/diensten/prefab-uitbouw" element={<Navigate to="/prefab-uitbouw" replace />} />
+          <Route path="/diensten/prefab-aanbouw" element={<Navigate to="/prefab-aanbouw" replace />} />
+          <Route path="/diensten/mantelzorgwoning" element={<Navigate to="/mantelzorgwoning" replace />} />
+          <Route path="/diensten/poolhouse" element={<Navigate to="/poolhouse" replace />} />
+          <Route path="/diensten/prefab-chalets" element={<Navigate to="/prefab-chalets" replace />} />
+          <Route path="/diensten/vakantiewoningen" element={<Navigate to="/vakantiewoningen" replace />} />
+          <Route path="/diensten/prefab-recreatiewoning" element={<Navigate to="/prefab-recreatiewoning" replace />} />
           <Route path="/zakelijk" element={<Zakelijk />} />
-          <Route path="/onze-modules" element={<Diensten />} />
+          <Route path="/onze-modules" element={<Navigate to="/diensten" replace />} />
           <Route path="/werkwijze" element={<Werkwijze />} />
           <Route path="/over-ons" element={<AboutPage />} />
-          <Route path="/wie-wij-zijn" element={<AboutPage />} />
+          <Route path="/wie-wij-zijn" element={<Navigate to="/over-ons" replace />} />
           <Route path="/waarom-prefab-select" element={<WhyChooseUsPage />} />
           <Route path="/projecten" element={<ProjectsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/ai-expert" element={<AIExpert />} />
           <Route path="/faq" element={<FAQPage />} />
-          <Route path="/veelgestelde-vragen" element={<FAQPage />} />
+          <Route path="/veelgestelde-vragen" element={<Navigate to="/faq" replace />} />
           <Route path="/blog/:slug" element={<BlogPage />} />
           <Route path="/regio" element={<RegioOverzicht />} />
           <Route path="/regio/zeeland" element={<ZeelandLandingPage />} />
-          <Route path="/uitbouw-zeeland" element={<ZeelandLandingPage />} />
+          <Route path="/uitbouw-zeeland" element={<Navigate to="/regio/zeeland" replace />} />
           <Route path="/regio/zeeland/nieuwbouwproject" element={<ZeelandSchuurtjesProject />} />
           <Route path="/regio/halsteren" element={<HalsterenLandingPage />} />
-          <Route path="/prefab-uitbouw-halsteren" element={<HalsterenLandingPage />} />
+          <Route path="/prefab-uitbouw-halsteren" element={<Navigate to="/regio/halsteren" replace />} />
           <Route path="/regio/eindhoven" element={<EindhovenLandingPage />} />
           <Route path="/regio/amsterdam" element={<AmsterdamLandingPage />} />
-          <Route path="/uitbouw-amsterdam" element={<AmsterdamLandingPage />} />
+          <Route path="/uitbouw-amsterdam" element={<Navigate to="/regio/amsterdam" replace />} />
           <Route path="/regio/breda" element={<BredaLandingPage />} />
-          <Route path="/uitbouw-breda" element={<BredaLandingPage />} />
+          <Route path="/uitbouw-breda" element={<Navigate to="/regio/breda" replace />} />
           <Route path="/regio/bergen-op-zoom" element={<BergenOpZoomLandingPage />} />
-          <Route path="/uitbouw-bergen-op-zoom" element={<BergenOpZoomLandingPage />} />
+          <Route path="/uitbouw-bergen-op-zoom" element={<Navigate to="/regio/bergen-op-zoom" replace />} />
           <Route path="/regio/oss" element={<OssLandingPage />} />
-          <Route path="/uitbouw-oss" element={<OssLandingPage />} />
+          <Route path="/uitbouw-oss" element={<Navigate to="/regio/oss" replace />} />
           <Route path="/regio/amstelveen" element={<AmstelveenLandingPage />} />
-          <Route path="/uitbouw-amstelveen" element={<AmstelveenLandingPage />} />
+          <Route path="/uitbouw-amstelveen" element={<Navigate to="/regio/amstelveen" replace />} />
           <Route path="/regio/utrecht" element={<UtrechtLandingPage />} />
-          <Route path="/uitbouw-utrecht" element={<UtrechtLandingPage />} />
+          <Route path="/uitbouw-utrecht" element={<Navigate to="/regio/utrecht" replace />} />
           <Route path="/regio/antwerpen" element={<AntwerpenLandingPage />} />
-          <Route path="/uitbouw-antwerpen" element={<AntwerpenLandingPage />} />
+          <Route path="/uitbouw-antwerpen" element={<Navigate to="/regio/antwerpen" replace />} />
           <Route path="/regio/haarlem" element={<HaarlemLandingPage />} />
-          <Route path="/uitbouw-haarlem" element={<HaarlemLandingPage />} />
+          <Route path="/uitbouw-haarlem" element={<Navigate to="/regio/haarlem" replace />} />
           <Route path="/regio/laren" element={<LarenLandingPage />} />
-          <Route path="/uitbouw-laren" element={<LarenLandingPage />} />
+          <Route path="/uitbouw-laren" element={<Navigate to="/regio/laren" replace />} />
           <Route path="/regio/almere" element={<AlmereLandingPage />} />
-          <Route path="/uitbouw-almere" element={<AlmereLandingPage />} />
+          <Route path="/uitbouw-almere" element={<Navigate to="/regio/almere" replace />} />
           <Route path="/regio/tilburg" element={<TilburgLandingPage />} />
-          <Route path="/uitbouw-tilburg" element={<TilburgLandingPage />} />
+          <Route path="/uitbouw-tilburg" element={<Navigate to="/regio/tilburg" replace />} />
           <Route path="/regio/den-bosch" element={<DenBoschLandingPage />} />
-          <Route path="/uitbouw-den-bosch" element={<DenBoschLandingPage />} />
+          <Route path="/uitbouw-den-bosch" element={<Navigate to="/regio/den-bosch" replace />} />
           <Route path="/regio/den-haag" element={<DenHaagLandingPage />} />
-          <Route path="/uitbouw-den-haag" element={<DenHaagLandingPage />} />
+          <Route path="/uitbouw-den-haag" element={<Navigate to="/regio/den-haag" replace />} />
           <Route path="/regio/leidschendam" element={<LeidschendamLandingPage />} />
-          <Route path="/uitbouw-leidschendam" element={<LeidschendamLandingPage />} />
+          <Route path="/uitbouw-leidschendam" element={<Navigate to="/regio/leidschendam" replace />} />
           <Route path="/regio/rotterdam" element={<RotterdamLandingPage />} />
-          <Route path="/uitbouw-rotterdam" element={<RotterdamLandingPage />} />
+          <Route path="/uitbouw-rotterdam" element={<Navigate to="/regio/rotterdam" replace />} />
+          {/* Oude themapagina's onder /regio: redirect naar de echte dienstpagina's */}
+          <Route path="/regio/mantelzorgwoning-prefab" element={<Navigate to="/mantelzorgwoning" replace />} />
+          <Route path="/regio/recreatiewoning-prefab" element={<Navigate to="/prefab-recreatiewoning" replace />} />
+          <Route path="/regio/prefab-uitbouw-laten-plaatsen" element={<Navigate to="/prefab-uitbouw" replace />} />
           <Route path="/regio/:slug" element={<CityLandingPage />} />
           
           {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}

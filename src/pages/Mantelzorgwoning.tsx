@@ -1,11 +1,85 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Clock, Box, ShieldCheck, Leaf, ArrowRight, CheckCircle2, ChevronRight, Zap } from 'lucide-react';
 import { KellyCTA } from '../KellyCTA';
 import { PrefabSteps } from '../App';
 
+const mantelzorgFaqs = [
+  {
+    question: 'Wat kost een prefab mantelzorgwoning?',
+    answer: 'Compacte modellen (± 30–40 m²) zijn er vanaf €40.000 – €60.000, compleet afgewerkt en geplaatst. Ruimere en luxere uitvoeringen beginnen vanaf €70.000. U krijgt altijd een vaste prijs vooraf, zonder verrassingen achteraf.'
+  },
+  {
+    question: 'Is een vergunning nodig voor een mantelzorgwoning?',
+    answer: 'In veel gevallen niet: bij een zorgrelatie kan een mantelzorgwoning in het achtererfgebied vaak vergunningsvrij geplaatst worden. De regels verschillen per gemeente — wij voeren bij elke offerte een gratis vergunningscheck uit.'
+  },
+  {
+    question: 'Hoe snel kan een mantelzorgwoning geplaatst worden?',
+    answer: 'De woning wordt in 2 tot 4 weken in onze fabriek in Halsteren gebouwd en daarna vaak binnen 1 à 2 dagen geplaatst. Inclusief afwerking is de woning meestal binnen enkele weken na plaatsing gebruiksklaar.'
+  },
+  {
+    question: 'Is de woning geschikt voor een zorgsituatie?',
+    answer: 'Ja — elke mantelzorgwoning is gelijkvloers en kan drempelloos worden uitgevoerd, met een aangepaste badkamer, bredere deuren en alle voorzieningen voor comfortabel en veilig wonen.'
+  },
+  {
+    question: 'Wat gebeurt er als de zorgsituatie eindigt?',
+    answer: 'Een prefab mantelzorgwoning is verplaatsbaar: de woning kan verwijderd, elders geplaatst of verkocht worden. Ook kan deze — afhankelijk van de gemeente — als bijgebouw blijven staan.'
+  }
+];
+
 const Mantelzorgwoning = () => {
+  useEffect(() => {
+    document.title = "Prefab mantelzorgwoning laten plaatsen | Prijzen 2026 | Prefab Select";
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        "content",
+        "Prefab mantelzorgwoning op maat vanaf €40.000, compleet geplaatst. Gelijkvloers, vaak vergunningsvrij, productie 2-4 weken en plaatsing in 1-2 dagen. Gratis offerte met vergunningscheck."
+      );
+    }
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'json-ld-mantelzorgwoning-schema';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "@id": "https://www.prefabselect.nl/mantelzorgwoning",
+          "name": "Prefab mantelzorgwoning",
+          "serviceType": "Mantelzorgwoning plaatsen",
+          "description": "Complete prefab mantelzorgwoningen op maat: gelijkvloers, vaak vergunningsvrij plaatsbaar, vanaf €40.000 compleet geplaatst.",
+          "provider": { "@type": "GeneralContractor", "name": "Prefab Select", "url": "https://www.prefabselect.nl", "telephone": "+31850607775" },
+          "areaServed": { "@type": "Country", "name": "Nederland" },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "EUR",
+            "price": "40000",
+            "description": "Compacte prefab mantelzorgwoning vanaf €40.000, compleet afgewerkt en geplaatst."
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": mantelzorgFaqs.map(f => ({
+            "@type": "Question",
+            "name": f.question,
+            "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+          }))
+        }
+      ]
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      const existing = document.getElementById('json-ld-mantelzorgwoning-schema');
+      if (existing) existing.remove();
+    };
+  }, []);
+
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
       {/* HERO SECTION */}
@@ -236,22 +310,82 @@ const Mantelzorgwoning = () => {
             De kosten van een prefab mantelzorgwoning hangen af van afmetingen, afwerking, indeling en luxe opties.
           </p>
 
-          <div className="bg-white p-12 lg:p-16 rounded-[3rem] shadow-xl border border-slate-100 text-left relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -mr-32 -mt-32" />
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-              <div>
-                <p className="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Maatwerk oplossingen</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mb-12">
+            <div className="bg-white p-10 lg:p-12 rounded-[3rem] shadow-xl border border-slate-100 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -mr-32 -mt-32" />
+              <div className="relative z-10">
+                <p className="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Compacte modellen (± 30–40 m²)</p>
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-4xl font-display font-black text-blue-950 tracking-tighter">Op aanvraag</span>
+                  <span className="text-4xl font-display font-black text-blue-950 tracking-tighter">€40.000 – €60.000</span>
                 </div>
-                <p className="text-slate-600">Prefab mantelzorgwoningen worden volledig op maat samengesteld afhankelijk van woonwensen en beschikbare ruimte.</p>
+                <ul className="space-y-2 text-slate-600">
+                  <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-600 shrink-0" /> Woonkamer met keuken</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-600 shrink-0" /> Slaapkamer en badkamer</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-600 shrink-0" /> Volledig gelijkvloers</li>
+                </ul>
               </div>
-              
-              <Link to="/offerte" className="w-full md:w-auto text-center bg-blue-950 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-blue-900 transition-all text-xs shadow-xl whitespace-nowrap">
-                Vraag offerte aan
-              </Link>
             </div>
+            <div className="bg-white p-10 lg:p-12 rounded-[3rem] shadow-xl border border-slate-100 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -mr-32 -mt-32" />
+              <div className="relative z-10">
+                <p className="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Ruime &amp; luxe uitvoeringen</p>
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-4xl font-display font-black text-blue-950 tracking-tighter">Vanaf €70.000</span>
+                </div>
+                <ul className="space-y-2 text-slate-600">
+                  <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-600 shrink-0" /> 50 m² en groter</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-600 shrink-0" /> Luxe gevelafwerking en grote glaspartijen</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 size={16} className="text-blue-600 shrink-0" /> Drempelloze toegang en aangepaste badkamer mogelijk</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-slate-500 text-sm mb-10 max-w-2xl mx-auto">
+            Richtprijzen voor een compleet afgewerkte en geplaatste woning. De exacte prijs hangt af van afmetingen, indeling en afwerkingsniveau — u ontvangt altijd een vaste prijs vooraf. Lees ook onze <Link to="/blog/mantelzorgwoning-kosten" className="text-blue-600 font-bold hover:underline">prijsgids mantelzorgwoning 2026</Link>.
+          </p>
+
+          <Link to="/offerte" className="inline-block text-center bg-blue-950 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-blue-900 transition-all text-xs shadow-xl whitespace-nowrap">
+            Vraag offerte aan
+          </Link>
+        </div>
+      </section>
+
+      {/* SECTIE 8 — VEELGESTELDE VRAGEN */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
+              Veelgestelde vragen
+            </h2>
+            <p className="text-lg text-slate-600">
+              Alles wat u wilt weten over een prefab mantelzorgwoning.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {mantelzorgFaqs.map((faq, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-slate-50 rounded-[2rem] p-8 lg:p-10 border border-slate-100"
+              >
+                <h3 className="text-lg font-black text-blue-950 uppercase tracking-wide mb-4 flex items-start gap-3">
+                  <ChevronRight size={20} className="text-blue-600 shrink-0 mt-0.5" />
+                  {faq.question}
+                </h3>
+                <p className="text-slate-600 leading-relaxed pl-8">{faq.answer}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-slate-600">
+              Meer weten over de regels? Lees <Link to="/blog/mantelzorgwoning-in-tuin-regels" className="text-blue-600 font-bold hover:underline">onze gids over vergunningen voor een mantelzorgwoning in de tuin (2026)</Link>.
+            </p>
           </div>
         </div>
       </section>
