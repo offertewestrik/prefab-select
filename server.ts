@@ -467,8 +467,17 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    // index/redirect uit: de catch-all hieronder serveert geprerenderde pagina's
+    // direct op de nette URL (zonder trailing-slash redirect)
+    app.use(express.static(distPath, { index: false, redirect: false }));
     app.get("*", (req, res) => {
+      // Geprerenderde pagina's (dist/<route>/index.html) direct serveren,
+      // zodat crawlers en AI-bots de volledige HTML krijgen zonder JavaScript.
+      const safePath = path.normalize(req.path).replace(/^(\.\.[/\\])+/, "");
+      const prerendered = path.join(distPath, safePath, "index.html");
+      if (prerendered.startsWith(distPath) && fsSync.existsSync(prerendered)) {
+        return res.sendFile(prerendered);
+      }
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

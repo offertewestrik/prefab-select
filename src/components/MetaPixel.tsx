@@ -11,7 +11,9 @@ declare global {
 export function MetaPixel() {
   const location = useLocation();
   const pixelId = (import.meta as any).env.VITE_META_PIXEL_ID || '2695577824162463';
-  const [consent, setConsent] = useState(() => localStorage.getItem('prefabCookieConsent'));
+  const [consent, setConsent] = useState(() =>
+    typeof localStorage !== 'undefined' ? localStorage.getItem('prefabCookieConsent') : null
+  );
 
   useEffect(() => {
     const handleConsentChange = () => {

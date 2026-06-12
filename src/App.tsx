@@ -325,7 +325,7 @@ const faqs: FAQ[] = [
   { question: 'Is prefab wel stevig genoeg?', answer: 'Ja — alles wordt onder gecontroleerde omstandigheden in de fabriek gebouwd, wat vaak een betere en constantere kwaliteit oplevert dan traditionele bouw op locatie.' }
 ];
 
-const blogs = [
+export const blogs = [
   {
     id: 1,
     title: "Prefab uitbouw kosten 2026: alle prijzen per m²",
@@ -979,7 +979,7 @@ interface CityPage {
   faqs?: FAQ[];
 }
 
-const cityPages: CityPage[] = [
+export const cityPages: CityPage[] = [
   {
     name: 'Eindhoven',
     slug: 'eindhoven',
