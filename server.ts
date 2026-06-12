@@ -453,115 +453,6 @@ app.post("/api/leads", async (req, res) => {
   }
 });
 
-// GET Endpoint to retrieve all leads (with Firestore fallback sync)
-app.get("/api/leads", async (req, res) => {
-  if (db) {
-    try {
-      const snapshot = await db.collection("leads").orderBy("createdAt", "desc").get();
-      const firestoreLeads = snapshot.docs.map(doc => {
-        const data = doc.data();
-        let createdAtStr = new Date().toISOString();
-        if (data.createdAt) {
-          if (typeof data.createdAt.toDate === "function") {
-            createdAtStr = data.createdAt.toDate().toISOString();
-          } else if (data.createdAt._seconds) {
-            createdAtStr = new Date(data.createdAt._seconds * 1000).toISOString();
-          } else {
-            createdAtStr = new Date(data.createdAt).toISOString();
-          }
-        }
-        return {
-          id: doc.id,
-          firstName: data.firstName || "",
-          lastName: data.lastName || "",
-          email: data.email || "",
-          phone: data.phone || "",
-          projectType: data.projectType || "",
-          message: data.message || "",
-          kozijnPui: data.kozijnPui || "",
-          kozijnKleur: data.kozijnKleur || "",
-          lichtstraat: data.lichtstraat || "",
-          stalenDoorbraak: data.stalenDoorbraak || "",
-          dakIsolatie: data.dakIsolatie || "",
-          wandIsolatie: data.wandIsolatie || "",
-          vloerIsolatie: data.vloerIsolatie || "",
-          status: data.status || "new",
-          emailDeliveryStatus: data.emailDeliveryStatus || undefined,
-          emailDeliveryError: data.emailDeliveryError || undefined,
-          createdAt: createdAtStr
-        };
-      });
-
-      // Merge and filter duplicates
-      const merged = [...localLeads];
-      for (const fsL of firestoreLeads) {
-        const idx = merged.findIndex(m => m.id === fsL.id);
-        if (idx !== -1) {
-          merged[idx] = fsL;
-        } else {
-          merged.push(fsL);
-        }
-      }
-      merged.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      localLeads = merged;
-      await saveLocalLeadsToDisk();
-    } catch (err: any) {
-      console.error("Error reading fresh leads from Firestore, returning cached leads:", err.message);
-    }
-  }
-  res.json(localLeads);
-});
-
-// PATCH Endpoint to update lead status
-app.patch("/api/leads/:id", async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-
-  if (!status) {
-    return res.status(400).json({ error: "status is required" });
-  }
-
-  console.log(`Updating lead ${id} status to ${status}`);
-
-  // Update locally first
-  const leadIndex = localLeads.findIndex(l => l.id === id);
-  if (leadIndex !== -1) {
-    localLeads[leadIndex].status = status;
-    await saveLocalLeadsToDisk();
-  }
-
-  // Sync to firestore in background if available
-  if (db) {
-    try {
-      const leadRef = db.collection("leads").doc(id);
-      const docSnap = await leadRef.get();
-      if (docSnap.exists) {
-        await leadRef.update({ status });
-        console.log(`Successfully updated lead ${id} in Firestore.`);
-      } else {
-        const localLead = localLeads[leadIndex];
-        if (localLead) {
-          await leadRef.set({
-            firstName: localLead.firstName,
-            lastName: localLead.lastName,
-            email: localLead.email,
-            phone: localLead.phone,
-            projectType: localLead.projectType,
-            message: localLead.message,
-            status,
-            createdAt: admin.firestore.FieldValue.serverTimestamp()
-          });
-          console.log(`Created missing lead ${id} in Firestore.`);
-        }
-      }
-    } catch (err: any) {
-      console.error(`Firestore lead ${id} update failed (silent bypass):`, err.message);
-    }
-  }
-
-  res.json({ success: true, message: `Lead status updated to ${status}` });
-});
-
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
@@ -576,8 +467,17 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    // index/redirect uit: de catch-all hieronder serveert geprerenderde pagina's
+    // direct op de nette URL (zonder trailing-slash redirect)
+    app.use(express.static(distPath, { index: false, redirect: false }));
     app.get("*", (req, res) => {
+      // Geprerenderde pagina's (dist/<route>/index.html) direct serveren,
+      // zodat crawlers en AI-bots de volledige HTML krijgen zonder JavaScript.
+      const safePath = path.normalize(req.path).replace(/^(\.\.[/\\])+/, "");
+      const prerendered = path.join(distPath, safePath, "index.html");
+      if (prerendered.startsWith(distPath) && fsSync.existsSync(prerendered)) {
+        return res.sendFile(prerendered);
+      }
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
