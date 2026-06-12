@@ -19,7 +19,6 @@ import AIExpert from './pages/AIExpert';
 import AboutPage from './pages/About';
 import FAQPage from './pages/FAQPage';
 import Werkwijze from './pages/Werkwijze';
-import Dashboard from './pages/Dashboard';
 import ZeelandLandingPage from './pages/ZeelandLandingPage';
 import ZeelandSchuurtjesProject from './pages/ZeelandSchuurtjesProject';
 import HalsterenLandingPage from './pages/HalsterenLandingPage';
@@ -4874,7 +4873,6 @@ export default function App() {
           <Route path="/regio/rotterdam" element={<RotterdamLandingPage />} />
           <Route path="/uitbouw-rotterdam" element={<RotterdamLandingPage />} />
           <Route path="/regio/:slug" element={<CityLandingPage />} />
-          <Route path="/crm" element={<Dashboard />} />
           
           {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}
           <Route path="*" element={<HomePage />} />
