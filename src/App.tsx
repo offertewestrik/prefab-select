@@ -1234,9 +1234,15 @@ Nijmegen is een stad van innovatie en duurzaamheid. Onze **modulaire aanbouw** o
 - **Vaste prijs**: Geen verrassingen, 100% transparantie.
 
 ### Wat kost een uitbouw in Nijmegen?
-Gemiddeld liggen de **uitbouw kosten per m²** in Nijmegen tussen de €2.500 en €4.000, afhankelijk van de luxe en afwerking.
+Gemiddeld liggen de **uitbouw kosten per m²** in Nijmegen tussen de €2.500 en €4.000, afhankelijk van de luxe en afwerking. Voor een uitbouw van 15 m² betekent dit een investering vanaf circa €45.000 — een bedrag dat zich in de Nijmeegse woningmarkt vrijwel direct terugbetaalt in woningwaarde. Bekijk ook onze [prijsgids prefab uitbouw 2026](/blog/kosten-uitbouw-15m2).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+### Vergunningsvrij uitbouwen in Nijmegen
+Een uitbouw aan de achterzijde tot 4 meter diep is in veel Nijmeegse wijken vergunningsvrij — van Dukenburg tot Nijmegen-Oost. Bij twijfel checken wij de regels gratis voor uw adres bij de gemeente Nijmegen tijdens het offertetraject.
+
+### Van fabriek naar uw tuin
+Uw uitbouw wordt volledig gebouwd in onze eigen fabriek in Halsteren en in één transport naar Nijmegen gebracht. De ruwbouw staat vaak al binnen één dag, waarna de afwerking volgt. Zo houden wij de overlast voor u en uw buren minimaal.
+
+[Bekijk onze werkwijze](/werkwijze) of [vraag direct een offerte aan](/offerte)`
   },
   {
     name: 'Antwerpen',
@@ -1529,6 +1535,26 @@ function CityLandingPage() {
 
   const heroImage = page.image || 'https://i.imgur.com/6VuTqto.jpeg';
 
+  // Standaardinhoud voor steden zonder eigen stats/voordelen/FAQ, zodat elke
+  // regiopagina even compleet is als de grote stadspagina's
+  const stats: Stat[] = page.stats || [
+    { value: '1-2 DAGEN', label: 'Plaatsing op locatie' },
+    { value: 'RC 6.0', label: 'Isolatiewaarde' },
+    { value: '2-4 WKN', label: 'Productie in fabriek' },
+    { value: 'VAST', label: 'Prijs vooraf' }
+  ];
+  const advantages: Advantage[] = page.advantages || [
+    { title: `Snel geplaatst in ${page.name}`, description: `Uw uitbouw wordt volledig in onze fabriek in Halsteren gebouwd en daarna in ${page.name} geplaatst — de ruwbouw staat vaak al binnen één dag. Geen maandenlange bouwplaats in uw tuin.` },
+    { title: 'Vaste prijs, geen verrassingen', description: 'U ontvangt vooraf een complete offerte met vaste prijs, inclusief transport, kraan en plaatsing. Wat we afspreken is wat u betaalt.' },
+    { title: 'Eigen fabriek, constante kwaliteit', description: 'Elke module wordt onder gecontroleerde omstandigheden gebouwd met hoogwaardige isolatie (Rc 6.0). Kom gerust langs in Halsteren om de kwaliteit zelf te zien.' }
+  ];
+  const faqs: FAQ[] = page.faqs || [
+    { question: `Wat kost een prefab uitbouw in ${page.name}?`, answer: `Reken op circa €2.500 tot €4.500 per m², compleet geplaatst. Een uitbouw van 15 m² in ${page.name} kost daarmee ongeveer €45.000 (basis) tot €65.000 (luxe). U krijgt altijd een vaste prijs vooraf.` },
+    { question: `Heb ik een vergunning nodig in ${page.name}?`, answer: `Een uitbouw aan de achterzijde tot 4 meter diep is in veel gevallen vergunningsvrij. De exacte regels verschillen per gemeente — wij voeren bij elke offerte een gratis vergunningscheck uit voor uw adres in ${page.name}.` },
+    { question: 'Hoe lang duurt het hele traject?', answer: 'Na het definitieve ontwerp bouwen wij uw uitbouw in 2 tot 4 weken in onze fabriek. De plaatsing op locatie duurt 1 à 2 dagen, waarna de afwerking volgt. Meestal bent u binnen 4 tot 6 weken na de start volledig klaar.' },
+    { question: `Werken jullie vaker in ${page.name}?`, answer: `Ja — wij plaatsen prefab uitbouwen door heel Nederland vanuit onze fabriek in Halsteren (Noord-Brabant). Bekijk ook onze andere regio's op de regiopagina of vraag direct een offerte aan.` }
+  ];
+
   // Custom Eindhoven layout components
   const EindhovenHero = () => (
     <section className="bg-white py-24 pt-40 overflow-hidden relative">
@@ -1663,10 +1689,10 @@ function CityLandingPage() {
                 </Link>
               </div>
 
-              {/* Injected Stats from turn */}
-              {page.stats && (
+              {/* Stats (per stad of standaard) */}
+              {stats && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20">
-                  {page.stats.map((stat, i) => (
+                  {stats.map((stat, i) => (
                     <motion.div 
                       key={i}
                       initial={{ opacity: 0, y: 20 }}
@@ -1715,11 +1741,11 @@ function CityLandingPage() {
 
 
               {/* Advantages Block */}
-              {page.advantages && (
+              {advantages && (
                 <div className="mt-24">
                   <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter mb-12">Waarom kiezen voor Prefab Select?</h2>
                   <div className="grid md:grid-cols-3 gap-8">
-                    {page.advantages.map((adv, i) => (
+                    {advantages.map((adv, i) => (
                       <div key={i} className="bg-slate-50 border border-slate-100 rounded-[2.5rem] p-10 hover:shadow-2xl transition-all duration-500 group">
                         <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform">
                           <CheckCircle2 size={20} />
@@ -1733,11 +1759,11 @@ function CityLandingPage() {
               )}
 
               {/* FAQs Block */}
-              {page.faqs && (
+              {faqs && (
                 <div className="mt-24">
                   <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter mb-12 italic">Veelgestelde Vragen</h2>
                   <div className="space-y-8">
-                    {page.faqs.map((faq, i) => (
+                    {faqs.map((faq, i) => (
                       <div key={i} className="bg-white border border-slate-100 rounded-[2rem] p-10 shadow-sm hover:shadow-xl transition-shadow">
                         <h4 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">{faq.question}</h4>
                         <p className="text-slate-500 leading-relaxed text-lg font-medium">{faq.answer}</p>
@@ -1818,6 +1844,20 @@ function CityLandingPage() {
               </div>
             </aside>
           </div>
+        </div>
+      </section>
+
+      {/* Ons stappenplan: van offerte tot plaatsing */}
+      <PrefabSteps />
+
+      {/* Verder lezen: interne links naar gidsen en regio-overzicht */}
+      <section className="py-16 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-slate-600 text-lg">
+            Lees ook onze <Link to="/blog/kosten-uitbouw-15m2" className="text-blue-600 font-bold hover:underline">prijsgids prefab uitbouw 2026</Link>,{' '}
+            bekijk <Link to="/blog/vergunning-uitbouw" className="text-blue-600 font-bold hover:underline">de vergunningsregels</Link>{' '}
+            of ontdek <Link to="/regio" className="text-blue-600 font-bold hover:underline">alle regio's waar wij werken</Link>.
+          </p>
         </div>
       </section>
 
