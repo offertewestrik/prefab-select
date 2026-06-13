@@ -6,6 +6,7 @@
 // ============================================================================
 
 import type {
+  AiAgent,
   Appointment,
   AppNotification,
   Integration,
@@ -437,6 +438,132 @@ export const seedIntegrations: Integration[] = [
   { id: "int-resend", naam: "Resend", categorie: "email", verbonden: false, beschrijving: "Offertes en e-mails versturen vanuit het CRM." },
   { id: "int-form", naam: "Website formulier", categorie: "website", verbonden: true, beschrijving: "Contact- en offerteformulieren van prefabselect.nl.", laatsteSync: dag(0, 8, 30) },
   { id: "int-config", naam: "Configurator", categorie: "website", verbonden: true, beschrijving: "Leads uit de online product-configurator.", laatsteSync: dag(-1, 9, 45) },
+];
+
+// Datumtijd 'n' minuten geleden — voor levendige agent-activiteit.
+function minGeleden(minuten: number): string {
+  return new Date(Date.now() - minuten * 60_000).toISOString();
+}
+
+export const seedAiAgents: AiAgent[] = [
+  {
+    id: "agent-lead",
+    naam: "Lead-opvolger",
+    categorie: "leads",
+    templateKey: "leads",
+    status: "bezig",
+    actief: true,
+    aanbevolen: true,
+    gekoppeld: true,
+    rol: "Volgt nieuwe leads binnen enkele minuten op en plant follow-ups in.",
+    huidigeTaak: "Belscript opstellen voor Familie De Vries (mantelzorgwoning).",
+    takenVandaag: 7,
+    takenTotaal: 213,
+    tijdBespaardMin: 95,
+    laatsteActiviteit: minGeleden(2),
+    activiteiten: [
+      { id: "a-lead-1", tijd: minGeleden(2), omschrijving: "Belscript klaargezet voor Familie De Vries.", leadId: "lead-001" },
+      { id: "a-lead-2", tijd: minGeleden(28), omschrijving: "Follow-up taak ingepland voor Jeroen Bakker (+2 dagen).", leadId: "lead-002" },
+      { id: "a-lead-3", tijd: minGeleden(74), omschrijving: "Welkomstmail verstuurd naar nieuwe lead via configurator." },
+    ],
+  },
+  {
+    id: "agent-offerte",
+    naam: "Offerte-assistent",
+    categorie: "offertes",
+    templateKey: "offertes",
+    status: "bezig",
+    actief: true,
+    aanbevolen: true,
+    gekoppeld: true,
+    rol: "Maakt automatisch een concept-offerte uit configurator-aanvragen.",
+    huidigeTaak: "Concept-offerte opbouwen uit configurator-regels (poolhouse 6×4).",
+    takenVandaag: 4,
+    takenTotaal: 88,
+    tijdBespaardMin: 140,
+    laatsteActiviteit: minGeleden(6),
+    activiteiten: [
+      { id: "a-off-1", tijd: minGeleden(6), omschrijving: "Concept-offerte PS-2026-0014 aangemaakt (poolhouse)." },
+      { id: "a-off-2", tijd: minGeleden(120), omschrijving: "Optie-beschrijvingen toegevoegd aan offerte familie Visser.", leadId: "lead-011" },
+    ],
+  },
+  {
+    id: "agent-email",
+    naam: "E-mail-agent",
+    categorie: "email",
+    templateKey: "email",
+    status: "actief",
+    actief: true,
+    aanbevolen: true,
+    gekoppeld: true,
+    rol: "Vat inkomende e-mail samen en stelt antwoorden voor.",
+    huidigeTaak: undefined,
+    takenVandaag: 11,
+    takenTotaal: 402,
+    tijdBespaardMin: 60,
+    laatsteActiviteit: minGeleden(18),
+    activiteiten: [
+      { id: "a-mail-1", tijd: minGeleden(18), omschrijving: "Conceptantwoord voorgesteld op vraag over levertijd." },
+      { id: "a-mail-2", tijd: minGeleden(95), omschrijving: "3 inkomende mails samengevat op de leadpagina." },
+    ],
+  },
+  {
+    id: "agent-planning",
+    naam: "Planning-agent",
+    categorie: "planning",
+    templateKey: "planning",
+    status: "rust",
+    actief: true,
+    aanbevolen: false,
+    gekoppeld: true,
+    rol: "Plant bezoek- en inmeetafspraken in en voorkomt dubbele boekingen.",
+    huidigeTaak: undefined,
+    takenVandaag: 2,
+    takenTotaal: 56,
+    tijdBespaardMin: 30,
+    laatsteActiviteit: minGeleden(210),
+    activiteiten: [
+      { id: "a-plan-1", tijd: minGeleden(210), omschrijving: "Inmeetafspraak voorgesteld voor familie Visser (di 10:00)." },
+    ],
+  },
+  {
+    id: "agent-factuur",
+    naam: "Factuur-bewaker",
+    categorie: "facturen",
+    templateKey: "facturen",
+    status: "fout",
+    actief: true,
+    aanbevolen: false,
+    gekoppeld: true,
+    rol: "Signaleert openstaande en te late facturen en stuurt herinneringen.",
+    huidigeTaak: undefined,
+    takenVandaag: 0,
+    takenTotaal: 34,
+    tijdBespaardMin: 0,
+    laatsteActiviteit: minGeleden(1440),
+    activiteiten: [
+      { id: "a-fact-1", tijd: minGeleden(1440), omschrijving: "Kan geen herinnering sturen — Resend-koppeling ontbreekt." },
+    ],
+  },
+  {
+    id: "agent-marketing",
+    naam: "Marketing-agent",
+    categorie: "marketing",
+    templateKey: "marketing",
+    status: "gepauzeerd",
+    actief: false,
+    aanbevolen: false,
+    gekoppeld: true,
+    rol: "Stelt social posts en advertentieteksten voor op basis van projecten.",
+    huidigeTaak: undefined,
+    takenVandaag: 0,
+    takenTotaal: 12,
+    tijdBespaardMin: 0,
+    laatsteActiviteit: minGeleden(2880),
+    activiteiten: [
+      { id: "a-mark-1", tijd: minGeleden(2880), omschrijving: "3 conceptposts voorgesteld over opgeleverd tuinkantoor." },
+    ],
+  },
 ];
 
 export const seedNotifications: AppNotification[] = [

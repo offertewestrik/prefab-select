@@ -24,6 +24,7 @@ import {
   Boxes,
   Share2,
   Package,
+  Bot,
 } from "lucide-react";
 import clsx from "clsx";
 import { APP_VERSIE } from "@/lib/versie";
@@ -59,7 +60,10 @@ const SECTIES: { titel: string | null; items: { href: string; label: string; ico
   },
   {
     titel: null,
-    items: [{ href: "/integraties", label: "Integraties", icon: Plug }],
+    items: [
+      { href: "/ai-agents", label: "AI-agents", icon: Bot },
+      { href: "/integraties", label: "Integraties", icon: Plug },
+    ],
   },
 ];
 
