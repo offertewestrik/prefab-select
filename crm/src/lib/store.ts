@@ -11,6 +11,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type {
+  AiAgent,
   Appointment,
   AppNotification,
   Invoice,
@@ -36,6 +37,7 @@ import type {
   User,
 } from "./types";
 import {
+  seedAiAgents,
   seedAppointments,
   seedEmailLogs,
   seedFiles,
@@ -56,6 +58,7 @@ import type { Integration } from "./types";
 import { volgendQuoteNummer, berekenTotalen } from "./quote-utils";
 import { volgendFactuurNummer, TERMIJN_SCHEMA } from "./invoice-utils";
 import { PRODUCT_CATALOGUS, catalogusBeschrijving } from "./product-catalogus";
+import { AI_AGENT_TEMPLATES } from "./ai-agents";
 
 function id(prefix: string): string {
   // UUID zodat de id direct compatibel is met de Supabase uuid-kolommen.
@@ -146,6 +149,7 @@ interface CrmState {
   payments: Payment[];
   purchases: Purchase[];
   products: Product[];
+  aiAgents: AiAgent[];
 
   // --- Leads / pijplijn ---
   /** Laadt de echte data uit Supabase in de store (bij het opstarten). */
@@ -227,6 +231,16 @@ interface CrmState {
   // --- Integraties ---
   toggleIntegration: (intId: string) => void;
 
+  // --- AI-agents ---
+  /** Zet een agent aan of pauzeert hem (handmatig). */
+  toggleAiAgent: (agentId: string) => void;
+  /** Voegt een agent uit de catalogus toe (nog niet gekoppeld). Geeft de id terug. */
+  addAiAgent: (templateKey: string) => string;
+  /** Koppelt of ontkoppelt een agent van de AI (Claude-API). */
+  koppelAiAgent: (agentId: string) => void;
+  /** Verwijdert een toegevoegde agent uit het dashboard. */
+  deleteAiAgent: (agentId: string) => void;
+
   reset: () => void;
 }
 
@@ -253,6 +267,7 @@ export const useCrm = create<CrmState>()(
       payments: [],
       purchases: [],
       products: [],
+      aiAgents: seedAiAgents,
 
       hydrate: async () => {
         if (typeof window === "undefined") return;
@@ -518,6 +533,83 @@ export const useCrm = create<CrmState>()(
           ),
         })),
 
+      toggleAiAgent: (agentId) =>
+        set((s) => ({
+          aiAgents: s.aiAgents.map((a) =>
+            a.id === agentId
+              ? {
+                  ...a,
+                  actief: !a.actief,
+                  // Aanzetten -> 'rust' (wacht op werk); pauzeren -> 'gepauzeerd'.
+                  status: !a.actief ? "rust" : "gepauzeerd",
+                  huidigeTaak: undefined,
+                }
+              : a,
+          ),
+        })),
+
+      addAiAgent: (templateKey) => {
+        const tmpl = AI_AGENT_TEMPLATES.find((t) => t.key === templateKey);
+        if (!tmpl) return "";
+        const nieuwId = id("agent");
+        const nu = new Date().toISOString();
+        set((s) => ({
+          aiAgents: [
+            ...s.aiAgents,
+            {
+              id: nieuwId,
+              naam: tmpl.naam,
+              categorie: tmpl.categorie,
+              status: "gepauzeerd",
+              actief: false,
+              gekoppeld: false,
+              templateKey: tmpl.key,
+              rol: tmpl.rol,
+              huidigeTaak: undefined,
+              takenVandaag: 0,
+              takenTotaal: 0,
+              tijdBespaardMin: 0,
+              laatsteActiviteit: nu,
+              aanbevolen: tmpl.aanbevolen,
+              activiteiten: [
+                { id: id("act"), tijd: nu, omschrijving: "Agent toegevoegd — koppel hem om te starten." },
+              ],
+            },
+          ],
+        }));
+        return nieuwId;
+      },
+
+      koppelAiAgent: (agentId) =>
+        set((s) => ({
+          aiAgents: s.aiAgents.map((a) => {
+            if (a.id !== agentId) return a;
+            const wordtGekoppeld = !a.gekoppeld;
+            const nu = new Date().toISOString();
+            return {
+              ...a,
+              gekoppeld: wordtGekoppeld,
+              actief: wordtGekoppeld,
+              status: wordtGekoppeld ? "rust" : "gepauzeerd",
+              huidigeTaak: undefined,
+              laatsteActiviteit: nu,
+              activiteiten: [
+                {
+                  id: id("act"),
+                  tijd: nu,
+                  omschrijving: wordtGekoppeld
+                    ? "Gekoppeld aan Claude — klaar om te werken."
+                    : "Ontkoppeld van Claude.",
+                },
+                ...a.activiteiten,
+              ],
+            };
+          }),
+        })),
+
+      deleteAiAgent: (agentId) =>
+        set((s) => ({ aiAgents: s.aiAgents.filter((a) => a.id !== agentId) })),
+
       setCurrentUser: (userId) => set({ currentUserId: userId }),
 
       toggleUserGoogle: (userId) =>
@@ -743,6 +835,7 @@ export const useCrm = create<CrmState>()(
           payments: seedPayments,
           purchases: [],
           products: [],
+          aiAgents: seedAiAgents,
         }),
     }),
     {

@@ -249,6 +249,69 @@ export interface Integration {
 }
 
 // ----------------------------------------------------------------------------
+// AI-agents — geautomatiseerde assistenten die meewerken in het CRM
+// ----------------------------------------------------------------------------
+
+/** Op welk CRM-onderdeel een agent werkt. */
+export type AiAgentCategorie =
+  | "leads"
+  | "offertes"
+  | "email"
+  | "planning"
+  | "facturen"
+  | "marketing"
+  | "rapportage";
+
+/**
+ * Live-status van een agent.
+ * - `bezig`    : voert op dit moment een taak uit (toont een pulserende indicator)
+ * - `actief`   : staat aan en wacht op werk
+ * - `rust`     : staat aan maar heeft nu niets te doen
+ * - `gepauzeerd`: handmatig uitgezet
+ * - `fout`     : laatste taak liep vast / mist een koppeling
+ */
+export type AiAgentStatus = "bezig" | "actief" | "rust" | "gepauzeerd" | "fout";
+
+/** Eén regel in het activiteitenlog van een agent. */
+export interface AiAgentActivity {
+  id: string;
+  /** ISO-datumtijd waarop de actie plaatsvond. */
+  tijd: string;
+  omschrijving: string;
+  /** Optionele koppeling naar de betreffende lead. */
+  leadId?: string;
+}
+
+export interface AiAgent {
+  id: string;
+  naam: string;
+  categorie: AiAgentCategorie;
+  status: AiAgentStatus;
+  /** Aan/uit gezet door de gebruiker. */
+  actief: boolean;
+  /** Korte omschrijving van wat de agent doet. */
+  rol: string;
+  /** Waar de agent op dit moment aan werkt (alleen bij status "bezig"). */
+  huidigeTaak?: string;
+  /** Aantal afgeronde taken vandaag. */
+  takenVandaag: number;
+  /** Totaal aantal afgeronde taken sinds de start. */
+  takenTotaal: number;
+  /** Geschatte bespaarde tijd vandaag, in minuten. */
+  tijdBespaardMin: number;
+  /** ISO-datumtijd van de laatste actie. */
+  laatsteActiviteit: string;
+  /** Recente acties, nieuwste eerst. */
+  activiteiten: AiAgentActivity[];
+  /** Of dit een door ons aanbevolen agent is voor Prefab Select. */
+  aanbevolen: boolean;
+  /** Of de agent gekoppeld is aan de AI (Claude-API) en dus mag draaien. */
+  gekoppeld: boolean;
+  /** Sleutel van het catalogus-sjabloon waaruit de agent is toegevoegd. */
+  templateKey?: string;
+}
+
+// ----------------------------------------------------------------------------
 // Fase 3 — medewerkers, agenda, taken, reminders & notificaties
 // ----------------------------------------------------------------------------
 
