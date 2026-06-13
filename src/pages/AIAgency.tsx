@@ -68,6 +68,7 @@ interface Content {
   pricing: { tag: string; t1: string; tg: string; sub: string; popular: string; items: { name: string; tagline: string; cta: string; features: string[] }[] };
   faq: { tag: string; t1: string; tg: string; items: { q: string; a: string }[] };
   contact: { tag: string; t1: string; tg: string; sub: string; benefits: string[]; fields: string[]; submit: string; privacy: string; okTitle: string; okBody: string };
+  portfolio: { tag: string; t1: string; tg: string; sub: string; cta: string; items: { title: string; subtitle: string; desc: string; tags: string[]; result: string }[] };
   dashboard: { title: string; live: string; kpis: string[]; chart: string };
   footer: string; // rights line tagline
   tagline: string;
@@ -170,6 +171,16 @@ const CONTENT: Record<Lang, Content> = {
       submit: 'Plan strategiegesprek', privacy: 'We respecteren je privacy. Je gegevens worden nooit gedeeld.',
       okTitle: 'Bedankt — we nemen contact op!', okBody: 'We hebben je aanvraag ontvangen en reageren binnen één werkdag.',
     },
+    portfolio: {
+      tag: 'Ons werk', t1: 'Echte projecten,', tg: 'echt gebouwd',
+      sub: 'Een greep uit wat we voor klanten bouwden — van converterende websites en 3D-configurators tot maatwerk CRM-systemen met leadpijplijnen, volledig afgestemd op de wensen van de klant.',
+      cta: 'Bouw mijn systeem',
+      items: [
+        { title: 'Prefab Select', subtitle: 'Website & offerte-funnel', desc: 'Volledige bedrijfswebsite met een geautomatiseerde aanvraagstroom die bezoekers omzet in gekwalificeerde leads.', tags: ['Webdesign', 'Offerte-funnel', 'SEO', 'Snelheid'], result: 'Live op prefabselect.nl' },
+        { title: 'Prefab Select Configurator', subtitle: '3D-configurator voor bouwbedrijven', desc: 'Een configurator op maat waarmee klanten in enkele stappen hun eigen prefab samenstellen — met 3D-visualisatie en animaties, directe prijsindicatie en automatische doorzending naar het CRM. Speciaal gebouwd voor bouwbedrijven.', tags: ['3D-configurator', '3D-animaties', 'Op maat', 'Bouwbedrijven'], result: 'Live op prefabselect.nl' },
+        { title: 'Prefab Select CRM', subtitle: 'Maatwerk CRM & leadpijplijn', desc: 'Een op maat gebouwd CRM dat elke aanvraag automatisch binnenhaalt en leads door een pijplijn leidt (nieuw → in behandeling → gekwalificeerd → gesloten), met statusbeheer, zoeken en realtime overzicht. Volledig gebouwd naar de wensen van de klant.', tags: ['CRM op maat', 'Leadpijplijn', 'Automatisering', 'Dashboard'], result: 'Live op crmprefabselect.nl' },
+      ],
+    },
     dashboard: { title: 'Nexora Groei-dashboard', live: 'Live', kpis: ['Omzet', 'Leads', 'Conversie'], chart: 'Omzetgroei' },
     footer: 'Alle rechten voorbehouden.',
     tagline: 'Website-, marketing- en salesgroei voor ambitieuze bedrijven',
@@ -270,6 +281,16 @@ const CONTENT: Record<Lang, Content> = {
       fields: ['Name', 'Company', 'Email', 'Phone', 'Message'],
       submit: 'Book Strategy Call', privacy: 'We respect your privacy. Your details are never shared.',
       okTitle: 'Thanks — we’ll be in touch!', okBody: 'We’ve received your request and will reach out within one business day.',
+    },
+    portfolio: {
+      tag: 'Our work', t1: 'Real projects,', tg: 'really shipped',
+      sub: 'A glimpse of what we built for clients — from high-converting websites and 3D configurators to custom CRM systems with lead pipelines, fully tailored to each client’s needs.',
+      cta: 'Build my system',
+      items: [
+        { title: 'Prefab Select', subtitle: 'Website & quote funnel', desc: 'Full company website with an automated request flow that turns visitors into qualified leads.', tags: ['Web design', 'Quote funnel', 'SEO', 'Speed'], result: 'Live at prefabselect.nl' },
+        { title: 'Prefab Select Configurator', subtitle: '3D configurator for construction companies', desc: 'A custom configurator that lets clients build their own prefab in a few steps — with 3D visualisation and animation, instant price indication and automatic hand-off to the CRM. Built specifically for construction companies.', tags: ['3D configurator', '3D animation', 'Bespoke', 'Construction'], result: 'Live at prefabselect.nl' },
+        { title: 'Prefab Select CRM', subtitle: 'Custom CRM & lead pipeline', desc: 'A bespoke CRM that captures every request automatically and moves leads through a pipeline (new → contacted → qualified → closed), with status management, search and a real-time overview. Built entirely to the client’s requirements.', tags: ['Custom CRM', 'Lead pipeline', 'Automation', 'Dashboard'], result: 'Live at crmprefabselect.nl' },
+      ],
     },
     dashboard: { title: 'Nexora Growth Dashboard', live: 'Live', kpis: ['Revenue', 'Leads', 'Conversion'], chart: 'Revenue growth' },
     footer: 'All rights reserved.',
@@ -372,6 +393,16 @@ const CONTENT: Record<Lang, Content> = {
       submit: 'احجز جلسة استراتيجية', privacy: 'نحترم خصوصيتك. لا تتم مشاركة بياناتك أبدًا.',
       okTitle: 'شكرًا — سنتواصل معك!', okBody: 'استلمنا طلبك وسنعاود التواصل خلال يوم عمل واحد.',
     },
+    portfolio: {
+      tag: 'أعمالنا', t1: 'مشاريع حقيقية،', tg: 'تم إطلاقها فعلاً',
+      sub: 'لمحة عمّا بنيناه للعملاء — من مواقع عالية التحويل ومُهيّئات ثلاثية الأبعاد إلى أنظمة CRM مخصّصة مع مسارات للعملاء المحتملين، مصمّمة بالكامل حسب احتياجات العميل.',
+      cta: 'ابنِ نظامي',
+      items: [
+        { title: 'Prefab Select', subtitle: 'موقع ومسار عروض الأسعار', desc: 'موقع شركة كامل مع تدفّق طلبات مؤتمت يحوّل الزوّار إلى عملاء مؤهّلين.', tags: ['تصميم الويب', 'مسار العروض', 'SEO', 'السرعة'], result: 'مباشر على prefabselect.nl' },
+        { title: 'Prefab Select Configurator', subtitle: 'مُهيّئ ثلاثي الأبعاد لشركات البناء', desc: 'مُهيّئ مخصّص يتيح للعملاء تكوين الوحدة الجاهزة الخاصة بهم في خطوات قليلة — مع تصوّر ورسوم ثلاثية الأبعاد ومؤشّر سعر فوري وإرسال تلقائي إلى نظام CRM. مبني خصيصًا لشركات البناء.', tags: ['مُهيّئ ثلاثي الأبعاد', 'رسوم ثلاثية الأبعاد', 'مخصّص', 'شركات البناء'], result: 'مباشر على prefabselect.nl' },
+        { title: 'Prefab Select CRM', subtitle: 'CRM مخصّص ومسار العملاء', desc: 'نظام CRM مبني خصيصًا يلتقط كل طلب تلقائيًا وينقل العملاء عبر مسار (جديد ← تم التواصل ← مؤهّل ← مغلق)، مع إدارة الحالات والبحث ونظرة عامة فورية. مبني بالكامل وفق متطلبات العميل.', tags: ['CRM مخصّص', 'مسار العملاء', 'الأتمتة', 'لوحة تحكم'], result: 'مباشر على crmprefabselect.nl' },
+      ],
+    },
     dashboard: { title: 'لوحة نمو Nexora', live: 'مباشر', kpis: ['الإيرادات', 'العملاء', 'التحويل'], chart: 'نمو الإيرادات' },
     footer: 'جميع الحقوق محفوظة.',
     tagline: 'نمو الموقع والتسويق والمبيعات للشركات الطموحة',
@@ -418,6 +449,13 @@ const DASHBOARD_KPIS = [
   { to: 48, prefix: '€', suffix: 'K', delta: '+24%' },
   { to: 1284, decimals: 0, suffix: '', delta: '+18%' },
   { to: 6.4, decimals: 1, suffix: '%', delta: '+12%' },
+];
+
+// Portfolio screenshots + icons (language-independent; text comes from CONTENT).
+const PORTFOLIO_META = [
+  { img: '/portfolio/prefabselect.jpg', url: 'prefabselect.nl', icon: Globe },
+  { img: '/portfolio/configurator.jpg', url: 'prefabselect.nl/configurator', icon: Settings2 },
+  { img: '/portfolio/crm.jpg', url: 'crmprefabselect.nl', icon: Workflow },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -499,6 +537,64 @@ function GradientText({ children, className = '' }: { children: React.ReactNode;
 
 function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ------------------------------------------------------------------ */
+/* 3D tilt — cards/visuals lean toward the cursor for depth            */
+/* ------------------------------------------------------------------ */
+function Tilt3D({
+  children,
+  className = '',
+  max = 9,
+  scale = 1.0,
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  max?: number;
+  scale?: number;
+  style?: React.CSSProperties;
+}) {
+  const reduce = useReducedMotion();
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const rotateX = useSpring(useTransform(py, [0, 1], [max, -max]), { stiffness: 150, damping: 18 });
+  const rotateY = useSpring(useTransform(px, [0, 1], [-max, max]), { stiffness: 150, damping: 18 });
+  if (reduce) {
+    return <div className={className} style={style}>{children}</div>;
+  }
+  return (
+    <motion.div
+      className={className}
+      style={{ transformPerspective: 1000, rotateX, rotateY, transformStyle: 'preserve-3d', ...style }}
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        px.set((e.clientX - r.left) / r.width);
+        py.set((e.clientY - r.top) / r.height);
+      }}
+      onMouseLeave={() => { px.set(0.5); py.set(0.5); }}
+      whileHover={scale !== 1 ? { scale } : undefined}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Browser-window frame around a portfolio screenshot.
+function BrowserMockup({ img, url, alt }: { img: string; url: string; alt: string }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a0e27] shadow-[0_50px_120px_-30px_rgba(37,99,235,0.6)]">
+      <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.05] px-4 py-2.5" dir="ltr">
+        <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+        <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+        <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+        <span className="mx-auto flex max-w-[60%] items-center gap-1.5 truncate rounded-md bg-white/5 px-3 py-1 text-[11px] text-white/45">
+          <ShieldCheck size={11} /> {url}
+        </span>
+      </div>
+      <img src={img} alt={alt} loading="lazy" className="block w-full" />
+    </div>
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -669,7 +765,7 @@ function LiveDashboard() {
 
   return (
     <div ref={ref} dir="ltr" className="relative mx-auto mt-16 max-w-4xl">
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] shadow-[0_40px_120px_-30px_rgba(37,99,235,0.6)] backdrop-blur-2xl">
+      <Tilt3D max={6} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] shadow-[0_40px_120px_-30px_rgba(37,99,235,0.6)] backdrop-blur-2xl">
         {/* window top bar */}
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
           <div className="flex items-center gap-1.5">
@@ -761,7 +857,7 @@ function LiveDashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </Tilt3D>
 
       {/* soft glow under the window */}
       <div className="pointer-events-none absolute inset-x-10 -bottom-6 -z-10 h-16 rounded-full opacity-50 blur-2xl" style={{ background: GRAD }} />
@@ -898,14 +994,16 @@ function Services() {
           {t.services.items.map((s, i) => {
             const Icon = SERVICE_ICONS[i];
             return (
-              <motion.article key={i} variants={revealItem} whileHover={{ y: -8 }} className="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/70 p-6 shadow-[0_10px_40px_-20px_rgba(37,99,235,0.25)] backdrop-blur-xl transition-shadow hover:shadow-[0_30px_60px_-25px_rgba(37,99,235,0.45)]">
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: `radial-gradient(120% 120% at 0% 0%, ${PALETTE.blue}12, transparent 55%)` }} />
-                <div className="relative mb-5 grid h-12 w-12 place-items-center rounded-2xl text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3" style={{ background: GRAD }}>
-                  <Icon size={22} />
-                </div>
-                <h3 className="relative text-lg font-bold tracking-tight text-[#0a0e27]">{s.title}</h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-slate-500">{s.desc}</p>
-              </motion.article>
+              <motion.div key={i} variants={revealItem} className="h-full">
+                <Tilt3D max={12} className="group relative h-full overflow-hidden rounded-3xl border border-slate-200/70 bg-white/70 p-6 shadow-[0_10px_40px_-20px_rgba(37,99,235,0.25)] backdrop-blur-xl transition-shadow hover:shadow-[0_30px_60px_-25px_rgba(37,99,235,0.45)]">
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: `radial-gradient(120% 120% at 0% 0%, ${PALETTE.blue}12, transparent 55%)` }} />
+                  <div className="relative mb-5 grid h-12 w-12 place-items-center rounded-2xl text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3" style={{ background: GRAD, transform: 'translateZ(45px)' }}>
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="relative text-lg font-bold tracking-tight text-[#0a0e27]" style={{ transform: 'translateZ(28px)' }}>{s.title}</h3>
+                  <p className="relative mt-2 text-sm leading-relaxed text-slate-500" style={{ transform: 'translateZ(16px)' }}>{s.desc}</p>
+                </Tilt3D>
+              </motion.div>
             );
           })}
         </motion.div>
@@ -1055,6 +1153,73 @@ function CaseMetric({ label, to, decimals = 0, suffix = '' }: { label: string; t
         <motion.div initial={{ width: 0 }} animate={inView ? { width: '100%' } : {}} transition={{ duration: 1.4, ease: 'easeOut' }} className="h-full rounded-full" style={{ background: GRAD }} />
       </div>
     </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Portfolio — real work (Prefab Select website + CRM)                 */
+/* ------------------------------------------------------------------ */
+function Portfolio() {
+  const { t } = useLang();
+  return (
+    <section id="work" className="relative overflow-hidden bg-[#05070f] py-24 sm:py-32">
+      <div className="ai-animated-bg absolute inset-0 -z-10 opacity-30" />
+      <div className="ai-grid absolute inset-0 -z-10 opacity-[0.1]" />
+      <div className="container-custom relative">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <SectionTag>{t.portfolio.tag}</SectionTag>
+          <h2 className="mt-5 text-3xl font-black tracking-tighter text-white sm:text-5xl">
+            {t.portfolio.t1} <GradientText>{t.portfolio.tg}</GradientText>
+          </h2>
+          <p className="mt-4 text-lg text-white/60">{t.portfolio.sub}</p>
+        </Reveal>
+
+        <div className="mt-16 space-y-16 sm:space-y-24">
+          {t.portfolio.items.map((p, i) => {
+            const meta = PORTFOLIO_META[i];
+            const Icon = meta.icon;
+            const flip = i % 2 === 1;
+            return (
+              <div key={i} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+                <Reveal className={flip ? 'lg:order-2' : ''}>
+                  <Tilt3D max={8} className="[transform-style:preserve-3d]">
+                    <BrowserMockup img={meta.img} url={meta.url} alt={p.title} />
+                  </Tilt3D>
+                </Reveal>
+
+                <Reveal delay={0.1} className={flip ? 'lg:order-1' : ''}>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-white/70">
+                    <Icon size={13} /> {p.subtitle}
+                  </span>
+                  <h3 className="mt-4 text-2xl font-black tracking-tight text-white sm:text-3xl">{p.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-white/60">{p.desc}</p>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {p.tags.map((tag) => (
+                      <span key={tag} className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/70">{tag}</span>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-emerald-300">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                    </span>
+                    {p.result}
+                  </div>
+
+                  <div className="mt-7">
+                    <button onClick={() => scrollToId('contact')} className="inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5 active:scale-95" style={{ background: GRAD }}>
+                      {t.portfolio.cta} <ArrowRight size={15} className="rtl:rotate-180" />
+                    </button>
+                  </div>
+                </Reveal>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1413,6 +1578,7 @@ export default function AIAgency() {
           <Features />
           <Process />
           <CaseStudies />
+          <Portfolio />
           <Testimonials />
           <Pricing />
           <FAQ />
