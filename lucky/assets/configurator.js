@@ -113,6 +113,25 @@
     luifel: 'assets/cassetteluifel-antraciet.png'
   };
 
+  // Nieuw product: Pergola met openschuifbaar doek (eigen referentie-library)
+  PRODUCTS.pergoladoek = {
+    title: 'Pergola met openschuifbaar doek', img: 'assets/hero-buitenleven.jpg',
+    desc: 'Aluminium pergola met verstelbaar schuifdoek.', rate: 900, min: 3500, groups: [
+      { key: 'dims', type: 'dims', label: 'Afmetingen', short: 'Afmeting', a: { l: 'Breedte', min: 300, max: 800, def: 400 }, b: { l: 'Diepte', min: 250, max: 500, def: 350 } },
+      { key: 'kleur', type: 'color', label: 'Kleur constructie', short: 'Kleur', main: true, choices: frame4() },
+      { key: 'doekpositie', type: 'single', label: 'Doekpositie', short: 'Doek', choices: [c('open', 'Volledig open', 0), c('p25', '25% gesloten', 0), c('p50', '50% gesloten', 0), c('p75', '75% gesloten', 0), c('dicht', 'Volledig gesloten', 0)] },
+      { key: 'doekkleur', type: 'color', label: 'Doekkleur', short: 'Doekkleur', choices: [c('wit', 'Wit', 0, { hex: '#f4f4f4' }), c('creme', 'Crème', 0, { hex: '#e9e6df' }), c('lichtgrijs', 'Lichtgrijs', 0, { hex: '#c9ccce' }), c('donkergrijs', 'Donkergrijs', 0, { hex: '#595d61' }), c('antraciet', 'Antraciet', 0, { hex: '#3a4651' }), c('zwart', 'Zwart', 0, { hex: '#232323' }), c('taupe', 'Taupe', 0, { hex: '#8b7d6b' })] },
+      { key: 'screens', type: 'single', label: 'Screens', short: 'Screens', choices: [c('geen', 'Geen', 0), c('voor', 'Voorzijde', 900), c('links', 'Linkerzijde', 900), c('rechts', 'Rechterzijde', 900), c('rondom', 'Rondom', 2800)] },
+      { key: 'glas', type: 'single', label: 'Glazen schuifwanden', short: 'Glas', choices: [c('geen', 'Geen', 0), c('voor', 'Voorzijde', 1200), c('links', 'Linkerzijde', 1200), c('rechts', 'Rechterzijde', 1200), c('rondom', 'Rondom', 3800)] },
+      { key: 'verlichting', type: 'single', label: 'Verlichting', short: 'Licht', choices: [c('geen', 'Geen', 0), c('spots', 'LED Spots', 350, { icon: 'light' }), c('warm', 'LED Strip Warm Wit', 450, { icon: 'light' }), c('rgb', 'LED Strip RGB', 600, { icon: 'light' }), c('combi', 'Spots + LED Strip', 800, { icon: 'light' })] },
+      { key: 'verwarming', type: 'single', label: 'Verwarming', short: 'Heater', choices: [c('geen', 'Geen', 0), c('1', '1 Heater', 350, { icon: 'heat' }), c('2', '2 Heaters', 650, { icon: 'heat' })] },
+      { key: 'bediening', type: 'single', label: 'Bediening', short: 'Bediening', choices: [c('hand', 'Handmatig', 0, { icon: 'crank' }), c('rts', 'Somfy RTS', 290, { img: IMG.rts }), c('io', 'Somfy IO', 360, { img: IMG.app }), c('smart', 'Smartphone bediening', 420, { icon: 'phone' })] },
+      { key: 'extra', type: 'multi', label: 'Extra opties', short: 'Opties', choices: [opt('winds', 'Windsensor', 180, 'wind'), opt('regens', 'Regensensor', 160, 'drop'), opt('zonaut', 'Zonautomaat', 220, 'sun')] }
+    ]
+  };
+  ORDER.push('pergoladoek');
+  CARD.pergoladoek = 'assets/pergoladoek-gesloten-antraciet.png';
+
   /* ---- state ---- */
   var S = { step: 0, product: 'rolluiken', w: 0, h: 0, single: {}, multi: {} };
   var STEPS = [];
@@ -283,6 +302,19 @@
     if (S.product === 'knikarm') { var kc = S.single.frame; if (MATRIX_COLS[kc]) return 'assets/knikarmscherm-' + kc + '.png'; return productFallback(); }
     if (S.product === 'uitval') { var uc = S.single.frame; if (MATRIX_COLS[uc]) return 'assets/uitvalscherm-' + uc + '.png'; return productFallback(); }
     if (S.product === 'luifel') { var lc = S.single.frame; if (MATRIX_COLS[lc]) return 'assets/cassetteluifel-' + lc + '.png'; return productFallback(); }
+    if (S.product === 'pergoladoek') {
+      var dk = S.single.kleur;
+      if (MATRIX_COLS[dk]) {
+        var led = S.single.verlichting && S.single.verlichting !== 'geen';
+        var scr = S.single.screens && S.single.screens !== 'geen';
+        var st;
+        if (scr && led) st = 'luxe';
+        else if (scr) st = 'screens';
+        else { var dp = S.single.doekpositie; st = (dp === 'open') ? 'open' : ((dp === 'p25' || dp === 'p50') ? 'half' : 'gesloten'); }
+        return 'assets/pergoladoek-' + st + '-' + dk + '.png';
+      }
+      return productFallback();
+    }
     return P().img;
   }
   function updatePreview() {
