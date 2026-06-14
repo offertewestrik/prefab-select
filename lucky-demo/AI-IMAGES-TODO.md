@@ -75,9 +75,19 @@ Ook gegenereerd op 2026-06-14 (zelfde model). URLs ophalen via
 
 | Beeld | Doel | Bestand | job-id |
 | :--- | :--- | :--- | :--- |
-| Afstandsbediening | bediening-stap "afstandsbediening" | `somfy-afstandsbediening.png` | `e7b58c23-6584-4c33-a1ed-20e4923ded78` |
+| Afstandsbediening | bediening-stap "afstandsbediening" | `somfy-afstandsbediening.png` | `ad63a527-e31a-4409-a93b-287983c834a2` |
 | Buismotor | bediening / "elektrisch" | `somfy-motor.png` | `96fd0db8-25ba-4d39-b5ef-63256db353df` |
 | App op smartphone | bediening "app/telefoon" | `somfy-app.png` | `8e93a7a8-2134-4676-8ef5-b9ca87635696` |
+
+Motor en app hebben al directe URLs (afstandsbediening via `job_display`):
+
+```bash
+cd lucky-demo/assets
+B="https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU"
+curl -L "$B/hf_20260614_121634_96fd0db8-25ba-4d39-b5ef-63256db353df.png" -o somfy-motor.png
+curl -L "$B/hf_20260614_121635_8e93a7a8-2134-4676-8ef5-b9ca87635696.png" -o somfy-app.png
+# afstandsbediening: job_display ad63a527-e31a-4409-a93b-287983c834a2 -> rawUrl -> somfy-afstandsbediening.png
+```
 
 Plaatsing-suggestie:
 - In de configurator bij **stap 4 (Bediening)**: kleine beelden bij
