@@ -239,13 +239,21 @@
   }
 
   /* ---- preview ---- */
-  var KAST_COLS = { wit: 1, creme: 1, antraciet: 1, zwart: 1 };
-  function rolluikFallback() { return ROLLUIK_COL_IMG[S.single.kleur] || P().img; }
+  var MATRIX_COLS = { wit: 1, creme: 1, antraciet: 1, zwart: 1 };
+  function productFallback() {
+    if (S.product === 'rolluiken') return ROLLUIK_COL_IMG[S.single.kleur] || P().img;
+    return P().img;
+  }
   function previewImg() {
     if (S.product === 'rolluiken') {
       var kast = S.single.kast, kleur = S.single.kleur;
-      if (kast && KAST_COLS[kleur]) return 'assets/rolluik-' + kast + '-' + kleur + '.png';
-      return rolluikFallback();
+      if (kast && MATRIX_COLS[kleur]) return 'assets/rolluik-' + kast + '-' + kleur + '.png';
+      return productFallback();
+    }
+    if (S.product === 'screens') {
+      var type = S.single.type, cas = S.single.cassette;
+      if (type && MATRIX_COLS[cas]) return 'assets/screen-' + type + '-' + cas + '.png';
+      return productFallback();
     }
     return P().img;
   }
@@ -253,7 +261,7 @@
     var img = $('#pvImg');
     if (img && img.getAttribute('src') !== previewImg()) {
       img.style.opacity = 0;
-      if (S.product === 'rolluiken') { img.onerror = function () { this.onerror = null; this.src = rolluikFallback(); }; } else { img.onerror = null; }
+      if (S.product === 'rolluiken' || S.product === 'screens') { img.onerror = function () { this.onerror = null; this.src = productFallback(); }; } else { img.onerror = null; }
       setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120);
     }
     if ($('#pvSize')) $('#pvSize').textContent = S.w + ' × ' + S.h + ' cm';
