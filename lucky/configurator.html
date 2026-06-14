@@ -78,17 +78,39 @@
     <div class="preview">
       <div class="stage">
         <span class="price-badge">Offerte op maat</span>
-        <img id="previewImg" src="assets/Rolluiken-3.jpeg" alt="Rolluik op maat — antraciet" style="max-height:360px;width:100%;object-fit:contain;border-radius:12px">
+        <svg id="rolluikSvg" viewBox="0 0 360 320" style="max-height:360px;width:100%" role="img" aria-label="Rolluik op maat">
+          <rect x="70" y="30" width="220" height="40" rx="5" id="rolluikCabinet" fill="#2b3037"/>
+          <rect x="74" y="34" width="212" height="6" rx="3" fill="#ffffff" opacity="0.12"/>
+          <rect x="62" y="66" width="14" height="220" rx="3" fill="#aab4bd"/>
+          <rect x="284" y="66" width="14" height="220" rx="3" fill="#aab4bd"/>
+          <g id="rolluikSlats" fill="#3a4651">
+            <rect x="78" y="72"  width="204" height="14" rx="3"/>
+            <rect x="78" y="89"  width="204" height="14" rx="3"/>
+            <rect x="78" y="106" width="204" height="14" rx="3"/>
+            <rect x="78" y="123" width="204" height="14" rx="3"/>
+            <rect x="78" y="140" width="204" height="14" rx="3"/>
+            <rect x="78" y="157" width="204" height="14" rx="3"/>
+            <rect x="78" y="174" width="204" height="14" rx="3"/>
+            <rect x="78" y="191" width="204" height="14" rx="3"/>
+            <rect x="78" y="208" width="204" height="14" rx="3"/>
+            <rect x="78" y="225" width="204" height="14" rx="3"/>
+            <rect x="78" y="242" width="204" height="14" rx="3"/>
+            <rect x="78" y="259" width="204" height="14" rx="3"/>
+          </g>
+          <rect x="78" y="276" width="204" height="10" rx="3" id="rolluikBar" fill="#222a30"/>
+        </svg>
         <div class="closeup">
           <div class="ring" style="background:#3a4651"></div>
           <span>Pantser<br>close-up</span>
         </div>
       </div>
       <div class="thumbs">
-        <div class="t active" style="background:#3a4651" title="Antraciet"></div>
-        <div class="t" style="background:#2b2b2b" title="Zwart"></div>
-        <div class="t" style="background:#e9e6df" title="Crème"></div>
-        <div class="t" style="background:#8a939b" title="Grijs"></div>
+        <div class="t active" style="background:#3a4651" data-color="#3a4651" title="Antraciet"></div>
+        <div class="t" style="background:#232323" data-color="#232323" title="Zwart"></div>
+        <div class="t" style="background:#e9e6df" data-color="#e9e6df" title="Crème"></div>
+        <div class="t" style="background:#f4f4f4" data-color="#f4f4f4" title="Wit"></div>
+        <div class="t" style="background:#8a939b" data-color="#8a939b" title="Grijs"></div>
+        <div class="t" style="background:#5a4632" data-color="#5a4632" title="Bruin"></div>
       </div>
     </div>
 
@@ -145,13 +167,14 @@
       <div class="opt-row">
         <label>3. Kastkleur &amp; pantserkleur</label>
         <div class="swatches" data-swatches>
-          <span class="swatch active" style="background:#3a4651" title="Antraciet (7016)"></span>
-          <span class="swatch" style="background:#2b2b2b" title="Zwart (9005)"></span>
-          <span class="swatch" style="background:#e9e6df" title="Crèmewit (9001)"></span>
-          <span class="swatch" style="background:#f4f4f4;border-color:#ccc" title="Wit (9010)"></span>
-          <span class="swatch" style="background:#8a939b" title="Grijs (7038)"></span>
-          <span class="swatch" style="background:#5a4632" title="Bruin (8014)"></span>
+          <span class="swatch active" style="background:#3a4651" data-color="#3a4651" data-name="Antraciet (RAL 7016)" title="Antraciet (7016)"></span>
+          <span class="swatch" style="background:#232323" data-color="#232323" data-name="Zwart (RAL 9005)" title="Zwart (9005)"></span>
+          <span class="swatch" style="background:#e9e6df" data-color="#e9e6df" data-name="Crèmewit (RAL 9001)" title="Crèmewit (9001)"></span>
+          <span class="swatch" style="background:#f4f4f4;border-color:#ccc" data-color="#f4f4f4" data-name="Wit (RAL 9010)" title="Wit (9010)"></span>
+          <span class="swatch" style="background:#8a939b" data-color="#8a939b" data-name="Grijs (RAL 7038)" title="Grijs (7038)"></span>
+          <span class="swatch" style="background:#5a4632" data-color="#5a4632" data-name="Bruin (RAL 8014)" title="Bruin (8014)"></span>
         </div>
+        <p id="kleurLabel" style="margin:10px 0 0;font-weight:700;color:var(--navy);font-size:.92rem">Gekozen kleur: Antraciet (RAL 7016)</p>
       </div>
 
       <!-- Stap 4: bediening -->
