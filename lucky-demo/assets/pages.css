@@ -22,3 +22,48 @@
   padding: 4px 0 4px 20px; margin: 34px 0; line-height: 1.4; }
 .prose-media { width: 100%; border-radius: var(--r); margin: 10px 0 30px; box-shadow: var(--shadow-m); display: block; }
 .prose-cta { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---- Offertepagina ---- */
+.offerte-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: 40px; align-items: start; }
+.offerte-form { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 34px; box-shadow: var(--shadow-m); }
+.fblock { margin-bottom: 26px; }
+.fblock:last-of-type { margin-bottom: 14px; }
+.fblock > .bl { font-weight: 800; color: var(--char); display: block; margin-bottom: 12px; font-size: 1.05rem; }
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fgrid .full { grid-column: 1 / -1; }
+.offerte-form input, .offerte-form select, .offerte-form textarea { width: 100%; padding: 14px 16px; border: 1.5px solid var(--line);
+  border-radius: 12px; font-family: inherit; font-size: 1rem; background: #fff; color: var(--ink); }
+.offerte-form textarea { min-height: 110px; resize: vertical; }
+.offerte-form input:focus, .offerte-form select:focus, .offerte-form textarea:focus { outline: none; border-color: var(--orange); }
+.check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.check-chip { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px;
+  font-weight: 600; color: var(--char); cursor: pointer; transition: border-color .15s, background .15s; }
+.check-chip:hover { border-color: var(--orange); }
+.check-chip input { width: 17px; height: 17px; accent-color: var(--orange); flex: none; }
+.radio-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+.radio-pill { border: 1.5px solid var(--line); border-radius: 999px; padding: 11px 18px; font-weight: 700; color: var(--char);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all .15s; }
+.radio-pill:hover { border-color: var(--orange); color: var(--orange-600); }
+.radio-pill input { accent-color: var(--orange); }
+.offerte-form .priv { font-size: .82rem; color: var(--muted); margin-top: 14px; }
+
+.offerte-aside { position: sticky; top: 96px; display: grid; gap: 18px; }
+.bene-card { background: var(--beige); border: 1px solid var(--line); border-radius: var(--r); padding: 26px; }
+.bene-card h3 { font-size: 1.2rem; margin-bottom: 16px; }
+.bene-list { list-style: none; display: grid; gap: 13px; }
+.bene-list li { display: flex; gap: 11px; align-items: flex-start; font-weight: 600; color: var(--char); }
+.bene-list svg { width: 20px; height: 20px; color: var(--orange-600); flex: none; margin-top: 2px; }
+.bene-call { background: var(--char); color: #fff; border-radius: var(--r); padding: 24px; text-align: center; }
+.bene-call .num { font-size: 1.6rem; font-weight: 800; color: #fff; }
+.bene-call small { color: #b7afa6; display: block; margin: 4px 0 14px; }
+.bene-rating { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 18px 22px; }
+.bene-rating .g { font-size: 1.8rem; font-weight: 800; color: var(--char); }
+.bene-rating .stars { color: var(--orange); letter-spacing: 1px; }
+.bene-rating small { color: var(--muted); display: block; }
+
+@media (max-width: 900px) {
+  .offerte-grid { grid-template-columns: 1fr; }
+  .offerte-aside { position: static; }
+  .fgrid { grid-template-columns: 1fr; }
+}
+
