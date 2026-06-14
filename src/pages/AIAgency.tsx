@@ -45,6 +45,10 @@ const PALETTE = {
 const GRAD = `linear-gradient(135deg, ${PALETTE.blue} 0%, ${PALETTE.blue2} 35%, ${PALETTE.cyan} 70%, ${PALETTE.sky} 100%)`;
 const GRAD_TEXT = `linear-gradient(120deg, ${PALETTE.sky} 0%, ${PALETTE.blue2} 40%, ${PALETTE.violet} 100%)`;
 
+// Resolve a public asset path against Vite's base URL (so it works at the site
+// root AND under a GitHub Pages subpath like /prefab-select/).
+const asset = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\//, '')}`;
+
 /* ------------------------------------------------------------------ */
 /* i18n — language definitions + content                               */
 /* ------------------------------------------------------------------ */
@@ -631,7 +635,7 @@ function BrowserMockup({ img, url, alt }: { img: string; url: string; alt: strin
           <ShieldCheck size={11} /> {url}
         </span>
       </div>
-      <img src={img} alt={alt} loading="lazy" className="block w-full" />
+      <img src={asset(img)} alt={alt} loading="lazy" className="block w-full" />
     </div>
   );
 }
@@ -1119,7 +1123,7 @@ function Hero() {
         preload="auto"
         aria-hidden="true"
       >
-        <source src="/nexora-hero.mp4" type="video/mp4" />
+        <source src={asset('/nexora-hero.mp4')} type="video/mp4" />
       </video>
       {/* dark overlay so headline + buttons stay readable on top of the video */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(5,7,15,0.45),rgba(5,7,15,0.82))]" />
@@ -1758,7 +1762,7 @@ function Contact() {
       <div className="ai-animated-bg absolute inset-0 -z-20 opacity-50" />
       {/* optional CTA background video — drop public/nexora-cta.mp4 to enable */}
       <video className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover" autoPlay muted loop playsInline aria-hidden="true">
-        <source src="/nexora-cta.mp4" type="video/mp4" />
+        <source src={asset('/nexora-cta.mp4')} type="video/mp4" />
       </video>
       {/* dark overlay so the heading + form stay readable on top of the video */}
       <div className="pointer-events-none absolute inset-0 -z-[5] bg-[radial-gradient(ellipse_at_center,rgba(5,7,15,0.5),rgba(5,7,15,0.85))]" />
@@ -1922,7 +1926,7 @@ export default function AIAgency() {
 
     const icon = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
     const prevIcon = icon?.getAttribute('href') ?? null;
-    if (icon) icon.setAttribute('href', '/nexora-logo.svg');
+    if (icon) icon.setAttribute('href', asset('/nexora-logo.svg'));
 
     return () => {
       document.title = prevTitle;
