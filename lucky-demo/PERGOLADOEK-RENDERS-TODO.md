@@ -12,7 +12,7 @@ Filenaampatroon: `assets/pergoladoek-gesloten-<kleur>.png`
 | pergoladoek-gesloten-wit.png | `ab283f24-abeb-4e59-9e3a-5686b4a9cb8d` (master) |
 | pergoladoek-gesloten-creme.png | `2869625b-0705-49a4-9a18-c1054834453a` |
 | pergoladoek-gesloten-antraciet.png | `04cae022-9b41-486a-8ad6-8e4d093b87ac` |
-| pergoladoek-gesloten-zwart.png | `6e7e700d-06fd-460d-906c-4b1fd80bef27` |
+| pergoladoek-gesloten-zwart.png | `62782326-e68c-4333-927a-725fad75bc27` (opnieuw) |
 
 ## Stappen (Full-sessie)
 1. Per job-id: `mcp__higgsfield__remove_background` (transparant) → cutout downloaden

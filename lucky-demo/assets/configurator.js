@@ -135,7 +135,8 @@
   var DOEK_URL = {
     wit: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183310_ab283f24-abeb-4e59-9e3a-5686b4a9cb8d.png',
     creme: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183614_2869625b-0705-49a4-9a18-c1054834453a.png',
-    antraciet: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183616_04cae022-9b41-486a-8ad6-8e4d093b87ac.png'
+    antraciet: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183616_04cae022-9b41-486a-8ad6-8e4d093b87ac.png',
+    zwart: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_184354_62782326-e68c-4333-927a-725fad75bc27.png'
   };
   CARD.pergoladoek = DOEK_URL.antraciet;
 
