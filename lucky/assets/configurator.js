@@ -130,7 +130,14 @@
     ]
   };
   ORDER.push('pergoladoek');
-  CARD.pergoladoek = 'assets/pergoladoek-gesloten-antraciet.png';
+  // Directe Higgsfield-links zodat de doek-renders nu al live tonen (Full-sessie
+  // vervangt ze later door lokale bestanden assets/pergoladoek-gesloten-<kleur>.png)
+  var DOEK_URL = {
+    wit: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183310_ab283f24-abeb-4e59-9e3a-5686b4a9cb8d.png',
+    creme: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183614_2869625b-0705-49a4-9a18-c1054834453a.png',
+    antraciet: 'https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260614_183616_04cae022-9b41-486a-8ad6-8e4d093b87ac.png'
+  };
+  CARD.pergoladoek = DOEK_URL.antraciet;
 
   /* ---- state ---- */
   var S = { step: 0, product: 'rolluiken', w: 0, h: 0, single: {}, multi: {} };
@@ -307,9 +314,9 @@
       if (MATRIX_COLS[dk]) {
         var led = S.single.verlichting && S.single.verlichting !== 'geen';
         var scr = S.single.screens && S.single.screens !== 'geen';
-        if (scr && led) return 'assets/pergola-luxe-' + dk + '-lamellendak.png';
-        if (scr) return 'assets/pergola-screens-' + dk + '-lamellendak.png';
-        return 'assets/pergoladoek-gesloten-' + dk + '.png';
+        var glas = S.single.glas && S.single.glas !== 'geen';
+        if (scr || glas || led) return 'assets/pergola-luxe-' + dk + '-lamellendak.png';
+        return DOEK_URL[dk] || 'assets/pergoladoek-gesloten-' + dk + '.png';
       }
       return productFallback();
     }
