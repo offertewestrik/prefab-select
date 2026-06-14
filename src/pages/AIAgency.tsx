@@ -770,6 +770,85 @@ function Nav() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Particle field — animated constellation network (canvas)            */
+/* ------------------------------------------------------------------ */
+function ParticleField() {
+  const ref = useRef<HTMLCanvasElement>(null);
+  const reduce = useReducedMotion();
+  useEffect(() => {
+    if (reduce) return;
+    const canvas = ref.current;
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const COLORS = ['#3B82F6', '#06B6D4', '#38BDF8', '#8B5CF6'];
+    let w = 0, h = 0, raf = 0;
+    let nodes: { x: number; y: number; vx: number; vy: number; c: string; r: number }[] = [];
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.max(28, Math.min(80, Math.floor((w * h) / 17000)));
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        c: COLORS[Math.floor(Math.random() * COLORS.length)],
+        r: Math.random() * 1.6 + 0.6,
+      }));
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const MAX = 135;
+    const frame = () => {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > w) a.vx *= -1;
+        if (a.y < 0 || a.y > h) a.vy *= -1;
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < MAX) {
+            ctx.globalAlpha = (1 - d / MAX) * 0.16;
+            ctx.strokeStyle = '#38BDF8';
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      for (const n of nodes) {
+        ctx.globalAlpha = 0.7;
+        ctx.fillStyle = n.c;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(frame);
+    };
+    frame();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    };
+  }, [reduce]);
+
+  return <canvas ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-[1] h-full w-full opacity-80" />;
+}
+
+/* ------------------------------------------------------------------ */
 /* Live dashboard (animated demo visual)                               */
 /* ------------------------------------------------------------------ */
 const BAR_COUNT = 16;
@@ -956,6 +1035,8 @@ function Hero() {
       <motion.div style={{ y: ySlow }} className="ai-float-slow pointer-events-none absolute right-[10%] top-[30%] -z-10 h-28 w-28 rounded-full border border-white/10 bg-white/5 backdrop-blur-md" />
       <motion.div style={{ y: yFast }} className="ai-float pointer-events-none absolute right-[20%] bottom-[12%] -z-10 h-20 w-20 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md" />
       <div className="ai-grid absolute inset-0 -z-10 opacity-[0.15]" />
+      {/* animated constellation network (Higgsfield-style, pure code) */}
+      <ParticleField />
 
       <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-md">
