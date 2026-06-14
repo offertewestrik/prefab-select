@@ -317,7 +317,7 @@
         var scr = S.single.screens && S.single.screens !== 'geen';
         var glas = S.single.glas && S.single.glas !== 'geen';
         if (scr || glas || led) return 'assets/pergola-luxe-' + dk + '-lamellendak.png';
-        return DOEK_URL[dk] || 'assets/pergoladoek-gesloten-' + dk + '.png';
+        return 'assets/pergoladoek-gesloten-' + dk + '.png';
       }
       return productFallback();
     }
@@ -327,7 +327,15 @@
     var img = $('#pvImg');
     if (img && img.getAttribute('src') !== previewImg()) {
       img.style.opacity = 0;
-      img.onerror = function () { this.onerror = null; this.src = productFallback(); };
+      img.onerror = function () {
+        // pergola-doek: lokaal bestand ontbreekt nog -> probeer directe link, anders projectfoto
+        var src = this.getAttribute('src') || '', m = src.match(/pergoladoek-gesloten-([a-z]+)\.png$/);
+        if (m && DOEK_URL[m[1]] && src.indexOf('http') !== 0) {
+          this.onerror = function () { this.onerror = null; this.src = productFallback(); };
+          this.src = DOEK_URL[m[1]]; return;
+        }
+        this.onerror = null; this.src = productFallback();
+      };
       setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120);
     }
     if ($('#pvSize')) $('#pvSize').textContent = S.w + ' × ' + S.h + ' cm';
