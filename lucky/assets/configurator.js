@@ -255,13 +255,19 @@
       if (type && MATRIX_COLS[cas]) return 'assets/screen-' + type + '-' + cas + '.png';
       return productFallback();
     }
+    if (S.product === 'veranda') {
+      var vk = S.single.kleur, vo = S.multi.extra || [];
+      var uit = (vo.indexOf('zip') > -1) ? 'glaswand-screens' : (vo.indexOf('schuif') > -1 ? 'glaswand' : 'open');
+      if (MATRIX_COLS[vk]) return 'assets/veranda-' + uit + '-' + vk + '-glasdak.png';
+      return productFallback();
+    }
     return P().img;
   }
   function updatePreview() {
     var img = $('#pvImg');
     if (img && img.getAttribute('src') !== previewImg()) {
       img.style.opacity = 0;
-      if (S.product === 'rolluiken' || S.product === 'screens') { img.onerror = function () { this.onerror = null; this.src = productFallback(); }; } else { img.onerror = null; }
+      if (S.product === 'rolluiken' || S.product === 'screens' || S.product === 'veranda') { img.onerror = function () { this.onerror = null; this.src = productFallback(); }; } else { img.onerror = null; }
       setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120);
     }
     if ($('#pvSize')) $('#pvSize').textContent = S.w + ' × ' + S.h + ' cm';
