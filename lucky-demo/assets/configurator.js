@@ -410,6 +410,9 @@
   $('#cfgSteps').addEventListener('click', function (e) { var s = e.target.closest('.s'); if (!s) return; var i = +s.getAttribute('data-i'); if (i <= S.step) go(i); });
 
   /* ---- init ---- */
-  setProduct('rolluiken');
-  go(0);
+  var startProduct = 'rolluiken', startStep = 0;
+  var hash = (window.location.hash || '').replace('#', '').toLowerCase();
+  if (hash && PRODUCTS[hash]) { startProduct = hash; startStep = 1; }
+  setProduct(startProduct);
+  go(startStep);
 })();
