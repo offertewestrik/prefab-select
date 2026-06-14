@@ -102,6 +102,17 @@
   };
   var ORDER = ['rolluiken', 'screens', 'veranda', 'pergola', 'knikarm', 'uitval', 'luifel'];
 
+  // Studio-render per product voor de productkeuze-kaarten (fallback = projectfoto)
+  var CARD = {
+    rolluiken: 'assets/rolluik-rond-antraciet.png',
+    screens: 'assets/screen-std-antraciet.png',
+    veranda: 'assets/veranda-open-antraciet-glasdak.png',
+    pergola: 'assets/pergola-open-antraciet-lamellendak.png',
+    knikarm: 'assets/knikarmscherm-antraciet.png',
+    uitval: 'assets/uitvalscherm-antraciet.png',
+    luifel: 'assets/cassetteluifel-antraciet.png'
+  };
+
   /* ---- state ---- */
   var S = { step: 0, product: 'rolluiken', w: 0, h: 0, single: {}, multi: {} };
   var STEPS = [];
@@ -147,7 +158,7 @@
     return '<h2 class="step-title">Kies uw product</h2><p class="step-sub">Waarvoor wilt u een offerte op maat?</p><div class="opt-grid">' +
       ORDER.map(function (id) { var p = PRODUCTS[id];
         return '<button class="opt' + (S.product === id ? ' sel' : '') + '" data-product="' + id + '">' + check() +
-          '<div class="ph"><img src="' + p.img + '" alt="' + p.title + '"></div><div class="ob"><b>' + p.title + '</b><span>' + p.desc + '</span></div></button>';
+          '<div class="ph"><img src="' + (CARD[id] || p.img) + '" alt="' + p.title + '" style="object-fit:contain;background:#fff" onerror="this.onerror=null;this.src=\'' + p.img + '\';this.style.objectFit=\'cover\'"></div><div class="ob"><b>' + p.title + '</b><span>' + p.desc + '</span></div></button>';
       }).join('') + '</div>';
   }
 
