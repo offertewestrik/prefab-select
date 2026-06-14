@@ -135,18 +135,19 @@
           <rect x="66" y="28" width="228" height="42" rx="8" fill="url(#cabSheen)"/>
           <rect x="66" y="66" width="228" height="4" rx="2" fill="#000000" opacity=".18"/>
         </svg>
+        <img id="rolluikPhoto" alt="Rolluik op maat" style="display:none;max-height:380px;width:100%;object-fit:contain;border-radius:12px">
         <div class="closeup">
           <div class="ring" style="background:#3a4651"></div>
           <span>Pantser<br>close-up</span>
         </div>
       </div>
       <div class="thumbs">
-        <div class="t active" style="background:#3a4651" data-color="#3a4651" title="Antraciet"></div>
-        <div class="t" style="background:#232323" data-color="#232323" title="Zwart"></div>
-        <div class="t" style="background:#e9e6df" data-color="#e9e6df" title="Crème"></div>
-        <div class="t" style="background:#f4f4f4" data-color="#f4f4f4" title="Wit"></div>
-        <div class="t" style="background:#8a939b" data-color="#8a939b" title="Grijs"></div>
-        <div class="t" style="background:#5a4632" data-color="#5a4632" title="Bruin"></div>
+        <div class="t active" style="background:#3a4651" data-color="#3a4651" data-img="assets/rolluik-antraciet.png" title="Antraciet"></div>
+        <div class="t" style="background:#232323" data-color="#232323" data-img="assets/rolluik-zwart.png" title="Zwart"></div>
+        <div class="t" style="background:#e9e6df" data-color="#e9e6df" data-img="assets/rolluik-creme.png" title="Crème"></div>
+        <div class="t" style="background:#f4f4f4" data-color="#f4f4f4" data-img="assets/rolluik-wit.png" title="Wit"></div>
+        <div class="t" style="background:#8a939b" data-color="#8a939b" data-img="assets/rolluik-grijs.png" title="Grijs"></div>
+        <div class="t" style="background:#5a4632" data-color="#5a4632" data-img="assets/rolluik-bruin.png" title="Bruin"></div>
       </div>
     </div>
 
@@ -203,12 +204,12 @@
       <div class="opt-row">
         <label>3. Kastkleur &amp; pantserkleur</label>
         <div class="swatches" data-swatches>
-          <span class="swatch active" style="background:#3a4651" data-color="#3a4651" data-name="Antraciet (RAL 7016)" title="Antraciet (7016)"></span>
-          <span class="swatch" style="background:#232323" data-color="#232323" data-name="Zwart (RAL 9005)" title="Zwart (9005)"></span>
-          <span class="swatch" style="background:#e9e6df" data-color="#e9e6df" data-name="Crèmewit (RAL 9001)" title="Crèmewit (9001)"></span>
-          <span class="swatch" style="background:#f4f4f4;border-color:#ccc" data-color="#f4f4f4" data-name="Wit (RAL 9010)" title="Wit (9010)"></span>
-          <span class="swatch" style="background:#8a939b" data-color="#8a939b" data-name="Grijs (RAL 7038)" title="Grijs (7038)"></span>
-          <span class="swatch" style="background:#5a4632" data-color="#5a4632" data-name="Bruin (RAL 8014)" title="Bruin (8014)"></span>
+          <span class="swatch active" style="background:#3a4651" data-color="#3a4651" data-img="assets/rolluik-antraciet.png" data-name="Antraciet (RAL 7016)" title="Antraciet (7016)"></span>
+          <span class="swatch" style="background:#232323" data-color="#232323" data-img="assets/rolluik-zwart.png" data-name="Zwart (RAL 9005)" title="Zwart (9005)"></span>
+          <span class="swatch" style="background:#e9e6df" data-color="#e9e6df" data-img="assets/rolluik-creme.png" data-name="Crèmewit (RAL 9001)" title="Crèmewit (9001)"></span>
+          <span class="swatch" style="background:#f4f4f4;border-color:#ccc" data-color="#f4f4f4" data-img="assets/rolluik-wit.png" data-name="Wit (RAL 9010)" title="Wit (9010)"></span>
+          <span class="swatch" style="background:#8a939b" data-color="#8a939b" data-img="assets/rolluik-grijs.png" data-name="Grijs (RAL 7038)" title="Grijs (7038)"></span>
+          <span class="swatch" style="background:#5a4632" data-color="#5a4632" data-img="assets/rolluik-bruin.png" data-name="Bruin (RAL 8014)" title="Bruin (8014)"></span>
         </div>
         <p id="kleurLabel" style="margin:10px 0 0;font-weight:700;color:var(--navy);font-size:.92rem">Gekozen kleur: Antraciet (RAL 7016)</p>
       </div>
@@ -221,6 +222,16 @@
           <div class="step"><span class="num">⏻</span> Schakelaar / sleutel</div>
           <div class="step done"><span class="num">⌁</span> Afstandsbediening / app</div>
           <div class="step active"><span class="num">☀</span> Solar — geen kabels</div>
+        </div>
+      </div>
+
+      <!-- Somfy bediening (verschijnt zodra de beelden bestaan) -->
+      <div class="opt-row" id="somfyBlock" style="display:none">
+        <label>Aangedreven door Somfy</label>
+        <div class="somfy-row">
+          <figure><img src="assets/somfy-afstandsbediening.png" alt="Somfy afstandsbediening" onload="document.getElementById('somfyBlock').style.display=''" onerror="this.closest('figure').style.display='none'"><figcaption>Afstandsbediening</figcaption></figure>
+          <figure><img src="assets/somfy-app.png" alt="Bediening via app" onload="document.getElementById('somfyBlock').style.display=''" onerror="this.closest('figure').style.display='none'"><figcaption>App &amp; telefoon</figcaption></figure>
+          <figure><img src="assets/somfy-motor.png" alt="Somfy buismotor" onload="document.getElementById('somfyBlock').style.display=''" onerror="this.closest('figure').style.display='none'"><figcaption>Elektrische motor</figcaption></figure>
         </div>
       </div>
 
