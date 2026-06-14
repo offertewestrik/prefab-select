@@ -27,22 +27,25 @@ python3 -m http.server 8080
   **Visueel** — de prijs rekent bewust nog niet live (fase 2).
 - `assets/` — stylesheet, lichte JS en SVG-product­illustraties.
 
-## Belangrijk: echte huisstijl-assets nog inladen
+## Echte huisstijl-assets verwerkt
 
-De huidige live site van Lucky (`luckyzonwering.nl`) blokkeert geautomatiseerde
-toegang, waardoor het **echte logo en de productfoto's niet vanuit deze
-omgeving** konden worden opgehaald. Daarom gebruikt de demo nu:
+De demo gebruikt nu het **echte materiaal van luckyzonwering.nl**:
 
-- een **tijdelijk Lucky-woordmerk** (zon-icoon + "LUCKY Zonwering"), en
-- **schone SVG-illustraties** als placeholder voor de producten.
+- **Logo** `Lucky-zonwering-logo-DEF-2.svg` (wit/gradiënt) — in de header op een
+  navy-plaat geplaatst (logo is voor donkere achtergrond gemaakt), in de footer
+  direct op de donkere achtergrond.
+- **Favicon** `Lucky_Zonwering_Favicon_64-64px.png`.
+- **Productfoto's** per categorie (rolluiken, screens, knikarm-/uitvalschermen,
+  veranda/luifel, markiezen, horren, raamdecoratie).
+- **Teksten** en **Google-reviews** (5,0 uit 124) van de officiële kanalen.
+- Bron- en gebruiksoverzicht: zie `CONTENT.md`.
 
-Deze zijn 1-op-1 te vervangen door de echte assets. Lever aan:
-`logo-lucky.svg/png`, en productfoto's voor rolluiken, screens,
-knikarmschermen, horren, houten jaloezieën en binnenzonwering →
-plaatsen in `assets/` en de `src=`/logo verwijzingen omzetten.
+> Beeld/teksten zijn eigendom van Lucky Zonwering en uitsluitend bedoeld voor
+> deze concept-/pitchdemo.
 
 ## Kleur & stijl
 
 Navy `#143257` (koppen) + groen `#1f9d4d` (CTA) + warm zon-accent `#f7a823`,
 met de strakke, conversiegerichte opzet als marktreferentie — vertaald naar
-Lucky's sterke punten: 47 jaar, eigen productie, inclusief montage, 9,5 reviews.
+Lucky's sterke punten: 47 jaar, familiebedrijf sinds 1975, eigen productie
+sinds 1992, inclusief montage, 5,0 op Google (124 reviews).
