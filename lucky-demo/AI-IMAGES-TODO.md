@@ -67,6 +67,30 @@ if (img && photo) photo.src = img;
 Commit op `claude/modest-bardeen-2dkplw`, en sync de `/lucky`-map op de
 `gh-pages` branch (zoals eerder gedaan in deze repo).
 
+## Somfy-bediening (extra set)
+
+Ook gegenereerd op 2026-06-14 (zelfde model). URLs ophalen via
+`mcp__higgsfield__job_display(id)` → `results.rawUrl`, dan downloaden naar
+`lucky-demo/assets/`.
+
+| Beeld | Doel | Bestand | job-id |
+| :--- | :--- | :--- | :--- |
+| Afstandsbediening | bediening-stap "afstandsbediening" | `somfy-afstandsbediening.png` | `e7b58c23-6584-4c33-a1ed-20e4923ded78` |
+| Buismotor | bediening / "elektrisch" | `somfy-motor.png` | `96fd0db8-25ba-4d39-b5ef-63256db353df` |
+| App op smartphone | bediening "app/telefoon" | `somfy-app.png` | `8e93a7a8-2134-4676-8ef5-b9ca87635696` |
+
+Plaatsing-suggestie:
+- In de configurator bij **stap 4 (Bediening)**: kleine beelden bij
+  Afstandsbediening / App / Elektrisch (motor).
+- Eventueel een blok op de homepage: **"Aangedreven door Somfy"** met de
+  afstandsbediening + app, naast de bestaande A-merkenbalk.
+
+> Let op: AI rendert het echte **Somfy-logo** niet betrouwbaar. Toon de
+> merknaam als tekst (zoals in de A-merkenbalk), of vervang later door
+> officiële Somfy-productfoto's.
+
+---
+
 > AI-beelden zijn rechtenvrij gegenereerd, maar geen foto's van Lucky's eigen
 > producten. Voor de definitieve site eventueel vervangen door echte
 > productfoto's van Lucky.
