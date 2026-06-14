@@ -10,14 +10,14 @@ Kleuren: `wit`, `creme`, `antraciet`, `zwart`
 
 | Bestand | job-id |
 | :--- | :--- |
-| knikarmscherm-wit.png | `ce8222d4-44ab-42ec-89e8-bd80b536668a` |
-| knikarmscherm-creme.png | `c5dc83ee-d0d5-49ef-8480-f7f065f93bb6` |
-| knikarmscherm-antraciet.png | `274b0266-fee9-43ea-a5e5-40cf3c3983b6` |
-| knikarmscherm-zwart.png | `26859fba-2d49-4ed9-87bd-84ab0b1e7b14` |
-| cassetteluifel-wit.png | `91fb03ff-a5af-42cf-a874-387dc4f8c632` |
-| cassetteluifel-creme.png | `4336dcfb-90fb-47e6-a63b-7512dd1c8db5` |
-| cassetteluifel-antraciet.png | `0605f90f-f848-43e1-b772-d5606c7c534f` |
-| cassetteluifel-zwart.png | `4370f67f-b807-48f1-90c0-68beaa2aa5eb` |
+| knikarmscherm-wit.png | `3442c893-8fa6-4299-a08b-43ec0393a618` (strakke v2) |
+| knikarmscherm-creme.png | `95d3cbf5-9a6d-43fe-8aad-eefd762e92e1` (v2) |
+| knikarmscherm-antraciet.png | `48d6fe6c-b5f5-4a7b-9449-927d48dc434a` (v2) |
+| knikarmscherm-zwart.png | `56890784-0996-4831-bb1b-c8c551b24ba7` (v2) |
+| cassetteluifel-wit.png | `74099dc1-5f85-45c0-8e17-11790fe2159e` (strakke v2) |
+| cassetteluifel-creme.png | `5d5839ef-1d1a-4651-86ae-1bfe784c05cb` (v2) |
+| cassetteluifel-antraciet.png | `d1a6729b-4135-4b54-ac27-444ef7964a4a` (v2) |
+| cassetteluifel-zwart.png | `edd48bad-1e29-46ee-87ec-1f47c856ec86` (v2) |
 | uitvalscherm-wit.png | `d222398b-b325-4163-86c1-c2f5519eb9d0` |
 | uitvalscherm-creme.png | `931cbc95-c68f-4951-aeeb-f413414d1cc5` |
 | uitvalscherm-antraciet.png | `0ccd822c-1bad-4d65-8b42-b825e64c5884` |
