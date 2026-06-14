@@ -261,13 +261,21 @@
       if (MATRIX_COLS[vk]) return 'assets/veranda-' + uit + '-' + vk + '-glasdak.png';
       return productFallback();
     }
+    if (S.product === 'pergola') {
+      var pk = S.single.kleur, po = S.multi.extra || [], led = (S.single.verlichting === 'spots' || S.single.verlichting === 'strip');
+      if (S.single.dak === 'lamel' && MATRIX_COLS[pk]) {
+        var pu = (po.indexOf('zip') > -1 && led) ? 'luxe' : (po.indexOf('zip') > -1 ? 'screens' : 'open');
+        return 'assets/pergola-' + pu + '-' + pk + '-lamellendak.png';
+      }
+      return productFallback();
+    }
     return P().img;
   }
   function updatePreview() {
     var img = $('#pvImg');
     if (img && img.getAttribute('src') !== previewImg()) {
       img.style.opacity = 0;
-      if (S.product === 'rolluiken' || S.product === 'screens' || S.product === 'veranda') { img.onerror = function () { this.onerror = null; this.src = productFallback(); }; } else { img.onerror = null; }
+      if (S.product === 'rolluiken' || S.product === 'screens' || S.product === 'veranda' || S.product === 'pergola') { img.onerror = function () { this.onerror = null; this.src = productFallback(); }; } else { img.onerror = null; }
       setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120);
     }
     if ($('#pvSize')) $('#pvSize').textContent = S.w + ' × ' + S.h + ' cm';
