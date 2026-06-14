@@ -66,16 +66,40 @@ function syncActive(color) {
     });
   });
 }
+// Toon echte foto als die bestaat, anders het vector-rolluik (geen kapotte plaatjes)
+function showRolluik(color, name, imgSrc) {
+  applyRolluikColor(color, name);
+  var photo = document.getElementById('rolluikPhoto');
+  var svg = document.getElementById('rolluikSvg');
+  if (!photo) return;
+  if (!imgSrc) { photo.style.display = 'none'; if (svg) svg.style.display = ''; return; }
+  photo.onload = function () { photo.style.display = ''; if (svg) svg.style.display = 'none'; };
+  photo.onerror = function () { photo.style.display = 'none'; if (svg) svg.style.display = ''; };
+  photo.src = imgSrc;
+}
+
 colorGroups.forEach(function (group) {
   group.querySelectorAll('[data-color]').forEach(function (sw) {
     sw.addEventListener('click', function () {
       var color = sw.getAttribute('data-color');
       var name = sw.getAttribute('data-name') || sw.getAttribute('title');
-      applyRolluikColor(color, name);
+      var img = sw.getAttribute('data-img');
+      showRolluik(color, name, img);
       syncActive(color);
     });
   });
 });
+
+// Bij laden: probeer de foto van de actieve kleur (valt terug op vector als afwezig)
+(function initRolluik() {
+  var active = document.querySelector('[data-swatches] [data-color].active') ||
+               document.querySelector('[data-swatches] [data-color]');
+  if (active) {
+    showRolluik(active.getAttribute('data-color'),
+                active.getAttribute('data-name') || active.getAttribute('title'),
+                active.getAttribute('data-img'));
+  }
+})();
 
 // Tabs
 document.querySelectorAll('[data-tablist]').forEach(function (list) {
