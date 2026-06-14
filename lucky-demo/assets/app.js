@@ -34,24 +34,48 @@ document.querySelectorAll('[data-choice]').forEach(function (card) {
   });
 });
 
-// Kleurstalen + thumbnails: actieve staat tonen
-function bindSwatch(selector, applyColor) {
-  document.querySelectorAll(selector).forEach(function (group) {
-    group.querySelectorAll('span, .t').forEach(function (sw) {
-      sw.addEventListener('click', function () {
-        group.querySelectorAll('span, .t').forEach(function (s) { s.classList.remove('active'); });
-        sw.classList.add('active');
-        if (applyColor) {
-          var bg = sw.style.background;
-          var ring = document.querySelector('.closeup .ring');
-          if (ring && bg) ring.style.background = bg;
-        }
-      });
+// --- Echte kleurwissel van het rolluik in de configurator ---
+function darken(hex, factor) {
+  var h = hex.replace('#', '');
+  if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+  var r = Math.round(parseInt(h.substr(0, 2), 16) * factor);
+  var g = Math.round(parseInt(h.substr(2, 2), 16) * factor);
+  var b = Math.round(parseInt(h.substr(4, 2), 16) * factor);
+  return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+function applyRolluikColor(color, name) {
+  var slats = document.getElementById('rolluikSlats');
+  var cabinet = document.getElementById('rolluikCabinet');
+  var bar = document.getElementById('rolluikBar');
+  var ring = document.querySelector('.closeup .ring');
+  var label = document.getElementById('kleurLabel');
+  if (slats) slats.setAttribute('fill', color);
+  if (cabinet) cabinet.setAttribute('fill', darken(color, 0.82));
+  if (bar) bar.setAttribute('fill', darken(color, 0.68));
+  if (ring) ring.style.background = color;
+  if (label && name) label.textContent = 'Gekozen kleur: ' + name;
+}
+
+// Houd alle kleurkiezers (stalen + thumbnails) in sync
+var colorGroups = document.querySelectorAll('[data-swatches], .thumbs');
+function syncActive(color) {
+  colorGroups.forEach(function (group) {
+    group.querySelectorAll('[data-color]').forEach(function (s) {
+      s.classList.toggle('active', s.getAttribute('data-color') === color);
     });
   });
 }
-bindSwatch('[data-swatches]', true);
-bindSwatch('.thumbs', true);
+colorGroups.forEach(function (group) {
+  group.querySelectorAll('[data-color]').forEach(function (sw) {
+    sw.addEventListener('click', function () {
+      var color = sw.getAttribute('data-color');
+      var name = sw.getAttribute('data-name') || sw.getAttribute('title');
+      applyRolluikColor(color, name);
+      syncActive(color);
+    });
+  });
+});
 
 // Tabs
 document.querySelectorAll('[data-tablist]').forEach(function (list) {
