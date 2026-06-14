@@ -302,9 +302,14 @@ p { color: var(--muted); }
 /* ---------- Emotion / strategy rows ---------- */
 .emotion-row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .emotion-row + .emotion-row { margin-top: 80px; }
-.emotion-row .em-img { border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-m); aspect-ratio: 4/3; }
+.emotion-row .em-img { display: block; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-m); aspect-ratio: 4/3; }
 .emotion-row .em-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
 .emotion-row .em-img:hover img { transform: scale(1.05); }
+.em-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-weight: 700; color: var(--orange-600);
+  text-decoration: none; letter-spacing: .01em; transition: gap .25s ease, color .25s ease; }
+.em-link svg { width: 18px; height: 18px; transition: transform .25s ease; }
+.em-link:hover { color: var(--orange-700, #d96a0a); }
+.em-link:hover svg { transform: translateX(4px); }
 .emotion-row.flip .em-text { order: 2; }
 .em-tag { display: inline-block; color: var(--orange-600); font-weight: 800; letter-spacing: .04em; margin-bottom: 12px;
   font-size: .92rem; text-transform: uppercase; }
