@@ -69,6 +69,7 @@ interface Content {
   faq: { tag: string; t1: string; tg: string; items: { q: string; a: string }[] };
   contact: { tag: string; t1: string; tg: string; sub: string; benefits: string[]; fields: string[]; submit: string; privacy: string; okTitle: string; okBody: string };
   portfolio: { tag: string; t1: string; tg: string; sub: string; cta: string; items: { title: string; subtitle: string; desc: string; tags: string[]; result: string }[] };
+  analytics: { tag: string; t1: string; tg: string; sub: string; donutTitle: string; legend: string[]; gaugeTitle: string; gauges: string[]; barsTitle: string; series: string[] };
   dashboard: { title: string; live: string; kpis: string[]; chart: string };
   footer: string; // rights line tagline
   tagline: string;
@@ -181,6 +182,13 @@ const CONTENT: Record<Lang, Content> = {
         { title: 'Prefab Select CRM', subtitle: 'Maatwerk CRM & leadpijplijn', desc: 'Een op maat gebouwd CRM dat elke aanvraag automatisch binnenhaalt en leads door een pijplijn leidt (nieuw → in behandeling → gekwalificeerd → gesloten), met statusbeheer, zoeken en realtime overzicht. Volledig gebouwd naar de wensen van de klant.', tags: ['CRM op maat', 'Leadpijplijn', 'Automatisering', 'Dashboard'], result: 'Live op crmprefabselect.nl' },
       ],
     },
+    analytics: {
+      tag: 'Inzichten', t1: 'Alles in één', tg: 'overzicht',
+      sub: 'Wij bouwen dashboards die je groei realtime zichtbaar maken — van kanalen en conversie tot automatisering.',
+      donutTitle: 'Leads per kanaal', legend: ['Organisch', 'Advertenties', 'Doorverwijzing', 'E-mail'],
+      gaugeTitle: 'Prestaties', gauges: ['Conversie', 'Retentie', 'Automatisering'],
+      barsTitle: 'Groei per maand', series: ['Leads', 'Deals'],
+    },
     dashboard: { title: 'Nexora Groei-dashboard', live: 'Live', kpis: ['Omzet', 'Leads', 'Conversie'], chart: 'Omzetgroei' },
     footer: 'Alle rechten voorbehouden.',
     tagline: 'Website-, marketing- en salesgroei voor ambitieuze bedrijven',
@@ -291,6 +299,13 @@ const CONTENT: Record<Lang, Content> = {
         { title: 'Prefab Select Configurator', subtitle: '3D configurator for construction companies', desc: 'A custom configurator that lets clients build their own prefab in a few steps — with 3D visualisation and animation, instant price indication and automatic hand-off to the CRM. Built specifically for construction companies.', tags: ['3D configurator', '3D animation', 'Bespoke', 'Construction'], result: 'Live at prefabselect.nl' },
         { title: 'Prefab Select CRM', subtitle: 'Custom CRM & lead pipeline', desc: 'A bespoke CRM that captures every request automatically and moves leads through a pipeline (new → contacted → qualified → closed), with status management, search and a real-time overview. Built entirely to the client’s requirements.', tags: ['Custom CRM', 'Lead pipeline', 'Automation', 'Dashboard'], result: 'Live at crmprefabselect.nl' },
       ],
+    },
+    analytics: {
+      tag: 'Insights', t1: 'Everything in one', tg: 'overview',
+      sub: 'We build dashboards that make your growth visible in real time — from channels and conversion to automation.',
+      donutTitle: 'Leads by channel', legend: ['Organic', 'Ads', 'Referral', 'Email'],
+      gaugeTitle: 'Performance', gauges: ['Conversion', 'Retention', 'Automation'],
+      barsTitle: 'Growth per month', series: ['Leads', 'Deals'],
     },
     dashboard: { title: 'Nexora Growth Dashboard', live: 'Live', kpis: ['Revenue', 'Leads', 'Conversion'], chart: 'Revenue growth' },
     footer: 'All rights reserved.',
@@ -403,6 +418,13 @@ const CONTENT: Record<Lang, Content> = {
         { title: 'Prefab Select CRM', subtitle: 'CRM مخصّص ومسار العملاء', desc: 'نظام CRM مبني خصيصًا يلتقط كل طلب تلقائيًا وينقل العملاء عبر مسار (جديد ← تم التواصل ← مؤهّل ← مغلق)، مع إدارة الحالات والبحث ونظرة عامة فورية. مبني بالكامل وفق متطلبات العميل.', tags: ['CRM مخصّص', 'مسار العملاء', 'الأتمتة', 'لوحة تحكم'], result: 'مباشر على crmprefabselect.nl' },
       ],
     },
+    analytics: {
+      tag: 'رؤى', t1: 'كل شيء في', tg: 'لوحة واحدة',
+      sub: 'نبني لوحات تحكم تُظهر نموّك لحظيًا — من القنوات والتحويل إلى الأتمتة.',
+      donutTitle: 'العملاء حسب القناة', legend: ['عضوي', 'إعلانات', 'إحالة', 'بريد إلكتروني'],
+      gaugeTitle: 'الأداء', gauges: ['التحويل', 'الاحتفاظ', 'الأتمتة'],
+      barsTitle: 'النمو شهريًا', series: ['عملاء', 'صفقات'],
+    },
     dashboard: { title: 'لوحة نمو Nexora', live: 'مباشر', kpis: ['الإيرادات', 'العملاء', 'التحويل'], chart: 'نمو الإيرادات' },
     footer: 'جميع الحقوق محفوظة.',
     tagline: 'نمو الموقع والتسويق والمبيعات للشركات الطموحة',
@@ -456,6 +478,19 @@ const PORTFOLIO_META = [
   { img: '/portfolio/prefabselect.jpg', url: 'prefabselect.nl', icon: Globe },
   { img: '/portfolio/configurator.jpg', url: 'prefabselect.nl/configurator', icon: Settings2 },
   { img: '/portfolio/crm.jpg', url: 'crmprefabselect.nl', icon: Workflow },
+];
+
+// Analytics section data (language-independent numbers).
+const DONUT_DATA = [
+  { v: 38, c: PALETTE.blue },
+  { v: 27, c: PALETTE.cyan },
+  { v: 20, c: PALETTE.violet },
+  { v: 15, c: PALETTE.sky },
+];
+const GAUGE_DATA = [68, 92, 85];
+const BARS_DATA = [
+  { a: 0.45, b: 0.30 }, { a: 0.58, b: 0.40 }, { a: 0.52, b: 0.46 },
+  { a: 0.72, b: 0.55 }, { a: 0.84, b: 0.62 }, { a: 0.96, b: 0.74 },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -548,12 +583,14 @@ function Tilt3D({
   max = 9,
   scale = 1.0,
   style,
+  dir,
 }: {
   children: React.ReactNode;
   className?: string;
   max?: number;
   scale?: number;
   style?: React.CSSProperties;
+  dir?: 'ltr' | 'rtl';
 }) {
   const reduce = useReducedMotion();
   const px = useMotionValue(0.5);
@@ -561,11 +598,12 @@ function Tilt3D({
   const rotateX = useSpring(useTransform(py, [0, 1], [max, -max]), { stiffness: 150, damping: 18 });
   const rotateY = useSpring(useTransform(px, [0, 1], [-max, max]), { stiffness: 150, damping: 18 });
   if (reduce) {
-    return <div className={className} style={style}>{children}</div>;
+    return <div className={className} style={style} dir={dir}>{children}</div>;
   }
   return (
     <motion.div
       className={className}
+      dir={dir}
       style={{ transformPerspective: 1000, rotateX, rotateY, transformStyle: 'preserve-3d', ...style }}
       onMouseMove={(e) => {
         const r = e.currentTarget.getBoundingClientRect();
@@ -1157,6 +1195,149 @@ function CaseMetric({ label, to, decimals = 0, suffix = '' }: { label: string; t
 }
 
 /* ------------------------------------------------------------------ */
+/* Analytics — extra animated charts (donut, gauges, grouped bars)     */
+/* ------------------------------------------------------------------ */
+function DonutChart({ centerValue, centerLabel }: { centerValue: string; centerLabel: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  let cum = 0;
+  return (
+    <div ref={ref} className="relative h-40 w-40 flex-shrink-0">
+      <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+        <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3.5" />
+        {DONUT_DATA.map((s, i) => {
+          const off = -cum; cum += s.v;
+          return (
+            <motion.circle
+              key={i} cx="18" cy="18" r="15.915" fill="none" stroke={s.c} strokeWidth="3.5" strokeLinecap="round"
+              strokeDashoffset={off}
+              initial={{ strokeDasharray: '0 100' }}
+              animate={inView ? { strokeDasharray: `${s.v} ${100 - s.v}` } : {}}
+              transition={{ duration: 0.9, delay: 0.1 + i * 0.15, ease: 'easeOut' }}
+            />
+          );
+        })}
+      </svg>
+      <div className="absolute inset-0 grid place-items-center text-center">
+        <div>
+          <div className="text-2xl font-black text-white">{centerValue}</div>
+          <div className="text-[10px] uppercase tracking-wider text-white/50">{centerLabel}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Gauge({ value, label }: { value: number; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  return (
+    <div ref={ref} className="flex flex-col items-center">
+      <div className="relative h-20 w-20 sm:h-24 sm:w-24">
+        <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+          <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
+          <motion.circle
+            cx="18" cy="18" r="15.915" fill="none" stroke="url(#anaGaugeGrad)" strokeWidth="3" strokeLinecap="round"
+            strokeDasharray="100"
+            initial={{ strokeDashoffset: 100 }}
+            animate={inView ? { strokeDashoffset: 100 - value } : {}}
+            transition={{ duration: 1.4, ease: 'easeOut' }}
+          />
+        </svg>
+        <div className="absolute inset-0 grid place-items-center text-base font-black text-white sm:text-lg">
+          <Counter to={value} suffix="%" />
+        </div>
+      </div>
+      <span className="mt-2 text-center text-xs font-medium text-white/60">{label}</span>
+    </div>
+  );
+}
+
+function GroupedBars({ seriesLabels }: { seriesLabels: string[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  return (
+    <div ref={ref}>
+      <div className="flex h-32 items-end justify-between gap-3">
+        {BARS_DATA.map((m, i) => (
+          <div key={i} className="flex h-full flex-1 items-end justify-center gap-1">
+            <motion.div className="w-2.5 rounded-t-sm sm:w-3.5" style={{ background: GRAD }} initial={{ height: 0 }} animate={inView ? { height: `${m.a * 100}%` } : {}} transition={{ duration: 0.9, delay: i * 0.08, ease: 'easeOut' }} />
+            <motion.div className="w-2.5 rounded-t-sm opacity-70 sm:w-3.5" style={{ background: PALETTE.violet }} initial={{ height: 0 }} animate={inView ? { height: `${m.b * 100}%` } : {}} transition={{ duration: 0.9, delay: i * 0.08 + 0.1, ease: 'easeOut' }} />
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 flex items-center gap-5 text-xs text-white/60">
+        <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm" style={{ background: GRAD }} /> {seriesLabels[0]}</span>
+        <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm" style={{ background: PALETTE.violet }} /> {seriesLabels[1]}</span>
+      </div>
+    </div>
+  );
+}
+
+function Analytics() {
+  const { t } = useLang();
+  const a = t.analytics;
+  return (
+    <section id="insights" className="relative overflow-hidden bg-[#05070f] py-24 sm:py-32">
+      <div className="ai-animated-bg absolute inset-0 -z-10 opacity-30" />
+      <div className="container-custom relative">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <SectionTag>{a.tag}</SectionTag>
+          <h2 className="mt-5 text-3xl font-black tracking-tighter text-white sm:text-5xl">
+            {a.t1} <GradientText>{a.tg}</GradientText>
+          </h2>
+          <p className="mt-4 text-lg text-white/60">{a.sub}</p>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <Tilt3D max={4} dir="ltr" className="mx-auto mt-14 max-w-5xl rounded-3xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_50px_120px_-30px_rgba(37,99,235,0.6)] backdrop-blur-2xl sm:p-8">
+            {/* shared gradient for gauges */}
+            <svg width="0" height="0" className="absolute"><defs>
+              <linearGradient id="anaGaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor={PALETTE.blue} /><stop offset="0.6" stopColor={PALETTE.cyan} /><stop offset="1" stopColor={PALETTE.sky} />
+              </linearGradient>
+            </defs></svg>
+
+            <div className="grid gap-5 lg:grid-cols-2">
+              {/* donut */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                <h4 className="text-sm font-bold text-white/80">{a.donutTitle}</h4>
+                <div className="mt-5 flex items-center gap-6">
+                  <DonutChart centerValue={`${DONUT_DATA[0].v}%`} centerLabel={a.legend[0]} />
+                  <ul className="flex-1 space-y-2.5">
+                    {a.legend.map((l, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="h-2.5 w-2.5 rounded-sm" style={{ background: DONUT_DATA[i].c }} />
+                        {l}
+                        <span className="ml-auto font-bold text-white">{DONUT_DATA[i].v}%</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* gauges */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                <h4 className="text-sm font-bold text-white/80">{a.gaugeTitle}</h4>
+                <div className="mt-5 grid grid-cols-3 gap-2">
+                  {a.gauges.map((g, i) => <Gauge key={i} value={GAUGE_DATA[i]} label={g} />)}
+                </div>
+              </div>
+            </div>
+
+            {/* grouped bars */}
+            <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <h4 className="text-sm font-bold text-white/80">{a.barsTitle}</h4>
+              <div className="mt-5"><GroupedBars seriesLabels={a.series} /></div>
+            </div>
+          </Tilt3D>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Portfolio — real work (Prefab Select website + CRM)                 */
 /* ------------------------------------------------------------------ */
 function Portfolio() {
@@ -1576,6 +1757,7 @@ export default function AIAgency() {
           <Hero />
           <Services />
           <Features />
+          <Analytics />
           <Process />
           <CaseStudies />
           <Portfolio />
