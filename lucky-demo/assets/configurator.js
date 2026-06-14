@@ -304,7 +304,13 @@
     if (S.product === 'luifel') { var lc = S.single.frame; if (MATRIX_COLS[lc]) return 'assets/cassetteluifel-' + lc + '.png'; return productFallback(); }
     if (S.product === 'pergoladoek') {
       var dk = S.single.kleur;
-      if (MATRIX_COLS[dk]) return 'assets/pergoladoek-gesloten-' + dk + '.png';
+      if (MATRIX_COLS[dk]) {
+        var led = S.single.verlichting && S.single.verlichting !== 'geen';
+        var scr = S.single.screens && S.single.screens !== 'geen';
+        if (scr && led) return 'assets/pergola-luxe-' + dk + '-lamellendak.png';
+        if (scr) return 'assets/pergola-screens-' + dk + '-lamellendak.png';
+        return 'assets/pergoladoek-gesloten-' + dk + '.png';
+      }
       return productFallback();
     }
     return P().img;
