@@ -41,10 +41,6 @@ const faqData: FAQCategory[] = [
       {
         question: 'Hoe lang duurt een omgevingsvergunning?',
         answer: 'Een eenvoudige aanvraag duurt gemiddeld ongeveer 8 weken. Complexere aanvragen kunnen langer duren afhankelijk van de gemeente, situatie en aanvullende eisen.'
-      },
-      {
-        question: 'Werkt prefab in elke gemeente?',
-        answer: 'Ja, Prefab Select realiseert prefab projecten door heel Nederland. De bouwmethode werkt overal hetzelfde, maar de vergunningsregels kunnen per gemeente verschillen. Daarom voeren wij altijd een vergunningscheck uit voor jouw specifieke situatie en adviseren wij om bij twijfel ook de gemeente te raadplegen.'
       }
     ]
   },
@@ -54,10 +50,6 @@ const faqData: FAQCategory[] = [
       {
         question: 'Heb je akkoord van de buren nodig om uit te bouwen?',
         answer: 'In principe mag je zonder akkoord uitbouwen wanneer je binnen de regelgeving bouwt. Natuurlijk adviseren wij wel om jouw plannen vooraf met de buren te bespreken.'
-      },
-      {
-        question: 'Wat als mijn buren bezwaar hebben tegen de uitbouw?',
-        answer: 'Wij adviseren om je buren vroeg in het traject te informeren over de plannen; dat voorkomt vaak misverstanden en bezwaren achteraf. Bouw je binnen de geldende regels, dan staat een bezwaar de bouw meestal niet in de weg. Loopt er een vergunningstraject, dan kent dat een formele bezwaarprocedure via de gemeente. Mocht er bezwaar zijn, dan denken wij graag met je mee over een passende oplossing.'
       },
       {
         question: 'Beide buren hebben een uitbouw, is het mogelijk om daartussen te bouwen?',
@@ -141,10 +133,6 @@ const faqData: FAQCategory[] = [
       {
         question: 'Doen jullie ook opbouwen?',
         answer: 'Ja, wij realiseren ook opbouwen op prefab projecten die wij zelf hebben gerealiseerd.'
-      },
-      {
-        question: 'Kan ik mijn uitbouw later nog aanpassen of uitbreiden?',
-        answer: 'Ons prefab systeem is modulair opgebouwd, waardoor er in veel gevallen later nog aanpassingen of uitbreidingen mogelijk zijn. Wat er precies kan, hangt af van de constructie en de situatie op locatie. Neem gerust contact met ons op, dan bespreken wij graag de mogelijkheden voor jouw project.'
       }
     ]
   },
@@ -222,10 +210,6 @@ const faqData: FAQCategory[] = [
       {
         question: 'Hoe kan ik mijn aanbouw financieren?',
         answer: 'Veel klanten financieren hun project via spaargeld, hypotheekverhoging, bouwdepot of financieringsmogelijkheden via een financieel adviseur.'
-      },
-      {
-        question: 'Kan ik de binnenafwerking zelf doen om kosten te besparen?',
-        answer: 'Ja, dat is bespreekbaar. Wij kunnen de aanbouw casco opleveren, waarbij de constructie wind- en waterdicht staat en je zelf de binnenafwerking verzorgt, zoals schilderwerk of vloeren. Bespreek vooraf met ons welke werkzaamheden je zelf wilt uitvoeren, dan leggen wij de afspraken duidelijk vast in de offerte.'
       }
     ]
   },

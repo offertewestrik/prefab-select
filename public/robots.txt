@@ -19,37 +19,4 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
-# Perplexity live ophalen namens gebruikers
-User-agent: Perplexity-User
-Allow: /
-
-# Claude (Anthropic) — zoeken en live ophalen
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
-# Microsoft Copilot gebruikt de Bing-index
-User-agent: Bingbot
-Allow: /
-
-# Common Crawl — trainingsdata voor veel AI-modellen
-User-agent: CCBot
-Allow: /
-
-# Meta AI
-User-agent: meta-externalagent
-Allow: /
-
-# Apple Intelligence / Siri
-User-agent: Applebot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
 Sitemap: https://www.prefabselect.nl/sitemap.xml
