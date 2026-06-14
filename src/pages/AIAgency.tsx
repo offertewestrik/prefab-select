@@ -1021,6 +1021,7 @@ function Hero() {
         loop
         playsInline
         preload="auto"
+        poster="/nexora-hero-poster.jpg"
         aria-hidden="true"
       >
         <source src="/nexora-hero.mp4" type="video/mp4" />
@@ -1360,7 +1361,21 @@ function Analytics() {
   const a = t.analytics;
   return (
     <section id="insights" className="relative overflow-hidden bg-[#05070f] py-24 sm:py-32">
-      <div className="ai-animated-bg absolute inset-0 -z-10 opacity-30" />
+      <div className="ai-animated-bg absolute inset-0 -z-30 opacity-30" />
+      {/* decorative looping background video — never captures clicks */}
+      <video
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover opacity-40"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/nexora-insights.mp4" type="video/mp4" />
+      </video>
+      {/* dark overlay keeps the charts and headline readable on top of the video */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(5,7,15,0.55),rgba(5,7,15,0.9))]" />
       <div className="container-custom relative">
         <Reveal className="mx-auto max-w-2xl text-center">
           <SectionTag>{a.tag}</SectionTag>
@@ -1656,7 +1671,21 @@ function Contact() {
   const benefitIcons = [ShieldCheck, Clock, Rocket];
   return (
     <section id="contact" className="relative overflow-hidden bg-[#05070f] py-24 sm:py-32">
-      <div className="ai-animated-bg absolute inset-0 -z-10 opacity-50" />
+      <div className="ai-animated-bg absolute inset-0 -z-30 opacity-50" />
+      {/* decorative looping background video — never captures clicks */}
+      <video
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover opacity-40"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/nexora-cta.mp4" type="video/mp4" />
+      </video>
+      {/* dark overlay keeps the form and headline readable on top of the video */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(5,7,15,0.5),rgba(5,7,15,0.88))]" />
       <div className="container-custom relative">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal>
