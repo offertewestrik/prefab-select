@@ -14,7 +14,7 @@ Kastvormen: `rond`, `afsch20`, `afsch45`, `vierkant` · Kleuren: `wit`, `creme`,
 | Bestand | job-id |
 | :--- | :--- |
 | rolluik-rond-antraciet.png | `7a8dcff3-04ce-4384-92a3-141c7be4a02e` |
-| rolluik-afsch20-antraciet.png | `9545e108-e56f-4c03-8d13-144a5b184e4d` |
+| rolluik-afsch20-antraciet.png | `25398f04-86b0-4a28-b368-66d5c262dc69` (opnieuw gegenereerd) |
 | rolluik-afsch45-antraciet.png | `6d633e4c-5224-4ab1-9aff-b952ec6bd23b` |
 | rolluik-vierkant-antraciet.png | `8782668a-2a81-422a-805f-56c0d4cac9c3` |
 | rolluik-rond-wit.png | `c23324ac-a28d-41a1-80cc-74ccd6b0f9ff` |
