@@ -280,13 +280,16 @@
       }
       return productFallback();
     }
+    if (S.product === 'knikarm') { var kc = S.single.frame; if (MATRIX_COLS[kc]) return 'assets/knikarmscherm-' + kc + '.png'; return productFallback(); }
+    if (S.product === 'uitval') { var uc = S.single.frame; if (MATRIX_COLS[uc]) return 'assets/uitvalscherm-' + uc + '.png'; return productFallback(); }
+    if (S.product === 'luifel') { var lc = S.single.frame; if (MATRIX_COLS[lc]) return 'assets/cassetteluifel-' + lc + '.png'; return productFallback(); }
     return P().img;
   }
   function updatePreview() {
     var img = $('#pvImg');
     if (img && img.getAttribute('src') !== previewImg()) {
       img.style.opacity = 0;
-      if (S.product === 'rolluiken' || S.product === 'screens' || S.product === 'veranda' || S.product === 'pergola') { img.onerror = function () { this.onerror = null; this.src = productFallback(); }; } else { img.onerror = null; }
+      img.onerror = function () { this.onerror = null; this.src = productFallback(); };
       setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120);
     }
     if ($('#pvSize')) $('#pvSize').textContent = S.w + ' × ' + S.h + ' cm';
