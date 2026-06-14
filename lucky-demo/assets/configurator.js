@@ -239,13 +239,23 @@
   }
 
   /* ---- preview ---- */
+  var KAST_COLS = { wit: 1, creme: 1, antraciet: 1, zwart: 1 };
+  function rolluikFallback() { return ROLLUIK_COL_IMG[S.single.kleur] || P().img; }
   function previewImg() {
-    if (S.product === 'rolluiken') { var k = mainColorGroup().key; return ROLLUIK_COL_IMG[S.single[k]] || P().img; }
+    if (S.product === 'rolluiken') {
+      var kast = S.single.kast, kleur = S.single.kleur;
+      if (kast && KAST_COLS[kleur]) return 'assets/rolluik-' + kast + '-' + kleur + '.png';
+      return rolluikFallback();
+    }
     return P().img;
   }
   function updatePreview() {
     var img = $('#pvImg');
-    if (img && img.getAttribute('src') !== previewImg()) { img.style.opacity = 0; setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120); }
+    if (img && img.getAttribute('src') !== previewImg()) {
+      img.style.opacity = 0;
+      if (S.product === 'rolluiken') { img.onerror = function () { this.onerror = null; this.src = rolluikFallback(); }; } else { img.onerror = null; }
+      setTimeout(function () { img.src = previewImg(); img.style.opacity = 1; }, 120);
+    }
     if ($('#pvSize')) $('#pvSize').textContent = S.w + ' × ' + S.h + ' cm';
     var mc = mainColorGroup(), ch = mc ? choiceById(mc, S.single[mc.key]) : null;
     if ($('#pvColor')) $('#pvColor').innerHTML = ch ? ((ch.hex ? '<i style="display:inline-block;width:11px;height:11px;border-radius:3px;background:' + ch.hex + ';border:1px solid #ccc;margin-right:6px;vertical-align:-1px"></i>' : '') + ch.nm) : '—';
