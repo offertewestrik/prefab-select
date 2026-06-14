@@ -126,7 +126,7 @@
       { key: 'verlichting', type: 'single', label: 'Verlichting', short: 'Licht', choices: [c('geen', 'Geen', 0), c('spots', 'LED Spots', 350, { icon: 'light' }), c('warm', 'LED Strip Warm Wit', 450, { icon: 'light' }), c('rgb', 'LED Strip RGB', 600, { icon: 'light' }), c('combi', 'Spots + LED Strip', 800, { icon: 'light' })] },
       { key: 'verwarming', type: 'single', label: 'Verwarming', short: 'Heater', choices: [c('geen', 'Geen', 0), c('1', '1 Heater', 350, { icon: 'heat' }), c('2', '2 Heaters', 650, { icon: 'heat' })] },
       { key: 'bediening', type: 'single', label: 'Bediening', short: 'Bediening', choices: [c('hand', 'Handmatig', 0, { icon: 'crank' }), c('rts', 'Somfy RTS', 290, { img: IMG.rts }), c('io', 'Somfy IO', 360, { img: IMG.app }), c('smart', 'Smartphone bediening', 420, { icon: 'phone' })] },
-      { key: 'extra', type: 'multi', label: 'Extra opties', short: 'Opties', choices: [opt('winds', 'Windsensor', 180, 'wind'), opt('regens', 'Regensensor', 160, 'drop'), opt('zonaut', 'Zonautomaat', 220, 'sun')] }
+      { key: 'extra', type: 'multi', label: 'Extra opties', short: 'Opties', choices: [c('winds', 'Windsensor', 180, { icon: 'wind' }), c('regens', 'Regensensor', 160, { icon: 'drop' }), c('zonaut', 'Zonautomaat', 220, { icon: 'sun' })] }
     ]
   };
   ORDER.push('pergoladoek');
