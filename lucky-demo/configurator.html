@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stel uw zonwering samen — Lucky Zonwering</title>
-<meta name="description" content="Stel online uw rolluiken, screens, veranda of zonwering op maat samen bij Lucky Zonwering. Kies afmeting, kleur, bediening en opties — ontvang direct een richtprijs en offerte op maat.">
+<meta name="description" content="Stel online uw rolluiken, screens, veranda, pergola of zonwering volledig op maat samen bij Lucky Zonwering. Kies afmeting, type, kleur, bediening en opties — ontvang direct een richtprijs en gratis advies & offerte.">
 <link rel="icon" type="image/png" href="assets/Lucky_Zonwering_Favicon_64-64px.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,88 +46,15 @@
     <div class="cfg-head">
       <span class="eyebrow">Configurator</span>
       <h1 style="font-size:clamp(2rem,4vw,3rem)">Stel uw zonwering samen</h1>
-      <p style="color:var(--muted);font-size:1.1rem;margin-top:10px">In 7 simpele stappen naar uw offerte op maat — inclusief richtprijs en gratis inmeten.</p>
+      <p style="color:var(--muted);font-size:1.1rem;margin-top:10px">Volledig op maat — kies product, afmeting, kleur, bediening en opties. U ziet direct een richtprijs.</p>
     </div>
 
     <div class="cfg-progress"><div class="fill" id="cfgFill"></div></div>
-    <div class="cfg-steps" id="cfgSteps">
-      <div class="s" data-i="0"><span class="n">1</span> Product</div>
-      <div class="s" data-i="1"><span class="n">2</span> Afmetingen</div>
-      <div class="s" data-i="2"><span class="n">3</span> Kleur</div>
-      <div class="s" data-i="3"><span class="n">4</span> Bediening</div>
-      <div class="s" data-i="4"><span class="n">5</span> Opties</div>
-      <div class="s" data-i="5"><span class="n">6</span> Overzicht</div>
-      <div class="s" data-i="6"><span class="n">7</span> Offerte</div>
-    </div>
+    <div class="cfg-steps" id="cfgSteps"></div>
 
     <div class="cfg-grid">
       <div class="cfg-panel">
-
-        <!-- 1 product -->
-        <div class="step-pane active">
-          <h2 class="step-title">Kies uw product</h2>
-          <p class="step-sub">Waarvoor wilt u een offerte op maat?</p>
-          <div class="opt-grid" id="gridProduct"></div>
-        </div>
-
-        <!-- 2 dimensions -->
-        <div class="step-pane">
-          <h2 class="step-title">Kies uw afmetingen</h2>
-          <p class="step-sub">Schuif naar de gewenste breedte en hoogte — u ziet het direct.</p>
-          <div class="dim-ctrls">
-            <div class="dim-row"><label>Breedte <b id="valW">200 cm</b></label><input type="range" id="rngW" min="60" max="400" value="200" step="5"></div>
-            <div class="dim-row"><label>Hoogte <b id="valH">160 cm</b></label><input type="range" id="rngH" min="60" max="300" value="160" step="5"></div>
-            <div class="size-vis"><div class="size-box" id="sizeBox"><span class="wlab" id="sizeW">200 cm</span><span class="hlab" id="sizeH">160 cm</span></div></div>
-          </div>
-        </div>
-
-        <!-- 3 colour -->
-        <div class="step-pane">
-          <h2 class="step-title">Kies uw kleur</h2>
-          <p class="step-sub">Populaire kleuren — de preview verandert live mee.</p>
-          <div class="swatches-lg" id="gridColor"></div>
-        </div>
-
-        <!-- 4 bediening -->
-        <div class="step-pane">
-          <h2 class="step-title">Kies uw bediening</h2>
-          <p class="step-sub">Van handmatig tot volledig smart met Somfy.</p>
-          <div class="opt-grid" id="gridBediening"></div>
-        </div>
-
-        <!-- 5 opties -->
-        <div class="step-pane">
-          <h2 class="step-title">Extra opties</h2>
-          <p class="step-sub" id="optHint">Kies wat u wilt (meerdere mogelijk).</p>
-          <div class="opt-grid" id="gridOpties"></div>
-        </div>
-
-        <!-- 6 overzicht -->
-        <div class="step-pane">
-          <h2 class="step-title">Uw configuratie</h2>
-          <p class="step-sub">Klopt alles? Ga door om uw offerte aan te vragen.</p>
-          <div id="paneSummaryBody"></div>
-        </div>
-
-        <!-- 7 offerte -->
-        <div class="step-pane" id="paneLead">
-          <h2 class="step-title">Ontvang uw offerte</h2>
-          <p class="step-sub">Vul uw gegevens in — u ontvangt een offerte op maat na gratis inmeten aan huis.</p>
-          <form id="leadForm" class="lead-grid">
-            <input class="full" type="text" placeholder="Naam" required>
-            <input type="email" placeholder="E-mailadres" required>
-            <input type="tel" placeholder="Telefoonnummer" required>
-            <input class="full" type="text" placeholder="Postcode" required>
-            <button class="btn btn-primary btn-lg full" type="submit">Ontvang mijn offerte
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          </form>
-          <div class="trust-mini">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Gratis inmeten</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Eigen montage</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 5,0 op Google</span>
-          </div>
-        </div>
-
+        <div id="stepBody" class="step-pane active"></div>
         <div class="cfg-nav">
           <button class="btn btn-back" id="btnBack">Terug</button>
           <button class="btn btn-primary btnNext next-d">Volgende
@@ -135,7 +62,6 @@
         </div>
       </div>
 
-      <!-- live preview -->
       <aside class="cfg-preview">
         <div class="pv-card">
           <div class="pv-stage"><img id="pvImg" src="assets/rolluik-antraciet.png" alt="Live preview van uw configuratie"><div class="pv-badges"><span id="pvSize">200 × 160 cm</span><span id="pvColor">Antraciet</span></div></div>
@@ -150,13 +76,11 @@
   </div>
 </section>
 
-<!-- Mobiele sticky balk -->
 <div class="cfg-bar">
   <div><small>Indicatieve richtprijs</small><span class="amt pvAmt">€ 0</span></div>
   <button class="btn btn-primary btnNext">Volgende</button>
 </div>
 
-<!-- WhatsApp -->
 <a class="wa" href="https://wa.me/31412633590" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.8 1.5 5.8 1.5 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.6c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10 10 0 01-1.6-5.4C5.8 9.9 10.4 5.4 16 5.4S26.2 9.9 26.2 15.5 21.6 25.6 16 25.6z"/></svg>
 </a>
