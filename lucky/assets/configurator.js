@@ -304,15 +304,7 @@
     if (S.product === 'luifel') { var lc = S.single.frame; if (MATRIX_COLS[lc]) return 'assets/cassetteluifel-' + lc + '.png'; return productFallback(); }
     if (S.product === 'pergoladoek') {
       var dk = S.single.kleur;
-      if (MATRIX_COLS[dk]) {
-        var led = S.single.verlichting && S.single.verlichting !== 'geen';
-        var scr = S.single.screens && S.single.screens !== 'geen';
-        var st;
-        if (scr && led) st = 'luxe';
-        else if (scr) st = 'screens';
-        else { var dp = S.single.doekpositie; st = (dp === 'open') ? 'open' : ((dp === 'p25' || dp === 'p50') ? 'half' : 'gesloten'); }
-        return 'assets/pergoladoek-' + st + '-' + dk + '.png';
-      }
+      if (MATRIX_COLS[dk]) return 'assets/pergoladoek-gesloten-' + dk + '.png';
       return productFallback();
     }
     return P().img;
