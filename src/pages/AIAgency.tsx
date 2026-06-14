@@ -1753,9 +1753,16 @@ function Contact() {
   const [sent, setSent] = useState(false);
   const benefitIcons = [ShieldCheck, Clock, Rocket];
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#05070f] py-24 sm:py-32">
-      <div className="ai-animated-bg absolute inset-0 -z-10 opacity-50" />
-      <div className="container-custom relative">
+    <section id="contact" className="relative isolate overflow-hidden bg-[#05070f] py-24 sm:py-32">
+      {/* animated gradient fallback (shown if the video is absent) */}
+      <div className="ai-animated-bg absolute inset-0 -z-20 opacity-50" />
+      {/* optional CTA background video — drop public/nexora-cta.mp4 to enable */}
+      <video className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover" autoPlay muted loop playsInline aria-hidden="true">
+        <source src="/nexora-cta.mp4" type="video/mp4" />
+      </video>
+      {/* dark overlay so the heading + form stay readable on top of the video */}
+      <div className="pointer-events-none absolute inset-0 -z-[5] bg-[radial-gradient(ellipse_at_center,rgba(5,7,15,0.5),rgba(5,7,15,0.85))]" />
+      <div className="container-custom relative z-10">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <SectionTag>{t.contact.tag}</SectionTag>
