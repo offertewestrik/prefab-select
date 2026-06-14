@@ -274,7 +274,7 @@
     }
     if (S.product === 'pergola') {
       var pk = S.single.kleur, po = S.multi.extra || [], led = (S.single.verlichting === 'spots' || S.single.verlichting === 'strip');
-      if (S.single.dak === 'lamel' && MATRIX_COLS[pk]) {
+      if (MATRIX_COLS[pk]) {
         var pu = (po.indexOf('zip') > -1 && led) ? 'luxe' : (po.indexOf('zip') > -1 ? 'screens' : 'open');
         return 'assets/pergola-' + pu + '-' + pk + '-lamellendak.png';
       }
