@@ -20,6 +20,7 @@ import {
   useMotionValue,
   useSpring,
   useReducedMotion,
+  type MotionValue,
 } from 'motion/react';
 import {
   Sparkles, Bot, Zap, Target, Globe, Filter, Workflow, MessageSquare, Code2,
@@ -849,6 +850,101 @@ function ParticleField() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Flying dashboards — real charts floating across the hero            */
+/* ------------------------------------------------------------------ */
+function FlyingDashboards({ progress }: { progress: MotionValue<number> }) {
+  const { t } = useLang();
+  const reduce = useReducedMotion();
+  const y1 = useTransform(progress, [0, 1], [0, -150]);
+  const y2 = useTransform(progress, [0, 1], [0, -90]);
+  const y3 = useTransform(progress, [0, 1], [0, -210]);
+  const y4 = useTransform(progress, [0, 1], [0, -120]);
+
+  const Card = ({ children, floatY = 16, dur = 7, delay = 0 }: { children: React.ReactNode; floatY?: number; dur?: number; delay?: number }) => (
+    <motion.div
+      animate={reduce ? undefined : { y: [0, -floatY, 0], rotate: [0, 1.5, 0] }}
+      transition={{ duration: dur, repeat: Infinity, ease: 'easeInOut', delay }}
+      className="rounded-2xl border border-white/15 bg-white/[0.07] p-3 shadow-[0_24px_70px_-24px_rgba(37,99,235,0.7)] backdrop-blur-xl"
+    >
+      {children}
+    </motion.div>
+  );
+
+  let cum = 0;
+  return (
+    <div className="pointer-events-none absolute inset-0 z-[2] hidden xl:block" aria-hidden>
+      {/* revenue line card — upper left */}
+      <motion.div style={{ y: y1 }} className="absolute left-[1.5%] top-[28%] w-[180px]">
+        <Card dur={7}>
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-[10px] font-semibold text-white/60">{t.dashboard.chart}</span>
+            <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-300"><TrendingUp size={10} />32%</span>
+          </div>
+          <svg viewBox="0 0 100 34" preserveAspectRatio="none" className="h-12 w-full">
+            <defs><linearGradient id="flyArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={PALETTE.blue2} stopOpacity="0.5" /><stop offset="1" stopColor={PALETTE.blue2} stopOpacity="0" /></linearGradient></defs>
+            <path d="M0,28 L18,22 L34,25 L52,14 L70,18 L88,8 L100,5 L100,34 L0,34 Z" fill="url(#flyArea)" />
+            <polyline points="0,28 18,22 34,25 52,14 70,18 88,8 100,5" fill="none" stroke={PALETTE.sky} strokeWidth="1.5" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <div className="mt-1 text-sm font-black text-white">€48K</div>
+        </Card>
+      </motion.div>
+
+      {/* leads KPI card — upper right */}
+      <motion.div style={{ y: y2 }} className="absolute right-[2%] top-[20%] w-[148px]">
+        <Card dur={8} delay={0.6}>
+          <div className="text-[10px] font-medium text-white/50">{t.dashboard.kpis[1]}</div>
+          <div className="text-xl font-black text-white"><Counter to={1284} /></div>
+          <div className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-300"><TrendingUp size={10} />+18%</div>
+          <div className="mt-2 flex h-7 items-end gap-1">
+            {[0.4, 0.55, 0.5, 0.7, 0.62, 0.85, 0.95].map((h, i) => (
+              <span key={i} className="flex-1 rounded-t-sm" style={{ height: `${h * 100}%`, background: GRAD, opacity: 0.6 + i * 0.05 }} />
+            ))}
+          </div>
+        </Card>
+      </motion.div>
+
+      {/* donut card — lower left */}
+      <motion.div style={{ y: y3 }} className="absolute left-[4%] top-[60%] w-[150px]">
+        <Card dur={9} delay={1.1}>
+          <div className="mb-1.5 text-[10px] font-semibold text-white/60">{t.analytics.donutTitle}</div>
+          <div className="flex items-center gap-2.5">
+            <div className="relative h-14 w-14 flex-shrink-0">
+              <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+                <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="4" />
+                {DONUT_DATA.map((s, i) => { const off = -cum; cum += s.v; return <circle key={i} cx="18" cy="18" r="15.915" fill="none" stroke={s.c} strokeWidth="4" strokeDasharray={`${s.v} ${100 - s.v}`} strokeDashoffset={off} />; })}
+              </svg>
+              <div className="absolute inset-0 grid place-items-center text-[10px] font-black text-white">38%</div>
+            </div>
+            <ul className="space-y-1">
+              {DONUT_DATA.slice(0, 3).map((s, i) => (<li key={i} className="flex items-center gap-1 text-[9px] text-white/60"><span className="h-1.5 w-1.5 rounded-sm" style={{ background: s.c }} />{s.v}%</li>))}
+            </ul>
+          </div>
+        </Card>
+      </motion.div>
+
+      {/* gauge card — lower right */}
+      <motion.div style={{ y: y4 }} className="absolute right-[3%] top-[46%] w-[150px]">
+        <Card dur={7.5} delay={0.3}>
+          <div className="mb-1.5 text-[10px] font-semibold text-white/60">{t.analytics.gauges[0]}</div>
+          <div className="flex items-center gap-2.5">
+            <div className="relative h-14 w-14 flex-shrink-0">
+              <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+                <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
+                <circle cx="18" cy="18" r="15.915" fill="none" stroke={PALETTE.cyan} strokeWidth="3" strokeLinecap="round" strokeDasharray="100" strokeDashoffset={100 - 68} />
+              </svg>
+              <div className="absolute inset-0 grid place-items-center text-xs font-black text-white">68%</div>
+            </div>
+            <div className="flex h-7 flex-1 items-end gap-0.5">
+              {[0.5, 0.65, 0.6, 0.8, 0.92].map((h, i) => (<span key={i} className="flex-1 rounded-t-sm" style={{ height: `${h * 100}%`, background: PALETTE.violet, opacity: 0.75 }} />))}
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Live dashboard (animated demo visual)                               */
 /* ------------------------------------------------------------------ */
 const BAR_COUNT = 16;
@@ -1037,6 +1133,8 @@ function Hero() {
       <div className="ai-grid absolute inset-0 -z-10 opacity-[0.15]" />
       {/* animated constellation network (Higgsfield-style, pure code) */}
       <ParticleField />
+      {/* real dashboards/charts flying across the hero */}
+      <FlyingDashboards progress={scrollYProgress} />
 
       <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-md">
