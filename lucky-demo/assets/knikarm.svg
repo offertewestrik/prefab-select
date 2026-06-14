@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Knikarmscherm">
+  <rect width="320" height="200" fill="#eef2f6"/>
+  <rect x="40" y="40" width="240" height="14" rx="3" fill="#2b3640"/>
+  <polygon points="40,54 280,54 264,150 56,150" fill="#e7ddcb"/>
+  <g fill="#d8ccb4">
+    <polygon points="56,54 84,150 64,150 40,54"/>
+    <polygon points="112,54 132,150 112,150 96,54"/>
+    <polygon points="168,54 180,150 160,150 152,54"/>
+    <polygon points="224,54 228,150 208,150 208,54"/>
+  </g>
+  <rect x="52" y="150" width="216" height="9" rx="3" fill="#cdbfa3"/>
+  <rect x="70" y="54" width="4" height="80" fill="#9aa7b2"/>
+  <rect x="246" y="54" width="4" height="80" fill="#9aa7b2"/>
+</svg>
