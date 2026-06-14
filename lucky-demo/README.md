@@ -16,9 +16,11 @@ python3 -m http.server 8080
 
 ## Inhoud
 
-- `index.html` — homepage: hero, USP-balk, assortiment (rolluiken, screens,
-  knikarmschermen, horren, **houten jaloezieën**, binnenzonwering),
-  configurator-teaser, "waarom Lucky", reviews, contact.
+- `index.html` — homepage: hero, USP-balk, **A-merkenbalk** (Luxaflex, Verano,
+  Somfy, Brustor), assortiment (rolluiken, screens, knikarmschermen,
+  **luifels**, horren, **houten jaloezieën**, binnenzonwering),
+  configurator-teaser, "waarom Lucky", **garantie/stalen/keurmerk-band**,
+  reviews, contact.
 - `configurator.html` — "Jouw rolluik op maat": productpreview met prijsbadge,
   USP-balk, keuze-kaarten (Rolluik / Solar rolluik), afmetingen, kleurstalen,
   tabs en zwevende zijtabs (Kleurstalen / Gratis inmeetgarantie + 9,5-badge).

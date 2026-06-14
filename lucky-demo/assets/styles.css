@@ -149,6 +149,23 @@ p { margin: 0 0 1em; color: var(--muted); }
 .truststrip b { display: block; color: #fff; font-size: 1rem; }
 .truststrip small { color: #aebccc; font-size: .82rem; }
 
+/* ---------- A-merken balk ---------- */
+.brands { background: #fff; border-bottom: 1px solid var(--line); }
+.brands .container { display: flex; align-items: center; gap: 28px; padding: 22px 24px; flex-wrap: wrap; justify-content: center; }
+.brands .lbl { color: var(--muted); font-weight: 700; font-size: .9rem; }
+.brands .logo-wm { font-weight: 900; letter-spacing: .04em; color: #8c99a6; font-size: 1.15rem; opacity: .85;
+  transition: color .15s ease, opacity .15s ease; }
+.brands .logo-wm:hover { color: var(--navy); opacity: 1; }
+
+/* ---------- Garantie / stalen band ---------- */
+.assure { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.assure .item { display: flex; gap: 16px; align-items: flex-start; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); }
+.assure .ic { width: 48px; height: 48px; border-radius: 12px; background: var(--navy); color: #fff; display: grid; place-items: center; flex: none; }
+.assure .ic svg { width: 24px; height: 24px; }
+.assure h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.assure p { font-size: .9rem; margin: 0; }
+
 /* ---------- Category grid ---------- */
 .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
 .cat-card {
