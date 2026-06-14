@@ -3,302 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rolluik op maat samenstellen — Lucky Zonwering Oss</title>
-<meta name="description" content="Stel online uw rolluik op maat samen bij Lucky Zonwering. Kies type, afmeting, kleur en bediening (handmatig t/m solar). Inclusief gratis inmeten en montage in Oss e.o.">
+<title>Stel uw zonwering samen — Lucky Zonwering</title>
+<meta name="description" content="Stel online uw rolluiken, screens, veranda of zonwering op maat samen bij Lucky Zonwering. Kies afmeting, kleur, bediening en opties — ontvang direct een richtprijs en offerte op maat.">
 <link rel="icon" type="image/png" href="assets/Lucky_Zonwering_Favicon_64-64px.png">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/premium.css">
 </head>
-<body>
+<body class="cfg">
 
-<div class="demo-banner">🎨 <b>Conceptvoorstel</b> — configurator-demo voor Lucky Zonwering. Visueel voorbeeld; de prijs is indicatief en rekent nog niet live.</div>
-
-<!-- Utility bar -->
-<div class="utilitybar">
-  <div class="container">
-    <div class="ub-list">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h2l2 7-1 2a11 11 0 005 5l2-1 7 2v2a2 2 0 01-2 2A18 18 0 013 7a2 2 0 012-2z"/></svg> 0412 - 633 590</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg> info@luckyzonwering.nl</span>
-    </div>
-    <div class="ub-list">
-      <span>★ 5,0 op Google — 124 reviews</span>
-      <span>Inclusief gratis inmeten &amp; montage</span>
-    </div>
-  </div>
-</div>
-
-<!-- Header -->
-<header class="header">
-  <div class="container">
-    <a class="logo" href="index.html" aria-label="Lucky Zonwering">
-      <span class="logo-plate"><img src="assets/Lucky-zonwering-logo-DEF-2.svg" alt="Lucky Zonwering"></span>
-    </a>
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Lucky Zonwering"><span class="plate"><img src="assets/Lucky-zonwering-logo-DEF-2.svg" alt="Lucky Zonwering"></span></a>
     <nav class="nav">
       <a href="index.html#producten">Producten</a>
-      <a href="configurator.html">Rolluik op maat</a>
+      <a href="index.html#projecten">Projecten</a>
       <a href="index.html#waarom">Waarom Lucky</a>
-      <a href="index.html#reviews">Reviews</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="index.html#werkgebied">Werkgebied</a>
+      <a href="configurator.html">Stel samen</a>
     </nav>
-    <div class="header-actions">
-      <a class="phone-pill" href="tel:0412633590">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h2l2 7-1 2a11 11 0 005 5l2-1 7 2v2a2 2 0 01-2 2A18 18 0 013 7a2 2 0 012-2z"/></svg>
-        <span>0412 - 633 590<small>Bel voor gratis advies</small></span>
-      </a>
-      <a class="btn btn--green" href="index.html#contact">Gratis offerte</a>
-      <button class="menu-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <div class="hdr-cta">
+      <a class="hdr-phone" href="tel:+31412633590"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h2l2 7-1 2a11 11 0 005 5l2-1 7 2v2a2 2 0 01-2 2A18 18 0 013 7a2 2 0 012-2z"/></svg> 0412 - 633 590</a>
+      <a class="btn btn-primary" href="index.html#offerte">Gratis advies</a>
+      <button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </div>
   </div>
 </header>
 
-<!-- Floating side tabs -->
-<div class="side-review">
-  <div class="num">5,0</div>
-  <small>Google</small>
+<div class="mnav">
+  <button class="x" aria-label="Sluiten">✕</button>
+  <a href="index.html#producten">Producten</a>
+  <a href="index.html#projecten">Projecten</a>
+  <a href="index.html#waarom">Waarom Lucky</a>
+  <a href="index.html#werkgebied">Werkgebied</a>
+  <a href="configurator.html">Stel samen</a>
+  <a href="index.html#offerte">Gratis advies</a>
 </div>
-<div class="side-tabs">
-  <button>Kleurstalen</button>
-  <button class="alt">Gratis inmeetgarantie</button>
-</div>
 
-<main class="container">
-  <div class="breadcrumb"><a href="index.html">Home</a> › <a href="index.html#producten">Rolluiken</a> › <span>Rolluik op maat</span></div>
-
-  <!-- Step indicator -->
-  <div class="steps">
-    <div class="step active"><span class="num">1</span> Type rolluik</div>
-    <div class="step"><span class="num">2</span> Afmetingen</div>
-    <div class="step"><span class="num">3</span> Kleur</div>
-    <div class="step"><span class="num">4</span> Bediening</div>
-    <div class="step"><span class="num">5</span> Inmeten &amp; montage</div>
-    <div class="step"><span class="num">6</span> Offerte</div>
-  </div>
-
-  <div class="config">
-    <!-- LEFT: preview -->
-    <div class="preview">
-      <div class="stage">
-        <span class="price-badge">Offerte op maat</span>
-        <svg id="rolluikSvg" viewBox="0 0 360 330" style="max-height:370px;width:100%" role="img" aria-label="Rolluik op maat">
-          <defs>
-            <linearGradient id="slatSheen" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#ffffff" stop-opacity=".48"/>
-              <stop offset=".16" stop-color="#ffffff" stop-opacity=".10"/>
-              <stop offset=".5" stop-color="#000000" stop-opacity="0"/>
-              <stop offset=".82" stop-color="#000000" stop-opacity=".12"/>
-              <stop offset="1" stop-color="#000000" stop-opacity=".36"/>
-            </linearGradient>
-            <linearGradient id="cabSheen" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
-              <stop offset=".42" stop-color="#ffffff" stop-opacity=".06"/>
-              <stop offset="1" stop-color="#000000" stop-opacity=".32"/>
-            </linearGradient>
-            <linearGradient id="guideGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#d3d8dd"/>
-              <stop offset=".5" stop-color="#9aa3ab"/>
-              <stop offset="1" stop-color="#6f777f"/>
-            </linearGradient>
-          </defs>
-          <ellipse cx="180" cy="314" rx="122" ry="10" fill="#000000" opacity=".12"/>
-          <rect x="64" y="60" width="12" height="234" rx="3" fill="url(#guideGrad)"/>
-          <rect x="284" y="60" width="12" height="234" rx="3" fill="url(#guideGrad)"/>
-          <g id="rolluikSlats" fill="#3a4651">
-            <rect x="76" y="74"  width="208" height="14" rx="3"/>
-            <rect x="76" y="91"  width="208" height="14" rx="3"/>
-            <rect x="76" y="108" width="208" height="14" rx="3"/>
-            <rect x="76" y="125" width="208" height="14" rx="3"/>
-            <rect x="76" y="142" width="208" height="14" rx="3"/>
-            <rect x="76" y="159" width="208" height="14" rx="3"/>
-            <rect x="76" y="176" width="208" height="14" rx="3"/>
-            <rect x="76" y="193" width="208" height="14" rx="3"/>
-            <rect x="76" y="210" width="208" height="14" rx="3"/>
-            <rect x="76" y="227" width="208" height="14" rx="3"/>
-            <rect x="76" y="244" width="208" height="14" rx="3"/>
-            <rect x="76" y="261" width="208" height="14" rx="3"/>
-          </g>
-          <g fill="url(#slatSheen)">
-            <rect x="76" y="74"  width="208" height="14" rx="3"/>
-            <rect x="76" y="91"  width="208" height="14" rx="3"/>
-            <rect x="76" y="108" width="208" height="14" rx="3"/>
-            <rect x="76" y="125" width="208" height="14" rx="3"/>
-            <rect x="76" y="142" width="208" height="14" rx="3"/>
-            <rect x="76" y="159" width="208" height="14" rx="3"/>
-            <rect x="76" y="176" width="208" height="14" rx="3"/>
-            <rect x="76" y="193" width="208" height="14" rx="3"/>
-            <rect x="76" y="210" width="208" height="14" rx="3"/>
-            <rect x="76" y="227" width="208" height="14" rx="3"/>
-            <rect x="76" y="244" width="208" height="14" rx="3"/>
-            <rect x="76" y="261" width="208" height="14" rx="3"/>
-          </g>
-          <rect x="76" y="278" width="208" height="12" rx="3" id="rolluikBar" fill="#222a30"/>
-          <rect x="76" y="278" width="208" height="12" rx="3" fill="url(#slatSheen)"/>
-          <rect x="66" y="28" width="228" height="42" rx="8" id="rolluikCabinet" fill="#2b3037"/>
-          <rect x="66" y="28" width="228" height="42" rx="8" fill="url(#cabSheen)"/>
-          <rect x="66" y="66" width="228" height="4" rx="2" fill="#000000" opacity=".18"/>
-        </svg>
-        <img id="rolluikPhoto" alt="Rolluik op maat" style="display:none;max-height:380px;width:100%;object-fit:contain;border-radius:12px">
-        <div class="closeup">
-          <div class="ring" style="background:#3a4651"></div>
-          <span>Pantser<br>close-up</span>
-        </div>
-      </div>
-      <div class="thumbs">
-        <div class="t active" style="background:#3a4651" data-color="#3a4651" data-img="assets/rolluik-antraciet.png" title="Antraciet"></div>
-        <div class="t" style="background:#232323" data-color="#232323" data-img="assets/rolluik-zwart.png" title="Zwart"></div>
-        <div class="t" style="background:#e9e6df" data-color="#e9e6df" data-img="assets/rolluik-creme.png" title="Crème"></div>
-        <div class="t" style="background:#f4f4f4" data-color="#f4f4f4" data-img="assets/rolluik-wit.png" title="Wit"></div>
-        <div class="t" style="background:#8a939b" data-color="#8a939b" data-img="assets/rolluik-grijs.png" title="Grijs"></div>
-        <div class="t" style="background:#5a4632" data-color="#5a4632" data-img="assets/rolluik-bruin.png" title="Bruin"></div>
-      </div>
+<section class="cfg">
+  <div class="wrap">
+    <div class="cfg-head">
+      <span class="eyebrow">Configurator</span>
+      <h1 style="font-size:clamp(2rem,4vw,3rem)">Stel uw zonwering samen</h1>
+      <p style="color:var(--muted);font-size:1.1rem;margin-top:10px">In 7 simpele stappen naar uw offerte op maat — inclusief richtprijs en gratis inmeten.</p>
     </div>
 
-    <!-- RIGHT: options -->
-    <div>
-      <h1>Jouw rolluik op maat</h1>
+    <div class="cfg-progress"><div class="fill" id="cfgFill"></div></div>
+    <div class="cfg-steps" id="cfgSteps">
+      <div class="s" data-i="0"><span class="n">1</span> Product</div>
+      <div class="s" data-i="1"><span class="n">2</span> Afmetingen</div>
+      <div class="s" data-i="2"><span class="n">3</span> Kleur</div>
+      <div class="s" data-i="3"><span class="n">4</span> Bediening</div>
+      <div class="s" data-i="4"><span class="n">5</span> Opties</div>
+      <div class="s" data-i="5"><span class="n">6</span> Overzicht</div>
+      <div class="s" data-i="6"><span class="n">7</span> Offerte</div>
+    </div>
 
-      <div class="usp-bar">
-        <div class="u"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Eigen productie sinds 1992</div>
-        <div class="u"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Inclusief montage door Lucky</div>
-        <div class="u"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Met de hand getest vóór levering</div>
-        <div class="u"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Gratis inmeten aan huis</div>
-      </div>
+    <div class="cfg-grid">
+      <div class="cfg-panel">
 
-      <!-- Stap 1: type -->
-      <div class="opt-row"><label>1. Kies uw type rolluik</label></div>
-      <div class="choices">
-        <div class="choice" data-choice>
-          <div class="pic"><img src="assets/Rolluiken-1.jpeg" alt="Standaard rolluik"></div>
-          <div class="ch-body">
-            <h3>Rolluik <span class="i">i</span></h3>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Handmatig of elektrisch</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Verduisterend &amp; isolerend</li>
-            </ul>
+        <!-- 1 product -->
+        <div class="step-pane active">
+          <h2 class="step-title">Kies uw product</h2>
+          <p class="step-sub">Waarvoor wilt u een offerte op maat?</p>
+          <div class="opt-grid" id="gridProduct"></div>
+        </div>
+
+        <!-- 2 dimensions -->
+        <div class="step-pane">
+          <h2 class="step-title">Kies uw afmetingen</h2>
+          <p class="step-sub">Schuif naar de gewenste breedte en hoogte — u ziet het direct.</p>
+          <div class="dim-ctrls">
+            <div class="dim-row"><label>Breedte <b id="valW">200 cm</b></label><input type="range" id="rngW" min="60" max="400" value="200" step="5"></div>
+            <div class="dim-row"><label>Hoogte <b id="valH">160 cm</b></label><input type="range" id="rngH" min="60" max="300" value="160" step="5"></div>
+            <div class="size-vis"><div class="size-box" id="sizeBox"><span class="wlab" id="sizeW">200 cm</span><span class="hlab" id="sizeH">160 cm</span></div></div>
           </div>
-          <button class="btn btn--ghost btn--block pick">+ Kiezen</button>
         </div>
-        <div class="choice selected" data-choice>
-          <span class="tag">Meest gekozen</span>
-          <div class="pic"><img src="assets/Rolluiken-2.jpeg" alt="Solar rolluik"></div>
-          <div class="ch-body">
-            <h3>Solar rolluik <span class="i">i</span></h3>
-            <ul>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Op zonne-energie</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Geen kabels, snelle montage</li>
-            </ul>
+
+        <!-- 3 colour -->
+        <div class="step-pane">
+          <h2 class="step-title">Kies uw kleur</h2>
+          <p class="step-sub">Populaire kleuren — de preview verandert live mee.</p>
+          <div class="swatches-lg" id="gridColor"></div>
+        </div>
+
+        <!-- 4 bediening -->
+        <div class="step-pane">
+          <h2 class="step-title">Kies uw bediening</h2>
+          <p class="step-sub">Van handmatig tot volledig smart met Somfy.</p>
+          <div class="opt-grid" id="gridBediening"></div>
+        </div>
+
+        <!-- 5 opties -->
+        <div class="step-pane">
+          <h2 class="step-title">Extra opties</h2>
+          <p class="step-sub" id="optHint">Kies wat u wilt (meerdere mogelijk).</p>
+          <div class="opt-grid" id="gridOpties"></div>
+        </div>
+
+        <!-- 6 overzicht -->
+        <div class="step-pane">
+          <h2 class="step-title">Uw configuratie</h2>
+          <p class="step-sub">Klopt alles? Ga door om uw offerte aan te vragen.</p>
+          <div id="paneSummaryBody"></div>
+        </div>
+
+        <!-- 7 offerte -->
+        <div class="step-pane" id="paneLead">
+          <h2 class="step-title">Ontvang uw offerte</h2>
+          <p class="step-sub">Vul uw gegevens in — u ontvangt een offerte op maat na gratis inmeten aan huis.</p>
+          <form id="leadForm" class="lead-grid">
+            <input class="full" type="text" placeholder="Naam" required>
+            <input type="email" placeholder="E-mailadres" required>
+            <input type="tel" placeholder="Telefoonnummer" required>
+            <input class="full" type="text" placeholder="Postcode" required>
+            <button class="btn btn-primary btn-lg full" type="submit">Ontvang mijn offerte
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </form>
+          <div class="trust-mini">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Gratis inmeten</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Eigen montage</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 5,0 op Google</span>
           </div>
-          <button class="btn btn--green btn--block pick">✓ Gekozen</button>
+        </div>
+
+        <div class="cfg-nav">
+          <button class="btn btn-back" id="btnBack">Terug</button>
+          <button class="btn btn-primary btnNext next-d">Volgende
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 
-      <!-- Stap 2: afmetingen -->
-      <div class="opt-row">
-        <label>2. Afmetingen (mm)</label>
-        <div class="dims">
-          <div class="field"><label>Breedte</label><input type="text" value="2800" inputmode="numeric"></div>
-          <div class="field"><label>Hoogte</label><input type="text" value="2000" inputmode="numeric"></div>
-          <div class="field"><label>Plaatsing</label><input type="text" value="Op het kozijn" readonly></div>
+      <!-- live preview -->
+      <aside class="cfg-preview">
+        <div class="pv-card">
+          <div class="pv-stage"><img id="pvImg" src="assets/rolluik-antraciet.png" alt="Live preview van uw configuratie"><div class="pv-badges"><span id="pvSize">200 × 160 cm</span><span id="pvColor">Antraciet</span></div></div>
+          <div class="pv-body">
+            <ul class="pv-sum" id="pvSum"></ul>
+            <div class="pv-price"><span class="lab">Indicatieve richtprijs</span><span class="amt pvAmt">€ 0</span></div>
+            <p class="pv-note">Incl. btw &amp; montage · definitieve prijs na gratis inmeten.</p>
+          </div>
         </div>
-      </div>
-
-      <!-- Stap 3: kleur -->
-      <div class="opt-row">
-        <label>3. Kastkleur &amp; pantserkleur</label>
-        <div class="swatches" data-swatches>
-          <span class="swatch active" style="background:#3a4651" data-color="#3a4651" data-img="assets/rolluik-antraciet.png" data-name="Antraciet (RAL 7016)" title="Antraciet (7016)"></span>
-          <span class="swatch" style="background:#232323" data-color="#232323" data-img="assets/rolluik-zwart.png" data-name="Zwart (RAL 9005)" title="Zwart (9005)"></span>
-          <span class="swatch" style="background:#e9e6df" data-color="#e9e6df" data-img="assets/rolluik-creme.png" data-name="Crèmewit (RAL 9001)" title="Crèmewit (9001)"></span>
-          <span class="swatch" style="background:#f4f4f4;border-color:#ccc" data-color="#f4f4f4" data-img="assets/rolluik-wit.png" data-name="Wit (RAL 9010)" title="Wit (9010)"></span>
-          <span class="swatch" style="background:#8a939b" data-color="#8a939b" data-img="assets/rolluik-grijs.png" data-name="Grijs (RAL 7038)" title="Grijs (7038)"></span>
-          <span class="swatch" style="background:#5a4632" data-color="#5a4632" data-img="assets/rolluik-bruin.png" data-name="Bruin (RAL 8014)" title="Bruin (8014)"></span>
-        </div>
-        <p id="kleurLabel" style="margin:10px 0 0;font-weight:700;color:var(--navy);font-size:.92rem">Gekozen kleur: Antraciet (RAL 7016)</p>
-      </div>
-
-      <!-- Stap 4: bediening -->
-      <div class="opt-row">
-        <label>4. Bediening</label>
-        <div class="steps" style="margin:0">
-          <div class="step"><span class="num">↻</span> Handmatig</div>
-          <div class="step"><span class="num">⏻</span> Schakelaar / sleutel</div>
-          <div class="step done"><span class="num">⌁</span> Afstandsbediening / app</div>
-          <div class="step active"><span class="num">☀</span> Solar — geen kabels</div>
-        </div>
-      </div>
-
-      <!-- Somfy bediening (verschijnt zodra de beelden bestaan) -->
-      <div class="opt-row" id="somfyBlock" style="display:none">
-        <label>Aangedreven door Somfy</label>
-        <div class="somfy-row">
-          <figure><img src="assets/somfy-afstandsbediening.png" alt="Somfy afstandsbediening" onload="document.getElementById('somfyBlock').style.display=''" onerror="this.closest('figure').style.display='none'"><figcaption>Afstandsbediening</figcaption></figure>
-          <figure><img src="assets/somfy-app.png" alt="Bediening via app" onload="document.getElementById('somfyBlock').style.display=''" onerror="this.closest('figure').style.display='none'"><figcaption>App &amp; telefoon</figcaption></figure>
-          <figure><img src="assets/somfy-motor.png" alt="Somfy buismotor" onload="document.getElementById('somfyBlock').style.display=''" onerror="this.closest('figure').style.display='none'"><figcaption>Elektrische motor</figcaption></figure>
-        </div>
-      </div>
-
-      <!-- Next -->
-      <div class="config-next">
-        <a class="btn btn--green btn--lg" href="index.html#contact">Verder naar: offerte aanvragen
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-
-      <!-- Tabs -->
-      <div class="tabs">
-        <div class="tablist" data-tablist>
-          <button class="active" data-tab="spec">Specificaties</button>
-          <button data-tab="oms">Omschrijving</button>
-          <button data-tab="rev">Reviews</button>
-          <button data-tab="faq">Veelgestelde vragen</button>
-        </div>
-        <div class="tabpanel" data-panel="spec">
-          <dl class="spec">
-            <dt>Product</dt><dd>Solar rolluik</dd>
-            <dt>Uitvoering</dt><dd>Op maat, eigen productie (sinds 1992)</dd>
-            <dt>Plaatsing</dt><dd>Op het kozijn of in de dag</dd>
-            <dt>Bediening</dt><dd>Handmatig · schakelaar/sleutel · afstandsbediening/app · solar</dd>
-            <dt>Eigenschappen</dt><dd>Verduisterend, isolerend en geluidwerend</dd>
-            <dt>Montage</dt><dd>Inclusief, door eigen monteurs</dd>
-          </dl>
-        </div>
-        <div class="tabpanel" data-panel="oms" hidden>
-          <p style="margin:0">Uw huis is de plek waar u zich het meest op uw gemak moet voelen, en veiligheid speelt daarbij een belangrijke rol. Onze rolluiken dienen als een soort pantser voor ramen en deuren. Ze zijn geluidwerend, verduisterend en isolerend: in de zomer aangenaam koel, in de winter houden ze de kou buiten — dat bespaart energie. Alle rolluiken worden bij Lucky met de hand in elkaar gezet, gecontroleerd en getest vóór levering.</p>
-        </div>
-        <div class="tabpanel" data-panel="rev" hidden>
-          <div class="stars" style="color:var(--sun)">★★★★★ <b style="color:var(--navy)">5,0</b> op Google · 124 reviews</div>
-          <p style="margin:12px 0 0">"Bij mij zijn 5 rolluiken op zonne-energie geplaatst. De twee monteurs zijn echte vakmensen en ontzettend goed op elkaar ingewerkt. Heel tevreden." — Max Westelaken</p>
-        </div>
-        <div class="tabpanel" data-panel="faq" hidden>
-          <p style="margin:0"><b>Komen jullie ook inmeten?</b><br>Ja, het inmeten is gratis en geheel vrijblijvend. Omdat we 6 dagen per week in de regio werken, kan dat meestal snel — en u hoeft niet de hele dag thuis te zijn.</p>
-        </div>
-      </div>
-
-      <p style="margin-top:18px;font-size:.9rem;color:var(--muted)">Liever persoonlijk advies? <a href="tel:0412633590" style="color:var(--green-600);font-weight:700">Bel 0412 - 633 590</a> of vraag een gratis offerte aan.</p>
-    </div>
-  </div>
-</main>
-
-<!-- CTA + footer -->
-<section class="ctaband" style="margin-top:60px">
-  <div class="container">
-    <div>
-      <h2>Hulp nodig bij het samenstellen?</h2>
-      <p>Onze specialist denkt graag met u mee en meet alles gratis bij u thuis in.</p>
-    </div>
-    <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a class="btn btn--navy btn--lg" href="tel:0412633590">Bel direct</a>
-      <a class="btn btn--ghost btn--lg" href="index.html#contact">Gratis offerte</a>
+      </aside>
     </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="legal" style="border:0;margin:0;padding:0">
-      <span>© 1975–2026 Lucky Zonwering — demo-ontwerp ter beoordeling.</span>
-      <span>Concept &amp; design door Prefab Select</span>
-    </div>
-  </div>
-</footer>
+<!-- Mobiele sticky balk -->
+<div class="cfg-bar">
+  <div><small>Indicatieve richtprijs</small><span class="amt pvAmt">€ 0</span></div>
+  <button class="btn btn-primary btnNext">Volgende</button>
+</div>
 
-<script src="assets/app.js"></script>
+<!-- WhatsApp -->
+<a class="wa" href="https://wa.me/31412633590" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.8 1.5 5.8 1.5 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.6c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.3 1.4 1.4-4.2-.3-.4a10 10 0 01-1.6-5.4C5.8 9.9 10.4 5.4 16 5.4S26.2 9.9 26.2 15.5 21.6 25.6 16 25.6z"/></svg>
+</a>
+
+<script src="assets/premium.js"></script>
+<script src="assets/configurator.js"></script>
 </body>
 </html>
