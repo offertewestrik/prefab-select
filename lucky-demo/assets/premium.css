@@ -346,6 +346,8 @@ p { color: var(--muted); }
 .story:hover .ph img { transform: scale(1.06); }
 .story .sb { padding: 26px; display: flex; flex-direction: column; flex: 1; }
 .story .stars { color: var(--orange); letter-spacing: 1px; }
+/* Higher-contrast star glyphs on white (a11y) */
+.gscore .stars, .rev .stars, .story .stars, .bene-rating .stars { color: #cf5f08; }
 .story p { color: var(--ink); margin: 12px 0 18px; flex: 1; }
 .story .who { display: flex; align-items: center; gap: 12px; }
 .story .av { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--char), #4a4138);
@@ -367,8 +369,13 @@ p { color: var(--muted); }
 .wa:hover { transform: scale(1.08); }
 .wa svg { width: 32px; height: 32px; }
 .wa::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(37,211,102,.5);
-  animation: pulse 2.4s infinite; }
+  animation: pulse 2.4s ease-out 3; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70% { box-shadow: 0 0 0 18px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+/* Accessibility: visible keyboard focus */
+:focus-visible { outline: 2px solid var(--char); outline-offset: 2px; }
+.btn:focus-visible, .nav a:focus-visible, .filter:focus-visible, .wa:focus-visible { outline: 2px solid var(--char); outline-offset: 3px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(245,130,31,.22); }
 
 .modal { position: fixed; inset: 0; z-index: 90; display: none; place-items: center; padding: 24px;
   background: rgba(20,17,14,.55); backdrop-filter: blur(6px); }
@@ -413,6 +420,7 @@ p { color: var(--muted); }
 }
 @media (max-width: 600px) {
   .prod-grid, .masonry { grid-template-columns: 1fr; columns: 1; }
+  .wa { bottom: 92px; }
   .foot .cols { grid-template-columns: 1fr; }
   .compare-card .ch, .compare-card .row { grid-template-columns: 1.2fr .6fr .6fr; }
   .compare-card .ch > div, .compare-card .row > div { padding: 13px 12px; font-size: .9rem; }
