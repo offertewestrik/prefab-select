@@ -4,6 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>NextGrowth — Wij bouwen digitale groeisystemen</title>
+<meta name="description" content="NextGrowth bouwt digitale groeisystemen: websites, webshops, AI-automatisering, 3D-configurators en live dashboards. Actief in Nederland, Dubai en Jordanië." />
+<meta name="theme-color" content="#060608" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="NextGrowth — Digitale Groeisystemen" />
+<meta property="og:description" content="Websites, AI-automatisering, 3D-configurators en dashboards — als één verbonden groeisysteem. Nederland · Dubai · Jordanië." />
+<meta property="og:image" content="assets/logo.svg" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -257,6 +264,24 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
 .foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;flex-wrap:wrap;gap:12px}
 @media(max-width:760px){.foot-top{grid-template-columns:1fr 1fr}}
 
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,60px);align-items:start}
+.contact-meta{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+.cmeta{display:flex;align-items:center;gap:12px;font-size:16px;color:var(--ink2);font-weight:500}
+.cmeta .i{width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;background:linear-gradient(135deg,#FBF6E6,#F7EFD4);border:1px solid #EFE3BD}
+.cmeta .i svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.8}
+a.cmeta:hover{color:var(--blue)}
+.contact-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,3vw,36px);box-shadow:var(--shadow-m);display:flex;flex-direction:column;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-family:"Sora","Plus Jakarta Sans";font-weight:600;font-size:13px;color:var(--ink2)}
+.field input,.field textarea{font-family:inherit;font-size:15px;color:var(--ink);background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;outline:none;transition:.2s;width:100%}
+.field input:focus,.field textarea:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+.field textarea{resize:vertical;min-height:110px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.contact-card .btn{justify-content:center;margin-top:4px}
+.form-note{font-size:13px;color:var(--muted);text-align:center}
+@media(max-width:880px){.contact-grid{grid-template-columns:1fr;gap:34px}.field-row{grid-template-columns:1fr}}
+
 /* RTL + Arabic */
 [dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{font-family:"Tajawal",sans-serif}
 [dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{letter-spacing:normal}
@@ -289,7 +314,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
     <div class="langsw" id="langsw">
       <button data-lang="nl">NL</button><button data-lang="en">EN</button><button data-lang="ar">عربى</button>
     </div>
-    <a href="#cta" class="btn btn-nav" data-i18n="nav_cta"></a>
+    <a href="#contact" class="btn btn-nav" data-i18n="nav_cta"></a>
   </div>
 </nav>
 
@@ -302,7 +327,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
       <h1 class="display"><span data-i18n="hero_titleA"></span> <span class="grad" data-i18n="hero_titleB"></span></h1>
       <p class="lead" data-i18n="hero_sub"></p>
       <div class="hero-cta">
-        <a href="#cta" class="btn btn-primary" data-i18n="hero_cta1"></a>
+        <a href="#contact" class="btn btn-primary" data-i18n="hero_cta1"></a>
         <a href="#work" class="btn btn-darkghost" data-i18n="hero_cta2"></a>
       </div>
       <div class="hero-trust">
@@ -373,7 +398,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
         <div class="cfg-tabs" id="cfg-tabs"></div>
         <div><div class="cfg-h" data-i18n="cfg_finish"></div><div class="swatches" id="cfg-sw"></div></div>
         <div><div class="cfg-h" data-i18n="cfg_options"></div><div class="opts" id="cfg-opts"></div></div>
-        <div class="cfg-price"><div><div class="u" data-i18n="cfg_price_label"></div><div class="p" id="cfg-price">€184.500</div></div><a href="#cta" class="btn btn-primary" style="padding:12px 20px;font-size:14px" data-i18n="cfg_btn"></a></div>
+        <div class="cfg-price"><div><div class="u" data-i18n="cfg_price_label"></div><div class="p" id="cfg-price">€184.500</div></div><a href="#contact" class="btn btn-primary" style="padding:12px 20px;font-size:14px" data-i18n="cfg_btn"></a></div>
       </div>
     </div>
     <div class="cfg-chips reveal" id="cfg-chips"></div>
@@ -445,8 +470,34 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
     <h2 class="h2 reveal d1" style="margin-top:20px" data-i18n="cta_title"></h2>
     <p class="lead reveal d2" data-i18n="cta_sub"></p>
     <div class="cta-row reveal d3">
-      <a href="#" class="btn btn-primary" data-i18n="cta_btn1"></a>
+      <a href="#contact" class="btn btn-primary" data-i18n="cta_btn1"></a>
       <a href="#work" class="btn btn-darkghost" data-i18n="cta_btn2"></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span><span data-i18n="ct_ey"></span></span>
+        <h2 class="h2" style="margin-top:18px" data-i18n="ct_title"></h2>
+        <p class="lead" style="margin-top:18px" data-i18n="ct_sub"></p>
+        <div class="contact-meta">
+          <a class="cmeta" href="mailto:hello@nextgrowth.nl"><span class="i"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span>hello@nextgrowth.nl</span></a>
+          <div class="cmeta"><span class="i"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></span><span>Nederland · Dubai · Jordanië</span></div>
+        </div>
+      </div>
+      <form class="contact-card reveal d1" id="contact-form">
+        <div class="field-row">
+          <div class="field"><label data-i18n="ct_name"></label><input name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label data-i18n="ct_company"></label><input name="company" type="text" autocomplete="organization"></div>
+        </div>
+        <div class="field"><label data-i18n="ct_email_l"></label><input name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label data-i18n="ct_msg"></label><textarea name="message"></textarea></div>
+        <button type="submit" class="btn btn-primary" data-i18n="ct_send"></button>
+        <div class="form-note" data-i18n="ct_note"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -457,7 +508,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
       <div><a href="#top" class="brand"><span class="mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NextGrowth"><defs><linearGradient id="ngf" x1="14" y1="14" x2="106" y2="106" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFF3C4"/><stop offset="38%" stop-color="#D4AF37"/><stop offset="68%" stop-color="#B8860B"/><stop offset="100%" stop-color="#FFE9A3"/></linearGradient><radialGradient id="ngft" cx="38%" cy="30%" r="80%"><stop offset="0%" stop-color="#16161C"/><stop offset="60%" stop-color="#0C0C11"/><stop offset="100%" stop-color="#070709"/></radialGradient></defs><rect width="120" height="120" rx="28" fill="#0B0B0F"/><rect width="120" height="120" rx="28" fill="url(#ngft)"/><g transform="translate(-6,-2)" stroke="url(#ngf)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M34 84 L34 42 L66 84 L66 42" stroke-width="8"/><path d="M104 50 A22 22 0 1 0 104 76 L104 63 L88 63" stroke-width="7"/></g><g transform="translate(-6,-2)" fill="url(#ngf)"><circle cx="34" cy="42" r="3"/><circle cx="66" cy="42" r="3"/><circle cx="88" cy="63" r="2.6"/></g></svg></span><span style="color:var(--ink)">NEXT</span><span class="gold">GROWTH</span></a><p data-i18n="foot_tagline"></p></div>
       <div><h5 data-i18n="foot_c1"></h5><a href="#services" data-i18n="nav_services"></a><a href="#automation" data-i18n="foot_l_ai"></a><a href="#configurators" data-i18n="nav_config"></a></div>
       <div><h5 data-i18n="foot_c2"></h5><a href="#work" data-i18n="nav_work"></a><a href="#results" data-i18n="nav_results"></a><a href="#industries" data-i18n="nav_industries"></a></div>
-      <div><h5 data-i18n="foot_c3"></h5><a href="#cta" data-i18n="nav_cta"></a><a href="#cta" data-i18n="foot_l_quote"></a></div>
+      <div><h5 data-i18n="foot_c3"></h5><a href="#contact" data-i18n="nav_cta"></a><a href="#contact" data-i18n="foot_l_quote"></a></div>
     </div>
     <div class="foot-bot"><span data-i18n="foot_copy"></span><span data-i18n="foot_built"></span></div>
   </div>
@@ -507,6 +558,7 @@ nl:{
  test_ey:"Resultaten van klanten",test_title:"Vertrouwd door ondernemers die resultaat wilden, geen theorie.",
  cta_ey:"Laten we bouwen",cta_title:"Klaar om jouw groeisysteem te bouwen?",cta_sub:"Plan een strategiegesprek van 30 minuten. We brengen het systeem in kaart dat jouw bedrijf nodig heeft en laten precies zien wat het kost om het te bouwen.",cta_btn1:"Plan een strategiegesprek →",cta_btn2:"Bekijk eerst het werk",
  foot_tagline:"Digitale groeisystemen voor ambitieuze bedrijven. Wij ontwerpen, bouwen en verbinden de systemen die aandacht omzetten in omzet.",foot_c1:"Diensten",foot_c2:"Studio",foot_c3:"Aan de slag",foot_l_ai:"AI-automatisering",foot_l_quote:"Offerte aanvragen",foot_copy:"© 2026 NextGrowth — Nederland · Dubai · Jordanië",foot_built:"Gebouwd als één verbonden systeem.",
+ ct_ey:"Contact",ct_title:"Laten we je groeisysteem bouwen.",ct_sub:"Vertel kort waar je staat en wat je wilt bereiken. Je hoort binnen één werkdag van ons.",ct_name:"Naam",ct_company:"Bedrijf",ct_email_l:"E-mail",ct_msg:"Waar kunnen we mee helpen?",ct_send:"Verstuur aanvraag →",ct_note:"Of mail direct naar hello@nextgrowth.nl",
  services:[{i:'web',t:"Websites",d:"Snelle, premium websites die bezoekers omzetten in aanvragen."},{i:'shop',t:"Webshops",d:"Schaalbare webshops die verkopen terwijl jij slaapt."},{i:'ai',t:"AI-automatisering",d:"Laat repetitief werk volledig automatisch verlopen."},{i:'agent',t:"AI-agents",d:"Digitale medewerkers die leads kwalificeren en afspraken plannen."},{i:'cfg',t:"Configurators",d:"3D-productconfigurators met live prijsberekening."},{i:'dash',t:"Dashboards",d:"Omzet, leads en ROI realtime op één scherm."},{i:'crm',t:"CRM-integraties",d:"Een CRM dat zichzelf bijwerkt, zonder handwerk."},{i:'video',t:"Marketingvideo's",d:"Video's die aandacht omzetten in aanvragen."},{i:'lead',t:"Leadgeneratie",d:"Een voorspelbare stroom gekwalificeerde leads."},{i:'code',t:"Maatwerk software",d:"Software op maat voor jouw unieke processen."}],
  feat_list:["Website, CRM en marketing delen één bron van waarheid","Elke lead wordt automatisch vastgelegd, gescoord en opgevolgd","De ondernemer ziet het hele bedrijf op één live dashboard","Gebouwd op tools die je team al kent — zonder alles te vervangen"],
  steps:[{t:"Lead komt op je website",s:"bron · Meta Ads · direct vastgelegd"},{t:"AI kwalificeert de lead",s:"intentiescore · 0.91 · zakelijk"},{t:"CRM werkt automatisch bij",s:"fase → gekwalificeerd · eigenaar toegewezen"},{t:"Offerte wordt opgesteld",s:"in jouw huisstijl · geprijsd · klaar"},{t:"Afspraak wordt ingepland",s:"agenda gesynchroniseerd · di 11:00"},{t:"Deal wordt gesloten",s:"gewonnen · omzet verwerkt"}],
@@ -536,6 +588,7 @@ en:{
  test_ey:"Client results",test_title:"Trusted by owners who wanted results, not theory.",
  cta_ey:"Let's build",cta_title:"Ready to build your growth system?",cta_sub:"Book a 30-minute strategy call. We'll map the system your business needs and show you exactly what it takes to build it.",cta_btn1:"Book a strategy call →",cta_btn2:"See the work first",
  foot_tagline:"Digital growth systems for ambitious businesses. We design, build and connect the systems that turn attention into revenue.",foot_c1:"Services",foot_c2:"Studio",foot_c3:"Get started",foot_l_ai:"AI automation",foot_l_quote:"Request a quote",foot_copy:"© 2026 NextGrowth — Netherlands · Dubai · Jordan",foot_built:"Built as one connected system.",
+ ct_ey:"Contact",ct_title:"Let's build your growth system.",ct_sub:"Tell us briefly where you are and what you want to achieve. We'll get back to you within one business day.",ct_name:"Name",ct_company:"Company",ct_email_l:"Email",ct_msg:"What can we help you with?",ct_send:"Send request →",ct_note:"Or email us directly at hello@nextgrowth.nl",
  services:[{i:'web',t:"Websites",d:"Fast, premium websites that turn visitors into enquiries."},{i:'shop',t:"Webshops",d:"Scalable stores that sell while you sleep."},{i:'ai',t:"AI automation",d:"Let repetitive work run fully on its own."},{i:'agent',t:"AI agents",d:"Digital staff that qualify leads and book meetings."},{i:'cfg',t:"Configurators",d:"3D product configurators with live pricing."},{i:'dash',t:"Dashboards",d:"Revenue, leads and ROI in real time, on one screen."},{i:'crm',t:"CRM integrations",d:"A CRM that updates itself, with no manual work."},{i:'video',t:"Marketing videos",d:"Videos that turn attention into enquiries."},{i:'lead',t:"Lead generation",d:"A predictable flow of qualified leads."},{i:'code',t:"Custom software",d:"Software built around your unique processes."}],
  feat_list:["Website, CRM and marketing share one source of truth","Every lead is captured, scored and followed up automatically","Owners see the whole business on one live dashboard","Built on tools your team already knows — no rip-and-replace"],
  steps:[{t:"Lead enters your website",s:"source · Meta Ads · captured instantly"},{t:"AI qualifies the lead",s:"intent score · 0.91 · enterprise fit"},{t:"CRM updates automatically",s:"stage → qualified · owner assigned"},{t:"Proposal is generated",s:"on-brand · priced · ready to send"},{t:"Meeting gets booked",s:"calendar synced · Tue 11:00"},{t:"Deal closes",s:"won · revenue recognised"}],
@@ -565,6 +618,7 @@ ar:{
  test_ey:"نتائج العملاء",test_title:"موثوقٌ به من أصحاب أعمالٍ أرادوا نتائج لا نظريات.",
  cta_ey:"لنبدأ البناء",cta_title:"جاهزٌ لبناء نظام نموّك؟",cta_sub:"احجز جلسة استراتيجية مدّتها 30 دقيقة. سنرسم النظام الذي يحتاجه عملك ونوضّح بدقّةٍ ما يتطلّبه بناؤه.",cta_btn1:"احجز جلسة استراتيجية ←",cta_btn2:"شاهد الأعمال أولًا",
  foot_tagline:"أنظمة نموٍّ رقمية للشركات الطموحة. نصمّم ونبني ونربط الأنظمة التي تُحوّل الانتباه إلى إيرادات.",foot_c1:"الخدمات",foot_c2:"الاستوديو",foot_c3:"ابدأ الآن",foot_l_ai:"أتمتة الذكاء الاصطناعي",foot_l_quote:"اطلب عرض سعر",foot_copy:"© 2026 NextGrowth — هولندا · دبي · الأردن",foot_built:"مبنيٌّ كنظامٍ واحدٍ متكامل.",
+ ct_ey:"تواصل",ct_title:"لنبنِ نظام نموّك.",ct_sub:"أخبرنا باختصار أين أنت وما الذي تريد تحقيقه. سنردّ عليك خلال يوم عمل واحد.",ct_name:"الاسم",ct_company:"الشركة",ct_email_l:"البريد الإلكتروني",ct_msg:"كيف يمكننا مساعدتك؟",ct_send:"إرسال الطلب ←",ct_note:"أو راسلنا مباشرةً على hello@nextgrowth.nl",
  services:[{i:'web',t:"المواقع الإلكترونية",d:"مواقع سريعة وفاخرة تُحوّل الزوّار إلى طلبات."},{i:'shop',t:"المتاجر الإلكترونية",d:"متاجر قابلة للتوسّع تبيع بينما تنام."},{i:'ai',t:"أتمتة الذكاء الاصطناعي",d:"اجعل المهام المتكرّرة تعمل تلقائيًا بالكامل."},{i:'agent',t:"وكلاء الذكاء الاصطناعي",d:"موظفون رقميون يؤهّلون العملاء ويحجزون المواعيد."},{i:'cfg',t:"المُهيّئات",d:"مُهيّئات منتجات ثلاثية الأبعاد بتسعيرٍ مباشر."},{i:'dash',t:"لوحات التحكم",d:"الإيرادات والعملاء والعائد في شاشةٍ واحدة."},{i:'crm',t:"تكاملات CRM",d:"نظام CRM يُحدّث نفسه دون عملٍ يدوي."},{i:'video',t:"فيديوهات تسويقية",d:"فيديوهات تُحوّل الانتباه إلى طلبات."},{i:'lead',t:"توليد العملاء",d:"تدفّقٌ ثابتٌ من العملاء المؤهّلين."},{i:'code',t:"برمجيات مخصّصة",d:"برمجيات مصمّمة خصيصًا لعملياتك."}],
  feat_list:["الموقع و CRM والتسويق يشتركون في مصدرٍ واحدٍ للحقيقة","كل عميلٍ محتمل يُلتقَط ويُقيَّم ويُتابَع تلقائيًا","يرى المالك الشركة كاملةً على لوحةٍ مباشرة","مبنيٌّ على أدواتٍ يعرفها فريقك — دون استبدالٍ كامل"],
  steps:[{t:"يدخل العميل إلى موقعك",s:"المصدر · إعلانات Meta · يُلتقَط فورًا"},{t:"الذكاء الاصطناعي يؤهّل العميل",s:"درجة النية · 0.91 · مؤسّسي"},{t:"تحديث CRM تلقائيًا",s:"المرحلة ← مؤهّل · تعيين مسؤول"},{t:"إنشاء عرض السعر",s:"بهوية علامتك · مُسعّر · جاهز"},{t:"حجز الاجتماع",s:"مزامنة التقويم · الثلاثاء 11:00"},{t:"إتمام الصفقة",s:"تم الفوز · احتُسب الإيراد"}],
@@ -712,6 +766,9 @@ function bindConfigUI(){
   $$('#cfg-opts .opt').forEach(o=>o.addEventListener('click',()=>{o.classList.toggle('on');cfgState[o.dataset.opt]=o.classList.contains('on');cfgBuild&&cfgBuild();cfgPrice();}));
   cfgPrice();
 }
+
+/* contact form → opens a pre-filled email (no backend needed) */
+(function(){const cf=$('#contact-form');if(!cf)return;cf.addEventListener('submit',e=>{e.preventDefault();const f=cf.elements;const who=(f.company.value||f.name.value||'').trim();const subj=encodeURIComponent('Aanvraag via NextGrowth'+(who?' — '+who:''));const body=encodeURIComponent('Naam: '+f.name.value+'\nBedrijf: '+f.company.value+'\nE-mail: '+f.email.value+'\n\n'+f.message.value);window.location.href='mailto:hello@nextgrowth.nl?subject='+subj+'&body='+body;});})();
 
 /* boot */
 setLang('nl');

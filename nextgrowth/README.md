@@ -40,9 +40,20 @@ python3 -m http.server 8000
 De taalwisselaar (NL / EN / عربى) staat in de navigatiebalk. Arabisch schakelt
 automatisch naar RTL. AE en JO delen dezelfde Arabische tekst.
 
+## Contact
+
+Onderaan staat een **contactsectie** (`#contact`) met formulier. Alle CTA-knoppen
+(nav, hero, configurator, CTA-banner, footer) verwijzen hiernaartoe. Het formulier
+heeft geen backend nodig: bij verzenden opent het een vooringevulde e-mail.
+
+> **Let op:** het e-mailadres `hello@nextgrowth.nl` is een **placeholder**. Vervang
+> het door je echte adres op deze plekken in `index.html`: de `mailto:`-link in de
+> contactsectie, de `window.location.href`-regel in het form-script, en de
+> `ct_note`-teksten in de drie talen.
+
 ## Nog te doen / ideeën
 
 - Echte teksten, diensten en cases van NextGrowth invullen (nu placeholders).
 - Eigen beeldmateriaal i.p.v. de Unsplash-placeholders.
-- Contactformulier / boekingslink koppelen aan de CTA-knoppen.
+- Echt e-mailadres + eventueel telefoonnummer invullen (zie hierboven).
 - Eigen domein + analytics.
