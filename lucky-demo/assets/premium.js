@@ -93,6 +93,24 @@
     });
   });
 
+
+  /* Producten dropdown (klik/toets naast hover) */
+  $$('.nav-dd').forEach(function (dd) {
+    var t = $('.nav-dd-t', dd), menu = $('.nav-dd-menu', dd);
+    if (!t || !menu) return;
+    t.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = menu.classList.toggle('open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (!dd.contains(e.target)) { menu.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); }
+    });
+    dd.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { menu.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); t.blur(); }
+    });
+  });
+
   /* Mobile nav */
   var burger = $('.burger'), mnav = $('.mnav');
   if (burger && mnav) {
