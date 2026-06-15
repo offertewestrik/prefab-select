@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" href="assets/Lucky_Zonwering_Favicon_64-64px.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/premium.css?v=20260615d">
+<link rel="stylesheet" href="assets/premium.css?v=20260615e">
 <link rel="stylesheet" href="assets/pages.css?v=20260615b">
 <script type="application/ld+json">
 { "@context":"https://schema.org","@type":"ContactPage","name":"Gratis offerte aanvragen — Lucky Zonwering",
@@ -57,8 +57,17 @@
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Lucky Zonwering"><span class="plate"><img src="assets/Lucky-zonwering-logo-DEF-2.svg" alt="Lucky Zonwering"></span></a>
     <nav class="nav">
-      <a href="index.html#producten">Producten</a>
-      <a href="veranda-op-maat.html">Veranda &amp; pergola</a>
+      <div class="nav-dd">
+        <button type="button" class="nav-dd-t" aria-expanded="false" aria-haspopup="true">Producten <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dd-menu" role="menu">
+          <a href="rolluiken-op-maat.html" role="menuitem">Rolluiken</a>
+          <a href="screens-op-maat.html" role="menuitem">Screens</a>
+          <a href="terraszonwering-op-maat.html" role="menuitem">Terraszonwering</a>
+          <a href="veranda-op-maat.html" role="menuitem">Veranda&#39;s &amp; overkappingen</a>
+          <a href="pergola-op-maat.html" role="menuitem">Pergola&#39;s</a>
+          <a href="horren-op-maat.html" role="menuitem">Horren &amp; insectenwering</a>
+        </div>
+      </div>
       <a href="projecten.html">Projecten</a>
       <a href="waarom-lucky.html">Waarom Lucky</a>
       <a href="over-ons.html">Over ons</a>
@@ -73,8 +82,13 @@
 </header>
 <div class="mnav">
   <button class="x" aria-label="Sluiten">✕</button>
-  <a href="index.html#producten">Producten</a>
-  <a href="veranda-op-maat.html">Veranda &amp; pergola</a>
+  <span class="mnav-group">Producten</span>
+  <a class="mnav-sub" href="rolluiken-op-maat.html">Rolluiken</a>
+  <a class="mnav-sub" href="screens-op-maat.html">Screens</a>
+  <a class="mnav-sub" href="terraszonwering-op-maat.html">Terraszonwering</a>
+  <a class="mnav-sub" href="veranda-op-maat.html">Veranda&#39;s &amp; overkappingen</a>
+  <a class="mnav-sub" href="pergola-op-maat.html">Pergola&#39;s</a>
+  <a class="mnav-sub" href="horren-op-maat.html">Horren &amp; insectenwering</a>
   <a href="projecten.html">Projecten</a>
   <a href="waarom-lucky.html">Waarom Lucky</a>
   <a href="over-ons.html">Over ons</a>
@@ -226,7 +240,7 @@
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.3c1.8 1 3.8 1.5 5.8 1.5 7 0 12.5-5.5 12.5-12.5S23 3 16 3z"/></svg>
 </a>
 
-<script src="assets/premium.js?v=20260615b"></script>
+<script src="assets/premium.js?v=20260615e"></script>
 <script>
   document.getElementById('offerteForm').addEventListener('submit', function (e) {
     e.preventDefault();
