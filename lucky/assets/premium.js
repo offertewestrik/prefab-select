@@ -6,6 +6,10 @@
 
   /* Header scroll state + sticky CTA + parallax hero */
   var hdr = $('.hdr'), sticky = $('.sticky-cta'), heroBg = $('.hero-bg'), hero = $('.hero');
+  /* Respect reduced-motion: keep the poster frame, no looping video */
+  if (heroBg && heroBg.tagName === 'VIDEO' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    try { heroBg.removeAttribute('autoplay'); heroBg.pause(); } catch (e) {}
+  }
   function onScroll() {
     var y = window.pageYOffset;
     if (hdr) hdr.classList.toggle('scrolled', y > 40);
