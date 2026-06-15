@@ -1,0 +1,99 @@
+/* =========================================================================
+   Agency Command Center — dark, glassmorphic dashboard theme.
+   Fully self-contained: imported only by AgencyApp.tsx and scoped under
+   .acc-root so it can never affect the marketing site.
+   ========================================================================= */
+.acc-root {
+  --acc-bg: #070A14;
+  --acc-surface: rgba(255, 255, 255, 0.04);
+  --acc-surface-strong: rgba(255, 255, 255, 0.06);
+  --acc-border: rgba(255, 255, 255, 0.08);
+  --acc-border-strong: rgba(255, 255, 255, 0.14);
+  --acc-text: #E8ECF6;
+  --acc-muted: #8B93A7;
+  --acc-accent: #3B82F6;
+
+  color: var(--acc-text);
+  background:
+    radial-gradient(1100px 600px at 15% -10%, rgba(59, 130, 246, 0.16), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(124, 58, 237, 0.14), transparent 55%),
+    radial-gradient(800px 600px at 50% 120%, rgba(16, 185, 129, 0.08), transparent 60%),
+    var(--acc-bg);
+  min-height: 100vh;
+  font-family: var(--font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+.acc-root h1, .acc-root h2, .acc-root h3, .acc-root h4, .acc-root h5, .acc-root h6 {
+  color: var(--acc-text);
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  letter-spacing: -0.02em;
+}
+
+.acc-glass {
+  background: var(--acc-surface);
+  border: 1px solid var(--acc-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.acc-glass-strong {
+  background: var(--acc-surface-strong);
+  border: 1px solid var(--acc-border-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.acc-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--acc-border);
+  border-radius: 1rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px -24px rgba(0, 0, 0, 0.8);
+}
+
+.acc-card-hover {
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.acc-card-hover:hover {
+  border-color: var(--acc-border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.9);
+}
+
+.acc-gradient-text {
+  background: linear-gradient(120deg, #ffffff 0%, #93b4ff 55%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.acc-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--acc-border);
+  color: var(--acc-text);
+  border-radius: 0.75rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.acc-input::placeholder { color: var(--acc-muted); }
+.acc-input:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.acc-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.acc-scroll::-webkit-scrollbar-track { background: transparent; }
+.acc-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+.acc-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.22); }
+
+@keyframes acc-pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+.acc-pulse { animation: acc-pulse-ring 1.8s infinite; }

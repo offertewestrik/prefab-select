@@ -185,7 +185,8 @@ Intent detection + company matching lives in `aiService.sendCommand`; replace it
 
 ## 7. Security notes
 
-- **No real API keys in code.** Use `.env` (see `.env.example`). `VITE_*` vars are only presence flags for the UI; real secrets stay server-side.
+- **No real API keys in code.** Use `.env` (see `src/agency/.env.agency.example`). `VITE_*` vars are only presence flags for the UI; real secrets stay server-side.
+- **Fully self-contained.** Everything the dashboard needs lives under `src/agency/` (code, theme `agency.css`, env example). The only hook into the existing app is a 3-line branch in `src/App.tsx` that renders `<AgencyApp/>` for `/agency/*` — required because routes must be registered in the app's router; it does not change any marketing behaviour.
 - RBAC is enforced in the UI (`lib/rbac.ts`) and must be mirrored in `firestore.rules`.
 - The `klant` role only ever sees its own company's data (already scoped in `DataContext`).
 
