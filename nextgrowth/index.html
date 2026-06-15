@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>NextGrowth — Wij bouwen digitale groeisystemen</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F172A; --ink2:#334155; --muted:#64748B; --line:#E6EBF2;
+  --bg:#FFFFFF; --bg2:#F8FAFC; --bg3:#F1F5F9;
+  --dark:#0B0B0F; --dark2:#060608; --panel:#16161C;
+  --blue:#D4AF37; --blue2:#E9C155; --g1:#FFF3C4; --g2:#D4AF37;
+  --on-dark:#E7E5E4; --on-dark-mut:#A8A29E;
+  --maxw:1200px; --ease:cubic-bezier(.22,.7,.3,1);
+  --shadow-s:0 2px 8px -2px rgba(15,23,42,.08);
+  --shadow-m:0 24px 60px -34px rgba(15,23,42,.30);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:"Sora","Plus Jakarta Sans",sans-serif;font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0;color:var(--ink)}
+p{margin:0}
+.mono{font-family:"JetBrains Mono",monospace}
+.gold{background:linear-gradient(135deg,#FFF3C4,#D4AF37 42%,#B8860B 70%,#FFE9A3);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative}
+.display{font-size:clamp(42px,6vw,78px)}
+.h2{font-size:clamp(32px,4.4vw,56px)}
+.lead{font-size:clamp(18px,1.5vw,21px);color:var(--muted);font-weight:400;line-height:1.55}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:13px;letter-spacing:.04em;color:var(--blue);text-transform:uppercase}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g2))}
+.eyebrow.on-dark{color:#FFE9A3}
+.btn{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:15.5px;padding:15px 28px;border-radius:13px;border:1px solid transparent;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s,background .35s,border-color .35s;display:inline-flex;align-items:center;gap:9px}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#0B0B0F;box-shadow:0 14px 34px -14px rgba(212,175,55,.7)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 48px -16px rgba(212,175,55,.85)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink);box-shadow:var(--shadow-s)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:#CBD5E1}
+.btn-darkghost{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:#fff}
+.btn-darkghost:hover{background:rgba(255,255,255,.12)}
+.section{padding:clamp(88px,11vw,160px) 0;position:relative}
+.section--alt{background:var(--bg2)}
+.section--dark{background:var(--dark);color:var(--on-dark)}
+.section--dark h1,.section--dark h2,.section--dark h3{color:#fff}
+.section--dark .lead{color:var(--on-dark-mut)}
+.section-head{max-width:760px;margin:0 auto clamp(54px,7vw,82px);text-align:center}
+.section-head.left{text-align:left;margin-left:0}
+.section-head .h2{margin-top:18px}
+.section-head .lead{margin-top:22px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,box-shadow .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(255,255,255,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:var(--line)}
+.nav .row{display:flex;align-items:center;height:70px;gap:30px}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Sora","Plus Jakarta Sans";font-weight:800;font-size:21px;letter-spacing:.06em;color:#fff;transition:color .4s}
+.nav.solid .brand{color:var(--ink)}
+.brand .mark{width:30px;height:30px;border-radius:9px;overflow:hidden;display:block;flex:none;box-shadow:0 6px 18px -6px rgba(212,175,55,.8)}
+.brand .mark svg{width:100%;height:100%;display:block}
+.navlinks{display:flex;gap:26px;margin-left:6px}
+.navlinks a{font-size:15px;font-weight:500;color:rgba(255,255,255,.82);transition:color .4s;white-space:nowrap}
+.nav.solid .navlinks a{color:var(--ink2)}
+.navlinks a:hover{color:var(--blue2)}
+.nav .spacer{margin-left:auto}
+.nav .btn{padding:11px 18px;font-size:14px}
+.nav .btn-nav{background:#fff;color:var(--ink)}
+.nav.solid .btn-nav{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#0B0B0F}
+.langsw{display:flex;gap:2px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:3px}
+.nav.solid .langsw{background:var(--bg3);border-color:var(--line)}
+.langsw button{border:0;background:transparent;color:rgba(255,255,255,.82);font-family:"Sora","Plus Jakarta Sans";font-weight:600;font-size:12.5px;padding:6px 9px;border-radius:7px;cursor:pointer;transition:.2s}
+.nav.solid .langsw button{color:var(--ink2)}
+.langsw button.on{background:#fff;color:var(--ink)}
+.nav.solid .langsw button.on{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#0B0B0F}
+@media(max-width:980px){.navlinks{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--dark2);overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 78% 18%,rgba(212,175,55,.20),transparent 60%),radial-gradient(800px 600px at 12% 80%,rgba(233,193,85,.14),transparent 60%),linear-gradient(180deg,#060608,#0B0B0F 70%,#060608)}
+.hero-bg::after{content:"";position:absolute;inset:0;opacity:.5;background-image:linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);background-size:64px 64px;mask:radial-gradient(1100px 700px at 50% 30%,#000,transparent 80%)}
+#hero-canvas{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity 1.6s ease}
+#hero-canvas.in{opacity:1}
+.hero .wrap{z-index:3;padding-top:96px;padding-bottom:60px}
+.hero-inner{max-width:700px}
+.hero .display{color:#fff;margin-top:24px}
+.hero .display .grad{background:linear-gradient(110deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{color:#B7B2A6;margin-top:26px;max-width:36em}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+.hero-trust{margin-top:54px}
+.hero-trust .t{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:#8A8170;font-weight:600}
+.hero-logos{display:flex;gap:28px;flex-wrap:wrap;align-items:center;margin-top:18px;opacity:.85}
+.hero-logos span{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:16px;color:#8C846F}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:140px;z-index:2;background:linear-gradient(transparent,var(--dark2));pointer-events:none}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{text-align:center;padding:14px}
+.stat .n{font-family:"Sora","Plus Jakarta Sans";font-weight:800;font-size:clamp(34px,4vw,52px);background:linear-gradient(135deg,var(--blue),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em}
+.stat .l{color:var(--muted);font-size:15px;margin-top:6px}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr);gap:30px 18px}}
+
+/* CARDS (services + industries) */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .45s var(--ease),box-shadow .45s,border-color .45s;position:relative;overflow:hidden}
+.svc:hover{transform:translateY(-6px);box-shadow:var(--shadow-m);border-color:#EADFB8}
+.svc .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;background:linear-gradient(135deg,#FBF6E6,#F7EFD4);border:1px solid #EFE3BD}
+.svc .ic svg{width:25px;height:25px;stroke:var(--blue);fill:none;stroke-width:1.7}
+.svc h3{font-size:21px;font-weight:700;margin-bottom:9px}
+.svc p{color:var(--muted);font-size:15px}
+@media(max-width:980px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.svc-grid{grid-template-columns:1fr}}
+
+/* IMAGERY */
+.photoband{position:relative;border-radius:26px;overflow:hidden;min-height:clamp(300px,40vw,420px);display:flex;align-items:flex-end;box-shadow:var(--shadow-m);background:#0B0B0F center/cover no-repeat}
+.photoband::after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(6,6,8,.88),rgba(11,11,15,.45) 55%,rgba(212,175,55,.30))}
+.photoband .pb-content{position:relative;z-index:2;padding:clamp(28px,4.6vw,56px);max-width:640px}
+.photoband .pb-content h3{color:#fff;font-size:clamp(26px,3.4vw,42px)}
+.photoband .pb-content p{color:rgba(255,255,255,.84);margin-top:14px;font-size:clamp(15px,1.3vw,18px)}
+.pb-chip{display:inline-flex;gap:9px;align-items:center;margin-bottom:18px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(8px);padding:8px 15px;border-radius:100px;font-size:13px;font-weight:600;color:#fff}
+.pb-chip i{width:7px;height:7px;border-radius:50%;background:#FFE9A3;box-shadow:0 0 8px #FFE9A3}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,64px);align-items:center}
+.feat .photo{border-radius:24px;min-height:clamp(300px,34vw,420px);background:#0B0B0F center/cover no-repeat;box-shadow:var(--shadow-m);position:relative;overflow:hidden}
+.feat .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(212,175,55,.22))}
+.feat h3{font-size:clamp(28px,3.6vw,44px);margin-top:18px}
+.feat p{color:var(--muted);margin-top:18px;font-size:17px}
+.feat ul{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:14px}
+.feat li{display:flex;gap:13px;align-items:flex-start;font-size:16px;color:var(--ink2)}
+.feat li .ck{width:23px;height:23px;border-radius:50%;flex:none;background:linear-gradient(135deg,var(--blue),var(--blue2));display:grid;place-items:center;color:#0B0B0F;font-size:12px;margin-top:1px}
+@media(max-width:880px){.feat{grid-template-columns:1fr;gap:30px}.feat .photo{min-height:260px;order:-1}}
+
+/* AUTOMATION */
+.flow{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center}
+.flow-card{background:linear-gradient(180deg,rgba(22,22,28,.7),rgba(8,8,11,.4));border:1px solid rgba(212,175,55,.14);border-radius:var(--radius);padding:14px 30px;position:relative;backdrop-filter:blur(10px)}
+.flow-spine{position:absolute;left:52px;top:46px;bottom:46px;width:2px;background:rgba(212,175,55,.28);overflow:hidden}
+.flow-spine .p{position:absolute;left:-2px;width:6px;height:64px;border-radius:6px;background:linear-gradient(var(--g1),transparent);box-shadow:0 0 18px var(--g1);animation:flowdown 3.6s linear infinite}
+@keyframes flowdown{0%{top:-64px}100%{top:100%}}
+.fstep{display:flex;align-items:center;gap:20px;padding:16px 0;position:relative;z-index:2}
+.fstep .nd{width:46px;height:46px;flex:none;border-radius:13px;display:grid;place-items:center;background:rgba(8,8,11,.9);border:1px solid rgba(212,175,55,.22);transition:.35s;color:#E9D9A8}
+.fstep.act .nd{border-color:var(--g2);box-shadow:0 0 28px -4px var(--g2);background:linear-gradient(135deg,rgba(212,175,55,.25),rgba(233,193,85,.18))}
+.fstep .t{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:16.5px;color:#fff}
+.fstep .s{font-size:13px;color:#8C846F}
+.flow-side{background:rgba(22,22,28,.55);border:1px solid rgba(212,175,55,.16);border-radius:var(--radius);padding:14px 30px;backdrop-filter:blur(10px)}
+.flow-side .row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(212,175,55,.12)}
+.flow-side .row:last-child{border-bottom:0}
+.flow-side .k{color:var(--on-dark-mut);font-size:14.5px}
+.flow-side .v{font-family:"JetBrains Mono";font-size:14.5px;color:#fff}
+.flow-side .v.up{color:#6EE7B7}
+@media(max-width:900px){.flow{grid-template-columns:1fr;gap:34px}}
+
+/* CONFIGURATOR */
+.cfg{display:grid;grid-template-columns:1.35fr .85fr;gap:40px;align-items:stretch}
+.device{border-radius:18px;overflow:hidden;box-shadow:var(--shadow-m);border:1px solid var(--line);background:#fff;min-height:520px;display:flex;flex-direction:column}
+.device .bar{height:42px;display:flex;align-items:center;gap:8px;padding:0 16px;background:#F8FAFC;border-bottom:1px solid var(--line)}
+.device .bar .dots{display:flex;gap:7px}
+.device .bar .dots i{width:11px;height:11px;border-radius:50%}
+.device .bar .url{margin:0 auto;font-family:"JetBrains Mono";font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);padding:5px 16px;border-radius:8px}
+.cfg-stage{position:relative;flex:1;background:radial-gradient(700px 460px at 50% 30%,#FBF6E6,#FAFAF7 70%)}
+#cfg-canvas{position:absolute;inset:0;width:100%;height:100%}
+.cfg-stage .hint{position:absolute;right:16px;top:14px;font-family:"JetBrains Mono";font-size:11px;color:var(--muted)}
+.cfg-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:24px;box-shadow:var(--shadow-s)}
+.cfg-tabs{display:flex;gap:6px;background:var(--bg3);padding:5px;border-radius:13px}
+.cfg-tabs button{flex:1;padding:11px 8px;border:0;background:transparent;color:var(--muted);font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:13px;border-radius:9px;cursor:pointer;transition:.25s}
+.cfg-tabs button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-s)}
+.cfg-h{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:12px}
+.swatches{display:flex;gap:11px;flex-wrap:wrap}
+.sw{width:36px;height:36px;border-radius:10px;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);transition:.2s}
+.sw.on{box-shadow:0 0 0 2px var(--blue);transform:scale(1.08)}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;transition:.25s;font-size:15px;font-weight:500}
+.opt:hover{border-color:#CBD5E1;background:var(--bg2)}
+.toggle{width:44px;height:25px;border-radius:20px;background:#CBD5E1;position:relative;transition:.25s;flex:none}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.opt.on .toggle{background:linear-gradient(135deg,var(--blue),var(--blue2))}
+.opt.on .toggle::after{left:22px}
+.cfg-price{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:20px}
+.cfg-price .u{font-size:12.5px;color:var(--muted)}
+.cfg-price .p{font-family:"Sora","Plus Jakarta Sans";font-weight:800;font-size:30px}
+.cfg-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:40px}
+.cfg-chips .c{font-size:14px;font-weight:600;color:var(--ink2);background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:100px;box-shadow:var(--shadow-s)}
+.cfg-chips .c span{color:var(--blue);margin-right:7px}
+@media(max-width:920px){.cfg{grid-template-columns:1fr}.device{min-height:420px}}
+
+/* PORTFOLIO */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.case{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s;display:flex;flex-direction:column}
+.case:hover{transform:translateY(-6px);box-shadow:var(--shadow-m)}
+.case .thumb{height:200px;position:relative;overflow:hidden;background-size:cover;background-position:center}
+.case .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(155deg,rgba(212,175,55,.34),rgba(184,134,11,.14) 55%,rgba(6,6,8,.34));mix-blend-mode:multiply}
+.case .thumb .ind{position:absolute;z-index:2;left:16px;top:14px;font-family:"JetBrains Mono";font-size:11px;color:#fff;background:rgba(11,11,15,.5);border:1px solid rgba(255,255,255,.25);padding:5px 11px;border-radius:8px;backdrop-filter:blur(6px)}
+.case .body{padding:26px}
+.case .tag{font-family:"JetBrains Mono";font-size:12px;color:var(--blue)}
+.case h3{font-size:20px;font-weight:700;margin:10px 0 8px}
+.case p{color:var(--muted);font-size:15px}
+.case .metric{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:10px}
+.case .metric .big{font-family:"Sora","Plus Jakarta Sans";font-weight:800;font-size:30px;color:var(--ink)}
+.case .metric .sm{font-size:13.5px;color:var(--muted)}
+@media(max-width:980px){.cases{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+
+/* DASHBOARD SHOWCASE */
+.show-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:center}
+.dashpanel{background:linear-gradient(180deg,rgba(22,22,28,.85),rgba(8,8,11,.75));border:1px solid rgba(212,175,55,.16);border-radius:24px;padding:28px;box-shadow:0 50px 120px -50px rgba(0,0,0,.7);backdrop-filter:blur(12px)}
+.dp-head{display:flex;justify-content:space-between;align-items:center}
+.dp-head .ttl{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:15px;color:#fff}
+.dp-head .live{font-family:"JetBrains Mono";font-size:11px;color:#6EE7B7;display:flex;align-items:center;gap:7px}
+.dp-head .live i{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 8px #34D399;animation:beat 1.6s infinite}
+@keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.dp-rev{font-family:"Sora","Plus Jakarta Sans";font-weight:800;font-size:clamp(36px,4.5vw,52px);color:#fff;margin:12px 0 2px;letter-spacing:-.03em}
+.dp-delta{font-family:"JetBrains Mono";font-size:13px;color:#6EE7B7}
+.dp-chart{margin-top:18px;width:100%;height:200px}
+.dp-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.dp-foot .c{background:rgba(8,8,11,.5);border:1px solid rgba(212,175,55,.12);border-radius:14px;padding:14px}
+.dp-foot .c .l{font-size:11.5px;color:var(--on-dark-mut);text-transform:uppercase;letter-spacing:.05em}
+.dp-foot .c .v{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:22px;color:#fff;margin-top:5px}
+.kpi-float{position:relative;min-height:420px}
+.kfloat{position:absolute;background:rgba(22,22,28,.78);border:1px solid rgba(212,175,55,.18);border-radius:18px;padding:18px 20px;min-width:170px;backdrop-filter:blur(14px);box-shadow:0 30px 60px -34px rgba(0,0,0,.8);animation:floaty 7s ease-in-out infinite}
+.kfloat .l{font-size:12px;color:var(--on-dark-mut);text-transform:uppercase;letter-spacing:.05em}
+.kfloat .v{font-family:"Sora","Plus Jakarta Sans";font-weight:800;font-size:30px;color:#fff;margin-top:6px;letter-spacing:-.02em}
+.kfloat .d{font-family:"JetBrains Mono";font-size:12px;color:#6EE7B7;margin-top:4px}
+.kfloat .spark{margin-top:8px;height:30px;width:100%}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.kfloat.k1{top:6%;left:2%}.kfloat.k2{top:30%;right:4%;animation-delay:-2.2s}.kfloat.k3{bottom:14%;left:10%;animation-delay:-4.4s}.kfloat.k4{bottom:0;right:14%;animation-delay:-1.2s}
+@media(max-width:920px){.show-grid{grid-template-columns:1fr;gap:30px}.kpi-float{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0}.kfloat{position:static;animation:none}}
+
+/* TESTIMONIALS */
+.tlist{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-s);transition:transform .45s var(--ease),box-shadow .45s;display:flex;flex-direction:column}
+.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.tcard .stars{color:#F59E0B;letter-spacing:3px;font-size:15px}
+.tcard .q{font-size:17px;color:var(--ink2);margin-top:16px;line-height:1.6;flex:1}
+.tcard .who{display:flex;align-items:center;gap:13px;margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.tcard .av{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:"Sora","Plus Jakarta Sans";font-weight:700;color:#0B0B0F;font-size:16px}
+.tcard .nm{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:15px}
+.tcard .ro{font-size:13.5px;color:var(--muted)}
+@media(max-width:980px){.tlist{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+
+/* CTA + FOOTER */
+.cta{position:relative;overflow:hidden;text-align:center;padding:clamp(96px,12vw,160px) 0}
+.cta-bg{position:absolute;inset:0;z-index:0;background:center/cover no-repeat;opacity:.16}
+.cta::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(700px 420px at 50% 0%,rgba(212,175,55,.28),transparent 60%),radial-gradient(600px 420px at 80% 100%,rgba(233,193,85,.22),transparent 60%)}
+.cta .wrap{position:relative;z-index:2}
+.cta .h2{color:#fff;max-width:18ch;margin:0 auto}
+.cta .lead{color:#B7B2A6;margin:22px auto 0;max-width:48ch}
+.cta-row{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40px}
+.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
+.foot .brand{color:var(--ink)}
+.foot p{color:var(--muted);font-size:15px;margin-top:16px;max-width:32ch}
+.foot h5{font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:14px;margin:0 0 14px}
+.foot a{display:block;color:var(--muted);font-size:14.5px;margin-bottom:10px;transition:color .2s}
+.foot a:hover{color:var(--blue)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;flex-wrap:wrap;gap:12px}
+@media(max-width:760px){.foot-top{grid-template-columns:1fr 1fr}}
+
+/* RTL + Arabic */
+[dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{font-family:"Tajawal",sans-serif}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{letter-spacing:normal}
+[dir=rtl] .eyebrow{letter-spacing:0}
+[dir=rtl] .section-head.left{text-align:right}
+[dir=rtl] .flow-spine{left:auto;right:52px}
+[dir=rtl] .flow-spine .p{left:auto;right:-2px}
+[dir=rtl] .toggle::after{left:auto;right:3px}
+[dir=rtl] .opt.on .toggle::after{left:auto;right:22px}
+[dir=rtl] .case .thumb .ind{left:auto;right:16px}
+[dir=rtl] .cfg-stage .hint{right:auto;left:16px}
+[dir=rtl] .cfg-chips .c span{margin-right:0;margin-left:7px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition-duration:.001s !important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap row">
+    <a href="#top" class="brand"><span class="mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NextGrowth"><defs><linearGradient id="ngn" x1="14" y1="14" x2="106" y2="106" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFF3C4"/><stop offset="38%" stop-color="#D4AF37"/><stop offset="68%" stop-color="#B8860B"/><stop offset="100%" stop-color="#FFE9A3"/></linearGradient><radialGradient id="ngnt" cx="38%" cy="30%" r="80%"><stop offset="0%" stop-color="#16161C"/><stop offset="60%" stop-color="#0C0C11"/><stop offset="100%" stop-color="#070709"/></radialGradient></defs><rect width="120" height="120" rx="28" fill="#0B0B0F"/><rect width="120" height="120" rx="28" fill="url(#ngnt)"/><g transform="translate(-6,-2)" stroke="url(#ngn)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M34 84 L34 42 L66 84 L66 42" stroke-width="8"/><path d="M104 50 A22 22 0 1 0 104 76 L104 63 L88 63" stroke-width="7"/></g><g transform="translate(-6,-2)" fill="url(#ngn)"><circle cx="34" cy="42" r="3"/><circle cx="66" cy="42" r="3"/><circle cx="88" cy="63" r="2.6"/></g></svg></span><span>NEXT</span><span class="gold">GROWTH</span></a>
+    <div class="navlinks">
+      <a href="#services" data-i18n="nav_services"></a>
+      <a href="#configurators" data-i18n="nav_config"></a>
+      <a href="#industries" data-i18n="nav_industries"></a>
+      <a href="#work" data-i18n="nav_work"></a>
+      <a href="#results" data-i18n="nav_results"></a>
+    </div>
+    <div class="spacer"></div>
+    <div class="langsw" id="langsw">
+      <button data-lang="nl">NL</button><button data-lang="en">EN</button><button data-lang="ar">عربى</button>
+    </div>
+    <a href="#cta" class="btn btn-nav" data-i18n="nav_cta"></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="eyebrow on-dark"><span class="dot"></span><span data-i18n="hero_badge"></span></span>
+      <h1 class="display"><span data-i18n="hero_titleA"></span> <span class="grad" data-i18n="hero_titleB"></span></h1>
+      <p class="lead" data-i18n="hero_sub"></p>
+      <div class="hero-cta">
+        <a href="#cta" class="btn btn-primary" data-i18n="hero_cta1"></a>
+        <a href="#work" class="btn btn-darkghost" data-i18n="hero_cta2"></a>
+      </div>
+      <div class="hero-trust">
+        <div class="t" data-i18n="hero_trust"></div>
+        <div class="hero-logos"><span>Voss Bouw</span><span>NorthPeak</span><span>Domani</span><span>Solaris</span><span>Reframe</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-fade"></div>
+</header>
+
+<section class="section section--alt" style="padding:clamp(60px,7vw,92px) 0">
+  <div class="wrap"><div class="stats" id="statband"></div></div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="photoband reveal" style="margin-bottom:clamp(72px,9vw,108px);background-image:url('https://images.unsplash.com/photo-1746021535490-cd4d7fe7ab2a?q=80&w=1800&auto=format&fit=crop')">
+      <div class="pb-content"><span class="pb-chip"><i></i><span data-i18n="band_chip"></span></span>
+        <h3 data-i18n="band_h"></h3><p data-i18n="band_p"></p></div>
+    </div>
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="svc_ey"></span></span>
+      <h2 class="h2" data-i18n="svc_title"></h2><p class="lead" data-i18n="svc_sub"></p>
+    </div>
+    <div class="svc-grid" id="svc-grid"></div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="feat">
+      <div class="photo reveal" style="background-image:url('https://images.unsplash.com/photo-1758691737158-18ffa31c0a46?q=80&w=1400&auto=format&fit=crop')"></div>
+      <div class="reveal d1">
+        <span class="eyebrow"><span class="dot"></span><span data-i18n="feat_ey"></span></span>
+        <h3 data-i18n="feat_title"></h3><p data-i18n="feat_p"></p>
+        <ul id="feat-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark" id="automation">
+  <div class="wrap">
+    <div class="section-head left reveal">
+      <span class="eyebrow on-dark"><span class="dot"></span><span data-i18n="auto_ey"></span></span>
+      <h2 class="h2" data-i18n="auto_title"></h2><p class="lead" data-i18n="auto_sub"></p>
+    </div>
+    <div class="flow">
+      <div class="flow-card reveal d1"><div class="flow-spine"><span class="p"></span><span class="p" style="animation-delay:-1.8s"></span></div><div id="flow-steps"></div></div>
+      <div class="flow-side reveal d2" id="flow-side"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="configurators">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="cfg_ey"></span></span>
+      <h2 class="h2" data-i18n="cfg_title"></h2><p class="lead" data-i18n="cfg_sub"></p>
+    </div>
+    <div class="cfg">
+      <div class="device reveal d1">
+        <div class="bar"><div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div><div class="url">configurator.jouwmerk.nl</div></div>
+        <div class="cfg-stage"><canvas id="cfg-canvas"></canvas><div class="hint" data-i18n="cfg_hint"></div></div>
+      </div>
+      <div class="cfg-panel reveal d2">
+        <div class="cfg-tabs" id="cfg-tabs"></div>
+        <div><div class="cfg-h" data-i18n="cfg_finish"></div><div class="swatches" id="cfg-sw"></div></div>
+        <div><div class="cfg-h" data-i18n="cfg_options"></div><div class="opts" id="cfg-opts"></div></div>
+        <div class="cfg-price"><div><div class="u" data-i18n="cfg_price_label"></div><div class="p" id="cfg-price">€184.500</div></div><a href="#cta" class="btn btn-primary" style="padding:12px 20px;font-size:14px" data-i18n="cfg_btn"></a></div>
+      </div>
+    </div>
+    <div class="cfg-chips reveal" id="cfg-chips"></div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="work_ey"></span></span>
+      <h2 class="h2" data-i18n="work_title"></h2><p class="lead" data-i18n="work_sub"></p>
+    </div>
+    <div class="cases" id="cases"></div>
+  </div>
+</section>
+
+<section class="section section--dark" id="results">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow on-dark"><span class="dot"></span><span data-i18n="dash_ey"></span></span>
+      <h2 class="h2" data-i18n="dash_title"></h2><p class="lead" data-i18n="dash_sub"></p>
+    </div>
+    <div class="show-grid">
+      <div class="dashpanel reveal d1">
+        <div class="dp-head"><span class="ttl" data-i18n="dash_panel_title"></span><span class="live"><i></i><span data-i18n="dash_live"></span></span></div>
+        <div class="dp-rev" data-count="842160" data-prefix="€">€0</div>
+        <div class="dp-delta"><span>▲ 12.4% </span><span data-i18n="dash_rev_delta"></span></div>
+        <svg class="dp-chart" id="dp-chart" viewBox="0 0 620 200" preserveAspectRatio="none"></svg>
+        <div class="dp-foot">
+          <div class="c"><div class="l" data-i18n="dash_pipeline"></div><div class="v" data-count="2.4" data-dec="1" data-prefix="€" data-suffix="M">€0</div></div>
+          <div class="c"><div class="l" data-i18n="dash_win"></div><div class="v" data-count="38" data-suffix="%">0%</div></div>
+          <div class="c"><div class="l" data-i18n="dash_deal"></div><div class="v" data-count="14.2" data-dec="1" data-prefix="€" data-suffix="k">€0</div></div>
+        </div>
+      </div>
+      <div class="kpi-float reveal d2">
+        <div class="kfloat k1"><div class="l" data-i18n="dash_leads"></div><div class="v" data-count="3920">0</div><div class="d">▲ 8.1%</div><svg class="spark" data-spark="1"></svg></div>
+        <div class="kfloat k2"><div class="l" data-i18n="dash_conv"></div><div class="v" data-count="6.8" data-dec="1" data-suffix="%">0%</div><div class="d">▲ 0.6</div><svg class="spark" data-spark="2"></svg></div>
+        <div class="kfloat k3"><div class="l" data-i18n="dash_roi"></div><div class="v" data-count="412" data-suffix="%">0%</div><div class="d">▲ 31</div><svg class="spark" data-spark="3"></svg></div>
+        <div class="kfloat k4"><div class="l" data-i18n="dash_mrr"></div><div class="v" data-count="68" data-prefix="€" data-suffix="k">€0</div><div class="d">▲ 5.4%</div><svg class="spark" data-spark="4"></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="industries">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ind_ey"></span></span>
+      <h2 class="h2" data-i18n="ind_title"></h2>
+    </div>
+    <div class="svc-grid" id="ind-grid"></div>
+  </div>
+</section>
+
+<section class="section section--alt" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="test_ey"></span></span>
+      <h2 class="h2" data-i18n="test_title"></h2>
+    </div>
+    <div class="tlist" id="tlist"></div>
+  </div>
+</section>
+
+<section class="section section--dark cta" id="cta">
+  <div class="cta-bg" style="background-image:url('https://images.unsplash.com/photo-1758691737158-18ffa31c0a46?q=80&w=1800&auto=format&fit=crop')"></div>
+  <div class="wrap">
+    <span class="eyebrow on-dark reveal"><span class="dot"></span><span data-i18n="cta_ey"></span></span>
+    <h2 class="h2 reveal d1" style="margin-top:20px" data-i18n="cta_title"></h2>
+    <p class="lead reveal d2" data-i18n="cta_sub"></p>
+    <div class="cta-row reveal d3">
+      <a href="#" class="btn btn-primary" data-i18n="cta_btn1"></a>
+      <a href="#work" class="btn btn-darkghost" data-i18n="cta_btn2"></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div><a href="#top" class="brand"><span class="mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NextGrowth"><defs><linearGradient id="ngf" x1="14" y1="14" x2="106" y2="106" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFF3C4"/><stop offset="38%" stop-color="#D4AF37"/><stop offset="68%" stop-color="#B8860B"/><stop offset="100%" stop-color="#FFE9A3"/></linearGradient><radialGradient id="ngft" cx="38%" cy="30%" r="80%"><stop offset="0%" stop-color="#16161C"/><stop offset="60%" stop-color="#0C0C11"/><stop offset="100%" stop-color="#070709"/></radialGradient></defs><rect width="120" height="120" rx="28" fill="#0B0B0F"/><rect width="120" height="120" rx="28" fill="url(#ngft)"/><g transform="translate(-6,-2)" stroke="url(#ngf)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M34 84 L34 42 L66 84 L66 42" stroke-width="8"/><path d="M104 50 A22 22 0 1 0 104 76 L104 63 L88 63" stroke-width="7"/></g><g transform="translate(-6,-2)" fill="url(#ngf)"><circle cx="34" cy="42" r="3"/><circle cx="66" cy="42" r="3"/><circle cx="88" cy="63" r="2.6"/></g></svg></span><span style="color:var(--ink)">NEXT</span><span class="gold">GROWTH</span></a><p data-i18n="foot_tagline"></p></div>
+      <div><h5 data-i18n="foot_c1"></h5><a href="#services" data-i18n="nav_services"></a><a href="#automation" data-i18n="foot_l_ai"></a><a href="#configurators" data-i18n="nav_config"></a></div>
+      <div><h5 data-i18n="foot_c2"></h5><a href="#work" data-i18n="nav_work"></a><a href="#results" data-i18n="nav_results"></a><a href="#industries" data-i18n="nav_industries"></a></div>
+      <div><h5 data-i18n="foot_c3"></h5><a href="#cta" data-i18n="nav_cta"></a><a href="#cta" data-i18n="foot_l_quote"></a></div>
+    </div>
+    <div class="foot-bot"><span data-i18n="foot_copy"></span><span data-i18n="foot_built"></span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>[...c.querySelectorAll(s)];
+
+const ICON={
+web:'<path d="M3 9h18M9 21V9M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"/>',
+shop:'<path d="M6 6h15l-1.5 9h-12L5 3H2M9 21a1 1 0 100-2 1 1 0 000 2zM18 21a1 1 0 100-2 1 1 0 000 2z"/>',
+ai:'<rect x="5" y="7" width="14" height="12" rx="2"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/>',
+agent:'<path d="M12 8a3 3 0 100-6 3 3 0 000 6zM5 21a7 7 0 0114 0M9 13l-2 2M15 13l2 2"/>',
+cfg:'<path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2zM12 11l8-4.5M12 11v9M12 11L4 6.5"/>',
+dash:'<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/>',
+crm:'<path d="M16 18a4 4 0 00-8 0M12 11a3 3 0 100-6 3 3 0 000 6zM4 20a8 8 0 0116 0"/>',
+video:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',
+lead:'<path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10zM12 13a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/>',
+code:'<path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/>',
+build:'<path d="M3 21h18M5 21V10l5-3 5 3v11M9 21v-5h2v5"/>',
+retail:'<path d="M4 9l1-5h14l1 5M4 9h16v10a1 1 0 01-1 1H5a1 1 0 01-1-1V9zM9 13h6"/>',
+horeca:'<path d="M6 3v7a3 3 0 006 0V3M9 3v18M18 3c-1.5 1-2 3-2 5s.5 4 2 5v8"/>',
+estate:'<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+service:'<path d="M14 7l3-3 3 3-3 3M3 21l7-7M5 13l6 6M16 13a4 4 0 01-5 5"/>',
+industry:'<path d="M3 21V10l5 3V10l5 3V6l5 3v12H3zM7 21v-4M12 21v-4M17 21v-4"/>'
+};
+
+const L={
+nl:{
+ nav_services:"Diensten",nav_config:"Configurators",nav_industries:"Branches",nav_work:"Werk",nav_results:"Resultaten",nav_cta:"Plan een gesprek",
+ hero_badge:"Digitale groeipartner",hero_titleA:"Wij bouwen digitale",hero_titleB:"groeisystemen.",
+ hero_sub:"Van websites en webshops tot AI-automatisering, configurators en marketingsystemen. Wij helpen bedrijven groeien met slimme technologie.",
+ hero_cta1:"Plan een strategiegesprek →",hero_cta2:"Bekijk ons werk",hero_trust:"Actief in Nederland, Dubai en Jordanië",
+ band_chip:"Echte bedrijven, echte resultaten",band_h:"Gebouwd voor hoe jouw bedrijf écht werkt.",band_p:"Achter elk dashboard zit een team, een pijplijn en honderd beslissingen per dag. Wij bouwen de systemen die dat alle drie makkelijker maken — en de groei die volgt meetbaar.",
+ svc_ey:"Wat wij bouwen",svc_title:"Alles wat je nodig hebt om te groeien, als één systeem.",svc_sub:"Tien diensten, één stack. Wij ontwerpen en verbinden ze zodat je website, marketing en processen elkaar versterken in plaats van tegenwerken.",
+ feat_ey:"Eén verbonden systeem",feat_title:"Jouw tools werken eindelijk als één team.",feat_p:"De meeste bedrijven draaien op een twaalftal losse apps die stilletjes tijd en leads lekken. Wij vervangen de gaten door één verbonden systeem dat je hele team kan vertrouwen.",
+ auto_ey:"AI-automatisering",auto_title:"Jouw bedrijf draait door tussen de klikken.",auto_sub:"Er komt een lead binnen en het systeem gaat aan het werk — kwalificeren, doorzetten, beantwoorden en inplannen. Geen tabjes, geen overtypen, geen gemiste opvolging.",
+ cfg_ey:"3D-configurators",cfg_title:"Laat klanten het bouwen vóórdat ze kopen.",cfg_sub:"Realtime 3D-configurators voor veranda's, prefab en vastgoed. Klanten stellen het product samen, zien direct de prijs en komen koopklaar binnen.",
+ cfg_hint:"sleep om te draaien",cfg_finish:"Gevelafwerking",cfg_options:"Opties",cfg_price_label:"Geschatte prijs",cfg_btn:"Offerte aanvragen",
+ work_ey:"Geselecteerd werk",work_title:"Resultaten die wij hebben gebouwd.",work_sub:"Een paar systemen die we bouwden voor ondernemers die groei wilden die ze kunnen meten — geen mooiere brochure.",
+ dash_ey:"Live dashboards",dash_title:"Elk cijfer dat telt, in realtime.",dash_sub:"Omzet, leads, conversie en ROI live — zodat je beslist op basis van bewijs in plaats van onderbuikgevoel.",
+ dash_panel_title:"Omzet · laatste 30 dagen",dash_live:"live",dash_rev_delta:"t.o.v. vorige periode",dash_pipeline:"Pijplijn",dash_win:"Winratio",dash_deal:"Gem. deal",dash_leads:"Leads",dash_conv:"Conversie",dash_roi:"ROI",dash_mrr:"MRR",
+ ind_ey:"Branches",ind_title:"Voor welke branche werken wij?",
+ test_ey:"Resultaten van klanten",test_title:"Vertrouwd door ondernemers die resultaat wilden, geen theorie.",
+ cta_ey:"Laten we bouwen",cta_title:"Klaar om jouw groeisysteem te bouwen?",cta_sub:"Plan een strategiegesprek van 30 minuten. We brengen het systeem in kaart dat jouw bedrijf nodig heeft en laten precies zien wat het kost om het te bouwen.",cta_btn1:"Plan een strategiegesprek →",cta_btn2:"Bekijk eerst het werk",
+ foot_tagline:"Digitale groeisystemen voor ambitieuze bedrijven. Wij ontwerpen, bouwen en verbinden de systemen die aandacht omzetten in omzet.",foot_c1:"Diensten",foot_c2:"Studio",foot_c3:"Aan de slag",foot_l_ai:"AI-automatisering",foot_l_quote:"Offerte aanvragen",foot_copy:"© 2026 NextGrowth — Nederland · Dubai · Jordanië",foot_built:"Gebouwd als één verbonden systeem.",
+ services:[{i:'web',t:"Websites",d:"Snelle, premium websites die bezoekers omzetten in aanvragen."},{i:'shop',t:"Webshops",d:"Schaalbare webshops die verkopen terwijl jij slaapt."},{i:'ai',t:"AI-automatisering",d:"Laat repetitief werk volledig automatisch verlopen."},{i:'agent',t:"AI-agents",d:"Digitale medewerkers die leads kwalificeren en afspraken plannen."},{i:'cfg',t:"Configurators",d:"3D-productconfigurators met live prijsberekening."},{i:'dash',t:"Dashboards",d:"Omzet, leads en ROI realtime op één scherm."},{i:'crm',t:"CRM-integraties",d:"Een CRM dat zichzelf bijwerkt, zonder handwerk."},{i:'video',t:"Marketingvideo's",d:"Video's die aandacht omzetten in aanvragen."},{i:'lead',t:"Leadgeneratie",d:"Een voorspelbare stroom gekwalificeerde leads."},{i:'code',t:"Maatwerk software",d:"Software op maat voor jouw unieke processen."}],
+ feat_list:["Website, CRM en marketing delen één bron van waarheid","Elke lead wordt automatisch vastgelegd, gescoord en opgevolgd","De ondernemer ziet het hele bedrijf op één live dashboard","Gebouwd op tools die je team al kent — zonder alles te vervangen"],
+ steps:[{t:"Lead komt op je website",s:"bron · Meta Ads · direct vastgelegd"},{t:"AI kwalificeert de lead",s:"intentiescore · 0.91 · zakelijk"},{t:"CRM werkt automatisch bij",s:"fase → gekwalificeerd · eigenaar toegewezen"},{t:"Offerte wordt opgesteld",s:"in jouw huisstijl · geprijsd · klaar"},{t:"Afspraak wordt ingepland",s:"agenda gesynchroniseerd · di 11:00"},{t:"Deal wordt gesloten",s:"gewonnen · omzet verwerkt"}],
+ side:[{k:"Leads verwerkt deze week",v:"1.284"},{k:"Gem. reactietijd",v:"0,8s",up:1},{k:"Automatisch gekwalificeerd",v:"73%",up:1},{k:"Bespaarde uren / week",v:"217",up:1},{k:"Handmatige stappen nodig",v:"0"}],
+ cfg_tabs:["Veranda","Prefab","Vastgoed"],cfg_opts:[{k:"solar",l:"Zonnedak"},{k:"glass",l:"Glazen gevel"},{k:"pergola",l:"Pergola / overkapping"}],
+ cfg_chips:["Veranda","Rolluik","Zonwering","Prefab","Offerte"],
+ industries:[{i:'build',t:"Bouw & Installatie",d:"Bouwbedrijven, aannemers, installateurs, zonnepanelen, warmtepompen, dakdekkers en prefab."},{i:'retail',t:"Retail & Webshops",d:"Webshops, winkels en merken die online willen groeien."},{i:'horeca',t:"Horeca",d:"Restaurants, hotels en cafés die meer reserveringen willen."},{i:'estate',t:"Vastgoed",d:"Makelaars en ontwikkelaars die sneller willen verkopen."},{i:'service',t:"Zakelijke dienstverlening",d:"Dienstverleners die hun salesproces willen automatiseren."},{i:'industry',t:"Industrie",d:"Productiebedrijven die hun processen willen digitaliseren."}],
+ cases:[{tag:"Bouw",t:"Leadmachine voor een regionale bouwer",d:"Nieuwe site + Meta-funnel + AI-intake. Gekwalificeerde leads direct in de salesagenda.",m:"+212%",l:"gekwalificeerde leads",c1:"#D4AF37",c2:"#FFE9A3",p:"https://images.unsplash.com/photo-1761227390482-bccb032eeea6?q=80&w=900&auto=format&fit=crop"},{tag:"Vastgoed",t:"3D-configurator voor nieuwbouwwoningen",d:"Kopers stellen hun woning samen, zien live de prijs en vragen een bezichtiging aan — nog vóór het eerste contact.",m:"3,4×",l:"meer bezichtigingen",c1:"#B8860B",c2:"#E9C155",p:"https://images.unsplash.com/photo-1560185009-5bf9f2849488?q=80&w=900&auto=format&fit=crop"},{tag:"Installatie",t:"Geautomatiseerd boekingssysteem",d:"Van eerste aanvraag tot bevestigde montage, volledig geautomatiseerd. Het team stopte met najagen en begon met installeren.",m:"−61%",l:"administratietijd",c1:"#A1791B",c2:"#FFD66B",p:"https://images.unsplash.com/photo-1745187946672-2c1d8cf26a2b?q=80&w=900&auto=format&fit=crop"}],
+ tests:[{q:"“Ze verkochten ons geen website — ze bouwden een systeem. Binnen een kwartaal zat onze agenda vol gekwalificeerde gesprekken.”",n:"Mark de Wit",r:"Eigenaar, Voss Bouw",c:"#D4AF37"},{q:"“De configurator veranderde hoe we verkopen. Kopers komen al zeker van wat ze willen. Onze sluitingsratio schoot omhoog.”",n:"Sofia Lindqvist",r:"Directeur, Domani Homes",c:"#B8860B"},{q:"“Alles praat eindelijk met elkaar. Ik open 's ochtends één dashboard en weet precies waar we staan.”",n:"Tom Berkhout",r:"Oprichter, Solaris Installs",c:"#A1791B"}],
+ stats:[{n:"€48M+",l:"Omzet beïnvloed"},{n:"320+",l:"Systemen gebouwd"},{n:"4,9",l:"Gemiddelde beoordeling"},{n:"12+",l:"Branches bediend"}]
+},
+en:{
+ nav_services:"Services",nav_config:"Configurators",nav_industries:"Industries",nav_work:"Work",nav_results:"Results",nav_cta:"Book a call",
+ hero_badge:"Digital growth partner",hero_titleA:"We build digital",hero_titleB:"growth systems.",
+ hero_sub:"From websites and webshops to AI automation, configurators and marketing systems. We help businesses grow with smart technology.",
+ hero_cta1:"Book a strategy call →",hero_cta2:"See our work",hero_trust:"Active across the Netherlands, Dubai & Jordan",
+ band_chip:"Real businesses, real outcomes",band_h:"Built for the way your business actually works.",band_p:"Behind every dashboard is a team, a pipeline and a hundred decisions a day. We build the systems that make all three easier — and the growth that follows measurable.",
+ svc_ey:"What we build",svc_title:"Everything you need to grow, as one system.",svc_sub:"Ten services, one stack. We design and connect them so your website, marketing and operations compound instead of fighting each other.",
+ feat_ey:"One connected system",feat_title:"Your tools finally work as one team.",feat_p:"Most businesses run on a dozen disconnected apps that quietly leak time and leads. We replace the gaps with a single, connected system your whole team can trust.",
+ auto_ey:"AI automation",auto_title:"Your business runs itself between clicks.",auto_sub:"A lead lands and the system goes to work — qualifying, routing, replying and booking. No tabs, no copy-paste, no dropped follow-ups.",
+ cfg_ey:"3D configurators",cfg_title:"Let customers build it before they buy.",cfg_sub:"Real-time 3D configurators for verandas, prefab and real estate. Customers shape the product, see the price, and arrive ready to buy.",
+ cfg_hint:"drag to rotate",cfg_finish:"Facade finish",cfg_options:"Options",cfg_price_label:"Estimated price",cfg_btn:"Request a quote",
+ work_ey:"Selected work",work_title:"Results we've engineered.",work_sub:"A few systems we built for owners who wanted growth they could measure — not a prettier brochure.",
+ dash_ey:"Live dashboards",dash_title:"Every number that matters, in real time.",dash_sub:"Revenue, leads, conversion and ROI live — so you lead with evidence instead of guesswork.",
+ dash_panel_title:"Revenue · last 30 days",dash_live:"live",dash_rev_delta:"vs last period",dash_pipeline:"Pipeline",dash_win:"Win rate",dash_deal:"Avg. deal",dash_leads:"Leads",dash_conv:"Conversion",dash_roi:"ROI",dash_mrr:"MRR",
+ ind_ey:"Industries",ind_title:"Which industries do we work for?",
+ test_ey:"Client results",test_title:"Trusted by owners who wanted results, not theory.",
+ cta_ey:"Let's build",cta_title:"Ready to build your growth system?",cta_sub:"Book a 30-minute strategy call. We'll map the system your business needs and show you exactly what it takes to build it.",cta_btn1:"Book a strategy call →",cta_btn2:"See the work first",
+ foot_tagline:"Digital growth systems for ambitious businesses. We design, build and connect the systems that turn attention into revenue.",foot_c1:"Services",foot_c2:"Studio",foot_c3:"Get started",foot_l_ai:"AI automation",foot_l_quote:"Request a quote",foot_copy:"© 2026 NextGrowth — Netherlands · Dubai · Jordan",foot_built:"Built as one connected system.",
+ services:[{i:'web',t:"Websites",d:"Fast, premium websites that turn visitors into enquiries."},{i:'shop',t:"Webshops",d:"Scalable stores that sell while you sleep."},{i:'ai',t:"AI automation",d:"Let repetitive work run fully on its own."},{i:'agent',t:"AI agents",d:"Digital staff that qualify leads and book meetings."},{i:'cfg',t:"Configurators",d:"3D product configurators with live pricing."},{i:'dash',t:"Dashboards",d:"Revenue, leads and ROI in real time, on one screen."},{i:'crm',t:"CRM integrations",d:"A CRM that updates itself, with no manual work."},{i:'video',t:"Marketing videos",d:"Videos that turn attention into enquiries."},{i:'lead',t:"Lead generation",d:"A predictable flow of qualified leads."},{i:'code',t:"Custom software",d:"Software built around your unique processes."}],
+ feat_list:["Website, CRM and marketing share one source of truth","Every lead is captured, scored and followed up automatically","Owners see the whole business on one live dashboard","Built on tools your team already knows — no rip-and-replace"],
+ steps:[{t:"Lead enters your website",s:"source · Meta Ads · captured instantly"},{t:"AI qualifies the lead",s:"intent score · 0.91 · enterprise fit"},{t:"CRM updates automatically",s:"stage → qualified · owner assigned"},{t:"Proposal is generated",s:"on-brand · priced · ready to send"},{t:"Meeting gets booked",s:"calendar synced · Tue 11:00"},{t:"Deal closes",s:"won · revenue recognised"}],
+ side:[{k:"Leads handled this week",v:"1,284"},{k:"Average response time",v:"0.8s",up:1},{k:"Auto-qualified",v:"73%",up:1},{k:"Hours saved / week",v:"217",up:1},{k:"Manual steps required",v:"0"}],
+ cfg_tabs:["Veranda","Prefab","Real estate"],cfg_opts:[{k:"solar",l:"Solar roof"},{k:"glass",l:"Glass facade"},{k:"pergola",l:"Pergola / canopy"}],
+ cfg_chips:["Veranda","Roller shutters","Sun shading","Prefab","Quote"],
+ industries:[{i:'build',t:"Construction & installation",d:"Builders, contractors, installers, solar, heat pumps, roofers and prefab."},{i:'retail',t:"Retail & webshops",d:"Stores and brands that want to grow online."},{i:'horeca',t:"Hospitality",d:"Restaurants, hotels and cafés that want more bookings."},{i:'estate',t:"Real estate",d:"Agents and developers who want to sell faster."},{i:'service',t:"Professional services",d:"Service firms that want to automate sales."},{i:'industry',t:"Manufacturing",d:"Producers that want to digitise their processes."}],
+ cases:[{tag:"Construction",t:"Lead engine for a regional builder",d:"New site + Meta funnel + AI intake. Qualified leads booked straight into the sales calendar.",m:"+212%",l:"qualified leads",c1:"#D4AF37",c2:"#FFE9A3",p:"https://images.unsplash.com/photo-1761227390482-bccb032eeea6?q=80&w=900&auto=format&fit=crop"},{tag:"Real estate",t:"3D configurator for off-plan homes",d:"Buyers design their unit, see live pricing, and request a viewing — before sales ever call.",m:"3.4×",l:"more viewings",c1:"#B8860B",c2:"#E9C155",p:"https://images.unsplash.com/photo-1560185009-5bf9f2849488?q=80&w=900&auto=format&fit=crop"},{tag:"Installers",t:"Automated booking system",d:"From first enquiry to confirmed install, fully automated. The team stopped chasing and started installing.",m:"−61%",l:"admin time",c1:"#A1791B",c2:"#FFD66B",p:"https://images.unsplash.com/photo-1745187946672-2c1d8cf26a2b?q=80&w=900&auto=format&fit=crop"}],
+ tests:[{q:"“They didn’t sell us a website — they built a system. Within a quarter our calendar was full of qualified calls.”",n:"Mark de Wit",r:"Owner, Voss Bouw",c:"#D4AF37"},{q:"“The configurator changed how we sell. Buyers arrive already certain about what they want. Our close rate jumped.”",n:"Sofia Lindqvist",r:"Director, Domani Homes",c:"#B8860B"},{q:"“Everything finally talks to everything. I open one dashboard in the morning and I know exactly where we stand.”",n:"Tom Berkhout",r:"Founder, Solaris Installs",c:"#A1791B"}],
+ stats:[{n:"€48M+",l:"Revenue influenced"},{n:"320+",l:"Systems shipped"},{n:"4.9",l:"Average rating"},{n:"12+",l:"Industries served"}]
+},
+ar:{
+ nav_services:"الخدمات",nav_config:"المُهيّئات",nav_industries:"القطاعات",nav_work:"أعمالنا",nav_results:"النتائج",nav_cta:"احجز مكالمة",
+ hero_badge:"شريك النمو الرقمي",hero_titleA:"نبني أنظمة",hero_titleB:"النمو الرقمية.",
+ hero_sub:"من المواقع والمتاجر الإلكترونية إلى أتمتة الذكاء الاصطناعي والمُهيّئات وأنظمة التسويق. نساعد الشركات على النمو بتقنياتٍ ذكية.",
+ hero_cta1:"احجز جلسة استراتيجية ←",hero_cta2:"شاهد أعمالنا",hero_trust:"نعمل في هولندا ودبي والأردن",
+ band_chip:"شركات حقيقية، نتائج حقيقية",band_h:"مبنيٌّ على طريقة عمل شركتك الفعلية.",band_p:"خلف كل لوحة تحكم فريقٌ ومسارُ مبيعاتٍ ومئاتُ القرارات يوميًا. نبني الأنظمة التي تُسهّل ذلك كلّه — ونموٌّ قابلٌ للقياس يتبع ذلك.",
+ svc_ey:"ما الذي نبنيه",svc_title:"كل ما تحتاجه للنمو، كنظامٍ واحد.",svc_sub:"عشرُ خدمات، منظومةٌ واحدة. نصمّمها ونربطها معًا ليتكامل موقعك وتسويقك وعملياتك بدلاً من أن تتعارض.",
+ feat_ey:"نظامٌ واحدٌ متكامل",feat_title:"أدواتك تعمل أخيرًا كفريقٍ واحد.",feat_p:"تعتمد معظم الشركات على عشرات التطبيقات المنفصلة التي تُهدر الوقت والعملاء بصمت. نستبدل الفجوات بنظامٍ واحدٍ متكاملٍ يثق به فريقك بالكامل.",
+ auto_ey:"أتمتة الذكاء الاصطناعي",auto_title:"شركتك تعمل من تلقاء نفسها بين النقرات.",auto_sub:"يصل العميل فيبدأ النظام العمل — تأهيلٌ وتوجيهٌ وردٌّ وحجز. دون نوافذ متعددة، ولا نسخ ولصق، ولا متابعاتٍ ضائعة.",
+ cfg_ey:"مُهيّئات ثلاثية الأبعاد",cfg_title:"دع العملاء يصمّمونه قبل الشراء.",cfg_sub:"مُهيّئات ثلاثية الأبعاد فورية للفيراندا والمباني الجاهزة والعقارات. يصمّم العميل المنتج ويرى السعر ويصل جاهزًا للشراء.",
+ cfg_hint:"اسحب للتدوير",cfg_finish:"تشطيب الواجهة",cfg_options:"الخيارات",cfg_price_label:"السعر التقديري",cfg_btn:"اطلب عرض سعر",
+ work_ey:"أعمالٌ مختارة",work_title:"نتائجُ صمّمناها.",work_sub:"بعض الأنظمة التي بنيناها لأصحاب أعمالٍ أرادوا نموًّا يمكن قياسه — لا مجرّد واجهةٍ أجمل.",
+ dash_ey:"لوحاتٌ مباشرة",dash_title:"كل رقمٍ مهم، في الوقت الفعلي.",dash_sub:"الإيرادات والعملاء والتحويل والعائد على الاستثمار مباشرةً — لتقود بالأدلّة لا بالتخمين.",
+ dash_panel_title:"الإيرادات · آخر 30 يومًا",dash_live:"مباشر",dash_rev_delta:"مقارنةً بالفترة السابقة",dash_pipeline:"خط الأنابيب",dash_win:"معدّل الفوز",dash_deal:"متوسط الصفقة",dash_leads:"العملاء",dash_conv:"التحويل",dash_roi:"العائد",dash_mrr:"الإيراد الشهري",
+ ind_ey:"القطاعات",ind_title:"ما القطاعات التي نخدمها؟",
+ test_ey:"نتائج العملاء",test_title:"موثوقٌ به من أصحاب أعمالٍ أرادوا نتائج لا نظريات.",
+ cta_ey:"لنبدأ البناء",cta_title:"جاهزٌ لبناء نظام نموّك؟",cta_sub:"احجز جلسة استراتيجية مدّتها 30 دقيقة. سنرسم النظام الذي يحتاجه عملك ونوضّح بدقّةٍ ما يتطلّبه بناؤه.",cta_btn1:"احجز جلسة استراتيجية ←",cta_btn2:"شاهد الأعمال أولًا",
+ foot_tagline:"أنظمة نموٍّ رقمية للشركات الطموحة. نصمّم ونبني ونربط الأنظمة التي تُحوّل الانتباه إلى إيرادات.",foot_c1:"الخدمات",foot_c2:"الاستوديو",foot_c3:"ابدأ الآن",foot_l_ai:"أتمتة الذكاء الاصطناعي",foot_l_quote:"اطلب عرض سعر",foot_copy:"© 2026 NextGrowth — هولندا · دبي · الأردن",foot_built:"مبنيٌّ كنظامٍ واحدٍ متكامل.",
+ services:[{i:'web',t:"المواقع الإلكترونية",d:"مواقع سريعة وفاخرة تُحوّل الزوّار إلى طلبات."},{i:'shop',t:"المتاجر الإلكترونية",d:"متاجر قابلة للتوسّع تبيع بينما تنام."},{i:'ai',t:"أتمتة الذكاء الاصطناعي",d:"اجعل المهام المتكرّرة تعمل تلقائيًا بالكامل."},{i:'agent',t:"وكلاء الذكاء الاصطناعي",d:"موظفون رقميون يؤهّلون العملاء ويحجزون المواعيد."},{i:'cfg',t:"المُهيّئات",d:"مُهيّئات منتجات ثلاثية الأبعاد بتسعيرٍ مباشر."},{i:'dash',t:"لوحات التحكم",d:"الإيرادات والعملاء والعائد في شاشةٍ واحدة."},{i:'crm',t:"تكاملات CRM",d:"نظام CRM يُحدّث نفسه دون عملٍ يدوي."},{i:'video',t:"فيديوهات تسويقية",d:"فيديوهات تُحوّل الانتباه إلى طلبات."},{i:'lead',t:"توليد العملاء",d:"تدفّقٌ ثابتٌ من العملاء المؤهّلين."},{i:'code',t:"برمجيات مخصّصة",d:"برمجيات مصمّمة خصيصًا لعملياتك."}],
+ feat_list:["الموقع و CRM والتسويق يشتركون في مصدرٍ واحدٍ للحقيقة","كل عميلٍ محتمل يُلتقَط ويُقيَّم ويُتابَع تلقائيًا","يرى المالك الشركة كاملةً على لوحةٍ مباشرة","مبنيٌّ على أدواتٍ يعرفها فريقك — دون استبدالٍ كامل"],
+ steps:[{t:"يدخل العميل إلى موقعك",s:"المصدر · إعلانات Meta · يُلتقَط فورًا"},{t:"الذكاء الاصطناعي يؤهّل العميل",s:"درجة النية · 0.91 · مؤسّسي"},{t:"تحديث CRM تلقائيًا",s:"المرحلة ← مؤهّل · تعيين مسؤول"},{t:"إنشاء عرض السعر",s:"بهوية علامتك · مُسعّر · جاهز"},{t:"حجز الاجتماع",s:"مزامنة التقويم · الثلاثاء 11:00"},{t:"إتمام الصفقة",s:"تم الفوز · احتُسب الإيراد"}],
+ side:[{k:"عملاء عولِجوا هذا الأسبوع",v:"1,284"},{k:"متوسط وقت الاستجابة",v:"0.8ث",up:1},{k:"مؤهّل تلقائيًا",v:"73%",up:1},{k:"ساعات مُوفّرة / أسبوع",v:"217",up:1},{k:"خطوات يدوية مطلوبة",v:"0"}],
+ cfg_tabs:["فيراندا","مبنى جاهز","عقارات"],cfg_opts:[{k:"solar",l:"سقف شمسي"},{k:"glass",l:"واجهة زجاجية"},{k:"pergola",l:"بيرغولا / مظلّة"}],
+ cfg_chips:["فيراندا","ستائر دوّارة","مظلّات شمسية","مبنى جاهز","عرض سعر"],
+ industries:[{i:'build',t:"البناء والتركيب",d:"شركات البناء والمقاولون والمركّبون والطاقة الشمسية والمضخّات الحرارية وعمّال الأسقف والمباني الجاهزة."},{i:'retail',t:"التجزئة والمتاجر",d:"المتاجر والعلامات التي تريد النموّ عبر الإنترنت."},{i:'horeca',t:"الضيافة",d:"المطاعم والفنادق والمقاهي التي تريد حجوزاتٍ أكثر."},{i:'estate',t:"العقارات",d:"الوسطاء والمطوّرون الذين يريدون بيعًا أسرع."},{i:'service',t:"الخدمات المهنية",d:"مزوّدو الخدمات الذين يريدون أتمتة المبيعات."},{i:'industry',t:"الصناعة",d:"شركات التصنيع التي تريد رقمنة عملياتها."}],
+ cases:[{tag:"البناء",t:"محرّك عملاء لشركة بناءٍ إقليمية",d:"موقع جديد + قمع Meta + استقبالٌ بالذكاء الاصطناعي. عملاء مؤهّلون يُحجَزون مباشرةً في تقويم المبيعات.",m:"+212%",l:"عملاء مؤهّلون",c1:"#D4AF37",c2:"#FFE9A3",p:"https://images.unsplash.com/photo-1761227390482-bccb032eeea6?q=80&w=900&auto=format&fit=crop"},{tag:"العقارات",t:"مُهيّئ ثلاثي الأبعاد للمنازل قيد الإنشاء",d:"يصمّم المشترون وحدتهم ويرون السعر مباشرةً ويطلبون معاينةً قبل أيّ اتصال.",m:"×3.4",l:"معاينات أكثر",c1:"#B8860B",c2:"#E9C155",p:"https://images.unsplash.com/photo-1560185009-5bf9f2849488?q=80&w=900&auto=format&fit=crop"},{tag:"التركيب",t:"نظام حجزٍ آلي",d:"من أول استفسارٍ إلى تركيبٍ مؤكّد، آليًا بالكامل. توقّف الفريق عن الملاحقة وبدأ التركيب.",m:"−61%",l:"وقتٌ إداري",c1:"#A1791B",c2:"#FFD66B",p:"https://images.unsplash.com/photo-1745187946672-2c1d8cf26a2b?q=80&w=900&auto=format&fit=crop"}],
+ tests:[{q:"«لم يبيعونا موقعًا — بل بنوا نظامًا. خلال ربعِ سنةٍ امتلأ تقويمنا بمكالماتٍ مؤهّلة.»",n:"Mark de Wit",r:"المالك، Voss Bouw",c:"#D4AF37"},{q:"«غيّر المُهيّئ طريقة بيعنا. يصل المشترون وهم متأكّدون ممّا يريدون، فارتفع معدّل الإغلاق.»",n:"Sofia Lindqvist",r:"مديرة، Domani Homes",c:"#B8860B"},{q:"«كل شيءٍ يتحدّث أخيرًا مع كل شيء. أفتح لوحةً واحدةً صباحًا وأعرف موقفنا بدقّة.»",n:"Tom Berkhout",r:"مؤسّس، Solaris Installs",c:"#A1791B"}],
+ stats:[{n:"€48M+",l:"إيرادات مُتأثّرة"},{n:"320+",l:"أنظمة تم بناؤها"},{n:"4.9",l:"متوسط التقييم"},{n:"12+",l:"قطاعات نخدمها"}]
+}
+};
+
+const numLocale={nl:'nl-NL',en:'en-US',ar:'en-US'};
+let lang='nl', cur=L.nl;
+
+/* nav solid */
+(function(){const nav=$('#nav');const f=()=>nav.classList.toggle('solid',scrollY>40);f();addEventListener('scroll',f,{passive:true});})();
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+function observeReveals(){$$('.reveal:not(.in)').forEach(e=>io.observe(e));}
+
+/* counters */
+function fmt(target,dec,pre,suf){return pre+target.toLocaleString(numLocale[lang],{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;}
+function animateCount(el){
+  const target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||0),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+  const dur=1500,t0=performance.now();
+  (function step(t){let p=Math.min(1,(t-t0)/dur);p=1-Math.pow(1-p,3);el.textContent=fmt(target*p,dec,pre,suf);if(p<1)requestAnimationFrame(step);else el.dataset.done="1";})(t0);
+}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){animateCount(e.target);cio.unobserve(e.target)}}),{threshold:.6});
+function reformatCounters(){$$('[data-count][data-done]').forEach(el=>{const dec=parseInt(el.dataset.dec||0);el.textContent=fmt(parseFloat(el.dataset.count),dec,el.dataset.prefix||'',el.dataset.suffix||'');});}
+
+/* render dynamic content from current language */
+function render(){
+  $$('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(cur[k]!=null)el.textContent=cur[k];});
+  const sg=$('#svc-grid');sg.innerHTML=cur.services.map(s=>`<div class="svc"><div class="ic"><svg viewBox="0 0 24 24">${ICON[s.i]}</svg></div><h3>${s.t}</h3><p>${s.d}</p></div>`).join('');
+  $('#feat-list').innerHTML=cur.feat_list.map(t=>`<li><span class="ck">✓</span>${t}</li>`).join('');
+  $('#flow-steps').innerHTML=cur.steps.map((s,i)=>`<div class="fstep" data-i="${i}"><div class="nd">${['◍','◎','▦','▤','◷','✓'][i]}</div><div><div class="t">${s.t}</div><div class="s">${s.s}</div></div></div>`).join('');
+  $('#flow-side').innerHTML=cur.side.map(r=>`<div class="row"><span class="k">${r.k}</span><span class="v${r.up?' up':''}">${r.v}</span></div>`).join('');
+  $('#cfg-tabs').innerHTML=cur.cfg_tabs.map((t,i)=>`<button class="${i===0?'on':''}" data-preset="${['studio','villa','tower'][i]}">${t}</button>`).join('');
+  $('#cfg-opts').innerHTML=cur.cfg_opts.map((o,i)=>`<div class="opt${o.k==='solar'?' on':''}" data-opt="${o.k}"><span>${o.l}</span><span class="toggle"></span></div>`).join('');
+  $('#cfg-chips').innerHTML=cur.cfg_chips.map(c=>`<div class="c"><span>+</span>${c}</div>`).join('');
+  $('#ind-grid').innerHTML=cur.industries.map(s=>`<div class="svc"><div class="ic"><svg viewBox="0 0 24 24">${ICON[s.i]}</svg></div><h3>${s.t}</h3><p>${s.d}</p></div>`).join('');
+  $('#cases').innerHTML=cur.cases.map(c=>`<div class="case"><div class="thumb" style="background-image:url('${c.p}'),linear-gradient(135deg,${c.c1},${c.c2})"><span class="ind">${c.tag}</span></div><div class="body"><div class="tag">${c.tag}</div><h3>${c.t}</h3><p>${c.d}</p><div class="metric"><span class="big">${c.m}</span><span class="sm">${c.l}</span></div></div></div>`).join('');
+  $('#tlist').innerHTML=cur.tests.map(t=>{const ini=t.n.split(' ').map(w=>w[0]).join('').slice(0,2);return `<div class="tcard"><div class="stars">★★★★★</div><p class="q">${t.q}</p><div class="who"><div class="av" style="background:linear-gradient(135deg,${t.c},#FFE9A3)">${ini}</div><div><div class="nm">${t.n}</div><div class="ro">${t.r}</div></div></div></div>`;}).join('');
+  $('#statband').innerHTML=cur.stats.map(s=>`<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('');
+  bindConfigUI();
+  reformatCounters();
+  observeReveals();
+}
+
+/* language switch */
+function setLang(l){
+  lang=l;cur=L[l];
+  const rtl=(l==='ar');
+  document.documentElement.lang=l;
+  document.documentElement.dir=rtl?'rtl':'ltr';
+  $$('#langsw button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+  render();
+}
+$$('#langsw button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+/* automation active step cycling */
+setInterval(()=>{const s=$$('#automation .fstep');if(!s.length)return;s.forEach(x=>x.classList.remove('act'));const a=s.filter(x=>x.classList.contains('act'));let i=0;s.forEach((x,k)=>{if(x.dataset.k==='1')i=k;});window.__fi=(window.__fi==null?0:(window.__fi+1)%s.length);s[window.__fi].classList.add('act');},1100);
+
+/* sparklines */
+function spark(svg,seed){const w=160,h=30,n=20;let pts=[],y=h/2;for(let i=0;i<n;i++){y+=Math.sin(i*.7+seed)*3+(Math.random()*5-2.5);y=Math.max(6,Math.min(h-4,y));pts.push([i/(n-1)*w,y]);}const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.innerHTML=`<path d="${d}" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>`;const p=svg.querySelector('path'),len=p.getTotalLength();p.style.strokeDasharray=len;p.style.strokeDashoffset=len;p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],{duration:1300,easing:'ease',fill:'forwards'});}
+$$('[data-spark]').forEach(s=>spark(s,parseInt(s.dataset.spark)*2.1));
+
+/* dashboard chart */
+(function(){const svg=$('#dp-chart');if(!svg)return;const W=620,H=200;function ser(seed,amp){let p=[],y=H*.6;for(let i=0;i<=30;i++){y+=Math.sin(i*.5+seed)*amp+(Math.random()*12-6);y=Math.max(24,Math.min(H-16,y));p.push([i/30*W,y]);}return p;}const pth=p=>p.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');const a=ser(1,14),b=ser(4,9);svg.innerHTML=`<defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D4AF37" stop-opacity=".30"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></linearGradient></defs>${[0,1,2].map(i=>`<line x1="0" y1="${50+i*55}" x2="${W}" y2="${50+i*55}" stroke="rgba(212,175,55,.12)"/>`).join('')}<path d="${pth(a)} L${W} ${H} L0 ${H}Z" fill="url(#dg)"/><path d="${pth(b)}" fill="none" stroke="rgba(184,134,11,.5)" stroke-width="1.6" stroke-dasharray="4 5"/><path id="dml" d="${pth(a)}" fill="none" stroke="#FFE9A3" stroke-width="2.6" stroke-linecap="round"/>`;const ml=$('#dml',svg),len=ml.getTotalLength();const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){ml.style.strokeDasharray=len;ml.style.strokeDashoffset=len;ml.animate([{strokeDashoffset:len},{strokeDashoffset:0}],{duration:2000,easing:'cubic-bezier(.22,.7,.3,1)',fill:'forwards'});o.disconnect();}},{threshold:.4});o.observe(svg);})();
+
+/* ===== HERO 3D floating panels ===== */
+(function(){
+  if(typeof THREE==='undefined')return;
+  const canvas=$('#hero-canvas');let renderer;try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});}catch(e){return;}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(46,1,.1,100);cam.position.set(0,0,14);
+  const root=new THREE.Group();scene.add(root);
+  function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath();}
+  function panel(kind){
+    const S=2,W=520,H=340,P=24;const cv=document.createElement('canvas');cv.width=W*S;cv.height=H*S;const x=cv.getContext('2d');x.scale(S,S);
+    x.shadowColor='rgba(8,8,11,.55)';x.shadowBlur=34;x.shadowOffsetY=22;x.fillStyle='#FFFFFF';rr(x,P,P,W-P*2,H-P*2,26);x.fill();x.shadowBlur=0;x.shadowOffsetY=0;
+    x.strokeStyle='rgba(226,232,240,.9)';x.lineWidth=1;rr(x,P,P,W-P*2,H-P*2,26);x.stroke();
+    const ix=P+26,iw=W-P*2-52,iy=P+30;x.fillStyle='#0F172A';x.font='700 19px "Sora","Plus Jakarta Sans",sans-serif';const blue='#D4AF37',blue2='#E9C155',lite='#FBF3D6',gray='#94A3B8';
+    if(kind==='revenue'){x.fillText('Omzet',ix,iy+6);x.font='800 40px "Sora","Plus Jakarta Sans"';x.fillText('€842.160',ix,iy+52);x.fillStyle='#059669';x.font='600 14px Inter';x.fillText('▲ 12,4%',ix,iy+78);
+      const cx0=ix,cy0=iy+210,cw=iw,ch=92;let pts=[];for(let i=0;i<=24;i++){pts.push([cx0+i/24*cw,cy0-((Math.sin(i*.5)*.4+.5+i/40)*ch)]);}const g=x.createLinearGradient(0,cy0-ch,0,cy0);g.addColorStop(0,'rgba(212,175,55,.25)');g.addColorStop(1,'rgba(212,175,55,0)');x.beginPath();x.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>x.lineTo(p[0],p[1]));x.lineTo(cx0+cw,cy0);x.lineTo(cx0,cy0);x.closePath();x.fillStyle=g;x.fill();x.beginPath();x.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>x.lineTo(p[0],p[1]));x.strokeStyle=blue;x.lineWidth=2.6;x.stroke();
+    }else if(kind==='kpi'){x.fillText("KPI's",ix,iy+6);const tiles=[['Leads','3.920','#FBF3D6',blue],['Conv.','6,8%','#FBF3D6','#B8860B'],['ROI','412%','#ECFDF5','#059669']];tiles.forEach((t,i)=>{const tw=(iw-20)/3,tx=ix+i*(tw+10),ty=iy+34;x.fillStyle=t[2];rr(x,tx,ty,tw,118,16);x.fill();x.fillStyle=gray;x.font='600 12px Inter';x.fillText(t[0],tx+14,ty+26);x.fillStyle=t[3];x.font='800 26px "Sora","Plus Jakarta Sans"';x.fillText(t[1],tx+14,ty+62);x.strokeStyle=t[3];x.lineWidth=2;x.beginPath();for(let k=0;k<=8;k++){const px=tx+14+k/8*(tw-28),py=ty+98-Math.abs(Math.sin(k*.8+i))*22;k?x.lineTo(px,py):x.moveTo(px,py);}x.stroke();});
+    }else if(kind==='pipeline'){x.fillText('Pijplijn',ix,iy+6);const cols=['Nieuw','Gekwal.','Gewonnen'],cc=[gray,blue,'#059669'];cols.forEach((c,i)=>{const cw=(iw-20)/3,cx=ix+i*(cw+10),cy=iy+34;x.fillStyle='#F8FAFC';rr(x,cx,cy,cw,210,14);x.fill();x.fillStyle=cc[i];x.font='700 12px "Sora","Plus Jakarta Sans"';x.fillText(c,cx+12,cy+22);for(let r=0;r<(3-i>0?3-i+1:2);r++){x.fillStyle='#fff';x.strokeStyle='#E6EBF2';x.lineWidth=1;rr(x,cx+10,cy+34+r*46,cw-20,36,9);x.fill();x.stroke();x.fillStyle=cc[i];rr(x,cx+18,cy+44+r*46,26,7,3);x.fill();x.fillStyle='#CBD5E1';rr(x,cx+18,cy+56+r*46,cw-44,6,3);x.fill();}});
+    }else if(kind==='workflow'){x.fillText('Automatisering',ix,iy+6);const steps=['Lead','AI-agent','CRM','Verkoop'],sy=iy+44,gap=(H-P*2-90)/3;steps.forEach((s,i)=>{const yy=sy+i*gap;if(i<steps.length-1){x.strokeStyle='#CBD5E1';x.lineWidth=2;x.beginPath();x.moveTo(ix+24,yy+18);x.lineTo(ix+24,yy+gap+18);x.stroke();}x.fillStyle=lite;x.strokeStyle=blue;x.lineWidth=2;x.beginPath();x.arc(ix+24,yy+18,18,0,7);x.fill();x.stroke();x.fillStyle=blue;x.font='700 13px "Sora","Plus Jakarta Sans"';x.fillText(String(i+1),ix+20,yy+23);x.fillStyle='#0F172A';x.font='600 16px Inter';x.fillText(s,ix+58,yy+24);});
+    }else if(kind==='analytics'){x.fillText('Kanalen',ix,iy+6);const bx=ix,by=iy+200,bw=iw*.62,bh=130,vals=[.5,.7,.45,.85,.6,.95,.7];vals.forEach((v,i)=>{const w2=bw/vals.length-8,h2=v*bh,xx=bx+i*(bw/vals.length);const g=x.createLinearGradient(0,by-h2,0,by);g.addColorStop(0,blue2);g.addColorStop(1,'#FFE9A3');x.fillStyle=g;rr(x,xx,by-h2,w2,h2,5);x.fill();});const dcx=ix+iw-60,dcy=iy+150,dr=46;x.lineWidth=16;x.strokeStyle='#EEF2F7';x.beginPath();x.arc(dcx,dcy,dr,0,7);x.stroke();x.strokeStyle=blue;x.beginPath();x.arc(dcx,dcy,dr,-1.57,-1.57+4.0);x.stroke();x.fillStyle='#0F172A';x.font='800 18px "Sora","Plus Jakarta Sans"';x.textAlign='center';x.fillText('64%',dcx,dcy+6);x.textAlign='left';
+    }else{x.fillText('Funnel',ix,iy+6);const labels=[['Bezoekers','38,4k',1],['Leads','24,6k',.7],['Gekwal.','14,5k',.45],['Gewonnen','3,4k',.22]];labels.forEach((l,i)=>{const yy=iy+46+i*60,w2=iw*l[2];const g=x.createLinearGradient(ix,0,ix+w2,0);g.addColorStop(0,blue);g.addColorStop(1,'#E9C155');x.fillStyle=g;rr(x,ix,yy,w2,40,10);x.fill();x.fillStyle='#fff';x.font='600 14px Inter';x.fillText(l[0],ix+14,yy+25);x.fillStyle='rgba(255,255,255,.9)';x.font='700 13px "JetBrains Mono"';x.fillText(l[1],ix+w2-54,yy+25);});}
+    const tex=new THREE.CanvasTexture(cv);tex.anisotropy=8;tex.minFilter=THREE.LinearFilter;return tex;
+  }
+  const defs=[{k:'revenue',pos:[-0.2,0.6,0],scl:1.32},{k:'kpi',pos:[3.7,1.9,-1.6],scl:1.0,r:-.18},{k:'pipeline',pos:[4.0,-1.6,-1.2],scl:1.02,r:-.16},{k:'workflow',pos:[-4.2,1.7,-1.4],scl:.86,r:.2},{k:'analytics',pos:[-4.0,-1.9,-1.0],scl:.96,r:.16},{k:'funnel',pos:[0.4,-2.4,-2.2],scl:.82}];
+  const panels=[];defs.forEach(d=>{const tex=panel(d.k);const w=3.0*d.scl,h=w*(340/520);const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false}));m.position.set(...d.pos);m.rotation.y=d.r||0;m.userData={base:d.pos.slice(),ph:Math.random()*6.28,amp:.12+Math.random()*.12};root.add(m);panels.push(m);});
+  const links=[[0,1],[0,2],[0,3],[0,4],[0,5],[1,2],[3,4]];
+  const lineGeo=new THREE.BufferGeometry();const lineObj=new THREE.LineSegments(lineGeo,new THREE.LineBasicMaterial({color:0xD4AF37,transparent:true,opacity:.22,blending:THREE.AdditiveBlending}));root.add(lineObj);
+  function rebuild(){const a=[];links.forEach(l=>{a.push(...panels[l[0]].position.toArray(),...panels[l[1]].position.toArray());});lineGeo.setAttribute('position',new THREE.Float32BufferAttribute(a,3));}rebuild();
+  const pm=new THREE.SpriteMaterial({color:0xE9C155,transparent:true,opacity:.9,blending:THREE.AdditiveBlending,depthTest:false});
+  const pulses=links.map(l=>{const s=new THREE.Sprite(pm.clone());s.scale.set(.32,.32,1);s.userData={l,t:Math.random()};root.add(s);return s;});
+  const pg=new THREE.BufferGeometry(),pp=[];for(let i=0;i<180;i++){pp.push((Math.random()-.5)*30,(Math.random()-.5)*18,-2-Math.random()*12);}pg.setAttribute('position',new THREE.Float32BufferAttribute(pp,3));scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0xC9A23A,size:.05,transparent:true,opacity:.5})));
+  let mx=0,my=0,tx=0,ty=0;addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;});
+  let sY=0;addEventListener('scroll',()=>sY=scrollY,{passive:true});
+  function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();cam.position.z=w<760?19:14;}size();addEventListener('resize',size);
+  let run=true;new IntersectionObserver(e=>run=e[0].isIntersecting,{threshold:0}).observe(canvas);
+  setTimeout(()=>canvas.classList.add('in'),220);const clock=new THREE.Clock();
+  function loop(){requestAnimationFrame(loop);if(!run)return;const t=clock.getElapsedTime();if(!reduce){panels.forEach(p=>{const b=p.userData.base;p.position.y=b[1]+Math.sin(t*.7+p.userData.ph)*p.userData.amp;p.rotation.z=Math.sin(t*.4+p.userData.ph)*.012;});rebuild();pulses.forEach(s=>{s.userData.t+=.006;if(s.userData.t>1)s.userData.t=0;const A=panels[s.userData.l[0]].position,B=panels[s.userData.l[1]].position,e=s.userData.t;s.position.set(A.x+(B.x-A.x)*e,A.y+(B.y-A.y)*e,A.z+(B.z-A.z)*e);s.material.opacity=Math.sin(e*Math.PI)*.9;});}tx+=(mx-tx)*.05;ty+=(my-ty)*.05;root.rotation.y=tx*.16;root.rotation.x=-ty*.10;cam.position.y=-sY*.0016;cam.lookAt(0,0,0);renderer.render(scene,cam);}loop();
+})();
+
+/* ===== CONFIGURATOR 3D ===== */
+let cfgState={preset:'studio',solar:true,glass:false,pergola:false},cfgFacade=null,cfgBuild=null;
+(function(){
+  if(typeof THREE==='undefined')return;
+  const canvas=$('#cfg-canvas');if(!canvas)return;let renderer;try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});}catch(e){return;}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(42,1,.1,100);cam.position.set(6,4.8,8.5);
+  scene.add(new THREE.AmbientLight(0xffffff,.85));const key=new THREE.DirectionalLight(0xffffff,1.0);key.position.set(6,11,6);scene.add(key);const fill=new THREE.DirectionalLight(0xfff0c8,.5);fill.position.set(-7,4,-5);scene.add(fill);
+  const model=new THREE.Group();scene.add(model);cfgFacade=new THREE.Color('#cdd6e6');
+  const mats={facade:new THREE.MeshStandardMaterial({color:cfgFacade,roughness:.62,metalness:.05}),glass:new THREE.MeshStandardMaterial({color:0xbfe0ff,roughness:.08,metalness:.1,transparent:true,opacity:.5}),dark:new THREE.MeshStandardMaterial({color:0x2b3447,roughness:.7}),plat:new THREE.MeshStandardMaterial({color:0xe8edf5,roughness:.9}),solar:new THREE.MeshStandardMaterial({color:0x1e3a8a,roughness:.3,metalness:.4})};
+  function clear(g){while(g.children.length)g.remove(g.children[0]);}
+  function box(w,h,d,m,x,y,z){const me=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);me.position.set(x,y,z);model.add(me);return me;}
+  cfgBuild=function(){clear(model);const plat=new THREE.Mesh(new THREE.CylinderGeometry(4.6,4.6,.3,52),mats.plat);plat.position.y=-1.25;model.add(plat);const ring=new THREE.Mesh(new THREE.TorusGeometry(4.6,.035,8,72),new THREE.MeshBasicMaterial({color:0xD4AF37}));ring.rotation.x=Math.PI/2;ring.position.y=-1.08;model.add(ring);const fmat=cfgState.glass?mats.glass:mats.facade;
+    if(cfgState.preset==='studio'){box(4,2.4,3,fmat,0,.2,0);box(4.2,.3,3.2,mats.dark,0,1.55,0);box(.12,2.4,.12,mats.dark,1.9,.2,1.4);box(.12,2.4,.12,mats.dark,-1.9,.2,1.4);if(cfgState.solar)box(3.4,.06,2.4,mats.solar,0,1.73,0);}
+    else if(cfgState.preset==='villa'){box(3,2,3,fmat,0,0,0);box(2.4,1.6,2.4,fmat,1.4,-.2,.4);box(5,.2,3.2,mats.plat,1.2,-1.0,1.8);box(3.2,.25,3.2,mats.dark,0,1.1,0);if(cfgState.solar)box(2.6,.06,2.6,mats.solar,0,1.26,0);}
+    else{for(let i=0;i<5;i++)box(2.6-i*.18,1,2.6-i*.18,i%2?fmat:mats.plat,0,-.6+i,0);box(.12,5,.12,mats.dark,1.2,1.4,1.2);if(cfgState.solar)box(1.6,.06,1.6,mats.solar,0,4,0);}
+    if(cfgState.pergola){const py=cfgState.preset==='tower'?4.4:(cfgState.preset==='villa'?1.4:1.9);for(let i=-2;i<=2;i++)box(.08,.08,3.4,mats.dark,i*.7,py,0);box(3.4,.08,.08,mats.dark,0,py,1.6);box(3.4,.08,.08,mats.dark,0,py,-1.6);}mats.facade.color.copy(cfgFacade);};
+  cfgBuild();
+  let drag=false,lastX=0,rotY=.6,vel=.004;
+  canvas.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;canvas.setPointerCapture(e.pointerId);});
+  canvas.addEventListener('pointermove',e=>{if(drag){const dx=e.clientX-lastX;rotY+=dx*.01;lastX=e.clientX;vel=dx*.0006;}});
+  addEventListener('pointerup',()=>drag=false);
+  function size(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}size();addEventListener('resize',size);setTimeout(size,300);
+  let run=true;new IntersectionObserver(e=>run=e[0].isIntersecting,{threshold:0}).observe(canvas);
+  function loop(){requestAnimationFrame(loop);if(!run)return;if(!drag&&!reduce){rotY+=vel;vel+=(.004-vel)*.02;}model.rotation.y=rotY;cam.lookAt(0,.4,0);renderer.render(scene,cam);}loop();
+})();
+
+const cfgPresets={studio:184500,villa:268000,tower:1240000};
+function cfgPrice(){let p=cfgPresets[cfgState.preset];if(cfgState.solar)p+=22000;if(cfgState.glass)p+=58000;if(cfgState.pergola)p+=14500;$('#cfg-price').textContent='€'+p.toLocaleString(numLocale[lang]);}
+const cfgColors=['#cdd6e6','#3b455c','#d8cfbf','#2f6f68','#b5654a','#f1f3f7'];
+function bindConfigUI(){
+  $$('#cfg-tabs button').forEach(b=>b.addEventListener('click',()=>{$$('#cfg-tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cfgState.preset=b.dataset.preset;cfgBuild&&cfgBuild();cfgPrice();}));
+  const sw=$('#cfg-sw');sw.innerHTML='';cfgColors.forEach((c,i)=>{const s=document.createElement('div');s.className='sw'+(i===0?' on':'');s.style.background=c;s.addEventListener('click',()=>{$$('.sw',sw).forEach(x=>x.classList.remove('on'));s.classList.add('on');if(cfgFacade){cfgFacade.set(c);cfgBuild&&cfgBuild();}});sw.appendChild(s);});
+  $$('#cfg-opts .opt').forEach(o=>o.addEventListener('click',()=>{o.classList.toggle('on');cfgState[o.dataset.opt]=o.classList.contains('on');cfgBuild&&cfgBuild();cfgPrice();}));
+  cfgPrice();
+}
+
+/* boot */
+setLang('nl');
+$$('[data-count]').forEach(e=>cio.observe(e));
+
+</script>
+</body>
+</html>

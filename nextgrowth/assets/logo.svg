@@ -1,0 +1,32 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NextGrowth monogram">
+  <defs>
+    <linearGradient id="ngGold" x1="14" y1="14" x2="106" y2="106" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF3C4"/>
+      <stop offset="38%" stop-color="#D4AF37"/>
+      <stop offset="68%" stop-color="#B8860B"/>
+      <stop offset="100%" stop-color="#FFE9A3"/>
+    </linearGradient>
+    <linearGradient id="ngBorder" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#7A5C12" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FFE9A3" stop-opacity="0.7"/>
+    </linearGradient>
+    <radialGradient id="ngTile" cx="38%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#16161C"/>
+      <stop offset="60%" stop-color="#0C0C11"/>
+      <stop offset="100%" stop-color="#070709"/>
+    </radialGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="#0B0B0F"/>
+  <rect width="120" height="120" rx="28" fill="url(#ngTile)"/>
+  <rect x="1.25" y="1.25" width="117.5" height="117.5" rx="26.75" fill="none" stroke="url(#ngBorder)" stroke-width="1.5"/>
+  <g transform="translate(-6,-2)" stroke="url(#ngGold)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 84 L34 42 L66 84 L66 42" stroke-width="8"/>
+    <path d="M104 50 A22 22 0 1 0 104 76 L104 63 L88 63" stroke-width="7"/>
+  </g>
+  <g transform="translate(-6,-2)" fill="url(#ngGold)">
+    <circle cx="34" cy="42" r="3"/>
+    <circle cx="66" cy="42" r="3"/>
+    <circle cx="88" cy="63" r="2.6"/>
+  </g>
+</svg>
