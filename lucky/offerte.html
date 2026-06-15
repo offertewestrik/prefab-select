@@ -84,12 +84,13 @@
         <div class="fblock">
           <span class="bl">1. Uw gegevens</span>
           <div class="fgrid">
-            <input class="full" type="text" name="naam" placeholder="Voor- en achternaam" required>
-            <input type="email" name="email" placeholder="E-mailadres" required>
-            <input type="tel" name="tel" placeholder="Telefoonnummer" required>
-            <input type="text" name="postcode" placeholder="Postcode" required>
-            <input type="text" name="plaats" placeholder="Plaats" required>
+            <input class="full" type="text" name="naam" placeholder="Voor- en achternaam" autocomplete="name" required>
+            <input type="tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="Telefoonnummer" required>
+            <input type="email" name="email" inputmode="email" autocomplete="email" placeholder="E-mailadres (optioneel)">
+            <input type="text" name="postcode" inputmode="text" autocomplete="postal-code" placeholder="Postcode (optioneel)">
+            <input type="text" name="plaats" autocomplete="address-level2" placeholder="Plaats (optioneel)">
           </div>
+          <p class="priv" style="margin-top:10px">Alleen uw naam en telefoonnummer zijn nodig — de rest helpt ons sneller een passend advies te geven.</p>
         </div>
 
         <div class="fblock">
@@ -148,6 +149,7 @@
 
         <button class="btn btn-primary btn-lg" type="submit" style="width:100%">Vraag gratis offerte aan
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="priv" style="text-align:center;font-weight:600;color:var(--char)">Gratis inmeten · vrijblijvend · reactie binnen 1 werkdag · geen verkooppraat</p>
         <p class="priv">Uw gegevens worden alleen gebruikt om uw aanvraag te behandelen. Geen verplichtingen.</p>
       </form>
     </div>
