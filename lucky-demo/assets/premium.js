@@ -6,9 +6,18 @@
 
   /* Header scroll state + sticky CTA + parallax hero */
   var hdr = $('.hdr'), sticky = $('.sticky-cta'), heroBg = $('.hero-bg'), hero = $('.hero');
-  /* Respect reduced-motion: keep the poster frame, no looping video */
-  if (heroBg && heroBg.tagName === 'VIDEO' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    try { heroBg.removeAttribute('autoplay'); heroBg.pause(); } catch (e) {}
+  /* Hero video: respect reduced-motion, otherwise ensure it actually autoplays */
+  if (heroBg && heroBg.tagName === 'VIDEO') {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      try { heroBg.removeAttribute('autoplay'); heroBg.pause(); } catch (e) {}
+    } else {
+      heroBg.muted = true; heroBg.defaultMuted = true; heroBg.setAttribute('muted', '');
+      var tryPlay = function () { var p = heroBg.play(); if (p && p.catch) p.catch(function () {}); };
+      heroBg.addEventListener('canplay', tryPlay, { once: true });
+      heroBg.addEventListener('loadeddata', tryPlay, { once: true });
+      tryPlay();
+    }
   }
   function onScroll() {
     var y = window.pageYOffset;
