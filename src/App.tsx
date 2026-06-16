@@ -5,6 +5,7 @@ import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
 import { MetaPixel } from './components/MetaPixel';
 import { CookieConsent } from './components/CookieConsent';
+import AgencyApp from './agency/AgencyApp';
 import Diensten from './pages/Diensten';
 import PrefabUitbouw from './pages/PrefabUitbouw';
 import PrefabAanbouw from './pages/PrefabAanbouw';
@@ -4293,6 +4294,15 @@ function ProjectsPage() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+
+  // The Agency Command Center is a self-contained application mounted under
+  // /agency/* with its own dark layout (sidebar, topbar, auth). It deliberately
+  // renders without the marketing chrome (Navbar/Footer/pixels).
+  if (pathname === '/agency' || pathname.startsWith('/agency/')) {
+    return <AgencyApp />;
+  }
+
   return (
     <div className="min-h-screen font-sans selection:bg-blue-100 selection:text-blue-900">
       <MetaPixel />
