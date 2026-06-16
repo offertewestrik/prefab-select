@@ -1,14 +1,14 @@
-# NextGrowth live zetten op Firebase Hosting
+# NextGrowth live zetten op Firebase Hosting (eigen, los project)
 
-Deze map heeft een **eigen** Firebase-hostingconfig (`firebase.json` + `.firebaserc`)
-die NextGrowth op een **aparte hosting-site** zet. Zo blijft de bestaande
-**PrefabSelect**-site (de "default" hosting-site) volledig onaangeroerd.
+NextGrowth draait op een **compleet eigen Firebase-project**, volledig
+losgekoppeld van PrefabSelect. NextGrowth is daarin de standaard-hostingsite,
+dus er is geen enkele overlap met de PrefabSelect-hosting.
 
-- Project: `gen-lang-client-0477752702` (zie `.firebaserc`)
-- Hosting-site: `nextgrowth` → wordt live op **https://nextgrowth.web.app**
+- Project (voorbeeld): `nextgrowth-web` (zie `.firebaserc`)
+- Wordt live op: **https://nextgrowth-web.web.app**
 
-> Ik kan hier niet zelf deployen, want dat vereist inloggen op jóuw Google/Firebase-account.
-> Hieronder staan de exacte commando's — kopiëren en plakken in je terminal.
+> Ik kan hier niet zelf deployen — dat vereist inloggen op jóuw Google/Firebase-account.
+> Hieronder de exacte commando's; kopiëren en plakken in je terminal.
 
 ## Stappen (eenmalig)
 
@@ -19,35 +19,35 @@ cd nextgrowth
 # 2. Log in op Firebase (opent je browser)
 npx -y firebase-tools login
 
-# 3. Maak de aparte hosting-site aan (eenmalig)
-#    Lukt dit niet omdat de naam 'nextgrowth' wereldwijd al bezet is?
-#    Kies dan een andere naam en pas "site" in firebase.json daarop aan.
-npx -y firebase-tools hosting:sites:create nextgrowth --project gen-lang-client-0477752702
+# 3. Maak een NIEUW, los Firebase-project aan
+#    Project-id's zijn wereldwijd uniek. Is 'nextgrowth-web' bezet,
+#    kies dan een eigen id (bv. 'nextgrowth-2026') en gebruik dat overal hieronder
+#    én in .firebaserc bij "default".
+npx -y firebase-tools projects:create nextgrowth-web --display-name "NextGrowth"
 ```
 
 ## Deployen (elke keer dat je wilt publiceren)
 
 ```bash
 cd nextgrowth
-npx -y firebase-tools deploy --only hosting --project gen-lang-client-0477752702
+npx -y firebase-tools deploy --only hosting --project nextgrowth-web
 ```
 
 Na afloop toont Firebase de live URL, bijv.:
 
 ```
-Hosting URL: https://nextgrowth.web.app
+Hosting URL: https://nextgrowth-web.web.app
 ```
 
-## Een ander project gebruiken?
+## Andere project-id gekozen?
 
-Wil je NextGrowth liever in een eigen, los Firebase-project?
+Pas dan twee dingen aan zodat alles klopt:
 
-```bash
-cd nextgrowth
-npx -y firebase-tools projects:create mijn-nextgrowth-project
-# pas "default" in .firebaserc aan naar de nieuwe project-id, daarna:
-npx -y firebase-tools deploy --only hosting --project mijn-nextgrowth-project
-```
+1. `.firebaserc` → zet `"default"` op je eigen project-id.
+2. Gebruik `--project <jouw-id>` in de commando's hierboven.
+
+(Het `--project`-argument overschrijft `.firebaserc`, dus met dat argument deploy
+je altijd naar het juiste project.)
 
 ## Let op
 

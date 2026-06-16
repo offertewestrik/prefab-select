@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "nextgrowth",
     "public": ".",
     "ignore": [
       "firebase.json",
