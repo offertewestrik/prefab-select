@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "nextgrowth",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**",
+      "README.md",
+      "DEPLOY.md",
+      "brand/**",
+      "shot-*.png",
+      "_shoot*"
+    ]
+  }
+}
