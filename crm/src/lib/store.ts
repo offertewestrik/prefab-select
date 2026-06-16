@@ -746,9 +746,23 @@ export const useCrm = create<CrmState>()(
         }),
     }),
     {
-      // v5: live datalaag — leads uit Supabase, transactionele data start leeg
+      // v6: live datalaag. Server-data (leads/offertes/facturen/agenda/inkoop/
+      // producten/bestanden) komt ALTIJD vers uit Supabase via hydrate() en
+      // wordt NIET in localStorage bewaard. Zo kan een oude lokale snapshot
+      // nooit een nieuwe lead (die al in Supabase staat) overschaduwen. Alleen
+      // client-/config-state blijft bewaard. Versie-bump wist oude snapshots
+      // die nog wél server-data bevatten.
       name: "prefab-crm-store",
-      version: 5,
+      version: 6,
+      partialize: (s) => ({
+        currentUserId: s.currentUserId,
+        integrations: s.integrations,
+        users: s.users,
+        reminderRules: s.reminderRules,
+        notifications: s.notifications,
+        emailLogs: s.emailLogs,
+        quoteRequests: s.quoteRequests,
+      }),
     },
   ),
 );
