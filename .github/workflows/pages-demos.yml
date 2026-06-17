@@ -1,0 +1,94 @@
+name: Deploy demo sites to GitHub Pages
+
+# Publishes BOTH standalone demo sites to GitHub Pages under one Pages site:
+#   /law-firm-dubai/  → Meridian Crowne (static)
+#   /aqua-flow/       → Al Naqaa / Aqua Flow (Next.js static export)
+# A root index links to both. Does NOT touch the Firebase-hosted production
+# site (prefabselect.nl).
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "law-firm-dubai/**"
+      - "aqua-flow/**"
+      - ".github/workflows/pages-demos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: aqua-flow/package-lock.json
+
+      - name: Build Aqua Flow (Next.js static export)
+        working-directory: aqua-flow
+        run: |
+          npm ci
+          npm run build
+        env:
+          # Served at https://<user>.github.io/prefab-select/aqua-flow/
+          NEXT_PUBLIC_BASE_PATH: /prefab-select/aqua-flow
+
+      - name: Assemble combined site
+        run: |
+          mkdir -p _site/law-firm-dubai _site/aqua-flow
+          cp -r law-firm-dubai/. _site/law-firm-dubai/
+          cp -r aqua-flow/out/. _site/aqua-flow/
+          cat > _site/index.html <<'HTML'
+          <!doctype html><html lang="en"><head><meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Demo Sites</title>
+          <style>
+            body{margin:0;min-height:100vh;display:grid;place-items:center;
+              font-family:system-ui,sans-serif;background:#070707;color:#eee}
+            .wrap{text-align:center;padding:24px}
+            h1{font-weight:300;letter-spacing:.08em;opacity:.7;font-size:1rem;text-transform:uppercase}
+            .cards{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+            a{display:block;width:260px;padding:34px 24px;border:1px solid #2a2a2a;border-radius:10px;
+              text-decoration:none;color:#eee;transition:.3s;background:#0e0e0e}
+            a:hover{border-color:#d4af37;transform:translateY(-4px)}
+            b{display:block;font-size:1.3rem;margin-bottom:6px}
+            span{opacity:.55;font-size:.85rem}
+          </style></head>
+          <body><div class="wrap"><h1>Demo Sites</h1><div class="cards">
+            <a href="./law-firm-dubai/"><b>Meridian Crowne</b><span>Luxury law firm · Dubai</span></a>
+            <a href="./aqua-flow/"><b>Al Naqaa</b><span>Purified water delivery · Dubai</span></a>
+          </div></div></body></html>
+          HTML
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
