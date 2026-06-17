@@ -78,14 +78,12 @@ export function Hero() {
           </motion.h1>
 
           <motion.p
-            lang="en"
-            dir="ltr"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4 font-display text-xl font-semibold text-aqua-deep sm:text-2xl"
+            className="mt-4 font-display text-2xl font-semibold text-aqua-deep sm:text-3xl"
           >
-            Pure Water, Delivered Daily
+            {brand.taglineAr}
           </motion.p>
 
           <motion.p

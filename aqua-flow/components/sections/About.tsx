@@ -34,19 +34,19 @@ export function About() {
             />
             <div className="flex flex-col justify-between gap-4">
               <div className="glass flex flex-1 flex-col justify-center rounded-3xl p-6 text-center">
-                <span className="text-gradient-aqua font-display text-4xl font-extrabold">
-                  UV
+                <span className="text-gradient-aqua font-display text-3xl font-extrabold">
+                  تعقيم
                 </span>
                 <span className="mt-1 text-xs font-medium text-navy/55">
-                  تعقيم
+                  بالأشعة فوق البنفسجية
                 </span>
               </div>
               <div className="glass flex flex-1 flex-col justify-center rounded-3xl p-6 text-center">
                 <span className="text-gradient-aqua font-display text-4xl font-extrabold">
-                  100%
+                  ١٠٠٪
                 </span>
                 <span className="mt-1 text-xs font-medium text-navy/55">
-                  نقية
+                  نقاء
                 </span>
               </div>
             </div>

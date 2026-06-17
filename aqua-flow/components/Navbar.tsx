@@ -40,7 +40,7 @@ export function Navbar() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={brand.logo}
-                alt={`${brand.full} logo`}
+                alt={`شعار ${brand.fullAr}`}
                 className="h-full w-full object-contain"
               />
             </span>
