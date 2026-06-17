@@ -40,6 +40,8 @@ jobs:
         env:
           # Project Pages are served from /<repo>; ship assets under that path.
           NEXT_PUBLIC_BASE_PATH: /prefab-select
+          # Absolute site URL for canonical, sitemap, robots and OG tags.
+          NEXT_PUBLIC_SITE_URL: https://offertewestrik.github.io/prefab-select
       - uses: actions/upload-pages-artifact@v3
         with:
           path: aqua-flow/out

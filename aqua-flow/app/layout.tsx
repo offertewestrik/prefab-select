@@ -17,28 +17,60 @@ const display = Cairo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://alnaqaa.ae"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://alnaqaa.ae"),
   title: {
-    default: "النقاء لمياه الشرب — مياه نقية تصل إليك يومياً في دبي",
-    template: "%s · النقاء",
+    default: "النقاء لمياه الشرب — توصيل مياه نقية في دبي يومياً | Al Naqaa",
+    template: "%s · النقاء لمياه الشرب",
   },
   description:
-    "النقاء لمياه الشرب: نوصّل مياه شرب نقية ومُعالَجة يومياً للمنازل والمكاتب والشركات في جميع أنحاء دبي والإمارات.",
+    "النقاء لمياه الشرب: توصيل مياه شرب نقية في دبي — غالونات 19 لتر، عبوات مياه واشتراكات أسبوعية للفلل والمكاتب والشركات. مياه معالَجة بالترشيح والتعقيم بالأشعة فوق البنفسجية، تصل إلى بابك كل يوم.",
+  applicationName: "النقاء لمياه الشرب",
   keywords: [
-    "مياه الشرب دبي",
-    "توصيل مياه",
+    "توصيل مياه دبي",
+    "مياه شرب دبي",
     "غالون مياه 19 لتر",
-    "مياه نقية",
+    "توصيل مياه للفلل دبي",
+    "مياه نقية دبي",
+    "اشتراك مياه دبي",
+    "توصيل مياه للمكاتب دبي",
+    "مياه شرب نقية",
     "النقاء",
+    "water delivery Dubai",
     "drinking water Dubai",
+    "19L water gallon Dubai",
+    "villa water supply Dubai",
+    "office water delivery Dubai",
   ],
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" as const },
+  },
   openGraph: {
-    title: "النقاء لمياه الشرب — مياه نقية تصل إليك يومياً",
+    title: "النقاء لمياه الشرب — توصيل مياه نقية في دبي يومياً",
     description:
-      "مياه شرب نقية تُوصَّل يومياً للمنازل والمكاتب والشركات في جميع أنحاء الإمارات.",
+      "مياه شرب نقية تُوصَّل يومياً للفلل والمكاتب والشركات في جميع أنحاء دبي — غالونات 19 لتر، عبوات واشتراكات أسبوعية.",
     type: "website",
     locale: "ar_AE",
+    siteName: "النقاء لمياه الشرب",
+    images: [
+      {
+        url: "/videos/hero-poster.png",
+        width: 1376,
+        height: 768,
+        alt: "النقاء لمياه الشرب — منشأة تنقية المياه في دبي",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "النقاء لمياه الشرب — توصيل مياه نقية في دبي",
+    description:
+      "غالونات 19 لتر وعبوات واشتراكات أسبوعية. مياه معالَجة بالكامل تصل إلى بابك يومياً.",
+    images: ["/videos/hero-poster.png"],
+  },
+  category: "business",
 };
 
 export const viewport: Viewport = {
