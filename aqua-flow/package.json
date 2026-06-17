@@ -2,7 +2,7 @@
   "name": "aqua-flow",
   "version": "1.0.0",
   "private": true,
-  "description": "Aqua Flow Water Services — ultra-premium water delivery website for Dubai",
+  "description": "Al Naqaa (النقاء) — purified drinking-water delivery website for Dubai",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

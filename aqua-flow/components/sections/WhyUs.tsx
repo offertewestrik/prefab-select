@@ -9,11 +9,11 @@ export function WhyUs() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-mist to-paper" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-aqua-deep">
-            Why Customers Choose Us
+          <p className="text-sm font-bold text-aqua-deep">
+            لماذا يختارنا عملاؤنا
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold leading-tight text-navy sm:text-4xl lg:text-5xl">
-            Fresh, clean, hygienic — and reliable
+            نقية، نظيفة، صحية — وموثوقة
           </h2>
         </div>
 

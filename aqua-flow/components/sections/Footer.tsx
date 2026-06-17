@@ -1,7 +1,7 @@
 "use client";
 
-import { Droplets, Phone, Mail, MapPin } from "lucide-react";
-import { contact, navLinks, products } from "@/lib/site";
+import { Phone, Mail, MapPin } from "lucide-react";
+import { contact, navLinks, products, brand } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -10,22 +10,32 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-aqua to-aqua-deep text-white shadow-glow">
-                <Droplets className="h-5 w-5" />
+              <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-aqua/20 shadow-glow">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={brand.logo}
+                  alt={`${brand.full} logo`}
+                  className="h-full w-full object-contain"
+                />
               </span>
-              <span className="text-lg font-bold tracking-tight text-navy">
-                Aqua<span className="text-aqua-deep">Flow</span>
+              <span className="flex flex-col leading-tight">
+                <span className="text-xl font-extrabold tracking-tight text-navy">
+                  {brand.nameAr}
+                </span>
+                <span className="text-[11px] font-medium text-navy/45">
+                  لمياه الشرب
+                </span>
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-navy/60">
-              Fresh purified drinking water, delivered daily to homes, offices
-              and businesses across the Emirates.
+              مياه شرب نقية وطازجة تُوصَّل يومياً للمنازل والمكاتب والشركات في
+              جميع أنحاء الإمارات.
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-navy">
-              Explore
+            <h4 className="text-sm font-bold text-navy">
+روابط
             </h4>
             <ul className="mt-4 space-y-2.5">
               {navLinks.map((l) => (
@@ -42,8 +52,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-navy">
-              Products
+            <h4 className="text-sm font-bold text-navy">
+المنتجات
             </h4>
             <ul className="mt-4 space-y-2.5">
               {products.map((p) => (
@@ -55,8 +65,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-navy">
-              Contact
+            <h4 className="text-sm font-bold text-navy">
+تواصل معنا
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
@@ -79,15 +89,15 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2 text-sm text-navy/60">
                 <MapPin className="h-4 w-4 text-aqua-deep" />
-                United Arab Emirates
+دبي، الإمارات العربية المتحدة
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-aqua/10 pt-6 text-xs text-navy/45 sm:flex-row">
-          <p>© {new Date().getFullYear()} Aqua Flow Water Services. All rights reserved.</p>
-          <p>Pure water, delivered daily.</p>
+          <p>© {new Date().getFullYear()} {brand.fullAr}. جميع الحقوق محفوظة.</p>
+          <p>{brand.taglineAr}</p>
         </div>
       </div>
     </footer>

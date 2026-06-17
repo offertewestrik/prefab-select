@@ -11,31 +11,45 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-/** Central contact details — overridable via NEXT_PUBLIC_* env vars. */
+const CDN =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU";
+
+/** هوية العلامة — النقاء لمياه الشرب، دبي. */
+export const brand = {
+  name: "Al Naqaa",
+  nameAr: "النقاء",
+  full: "Al Naqaa Drinking Water",
+  fullAr: "النقاء لمياه الشرب",
+  taglineAr: "مياه نقية .. حياة صحية",
+  taglineEn: "Pure water, healthy life",
+  location: "دبي · الإمارات العربية المتحدة",
+  logo: "/brand-logo.jpg",
+};
+
+/** بيانات التواصل — قابلة للتهيئة عبر متغيرات NEXT_PUBLIC_*. */
 export const contact = {
   phone: process.env.NEXT_PUBLIC_PHONE_NUMBER ?? "+971 50 000 0000",
   phoneHref: (process.env.NEXT_PUBLIC_PHONE_NUMBER ?? "+971500000000").replace(/\s/g, ""),
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "971500000000",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@aquaflow.ae",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@alnaqaa.ae",
 };
 
 export const whatsappBase = `https://wa.me/${contact.whatsapp}`;
 export const whatsappLink = `${whatsappBase}?text=${encodeURIComponent(
-  "Hello Aqua Flow, I would like to order purified drinking water.",
+  "مرحباً النقاء، أود طلب مياه شرب نقية.",
 )}`;
 
 /**
- * Hero media. Generated with Higgsfield and served from its persistent CDN.
- * To self-host instead, download these into /public and point the env vars at
- * /videos/hero.mp4 and /facility-hero.jpg.
+ * وسائط القسم الرئيسي — مُولّدة عبر Higgsfield وتُقدَّم من شبكة CDN دائمة.
+ * للاستضافة الذاتية، نزّلها إلى /public واضبط متغيرات البيئة على مسارات محلية.
  */
 export const heroMedia = {
   videoUrl:
     process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??
-    "https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260617_152815_463da484-1606-4a53-ab26-4ad1e41e4baa.mp4",
+    `${CDN}/hf_20260617_152815_463da484-1606-4a53-ab26-4ad1e41e4baa.mp4`,
   posterUrl:
     process.env.NEXT_PUBLIC_HERO_POSTER_URL ??
-    "https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260617_152224_0ffe831b-e14f-40c2-b9af-0f80f55cb9b4.png",
+    `${CDN}/hf_20260617_152224_0ffe831b-e14f-40c2-b9af-0f80f55cb9b4.png`,
 };
 
 export type Product = {
@@ -43,34 +57,39 @@ export type Product = {
   title: string;
   description: string;
   highlight?: string;
+  image: string;
 };
 
 export const products: Product[] = [
   {
     icon: Droplet,
-    title: "19 Litre Water Gallons",
+    title: "غالونات مياه 19 لتر",
     description:
-      "Our flagship product. Refillable 19L gallons of freshly purified drinking water — ideal for homes and offices.",
-    highlight: "Most popular",
+      "منتجنا الرئيسي. غالونات قابلة لإعادة التعبئة سعة 19 لتراً من مياه شرب نقية طازجة — مثالية للمنازل والمكاتب.",
+    highlight: "الأكثر طلباً",
+    image: `${CDN}/hf_20260617_154825_aedffcc8-465c-43e4-9c8e-0cb3d527aadc.png`,
   },
   {
     icon: Boxes,
-    title: "Bottled Drinking Water",
+    title: "عبوات مياه الشرب",
     description:
-      "Crystal-clear bottled water in a range of sizes — from 330ml to 1.5L — perfect for events, desks and on the go.",
+      "مياه صافية في عبوات بأحجام متعددة — من 330 مل إلى 1.5 لتر — مثالية للمناسبات والمكاتب والتنقل.",
+    image: `${CDN}/hf_20260617_154826_92d3e8ff-676f-401d-b50b-44265edb049d.png`,
   },
   {
     icon: CalendarClock,
-    title: "Water Subscriptions",
+    title: "اشتراكات المياه",
     description:
-      "Set it and forget it. Scheduled weekly delivery so you never run out of pure drinking water again.",
-    highlight: "Weekly delivery",
+      "اضبطها وانسَها. توصيل أسبوعي مجدول حتى لا تنفد مياهك النقية أبداً.",
+    highlight: "توصيل أسبوعي",
+    image: `${CDN}/hf_20260617_154838_80a64c1f-dbd0-4fda-9a05-71ae0fc5513a.png`,
   },
   {
     icon: Building2,
-    title: "Business Deliveries",
+    title: "توصيل الشركات",
     description:
-      "Reliable bulk supply for companies, offices, schools and clinics — billed simply, delivered on time.",
+      "إمداد موثوق بالجملة للشركات والمكاتب والمدارس والعيادات — فوترة بسيطة وتوصيل في الموعد.",
+    image: `${CDN}/hf_20260617_154839_dee06c64-45c3-4067-8d5f-256857cd3f7e.png`,
   },
 ];
 
@@ -80,36 +99,36 @@ export type ProcessStep = {
   description: string;
 };
 
-/** The purification journey — mirrors the 3D animation. */
+/** رحلة التنقية — تعكس الرسوم ثلاثية الأبعاد. */
 export const processSteps: ProcessStep[] = [
   {
-    step: "01",
-    title: "Source Water",
-    description: "Every drop begins as raw water entering our modern production facility.",
+    step: "٠١",
+    title: "مياه المصدر",
+    description: "تبدأ كل قطرة كمياه خام تدخل منشأة الإنتاج الحديثة لدينا.",
   },
   {
-    step: "02",
-    title: "Multi-Stage Filtration",
+    step: "٠٢",
+    title: "ترشيح متعدد المراحل",
     description:
-      "Sediment, carbon and reverse-osmosis membranes strip out impurities in successive stages.",
+      "أغشية الترسيب والكربون والتناضح العكسي تزيل الشوائب على مراحل متتالية.",
   },
   {
-    step: "03",
-    title: "UV Disinfection",
+    step: "٠٣",
+    title: "تعقيم بالأشعة فوق البنفسجية",
     description:
-      "High-intensity UV light neutralises any remaining micro-organisms for total safety.",
+      "أشعة فوق بنفسجية عالية الكثافة تقضي على أي كائنات دقيقة متبقية لأمان تام.",
   },
   {
-    step: "04",
-    title: "Filling the Gallon",
+    step: "٠٤",
+    title: "تعبئة الغالون",
     description:
-      "Purified water is sealed into hygienic 19L gallons under strict quality control.",
+      "تُعبّأ المياه النقية في غالونات صحية سعة 19 لتراً تحت رقابة جودة صارمة.",
   },
   {
-    step: "05",
-    title: "Delivered to You",
+    step: "٠٥",
+    title: "التوصيل إليك",
     description:
-      "Fresh, pure water arrives at your door — daily, on schedule, every single day.",
+      "تصل المياه النقية الطازجة إلى بابك — يومياً وفي الموعد، كل يوم.",
   },
 ];
 
@@ -122,44 +141,44 @@ export type Reason = {
 export const reasons: Reason[] = [
   {
     icon: ShieldCheck,
-    title: "100% Purified Water",
-    description: "Every gallon passes multi-stage filtration and UV disinfection.",
+    title: "مياه نقية 100%",
+    description: "كل غالون يمر بترشيح متعدد المراحل وتعقيم بالأشعة فوق البنفسجية.",
   },
   {
     icon: Truck,
-    title: "Daily Delivery",
-    description: "Fresh water at your door every day, right on schedule.",
+    title: "توصيل يومي",
+    description: "مياه طازجة عند بابك كل يوم وفي الموعد المحدد.",
   },
   {
     icon: Wallet,
-    title: "Affordable Prices",
-    description: "Premium purity without the premium price tag.",
+    title: "أسعار مناسبة",
+    description: "نقاء متميّز دون سعر مرتفع.",
   },
   {
     icon: FlaskConical,
-    title: "Modern Filtration Technology",
-    description: "A professional production facility with rigorous quality control.",
+    title: "تقنية ترشيح حديثة",
+    description: "منشأة إنتاج احترافية مع رقابة جودة صارمة.",
   },
   {
     icon: Zap,
-    title: "Fast Service",
-    description: "Quick response and reliable, friendly delivery teams.",
+    title: "خدمة سريعة",
+    description: "استجابة سريعة وفِرق توصيل موثوقة وودودة.",
   },
 ];
 
-/** Highlights of the production facility shown in the About section. */
+/** أبرز ملامح منشأة الإنتاج في قسم «من نحن». */
 export const facilityHighlights: string[] = [
-  "Modern filtration line",
-  "Multiple filtration stages",
-  "UV disinfection",
-  "High quality control standards",
-  "Professional production environment",
+  "خط ترشيح حديث",
+  "مراحل ترشيح متعددة",
+  "تعقيم بالأشعة فوق البنفسجية",
+  "معايير رقابة جودة عالية",
+  "بيئة إنتاج احترافية",
 ];
 
 export const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#process", label: "Process" },
-  { href: "#products", label: "Products" },
-  { href: "#why", label: "Why us" },
-  { href: "#order", label: "Order" },
+  { href: "#about", label: "من نحن" },
+  { href: "#process", label: "التنقية" },
+  { href: "#products", label: "منتجاتنا" },
+  { href: "#why", label: "لماذا نحن" },
+  { href: "#order", label: "اطلب الآن" },
 ];

@@ -1,47 +1,48 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Tajawal, Cairo } from "next/font/google";
 import "./globals.css";
 
-const sans = Inter({
-  subsets: ["latin"],
+const sans = Tajawal({
+  subsets: ["arabic", "latin"],
   variable: "--font-sans",
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
-const display = Sora({
-  subsets: ["latin"],
+const display = Cairo({
+  subsets: ["arabic", "latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700", "800", "900"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aquaflow.ae"),
+  metadataBase: new URL("https://alnaqaa.ae"),
   title: {
-    default: "Aqua Flow — Premium Water Delivery Across Dubai",
-    template: "%s · Aqua Flow",
+    default: "النقاء لمياه الشرب — مياه نقية تصل إليك يومياً في دبي",
+    template: "%s · النقاء",
   },
   description:
-    "Reliable premium drinking water solutions for villas, residential communities, commercial buildings and construction projects across Dubai and the UAE.",
+    "النقاء لمياه الشرب: نوصّل مياه شرب نقية ومُعالَجة يومياً للمنازل والمكاتب والشركات في جميع أنحاء دبي والإمارات.",
   keywords: [
-    "water delivery Dubai",
-    "water tanker Dubai",
-    "villa water supply",
-    "bulk water UAE",
-    "construction water delivery",
+    "مياه الشرب دبي",
+    "توصيل مياه",
+    "غالون مياه 19 لتر",
+    "مياه نقية",
+    "النقاء",
     "drinking water Dubai",
   ],
   openGraph: {
-    title: "Aqua Flow — Premium Water Delivery Across Dubai",
+    title: "النقاء لمياه الشرب — مياه نقية تصل إليك يومياً",
     description:
-      "Reliable premium drinking water solutions for villas, communities, commercial buildings and construction projects.",
+      "مياه شرب نقية تُوصَّل يومياً للمنازل والمكاتب والشركات في جميع أنحاء الإمارات.",
     type: "website",
-    locale: "en_AE",
+    locale: "ar_AE",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#04060f",
+  themeColor: "#f4fbff",
   width: "device-width",
   initialScale: 1,
 };
@@ -52,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+    <html lang="ar" dir="rtl" className={`${sans.variable} ${display.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

@@ -12,7 +12,7 @@ export const Label = ({
 }: React.LabelHTMLAttributes<HTMLLabelElement>) => (
   <label
     className={cn(
-      "mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-foam/55",
+      "mb-2 block text-[13px] font-semibold text-foam/70",
       className,
     )}
     {...props}

@@ -41,8 +41,8 @@ export function PhotoSlot({
       {failed && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center text-navy/50">
           <ImageIcon className="h-8 w-8" />
-          <span className="px-6 text-xs font-medium uppercase tracking-widest">
-            {label ?? "Facility photo"}
+          <span className="px-6 text-xs font-medium">
+            {label ?? "صورة من المنشأة"}
           </span>
           <span className="px-6 text-[10px] text-navy/35">
             Add /public/{src.replace(/^\//, "")}

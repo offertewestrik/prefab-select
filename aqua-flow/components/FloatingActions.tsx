@@ -12,7 +12,7 @@ export function FloatingActions() {
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label="الدردشة عبر واتساب"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
@@ -28,7 +28,7 @@ export function FloatingActions() {
 
       <motion.a
         href={`tel:${contact.phoneHref}`}
-        aria-label="Call us"
+        aria-label="اتصل بنا"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1.1, type: "spring", stiffness: 200 }}

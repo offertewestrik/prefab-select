@@ -43,14 +43,14 @@ export function Process() {
 
         {/* Heading */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-24 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-aqua-bright">
-            The Purification Journey
+          <p className="text-sm font-bold text-aqua-bright">
+            رحلة التنقية
           </p>
           <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-            From a single drop to your front door
+            من قطرة واحدة إلى باب منزلك
           </h2>
           <p className="mt-3 max-w-xl text-white/60">
-            Scroll to follow every drop through our modern filtration facility.
+            مرّر للأسفل لتتبّع كل قطرة عبر منشأة التنقية الحديثة لدينا.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export function Process() {
               >
                 <span
                   className={cn(
-                    "text-xs font-bold tracking-widest",
+                    "text-sm font-bold",
                     active === i ? "text-aqua-bright" : "text-white/40",
                   )}
                 >
@@ -92,7 +92,7 @@ export function Process() {
           <div className="mx-auto mt-5 h-1 max-w-7xl overflow-hidden rounded-full bg-white/10">
             <motion.div
               className="h-full rounded-full bg-gradient-to-r from-aqua-deep to-aqua-bright"
-              style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
+              style={{ scaleX: scrollYProgress, transformOrigin: "right" }}
             />
           </div>
         </div>

@@ -8,12 +8,12 @@ import { Input, Label, Select } from "@/components/ui/field";
 import { whatsappBase } from "@/lib/site";
 
 const deliveryWindows = [
-  "Today — Morning (8:00–12:00)",
-  "Today — Afternoon (12:00–17:00)",
-  "Today — Evening (17:00–21:00)",
-  "Tomorrow — Morning",
-  "Tomorrow — Afternoon",
-  "This week — flexible",
+  "اليوم — صباحاً (8:00–12:00)",
+  "اليوم — ظهراً (12:00–17:00)",
+  "اليوم — مساءً (17:00–21:00)",
+  "غداً — صباحاً",
+  "غداً — ظهراً",
+  "هذا الأسبوع — مرن",
 ];
 
 export function OrderForm() {
@@ -37,13 +37,13 @@ export function OrderForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const message = [
-      "*New Water Order — Aqua Flow*",
+      "*طلب مياه جديد — النقاء*",
       "",
-      `👤 Name: ${form.name || "—"}`,
-      `📞 Phone: ${form.phone || "—"}`,
-      `📍 Location: ${form.location || "—"}`,
-      `💧 Gallons (19L): ${form.gallons}`,
-      `🕒 Delivery: ${form.delivery}`,
+      `👤 الاسم: ${form.name || "—"}`,
+      `📞 الهاتف: ${form.phone || "—"}`,
+      `📍 الموقع: ${form.location || "—"}`,
+      `💧 الغالونات (19 لتر): ${form.gallons}`,
+      `🕒 التوصيل: ${form.delivery}`,
     ].join("\n");
 
     window.open(
@@ -67,20 +67,20 @@ export function OrderForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-aqua-bright">
-              Order Online
+            <p className="text-sm font-bold text-aqua-bright">
+              اطلب أونلاين
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-              Pure water, just a message away
+              مياه نقية على بُعد رسالة واحدة
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-white/65">
-              Fill in your details and we’ll confirm your delivery instantly on
-              WhatsApp. No account needed — fast, simple and reliable.
+              املأ بياناتك وسنؤكّد توصيلك فوراً عبر واتساب. دون أي حساب — سريع
+              وبسيط وموثوق.
             </p>
             <div className="mt-8 flex items-center gap-3 text-white/70">
               <Droplets className="h-5 w-5 text-aqua-bright" />
               <span className="text-sm">
-                Daily delivery across the Emirates — fresh, every day.
+                توصيل يومي في جميع أنحاء الإمارات — طازجة، كل يوم.
               </span>
             </div>
           </motion.div>
@@ -96,11 +96,11 @@ export function OrderForm() {
           >
             <div className="grid gap-5">
               <div>
-                <Label htmlFor="name">Full name</Label>
+                <Label htmlFor="name">الاسم الكامل</Label>
                 <Input
                   id="name"
                   required
-                  placeholder="Your name"
+                  placeholder="اسمك"
                   value={form.name}
                   onChange={update("name")}
                 />
@@ -108,18 +108,19 @@ export function OrderForm() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <Label htmlFor="phone">Phone number</Label>
+                  <Label htmlFor="phone">رقم الهاتف</Label>
                   <Input
                     id="phone"
                     type="tel"
                     required
+                    dir="ltr"
                     placeholder="+971 50 000 0000"
                     value={form.phone}
                     onChange={update("phone")}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="gallons">Number of gallons (19L)</Label>
+                  <Label htmlFor="gallons">عدد الغالونات (19 لتر)</Label>
                   <Input
                     id="gallons"
                     type="number"
@@ -132,18 +133,18 @@ export function OrderForm() {
               </div>
 
               <div>
-                <Label htmlFor="location">Location / address</Label>
+                <Label htmlFor="location">الموقع / العنوان</Label>
                 <Input
                   id="location"
                   required
-                  placeholder="Area, building, villa no."
+                  placeholder="المنطقة، المبنى، رقم الفيلا"
                   value={form.location}
                   onChange={update("location")}
                 />
               </div>
 
               <div>
-                <Label htmlFor="delivery">Preferred delivery moment</Label>
+                <Label htmlFor="delivery">وقت التوصيل المفضّل</Label>
                 <Select
                   id="delivery"
                   value={form.delivery}
@@ -159,10 +160,10 @@ export function OrderForm() {
 
               <Button type="submit" size="lg" className="mt-1 w-full">
                 <MessageCircle className="h-4 w-4" />
-                Send order via WhatsApp
+                أرسل الطلب عبر واتساب
               </Button>
               <p className="text-center text-xs text-white/45">
-                Opens WhatsApp with your order pre-filled — review and send.
+                يفتح واتساب مع طلبك جاهزاً — راجِع وأرسِل.
               </p>
             </div>
           </motion.form>

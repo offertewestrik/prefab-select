@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Droplets, Menu, X, Phone } from "lucide-react";
-import { navLinks, contact, whatsappLink } from "@/lib/site";
+import { Menu, X, Phone } from "lucide-react";
+import { navLinks, contact, whatsappLink, brand } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -36,11 +36,21 @@ export function Navbar() {
           )}
         >
           <a href="#top" className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-aqua to-aqua-deep text-white shadow-glow">
-              <Droplets className="h-5 w-5" />
+            <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-xl bg-white ring-1 ring-aqua/20 shadow-glow">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={brand.logo}
+                alt={`${brand.full} logo`}
+                className="h-full w-full object-contain"
+              />
             </span>
-            <span className="text-lg font-bold tracking-tight text-navy">
-              Aqua<span className="text-aqua-deep">Flow</span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-xl font-extrabold tracking-tight text-navy">
+                {brand.nameAr}
+              </span>
+              <span className="text-[11px] font-medium text-navy/45">
+                لمياه الشرب
+              </span>
             </span>
           </a>
 
@@ -65,12 +75,12 @@ export function Navbar() {
               {contact.phone}
             </a>
             <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-              <Button size="sm">Order on WhatsApp</Button>
+              <Button size="sm">اطلب عبر واتساب</Button>
             </a>
           </div>
 
           <button
-            aria-label="Toggle menu"
+            aria-label="القائمة"
             onClick={() => setOpen((v) => !v)}
             className="grid h-10 w-10 place-items-center rounded-xl text-navy lg:hidden"
           >
@@ -101,7 +111,7 @@ export function Navbar() {
               className="mt-1"
             >
               <Button size="sm" className="w-full">
-                Order on WhatsApp
+                اطلب عبر واتساب
               </Button>
             </a>
           </motion.div>

@@ -22,14 +22,14 @@ export function About() {
           >
             <PhotoSlot
               src="/facility-1.jpg"
-              alt="Water purification installation with filling station and gallons"
-              label="Production facility"
+              alt="منشأة تنقية المياه مع محطة التعبئة والغالونات"
+              label="منشأة الإنتاج"
               className="col-span-2 aspect-[16/11]"
             />
             <PhotoSlot
               src="/facility-2.jpg"
-              alt="Stainless-steel filtration and filling line"
-              label="Filtration line"
+              alt="خط الترشيح والتعبئة من الستانلس ستيل"
+              label="خط الترشيح"
               className="aspect-[4/5]"
             />
             <div className="flex flex-col justify-between gap-4">
@@ -37,16 +37,16 @@ export function About() {
                 <span className="text-gradient-aqua font-display text-4xl font-extrabold">
                   UV
                 </span>
-                <span className="mt-1 text-xs font-medium uppercase tracking-widest text-navy/55">
-                  Disinfection
+                <span className="mt-1 text-xs font-medium text-navy/55">
+                  تعقيم
                 </span>
               </div>
               <div className="glass flex flex-1 flex-col justify-center rounded-3xl p-6 text-center">
                 <span className="text-gradient-aqua font-display text-4xl font-extrabold">
                   100%
                 </span>
-                <span className="mt-1 text-xs font-medium uppercase tracking-widest text-navy/55">
-                  Purified
+                <span className="mt-1 text-xs font-medium text-navy/55">
+                  نقية
                 </span>
               </div>
             </div>
@@ -59,19 +59,16 @@ export function About() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-aqua-deep">
-              About Us
+            <p className="text-sm font-bold text-aqua-deep">
+              من نحن
             </p>
             <h2 className="mt-3 font-display text-3xl font-bold leading-tight text-navy sm:text-4xl lg:text-5xl">
-              Purity you can{" "}
-              <span className="text-gradient-aqua">see and trust</span>
+              نقاءٌ <span className="text-gradient-aqua">تراه وتثق به</span>
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-navy/70">
-              Our water is purified in a modern production facility built around
-              one goal: clean, safe, great-tasting drinking water. Every gallon
-              passes through multiple filtration stages and UV disinfection,
-              under strict quality control — so what reaches your door is
-              genuinely pure.
+              تُنقّى مياهنا في منشأة إنتاج حديثة هدفها واحد: مياه شرب نظيفة وآمنة
+              ولذيذة المذاق. يمر كل غالون عبر مراحل ترشيح متعددة وتعقيم بالأشعة
+              فوق البنفسجية، تحت رقابة جودة صارمة — لتصل إلى بابك مياه نقية حقاً.
             </p>
 
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">

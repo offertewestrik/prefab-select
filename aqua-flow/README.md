@@ -1,11 +1,15 @@
-# Aqua Flow — Premium Water Delivery (Dubai / UAE)
+# النقاء لمياه الشرب — Al Naqaa Drinking Water (Dubai / UAE)
 
-Ultra-clean, fresh & hygienic marketing site for a purified-drinking-water
-brand. The site puts the **filtration facility and purification process**
-front and centre — the real differentiator — instead of generic stock imagery.
+Ultra-clean, fresh & hygienic **Arabic-first (RTL)** marketing site for the
+purified-drinking-water brand **النقاء (Al Naqaa)**. The site puts the
+**filtration facility and purification process** front and centre — the real
+differentiator — instead of generic stock imagery.
 
-> **Positioning:** _"Fresh purified drinking water, delivered daily to your home."_
+> **Positioning:** _مياه نقية .. حياة صحية — "Pure water, healthy life."_
+> Language: Arabic (RTL), fonts Cairo + Tajawal.
 > Style: white · aqua blue · deep navy · glass effects · water animations.
+> Hero video, hero poster and all product images are AI-generated with
+> Higgsfield and served from its CDN (env-overridable for self-hosting).
 
 ## Tech stack
 

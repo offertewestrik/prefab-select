@@ -4,12 +4,12 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, ShieldCheck, Sun, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { contact, whatsappLink, heroMedia } from "@/lib/site";
+import { contact, whatsappLink, heroMedia, brand } from "@/lib/site";
 
 const trust = [
-  { icon: ShieldCheck, label: "100% Purified" },
-  { icon: Sun, label: "UV Disinfected" },
-  { icon: Truck, label: "Daily Delivery" },
+  { icon: ShieldCheck, label: "نقاء 100%" },
+  { icon: Sun, label: "تعقيم بالأشعة فوق البنفسجية" },
+  { icon: Truck, label: "توصيل يومي" },
 ];
 
 export function Hero() {
@@ -33,7 +33,7 @@ export function Hero() {
         <source src={heroMedia.videoUrl} type="video/mp4" />
       </video>
       {/* Light wash so headline text stays readable over the footage */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-paper/85 via-paper/55 to-paper/20" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-l from-paper/85 via-paper/55 to-paper/20" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-paper via-paper/20 to-transparent" />
 
       {/* Floating bubbles */}
@@ -57,35 +57,35 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-aqua-deep"
+            className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold text-aqua-deep"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-aqua opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-aqua-deep" />
             </span>
-            Fresh purified drinking water · UAE
+            {brand.fullAr} · {brand.location}
           </motion.span>
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-6 font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-navy sm:text-6xl lg:text-7xl"
+            className="mt-6 font-display text-5xl font-extrabold leading-[1.15] tracking-tight text-navy sm:text-6xl lg:text-7xl"
           >
-            Pure Water,
+            مياه نقية
             <br />
-            <span className="text-gradient-aqua">Delivered Daily</span>
+            <span className="text-gradient-aqua">تصل إليك يومياً</span>
           </motion.h1>
 
           <motion.p
-            dir="rtl"
-            lang="ar"
+            lang="en"
+            dir="ltr"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4 font-display text-2xl font-semibold text-aqua-deep sm:text-3xl"
+            className="mt-4 font-display text-xl font-semibold text-aqua-deep sm:text-2xl"
           >
-            مياه نقية تصل إلى باب منزلك
+            Pure Water, Delivered Daily
           </motion.p>
 
           <motion.p
@@ -94,8 +94,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="mt-6 max-w-xl text-lg leading-relaxed text-navy/70"
           >
-            We deliver freshly purified drinking water every day — for homes,
-            offices and businesses across the Emirates.
+            نوصّل مياه شرب نقية ومُعالَجة طازجة كل يوم — للمنازل والمكاتب
+            والشركات في جميع أنحاء الإمارات.
           </motion.p>
 
           <motion.div
@@ -107,13 +107,13 @@ export function Hero() {
             <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
               <Button size="lg">
                 <MessageCircle className="h-4 w-4" />
-                Order on WhatsApp
+                اطلب عبر واتساب
               </Button>
             </a>
             <a href={`tel:${contact.phoneHref}`}>
               <Button size="lg" variant="outline">
                 <Phone className="h-4 w-4" />
-                Call Now
+                اتصل الآن
               </Button>
             </a>
           </motion.div>
