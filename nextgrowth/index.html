@@ -12,6 +12,25 @@
 <meta property="og:image" content="assets/logo.svg" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+<link rel="canonical" href="https://nextgrowth-8b45c.web.app/" />
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {"@type":"Organization","@id":"https://nextgrowth-8b45c.web.app/#org","name":"NextGrowth","url":"https://nextgrowth-8b45c.web.app/","logo":"https://nextgrowth-8b45c.web.app/assets/logo.svg","email":"hello@nextgrowth.nl","slogan":"Digitale groeisystemen","description":"NextGrowth bouwt digitale groeisystemen: websites, webshops, AI-automatisering, 3D-configurators en live dashboards.","areaServed":["Nederland","Dubai","Jordanië"],"knowsAbout":["digitale groeisystemen","website laten maken","3D productconfigurator","AI-automatisering","CRM-dashboard","leadgeneratie","webshops"]},
+  {"@type":"WebSite","@id":"https://nextgrowth-8b45c.web.app/#website","url":"https://nextgrowth-8b45c.web.app/","name":"NextGrowth","publisher":{"@id":"https://nextgrowth-8b45c.web.app/#org"},"inLanguage":["nl-NL","en","ar"]},
+  {"@type":"FAQPage","@id":"https://nextgrowth-8b45c.web.app/#faq","mainEntity":[
+   {"@type":"Question","name":"Wat zijn digitale groeisystemen?","acceptedAnswer":{"@type":"Answer","text":"Een digitaal groeisysteem verbindt je website, marketing, configurator, CRM en automatisering tot één geheel, zodat aandacht automatisch wordt omgezet in aanvragen en omzet. NextGrowth ontwerpt, bouwt en koppelt deze systemen voor je."}},
+   {"@type":"Question","name":"Wat kost een website, configurator of dashboard?","acceptedAnswer":{"@type":"Answer","text":"Elk project is maatwerk. Een professionele website start vanaf een paar duizend euro; een 3D-configurator, CRM-dashboard of AI-automatisering hangt af van de complexiteit. Plan een gratis strategiegesprek voor een concrete prijsindicatie."}},
+   {"@type":"Question","name":"Hoe lang duurt het om een systeem te bouwen?","acceptedAnswer":{"@type":"Answer","text":"Een website is meestal binnen 3 tot 6 weken live. Configurators en dashboards duren doorgaans 6 tot 12 weken, afhankelijk van de functionaliteit. Vooraf krijg je een duidelijke planning."}},
+   {"@type":"Question","name":"Wat is een 3D-productconfigurator?","acceptedAnswer":{"@type":"Answer","text":"Een interactieve tool waarmee klanten online zelf een product samenstellen — zoals een veranda, rolluik of prefab woning — direct de prijs zien en koopklaar een offerte aanvragen. Dat verhoogt je conversie en bespaart verkooptijd."}},
+   {"@type":"Question","name":"Werken jullie ook met AI-automatisering?","acceptedAnswer":{"@type":"Answer","text":"Ja. We bouwen AI-agents en automatiseringen die leads kwalificeren, offertes opstellen, klanten opvolgen en je CRM automatisch bijwerken — 24/7 en zonder handwerk."}},
+   {"@type":"Question","name":"In welke regio's is NextGrowth actief?","acceptedAnswer":{"@type":"Answer","text":"We werken voor bedrijven in Nederland, Dubai en Jordanië en bedienen klanten in het Nederlands, Engels en Arabisch."}},
+   {"@type":"Question","name":"Voor welke branches bouwen jullie?","acceptedAnswer":{"@type":"Answer","text":"Onder andere bouw & installatie, retail en webshops, horeca, vastgoed, zakelijke dienstverlening en industrie."}}
+  ]}
+ ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -268,6 +287,25 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:72px 0 40p
 .foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;flex-wrap:wrap;gap:12px}
 @media(max-width:760px){.foot-top{grid-template-columns:1fr 1fr}}
 
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.gallery figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-s);transition:transform .45s var(--ease),box-shadow .45s}
+.gallery figure:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.gallery img{width:100%;height:auto;display:block;border-bottom:1px solid var(--line)}
+.gallery figcaption{padding:16px 20px;font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:15px;color:var(--ink)}
+@media(max-width:760px){.gallery{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq-list{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq-item{background:rgba(22,22,28,.6);border:1px solid rgba(212,175,55,.16);border-radius:16px;overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:rgba(212,175,55,.4)}
+.faq-q{width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:17px;color:#fff;line-height:1.4}
+.faq-q .ic{flex:none;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#0B0B0F;font-size:17px;transition:transform .3s}
+.faq-item.open .faq-q .ic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.faq-a p{padding:0 24px 22px;color:var(--on-dark-mut);font-size:15.5px;line-height:1.65;margin:0}
+[dir=rtl] .faq-q{text-align:right}
+
 /* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,60px);align-items:start}
 .contact-meta{margin-top:30px;display:flex;flex-direction:column;gap:14px}
@@ -418,6 +456,16 @@ a.cmeta:hover{color:var(--blue)}
   </div>
 </section>
 
+<section class="section section--alt" id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="gal_ey"></span></span>
+      <h2 class="h2" data-i18n="gal_title"></h2><p class="lead" data-i18n="gal_sub"></p>
+    </div>
+    <div class="gallery" id="gallery-grid"></div>
+  </div>
+</section>
+
 <section class="section section--dark" id="results">
   <div class="wrap">
     <div class="section-head reveal">
@@ -479,6 +527,16 @@ a.cmeta:hover{color:var(--blue)}
   </div>
 </section>
 
+<section class="section section--dark" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow on-dark"><span class="dot"></span><span data-i18n="faq_ey"></span></span>
+      <h2 class="h2" data-i18n="faq_title"></h2><p class="lead" data-i18n="faq_sub"></p>
+    </div>
+    <div class="faq-list reveal d1" id="faq-list"></div>
+  </div>
+</section>
+
 <section class="section" id="contact">
   <div class="wrap">
     <div class="contact-grid">
@@ -510,7 +568,7 @@ a.cmeta:hover{color:var(--blue)}
     <div class="foot-top">
       <div><a href="#top" class="brand"><span class="mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NextGrowth"><defs><linearGradient id="ngf" x1="14" y1="14" x2="106" y2="106" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFF3C4"/><stop offset="38%" stop-color="#D4AF37"/><stop offset="68%" stop-color="#B8860B"/><stop offset="100%" stop-color="#FFE9A3"/></linearGradient><radialGradient id="ngft" cx="38%" cy="30%" r="80%"><stop offset="0%" stop-color="#16161C"/><stop offset="60%" stop-color="#0C0C11"/><stop offset="100%" stop-color="#070709"/></radialGradient></defs><rect width="120" height="120" rx="28" fill="#0B0B0F"/><rect width="120" height="120" rx="28" fill="url(#ngft)"/><g transform="translate(-6,-2)" stroke="url(#ngf)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M34 84 L34 42 L66 84 L66 42" stroke-width="8"/><path d="M104 50 A22 22 0 1 0 104 76 L104 63 L88 63" stroke-width="7"/></g><g transform="translate(-6,-2)" fill="url(#ngf)"><circle cx="34" cy="42" r="3"/><circle cx="66" cy="42" r="3"/><circle cx="88" cy="63" r="2.6"/></g></svg></span><span style="color:var(--ink)">NEXT</span><span class="gold">GROWTH</span></a><p data-i18n="foot_tagline"></p></div>
       <div><h5 data-i18n="foot_c1"></h5><a href="#services" data-i18n="nav_services"></a><a href="#automation" data-i18n="foot_l_ai"></a><a href="#configurators" data-i18n="nav_config"></a></div>
-      <div><h5 data-i18n="foot_c2"></h5><a href="#work" data-i18n="nav_work"></a><a href="#results" data-i18n="nav_results"></a><a href="#industries" data-i18n="nav_industries"></a></div>
+      <div><h5 data-i18n="foot_c2"></h5><a href="#work" data-i18n="nav_work"></a><a href="#gallery" data-i18n="gal_ey"></a><a href="#results" data-i18n="nav_results"></a><a href="#faq" data-i18n="faq_ey"></a></div>
       <div><h5 data-i18n="foot_c3"></h5><a href="#contact" data-i18n="nav_cta"></a><a href="#contact" data-i18n="foot_l_quote"></a></div>
     </div>
     <div class="foot-bot"><span data-i18n="foot_copy"></span><span data-i18n="foot_built"></span></div>
@@ -571,7 +629,11 @@ nl:{
  industries:[{i:'build',t:"Bouw & Installatie",d:"Bouwbedrijven, aannemers, installateurs, zonnepanelen, warmtepompen, dakdekkers en prefab."},{i:'retail',t:"Retail & Webshops",d:"Webshops, winkels en merken die online willen groeien."},{i:'horeca',t:"Horeca",d:"Restaurants, hotels en cafés die meer reserveringen willen."},{i:'estate',t:"Vastgoed",d:"Makelaars en ontwikkelaars die sneller willen verkopen."},{i:'service',t:"Zakelijke dienstverlening",d:"Dienstverleners die hun salesproces willen automatiseren."},{i:'industry',t:"Industrie",d:"Productiebedrijven die hun processen willen digitaliseren."}],
  cases:[{tag:"Configurator",t:"Lucky Zonwering — 3D productconfigurator",d:"Online configurator voor rolluiken, screens en aluminium veranda's. Klanten stellen hun product samen, zien de specificaties en vragen direct een offerte aan.",m:"24/7",l:"offertes online",c1:"#D4AF37",c2:"#FFE9A3",p:"assets/work/configurator-luckyzonwering.png",v:"assets/work/lucky-zonwering.mp4"},{tag:"Website + configurator",t:"PrefabSelect — configurator-website",d:"Volledige website met visuele configurator voor prefab uitbouw, aanbouw en poolhouses — van inspiratie tot offerteaanvraag.",m:"61",l:"SEO-pagina's live",c1:"#B8860B",c2:"#E9C155",p:"assets/work/website-prefabselect.png",v:"assets/work/prefabselect.mp4"},{tag:"Dashboard",t:"Command Center — CRM-dashboard",d:"Eén dashboard met leads, pijplijn, omzet, websitebezoekers, conversie en advertentie-ROAS — realtime inzicht voor de ondernemer.",m:"€142k",l:"omzet realtime in beeld",c1:"#A1791B",c2:"#FFD66B",p:"assets/work/dashboard-crm.png",v:"assets/work/dashboard-crm.mp4"},{tag:"AI-automatisering",t:"AI Agents — automatiseringsplatform",d:"Een team van AI-agents dat leads opvolgt, offertes opstelt, content en SEO maakt en advertenties beheert — volledig automatisch.",m:"10+",l:"AI-agents actief",c1:"#D4AF37",c2:"#E9C155",p:"assets/work/dashboard-ag-agents.png"}],
  tests:[{q:"“Ze verkochten ons geen website — ze bouwden een systeem. Binnen een kwartaal zat onze agenda vol gekwalificeerde gesprekken.”",n:"Mark de Wit",r:"Eigenaar, Voss Bouw",c:"#D4AF37"},{q:"“De configurator veranderde hoe we verkopen. Kopers komen al zeker van wat ze willen. Onze sluitingsratio schoot omhoog.”",n:"Sofia Lindqvist",r:"Directeur, Domani Homes",c:"#B8860B"},{q:"“Alles praat eindelijk met elkaar. Ik open 's ochtends één dashboard en weet precies waar we staan.”",n:"Tom Berkhout",r:"Oprichter, Solaris Installs",c:"#A1791B"}],
- stats:[{n:"€48M+",l:"Omzet beïnvloed"},{n:"320+",l:"Systemen gebouwd"},{n:"4,9",l:"Gemiddelde beoordeling"},{n:"12+",l:"Branches bediend"}]
+ stats:[{n:"€48M+",l:"Omzet beïnvloed"},{n:"320+",l:"Systemen gebouwd"},{n:"4,9",l:"Gemiddelde beoordeling"},{n:"12+",l:"Branches bediend"}],
+ gal_ey:"In actie",gal_title:"Een blik in de systemen die we bouwen.",gal_sub:"Echte schermen uit echte projecten — configurators, websites en dashboards die we voor ondernemers hebben gebouwd.",
+ gallery:[{img:"assets/work/configurator-luckyzonwering.png",t:"Lucky Zonwering — 3D productconfigurator",alt:"3D productconfigurator voor rolluiken, screens en aluminium veranda's van Lucky Zonwering"},{img:"assets/work/website-prefabselect.png",t:"PrefabSelect — configurator-website",alt:"PrefabSelect configurator-website voor prefab uitbouw, aanbouw en poolhouse"},{img:"assets/work/dashboard-crm.png",t:"Command Center — CRM-dashboard",alt:"CRM-dashboard met leads, pijplijn, omzet en ROAS in realtime"},{img:"assets/work/dashboard-ag-agents.png",t:"AI Agents — automatiseringsplatform",alt:"AI-automatiseringsplatform met agents voor leads, offertes, content en SEO"}],
+ faq_ey:"Veelgestelde vragen",faq_title:"Alles wat je wilt weten over groeisystemen.",faq_sub:"Geen antwoord op je vraag? Plan een gratis strategiegesprek, dan denken we met je mee.",
+ faqs:[{q:"Wat zijn digitale groeisystemen?",a:"Een digitaal groeisysteem verbindt je website, marketing, configurator, CRM en automatisering tot één geheel, zodat aandacht automatisch wordt omgezet in aanvragen en omzet. NextGrowth ontwerpt, bouwt en koppelt deze systemen voor je."},{q:"Wat kost een website, configurator of dashboard?",a:"Elk project is maatwerk. Een professionele website start vanaf een paar duizend euro; een 3D-configurator, CRM-dashboard of AI-automatisering hangt af van de complexiteit. Plan een gratis strategiegesprek voor een concrete prijsindicatie."},{q:"Hoe lang duurt het om een systeem te bouwen?",a:"Een website is meestal binnen 3 tot 6 weken live. Configurators en dashboards duren doorgaans 6 tot 12 weken, afhankelijk van de functionaliteit. Vooraf krijg je een duidelijke planning."},{q:"Wat is een 3D-productconfigurator?",a:"Een interactieve tool waarmee klanten online zelf een product samenstellen — zoals een veranda, rolluik of prefab woning — direct de prijs zien en koopklaar een offerte aanvragen. Dat verhoogt je conversie en bespaart verkooptijd."},{q:"Werken jullie ook met AI-automatisering?",a:"Ja. We bouwen AI-agents en automatiseringen die leads kwalificeren, offertes opstellen, klanten opvolgen en je CRM automatisch bijwerken — 24/7 en zonder handwerk."},{q:"In welke regio's is NextGrowth actief?",a:"We werken voor bedrijven in Nederland, Dubai en Jordanië en bedienen klanten in het Nederlands, Engels en Arabisch."},{q:"Voor welke branches bouwen jullie?",a:"Onder andere bouw & installatie, retail en webshops, horeca, vastgoed, zakelijke dienstverlening en industrie."}]
 },
 en:{
  nav_services:"Services",nav_config:"Configurators",nav_industries:"Industries",nav_work:"Work",nav_results:"Results",nav_cta:"Book a call",
@@ -601,7 +663,11 @@ en:{
  industries:[{i:'build',t:"Construction & installation",d:"Builders, contractors, installers, solar, heat pumps, roofers and prefab."},{i:'retail',t:"Retail & webshops",d:"Stores and brands that want to grow online."},{i:'horeca',t:"Hospitality",d:"Restaurants, hotels and cafés that want more bookings."},{i:'estate',t:"Real estate",d:"Agents and developers who want to sell faster."},{i:'service',t:"Professional services",d:"Service firms that want to automate sales."},{i:'industry',t:"Manufacturing",d:"Producers that want to digitise their processes."}],
  cases:[{tag:"Configurator",t:"Lucky Zonwering — 3D product configurator",d:"Online configurator for roller shutters, screens and aluminium verandas. Customers build their product, see the specs, and request a quote instantly.",m:"24/7",l:"quotes online",c1:"#D4AF37",c2:"#FFE9A3",p:"assets/work/configurator-luckyzonwering.png",v:"assets/work/lucky-zonwering.mp4"},{tag:"Website + configurator",t:"PrefabSelect — configurator website",d:"A full website with a visual configurator for prefab extensions, add-ons and pool houses — from inspiration to quote request.",m:"61",l:"SEO pages live",c1:"#B8860B",c2:"#E9C155",p:"assets/work/website-prefabselect.png",v:"assets/work/prefabselect.mp4"},{tag:"Dashboard",t:"Command Center — CRM dashboard",d:"One dashboard with leads, pipeline, revenue, website visitors, conversion and ad ROAS — real-time insight for the owner.",m:"€142k",l:"revenue in real time",c1:"#A1791B",c2:"#FFD66B",p:"assets/work/dashboard-crm.png",v:"assets/work/dashboard-crm.mp4"},{tag:"AI automation",t:"AI Agents — automation platform",d:"A team of AI agents that follows up leads, drafts quotes, creates content and SEO, and manages ads — fully automatically.",m:"10+",l:"AI agents running",c1:"#D4AF37",c2:"#E9C155",p:"assets/work/dashboard-ag-agents.png"}],
  tests:[{q:"“They didn’t sell us a website — they built a system. Within a quarter our calendar was full of qualified calls.”",n:"Mark de Wit",r:"Owner, Voss Bouw",c:"#D4AF37"},{q:"“The configurator changed how we sell. Buyers arrive already certain about what they want. Our close rate jumped.”",n:"Sofia Lindqvist",r:"Director, Domani Homes",c:"#B8860B"},{q:"“Everything finally talks to everything. I open one dashboard in the morning and I know exactly where we stand.”",n:"Tom Berkhout",r:"Founder, Solaris Installs",c:"#A1791B"}],
- stats:[{n:"€48M+",l:"Revenue influenced"},{n:"320+",l:"Systems shipped"},{n:"4.9",l:"Average rating"},{n:"12+",l:"Industries served"}]
+ stats:[{n:"€48M+",l:"Revenue influenced"},{n:"320+",l:"Systems shipped"},{n:"4.9",l:"Average rating"},{n:"12+",l:"Industries served"}],
+ gal_ey:"In action",gal_title:"A look inside the systems we build.",gal_sub:"Real screens from real projects — configurators, websites and dashboards we built for business owners.",
+ gallery:[{img:"assets/work/configurator-luckyzonwering.png",t:"Lucky Zonwering — 3D product configurator",alt:"3D product configurator for roller shutters, screens and aluminium verandas"},{img:"assets/work/website-prefabselect.png",t:"PrefabSelect — configurator website",alt:"PrefabSelect configurator website for prefab extensions, add-ons and pool houses"},{img:"assets/work/dashboard-crm.png",t:"Command Center — CRM dashboard",alt:"CRM dashboard with leads, pipeline, revenue and ROAS in real time"},{img:"assets/work/dashboard-ag-agents.png",t:"AI Agents — automation platform",alt:"AI automation platform with agents for leads, quotes, content and SEO"}],
+ faq_ey:"Frequently asked questions",faq_title:"Everything you want to know about growth systems.",faq_sub:"No answer to your question? Book a free strategy call and we'll think along with you.",
+ faqs:[{q:"What are digital growth systems?",a:"A digital growth system connects your website, marketing, configurator, CRM and automation into one whole, so attention is automatically turned into enquiries and revenue. NextGrowth designs, builds and connects these systems for you."},{q:"What does a website, configurator or dashboard cost?",a:"Every project is custom. A professional website starts from a few thousand euros; a 3D configurator, CRM dashboard or AI automation depends on complexity. Book a free strategy call for a concrete price indication."},{q:"How long does it take to build a system?",a:"A website usually goes live within 3 to 6 weeks. Configurators and dashboards typically take 6 to 12 weeks, depending on functionality. You get a clear timeline up front."},{q:"What is a 3D product configurator?",a:"An interactive tool that lets customers build a product online — such as a veranda, roller shutter or prefab home — see the price instantly and request a quote, ready to buy. It boosts conversion and saves sales time."},{q:"Do you also do AI automation?",a:"Yes. We build AI agents and automations that qualify leads, draft quotes, follow up with customers and update your CRM automatically — 24/7 and without manual work."},{q:"Which regions does NextGrowth serve?",a:"We work for businesses in the Netherlands, Dubai and Jordan and serve clients in Dutch, English and Arabic."},{q:"Which industries do you build for?",a:"Among others construction & installation, retail and webshops, hospitality, real estate, professional services and manufacturing."}]
 },
 ar:{
  nav_services:"الخدمات",nav_config:"المُهيّئات",nav_industries:"القطاعات",nav_work:"أعمالنا",nav_results:"النتائج",nav_cta:"احجز مكالمة",
@@ -631,7 +697,11 @@ ar:{
  industries:[{i:'build',t:"البناء والتركيب",d:"شركات البناء والمقاولون والمركّبون والطاقة الشمسية والمضخّات الحرارية وعمّال الأسقف والمباني الجاهزة."},{i:'retail',t:"التجزئة والمتاجر",d:"المتاجر والعلامات التي تريد النموّ عبر الإنترنت."},{i:'horeca',t:"الضيافة",d:"المطاعم والفنادق والمقاهي التي تريد حجوزاتٍ أكثر."},{i:'estate',t:"العقارات",d:"الوسطاء والمطوّرون الذين يريدون بيعًا أسرع."},{i:'service',t:"الخدمات المهنية",d:"مزوّدو الخدمات الذين يريدون أتمتة المبيعات."},{i:'industry',t:"الصناعة",d:"شركات التصنيع التي تريد رقمنة عملياتها."}],
  cases:[{tag:"مُهيّئ",t:"Lucky Zonwering — مُهيّئ منتجات ثلاثي الأبعاد",d:"مُهيّئ إلكتروني للستائر الدوّارة والشاشات والفيراندا الألمنيوم. يصمّم العميل منتجه ويرى المواصفات ويطلب عرض سعر فورًا.",m:"24/7",l:"عروض أسعار إلكترونية",c1:"#D4AF37",c2:"#FFE9A3",p:"assets/work/configurator-luckyzonwering.png",v:"assets/work/lucky-zonwering.mp4"},{tag:"موقع + مُهيّئ",t:"PrefabSelect — موقع مع مُهيّئ",d:"موقع كامل مع مُهيّئ بصري للمباني الجاهزة والملحقات وبيوت المسابح — من الإلهام إلى طلب عرض السعر.",m:"61",l:"صفحات SEO مباشرة",c1:"#B8860B",c2:"#E9C155",p:"assets/work/website-prefabselect.png",v:"assets/work/prefabselect.mp4"},{tag:"لوحة تحكم",t:"Command Center — لوحة CRM",d:"لوحة واحدة بالعملاء وخط الأنابيب والإيرادات وزوّار الموقع والتحويل وعائد الإعلانات — رؤية فورية لصاحب العمل.",m:"€142k",l:"الإيراد في الوقت الفعلي",c1:"#A1791B",c2:"#FFD66B",p:"assets/work/dashboard-crm.png",v:"assets/work/dashboard-crm.mp4"},{tag:"أتمتة الذكاء الاصطناعي",t:"AI Agents — منصّة أتمتة",d:"فريق من وكلاء الذكاء الاصطناعي يتابع العملاء ويُعدّ العروض ويُنشئ المحتوى و SEO ويدير الإعلانات — آليًا بالكامل.",m:"10+",l:"وكلاء يعملون",c1:"#D4AF37",c2:"#E9C155",p:"assets/work/dashboard-ag-agents.png"}],
  tests:[{q:"«لم يبيعونا موقعًا — بل بنوا نظامًا. خلال ربعِ سنةٍ امتلأ تقويمنا بمكالماتٍ مؤهّلة.»",n:"Mark de Wit",r:"المالك، Voss Bouw",c:"#D4AF37"},{q:"«غيّر المُهيّئ طريقة بيعنا. يصل المشترون وهم متأكّدون ممّا يريدون، فارتفع معدّل الإغلاق.»",n:"Sofia Lindqvist",r:"مديرة، Domani Homes",c:"#B8860B"},{q:"«كل شيءٍ يتحدّث أخيرًا مع كل شيء. أفتح لوحةً واحدةً صباحًا وأعرف موقفنا بدقّة.»",n:"Tom Berkhout",r:"مؤسّس، Solaris Installs",c:"#A1791B"}],
- stats:[{n:"€48M+",l:"إيرادات مُتأثّرة"},{n:"320+",l:"أنظمة تم بناؤها"},{n:"4.9",l:"متوسط التقييم"},{n:"12+",l:"قطاعات نخدمها"}]
+ stats:[{n:"€48M+",l:"إيرادات مُتأثّرة"},{n:"320+",l:"أنظمة تم بناؤها"},{n:"4.9",l:"متوسط التقييم"},{n:"12+",l:"قطاعات نخدمها"}],
+ gal_ey:"قيد العمل",gal_title:"نظرة داخل الأنظمة التي نبنيها.",gal_sub:"شاشات حقيقية من مشاريع حقيقية — مُهيّئات ومواقع ولوحات تحكم بنيناها لأصحاب الأعمال.",
+ gallery:[{img:"assets/work/configurator-luckyzonwering.png",t:"Lucky Zonwering — مُهيّئ منتجات ثلاثي الأبعاد",alt:"مُهيّئ منتجات ثلاثي الأبعاد للستائر الدوّارة والشاشات والفيراندا الألمنيوم"},{img:"assets/work/website-prefabselect.png",t:"PrefabSelect — موقع مع مُهيّئ",alt:"موقع PrefabSelect مع مُهيّئ للمباني الجاهزة والملحقات وبيوت المسابح"},{img:"assets/work/dashboard-crm.png",t:"Command Center — لوحة CRM",alt:"لوحة CRM بالعملاء وخط الأنابيب والإيرادات وعائد الإعلانات في الوقت الفعلي"},{img:"assets/work/dashboard-ag-agents.png",t:"AI Agents — منصّة أتمتة",alt:"منصّة أتمتة بالذكاء الاصطناعي بوكلاء للعملاء والعروض والمحتوى و SEO"}],
+ faq_ey:"الأسئلة الشائعة",faq_title:"كل ما تريد معرفته عن أنظمة النمو.",faq_sub:"لم تجد إجابة لسؤالك؟ احجز جلسة استراتيجية مجانية وسنفكّر معك.",
+ faqs:[{q:"ما هي أنظمة النمو الرقمية؟",a:"يربط نظام النمو الرقمي موقعك وتسويقك والمُهيّئ و CRM والأتمتة في كلٍّ واحد، فيتحوّل الانتباه تلقائيًا إلى طلبات وإيرادات. تصمّم NextGrowth هذه الأنظمة وتبنيها وتربطها لك."},{q:"كم تكلفة موقع أو مُهيّئ أو لوحة تحكم؟",a:"كل مشروع مُصمّم خصيصًا. يبدأ الموقع الاحترافي من بضعة آلاف من اليوروهات؛ أما المُهيّئ ثلاثي الأبعاد أو لوحة CRM أو الأتمتة فيعتمد على التعقيد. احجز جلسة استراتيجية مجانية للحصول على تقدير سعر دقيق."},{q:"كم يستغرق بناء النظام؟",a:"يكون الموقع جاهزًا عادةً خلال 3 إلى 6 أسابيع. وتستغرق المُهيّئات ولوحات التحكم عادةً من 6 إلى 12 أسبوعًا حسب الوظائف. تحصل على جدول زمني واضح مسبقًا."},{q:"ما هو المُهيّئ ثلاثي الأبعاد؟",a:"أداة تفاعلية تتيح للعملاء تصميم منتج عبر الإنترنت — مثل فيراندا أو ستارة دوّارة أو منزل جاهز — ورؤية السعر فورًا وطلب عرض سعر جاهز للشراء. يرفع ذلك التحويل ويوفّر وقت المبيعات."},{q:"هل تقدّمون أيضًا أتمتة بالذكاء الاصطناعي؟",a:"نعم. نبني وكلاء ذكاء اصطناعي وأتمتة تؤهّل العملاء وتُعدّ العروض وتتابع العملاء وتحدّث CRM تلقائيًا — على مدار الساعة وبدون عمل يدوي."},{q:"ما المناطق التي تخدمها NextGrowth؟",a:"نعمل مع شركات في هولندا ودبي والأردن ونخدم العملاء بالهولندية والإنجليزية والعربية."},{q:"لأي قطاعات تبنون؟",a:"من بينها البناء والتركيب، التجزئة والمتاجر، الضيافة، العقارات، الخدمات المهنية والصناعة."}]
 }
 };
 
@@ -669,6 +739,9 @@ function render(){
   $('#cases').innerHTML=cur.cases.map(c=>`<div class="case"><div class="thumb"${c.v?'':` style="background-image:url('${c.p}'),linear-gradient(135deg,${c.c1},${c.c2})"`}>${c.v?`<video class="thumb-vid" src="${c.v}" poster="${c.p}" autoplay muted loop playsinline preload="metadata"></video>`:''}<span class="ind">${c.tag}</span></div><div class="body"><div class="tag">${c.tag}</div><h3>${c.t}</h3><p>${c.d}</p><div class="metric"><span class="big">${c.m}</span><span class="sm">${c.l}</span></div></div></div>`).join('');
   $('#tlist').innerHTML=cur.tests.map(t=>{const ini=t.n.split(' ').map(w=>w[0]).join('').slice(0,2);return `<div class="tcard"><div class="stars">★★★★★</div><p class="q">${t.q}</p><div class="who"><div class="av" style="background:linear-gradient(135deg,${t.c},#FFE9A3)">${ini}</div><div><div class="nm">${t.n}</div><div class="ro">${t.r}</div></div></div></div>`;}).join('');
   $('#statband').innerHTML=cur.stats.map(s=>`<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('');
+  $('#gallery-grid').innerHTML=cur.gallery.map(g=>`<figure><img src="${g.img}" alt="${g.alt}" loading="lazy"><figcaption>${g.t}</figcaption></figure>`).join('');
+  $('#faq-list').innerHTML=cur.faqs.map(f=>`<div class="faq-item"><button class="faq-q" aria-expanded="false">${f.q}<span class="ic" aria-hidden="true">+</span></button><div class="faq-a"><p>${f.a}</p></div></div>`).join('');
+  bindFAQ();
   bindConfigUI();
   reformatCounters();
   observeReveals();
@@ -772,6 +845,9 @@ function bindConfigUI(){
 
 /* contact form → opens a pre-filled email (no backend needed) */
 (function(){const cf=$('#contact-form');if(!cf)return;cf.addEventListener('submit',e=>{e.preventDefault();const f=cf.elements;const who=(f.company.value||f.name.value||'').trim();const subj=encodeURIComponent('Aanvraag via NextGrowth'+(who?' — '+who:''));const body=encodeURIComponent('Naam: '+f.name.value+'\nBedrijf: '+f.company.value+'\nE-mail: '+f.email.value+'\n\n'+f.message.value);window.location.href='mailto:hello@nextgrowth.nl?subject='+subj+'&body='+body;});})();
+
+/* FAQ accordion */
+function bindFAQ(){$$('#faq-list .faq-q').forEach(b=>b.addEventListener('click',()=>{const it=b.parentElement;const open=it.classList.toggle('open');b.setAttribute('aria-expanded',open);const a=it.querySelector('.faq-a');a.style.maxHeight=open?a.scrollHeight+'px':'0';}));}
 
 /* boot */
 setLang('nl');
