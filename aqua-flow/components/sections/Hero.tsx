@@ -1,10 +1,16 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, ShieldCheck, Sun, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { contact, whatsappLink, heroMedia, brand } from "@/lib/site";
+
+// Premium 3D gallon — client only.
+const WaterGallon3D = dynamic(() => import("@/components/three/WaterGallon3D"), {
+  ssr: false,
+});
 
 const trust = [
   { icon: ShieldCheck, label: "نقاء 100%" },
@@ -51,8 +57,8 @@ export function Hero() {
         />
       ))}
 
-      <div className="mx-auto w-full max-w-7xl px-4 pt-28 sm:px-6">
-        <div className="max-w-3xl">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-6 px-4 pb-12 pt-28 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-2 lg:pb-0 lg:pt-20">
+        <div className="max-w-2xl">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,6 +138,11 @@ export function Hero() {
               </div>
             ))}
           </motion.div>
+        </div>
+
+        {/* Premium 3D water gallon — right 45% on desktop, below text on mobile */}
+        <div className="relative mx-auto h-[380px] w-full max-w-md sm:h-[480px] lg:h-[82vh] lg:max-w-none">
+          <WaterGallon3D />
         </div>
       </div>
     </section>
