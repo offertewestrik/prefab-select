@@ -62,18 +62,62 @@ export async function GET() {
     storageBucket = `ONTBREEKT of FOUT: ${(err as Error).message}`;
   }
 
-  // Producten-tabel (migratie 0011)
+  // Producten-tabel (migratie 0011) — leescheck
   let productenTabel: string;
+  let productenLeesOk = false;
   try {
     const { count, error } = await db.from("products").select("*", { count: "exact", head: true });
     if (error) throw error;
     productenTabel = `OK (${count ?? 0} producten)`;
+    productenLeesOk = true;
   } catch (err) {
     productenTabel = `ONTBREEKT of FOUT: ${(err as Error).message}`;
   }
 
+  // Producten — echte schrijf-/verwijdertest. Een leescheck mist namelijk
+  // rechten-/RLS-problemen die ervoor zorgen dat toevoegen niet bewaart of dat
+  // verwijderde producten weer terugkomen. We schrijven een tijdelijk
+  // testproduct en verwijderen het meteen weer.
+  let productenSchrijftest: string;
+  let productenSchrijfOk = false;
+  if (!productenLeesOk) {
+    productenSchrijftest = "Overgeslagen — tabel niet leesbaar.";
+  } else {
+    const testId = crypto.randomUUID();
+    try {
+      const { error: insErr } = await db.from("products").insert({
+        id: testId, naam: "__systeemtest__ (mag weg)", beschrijving: null,
+        categorie: "Systeemtest", eenheid: "stuks", prijs_per_stuk: 0,
+        btw_percentage: 21, actief: false,
+      });
+      if (insErr) throw new Error(`toevoegen mislukt: ${insErr.message}`);
+
+      const { error: delErr } = await db.from("products").delete().eq("id", testId);
+      if (delErr) throw new Error(`verwijderen mislukt: ${delErr.message}`);
+
+      // Controleer dat het testproduct écht weg is (anders "komt het terug").
+      const { count, error: chkErr } = await db
+        .from("products").select("*", { count: "exact", head: true }).eq("id", testId);
+      if (chkErr) throw chkErr;
+      if ((count ?? 0) !== 0) {
+        productenSchrijftest = "FOUT: testproduct bleef bestaan na verwijderen (verwijderen werkt niet).";
+      } else {
+        productenSchrijftest = "OK — toevoegen én verwijderen werkt.";
+        productenSchrijfOk = true;
+      }
+    } catch (err) {
+      // Best effort opruimen, mocht insert geslaagd maar iets anders gefaald zijn.
+      await db.from("products").delete().eq("id", testId).then(() => {}, () => {});
+      productenSchrijftest = `FOUT: ${(err as Error).message}`;
+    }
+  }
+
   const alles =
-    typeof aantalLeads === "number" && bestandenTabel === "OK" && storageBucket === "OK";
+    typeof aantalLeads === "number" &&
+    bestandenTabel === "OK" &&
+    storageBucket === "OK" &&
+    productenLeesOk &&
+    productenSchrijfOk;
 
   return Response.json({
     ok: alles,
@@ -83,7 +127,10 @@ export async function GET() {
       bucket: storageBucket,
       aantalBestandenInDatabase: aantalBestanden,
     },
-    producten: productenTabel,
+    producten: {
+      tabel: productenTabel,
+      schrijftest: productenSchrijftest,
+    },
     config,
   });
 }
