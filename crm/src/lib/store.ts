@@ -904,6 +904,7 @@ export const useCrm = create<CrmState>()(
         users: s.users,
         reminderRules: s.reminderRules,
         notifications: s.notifications,
+        aiAgents: s.aiAgents,
         emailLogs: s.emailLogs,
         quoteRequests: s.quoteRequests,
       }),
