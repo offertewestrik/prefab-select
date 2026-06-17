@@ -74,21 +74,49 @@ function id(prefix: string): string {
 function syncLead(method: "POST" | "PATCH" | "DELETE", body: unknown, leadId?: string) {
   if (typeof window === "undefined") return;
   const url = leadId ? `/api/leads/${leadId}` : "/api/leads";
+  pendingWrites++;
   fetch(url, {
     method,
     headers: { "Content-Type": "application/json" },
     body: body ? JSON.stringify(body) : undefined,
-  }).catch((e) => console.error("Lead-synchronisatie mislukt:", e));
+  })
+    .catch((e) => console.error("Lead-synchronisatie mislukt:", e))
+    .finally(() => {
+      pendingWrites = Math.max(0, pendingWrites - 1);
+      laatsteSchrijfMoment = Date.now();
+    });
 }
 
-/** Generieke write-through naar Supabase (offertes, facturen, betalingen). */
-function dbSync(table: string, op: "upsert" | "delete", data: unknown) {
-  if (typeof window === "undefined" || !data) return;
-  fetch("/api/db", {
+/** Generieke write-through naar Supabase (offertes, facturen, betalingen, producten). */
+function dbSync(table: string, op: "upsert" | "delete", data: unknown): Promise<boolean> {
+  if (typeof window === "undefined" || !data) return Promise.resolve(true);
+  pendingWrites++;
+  return fetch("/api/db", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ table, op, data }),
-  }).catch((e) => console.error(`Synchronisatie van ${table} mislukt:`, e));
+  })
+    .then(async (res) => {
+      if (!res.ok) {
+        const info = (await res.json().catch(() => ({}))) as { error?: string };
+        const reden = info.error || `serverfout ${res.status}`;
+        console.error(`Synchronisatie van ${table} mislukt:`, reden);
+        useCrm.getState().setSyncError(`Kon wijziging niet opslaan in de database (${reden}).`);
+        return false;
+      }
+      // Geslaagd opslaan: een eerdere foutmelding mag weg.
+      if (useCrm.getState().syncError) useCrm.getState().setSyncError(null);
+      return true;
+    })
+    .catch((e) => {
+      console.error(`Synchronisatie van ${table} mislukt:`, e);
+      useCrm.getState().setSyncError("Kon wijziging niet opslaan (geen verbinding met de database).");
+      return false;
+    })
+    .finally(() => {
+      pendingWrites = Math.max(0, pendingWrites - 1);
+      laatsteSchrijfMoment = Date.now();
+    });
 }
 
 // ---------------------------------------------------------------------------
@@ -99,6 +127,11 @@ function dbSync(table: string, op: "upsert" | "delete", data: unknown) {
 // ---------------------------------------------------------------------------
 let uploadActief = false;
 let hydrateVolgnr = 0;
+// Aantal lopende write-through schrijfacties + tijdstip van de laatste. Zo kan
+// de auto-verversing een zojuist opgeslagen wijziging (product, btw-tarief…)
+// niet terugdraaien doordat ze net vóór de schrijfactie de oude data ophaalde.
+let pendingWrites = 0;
+let laatsteSchrijfMoment = 0;
 export function setUploadActief(actief: boolean) {
   uploadActief = actief;
 }
@@ -150,6 +183,11 @@ interface CrmState {
   purchases: Purchase[];
   products: Product[];
   aiAgents: AiAgent[];
+  /** Laatste opslagfout (Supabase write-through), of null als alles goed ging. */
+  syncError: string | null;
+
+  // --- Opslagstatus ---
+  setSyncError: (msg: string | null) => void;
 
   // --- Leads / pijplijn ---
   /** Laadt de echte data uit Supabase in de store (bij het opstarten). */
@@ -268,6 +306,9 @@ export const useCrm = create<CrmState>()(
       purchases: [],
       products: [],
       aiAgents: seedAiAgents,
+      syncError: null,
+
+      setSyncError: (msg) => set({ syncError: msg }),
 
       hydrate: async () => {
         if (typeof window === "undefined") return;
@@ -277,9 +318,16 @@ export const useCrm = create<CrmState>()(
           const res = await fetch("/api/bootstrap", { cache: "no-store" });
           if (!res.ok) return;
           const data = await res.json();
-          // Inmiddels een nieuwere verversing gestart of upload bezig?
-          // Dan dit (mogelijk verouderde) antwoord negeren.
-          if (volgnr !== hydrateVolgnr || uploadActief) return;
+          // Inmiddels een nieuwere verversing gestart, upload bezig, of net een
+          // wijziging weggeschreven? Dan dit (mogelijk verouderde) antwoord
+          // negeren, anders draait het een zojuist opgeslagen wijziging terug.
+          if (
+            volgnr !== hydrateVolgnr ||
+            uploadActief ||
+            pendingWrites > 0 ||
+            Date.now() - laatsteSchrijfMoment < 4000
+          )
+            return;
           const patch: Partial<CrmState> = {};
           if (Array.isArray(data.leads)) patch.leads = data.leads;
           if (Array.isArray(data.quotes)) patch.quotes = data.quotes;
@@ -836,6 +884,7 @@ export const useCrm = create<CrmState>()(
           purchases: [],
           products: [],
           aiAgents: seedAiAgents,
+          syncError: null,
         }),
     }),
     {
@@ -847,6 +896,8 @@ export const useCrm = create<CrmState>()(
       // die nog wél server-data bevatten.
       name: "prefab-crm-store",
       version: 6,
+      // syncError staat bewust niet in de whitelist: een opslagfout is transient
+      // en mag na herladen niet blijven hangen.
       partialize: (s) => ({
         currentUserId: s.currentUserId,
         integrations: s.integrations,
