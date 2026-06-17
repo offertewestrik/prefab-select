@@ -11,9 +11,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const CDN =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU";
-
 /** هوية العلامة — النقاء لمياه الشرب، دبي. */
 export const brand = {
   name: "Al Naqaa",
@@ -44,20 +41,14 @@ export const whatsappLink = `${whatsappBase}?text=${encodeURIComponent(
  * للاستضافة الذاتية، نزّلها إلى /public واضبط متغيرات البيئة على مسارات محلية.
  */
 export const heroMedia = {
-  videoUrl:
-    process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??
-    `${CDN}/hf_20260617_152815_463da484-1606-4a53-ab26-4ad1e41e4baa.mp4`,
-  posterUrl:
-    process.env.NEXT_PUBLIC_HERO_POSTER_URL ??
-    `${CDN}/hf_20260617_152224_0ffe831b-e14f-40c2-b9af-0f80f55cb9b4.png`,
+  videoUrl: process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? "/videos/hero.mp4",
+  posterUrl: process.env.NEXT_PUBLIC_HERO_POSTER_URL ?? "/videos/hero-poster.png",
 };
 
 /** Short "watch the process" clip (gallon being filled). AI-generated. */
 export const processClip = {
-  videoUrl:
-    process.env.NEXT_PUBLIC_PROCESS_VIDEO_URL ??
-    `${CDN}/hf_20260617_161040_3cd07e87-dbf4-4a41-8188-e8393209d5fb.mp4`,
-  posterUrl: `${CDN}/hf_20260617_154825_aedffcc8-465c-43e4-9c8e-0cb3d527aadc.png`,
+  videoUrl: process.env.NEXT_PUBLIC_PROCESS_VIDEO_URL ?? "/videos/process.mp4",
+  posterUrl: "/products/gallon.png",
 };
 
 export type Product = {
@@ -75,14 +66,14 @@ export const products: Product[] = [
     description:
       "منتجنا الرئيسي. غالونات قابلة لإعادة التعبئة سعة 19 لتراً من مياه شرب نقية طازجة — مثالية للمنازل والمكاتب.",
     highlight: "الأكثر طلباً",
-    image: `${CDN}/hf_20260617_154825_aedffcc8-465c-43e4-9c8e-0cb3d527aadc.png`,
+    image: "/products/gallon.png",
   },
   {
     icon: Boxes,
     title: "عبوات مياه الشرب",
     description:
       "مياه صافية في عبوات بأحجام متعددة — من 330 مل إلى 1.5 لتر — مثالية للمناسبات والمكاتب والتنقل.",
-    image: `${CDN}/hf_20260617_154826_92d3e8ff-676f-401d-b50b-44265edb049d.png`,
+    image: "/products/bottles.png",
   },
   {
     icon: CalendarClock,
@@ -90,14 +81,14 @@ export const products: Product[] = [
     description:
       "اضبطها وانسَها. توصيل أسبوعي مجدول حتى لا تنفد مياهك النقية أبداً.",
     highlight: "توصيل أسبوعي",
-    image: `${CDN}/hf_20260617_154838_80a64c1f-dbd0-4fda-9a05-71ae0fc5513a.png`,
+    image: "/products/delivery.png",
   },
   {
     icon: Building2,
     title: "توصيل الشركات",
     description:
       "إمداد موثوق بالجملة للشركات والمكاتب والمدارس والعيادات — فوترة بسيطة وتوصيل في الموعد.",
-    image: `${CDN}/hf_20260617_154839_dee06c64-45c3-4067-8d5f-256857cd3f7e.png`,
+    image: "/products/office.png",
   },
 ];
 

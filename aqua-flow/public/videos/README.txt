@@ -1,3 +1,1 @@
-Drop your real media here (filenames matched automatically):
-- hero.mp4 / hero-poster.jpg (hero background)
-See README.md for the full list.
+See ../MEDIA.md for which media files to add here.

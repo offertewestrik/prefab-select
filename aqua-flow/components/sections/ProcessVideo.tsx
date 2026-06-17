@@ -38,7 +38,7 @@ export function ProcessVideo() {
           className="glass-dark mx-auto mt-12 overflow-hidden rounded-[2rem] p-2"
         >
           <video
-            className="aspect-video w-full rounded-3xl object-cover"
+            className="aspect-video w-full rounded-3xl bg-gradient-to-br from-navy via-aqua-deep/40 to-navy object-cover"
             autoPlay
             muted
             loop

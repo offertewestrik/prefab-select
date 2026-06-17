@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { products } from "@/lib/site";
+import { SmartImage } from "@/components/SmartImage";
 
 export function Products() {
   return (
@@ -30,10 +31,9 @@ export function Products() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="group relative flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-aqua/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_40px_80px_-30px_rgba(8,145,178,0.45)]"
             >
-              {/* Generated product image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-mist">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              {/* Generated product image (falls back to aqua gradient) */}
+              <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-aqua-soft/50 via-mist to-white">
+                <SmartImage
                   src={p.image}
                   alt={p.title}
                   loading="lazy"
