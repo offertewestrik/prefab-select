@@ -6,6 +6,7 @@ import { useCrm } from "@/lib/store";
 import { APP_VERSIE } from "@/lib/versie";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { SyncErrorBanner } from "./SyncErrorBanner";
 
 /**
  * Bepaalt de layout. Het klantportaal (/portaal/...) krijgt géén CRM-menu;
@@ -79,6 +80,7 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <div className="flex flex-1 flex-col lg:pl-64">
         <Topbar />
+        <SyncErrorBanner />
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
       </div>
     </div>
