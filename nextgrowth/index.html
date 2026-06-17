@@ -42,10 +42,9 @@
   <div class="wrap row">
     <a href="#top" class="brand"><span class="mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NextGrowth"><defs><linearGradient id="ngn" x1="14" y1="14" x2="106" y2="106" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFF3C4"/><stop offset="38%" stop-color="#D4AF37"/><stop offset="68%" stop-color="#B8860B"/><stop offset="100%" stop-color="#FFE9A3"/></linearGradient><radialGradient id="ngnt" cx="38%" cy="30%" r="80%"><stop offset="0%" stop-color="#16161C"/><stop offset="60%" stop-color="#0C0C11"/><stop offset="100%" stop-color="#070709"/></radialGradient></defs><rect width="120" height="120" rx="28" fill="#0B0B0F"/><rect width="120" height="120" rx="28" fill="url(#ngnt)"/><g transform="translate(-6,-2)" stroke="url(#ngn)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M34 84 L34 42 L66 84 L66 42" stroke-width="8"/><path d="M104 50 A22 22 0 1 0 104 76 L104 63 L88 63" stroke-width="7"/></g><g transform="translate(-6,-2)" fill="url(#ngn)"><circle cx="34" cy="42" r="3"/><circle cx="66" cy="42" r="3"/><circle cx="88" cy="63" r="2.6"/></g></svg></span><span>NEXT</span><span class="gold">GROWTH</span></a>
     <div class="navlinks">
-      <a href="#services" data-i18n="nav_services"></a>
-      <a href="#configurators" data-i18n="nav_config"></a>
-      <a href="#industries" data-i18n="nav_industries"></a>
+      <span class="navdrop"><a href="#services" data-i18n="nav_services"></a><span class="dropmenu" id="nav-drop"></span></span>
       <a href="#work" data-i18n="nav_work"></a>
+      <a href="#industries" data-i18n="nav_industries"></a>
       <a href="#results" data-i18n="nav_results"></a>
     </div>
     <div class="spacer"></div>
@@ -431,6 +430,8 @@ function render(){
   const SVC_URL={web:'diensten/websites.html',shop:'diensten/webshops.html',ai:'diensten/ai-automatisering.html',cfg:'diensten/configurators.html',dash:'diensten/dashboards.html'};
   const MORE={nl:'Meer over deze dienst →',en:'Learn more →',ar:'اعرف المزيد ←'};
   const sg=$('#svc-grid');sg.innerHTML=cur.services.map(s=>{const u=SVC_URL[s.i];const inner=`<div class="ic"><svg viewBox="0 0 24 24">${ICON[s.i]}</svg></div><h3>${s.t}</h3><p>${s.d}</p>${u?`<span class="more">${MORE[lang]}</span>`:''}`;return u?`<a class="svc" href="${u}">${inner}</a>`:`<div class="svc">${inner}</div>`;}).join('');
+  const ALL={nl:'Alle diensten',en:'All services',ar:'كل الخدمات'};
+  const nd=$('#nav-drop');if(nd)nd.innerHTML=cur.services.filter(s=>SVC_URL[s.i]).map(s=>`<a href="${SVC_URL[s.i]}">${s.t}</a>`).join('')+`<a class="all" href="#services">${ALL[lang]} →</a>`;
   $('#feat-list').innerHTML=cur.feat_list.map(t=>`<li><span class="ck">✓</span>${t}</li>`).join('');
   $('#flow-steps').innerHTML=cur.steps.map((s,i)=>`<div class="fstep" data-i="${i}"><div class="nd">${['◍','◎','▦','▤','◷','✓'][i]}</div><div><div class="t">${s.t}</div><div class="s">${s.s}</div></div></div>`).join('');
   $('#flow-side').innerHTML=cur.side.map(r=>`<div class="row"><span class="k">${r.k}</span><span class="v${r.up?' up':''}">${r.v}</span></div>`).join('');

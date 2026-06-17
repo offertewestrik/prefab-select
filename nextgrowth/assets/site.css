@@ -362,3 +362,14 @@ a.cmeta:hover{color:var(--blue)}
 /* svc card link */
 a.svc{color:inherit;display:block}
 a.svc .more{margin-top:14px;font-family:"Sora","Plus Jakarta Sans";font-weight:700;font-size:14px;color:var(--blue);display:inline-flex;gap:6px;align-items:center}
+
+/* NAV DROPDOWN (Diensten) */
+.navdrop{position:relative;display:flex;align-items:center}
+.navdrop>a::after{content:"▾";margin-left:6px;font-size:11px;opacity:.7}
+.dropmenu{position:absolute;top:100%;left:0;margin-top:8px;min-width:240px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-m);padding:8px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,visibility .25s}
+.navdrop:hover .dropmenu,.navdrop:focus-within .dropmenu{opacity:1;visibility:visible;transform:none}
+.dropmenu a{display:block;padding:10px 14px;border-radius:9px;font-size:14.5px;font-weight:600;color:var(--ink2)!important;white-space:nowrap;margin:0}
+.dropmenu a:hover{background:var(--bg2);color:var(--blue)!important}
+.dropmenu a.all{border-top:1px solid var(--line);margin-top:4px;padding-top:12px;color:var(--blue)!important;font-family:"Sora","Plus Jakarta Sans"}
+[dir=rtl] .dropmenu{left:auto;right:0}
+[dir=rtl] .navdrop>a::after{margin-left:0;margin-right:6px}

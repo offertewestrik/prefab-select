@@ -53,7 +53,7 @@ function navHTML(u){
  return `<div class="wrap row">
   <a href="../index.html" class="brand"><span class="mark">${LOGO}</span><span>NEXT</span><span class="gold">GROWTH</span></a>
   <div class="navlinks">
-   <a href="../index.html#services">${u.diensten}</a>
+   <span class="navdrop"><a href="../index.html#services">${u.diensten}</a><span class="dropmenu">${SERVICES.map(s=>`<a href="${s.slug}.html">${s[lang]}</a>`).join('')}<a class="all" href="../index.html#services">${u.diensten} →</a></span></span>
    <a href="../index.html#work">${u.werk}</a>
    <a href="../index.html#industries">${u.branches}</a>
    <a href="../index.html#faq">FAQ</a>
