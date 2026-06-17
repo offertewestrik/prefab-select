@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Aqua Flow design tokens — fresh, clean, hygienic.
+   White · aqua blue · deep navy · glass effects. (No luxury black / gold.)
+---------------------------------------------------------------------------- */
+@theme {
+  --color-paper: #f4fbff;
+  --color-mist: #eaf6fd;
+  --color-navy: #0a2a5b;
+  --color-navy-deep: #07203f;
+  --color-ink: #0a1730;
+  --color-aqua: #06b6d4;
+  --color-aqua-bright: #22d3ee;
+  --color-aqua-soft: #7dd3fc;
+  --color-aqua-deep: #0891b2;
+
+  --font-display: var(--font-display), "Inter", system-ui, sans-serif;
+  --font-sans: var(--font-sans), "Inter", system-ui, sans-serif;
+
+  --shadow-glow: 0 0 60px -15px rgba(34, 211, 238, 0.55);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  overflow-x: hidden;
+}
+
+/* Light glassmorphism — for cards on light backgrounds */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(234, 246, 253, 0.55) 100%
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 60px -30px rgba(8, 145, 178, 0.35);
+}
+
+/* Dark glass — for cards on the deep-navy immersive sections */
+.glass-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(125, 211, 252, 0.04) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(125, 211, 252, 0.18);
+}
+
+/* Aqua gradient text */
+.text-gradient-aqua {
+  background: linear-gradient(120deg, #0891b2 0%, #06b6d4 45%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fresh aqua aurora behind light sections */
+.aurora-light {
+  background:
+    radial-gradient(55% 55% at 15% 12%, rgba(34, 211, 238, 0.16), transparent 60%),
+    radial-gradient(45% 45% at 88% 18%, rgba(6, 182, 212, 0.12), transparent 55%),
+    radial-gradient(60% 60% at 50% 100%, rgba(125, 211, 252, 0.18), transparent 60%);
+}
+
+/* Deep aqua glow behind the immersive navy section */
+.aurora-deep {
+  background:
+    radial-gradient(50% 50% at 25% 20%, rgba(34, 211, 238, 0.22), transparent 60%),
+    radial-gradient(45% 45% at 80% 80%, rgba(8, 145, 178, 0.25), transparent 55%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-mist);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-aqua-deep), var(--color-aqua-bright));
+  border-radius: 999px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.animate-ripple {
+  animation: ripple 3s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-float, .animate-ripple { animation: none; }
+}
