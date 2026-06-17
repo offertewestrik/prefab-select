@@ -24,6 +24,20 @@ export const whatsappLink = `${whatsappBase}?text=${encodeURIComponent(
   "Hello Aqua Flow, I would like to order purified drinking water.",
 )}`;
 
+/**
+ * Hero media. Generated with Higgsfield and served from its persistent CDN.
+ * To self-host instead, download these into /public and point the env vars at
+ * /videos/hero.mp4 and /facility-hero.jpg.
+ */
+export const heroMedia = {
+  videoUrl:
+    process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260617_152815_463da484-1606-4a53-ab26-4ad1e41e4baa.mp4",
+  posterUrl:
+    process.env.NEXT_PUBLIC_HERO_POSTER_URL ??
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3EdpNOPjrEuN7grAEkmSnZzolrU/hf_20260617_152224_0ffe831b-e14f-40c2-b9af-0f80f55cb9b4.png",
+};
+
 export type Product = {
   icon: LucideIcon;
   title: string;

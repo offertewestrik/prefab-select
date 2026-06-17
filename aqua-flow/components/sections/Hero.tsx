@@ -4,7 +4,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, ShieldCheck, Sun, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { contact, whatsappLink } from "@/lib/site";
+import { contact, whatsappLink, heroMedia } from "@/lib/site";
 
 const trust = [
   { icon: ShieldCheck, label: "100% Purified" },
@@ -18,21 +18,23 @@ export function Hero() {
       id="top"
       className="relative flex min-h-screen items-center overflow-hidden"
     >
-      {/* Background video — drop your real footage at /public/videos/hero.mp4.
-          The animated aqua layer below always shows as a graceful fallback. */}
+      {/* AI-generated hero footage (Higgsfield). The animated aqua layer below
+          always shows as a graceful fallback while the video loads. */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-paper via-mist to-white" />
       <div className="absolute inset-0 -z-10 aurora-light" />
       <video
-        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60"
+        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-70"
         autoPlay
         muted
         loop
         playsInline
-        poster="/videos/hero-poster.jpg"
+        poster={heroMedia.posterUrl}
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src={heroMedia.videoUrl} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-paper via-paper/30 to-transparent" />
+      {/* Light wash so headline text stays readable over the footage */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-paper/85 via-paper/55 to-paper/20" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-paper via-paper/20 to-transparent" />
 
       {/* Floating bubbles */}
       {[...Array(8)].map((_, i) => (
