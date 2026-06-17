@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { EENHEDEN, DEFAULT_BTW } from "@/lib/constants";
 import { euroCent } from "@/lib/format";
 import type { Product } from "@/lib/types";
-import { DownloadCloud, Package, Plus, Search, Trash2 } from "lucide-react";
+import { AlertTriangle, DownloadCloud, Package, Plus, Search, Trash2, X } from "lucide-react";
 
 const inputCls =
   "w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-brand-500";
@@ -19,6 +19,8 @@ export default function ProductenPage() {
   const updateProduct = useCrm((s) => s.updateProduct);
   const deleteProduct = useCrm((s) => s.deleteProduct);
   const importCatalogus = useCrm((s) => s.importCatalogus);
+  const syncError = useCrm((s) => s.syncError);
+  const setSyncError = useCrm((s) => s.setSyncError);
 
   const [zoek, setZoek] = useState("");
   const [nieuwOpen, setNieuwOpen] = useState(false);
@@ -80,6 +82,29 @@ export default function ProductenPage() {
           </div>
         }
       />
+
+      {syncError && (
+        <div className="mb-4 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" />
+          <div className="flex-1">
+            <p className="font-semibold">Opslaan in de database is mislukt</p>
+            <p className="mt-0.5">{syncError}</p>
+            <p className="mt-1 text-xs text-rose-700">
+              Je wijziging staat nu alleen lokaal. Meestal betekent dit dat de{" "}
+              <code className="rounded bg-rose-100 px-1">products</code>-tabel nog niet bestaat in
+              Supabase — voer migratie <strong>0011_producten.sql</strong> uit, of controleer de
+              Supabase-secrets. Daarna worden producten en btw-tarieven wél bewaard.
+            </p>
+          </div>
+          <button
+            onClick={() => setSyncError(null)}
+            className="rounded-lg p-1 text-rose-400 hover:bg-rose-100 hover:text-rose-600"
+            title="Melding sluiten"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
 
       {importMelding && (
         <div className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700">
