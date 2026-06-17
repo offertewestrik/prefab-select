@@ -11,6 +11,11 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+/** Base path prefix (e.g. "/prefab-select" on GitHub Pages; "" elsewhere). */
+export const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+/** Prefix a /public path with the deployment base path. */
+export const asset = (p: string) => `${BASE}${p}`;
+
 /** هوية العلامة — النقاء لمياه الشرب، دبي. */
 export const brand = {
   name: "Al Naqaa",
@@ -20,7 +25,7 @@ export const brand = {
   taglineAr: "مياه نقية .. حياة صحية",
   taglineEn: "Pure water, healthy life",
   location: "دبي · الإمارات العربية المتحدة",
-  logo: "/brand-logo.jpg",
+  logo: asset("/brand-logo.jpg"),
 };
 
 /** بيانات التواصل — قابلة للتهيئة عبر متغيرات NEXT_PUBLIC_*. */
@@ -41,14 +46,16 @@ export const whatsappLink = `${whatsappBase}?text=${encodeURIComponent(
  * للاستضافة الذاتية، نزّلها إلى /public واضبط متغيرات البيئة على مسارات محلية.
  */
 export const heroMedia = {
-  videoUrl: process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? "/videos/hero.mp4",
-  posterUrl: process.env.NEXT_PUBLIC_HERO_POSTER_URL ?? "/videos/hero-poster.png",
+  videoUrl: process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? asset("/videos/hero.mp4"),
+  posterUrl:
+    process.env.NEXT_PUBLIC_HERO_POSTER_URL ?? asset("/videos/hero-poster.png"),
 };
 
 /** Short "watch the process" clip (gallon being filled). AI-generated. */
 export const processClip = {
-  videoUrl: process.env.NEXT_PUBLIC_PROCESS_VIDEO_URL ?? "/videos/process.mp4",
-  posterUrl: "/products/gallon.png",
+  videoUrl:
+    process.env.NEXT_PUBLIC_PROCESS_VIDEO_URL ?? asset("/videos/process.mp4"),
+  posterUrl: asset("/products/gallon.png"),
 };
 
 export type Product = {
@@ -66,14 +73,14 @@ export const products: Product[] = [
     description:
       "منتجنا الرئيسي. غالونات قابلة لإعادة التعبئة سعة 19 لتراً من مياه شرب نقية طازجة — مثالية للمنازل والمكاتب.",
     highlight: "الأكثر طلباً",
-    image: "/products/gallon.png",
+    image: asset("/products/gallon.png"),
   },
   {
     icon: Boxes,
     title: "عبوات مياه الشرب",
     description:
       "مياه صافية في عبوات بأحجام متعددة — من 330 مل إلى 1.5 لتر — مثالية للمناسبات والمكاتب والتنقل.",
-    image: "/products/bottles.png",
+    image: asset("/products/bottles.png"),
   },
   {
     icon: CalendarClock,
@@ -81,14 +88,14 @@ export const products: Product[] = [
     description:
       "اضبطها وانسَها. توصيل أسبوعي مجدول حتى لا تنفد مياهك النقية أبداً.",
     highlight: "توصيل أسبوعي",
-    image: "/products/delivery.png",
+    image: asset("/products/delivery.png"),
   },
   {
     icon: Building2,
     title: "توصيل الشركات",
     description:
       "إمداد موثوق بالجملة للشركات والمكاتب والمدارس والعيادات — فوترة بسيطة وتوصيل في الموعد.",
-    image: "/products/office.png",
+    image: asset("/products/office.png"),
   },
 ];
 

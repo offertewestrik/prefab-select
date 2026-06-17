@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
-import { facilityHighlights } from "@/lib/site";
+import { facilityHighlights, asset } from "@/lib/site";
 import { PhotoSlot } from "@/components/PhotoSlot";
 
 export function About() {
@@ -21,13 +21,13 @@ export function About() {
             className="grid grid-cols-2 gap-4"
           >
             <PhotoSlot
-              src="/facility-1.jpg"
+              src={asset("/facility-1.jpg")}
               alt="منشأة تنقية المياه مع محطة التعبئة والغالونات"
               label="منشأة الإنتاج"
               className="col-span-2 aspect-[16/11]"
             />
             <PhotoSlot
-              src="/facility-2.jpg"
+              src={asset("/facility-2.jpg")}
               alt="خط الترشيح والتعبئة من الستانلس ستيل"
               label="خط الترشيح"
               className="aspect-[4/5]"
