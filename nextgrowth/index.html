@@ -167,6 +167,9 @@ p{margin:0}
 .device .bar .dots{display:flex;gap:7px}
 .device .bar .dots i{width:11px;height:11px;border-radius:50%}
 .device .bar .url{margin:0 auto;font-family:"JetBrains Mono";font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);padding:5px 16px;border-radius:8px}
+.cfg-showcase{border-radius:18px;overflow:hidden;box-shadow:var(--shadow-m);border:1px solid var(--line);background:#fff;min-height:520px;display:block}
+.cfg-showcase img{width:100%;height:100%;min-height:520px;object-fit:cover;display:block}
+@media(max-width:920px){.cfg-showcase{min-height:0}.cfg-showcase img{min-height:0}}
 .cfg-stage{position:relative;flex:1;background:radial-gradient(700px 460px at 50% 30%,#FBF6E6,#FAFAF7 70%)}
 #cfg-canvas{position:absolute;inset:0;width:100%;height:100%}
 .cfg-stage .hint{position:absolute;right:16px;top:14px;font-family:"JetBrains Mono";font-size:11px;color:var(--muted)}
@@ -390,9 +393,8 @@ a.cmeta:hover{color:var(--blue)}
       <h2 class="h2" data-i18n="cfg_title"></h2><p class="lead" data-i18n="cfg_sub"></p>
     </div>
     <div class="cfg">
-      <div class="device reveal d1">
-        <div class="bar"><div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div><div class="url">configurator.jouwmerk.nl</div></div>
-        <div class="cfg-stage"><canvas id="cfg-canvas"></canvas><div class="hint" data-i18n="cfg_hint"></div></div>
+      <div class="cfg-showcase reveal d1">
+        <img src="assets/configurator-showcase.png" alt="NextGrowth 3D-configurator showcase — prefab, poolhouse en aanbouw met live prijzen, dashboards en AI-assistent" loading="lazy" />
       </div>
       <div class="cfg-panel reveal d2">
         <div class="cfg-tabs" id="cfg-tabs"></div>
