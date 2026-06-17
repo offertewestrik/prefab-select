@@ -119,19 +119,24 @@ export async function GET() {
     productenLeesOk &&
     productenSchrijfOk;
 
-  // Mailkanaal — kan het CRM offertes/facturen echt versturen?
+  // Mailkanaal — kan het CRM offertes/facturen echt versturen? We valideren de
+  // Gmail-koppeling echt (token-refresh), zodat een verlopen koppeling rood is.
   let mailKanaal: string;
   try {
-    const { isGmailConnected } = await import("@/lib/integrations/google");
-    const gmail = await isGmailConnected().catch(() => false);
+    const { gmailStatus } = await import("@/lib/integrations/google");
+    const gmail = await gmailStatus().catch((e) => ({
+      ok: false,
+      email: undefined as string | undefined,
+      reden: (e as Error).message,
+    }));
     const resendKlaar =
       process.env.USE_REAL_INTEGRATIONS === "true" && Boolean(process.env.RESEND_API_KEY);
-    if (gmail) {
-      mailKanaal = "OK — Gmail gekoppeld.";
+    if (gmail.ok) {
+      mailKanaal = `OK — Gmail gekoppeld${gmail.email ? ` (${gmail.email})` : ""}.`;
     } else if (resendKlaar) {
       mailKanaal = `OK — Resend (afzender ${process.env.RESEND_FROM_EMAIL ?? "offerte@prefabselect.nl"}).`;
     } else {
-      mailKanaal = "GEEN — koppel Gmail of stel de RESEND_API_KEY in (anders worden mails niet echt verstuurd).";
+      mailKanaal = `GEEN — ${gmail.reden ?? "koppel Gmail of stel de RESEND_API_KEY in"} (anders worden mails niet echt verstuurd).`;
     }
   } catch (err) {
     mailKanaal = `FOUT: ${(err as Error).message}`;

@@ -112,6 +112,30 @@ export async function isGmailConnected(): Promise<boolean> {
   return Boolean(t?.refreshToken);
 }
 
+/**
+ * Echte status van de Gmail-koppeling: dwingt zo nodig een token-refresh af,
+ * zodat een verlopen/ingetrokken koppeling ook echt als kapot wordt gemeld
+ * (i.p.v. "gekoppeld" omdat er nog een oud refresh-token in de database staat).
+ */
+export async function gmailStatus(): Promise<{ ok: boolean; email?: string; reden?: string }> {
+  if (!isGoogleConfigured()) return { ok: false, reden: "Google niet geconfigureerd (secrets ontbreken)." };
+  const t = await getGoogleTokens();
+  if (!t?.refreshToken) return { ok: false, reden: "Geen Gmail gekoppeld." };
+  try {
+    await getAccessToken(); // ververst als de access-token verlopen is
+    return { ok: true, email: t.email ?? undefined };
+  } catch (e) {
+    const ruw = (e as Error).message ?? "";
+    return {
+      ok: false,
+      email: t.email ?? undefined,
+      reden: /invalid_grant|invalid_token|unauthorized/i.test(ruw)
+        ? "Gmail-koppeling verlopen — opnieuw koppelen (en zet de Google-app op 'In productie')."
+        : ruw,
+    };
+  }
+}
+
 function buildMime(opts: {
   van: string;
   naar: string;

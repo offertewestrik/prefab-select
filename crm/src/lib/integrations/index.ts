@@ -30,14 +30,28 @@ export async function verstuurOfferteMail(opts: {
   bestandsnaam?: string;
 }): Promise<MailResultaat> {
   // 1) Gmail gebruiken als de postbus is gekoppeld (mailen vanuit het CRM).
+  let gmailFout: string | undefined;
   try {
     const { isGmailConnected, sendGmail } = await import("./google");
     if (await isGmailConnected()) {
-      const r = await sendGmail(opts);
-      return { ok: r.ok, messageId: r.messageId, mock: false, kanaal: "gmail" };
+      try {
+        const r = await sendGmail(opts);
+        return { ok: r.ok, messageId: r.messageId, mock: false, kanaal: "gmail" };
+      } catch (e) {
+        const ruw = (e as Error).message ?? "";
+        gmailFout = /invalid_grant|invalid_token|unauthorized/i.test(ruw)
+          ? "De Gmail-koppeling is verlopen of ingetrokken. Koppel Gmail opnieuw via Integraties. Tip: zet de Google-app op 'In productie' in de Google Cloud Console, anders verloopt de koppeling elke 7 dagen."
+          : `Gmail-verzending mislukt: ${ruw}`;
+        console.error("Gmail-verzending mislukt:", e);
+        // Geen Resend-terugval beschikbaar? Geef dan de échte reden terug
+        // i.p.v. stil te 'mocken' alsof het gelukt is.
+        if (!useRealIntegrations || !process.env.RESEND_API_KEY) {
+          return { ok: false, messageId: "", mock: false, kanaal: "gmail", fout: gmailFout };
+        }
+      }
     }
   } catch (e) {
-    console.error("Gmail-verzending mislukt, val terug op Resend:", e);
+    console.error("Gmail-koppeling controleren mislukt:", e);
   }
 
   // 2) Anders: Resend (of mock zolang er geen key is).
@@ -50,9 +64,11 @@ export async function verstuurOfferteMail(opts: {
       messageId: `mock-${Date.now()}`,
       mock: true,
       kanaal: "mock",
-      fout: !process.env.RESEND_API_KEY
-        ? "Geen mailkanaal ingesteld: koppel Gmail of stel de RESEND_API_KEY in."
-        : undefined,
+      fout:
+        gmailFout ??
+        (!process.env.RESEND_API_KEY
+          ? "Geen mailkanaal ingesteld: koppel Gmail of stel de RESEND_API_KEY in."
+          : undefined),
     };
   }
 
