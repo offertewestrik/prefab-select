@@ -22,22 +22,34 @@ export function About() {
           >
             <PhotoSlot
               src="/facility-1.jpg"
-              alt="Water filtration installation"
-              label="Filtration line"
-              className="col-span-2 aspect-[16/10]"
+              alt="Water purification installation with filling station and gallons"
+              label="Production facility"
+              className="col-span-2 aspect-[16/11]"
             />
             <PhotoSlot
               src="/facility-2.jpg"
-              alt="UV disinfection stage"
-              label="UV disinfection"
-              className="aspect-square"
+              alt="Stainless-steel filtration and filling line"
+              label="Filtration line"
+              className="aspect-[4/5]"
             />
-            <PhotoSlot
-              src="/facility-3.jpg"
-              alt="Gallon filling line"
-              label="Gallon filling"
-              className="aspect-square"
-            />
+            <div className="flex flex-col justify-between gap-4">
+              <div className="glass flex flex-1 flex-col justify-center rounded-3xl p-6 text-center">
+                <span className="text-gradient-aqua font-display text-4xl font-extrabold">
+                  UV
+                </span>
+                <span className="mt-1 text-xs font-medium uppercase tracking-widest text-navy/55">
+                  Disinfection
+                </span>
+              </div>
+              <div className="glass flex flex-1 flex-col justify-center rounded-3xl p-6 text-center">
+                <span className="text-gradient-aqua font-display text-4xl font-extrabold">
+                  100%
+                </span>
+                <span className="mt-1 text-xs font-medium uppercase tracking-widest text-navy/55">
+                  Purified
+                </span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Copy */}
