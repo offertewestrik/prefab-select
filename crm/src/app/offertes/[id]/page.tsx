@@ -124,13 +124,17 @@ export default function OfferteDetailPage() {
           messageId: data.messageId,
           mock: !!data.mock,
         });
-        setMelding(data.mock ? `Offerte ge-maild naar ${lead!.email} (mock — geen echte mail verstuurd).` : `Offerte verstuurd naar ${lead!.email}.`);
+        setMelding(
+          data.mock
+            ? `Nog niet echt verstuurd naar ${lead!.email}. ${data.fout ?? "Er is nog geen mailkanaal gekoppeld (Gmail of Resend)."}`
+            : `Offerte verstuurd naar ${lead!.email}.`,
+        );
       } else {
         addEmailLog({ quoteId: quote!.id, naar: lead!.email, onderwerp: "Uw offerte van Prefab Select", status: "mislukt", mock: true });
-        setMelding("Mailen mislukt.");
+        setMelding(`Mailen mislukt: ${data.fout ?? "onbekende fout"}`);
       }
-    } catch {
-      setMelding("Mailen mislukt.");
+    } catch (e) {
+      setMelding(`Mailen mislukt: ${(e as Error).message}`);
     } finally {
       setBezig(null);
     }

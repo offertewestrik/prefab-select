@@ -9,6 +9,7 @@ type Health = {
   aantalLeads: number | string;
   bestanden: { tabel: string; bucket: string; aantalBestandenInDatabase: number | null };
   producten: { tabel: string; schrijftest: string };
+  mail?: string;
   config: Record<string, unknown>;
   reden?: string;
 };
@@ -138,6 +139,16 @@ export default function SysteemstatusPage() {
               label="Bestanden — opslagbucket"
               waarde={data.bestanden?.bucket}
               hint="De storage-bucket wordt normaal automatisch aangemaakt; controleer de Supabase Storage-rechten."
+            />
+          </section>
+
+          {/* Communicatie */}
+          <section className="rounded-2xl border border-slate-100 bg-white p-5 shadow-soft">
+            <h3 className="mb-2 font-bold text-slate-900">Communicatie</h3>
+            <StatusRij
+              label="Mailen (offertes &amp; facturen versturen)"
+              waarde={data.mail ?? "onbekend"}
+              hint="Koppel Gmail via Integraties, óf stel de RESEND_API_KEY in en verifieer het afzenderdomein bij Resend. Zonder mailkanaal worden mails niet echt verstuurd."
             />
           </section>
 

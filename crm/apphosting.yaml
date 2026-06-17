@@ -71,3 +71,4 @@ env:
 # trigger 1780946324
 # trigger 1781728012 — producten-fix, syncError, systeemstatus & AI-agents live
 # trigger 1781729238 — 14 AI-agents voor Prefab Select + CEO-agent
+# trigger 1781733575 — offerte-mail: echte foutreden + mailstatus in systeemstatus

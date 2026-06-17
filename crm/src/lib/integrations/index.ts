@@ -16,6 +16,10 @@ export interface MailResultaat {
   ok: boolean;
   messageId: string;
   mock: boolean;
+  /** Reden bij een mislukte verzending (voor de gebruiker). */
+  fout?: string;
+  /** Via welk kanaal verstuurd: "gmail" | "resend" | "mock". */
+  kanaal?: "gmail" | "resend" | "mock";
 }
 
 export async function verstuurOfferteMail(opts: {
@@ -30,7 +34,7 @@ export async function verstuurOfferteMail(opts: {
     const { isGmailConnected, sendGmail } = await import("./google");
     if (await isGmailConnected()) {
       const r = await sendGmail(opts);
-      return { ok: r.ok, messageId: r.messageId, mock: false };
+      return { ok: r.ok, messageId: r.messageId, mock: false, kanaal: "gmail" };
     }
   } catch (e) {
     console.error("Gmail-verzending mislukt, val terug op Resend:", e);
@@ -38,10 +42,18 @@ export async function verstuurOfferteMail(opts: {
 
   // 2) Anders: Resend (of mock zolang er geen key is).
   if (!useRealIntegrations || !process.env.RESEND_API_KEY) {
-    // MOCK: in het prototype versturen we niet echt.
+    // MOCK: er is geen echt mailkanaal — niets wordt verstuurd.
     console.info(`[MOCK Resend] mail naar ${opts.naar} — "${opts.onderwerp}"`);
     await new Promise((r) => setTimeout(r, 400));
-    return { ok: true, messageId: `mock-${Date.now()}`, mock: true };
+    return {
+      ok: true,
+      messageId: `mock-${Date.now()}`,
+      mock: true,
+      kanaal: "mock",
+      fout: !process.env.RESEND_API_KEY
+        ? "Geen mailkanaal ingesteld: koppel Gmail of stel de RESEND_API_KEY in."
+        : undefined,
+    };
   }
 
   // ECHTE IMPLEMENTATIE — Resend
@@ -59,9 +71,9 @@ export async function verstuurOfferteMail(opts: {
   });
   if (error) {
     console.error("[Resend] versturen mislukt:", error);
-    return { ok: false, messageId: "", mock: false };
+    return { ok: false, messageId: "", mock: false, kanaal: "resend", fout: error.message };
   }
-  return { ok: true, messageId: data?.id ?? "", mock: false };
+  return { ok: true, messageId: data?.id ?? "", mock: false, kanaal: "resend" };
 }
 
 // ---------------------------------------------------------------------------

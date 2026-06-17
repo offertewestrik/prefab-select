@@ -59,6 +59,6 @@ export async function POST(req: Request) {
     return Response.json({ ...resultaat, onderwerp: ONDERWERP, naar: lead.email });
   } catch (err) {
     console.error("Mailen mislukt:", err);
-    return Response.json({ ok: false, fout: "Mailen mislukt" }, { status: 500 });
+    return Response.json({ ok: false, fout: (err as Error).message || "Mailen mislukt" }, { status: 500 });
   }
 }

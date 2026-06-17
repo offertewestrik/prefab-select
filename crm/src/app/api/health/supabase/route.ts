@@ -119,6 +119,24 @@ export async function GET() {
     productenLeesOk &&
     productenSchrijfOk;
 
+  // Mailkanaal — kan het CRM offertes/facturen echt versturen?
+  let mailKanaal: string;
+  try {
+    const { isGmailConnected } = await import("@/lib/integrations/google");
+    const gmail = await isGmailConnected().catch(() => false);
+    const resendKlaar =
+      process.env.USE_REAL_INTEGRATIONS === "true" && Boolean(process.env.RESEND_API_KEY);
+    if (gmail) {
+      mailKanaal = "OK — Gmail gekoppeld.";
+    } else if (resendKlaar) {
+      mailKanaal = `OK — Resend (afzender ${process.env.RESEND_FROM_EMAIL ?? "offerte@prefabselect.nl"}).`;
+    } else {
+      mailKanaal = "GEEN — koppel Gmail of stel de RESEND_API_KEY in (anders worden mails niet echt verstuurd).";
+    }
+  } catch (err) {
+    mailKanaal = `FOUT: ${(err as Error).message}`;
+  }
+
   return Response.json({
     ok: alles,
     aantalLeads,
@@ -131,6 +149,7 @@ export async function GET() {
       tabel: productenTabel,
       schrijftest: productenSchrijftest,
     },
+    mail: mailKanaal,
     config,
   });
 }
