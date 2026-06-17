@@ -112,6 +112,9 @@ p{margin:0}
 .hero-bg::after{content:"";position:absolute;inset:0;opacity:.5;background-image:linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);background-size:64px 64px;mask:radial-gradient(1100px 700px at 50% 30%,#000,transparent 80%)}
 #hero-canvas{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity 1.6s ease}
 #hero-canvas.in{opacity:1}
+.hero-video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:0;animation:heroFade 1.4s ease .2s forwards}
+@keyframes heroFade{to{opacity:1}}
+.hero-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(6,6,8,.86),rgba(6,6,8,.5) 52%,rgba(6,6,8,.2)),linear-gradient(0deg,rgba(6,6,8,.55),transparent 40%)}
 .hero .wrap{z-index:3;padding-top:96px;padding-bottom:60px}
 .hero-inner{max-width:700px}
 .hero .display{color:#fff;margin-top:24px}
@@ -388,7 +391,11 @@ a.cmeta:hover{color:var(--blue)}
 
 <header class="hero" id="top">
   <div class="hero-bg"></div>
-  <canvas id="hero-canvas"></canvas>
+  <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim"></div>
+  <canvas id="hero-canvas" hidden></canvas>
   <div class="wrap">
     <div class="hero-inner">
       <span class="eyebrow on-dark"><span class="dot"></span><span data-i18n="hero_badge"></span></span>
@@ -797,7 +804,7 @@ $$('[data-spark]').forEach(s=>spark(s,parseInt(s.dataset.spark)*2.1));
 /* ===== HERO 3D floating panels ===== */
 (function(){
   if(typeof THREE==='undefined')return;
-  const canvas=$('#hero-canvas');let renderer;try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});}catch(e){return;}
+  const canvas=$('#hero-canvas');if(!canvas||canvas.hasAttribute('hidden'))return;let renderer;try{renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});}catch(e){return;}
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(46,1,.1,100);cam.position.set(0,0,14);
   const root=new THREE.Group();scene.add(root);
