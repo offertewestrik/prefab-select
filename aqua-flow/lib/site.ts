@@ -52,6 +52,14 @@ export const heroMedia = {
     `${CDN}/hf_20260617_152224_0ffe831b-e14f-40c2-b9af-0f80f55cb9b4.png`,
 };
 
+/** Short "watch the process" clip (gallon being filled). AI-generated. */
+export const processClip = {
+  videoUrl:
+    process.env.NEXT_PUBLIC_PROCESS_VIDEO_URL ??
+    `${CDN}/hf_20260617_161040_3cd07e87-dbf4-4a41-8188-e8393209d5fb.mp4`,
+  posterUrl: `${CDN}/hf_20260617_154825_aedffcc8-465c-43e4-9c8e-0cb3d527aadc.png`,
+};
+
 export type Product = {
   icon: LucideIcon;
   title: string;

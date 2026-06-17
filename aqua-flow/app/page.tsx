@@ -3,6 +3,7 @@ import { FloatingActions } from "@/components/FloatingActions";
 import { Hero } from "@/components/sections/Hero";
 import { Process } from "@/components/sections/Process";
 import { About } from "@/components/sections/About";
+import { ProcessVideo } from "@/components/sections/ProcessVideo";
 import { Products } from "@/components/sections/Products";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { OrderForm } from "@/components/sections/OrderForm";
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <Process />
       <About />
+      <ProcessVideo />
       <Products />
       <WhyUs />
       <OrderForm />
