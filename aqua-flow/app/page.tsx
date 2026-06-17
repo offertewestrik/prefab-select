@@ -9,6 +9,7 @@ import { ProcessVideo } from "@/components/sections/ProcessVideo";
 import { Products } from "@/components/sections/Products";
 import { ServiceAreas } from "@/components/sections/ServiceAreas";
 import { WhyUs } from "@/components/sections/WhyUs";
+import { Certifications } from "@/components/sections/Certifications";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
 import { OrderForm } from "@/components/sections/OrderForm";
@@ -27,6 +28,7 @@ export default function Home() {
       <Products />
       <ServiceAreas />
       <WhyUs />
+      <Certifications />
       <Testimonials />
       <Faq />
       <OrderForm />

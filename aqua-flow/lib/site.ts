@@ -12,6 +12,7 @@ import {
   Clock,
   Award,
   Users,
+  Sun,
   type LucideIcon,
 } from "lucide-react";
 
@@ -289,3 +290,27 @@ export const faqs: Faq[] = [
 /** فقرة تعريفية غنية بالكلمات المفتاحية لتحسين الظهور في دبي. */
 export const seoIntro =
   "النقاء لمياه الشرب هي خدمتك الموثوقة لتوصيل مياه الشرب النقية في دبي. نوفّر غالونات مياه 19 لتر، وعبوات مياه بأحجام متعددة، واشتراكات توصيل أسبوعية للفلل والمكاتب والشركات في جميع أنحاء الإمارة — من نخيل جميرا ودبي مارينا إلى وسط مدينة دبي والخليج التجاري والمرابع العربية. مياهنا معالَجة بالكامل عبر ترشيح متعدد المراحل وتعقيم بالأشعة فوق البنفسجية، وتصل إلى بابك طازجةً كل يوم.";
+
+/* -------------------------------------------------------------------------- */
+/*  الجودة والاعتمادات                                                         */
+/* -------------------------------------------------------------------------- */
+export type QualityBadge = { icon: LucideIcon; title: string };
+
+export const qualityBadges: QualityBadge[] = [
+  { icon: FlaskConical, title: "ترشيح متعدد المراحل (RO)" },
+  { icon: Sun, title: "تعقيم بالأشعة فوق البنفسجية" },
+  { icon: ShieldCheck, title: "رقابة جودة على كل دفعة" },
+  { icon: Boxes, title: "تعبئة صحية مُحكمة" },
+  { icon: Building2, title: "منشأة إنتاج حديثة" },
+  { icon: Droplet, title: "مياه صالحة للشرب 100%" },
+];
+
+/** شعارات الجهات الرسمية — أضف الصور الحقيقية في /public/certs لعرضها. */
+export type Accreditation = { label: string; image: string };
+
+export const accreditations: Accreditation[] = [
+  { label: "بلدية دبي", image: "/certs/dubai-municipality.png" },
+  { label: "هيئة الإمارات للمواصفات (ESMA)", image: "/certs/esma.png" },
+  { label: "ISO 22000", image: "/certs/iso-22000.png" },
+  { label: "حلال", image: "/certs/halal.png" },
+];
