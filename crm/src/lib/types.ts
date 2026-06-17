@@ -252,12 +252,24 @@ export interface Integration {
 // AI-agents — geautomatiseerde assistenten die meewerken in het CRM
 // ----------------------------------------------------------------------------
 
-/** Op welk CRM-onderdeel een agent werkt. */
+/** Op welk onderdeel een agent werkt (bepaalt icoon + link in het dashboard). */
 export type AiAgentCategorie =
+  | "directie" // CEO Agent — overkoepelend overzicht
   | "leads"
   | "offertes"
-  | "email"
+  | "configurator"
+  | "follow_up"
+  | "bouwkosten"
+  | "productie"
   | "planning"
+  | "vergunning"
+  | "visual"
+  | "seo"
+  | "concurrentie"
+  | "klantportaal"
+  | "review"
+  // legacy-categorieën (nog gebruikt door oudere data)
+  | "email"
   | "facturen"
   | "marketing"
   | "rapportage";
@@ -309,6 +321,12 @@ export interface AiAgent {
   gekoppeld: boolean;
   /** Sleutel van het catalogus-sjabloon waaruit de agent is toegevoegd. */
   templateKey?: string;
+  /** Concrete taken die de agent uitvoert (voor de kaart). */
+  taken?: string[];
+  /** Voorbeeld van wat de agent oplevert. */
+  voorbeeld?: string;
+  /** Alleen voor de CEO-agent: overkoepelende inzichten bovenaan het dashboard. */
+  inzichten?: string[];
 }
 
 // ----------------------------------------------------------------------------

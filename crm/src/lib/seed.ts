@@ -7,6 +7,7 @@
 
 import type {
   AiAgent,
+  AiAgentStatus,
   Appointment,
   AppNotification,
   Integration,
@@ -24,6 +25,7 @@ import type {
   User,
 } from "./types";
 import { DEFAULT_BTW, DEFAULT_VOORWAARDEN } from "./constants";
+import { AI_AGENT_TEMPLATES } from "./ai-agents";
 
 // Datums relatief t.o.v. nu, zodat het dashboard altijd "levend" oogt.
 function dag(offset: number, uur = 9, minuut = 0): string {
@@ -445,126 +447,136 @@ function minGeleden(minuten: number): string {
   return new Date(Date.now() - minuten * 60_000).toISOString();
 }
 
-export const seedAiAgents: AiAgent[] = [
-  {
-    id: "agent-lead",
-    naam: "Lead-opvolger",
-    categorie: "leads",
-    templateKey: "leads",
-    status: "bezig",
-    actief: true,
-    aanbevolen: true,
-    gekoppeld: true,
-    rol: "Volgt nieuwe leads binnen enkele minuten op en plant follow-ups in.",
-    huidigeTaak: "Belscript opstellen voor Familie De Vries (mantelzorgwoning).",
-    takenVandaag: 7,
-    takenTotaal: 213,
-    tijdBespaardMin: 95,
-    laatsteActiviteit: minGeleden(2),
+// Demo-status per agent (op sleutel uit de catalogus). De rol/taken/voorbeeld
+// komen uit AI_AGENT_TEMPLATES, hier alleen de "live" toestand voor het
+// prototype. Echte uitvoering volgt zodra de Claude-API gekoppeld is.
+type AgentDemo = {
+  status: AiAgentStatus;
+  gekoppeld: boolean;
+  actief: boolean;
+  huidigeTaak?: string;
+  takenVandaag: number;
+  takenTotaal: number;
+  tijdBespaardMin: number;
+  minGeleden: number;
+  activiteiten: string[];
+  inzichten?: string[];
+};
+
+const AGENT_DEMO: Record<string, AgentDemo> = {
+  ceo: {
+    status: "bezig", gekoppeld: true, actief: true,
+    huidigeTaak: "Weekoverzicht voor de directie samenstellen.",
+    takenVandaag: 5, takenTotaal: 140, tijdBespaardMin: 35, minGeleden: 3,
+    inzichten: [
+      "Deze week 18 nieuwe leads.",
+      "€312.000 aan openstaande offertes.",
+      "2 projecten moeten deze week geplaatst worden.",
+      "Poolhouses converteren 34% beter dan uitbouwen.",
+      "Eindhoven levert de meeste aanvragen op.",
+    ],
+    activiteiten: ["Directie-overzicht bijgewerkt.", "Conversie per producttype herberekend."],
+  },
+  lead_qualification: {
+    status: "bezig", gekoppeld: true, actief: true,
+    huidigeTaak: "Leadscore bepalen voor aanvraag uit Eindhoven (uitbouw 25 m²).",
+    takenVandaag: 9, takenTotaal: 240, tijdBespaardMin: 110, minGeleden: 2,
     activiteiten: [
-      { id: "a-lead-1", tijd: minGeleden(2), omschrijving: "Belscript klaargezet voor Familie De Vries.", leadId: "lead-001" },
-      { id: "a-lead-2", tijd: minGeleden(28), omschrijving: "Follow-up taak ingepland voor Jeroen Bakker (+2 dagen).", leadId: "lead-002" },
-      { id: "a-lead-3", tijd: minGeleden(74), omschrijving: "Welkomstmail verstuurd naar nieuwe lead via configurator." },
+      "Lead Eindhoven gescoord: hoge kans, budget ~€55.000.",
+      "Lead Jeroen Bakker als 'oriënterend' gemarkeerd.",
     ],
   },
-  {
-    id: "agent-offerte",
-    naam: "Offerte-assistent",
-    categorie: "offertes",
-    templateKey: "offertes",
-    status: "bezig",
-    actief: true,
-    aanbevolen: true,
-    gekoppeld: true,
-    rol: "Maakt automatisch een concept-offerte uit configurator-aanvragen.",
-    huidigeTaak: "Concept-offerte opbouwen uit configurator-regels (poolhouse 6×4).",
-    takenVandaag: 4,
-    takenTotaal: 88,
-    tijdBespaardMin: 140,
-    laatsteActiviteit: minGeleden(6),
-    activiteiten: [
-      { id: "a-off-1", tijd: minGeleden(6), omschrijving: "Concept-offerte PS-2026-0014 aangemaakt (poolhouse)." },
-      { id: "a-off-2", tijd: minGeleden(120), omschrijving: "Optie-beschrijvingen toegevoegd aan offerte familie Visser.", leadId: "lead-011" },
-    ],
+  offerte: {
+    status: "bezig", gekoppeld: true, actief: true,
+    huidigeTaak: "Concept-offerte opbouwen (6×4 uitbouw, stucwerk, schuifpui).",
+    takenVandaag: 4, takenTotaal: 88, tijdBespaardMin: 140, minGeleden: 6,
+    activiteiten: ["Concept-offerte PS-2026-0014 aangemaakt.", "Productvisuals toegevoegd aan offerte."],
   },
-  {
-    id: "agent-email",
-    naam: "E-mail-agent",
-    categorie: "email",
-    templateKey: "email",
-    status: "actief",
-    actief: true,
-    aanbevolen: true,
-    gekoppeld: true,
-    rol: "Vat inkomende e-mail samen en stelt antwoorden voor.",
-    huidigeTaak: undefined,
-    takenVandaag: 11,
-    takenTotaal: 402,
-    tijdBespaardMin: 60,
-    laatsteActiviteit: minGeleden(18),
-    activiteiten: [
-      { id: "a-mail-1", tijd: minGeleden(18), omschrijving: "Conceptantwoord voorgesteld op vraag over levertijd." },
-      { id: "a-mail-2", tijd: minGeleden(95), omschrijving: "3 inkomende mails samengevat op de leadpagina." },
-    ],
+  configurator: {
+    status: "actief", gekoppeld: true, actief: true,
+    takenVandaag: 6, takenTotaal: 75, tijdBespaardMin: 40, minGeleden: 22,
+    activiteiten: ["Upgrade-advies voorgesteld: zwarte schuifpui.", "Meerwerk dakraam berekend (+€1.250)."],
   },
-  {
-    id: "agent-planning",
-    naam: "Planning-agent",
-    categorie: "planning",
-    templateKey: "planning",
-    status: "rust",
-    actief: true,
-    aanbevolen: false,
-    gekoppeld: true,
-    rol: "Plant bezoek- en inmeetafspraken in en voorkomt dubbele boekingen.",
-    huidigeTaak: undefined,
-    takenVandaag: 2,
-    takenTotaal: 56,
-    tijdBespaardMin: 30,
-    laatsteActiviteit: minGeleden(210),
-    activiteiten: [
-      { id: "a-plan-1", tijd: minGeleden(210), omschrijving: "Inmeetafspraak voorgesteld voor familie Visser (di 10:00)." },
-    ],
+  follow_up: {
+    status: "bezig", gekoppeld: true, actief: true,
+    huidigeTaak: "Dag-3 herinnering klaarzetten voor 4 openstaande offertes.",
+    takenVandaag: 12, takenTotaal: 360, tijdBespaardMin: 80, minGeleden: 5,
+    activiteiten: ["WhatsApp dag-1 verstuurd naar 3 nieuwe leads.", "Opvolgmail dag-7 ingepland."],
   },
-  {
-    id: "agent-factuur",
-    naam: "Factuur-bewaker",
-    categorie: "facturen",
-    templateKey: "facturen",
-    status: "fout",
-    actief: true,
-    aanbevolen: false,
-    gekoppeld: true,
-    rol: "Signaleert openstaande en te late facturen en stuurt herinneringen.",
-    huidigeTaak: undefined,
-    takenVandaag: 0,
-    takenTotaal: 34,
-    tijdBespaardMin: 0,
-    laatsteActiviteit: minGeleden(1440),
-    activiteiten: [
-      { id: "a-fact-1", tijd: minGeleden(1440), omschrijving: "Kan geen herinnering sturen — Resend-koppeling ontbreekt." },
-    ],
+  bouwkosten: {
+    status: "actief", gekoppeld: true, actief: true,
+    takenVandaag: 3, takenTotaal: 64, tijdBespaardMin: 50, minGeleden: 40,
+    activiteiten: ["Marge project Oss gesignaleerd onder 18%.", "Transportkosten geüpdatet."],
   },
-  {
-    id: "agent-marketing",
-    naam: "Marketing-agent",
-    categorie: "marketing",
-    templateKey: "marketing",
-    status: "gepauzeerd",
-    actief: false,
-    aanbevolen: false,
-    gekoppeld: true,
-    rol: "Stelt social posts en advertentieteksten voor op basis van projecten.",
-    huidigeTaak: undefined,
-    takenVandaag: 0,
-    takenTotaal: 12,
-    tijdBespaardMin: 0,
-    laatsteActiviteit: minGeleden(2880),
-    activiteiten: [
-      { id: "a-mark-1", tijd: minGeleden(2880), omschrijving: "3 conceptposts voorgesteld over opgeleverd tuinkantoor." },
-    ],
+  productie: {
+    status: "rust", gekoppeld: true, actief: true,
+    takenVandaag: 2, takenTotaal: 30, tijdBespaardMin: 20, minGeleden: 180,
+    activiteiten: ["Project Maas: status naar 'productie' gezet."],
   },
-];
+  planning: {
+    status: "rust", gekoppeld: true, actief: true,
+    takenVandaag: 2, takenTotaal: 56, tijdBespaardMin: 30, minGeleden: 210,
+    activiteiten: ["Montage Breda gepland (di 10:00) — geen conflict."],
+  },
+  vergunning: {
+    status: "actief", gekoppeld: true, actief: true,
+    takenVandaag: 1, takenTotaal: 18, tijdBespaardMin: 15, minGeleden: 95,
+    activiteiten: ["Waarschuwing: dakopbouw project Tilburg vereist mogelijk vergunning."],
+  },
+  visual: {
+    status: "gepauzeerd", gekoppeld: false, actief: false,
+    takenVandaag: 0, takenTotaal: 12, tijdBespaardMin: 0, minGeleden: 2880,
+    activiteiten: ["Niet gekoppeld — beeldgeneratie-API nog instellen."],
+  },
+  seo: {
+    status: "gepauzeerd", gekoppeld: false, actief: false,
+    takenVandaag: 0, takenTotaal: 22, tijdBespaardMin: 0, minGeleden: 1440,
+    activiteiten: ["Stadspagina's Oss/Eindhoven/Tilburg als concept klaargezet."],
+  },
+  concurrentie: {
+    status: "gepauzeerd", gekoppeld: false, actief: false,
+    takenVandaag: 0, takenTotaal: 8, tijdBespaardMin: 0, minGeleden: 4320,
+    activiteiten: ["Niet gekoppeld — koppel een databron om concurrenten te volgen."],
+  },
+  klantportaal: {
+    status: "rust", gekoppeld: true, actief: true,
+    takenVandaag: 1, takenTotaal: 14, tijdBespaardMin: 10, minGeleden: 300,
+    activiteiten: ["Klantdashboard familie Visser bijgewerkt: productie 65%."],
+  },
+  review: {
+    status: "gepauzeerd", gekoppeld: false, actief: false,
+    takenVandaag: 0, takenTotaal: 9, tijdBespaardMin: 0, minGeleden: 2880,
+    activiteiten: ["Reviewverzoek klaargezet voor opgeleverd project Willems."],
+  },
+};
+
+export const seedAiAgents: AiAgent[] = AI_AGENT_TEMPLATES.map((t) => {
+  const d = AGENT_DEMO[t.key];
+  return {
+    id: `agent-${t.key}`,
+    naam: t.naam,
+    categorie: t.categorie,
+    templateKey: t.key,
+    rol: t.rol,
+    taken: t.taken,
+    voorbeeld: t.voorbeeld,
+    aanbevolen: t.aanbevolen,
+    status: d.status,
+    actief: d.actief,
+    gekoppeld: d.gekoppeld,
+    huidigeTaak: d.huidigeTaak,
+    takenVandaag: d.takenVandaag,
+    takenTotaal: d.takenTotaal,
+    tijdBespaardMin: d.tijdBespaardMin,
+    laatsteActiviteit: minGeleden(d.minGeleden),
+    activiteiten: d.activiteiten.map((o, i) => ({
+      id: `a-${t.key}-${i}`,
+      tijd: minGeleden(d.minGeleden + i * 35),
+      omschrijving: o,
+    })),
+    inzichten: d.inzichten,
+  };
+});
 
 export const seedNotifications: AppNotification[] = [
   { id: "notif-1", type: "nieuwe_lead", titel: "Nieuwe lead", tekst: "Jeroen Bakker via Meta Ads (tuinkantoor).", link: "/leads/lead-002", gelezen: false, voorUserId: "u-tom", aangemaaktOp: dag(0, 8, 30) },

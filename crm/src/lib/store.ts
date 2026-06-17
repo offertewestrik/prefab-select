@@ -613,6 +613,8 @@ export const useCrm = create<CrmState>()(
               gekoppeld: false,
               templateKey: tmpl.key,
               rol: tmpl.rol,
+              taken: tmpl.taken,
+              voorbeeld: tmpl.voorbeeld,
               huidigeTaak: undefined,
               takenVandaag: 0,
               takenTotaal: 0,

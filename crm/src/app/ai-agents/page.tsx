@@ -29,13 +29,36 @@ import {
   Trash2,
   X,
   Check,
+  Crown,
+  SlidersHorizontal,
+  MessageCircle,
+  Calculator,
+  Factory,
+  Stamp,
+  Image as ImageIcon,
+  Globe,
+  Eye,
+  LayoutDashboard,
+  Star,
 } from "lucide-react";
 
 const CAT_ICON: Record<AiAgentCategorie, any> = {
+  directie: Crown,
   leads: Users,
   offertes: FileText,
-  email: Mail,
+  configurator: SlidersHorizontal,
+  follow_up: MessageCircle,
+  bouwkosten: Calculator,
+  productie: Factory,
   planning: CalendarDays,
+  vergunning: Stamp,
+  visual: ImageIcon,
+  seo: Globe,
+  concurrentie: Eye,
+  klantportaal: LayoutDashboard,
+  review: Star,
+  // legacy
+  email: Mail,
   facturen: Receipt,
   marketing: Megaphone,
   rapportage: BarChart3,
@@ -43,10 +66,22 @@ const CAT_ICON: Record<AiAgentCategorie, any> = {
 
 /** Naar welk CRM-onderdeel de agent werkt — voor de "Bekijk"-link. */
 const CAT_LINK: Record<AiAgentCategorie, string> = {
+  directie: "/dashboard",
   leads: "/leads",
   offertes: "/offertes",
+  configurator: "/producten",
+  follow_up: "/taken",
+  bouwkosten: "/projecten",
+  productie: "/projecten",
+  planning: "/team-planning",
+  vergunning: "/offertes",
+  visual: "/marketing",
+  seo: "/marketing",
+  concurrentie: "/marketing",
+  klantportaal: "/leads",
+  review: "/dashboard",
+  // legacy
   email: "/integraties",
-  planning: "/agenda",
   facturen: "/facturen",
   marketing: "/social",
   rapportage: "/rapportage",
@@ -105,6 +140,10 @@ export default function AiAgentsPage() {
     .sort((x, y) => new Date(y.tijd).getTime() - new Date(x.tijd).getTime())
     .slice(0, 12);
 
+  // CEO-agent krijgt een eigen hero bovenaan; de rest in het raster.
+  const ceo = agents.find((a) => a.categorie === "directie");
+  const overige = agents.filter((a) => a.categorie !== "directie");
+
   return (
     <div>
       <PageHeader
@@ -120,8 +159,11 @@ export default function AiAgentsPage() {
         }
       />
 
+      {/* CEO-agent — overkoepelend overzicht bovenaan */}
+      {ceo && <CeoHero agent={ceo} onToggle={() => toggleAiAgent(ceo.id)} onKoppel={() => koppelAiAgent(ceo.id)} />}
+
       {/* Samenvatting */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <KpiCard icon={Bot} label="Gekoppelde agents" waarde={`${aantalGekoppeld} / ${agents.length}`} sub={`${aantalBezig} nu aan het werk`} />
         <KpiCard icon={CheckCircle2} label="Taken vandaag" waarde={String(takenVandaag)} sub="automatisch afgehandeld" />
         <KpiCard icon={Clock} label="Tijd bespaard" waarde={uurMin(tijdBespaard)} sub="geschat, vandaag" />
@@ -137,7 +179,7 @@ export default function AiAgentsPage() {
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
         {/* Agent-kaarten */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:col-span-2">
-          {agents.map((a) => (
+          {overige.map((a) => (
             <AgentCard
               key={a.id}
               agent={a}
@@ -226,6 +268,71 @@ function KpiCard({
   );
 }
 
+function CeoHero({
+  agent,
+  onToggle,
+  onKoppel,
+}: {
+  agent: AiAgent;
+  onToggle: () => void;
+  onKoppel: () => void;
+}) {
+  const m = STATUS_META[agent.status];
+  return (
+    <div className="rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-950 to-brand-800 p-6 text-white shadow-soft">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15">
+            <Crown className="h-6 w-6 text-amber-300" />
+          </span>
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-black">{agent.naam}</h2>
+              <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide">
+                Overzicht
+              </span>
+            </div>
+            <span className="mt-1 inline-flex items-center gap-1.5 text-sm text-white/80">
+              <StatusDot status={agent.status} /> {agent.gekoppeld ? m.label : "Niet gekoppeld"}
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          {agent.gekoppeld ? (
+            <button
+              onClick={onToggle}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-3 py-2 text-sm font-semibold hover:bg-white/25"
+            >
+              {agent.actief ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              {agent.actief ? "Pauzeren" : "Activeren"}
+            </button>
+          ) : (
+            <button
+              onClick={onKoppel}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-brand-800 hover:bg-brand-50"
+            >
+              <Plug className="h-4 w-4" /> Koppelen
+            </button>
+          )}
+        </div>
+      </div>
+
+      <p className="mt-4 max-w-2xl text-sm text-white/80">{agent.rol}</p>
+
+      {agent.inzichten && agent.inzichten.length > 0 && (
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+          {agent.inzichten.map((tekst) => (
+            <div key={tekst} className="flex items-start gap-2 rounded-xl bg-white/10 px-4 py-3">
+              <Activity className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+              <p className="text-sm font-medium">{tekst}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function AgentCard({
   agent,
   onToggle,
@@ -279,6 +386,23 @@ function AgentCard({
       </div>
 
       <p className="mt-3 text-sm text-slate-500">{agent.rol}</p>
+
+      {agent.taken && agent.taken.length > 0 && (
+        <ul className="mt-3 flex flex-wrap gap-1.5">
+          {agent.taken.map((t) => (
+            <li key={t} className="rounded-lg bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+              {t}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {agent.voorbeeld && (
+        <p className="mt-3 rounded-xl bg-slate-50 px-3 py-2 text-xs italic text-slate-500">
+          <span className="font-semibold not-italic text-slate-600">Voorbeeld: </span>
+          {agent.voorbeeld}
+        </p>
+      )}
 
       {agent.gekoppeld && agent.status === "bezig" && agent.huidigeTaak && (
         <div className="mt-3 rounded-xl border border-emerald-100 bg-emerald-50 px-3 py-2">
