@@ -1,0 +1,12 @@
+<svg width="430" height="100" viewBox="0 0 430 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Westrik Bouw &amp; Installaties">
+  <defs>
+    <linearGradient id="ldW" x1="21" y1="45" x2="67" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B00"/><stop offset="0.52" stop-color="#FF6B00"/><stop offset="0.56" stop-color="#1F6BFF"/><stop offset="1" stop-color="#005BFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="14" width="72" height="72" rx="18" fill="#111111"/>
+  <path d="M21 28 L28 28 L34 53 L40 31 L48 31 L54 53 L60 28 L67 28 L57 64 L49 64 L44 41 L39 64 L31 64 Z" fill="url(#ldW)"/>
+  <path d="M45 21 L40 31 L44 31 L42 39 L49 27 L45 27 Z" fill="#005BFF"/>
+  <text x="96" y="52" font-family="'Inter','Segoe UI',Arial,sans-serif" font-size="36" font-weight="800" letter-spacing="-0.5" fill="#111111">Westrik</text>
+  <text x="98" y="74" font-family="'Inter','Segoe UI',Arial,sans-serif" font-size="12.5" font-weight="600" letter-spacing="3.2" fill="#FF6B00">BOUW &amp; INSTALLATIES</text>
+</svg>
