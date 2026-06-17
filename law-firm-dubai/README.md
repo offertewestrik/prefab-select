@@ -62,12 +62,40 @@ law-firm-dubai/
 ├── index.html              # all markup + SEO/meta + JSON-LD
 └── assets/
     ├── css/styles.css      # full design system
+    ├── vendor/             # drop three.min.js here for a fully offline build
     └── js/
         ├── i18n.js         # 5-language dictionary + apply()
         ├── data.js         # practice areas, partners, insights + rendering
+        ├── loader.js       # loads THREE (local vendor → CDN fallbacks), then the scene
         ├── scene.js        # Three.js hero (skyline, particles, beams)
-        └── main.js         # nav, counters, reveals, slider, AI, forms, exit-intent
+        └── main.js         # nav, counters, reveals, slider, AI, booking, forms, exit-intent
 ```
+
+## Booking (Calendly)
+
+The "Book" CTAs (hero, nav, sticky bar, exit popup) open a **Calendly popup**.
+Set your real scheduling link in `assets/js/main.js`:
+
+```js
+const CALENDLY_URL = "https://calendly.com/your-handle/private-consultation";
+```
+
+Until Calendly's widget loads, every booking CTA gracefully falls back to
+scrolling to the contact form — so the page is always functional.
+
+## Going fully offline (Three.js)
+
+`loader.js` tries `assets/vendor/three.min.js` first, then falls back across
+unpkg / jsDelivr / cdnjs. To remove the runtime CDN dependency entirely, vendor
+the library once on a networked machine:
+
+```bash
+curl -L -o assets/vendor/three.min.js \
+  https://unpkg.com/three@0.128.0/build/three.min.js
+```
+
+If THREE can't be loaded from any source, the cinematic hero degrades to the
+CSS veil + grid — it never appears broken.
 
 ## Customisation
 
@@ -82,16 +110,16 @@ law-firm-dubai/
 - **Languages / copy:** `assets/js/i18n.js`. Practice-area names and partner
   bios are currently English across all locales — translate the arrays in
   `data.js` if you need them localised too.
-- **Booking:** the CTAs point to `#contact`. Swap to a Calendly URL to enable
-  real scheduling.
+- **Booking:** set `CALENDLY_URL` in `assets/js/main.js` (see _Booking_ above).
 - **Form + AI concierge** are front-end only. For production, post the form to
   your backend/CRM and connect the concierge to a real model
   (e.g. the Claude API) with appropriate legal disclaimers.
 
 ## Notes & responsibilities
 
-- Three.js is loaded from a CDN (`unpkg`). For an air-gapped/offline build,
-  vendor `three.min.js` locally and update the `<script>` tag.
+- Three.js loads via `loader.js` (local vendor → CDN fallback). See
+  _Going fully offline_ above.
+- Calendly's widget loads from `assets.calendly.com` in the visitor's browser.
 - Marketing claims and statements about court rights/registration must be
   accurate and compliant with **UAE / Dubai Legal Affairs Department** and
   DIFC/ADGM advertising rules before publishing.

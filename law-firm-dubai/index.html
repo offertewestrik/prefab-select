@@ -93,7 +93,7 @@
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="nav-cta">
-        <a href="#contact" class="btn btn-gold"><span data-i18n="nav.cta">Book Consultation</span></a>
+        <a href="#contact" data-book class="btn btn-gold"><span data-i18n="nav.cta">Book Consultation</span></a>
         <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -126,7 +126,7 @@
           </h1>
           <p class="sub" data-i18n="hero.sub">Trusted by investors, entrepreneurs, family offices and multinational corporations across the UAE and beyond.</p>
           <div class="hero-cta">
-            <a href="#contact" class="btn btn-gold">
+            <a href="#contact" data-book class="btn btn-gold">
               <span data-i18n="hero.cta1">Book Private Consultation</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
@@ -442,7 +442,7 @@
 
   <div class="sticky-cta">
     <a class="" href="tel:+97140000000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><span data-i18n="scta.call">Call</span></a>
-    <a class="gold" href="#contact"><span data-i18n="scta.book">Book Consultation</span></a>
+    <a class="gold" href="#contact" data-book><span data-i18n="scta.book">Book Consultation</span></a>
   </div>
 
   <!-- ========================= AI CONCIERGE ========================= -->
@@ -476,16 +476,18 @@
       <span class="eyebrow" data-i18n="exit.eyebrow">A Privileged Invitation</span>
       <h3 data-i18n="exit.title">Before you go — a complimentary consultation</h3>
       <p data-i18n="exit.body">Receive a confidential 30-minute strategy session with a senior partner. No obligation, absolute discretion.</p>
-      <button class="btn btn-gold"><span data-i18n="exit.cta">Claim Private Consultation</span></button>
+      <button class="btn btn-gold" data-book><span data-i18n="exit.cta">Claim Private Consultation</span></button>
       <small data-i18n="exit.note">Limited availability · By appointment only</small>
     </div>
   </div>
 
   <!-- ============================ SCRIPTS =========================== -->
-  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+  <!-- Calendly (loaded in the visitor's browser; booking degrades to the form if unavailable) -->
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/data.js"></script>
-  <script src="assets/js/scene.js"></script>
+  <script src="assets/js/loader.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

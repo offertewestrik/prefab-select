@@ -7,6 +7,11 @@
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- Booking config ----------------------------------------
+     Replace with your real Calendly scheduling link. Until Calendly
+     loads, every "Book" CTA gracefully falls back to the contact form. */
+  const CALENDLY_URL = "https://calendly.com/meridiancrowne/private-consultation";
+
   /* ---------- Language ---------------------------------------------- */
   const { I18N, I18N_ORDER, applyLanguage } = window.MC_I18N;
   let saved = "en";
@@ -219,10 +224,21 @@
   setTimeout(() => { /* mobile fallback after dwell */ if (window.innerWidth < 760) showExit(); }, 45000);
   $(".exit-card .x")?.addEventListener("click", () => exit.classList.remove("open"));
   exit?.addEventListener("click", (e) => { if (e.target === exit) exit.classList.remove("open"); });
-  $(".exit-card .btn")?.addEventListener("click", () => {
-    exit.classList.remove("open");
-    $("#contact")?.scrollIntoView({ behavior: "smooth" });
-  });
+
+  /* ---------- Booking (Calendly popup → contact fallback) ----------- */
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-book]");
+    if (!el) return;
+    e.preventDefault();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    exit?.classList.remove("open");
+    document.body.classList.remove("menu-open");
+    if (window.Calendly && CALENDLY_URL) {
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      $("#contact")?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    }
+  }, true);
 
   /* ---------- Year ------------------------------------------------- */
   const y = $("#year"); if (y) y.textContent = new Date().getFullYear();
