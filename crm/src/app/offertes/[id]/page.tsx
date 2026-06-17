@@ -42,6 +42,7 @@ export default function OfferteDetailPage() {
   const addEmailLog = useCrm((s) => s.addEmailLog);
   const genereerTermijnfacturen = useCrm((s) => s.genereerTermijnfacturen);
   const deleteQuote = useCrm((s) => s.deleteQuote);
+  const facturenVanOfferte = useCrm((s) => s.invoices.filter((i) => i.quoteId === quoteId));
   const router = useRouter();
 
   const [bezig, setBezig] = useState<"pdf" | "mail" | "preview" | null>(null);
@@ -192,19 +193,35 @@ export default function OfferteDetailPage() {
 
       {quote.status === "geaccepteerd" && (
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4">
-          <p className="text-sm font-medium text-emerald-800">Offerte geaccepteerd — genereer de termijnfacturen (40/30/20/10).</p>
-          <button
-            onClick={() => {
-              const ids = genereerTermijnfacturen(quote.id);
-              if (ids.length) {
-                setMelding(`${ids.length} termijnfacturen aangemaakt.`);
-                router.push("/facturen");
-              }
-            }}
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-          >
-            Genereer termijnfacturen
-          </button>
+          {facturenVanOfferte.length > 0 ? (
+            <>
+              <p className="text-sm font-medium text-emerald-800">
+                Er {facturenVanOfferte.length === 1 ? "is" : "zijn"} al {facturenVanOfferte.length} factu{facturenVanOfferte.length === 1 ? "ur" : "ren"} voor deze offerte aangemaakt.
+              </p>
+              <button
+                onClick={() => router.push("/facturen")}
+                className="inline-flex items-center gap-2 rounded-lg border border-emerald-300 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50"
+              >
+                Bekijk facturen
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="text-sm font-medium text-emerald-800">Offerte geaccepteerd — genereer de termijnfacturen (40/30/20/10).</p>
+              <button
+                onClick={() => {
+                  const ids = genereerTermijnfacturen(quote.id);
+                  if (ids.length) {
+                    setMelding(`${ids.length} termijnfacturen aangemaakt.`);
+                    router.push("/facturen");
+                  }
+                }}
+                className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+              >
+                Genereer termijnfacturen
+              </button>
+            </>
+          )}
         </div>
       )}
 
