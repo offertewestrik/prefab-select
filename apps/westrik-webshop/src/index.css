@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sora', sans-serif;
+
+  /* Westrik huisstijl — donkerblauw, lichtblauw, wit, zilver */
+  --color-navy-50: #eef3fb;
+  --color-navy-100: #d6e2f5;
+  --color-navy-200: #aec5ec;
+  --color-navy-300: #7ba0df;
+  --color-navy-400: #4a78cf;
+  --color-navy-500: #2a57b5;
+  --color-navy-600: #1d4191;
+  --color-navy-700: #173474;
+  --color-navy-800: #102350;
+  --color-navy-900: #0a1838;
+  --color-navy-950: #050d20;
+
+  --color-sky-accent: #2e9bff;
+  --color-sky-light: #e8f3ff;
+
+  --color-silver-50: #f8fafc;
+  --color-silver-100: #f1f5f9;
+  --color-silver-200: #e2e8f0;
+  --color-silver-300: #cbd5e1;
+  --color-silver-400: #94a3b8;
+  --color-silver-500: #64748b;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-navy-900);
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--color-navy-600);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Subtiele premium gradient achtergrond */
+  .bg-mesh {
+    background-color: #050d20;
+    background-image:
+      radial-gradient(at 18% 20%, rgba(46, 155, 255, 0.28) 0px, transparent 55%),
+      radial-gradient(at 82% 0%, rgba(29, 65, 145, 0.55) 0px, transparent 50%),
+      radial-gradient(at 75% 85%, rgba(46, 155, 255, 0.18) 0px, transparent 50%);
+  }
+
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #050d20 0%, #0a1838 45%, #102350 100%);
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .glass-light {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .text-gradient {
+    background: linear-gradient(120deg, #2e9bff 0%, #7ba0df 60%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Strakke premium schaduwen */
+  .shadow-soft {
+    box-shadow: 0 1px 2px rgba(10, 24, 56, 0.04), 0 8px 24px rgba(10, 24, 56, 0.06);
+  }
+  .shadow-card {
+    box-shadow: 0 2px 4px rgba(10, 24, 56, 0.04), 0 18px 40px rgba(10, 24, 56, 0.08);
+  }
+  .shadow-glow {
+    box-shadow: 0 24px 60px rgba(29, 65, 145, 0.28);
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-wide {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Verberg scrollbar voor sliders */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
