@@ -5,7 +5,7 @@ name: Deploy Law Firm Demo to GitHub Pages
 
 on:
   push:
-    branches: ["claude/confident-davinci-tryg8c"]
+    branches: ["main"]
     paths:
       - "law-firm-dubai/**"
       - ".github/workflows/law-firm-pages.yml"
