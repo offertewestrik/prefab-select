@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { LISTINGS, LANDINGS } from "./listings.data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -26,6 +27,20 @@ const CATEGORIES = [
   "Wonen & verhuizen",
   "Markt & nieuwbouw",
 ];
+const CAT_SLUG = {
+  "Kopen & proces": "kopen-proces",
+  "Investeren & rendement": "investeren-rendement",
+  "Wijken & locaties": "wijken-locaties",
+  "Wonen & verhuizen": "wonen-verhuizen",
+  "Markt & nieuwbouw": "markt-nieuwbouw",
+};
+const CAT_INTRO = {
+  "Kopen & proces": "Alles wat u moet weten om vastgoed te kopen in Dubai: van down payment, hypotheek en kosten koper tot het volledige koopproces, eigendomsoverdracht en kopen op afstand. Praktische, eerlijke gidsen voor Nederlandse en Belgische kopers.",
+  "Investeren & rendement": "Verdiep u in investeren in Dubai-vastgoed: huurrendement, ROI, off-plan, belastingvoordelen, financiering en risico's. Concrete cijfers en rekenvoorbeelden helpen u een onderbouwde investeringsbeslissing te nemen.",
+  "Wijken & locaties": "Ontdek de beste wijken van Dubai — van Palm Jumeirah, Dubai Marina en Downtown tot Business Bay, JVC en Dubai Hills. Per gebied leest u over sfeer, prijzen, huurrendement en voor wie het geschikt is.",
+  "Wonen & verhuizen": "Praktische gidsen over verhuizen naar en wonen in Dubai: Golden Visa, kosten van levensonderhoud, scholen, zorg, veiligheid, bankzaken en het leven als Nederlander in Dubai.",
+  "Markt & nieuwbouw": "Blijf op de hoogte van de Dubai-vastgoedmarkt: nieuwbouwprojecten, de grootste ontwikkelaars, betaalplannen, prijsontwikkeling en hoe DLD en RERA de markt reguleren.",
+};
 
 /* ---------------------------------------------------------------- utils */
 const esc = (s = "") => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -344,7 +359,7 @@ function renderIndex(articles) {
     if (!list.length) return "";
     return `
       <section class="kb-section reveal" data-section="${escA(cat)}">
-        <div class="kb-section-head"><h2>${esc(cat)}</h2><span>${list.length} artikelen</span></div>
+        <div class="kb-section-head"><h2><a href="categorie-${CAT_SLUG[cat]}.html">${esc(cat)}</a></h2><a class="kb-cat-link" href="categorie-${CAT_SLUG[cat]}.html">Bekijk alle ${list.length} →</a></div>
         <div class="kb-grid">${cards(list)}</div>
       </section>`;
   }).join("");
@@ -399,16 +414,61 @@ ${FOOTER}
 }
 
 /* ------------------------------------------------------------- sitemap */
-function renderSitemap(articles) {
-  const urls = [
-    `${SITE}/`,
-    `${SITE}/kennisbank/`,
-    ...articles.map((a) => `${SITE}/kennisbank/${a.slug}.html`),
-  ];
+function renderSitemap(urls) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${UPDATED}</lastmod></url>`).join("\n")}
 </urlset>`;
+}
+
+/* ------------------------------------------------------------ hub page */
+function renderHub(cat, articles) {
+  const slug = CAT_SLUG[cat];
+  const canonical = `${SITE}/kennisbank/categorie-${slug}.html`;
+  const list = articles.filter((a) => a.category === cat);
+  const intro = CAT_INTRO[cat];
+  const cards = list.map((a) => `
+        <a class="kb-card" href="${a.slug}.html">
+          <span class="kb-chip">${esc(a.category)}</span>
+          <h3>${esc(a.h1)}</h3>
+          <p>${esc(a.description)}</p>
+          <span class="kb-read">${a.readtime} min · Lees verder →</span>
+        </a>`).join("");
+  const jsonld = `  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "CollectionPage",
+    name: `${cat} — Kennisbank Dubai vastgoed`, description: intro, url: canonical, inLanguage: "nl-NL",
+    hasPart: list.map((a) => ({ "@type": "Article", headline: a.h1, url: `${SITE}/kennisbank/${a.slug}.html` })),
+  })}</script>
+  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE + "/" },
+      { "@type": "ListItem", position: 2, name: "Kennisbank", item: SITE + "/kennisbank/" },
+      { "@type": "ListItem", position: 3, name: cat, item: canonical },
+    ],
+  })}</script>`;
+  return `${HEAD(`${cat} in Dubai — gidsen & tips | Kennisbank Droomhuis in Dubai`, intro, canonical, jsonld)}
+  <main class="kb-main">
+    <section class="kb-hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Kruimelpad"><a href="../index.html#top">Home</a><span>/</span><a href="index.html">Kennisbank</a><span>/</span><span>${esc(cat)}</span></nav>
+        <span class="eyebrow">Kennisbank</span>
+        <h1>${esc(cat)}</h1>
+        <p>${esc(intro)}</p>
+      </div>
+    </section>
+    <div class="wrap">
+      <section class="kb-section"><div class="kb-grid">${cards}</div></section>
+      <section class="kb-cta reveal" style="margin-top:56px">
+        <div><h2>Persoonlijk advies nodig?</h2><p>Joy beantwoordt al uw vragen over ${esc(cat.toLowerCase())} in Dubai — vrijblijvend en in het Nederlands.</p></div>
+        <a class="btn btn-gold" href="../index.html#contact">Neem contact op</a>
+      </section>
+    </div>
+  </main>
+${FOOTER}
+  <script src="../assets/js/kennisbank.js"></script>
+</body>
+</html>`;
 }
 
 function renderRobots() {
@@ -440,11 +500,24 @@ function build() {
     n++;
   }
   fs.writeFileSync(path.join(OUT, "index.html"), renderIndex(articles));
-  fs.writeFileSync(path.join(ROOT, "sitemap.xml"), renderSitemap(articles));
+  for (const cat of CATEGORIES) {
+    fs.writeFileSync(path.join(OUT, `categorie-${CAT_SLUG[cat]}.html`), renderHub(cat, articles));
+  }
+
+  const urls = [
+    `${SITE}/`,
+    `${SITE}/aanbod/`,
+    ...LISTINGS.map((p) => `${SITE}/aanbod/${p.slug}.html`),
+    `${SITE}/kennisbank/`,
+    ...CATEGORIES.map((c) => `${SITE}/kennisbank/categorie-${CAT_SLUG[c]}.html`),
+    ...articles.map((a) => `${SITE}/kennisbank/${a.slug}.html`),
+    ...LANDINGS.map((l) => `${SITE}/diensten/${l.slug}.html`),
+  ];
+  fs.writeFileSync(path.join(ROOT, "sitemap.xml"), renderSitemap(urls));
   fs.writeFileSync(path.join(ROOT, "robots.txt"), renderRobots());
 
   const perCat = CATEGORIES.map((c) => `${c}: ${articles.filter((a) => a.category === c).length}`).join("  |  ");
-  console.log(`✓ Built ${n} articles + index + sitemap`);
+  console.log(`✓ Built ${n} articles + index + ${CATEGORIES.length} hubs + sitemap`);
   console.log("  " + perCat);
 }
 

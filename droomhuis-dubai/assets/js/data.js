@@ -7,6 +7,7 @@ window.DH = (function () {
   const PROPERTIES = [
     {
       tag: "Uitgelicht",
+      slug: "ellington-beach-house",
       name: "Ellington Beach House",
       loc: "Palm Jumeirah",
       price: "AED 5.200.000",
@@ -16,6 +17,7 @@ window.DH = (function () {
     },
     {
       tag: "Uitgelicht",
+      slug: "address-residences-the-bay",
       name: "Address Residences The Bay",
       loc: "Dubai Harbour",
       price: "AED 3.800.000",
@@ -25,6 +27,7 @@ window.DH = (function () {
     },
     {
       tag: "Uitgelicht",
+      slug: "sobha-one",
       name: "Sobha One",
       loc: "Business Bay",
       price: "AED 2.100.000",
@@ -34,6 +37,7 @@ window.DH = (function () {
     },
     {
       tag: "Uitgelicht",
+      slug: "nad-al-sheba-gardens",
       name: "Nad Al Sheba Gardens",
       loc: "Nad Al Sheba",
       price: "AED 6.500.000",
