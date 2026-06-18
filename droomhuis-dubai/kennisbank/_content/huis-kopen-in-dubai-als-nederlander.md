@@ -14,13 +14,13 @@ Als Nederlander een huis kopen in Dubai is goed mogelijk en relatief eenvoudig, 
 ## Mag u als Nederlander kopen?
 Buitenlanders, dus ook Nederlanders, kunnen in Dubai vastgoed kopen in zogenoemde freehold-zones. Daar verkrijgt u 100% eigendom en ontvangt u een title deed (eigendomsbewijs) van het Dubai Land Department. U hoeft hiervoor geen ingezetene te zijn en geen verblijfsvergunning te hebben. Dat maakt Dubai bijzonder toegankelijk voor internationale kopers.
 
-Buiten freehold-zones geldt vaak leasehold of beperkter eigendom, waarbij u een langdurig gebruiksrecht krijgt maar niet de volle eigendom. Het verschil leest u in [freehold versus leasehold](slug:freehold-vs-leasehold-dubai).
+Buiten freehold-zones geldt vaak leasehold of beperkter eigendom, waarbij u een langdurig gebruiksrecht krijgt maar niet de volle eigendom. Het verschil tussen freehold en leasehold is belangrijk om vooraf te begrijpen.
 
 ## Een gereguleerde, transparante markt
-De Dubai-vastgoedmarkt wordt gereguleerd door het DLD en RERA. Zij registreren transacties, houden toezicht op makelaars en ontwikkelaars en beschermen kopers via wettelijke escrow-rekeningen bij off-plan. Dit geeft Nederlandse kopers een hoog niveau van rechtszekerheid, mits u met geregistreerde partijen werkt. Meer hierover in [DLD en RERA uitgelegd](slug:dld-en-rera-uitgelegd).
+De Dubai-vastgoedmarkt wordt gereguleerd door het DLD en RERA. Zij registreren transacties, houden toezicht op makelaars en ontwikkelaars en beschermen kopers via wettelijke escrow-rekeningen bij off-plan. Dit geeft Nederlandse kopers een hoog niveau van rechtszekerheid, mits u met geregistreerde partijen werkt.
 
 ## Belastingvoordelen voor Nederlanders
-De Verenigde Arabische Emiraten kennen 0% inkomstenbelasting en 0% vermogenswinstbelasting. Huurinkomsten en eventuele waardestijging worden in Dubai dus niet belast. Houd er wel rekening mee dat uw Nederlandse fiscale situatie afhankelijk is van uw woon- en belastingstatus; win hierover altijd fiscaal advies in om dubbele belasting of verrassingen te voorkomen. Meer hierover in [belastingvrij investeren in Dubai](slug:belastingvrij-investeren-in-dubai).
+De Verenigde Arabische Emiraten kennen 0% inkomstenbelasting en 0% vermogenswinstbelasting. Huurinkomsten en eventuele waardestijging worden in Dubai dus niet belast. Houd er wel rekening mee dat uw Nederlandse fiscale situatie afhankelijk is van uw woon- en belastingstatus; win hierover altijd fiscaal advies in om dubbele belasting of verrassingen te voorkomen. Meer hierover in [belastingvrij investeren in Dubai](slug:belastingvrij-investeren-in-dubai), waar we de fiscale voordelen en aandachtspunten verder uitwerken.
 
 ## Welke kosten komen erbij?
 Naast de koopsom betaalt u eenmalige aankoopkosten van circa 6 tot 8%. Onderstaande tabel geeft de belangrijkste posten.
@@ -35,10 +35,10 @@ Naast de koopsom betaalt u eenmalige aankoopkosten van circa 6 tot 8%. Onderstaa
 Een volledige uitwerking vindt u in [kosten koper in Dubai](slug:kosten-koper-dubai). Reken daarnaast op doorlopende lasten zoals service charges en nutsvoorzieningen via DEWA.
 
 ## Financiering vanuit Nederland
-Niet-residenten kunnen meestal een hypotheek krijgen tot 50-60% LTV, wat een aanbetaling van 40-50% betekent. Residenten komen vaak tot 75-80%. Veel Nederlandse kopers financieren (deels) met eigen vermogen of een betaalplan bij off-plan. Lees [hoe een hypotheek in Dubai werkt](slug:hoe-werkt-een-hypotheek-in-dubai). Een preapproval vooraf geeft duidelijkheid over uw budget.
+Niet-residenten kunnen meestal een hypotheek krijgen tot 50-60% LTV, wat een aanbetaling van 40-50% betekent. Residenten komen vaak tot 75-80%. Veel Nederlandse kopers financieren (deels) met eigen vermogen of een betaalplan bij off-plan. Een preapproval vooraf geeft duidelijkheid over uw budget en versterkt uw onderhandelingspositie.
 
 ## Op afstand kopen
-U hoeft niet in Dubai te zijn om te kopen. Veel transacties verlopen op afstand, eventueel met een Power of Attorney (volmacht) zodat een vertrouwenspersoon namens u tekent. Werk uitsluitend met RERA-geregistreerde makelaars, gebruik officiële kanalen en maak geen betalingen naar privérekeningen. Lees meer over [vastgoed kopen op afstand](slug:vastgoed-kopen-op-afstand-dubai).
+U hoeft niet in Dubai te zijn om te kopen. Veel transacties verlopen op afstand, eventueel met een Power of Attorney (volmacht) zodat een vertrouwenspersoon namens u tekent. Werk uitsluitend met RERA-geregistreerde makelaars, gebruik officiële kanalen en maak geen betalingen naar privérekeningen.
 
 ## Het koopproces stap voor stap
 Het proces is gereguleerd door DLD en RERA en verloopt overzichtelijk:
@@ -50,10 +50,23 @@ Het proces is gereguleerd door DLD en RERA en verloopt overzichtelijk:
 Het complete [stappenplan](slug:koopproces-dubai-stappenplan) helpt u verder. Bij bestaande bouw duurt het proces vaak 4 tot 8 weken.
 
 ## Eigen gebruik of investeren?
-Veel Nederlanders kopen om te investeren en te verhuren, anderen voor eigen gebruik of een tweede huis. Het bruto huurrendement ligt vaak tussen 5% en 9%, afhankelijk van wijk en strategie. Reken met netto cijfers, want service charges en leegstand drukken het resultaat. Wilt u investeren, lees dan [investeren in Dubai-vastgoed](slug:investeren-in-dubai-vastgoed).
+Veel Nederlanders kopen om te investeren en te verhuren, anderen voor eigen gebruik of een tweede huis. Het bruto huurrendement ligt vaak tussen 5% en 9%, afhankelijk van wijk en strategie. Reken met netto cijfers, want service charges en leegstand drukken het resultaat. Bepaal vooraf of u kiest voor eigen gebruik, langetermijnverhuur of een combinatie.
 
 ## Verblijfsvergunning via vastgoed
 Koopt u voor minimaal AED 2 miljoen, dan komt u in aanmerking voor de 10-jarige Golden Visa. Dat geeft u en uw gezin verblijfsrecht in de VAE, zonder dat u er permanent hoeft te wonen. Onder dat bedrag gelden beperktere of geen visumvoordelen. Meer hierover in [Golden Visa Dubai](slug:golden-visa-dubai).
+
+## Appartement of villa kiezen?
+Veel Nederlanders twijfelen tussen een appartement en een villa. Een [appartement](slug:appartement-kopen-in-dubai) is toegankelijker, makkelijker te verhuren en levert vaak een hoger bruto rendement. Een villa biedt meer ruimte en privacy en is gewild bij gezinnen, maar vraagt een grotere investering. Onderstaande tabel zet de hoofdverschillen op een rij.
+
+| Aspect | Appartement | Villa |
+|--------|-------------|-------|
+| Instapprijs | Lager | Hoger |
+| Bruto rendement | Vaak 5-9% | Vaak 4-6% |
+| Onderhoud | Via service charges | Meer eigen kosten |
+| Doelgroep huurders | Expats, toeristen | Gezinnen |
+
+## Valuta en geld overmaken
+Als Nederlandse koper betaalt u in dirham (AED), die gekoppeld is aan de Amerikaanse dollar. Houd rekening met wisselkoersschommelingen tussen euro en dirham bij grote overboekingen; deze kunnen uw effectieve kosten beïnvloeden. Werk met officiële kanalen en overweeg een lokale bankrekening in Dubai voor huurinkomsten en doorlopende lasten. Betaal nooit naar privérekeningen.
 
 ## Aandachtspunten en risico's
 Doe onderzoek naar de ontwikkelaar en de wijk, controleer of betalingen via escrow lopen bij off-plan, en houd rekening met service charges en marktschommelingen. Onderschat de doorlopende lasten en valutarisico's niet. Schakel een ervaren, betrouwbare adviseur in en zorg voor realistische verwachtingen. Met een goede voorbereiding is een huis kopen in Dubai als Nederlander een doordachte en goed beschermde stap.

@@ -25,8 +25,12 @@ JVC kent een breed en betaalbaar aanbod:
 - Townhouses en villa's met eigen tuin
 - Veel off-plan projecten met gespreide betaalplannen
 
+De bouwkwaliteit verschilt sterk per ontwikkelaar. JVC kent zowel projecten van grote, gevestigde namen als kleinere boutiquegebouwen. Dat onderscheid is belangrijk: een goed beheerd gebouw met degelijke afwerking verhuurt beter, houdt zijn waarde beter vast en kent minder onderhoudsproblemen. Beoordeel daarom altijd het specifieke gebouw, niet alleen de wijk.
+
 ## Voor wie is de wijk geschikt?
-JVC trekt een gemengd publiek: gezinnen die betaalbare ruimte zoeken, young professionals die centraal en goedkoop willen wonen, en investeerders die op hoog rendement mikken. Wie luxe of prestige zoekt, kijkt eerder naar wijken als Palm Jumeirah of [Dubai Hills Estate](slug:dubai-hills-estate), maar voor waar-voor-je-geld is JVC moeilijk te verslaan.
+JVC trekt een gemengd publiek: gezinnen die betaalbare ruimte zoeken, young professionals die centraal en goedkoop willen wonen, en investeerders die op hoog rendement mikken. Door de mix van woningtypes en prijsklassen is er voor vrijwel elk budget iets te vinden.
+
+Wie luxe of prestige zoekt, kijkt eerder naar wijken als Palm Jumeirah of [Dubai Hills Estate](slug:dubai-hills-estate), maar voor waar-voor-je-geld is JVC moeilijk te verslaan. Voor de investeerder die op cashflow stuurt in plaats van op prestige, is het vaak de eerste keuze.
 
 ## Voorzieningen en lifestyle
 Ondanks het betaalbare karakter is JVC goed voorzien:
@@ -37,7 +41,9 @@ Ondanks het betaalbare karakter is JVC goed voorzien:
 - Het Circle Mall winkelcentrum
 
 ## Bereikbaarheid
-JVC ligt centraal in nieuw Dubai, ingeklemd tussen Al Khail Road en Sheikh Zayed Road. Per auto bereikt u Dubai Marina en JBR in zo'n 10-15 minuten en Downtown in circa 20 minuten. De wijk heeft nog geen eigen metrostation, dus een auto is praktisch. Verbindingen verbeteren wel naarmate het omliggende wegennet groeit.
+JVC ligt centraal in nieuw Dubai, ingeklemd tussen Al Khail Road en Sheikh Zayed Road. Per auto bereikt u Dubai Marina en JBR in zo'n 10-15 minuten en Downtown in circa 20 minuten. Ook de zakendistricten Media City en Internet City liggen dichtbij, wat de wijk gewild maakt bij forenzen.
+
+De wijk heeft nog geen eigen metrostation, dus een auto is praktisch onmisbaar. Voor wie afhankelijk is van openbaar vervoer is dat een aandachtspunt; voor wie rijdt, is de centrale ligging juist een groot voordeel. Verbindingen en infrastructuur verbeteren naarmate het omliggende wegennet en de buurwijken verder groeien.
 
 ## Indicatieve prijzen en rendement
 Onderstaande tabel geeft een indicatie van prijzen en bruto huurrendement in 2026. Prijzen zijn indicatief en variëren per gebouw, oplevering en afwerking.
@@ -54,7 +60,30 @@ De hoge rendementen maken JVC een topkeuze voor wie [investeert in Dubai-vastgoe
 ## Investeren in JVC
 JVC behoort tot de wijken met het hoogste bruto huurrendement van Dubai. De combinatie van lage instapprijzen en sterke huurvraag zorgt voor aantrekkelijke cijfers. Vooral compacte appartementen verhuren snel en goed.
 
-Aandachtspunten zijn de grote hoeveelheid nieuw aanbod (wat de huurprijzen kan drukken), verschillen in bouwkwaliteit per ontwikkelaar en het ontbreken van een metrostation. Een goed onderhouden gebouw van een betrouwbare ontwikkelaar presteert het best. Bereken vooraf altijd het [netto rendement](slug:rendement-vastgoed-dubai) inclusief service charges.
+Aandachtspunten zijn de grote hoeveelheid nieuw aanbod (wat de huurprijzen kan drukken), verschillen in bouwkwaliteit per ontwikkelaar en het ontbreken van een metrostation. Een goed onderhouden gebouw van een betrouwbare ontwikkelaar presteert het best.
+
+Let bij een aankoop in JVC vooral op:
+- De reputatie en oplevergeschiedenis van de ontwikkelaar
+- De hoogte van de service charges per square foot
+- De staat en het beheer van het specifieke gebouw
+- De verhuurbaarheid: layout, parkeerplaats en voorzieningen
+
+Bereken vooraf altijd het [netto rendement](slug:rendement-vastgoed-dubai) inclusief service charges en houd rekening met mogelijke leegstand. Het hoge bruto rendement is aantrekkelijk, maar het netto resultaat bepaalt uiteindelijk uw werkelijke opbrengst.
+
+## Off-plan of bestaande bouw in JVC?
+JVC kent veel nieuwbouw, waardoor u vaak kunt kiezen tussen een bestaand appartement en een off-plan project. Beide hebben voor- en nadelen die in JVC extra duidelijk spelen.
+
+Off-plan biedt:
+- Lagere instapprijzen en gespreide betaalplannen
+- Moderne layouts en voorzieningen
+- Potentiële waardestijging tot oplevering
+
+Bestaande bouw biedt:
+- Directe huurinkomsten zonder wachttijd
+- Zicht op de werkelijke staat en bouwkwaliteit
+- Geen opleverrisico
+
+Voor wie op cashflow stuurt, is een opgeleverd, goed verhuurbaar appartement vaak de veiligste keuze. Wie gelooft in de verdere groei van de wijk en de bouwperiode kan overbruggen, kan met off-plan instappen tegen een lagere prijs. Weeg in beide gevallen de service charges en het realistische huurniveau mee in uw [rendementsberekening](slug:rendement-vastgoed-dubai).
 
 ## Conclusie
 JVC is de uitgelezen wijk voor wie betaalbaar wil kopen met hoog rendement of een leefbare gezinswijk zoekt zonder topprijzen te betalen. De centrale ligging, brede voorzieningen en sterke verhuurvraag maken het een verstandige keuze. Let op de bouwkwaliteit, het ruime aanbod en reken realistisch met service charges.

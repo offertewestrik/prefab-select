@@ -24,7 +24,7 @@ Voordelen van een villa:
 Tegelijk vraagt een villa een grotere investering en hogere onderhoudslasten. Het is daarom belangrijk uw doel helder te hebben: eigen gebruik, verhuur of waardegroei.
 
 ## Eigendom voor buitenlanders
-Als buitenlander koopt u in freehold-zones met 100% eigendom en een title deed van het DLD. Veel grote villawijken vallen binnen deze zones, waardoor ook Nederlanders er volledig eigenaar kunnen worden. Buiten freehold-zones geldt vaak leasehold. Het verschil tussen freehold en leasehold leest u in [freehold versus leasehold](slug:freehold-vs-leasehold-dubai).
+Als buitenlander koopt u in freehold-zones met 100% eigendom en een title deed van het DLD. Veel grote villawijken vallen binnen deze zones, waardoor ook Nederlanders er volledig eigenaar kunnen worden. Buiten freehold-zones geldt vaak leasehold, waarbij u een langdurig gebruiksrecht verwerft maar niet de volledige eigendom.
 
 ## Villa, townhouse of vrijstaand?
 Binnen het villasegment zijn er meerdere typen:
@@ -74,5 +74,19 @@ Villa's leveren doorgaans een lager bruto huurrendement op dan appartementen (va
 ## Het koopproces
 Het villakoopproces verloopt vergelijkbaar met dat van een appartement en is gereguleerd door DLD en RERA: reservering, koopcontract (MOU / Form F) en aanbetaling, NOC bij doorverkoop, en overdracht met afgifte van de title deed. Het volledige [stappenplan](slug:koopproces-dubai-stappenplan) helpt u op weg. Kopen op afstand is mogelijk via een volmacht.
 
+## Gated communities en voorzieningen
+Veel villa's liggen in gated communities met gedeelde voorzieningen zoals parken, zwembaden, sportscholen, scholen en winkels. Deze voorzieningen verhogen het woongenot en de waarde, maar brengen ook service charges met zich mee voor het onderhoud. Beoordeel bij uw keuze de kwaliteit van het beheer en de community: een goed onderhouden omgeving houdt zijn waarde beter vast en is aantrekkelijker voor huurders.
+
+## Off-plan villa of bestaande bouw?
+Bij een off-plan villa profiteert u van gespreide betaalplannen en vaak een lagere instapprijs, maar u koopt iets dat nog gebouwd wordt. Bestaande villa's bieden zekerheid: u ziet de woning, de community is af en u kunt direct verhuren of betrekken. Weeg de voordelen tegen elkaar af. Lees meer in [off-plan versus bestaande bouw](slug:off-plan-vs-bestaande-bouw-dubai). Bij off-plan beschermt een wettelijke escrow-rekening uw betalingen.
+
+## Voor wie is een villa geschikt?
+Een villa past goed bij:
+- Gezinnen die ruimte, privacy en nabijheid van scholen zoeken
+- Kopers die in Dubai willen wonen of een ruim tweede huis willen
+- Investeerders die inzetten op waardegroei op schaarse toplocaties
+
+Voor wie vooral cashflow en hoog huurrendement zoekt, kan een appartement een logischer keuze zijn. Bepaal daarom vooraf wat uw belangrijkste doel is.
+
 ## Risico's en aandachtspunten
-Let bij off-plan villa's op opleverrisico en kies een betrouwbare ontwikkelaar. Houd rekening met onderhoudskosten van tuin en zwembad, met marktschommelingen en met de grotere eigen inbreng. Doe grondig onderzoek naar wijk en ontwikkelaar. Een realistische inschatting en deskundige begeleiding voorkomen verrassingen en maken uw villa-aankoop in Dubai tot een doordachte stap.
+Let bij off-plan villa's op opleverrisico en kies een betrouwbare ontwikkelaar. Houd rekening met onderhoudskosten van tuin en zwembad, met marktschommelingen en met de grotere eigen inbreng. Doe grondig onderzoek naar wijk en ontwikkelaar, en reken met netto cijfers inclusief alle doorlopende lasten. Een realistische inschatting en deskundige begeleiding voorkomen verrassingen en maken uw villa-aankoop in Dubai tot een doordachte stap.

@@ -16,6 +16,11 @@ De Dubai-markt is historisch sterk gegroeid, maar ook cyclisch geweest. Er waren
 
 Het belangrijkste tegengif is een lange beleggingshorizon en realistische verwachtingen over [waardestijging](slug:waardestijging-vastgoed-dubai). Reken niet op snelle winst en zie groei als bonus, niet als zekerheid.
 
+### Overaanbod als prijsdrukker
+Een specifiek marktrisico in Dubai is overaanbod. Wanneer veel nieuwbouwprojecten tegelijk worden opgeleverd, kan het aanbod tijdelijk de vraag overtreffen. Dit drukt zowel de verkoopprijzen als de huren in de betreffende wijken.
+
+U beperkt dit risico door te kijken naar de hoeveelheid geplande opleveringen in de omgeving van uw woning. Een wijk met schaars aanbod en sterke vraag is beter bestand tegen prijsdruk dan een gebied waar nog duizenden units in aanbouw zijn.
+
 ## Risico's bij off-plan
 Off-plan kopen biedt voordelen zoals gespreide betaling en lagere instapprijzen, maar kent specifieke risico's:
 - **Opleververtraging**: een project kan later klaar zijn dan gepland
@@ -24,6 +29,17 @@ Off-plan kopen biedt voordelen zoals gespreide betaling en lagere instapprijzen,
 
 Gelukkig zijn er beschermingsmechanismen. Betalingen lopen via verplichte escrow-rekeningen en projecten worden geregistreerd bij het Dubai Land Department. Meer over deze afweging leest u bij [off-plan projecten in Dubai](slug:off-plan-projecten-dubai).
 
+### De ontwikkelaar beoordelen
+Bij off-plan is de keuze van de ontwikkelaar cruciaal. Gevestigde namen zoals Emaar, Damac, Nakheel, Sobha, Meraas en Aldar hebben een trackrecord van afgeleverde projecten. Kleinere of nieuwe ontwikkelaars kunnen aantrekkelijke prijzen bieden, maar dragen meer risico op vertraging of afwijkende kwaliteit.
+
+Beoordeel een ontwikkelaar op:
+- Aantal eerder opgeleverde projecten en de oplevertijden daarvan
+- De kwaliteit en het onderhoud van bestaande projecten
+- De financiële stabiliteit en reputatie
+- De voorwaarden van het betaalplan en de escrow-regeling
+
+Een lagere prijs bij een onbekende partij kan duur uitpakken als het project vertraagt of niet wordt afgemaakt.
+
 ## Leegstand en huurrisico
 Huurinkomsten zijn niet altijd constant. Bij overaanbod in een wijk kunnen huren dalen of kan leegstand oplopen. Dit drukt direct uw netto rendement.
 
@@ -31,6 +47,9 @@ Beperk dit risico door:
 - Te kiezen voor wijken met aantoonbare verhuurvraag
 - Een marge voor leegstand in uw berekening op te nemen
 - Goed beheer te regelen zodat het pand snel weer verhuurd is
+- Een marktconforme huurprijs te vragen in plaats van te hoog in te zetten
+
+Een te hoge vraagprijs leidt vaak tot langere leegstand, wat per saldo meer kost dan een iets lagere maar stabiele huur. Reken in uw rendementsberekening daarom altijd met een realistische bezettingsgraad in plaats van een volledig verhuurd jaar. Zo bouwt u een buffer in voor periodes tussen twee huurders.
 
 ## Service charges en doorlopende kosten
 Service charges per sqft kunnen in de loop der jaren stijgen, zeker bij oudere gebouwen. Een onverwacht hoge bijdrage of een bijstorting uit het reservefonds drukt uw rendement.
@@ -52,6 +71,25 @@ Het is goed te weten dat de markt sterk gereguleerd is. Het Dubai Land Departmen
 
 Lees hoe dit toezicht werkt in [DLD en RERA uitgelegd](slug:dld-en-rera-uitgelegd). Toch beschermt regelgeving u niet tegen markt- of rendementsrisico; dat blijft uw eigen verantwoordelijkheid.
 
+## Liquiditeit en exit
+### Liquiditeitsrisico
+Vastgoed is een minder liquide belegging dan bijvoorbeeld aandelen. Wilt u snel verkopen, dan bent u afhankelijk van de marktomstandigheden op dat moment. In een afkoelende markt kan een verkoop langer duren of moet u prijs inleveren.
+
+Houd hier rekening mee door niet al uw vermogen in één pand vast te leggen en door een financiële buffer aan te houden voor onvoorziene situaties. Een lange beleggingshorizon helpt ook hier: hoe minder u gedwongen bent op een ongunstig moment te verkopen, hoe kleiner dit risico.
+
+### Risico's afwegen tegen de voordelen
+Het is belangrijk de risico's in perspectief te zien. Tegenover de genoemde risico's staan reële voordelen die Dubai aantrekkelijk maken:
+
+| Voordeel | Toelichting |
+|----------|-------------|
+| 0% inkomstenbelasting | particuliere huurinkomsten onbelast |
+| 0% vermogenswinstbelasting | winst bij verkoop onbelast voor particulieren |
+| Sterke regulering | DLD en RERA bewaken transacties |
+| Escrow-bescherming | koperskapitaal beschermd bij off-plan |
+| Stabiele munt | AED gekoppeld aan de USD |
+
+De kunst is om de voordelen te benutten terwijl u de risico's beheerst. Geen enkele investering is risicovrij; het gaat erom dat u de risico's begrijpt, inprijst en spreidt. Let op: sinds 2023 geldt voor bedrijven 9% vennootschapsbelasting boven AED 375.000 winst, niet voor particuliere verhuur.
+
 ## Risico's beperken: een checklist
 U kunt risico nooit volledig wegnemen, maar wel beheersen:
 1. Kies sterke locaties en gevestigde ontwikkelaars
@@ -60,6 +98,11 @@ U kunt risico nooit volledig wegnemen, maar wel beheersen:
 4. Houd een financiële buffer aan
 5. Hanteer een lange beleggingshorizon
 6. Laat u begeleiden door een ervaren, onafhankelijke adviseur
+
+### De rol van een goede adviseur
+Veel risico's zijn te beperken met de juiste begeleiding. Een ervaren, onafhankelijke adviseur kent de lokale markt, de betrouwbare ontwikkelaars en de valkuilen per wijk. Die kennis helpt u om niet op een marktpiek of in een minder kansrijk project te stappen.
+
+Wees alert op partijen die uitsluitend hoge rendementen en zekere waardestijging beloven. Realistische advisering benoemt juist de risico's en werkt met nuchtere cijfers. Een adviseur die u behoedt voor één verkeerde aankoop, verdient zichzelf ruimschoots terug. Laat u daarom begeleiden door iemand die transparant is over kosten, escrow en de werkelijke marktomstandigheden.
 
 ## Conclusie
 Investeren in Dubai kan lonend zijn, maar vraagt om realisme. Marktcycli, off-plan vertraging, leegstand, service charges en valuta zijn reële risico's. Door goede voorbereiding, spreiding en een lange horizon vergroot u de kans op een stabiel rendement, zonder uzelf rijk te rekenen.

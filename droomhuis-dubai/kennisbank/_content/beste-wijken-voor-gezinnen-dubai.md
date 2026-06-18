@@ -12,21 +12,29 @@ BODY:
 Dubai is een populaire bestemming voor gezinnen dankzij veiligheid, internationale scholen en ruime, goed voorziene woonwijken. De beste gezinswijk hangt af van uw budget, schoolvoorkeur en gewenste woningtype. In deze gids vergelijken we de meest geschikte gezinswijken op ruimte, voorzieningen, prijs en bereikbaarheid.
 
 ## Wat maakt een wijk geschikt voor gezinnen?
-Bij het kiezen van een gezinswijk wegen andere zaken zwaarder dan bij een investering. Let vooral op:
+Bij het kiezen van een gezinswijk wegen andere zaken zwaarder dan bij een investering. Niet het rendement, maar de leefbaarheid en het dagelijks gemak staan centraal. Let vooral op:
 - Nabijheid van goede internationale scholen
 - Ruimte: townhouses en villa's met tuin
 - Parken, speeltuinen en fietspaden
 - Veiligheid en een gated, rustige omgeving
 - Voorzieningen zoals supermarkten, klinieken en sport
 
+Een goede gezinswijk is er vaak een waar kinderen veilig buiten kunnen spelen, waar school en boodschappen dichtbij zijn en waar een gemeenschap van andere gezinnen voor aansluiting zorgt. Dubai biedt verschillende wijken die hier sterk op scoren, in uiteenlopende prijsklassen.
+
 ## Dubai Hills Estate: groen en centraal
-Dubai Hills Estate is een groene Emaar-wijk rond een golfbaan, centraal gelegen langs Al Khail Road. De wijk biedt townhouses en villa's, internationale scholen, een groot park, een mall en een ziekenhuis. De combinatie van groen, kwaliteit en centrale ligging maakt het een topkeuze voor gezinnen die comfort en waardevastheid zoeken. Lees meer over [Dubai Hills Estate](slug:dubai-hills-estate).
+Dubai Hills Estate is een groene Emaar-wijk rond een golfbaan, centraal gelegen langs Al Khail Road. De wijk biedt townhouses en villa's, internationale scholen, een groot park, een mall en een ziekenhuis binnen de community. De combinatie van groen, kwaliteit en centrale ligging maakt het een topkeuze voor gezinnen die comfort en waardevastheid zoeken.
+
+Het grote voordeel van Dubai Hills is dat vrijwel alles binnen de wijk ligt: u hoeft voor school, boodschappen, sport of zorg nauwelijks de wijk uit. Tegelijk bent u snel in Downtown of Marina. Lees meer over [Dubai Hills Estate](slug:dubai-hills-estate).
 
 ## Arabian Ranches: rustige villawijk
-Arabian Ranches is een gevestigde, rustige Emaar-villawijk met ruime gezinsvilla's, een golfbaan, een ruiterclub en scholen. De hechte gemeenschap en het groene karakter zijn ideaal voor gezinnen die rust en ruimte boven stedelijke nabijheid stellen. Ontdek [Arabian Ranches](slug:arabian-ranches).
+Arabian Ranches is een gevestigde, rustige Emaar-villawijk met ruime gezinsvilla's, een golfbaan, een ruiterclub en scholen. De hechte gemeenschap en het groene karakter zijn ideaal voor gezinnen die rust en ruimte boven stedelijke nabijheid stellen.
+
+De wijk ligt iets verder van het centrum, wat zich vertaalt in meer rust en vaak iets meer ruimte voor uw geld. De volwassen beplanting en gevestigde community geven Arabian Ranches een ontspannen, dorpse sfeer die veel gezinnen waarderen. Ontdek [Arabian Ranches](slug:arabian-ranches).
 
 ## JVC: betaalbaar gezinswonen
-Jumeirah Village Circle is het betaalbare alternatief: townhouses, villa's en ruime appartementen met parken, scholen en supermarkten. De centrale ligging en lagere prijzen maken JVC aantrekkelijk voor gezinnen die waar voor hun geld willen. Bekijk [JVC](slug:jumeirah-village-circle-jvc).
+Jumeirah Village Circle is het betaalbare alternatief: townhouses, villa's en ruime appartementen met parken, scholen en supermarkten. De centrale ligging en lagere prijzen maken JVC aantrekkelijk voor gezinnen die waar voor hun geld willen.
+
+JVC biedt niet de luxe of het prestige van de villawijken, maar wel een leefbare, groene omgeving tegen een fractie van de prijs. Voor gezinnen met een beperkter budget, of voor wie betaalbaar wil kopen en verhuren, is het vaak de logische keuze. Bekijk [JVC](slug:jumeirah-village-circle-jvc).
 
 ## Dubai Marina en JBR: stedelijk gezinsleven
 Voor gezinnen die liever stedelijk en aan het water wonen, bieden Dubai Marina en JBR ruime appartementen met strand, promenades en voorzieningen op loopafstand. Minder tuin en ruimte dan villawijken, maar veel lifestyle en goede bereikbaarheid.
@@ -44,7 +52,9 @@ Onderstaande tabel geeft een indicatie van prijzen en bruto huurrendement in 202
 Gezinswijken met villa's bieden doorgaans een lager rendement maar sterke [waardevastheid](slug:villa-kopen-in-dubai); betaalbare wijken als JVC combineren gezinsvoorzieningen met hoger rendement.
 
 ## Scholen en gezondheidszorg
-De meeste gezinswijken liggen dicht bij internationale scholen met Brits, Amerikaans of IB-curriculum. Dubai Hills en Arabian Ranches hebben scholen binnen of naast de wijk, en JVC kent meerdere scholen in de directe omgeving. Klinieken en ziekenhuizen zijn ruim aanwezig, met Dubai Hills die zelfs een eigen ziekenhuis heeft.
+Voor veel gezinnen is de nabijheid van goede scholen doorslaggevend bij de wijkkeuze. De meeste gezinswijken liggen dicht bij internationale scholen met Brits, Amerikaans of IB-curriculum. Dubai Hills en Arabian Ranches hebben scholen binnen of naast de wijk, en JVC kent meerdere scholen in de directe omgeving.
+
+Houd er rekening mee dat populaire scholen wachtlijsten kennen en dat de schoolgelden een aanzienlijke jaarlijkse kostenpost vormen. Het loont om de schoolkeuze en de wijkkeuze samen te bekijken. Klinieken en ziekenhuizen zijn ruim aanwezig en van hoog niveau; Dubai Hills heeft zelfs een eigen ziekenhuis binnen de wijk, wat het wonen met kinderen extra gemakkelijk maakt.
 
 ## Veiligheid en gemeenschap
 Dubai behoort tot de veiligste steden ter wereld, met zeer lage criminaliteit. Gated gezinswijken bieden daarbovenop extra rust en beveiliging. De hechte communities, met community centres en evenementen, maken het makkelijk om als gezin aansluiting te vinden.

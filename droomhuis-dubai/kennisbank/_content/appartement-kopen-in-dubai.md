@@ -78,5 +78,18 @@ Een uitgebreid overzicht staat in ons [koopproces-stappenplan](slug:koopproces-d
 ## Rendement realistisch inschatten
 Het bruto huurrendement ligt doorgaans tussen 5% en 9%. Het netto rendement valt lager uit doordat service charges, eventuele leegstand, beheerkosten en onderhoud meetellen. Reken altijd met netto cijfers en houd een buffer aan. Korte- of langetermijnverhuur maakt eveneens verschil: korte termijn levert vaak meer op maar vraagt actiever beheer.
 
+## Verhuren: korte of lange termijn
+Wilt u uw appartement verhuren, dan kiest u tussen korte- en langetermijnverhuur. Kortetermijn- of vakantieverhuur levert vaak een hoger bruto rendement op, maar vraagt actief beheer, vergunningen en heeft te maken met seizoensschommelingen. Langetermijnverhuur biedt stabielere inkomsten met minder werk, maar doorgaans een lager rendement. Veel investeerders schakelen een beheerder in die verhuur, onderhoud en de Ejari-registratie verzorgt. Houd rekening met beheerkosten die het netto rendement beïnvloeden.
+
+## Waar moet u op letten bij de keuze van een wijk?
+De wijk bepaalt sterk uw rendement en verhuurbaarheid. Let op:
+- Bereikbaarheid en nabijheid van metro, strand en voorzieningen
+- Het type huurder dat de wijk aantrekt
+- De kwaliteit en reputatie van het gebouw en de ontwikkelaar
+- De hoogte van de service charges
+- Het aanbod en de pijplijn van nieuwbouw in de buurt
+
+Gevestigde wijken bieden vaak stabiliteit, terwijl opkomende wijken meer groeipotentieel maar ook meer onzekerheid kennen.
+
 ## Risico's en aandachtspunten
-Hoge rendementen gaan gepaard met risico's. Let op marktschommelingen, mogelijke opleververtraging bij off-plan, leegstand en service charges die het netto rendement drukken. Doe onderzoek naar de ontwikkelaar en de wijk, controleer of betalingen via escrow lopen en laat u begeleiden door een ervaren adviseur. Realistische verwachtingen en een goede voorbereiding voorkomen teleurstellingen en maken uw appartementaankoop in Dubai tot een doordachte investering.
+Hoge rendementen gaan gepaard met risico's. Let op marktschommelingen, mogelijke opleververtraging bij off-plan, leegstand en service charges die het netto rendement drukken. Een overaanbod van nieuwbouw in een wijk kan de huurprijzen onder druk zetten. Doe onderzoek naar de ontwikkelaar en de wijk, controleer of betalingen via escrow lopen en laat u begeleiden door een ervaren adviseur. Realistische verwachtingen en een goede voorbereiding voorkomen teleurstellingen en maken uw appartementaankoop in Dubai tot een doordachte investering.

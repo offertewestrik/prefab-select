@@ -60,7 +60,7 @@ Uw ROI hangt sterk af van uw strategie. Globaal:
 | Off-plan met betaalplan | variabel | mogelijk hoog | hoger |
 | Korte termijn verhuur | hoger maar volatiel | variabel | hoger |
 
-De keuze tussen yield en groei bepaalt uw rendementsprofiel. Voor een uitsplitsing van het volledige rendementsbeeld verwijzen we naar [rendement vastgoed in Dubai](slug:rendement-vastgoed-dubai).
+De keuze tussen yield en groei bepaalt uw rendementsprofiel. Voor een uitsplitsing van het volledige rendementsbeeld is het verstandig om het huurrendement en de verwachte waardegroei apart te beoordelen voordat u ze samenvoegt tot een totaalrendement.
 
 ### Het effect van financiering op ROI
 Wie met een hypotheek koopt, verandert het rendementsplaatje. Door een deel te lenen, zet u uw eigen inbreng (de aanbetaling) in tegen het volledige rendement van de woning. Dit hefboomeffect kan uw rendement op eigen vermogen verhogen, maar werkt twee kanten op: als de markt daalt of de huur tegenvalt, vergroot de hefboom ook uw verlies.
@@ -76,6 +76,21 @@ Een eenvoudige manier om dit te bekijken is de cash-on-cash return: de jaarlijks
 Een belangrijk voordeel: particuliere huurinkomsten en vermogenswinst zijn in Dubai onbelast (0%). Dit verhoogt uw netto-ROI vergeleken met veel andere landen. Let op: sinds 2023 geldt 9% vennootschapsbelasting boven AED 375.000 winst voor bedrijven, niet voor particuliere verhuur.
 
 Houd er rekening mee dat uw Nederlandse fiscale positie afhankelijk is van uw status; raadpleeg hiervoor een fiscalist.
+
+## ROI verhogen zonder onverantwoorde risico's
+Er zijn legitieme manieren om uw rendement te optimaliseren zonder roekeloos te worden:
+- **Kies de juiste verhuurvorm**: korte-termijn verhuur levert in toeristische wijken vaak meer op, lange-termijn geeft stabiliteit
+- **Beperk leegstand**: goed beheer en een marktconforme huurprijs houden uw pand verhuurd
+- **Let op service charges**: een gebouw met lagere charges en gezonde voorzieningen verhoogt het netto rendement
+- **Koop op een verstandig moment**: instappen na een afkoeling in plaats van op een piek vergroot het opwaartse potentieel
+- **Onderhandel de aankoopprijs**: elke euro korting bij aankoop verbetert uw rendement direct
+
+Het verschil tussen een matige en een goede ROI zit vaak in deze details. Een net iets lagere aankoopprijs of een gebouw met lagere lasten kan over de jaren een merkbaar effect hebben op uw totale rendement.
+
+### Een rekenvoorbeeld over meerdere jaren
+Stel dat u een appartement koopt voor AED 1.200.000 met een netto huurinkomen van AED 67.000 per jaar. Over vijf jaar levert de huur alleen al circa AED 335.000 op, los van eventuele huurstijgingen. Komt daar een bescheiden waardestijging bij, dan groeit uw total return verder.
+
+Stijgt de markt niet, dan blijft uw rendement gedragen door de huurinkomsten. Daalt de markt tijdelijk, dan kunt u dit met een lange horizon uitzitten terwijl de huur blijft binnenkomen. Dit illustreert waarom een gezond huurrendement de stabiele basis van uw ROI vormt.
 
 ## Risico's die uw ROI beïnvloeden
 Een hoog rendement gaat gepaard met risico. Factoren die uw ROI kunnen drukken:

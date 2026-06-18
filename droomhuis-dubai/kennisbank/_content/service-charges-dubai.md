@@ -45,7 +45,7 @@ Naast de service charge van uw eigen gebouw betaalt u in veel projecten ook een 
 
 Het is belangrijk om beide bijdragen samen te bekijken. Twee appartementen met hetzelfde tarief per sqft kunnen sterk verschillen in totale jaarlasten door een hoge of lage master community fee.
 
-## Waarom tarieven per gebouw verschillen
+### Waarom tarieven per gebouw verschillen
 Het tarief per sqft wordt vooral bepaald door het voorzieningenniveau en de leeftijd van het gebouw. Factoren die het tarief opdrijven zijn:
 - Uitgebreide faciliteiten zoals concierge, valet, meerdere zwembaden en spa
 - Hoge torens met veel liften en technische installaties

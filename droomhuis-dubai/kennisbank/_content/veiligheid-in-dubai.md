@@ -18,14 +18,15 @@ Dubai kenmerkt zich door zeer lage criminaliteit. Geweldsdelicten, inbraken en s
 - Brede aanwezigheid van politie en cameratoezicht
 - Hoge sociale controle en pakkans
 - Strikte straffen die afschrikkend werken
+- Een stabiele en welvarende samenleving
 
-Veel bewoners ervaren het als normaal om ook 's avonds veilig over straat te gaan.
+Veel bewoners ervaren het als normaal om ook 's avonds veilig over straat te gaan en waardevolle spullen onbezorgd bij zich te dragen. Dit gevoel van veiligheid is een van de meest genoemde redenen waarom expats zich in Dubai prettig voelen.
 
 ## Veilig voor gezinnen
-Voor gezinnen is Dubai aantrekkelijk vanwege de combinatie van veiligheid en voorzieningen. Kinderen kunnen relatief vrij bewegen in woonwijken, en openbare ruimtes, parken en winkelcentra zijn goed bewaakt. Bij de keuze van een woonwijk speelt veiligheid mee naast scholen en voorzieningen; lees [de beste wijken voor gezinnen in Dubai](slug:beste-wijken-voor-gezinnen-dubai).
+Voor gezinnen is Dubai aantrekkelijk vanwege de combinatie van veiligheid en voorzieningen. Kinderen kunnen relatief vrij bewegen in woonwijken, en openbare ruimtes, parken en winkelcentra zijn goed bewaakt. Veel residentiële wijken zijn afgesloten of voorzien van beveiliging, wat ouders extra gerust stelt. Bij de keuze van een woonwijk speelt veiligheid mee naast scholen en voorzieningen; lees [de beste wijken voor gezinnen in Dubai](slug:beste-wijken-voor-gezinnen-dubai).
 
 ## Veiligheid voor vrouwen
-Dubai staat bekend als veilig voor vrouwen, ook alleenreizend of laat op de avond. Toch is het verstandig de lokale gebruiken te respecteren, zoals gepaste kleding in publieke ruimtes en terughoudendheid met gedrag dat als aanstootgevend kan gelden. Respect voor de cultuur draagt bij aan een prettige ervaring.
+Dubai staat bekend als veilig voor vrouwen, ook alleenreizend of laat op de avond. Toch is het verstandig de lokale gebruiken te respecteren, zoals gepaste kleding in publieke ruimtes en terughoudendheid met gedrag dat als aanstootgevend kan gelden. Respect voor de cultuur draagt bij aan een prettige ervaring en voorkomt ongemakkelijke situaties. Veel vrouwelijke expats omschrijven Dubai als een van de prettigste steden om zelfstandig te wonen en zich vrij te bewegen.
 
 ## Wetgeving en cultuur respecteren
 De veiligheid hangt deels samen met strikte wetgeving. Het is belangrijk de regels te kennen, omdat onbekendheid niet als excuus geldt. Let onder meer op:
@@ -34,8 +35,9 @@ De veiligheid hangt deels samen met strikte wetgeving. Het is belangrijk de rege
 - Gedrag in het openbaar en op sociale media
 - Respect voor religieuze gebruiken, zeker tijdens de ramadan
 - Strikte regels rond drugs, met zware straffen
+- Terughoudendheid met het maken van foto's van anderen
 
-Wie zich aan de regels houdt, zal in de praktijk weinig problemen ervaren.
+Wie zich aan de regels houdt, zal in de praktijk weinig problemen ervaren. De keerzijde van de hoge veiligheid is dus dat overtredingen streng worden aangepakt.
 
 ## Verkeersveiligheid
 De wegen in Dubai zijn modern en goed onderhouden, maar het verkeer kan druk en snel zijn. Een paar aandachtspunten.
@@ -46,7 +48,10 @@ De wegen in Dubai zijn modern en goed onderhouden, maar het verkeer kan druk en 
 | Snelheid | Hoge snelheden gangbaar | Houd afstand, rijd defensief |
 | Handhaving | Veel flitspalen, strenge boetes | Respecteer limieten |
 
-Defensief rijden en het respecteren van de regels verkleinen de risico's aanzienlijk.
+Defensief rijden en het respecteren van de regels verkleinen de risico's aanzienlijk. Het verkeer is voor veel nieuwkomers wennen vanwege het tempo en de drukte op de snelwegen.
+
+## Digitale en financiële veiligheid
+Naast fysieke veiligheid is het verstandig aandacht te besteden aan digitale en financiële veiligheid. Online oplichting en phishing komen, net als elders, ook in Dubai voor. Wees voorzichtig met persoonlijke gegevens, controleer bij vastgoedtransacties altijd de officiële kanalen en betaal alleen via geverifieerde rekeningen. Bij vastgoedaankopen verlopen betalingen idealiter via de officiële registratie bij het Dubai Land Department, wat bescherming biedt tegen fraude.
 
 ## Praktische veiligheidstips
 Ook in een veilige stad blijft gezond verstand belangrijk:
@@ -55,6 +60,7 @@ Ook in een veilige stad blijft gezond verstand belangrijk:
 2. Respecteer kledingnormen in publieke ruimtes
 3. Wees voorzichtig in het verkeer en draag een gordel
 4. Bewaar belangrijke documenten en de Emirates ID goed
+5. Wees alert op online oplichting bij transacties
 
 ## Conclusie: veilig wonen met respect voor de regels
-Dubai biedt een uitzonderlijk hoog veiligheidsniveau, wat het tot een geliefde bestemming voor gezinnen maakt. De keerzijde is een strikte wetgeving die respect vraagt. Wie zich daaraan houdt, geniet van een veilige leefomgeving. Voor het complete plaatje leest u [verhuizen naar Dubai](slug:verhuizen-naar-dubai) en [als Nederlander leven in Dubai](slug:als-nederlander-leven-in-dubai).
+Dubai biedt een uitzonderlijk hoog veiligheidsniveau, wat het tot een geliefde bestemming voor gezinnen maakt. De keerzijde is een strikte wetgeving die respect vraagt. Wie zich daaraan houdt, geniet van een veilige leefomgeving waarin kinderen en volwassenen zich vrij kunnen bewegen. Voor het complete plaatje leest u [verhuizen naar Dubai](slug:verhuizen-naar-dubai) en [als Nederlander leven in Dubai](slug:als-nederlander-leven-in-dubai).

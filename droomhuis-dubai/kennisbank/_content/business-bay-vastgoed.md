@@ -73,5 +73,16 @@ Business Bay is daarnaast geschikt voor kortetermijnverhuur. De centrale ligging
 
 Aandachtspunten zijn de doorlopende ontwikkeling (sommige torens leveren nog op), de service charges die per gebouw verschillen en de concurrentie van veel aanbod dat huurprijzen onder druk kan zetten. Een goed gekozen gebouw met afgerond bouwproject, goede voorzieningen en een betrouwbare ontwikkelaar presteert doorgaans beter. Beoordeel daarom altijd de reputatie van de ontwikkelaar, de servicekwaliteit van het gebouw en het werkelijke uitzicht voordat u koopt. Wie liever in bestaande, gevestigde luxe investeert, kijkt ook naar [Downtown Dubai](slug:downtown-dubai-wonen).
 
+## Kopen in Business Bay: praktische aandachtspunten
+Het koopproces in Business Bay verloopt zoals elders in Dubai, gereguleerd door het Dubai Land Department (DLD) en RERA. Als buitenlander kunt u in deze freehold-zone 100% eigendom verkrijgen met een title deed op uw naam. Houd rekening met de gebruikelijke aankoopkosten: circa 4% overdrachtsbelasting plus registratie- en makelaarskosten.
+
+Specifiek voor Business Bay zijn deze punten belangrijk:
+- **Uitzicht en oriëntatie**: canal- of Burj Khalifa-zicht levert meerwaarde op bij verhuur en doorverkoop.
+- **Status van het project**: kies bij voorkeur een afgerond, opgeleverd gebouw of een betrouwbaar off-plan project met goede betaalstructuur.
+- **Service charges**: deze verschillen sterk per gebouw en drukken het netto rendement; vraag de actuele tarieven altijd op.
+- **Beheer en bouwkwaliteit**: een goed beheerd gebouw verhuurt beter en behoudt zijn waarde.
+
+Wie de cijfers wil vergelijken met andere kansrijke wijken, leest de gids over de [beste wijken voor investeerders](slug:beste-wijken-voor-investeerders-dubai). Laat u bij voorkeur begeleiden door een ervaren adviseur die de lokale markt en de verschillen tussen gebouwen kent.
+
 ## Conclusie
 Business Bay is een centrale groeiwijke die stedelijk wonen, waterfront-lifestyle en aantrekkelijke huurrendementen combineert. De toegankelijke instapprijzen naast Downtown maken het een logische keuze voor investeerders en professionals. Houd rekening met de doorlopende ontwikkeling en kies een gebouw met een afgerond, goed beheerd project.

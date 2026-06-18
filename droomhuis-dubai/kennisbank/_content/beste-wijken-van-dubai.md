@@ -18,23 +18,27 @@ Begin bij uw doel. Wilt u zelf wonen, verhuren of beide? Zoekt u maximaal rendem
 - Voorzieningen (scholen, strand, winkels, parken)
 - Verhuurpotentieel en doelgroep
 
+In grote lijnen kent Dubai twee soorten wijken. Prestigewijken zoals Palm Jumeirah en Downtown bieden hogere prijzen, sterke waardevastheid en een bescheidener rendement. Rendementswijken zoals JVC en Business Bay bieden lagere instapprijzen en een hoger bruto huurrendement, maar met meer concurrentie en marktdynamiek. De juiste keuze hangt af van of u stuurt op cashflow of op kapitaalbehoud, en of u zelf wilt wonen of puur belegt.
+
 ## Palm Jumeirah: prestige en beachfront
-Palm Jumeirah is het iconische kunstmatige eiland met luxe beachfront-villa's en appartementen. Het staat voor prestige, privacy en sterke waardevastheid. Het bruto rendement is bescheiden (4-6%), maar de schaarste en uitstraling houden de waarde hoog. Lees meer over [woningen op Palm Jumeirah](slug:palm-jumeirah-woningen).
+Palm Jumeirah is het iconische kunstmatige palmvormige eiland met luxe beachfront-villa's en appartementen. Het staat voor prestige, privacy en sterke waardevastheid. Veel woningen hebben een eigen strandstrook of direct zeezicht, iets wat elders in Dubai zeldzaam is.
+
+Het bruto rendement is bescheiden (4-6%), maar de schaarste en uitstraling houden de waarde hoog. Voor kopers die kapitaalbehoud en een topadres belangrijker vinden dan maximale cashflow, is Palm een logische keuze. De wijk is geliefd bij vermogende particulieren en bij wie vakantieverhuur op een toplocatie overweegt. Lees meer over [woningen op Palm Jumeirah](slug:palm-jumeirah-woningen).
 
 ## Downtown Dubai: het premium centrum
-Downtown draait om de Burj Khalifa, Dubai Mall en de Dubai Fountain. Het is hét premium stadscentrum met luxe appartementen en hoge huurvraag. Rendement ligt rond 5-6%, met sterke waardevastheid. Ideaal voor wie centraal en prestigieus wil wonen; ontdek [wonen in Downtown Dubai](slug:downtown-dubai-wonen).
+Downtown draait om de Burj Khalifa, Dubai Mall en de Dubai Fountain. Het is hét premium stadscentrum met luxe appartementen en hoge huurvraag. Rendement ligt rond 5-6%, met sterke waardevastheid. De combinatie van wereldberoemde bezienswaardigheden, exclusieve horeca en een centrale ligging maakt Downtown tot een van de meest gewilde adressen van de stad. Ideaal voor wie centraal en prestigieus wil wonen of verhuren; ontdek [wonen in Downtown Dubai](slug:downtown-dubai-wonen).
 
 ## Dubai Marina en JBR: waterfront-lifestyle
-Dubai Marina en het aangrenzende JBR bieden bruisend waterfront-leven met jachthavens, strand en horeca. De verhuurvraag is hoog, vooral voor kortetermijnverhuur, met rendementen rond 6-7,5%. Perfect voor lifestyle en verhuur; bekijk de [appartementen in Dubai Marina](slug:dubai-marina-appartementen).
+Dubai Marina en het aangrenzende JBR bieden bruisend waterfront-leven met jachthavens, strand en horeca. De verhuurvraag is hoog, vooral voor kortetermijnverhuur, met rendementen rond 6-7,5%. De wijken zijn populair bij expats, young professionals en toeristen, wat zorgt voor een levendige en goed verhuurbare markt. Perfect voor lifestyle en verhuur; bekijk de [appartementen in Dubai Marina](slug:dubai-marina-appartementen).
 
 ## Business Bay: centrale groeiwijke
-Business Bay grenst aan Downtown en biedt toegankelijkere instapprijzen met sterke huurvraag. Het bruto rendement ligt rond 6-8%, wat de wijk populair maakt bij investeerders die centraal willen kopen.
+Business Bay grenst aan Downtown en biedt toegankelijkere instapprijzen met sterke huurvraag. Het bruto rendement ligt rond 6-8%, wat de wijk populair maakt bij investeerders die centraal willen kopen. De ligging aan het Dubai Canal en de nabijheid van het zakencentrum trekken vooral young professionals aan. Wel is de wijk nog volop in ontwikkeling, met veel nieuw aanbod.
 
 ## JVC: betaalbaar en hoog rendement
-Jumeirah Village Circle is de wijk voor wie betaalbaar wil kopen met topcijfers voor rendement (7-9%). Gezinsvriendelijk, met parken en scholen, en veel instapappartementen. Een favoriet voor cashflowgerichte investeerders.
+Jumeirah Village Circle is de wijk voor wie betaalbaar wil kopen met topcijfers voor rendement (7-9%). Gezinsvriendelijk, met parken en scholen, en veel instapappartementen en townhouses. De lage instapprijzen in combinatie met sterke huurvraag maken JVC een favoriet voor cashflowgerichte investeerders. Bekijk [JVC](slug:jumeirah-village-circle-jvc) voor de details.
 
 ## Dubai Hills Estate: groen gezinswonen
-Dubai Hills is een groene Emaar-wijk rond een golfbaan, met villa's, scholen en een mall. Waardevast en gezinsvriendelijk, met rendementen rond 5-6,5%. Lees meer over [Dubai Hills Estate](slug:dubai-hills-estate).
+Dubai Hills is een groene Emaar-wijk rond een golfbaan, met villa's, scholen, een ziekenhuis en een eigen mall. Waardevast en gezinsvriendelijk, met rendementen rond 5-6,5%. De centrale ligging en de complete voorzieningen maken het een topkeuze voor gezinnen die comfort en kwaliteit zoeken. Lees meer over [Dubai Hills Estate](slug:dubai-hills-estate).
 
 ## Vergelijkingstabel
 Onderstaande tabel geeft een indicatie van instapprijzen en bruto huurrendement in 2026. Prijzen zijn indicatief en variëren sterk per project en uitzicht.
