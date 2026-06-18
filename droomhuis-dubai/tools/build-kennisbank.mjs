@@ -174,7 +174,7 @@ const FOOTER = `
         </div>
       </div>
       <div class="foot-bottom">
-        <span>Droomhuis in Dubai © ${new Date().getFullYear()} · Joy Al Tahat</span>
+        <span>Droomhuis in Dubai © ${new Date().getFullYear()} · Joy van den Hurk</span>
         <span><a href="../index.html#top">Home</a> · Demo-ontwerp</span>
       </div>
     </div>
@@ -249,7 +249,7 @@ function renderArticle(a, byslug) {
     inLanguage: "nl-NL",
     datePublished: UPDATED,
     dateModified: UPDATED,
-    author: { "@type": "Person", name: "Joy Al Tahat", jobTitle: "Luxury Real Estate Advisor Dubai" },
+    author: { "@type": "Person", name: "Joy van den Hurk", jobTitle: "Luxury Real Estate Advisor Dubai" },
     publisher: { "@type": "Organization", name: "Droomhuis in Dubai", url: SITE },
     mainEntityOfPage: canonical,
     keywords: a.keywords.join(", "),
@@ -296,9 +296,9 @@ function renderArticle(a, byslug) {
           ${bodyHtml}
           ${faqHtml}
           <div class="author-box">
-            <div class="author-av">JT</div>
+            <div class="author-av">JH</div>
             <div>
-              <b>Joy Al Tahat</b>
+              <b>Joy van den Hurk</b>
               <span>Nederlandse Luxury Real Estate Advisor · Dubai</span>
               <p>Joy begeleidt Nederlandse en internationale klanten van A tot Z bij het kopen, verkopen, verhuren en investeren in Dubai-vastgoed.</p>
             </div>
