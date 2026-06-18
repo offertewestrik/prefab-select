@@ -17,6 +17,8 @@ Bij korte-termijnverhuur (officieel: holiday homes) verhuur je je woning per nac
 
 De keerzijde van langetermijnverhuur lees je in [lange termijn verhuur in Dubai](slug:lange-termijn-verhuur-dubai); dit artikel richt zich op het korte-termijnmodel.
 
+Het korte-termijnmodel is in de kern een hospitality-onderneming, geen passieve belegging. Je verdient niet alleen aan een woning, maar aan de ervaring die je gasten bieden: een vlekkeloze check-in, een schone en goed ingerichte woning en snelle communicatie. Wie dat onderschat, ziet zijn beoordelingen dalen en daarmee zijn bezetting en tarieven. Het is daarom belangrijk vooraf eerlijk in te schatten of je dit zelf wilt en kunt doen, of dat je het uitbesteedt.
+
 ## De DTCM-vergunning is verplicht
 
 Korte-termijnverhuur mag niet zomaar. Je hebt een vergunning nodig van DTCM, het Department of Economy and Tourism. Het proces omvat:
@@ -26,6 +28,8 @@ Korte-termijnverhuur mag niet zomaar. Je hebt een vergunning nodig van DTCM, het
 - **Periodieke verlenging** van de vergunning.
 
 Zonder DTCM-vergunning verhuren is niet toegestaan en kan tot boetes leiden. Reken de vergunningskosten mee in je rendementsberekening.
+
+De vergunning is bovendien gekoppeld aan voorwaarden die je structureel moet naleven. Zo wordt verwacht dat de woning volledig gemeubileerd en van een vastgesteld basisniveau is, dat er een toeristenheffing (Tourism Dirham) per nacht wordt afgedragen en dat gastgegevens correct worden geregistreerd. Ook geldt dat niet elk gebouw korte-termijnverhuur toestaat: sommige Owners Associations of ontwikkelaars verbieden holiday homes in hun complex. Controleer dit dus vóór aankoop, want het kan je hele businessmodel onderuithalen. Lees je breder in over de spelregels van de markt via [DLD en RERA uitgelegd](slug:dld-en-rera-uitgelegd).
 
 ## Voor- en nadelen
 

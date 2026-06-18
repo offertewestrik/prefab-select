@@ -28,6 +28,18 @@ Een typisch off-plan traject ziet er zo uit:
 
 Steeds vaker bieden ontwikkelaars post-handover plannen, waarbij je een deel pas na oplevering betaalt. Meer hierover lees je in [betaalplannen off-plan in Dubai](slug:betaalplannen-off-plan-dubai).
 
+### Een voorbeeld van een betaalplan
+
+Stel je koopt een appartement van AED 1.500.000 met een veelvoorkomend 60/40-plan:
+
+| Fase | Percentage | Bedrag (AED) |
+|---|---|---|
+| Reservering + aanbetaling | 20% | 300.000 |
+| Tijdens de bouw (4 termijnen) | 40% | 600.000 |
+| Bij oplevering | 40% | 600.000 |
+
+Bij dit plan betaal je dus 60% tijdens de bouwperiode en het restant bij de sleuteloverdracht. Bij een post-handover plan schuift een deel van die laatste 40% door naar de eerste jaren ná oplevering, soms gespreid over twee tot drie jaar. Dat verlaagt je instapdruk, maar betekent niet dat het pand goedkoper wordt; je verspreidt alleen de betaling. Reken bovenop het betaalplan altijd de aankoopkosten mee: 4% DLD-overdrachtsbelasting, circa AED 580 admin en doorgaans 2% courtage plus 5% btw. Bekijk de volledige opsomming in [kosten koper in Dubai](slug:kosten-koper-dubai).
+
 ## Bescherming: escrow en Oqood
 
 De Dubai-markt is goed gereguleerd. Twee mechanismen beschermen off-plan kopers:
@@ -37,7 +49,18 @@ De Dubai-markt is goed gereguleerd. Twee mechanismen beschermen off-plan kopers:
 | Escrow-rekening | Ontwikkelaars storten betalingen op een wettelijke geblokkeerde rekening die RERA bewaakt. Geld komt vrij naarmate de bouw vordert. |
 | Oqood-registratie | Je koopovereenkomst wordt officieel geregistreerd bij het DLD, vooruitlopend op de title deed. |
 
-Deze regels verkleinen het risico dat geld verdwijnt, maar bieden geen garantie tegen vertraging of marktdaling.
+Deze regels verkleinen het risico dat geld verdwijnt, maar bieden geen garantie tegen vertraging of marktdaling. De escrow-rekening zorgt ervoor dat de ontwikkelaar jouw geld pas kan opnemen naarmate bouwfasen daadwerkelijk worden gehaald, gecontroleerd door een onafhankelijke partij. Mocht een project stilvallen, dan biedt het resterende saldo op de escrow-rekening een belangrijke buffer, al kan een afwikkeling tijd kosten. De regelgeving rond DLD en RERA wordt uitgebreid toegelicht in [DLD en RERA uitgelegd](slug:dld-en-rera-uitgelegd).
+
+## Hoe kies je een betrouwbare ontwikkelaar?
+
+De kwaliteit van je off-plan investering staat of valt met de ontwikkelaar. Let bij je keuze op:
+
+- **Track record**: hoeveel projecten heeft de partij eerder opgeleverd, en op tijd?
+- **RERA-registratie**: een geldige registratie bij het Dubai Land Department is een minimumvereiste.
+- **Financiële soliditeit**: gevestigde ontwikkelaars met meerdere lopende projecten zijn doorgaans stabieler.
+- **Reputatie bij oplevering**: kwaliteit van afwerking en nakomen van beloften verschillen sterk per partij.
+
+Een overzicht van gevestigde namen vind je in [grootste ontwikkelaars in Dubai](slug:grootste-ontwikkelaars-dubai). Grote, beursgenoteerde of overheidsgelieerde ontwikkelaars bieden vaak meer zekerheid over oplevering, terwijl kleinere partijen soms scherper geprijsd zijn maar een hoger risico kennen.
 
 ## Voordelen van off-plan
 
@@ -60,7 +83,15 @@ Kies daarom voor een ervaren, RERA-geregistreerde ontwikkelaar. Een overzicht va
 
 ## Off-plan en doorverkoop
 
-Veel investeerders verkopen hun off-plan unit vóór oplevering door (assignment). Dit kan rendabel zijn in een stijgende markt, maar hangt af van de voorwaarden van de ontwikkelaar en het percentage dat je al hebt betaald. Bij doorverkoop is vaak een NOC van de ontwikkelaar nodig. Reken ook hier de DLD-kosten en eventuele courtage mee.
+Veel investeerders verkopen hun off-plan unit vóór oplevering door (assignment). Dit kan rendabel zijn in een stijgende markt, maar hangt af van de voorwaarden van de ontwikkelaar en het percentage dat je al hebt betaald. Veel ontwikkelaars staan doorverkoop pas toe nadat je een bepaald deel van de koopsom hebt voldaan, bijvoorbeeld 30 tot 40%. Bij doorverkoop is vaak een NOC (No Objection Certificate) van de ontwikkelaar nodig, waarvoor administratiekosten gelden. Reken ook hier de DLD-kosten en eventuele courtage mee.
+
+> Doorverkoop vóór oplevering is geen gegarandeerde winststrategie. In een vlakke of dalende markt kan het lastig zijn een koper te vinden die jouw aankoopprijs plus kosten wil betalen.
+
+## Voor wie is off-plan geschikt?
+
+Off-plan past het best bij investeerders met een langere horizon die niet direct huurinkomsten nodig hebben en die de instap willen spreiden. Wie meteen rendement zoekt of zekerheid over het pand wil, kijkt eerder naar bestaande bouw. Ook je risicobereidheid telt: kun je een eventuele opleververtraging of tijdelijke marktdaling dragen zonder in de problemen te komen? Vergelijk beide routes grondig in [off-plan vs bestaande bouw in Dubai](slug:off-plan-vs-bestaande-bouw-dubai) en plaats de keuze in je bredere plan via [investeren in Dubai vastgoed](slug:investeren-in-dubai-vastgoed).
+
+Voor wie op afstand vanuit Nederland koopt, is off-plan goed te organiseren: de meeste betalingen verlopen digitaal en je hoeft niet fysiek aanwezig te zijn bij elke fase. Wel is het verstandig een lokale, betrouwbare partij te hebben die het project en de oplevering voor je in de gaten houdt.
 
 ## Conclusie
 
