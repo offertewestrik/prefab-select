@@ -175,7 +175,8 @@ const FOOTER = `
       </div>
       <div class="foot-bottom">
         <span>Droomhuis in Dubai © ${new Date().getFullYear()} · Joy van den Hurk</span>
-        <span><a href="../index.html#top">Home</a> · Demo-ontwerp</span>
+        <span class="built-by">Build by <a href="https://growthnext.nl" target="_blank" rel="noopener">GROWTH&nbsp;NEXT</a></span>
+        <span><a href="../index.html#top">Home</a></span>
       </div>
     </div>
   </footer>`;

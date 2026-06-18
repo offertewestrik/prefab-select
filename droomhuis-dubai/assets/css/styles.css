@@ -511,6 +511,8 @@ textarea.input { resize: vertical; min-height: 120px; }
 .foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 0.84rem; color: rgba(255,255,255,0.5); }
 .foot-bottom a { color: rgba(255,255,255,0.5); }
 .foot-bottom a:hover { color: var(--gold); }
+.built-by a { color: var(--gold); font-weight: 600; letter-spacing: 0.06em; }
+.built-by a:hover { color: #fff; }
 
 /* ===================================================================
    CONTACT
