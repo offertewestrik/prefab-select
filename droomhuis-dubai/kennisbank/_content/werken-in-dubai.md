@@ -50,11 +50,10 @@ Dubai heft geen inkomstenbelasting, waardoor u netto vaak meer overhoudt dan in 
 ## Ondernemen in Dubai
 Wilt u voor uzelf beginnen, dan kunt u een bedrijf oprichten in een free zone of op het mainland. Een free zone biedt vaak 100% buitenlands eigendom en een eenvoudig visumtraject, terwijl een mainland-bedrijf u meer ruimte geeft om lokaal te handelen met klanten in de VAE. Aan beide zijn registratiekosten en jaarlijkse verplichtingen verbonden, zoals een handelsvergunning en kantoorruimte. Een eigen bedrijf kan tevens de basis vormen voor uw verblijfsvisum, waarmee u zowel werkt als woont op één regeling. Laat u bij de keuze tussen free zone en mainland begeleiden door een lokale specialist.
 
-## Werk-privébalans en cultuur
-De werkcultuur in Dubai is internationaal maar kent eigen gebruiken. De werkweek loopt doorgaans van maandag tot vrijdag, met het weekend op zaterdag en zondag. Tijdens de ramadan gelden aangepaste werktijden. Respect voor lokale gebruiken en hiërarchie wordt gewaardeerd. Veel expats ervaren de combinatie van professionele kansen en een aangename leefomgeving als aantrekkelijk, al kan het tempo in sommige sectoren hoog liggen.
-
-## Een baan vinden in Dubai
+## Een baan vinden en de werkcultuur
 De praktische zoektocht naar werk verschilt van die in Nederland. Veel posities worden ingevuld via gespecialiseerde recruiters, online vacaturebanken en vooral via het eigen netwerk. Het loont om uw cv aan te passen aan de lokale gebruiken, uw LinkedIn-profiel up-to-date te houden en gericht te netwerken binnen uw sector en de Nederlandse gemeenschap. Sommige professionals reizen eerst af om kennis te maken met de markt, terwijl anderen al vanuit Nederland solliciteren. Houd er rekening mee dat het proces tijd kan kosten en dat een werkgever het visum pas regelt na een definitief aanbod. Een financiële buffer voor de zoekperiode is daarom verstandig.
+
+De werkcultuur zelf is internationaal maar kent eigen gebruiken. De werkweek loopt doorgaans van maandag tot vrijdag, met het weekend op zaterdag en zondag. Tijdens de ramadan gelden aangepaste werktijden. Respect voor lokale gebruiken en hiërarchie wordt gewaardeerd. Veel expats ervaren de combinatie van professionele kansen en een aangename leefomgeving als aantrekkelijk, al kan het tempo in sommige sectoren hoog liggen.
 
 ## Werk, visum en wonen combineren
 Werken in Dubai gaat hand in hand met de bredere verhuisstap. Houd rekening met de [kosten van levensonderhoud in Dubai](slug:kosten-van-levensonderhoud-dubai), waarbij huur en scholen het besteedbaar inkomen drukken. Wie een vermogen opbouwt, kan via vastgoed bovendien een [Golden Visa](slug:golden-visa-dubai) overwegen voor langdurig verblijf los van een werkgever. Zo bent u niet afhankelijk van één arbeidscontract voor uw verblijfsrecht.
