@@ -452,6 +452,30 @@ textarea.input { resize: vertical; min-height: 120px; }
 .cinema .hero-cta { justify-content: center; margin-top: 30px; }
 
 /* ===================================================================
+   PREMIUM UTILITIES — scroll progress, WhatsApp FAB, mobile CTA, nav active
+   =================================================================== */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 200; background: linear-gradient(90deg, #c9a76a, #b0904f); transition: width 0.12s linear; }
+
+.nav-links a.active { opacity: 1; color: var(--gold-deep); }
+.nav-links a.active::after { width: 100%; }
+
+.fab-wa { position: fixed; right: 22px; bottom: 22px; z-index: 150; width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 16px 34px -10px rgba(37,211,102,0.65); transition: transform 0.35s var(--ease); }
+.fab-wa::before { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(37,211,102,0.5); animation: waPulse 2.6s ease-out infinite; }
+@keyframes waPulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.45); } 70%,100% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } }
+.fab-wa:hover { transform: translateY(-3px) scale(1.05); }
+.fab-wa svg { width: 30px; height: 30px; color: #fff; position: relative; }
+
+.mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 140; display: none; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.96); backdrop-filter: blur(14px); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px -12px rgba(20,33,61,0.25); }
+.mobile-cta a { flex: 1; padding: 14px; font-size: 0.85rem; }
+.mobile-cta .btn-wa { background: #25d366; color: #fff; }
+
+@media (max-width: 760px) {
+  .mobile-cta { display: flex; }
+  .fab-wa { bottom: 86px; width: 52px; height: 52px; }
+  .fab-wa svg { width: 26px; height: 26px; }
+}
+
+/* ===================================================================
    KNOWLEDGE CENTER teaser
    =================================================================== */
 .know { background: var(--bg); }

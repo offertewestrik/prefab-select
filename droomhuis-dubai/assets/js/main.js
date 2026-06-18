@@ -195,5 +195,33 @@
     vids.forEach((v) => vio.observe(v));
   }
 
+  /* ---- scroll progress bar ------------------------------------------ */
+  const prog = $("#scrollProgress");
+  if (prog) {
+    const upd = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+    };
+    upd();
+    window.addEventListener("scroll", upd, { passive: true });
+  }
+
+  /* ---- nav scroll-spy ------------------------------------------------ */
+  const navA = $$("#navLinks a");
+  const secs = ["woningen", "locaties", "diensten", "over", "contact", "rendement"]
+    .map((id) => document.getElementById(id)).filter(Boolean);
+  if (secs.length) {
+    const sp = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const href = "#" + e.target.id;
+          navA.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === href));
+        }
+      }),
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    secs.forEach((s) => sp.observe(s));
+  }
+
   observeReveals();
 })();
