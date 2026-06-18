@@ -106,7 +106,7 @@ function parse(file) {
   const body = parts.slice(1).join("\nBODY:\n").replace(/^\n+/, "");
   const meta = { faq: [], keywords: [], related: [] };
   for (const line of headerPart.split("\n")) {
-    const m = line.match(/^([A-Z]+):\s?(.*)$/);
+    const m = line.match(/^([A-Z0-9]+):\s?(.*)$/);
     if (!m) continue;
     const key = m[1], val = m[2].trim();
     if (key === "FAQ") {
@@ -186,7 +186,7 @@ const HEAD = (title, desc, canonical, jsonld) => `<!doctype html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0b" />
+  <meta name="theme-color" content="#f8f6f2" />
   <title>${esc(title)}</title>
   <meta name="description" content="${escA(desc)}" />
   <link rel="canonical" href="${canonical}" />
@@ -197,7 +197,10 @@ const HEAD = (title, desc, canonical, jsonld) => `<!doctype html>
   <meta property="og:description" content="${escA(desc)}" />
   <meta property="og:locale" content="nl_NL" />
   <meta property="og:url" content="${canonical}" />
+  <meta property="og:image" content="${SITE}/assets/video/penthouse-burj.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="${SITE}/assets/video/penthouse-burj.jpg" />
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23c9a76a'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='60' fill='%2314213d' text-anchor='middle' font-weight='700'%3ED%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -247,6 +250,7 @@ function renderArticle(a, byslug) {
     "@type": "Article",
     headline: a.h1,
     description: a.description,
+    image: `${SITE}/assets/video/penthouse-burj.jpg`,
     inLanguage: "nl-NL",
     datePublished: UPDATED,
     dateModified: UPDATED,
@@ -396,11 +400,23 @@ ${FOOTER}
 
 /* ------------------------------------------------------------- sitemap */
 function renderSitemap(articles) {
-  const urls = [`${SITE}/kennisbank/`, ...articles.map((a) => `${SITE}/kennisbank/${a.slug}.html`)];
+  const urls = [
+    `${SITE}/`,
+    `${SITE}/kennisbank/`,
+    ...articles.map((a) => `${SITE}/kennisbank/${a.slug}.html`),
+  ];
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${UPDATED}</lastmod></url>`).join("\n")}
 </urlset>`;
+}
+
+function renderRobots() {
+  return `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`;
 }
 
 /* ---------------------------------------------------------------- main */
@@ -424,7 +440,8 @@ function build() {
     n++;
   }
   fs.writeFileSync(path.join(OUT, "index.html"), renderIndex(articles));
-  fs.writeFileSync(path.join(OUT, "sitemap.xml"), renderSitemap(articles));
+  fs.writeFileSync(path.join(ROOT, "sitemap.xml"), renderSitemap(articles));
+  fs.writeFileSync(path.join(ROOT, "robots.txt"), renderRobots());
 
   const perCat = CATEGORIES.map((c) => `${c}: ${articles.filter((a) => a.category === c).length}`).join("  |  ");
   console.log(`✓ Built ${n} articles + index + sitemap`);
