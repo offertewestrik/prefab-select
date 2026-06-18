@@ -53,13 +53,22 @@ Onderstaande tabel geeft een indicatie van instapprijzen en bruto huurrendement 
 | Dubai Hills Estate | Groen gezinswonen | 1.300.000+ | 5 - 6,5% |
 | Emaar Beachfront | Nieuw beachfront | 2.200.000+ | 6 - 7% |
 
+## Bereikbaarheid en infrastructuur per wijk
+Bereikbaarheid is een onderschatte factor bij de wijkkeuze. Wijken die direct aan de metro (rode lijn) of aan Sheikh Zayed Road liggen, zijn doorgaans makkelijker te verhuren en gewilder bij expats zonder auto.
+
+- **Sterk verbonden via metro en Sheikh Zayed Road**: Downtown, Business Bay, Dubai Marina en JBR liggen aan of nabij de rode metrolijn en de hoofdverkeersader.
+- **Goed bereikbaar per auto, geen metro**: JVC, Dubai Hills en Arabian Ranches leunen op het wegennet; hier is een auto vrijwel onmisbaar.
+- **Eilandligging met aansluiting**: Palm Jumeirah en Emaar Beachfront combineren een afgeschermde ligging met verbindingen naar het vasteland.
+
+Voor verhuur aan young professionals is metronabijheid een pluspunt; voor gezinnen wegen ruimte en scholen vaak zwaarder dan de aanwezigheid van een metrostation.
+
 ## Welke wijk past bij u?
 - Prestige en waardevastheid: Palm Jumeirah, Downtown, Dubai Hills
 - Lifestyle en verhuur: Dubai Marina, JBR, Business Bay
 - Maximaal rendement: JVC, Business Bay
 - Gezinnen: Dubai Hills, Arabian Ranches, JVC
 
-Wilt u puur op cijfers sturen, lees dan de gids over de [beste wijken voor investeerders](slug:beste-wijken-voor-investeerders-dubai). Zoekt u een gezinswijk, bekijk dan de [beste wijken voor gezinnen](slug:beste-wijken-voor-gezinnen-dubai).
+Wilt u puur op cijfers sturen, lees dan de gids over de [beste wijken voor investeerders](slug:beste-wijken-voor-investeerders-dubai). Zoekt u een gezinswijk, bekijk dan de [beste wijken voor gezinnen](slug:beste-wijken-voor-gezinnen-dubai). Laat u bij twijfel adviseren: de juiste wijk hangt sterk af van uw persoonlijke doel, budget en horizon.
 
 ## Conclusie
 De beste wijk van Dubai is de wijk die past bij uw doel en budget. Prestige en waardevastheid vindt u in Palm, Downtown en Dubai Hills; lifestyle en verhuur in Marina, JBR en Business Bay; en maximaal rendement in JVC. Weeg karakter, bereikbaarheid en rendement tegen elkaar af en laat u adviseren voor de juiste keuze.

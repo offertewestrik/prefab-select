@@ -51,6 +51,12 @@ De ligging van de school bepaalt mede uw woonkeuze, omdat reistijd in Dubai flin
 ## Het schooljaar en instroommomenten
 Het schooljaar in Dubai loopt doorgaans van september tot juni, met het belangrijkste instroommoment in september. Tussentijds instromen kan vaak wel, maar de keuze is dan beperkter en populaire scholen kunnen vol zitten. Veel gezinnen stemmen hun verhuizing af op de start van het schooljaar, zodat de kinderen direct kunnen meedraaien en wennen aan de nieuwe omgeving. Plan uw aanmelding en verhuizing dus in samenhang.
 
+## Aansluiting op het Nederlandse onderwijs
+Voor gezinnen die mogelijk terugkeren naar Nederland, is de aansluiting op het Nederlandse onderwijs een belangrijk aandachtspunt. Internationale curricula zoals Brits en IB worden in Nederland erkend voor toelating tot het hoger onderwijs, maar de overstap naar een Nederlandse middelbare school halverwege kan lastiger zijn vanwege verschillen in vakken en niveau-indeling. Sommige ouders kiezen daarom voor extra Nederlandse taal- en cultuurlessen, die op sommige scholen of via aanvullende programma's worden aangeboden. Denk vooruit over uw mogelijke terugkeer en stem de schoolkeuze daarop af, zodat uw kind later soepel kan instromen.
+
+## Buitenschoolse activiteiten en faciliteiten
+Internationale scholen in Dubai bieden vaak uitgebreide faciliteiten en buitenschoolse activiteiten, van sport en muziek tot wetenschap en kunst. Voor veel gezinnen weegt dit mee in de keuze, omdat het de ontwikkeling en integratie van hun kind ondersteunt. Moderne scholen beschikken regelmatig over sportvelden, zwembaden, laboratoria en theaters. Houd er rekening mee dat sommige activiteiten extra kosten met zich meebrengen. Bij een schoolbezoek loont het de moeite te vragen naar het naschoolse aanbod en hoe nieuwe leerlingen daarin worden opgenomen, want dit draagt sterk bij aan hoe snel uw kind zich thuis voelt.
+
 ## Praktische tips voor ouders
 Een paar adviezen om het schoolproces soepel te laten verlopen:
 

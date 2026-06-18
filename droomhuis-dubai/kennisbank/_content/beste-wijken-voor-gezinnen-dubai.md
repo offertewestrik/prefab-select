@@ -59,13 +59,20 @@ Houd er rekening mee dat populaire scholen wachtlijsten kennen en dat de schoolg
 ## Veiligheid en gemeenschap
 Dubai behoort tot de veiligste steden ter wereld, met zeer lage criminaliteit. Gated gezinswijken bieden daarbovenop extra rust en beveiliging. De hechte communities, met community centres en evenementen, maken het makkelijk om als gezin aansluiting te vinden.
 
+## Kopen of huren als gezin?
+Veel gezinnen die naar Dubai verhuizen, huren eerst een jaar om de stad en de wijken te leren kennen voordat ze kopen. Dat is een verstandige aanpak: u ervaart het dagelijks leven, de schoolroute en de gemeenschap voordat u zich vastlegt.
+
+Kopen wordt aantrekkelijk zodra u langer in Dubai wilt blijven. De voordelen zijn duidelijk: geen jaarlijkse huurstijgingen, opbouw van vermogen en, bij een aankoop vanaf AED 2 miljoen, mogelijk toegang tot de Golden Visa voor het hele gezin. Tegelijk brengt kopen eenmalige kosten en doorlopende service charges met zich mee.
+
+Voor gezinnen die kopen, geldt: kies een wijk en woning die meegroeit met het gezin. Een ruime villa of townhouse met tuin in een gevestigde wijk biedt stabiliteit en waardevastheid. Een grondgebonden gezinswoning in een Emaar-wijk behoudt doorgaans goed zijn waarde, wat ook bij een eventuele toekomstige verkoop prettig is.
+
 ## Welke gezinswijk past bij u?
 - Centraal, groen en premium: Dubai Hills Estate
 - Rustig, ruim en gevestigd: Arabian Ranches
 - Betaalbaar met goede voorzieningen: JVC
 - Stedelijk en aan het water: Dubai Marina, JBR
 
-Wilt u alle wijken breder vergelijken, lees dan de overzichtsgids over de [beste wijken van Dubai](slug:beste-wijken-van-dubai).
+Wilt u alle wijken breder vergelijken, lees dan de overzichtsgids over de [beste wijken van Dubai](slug:beste-wijken-van-dubai). Laat u adviseren over de match tussen wijk, school en budget, zodat u een keuze maakt die voor jaren past.
 
 ## Conclusie
 De beste gezinswijk in Dubai hangt af van uw budget en voorkeuren. Dubai Hills Estate en Arabian Ranches bieden ruime villa's, groen en topscholen; JVC is het betaalbare alternatief; en Marina of JBR passen bij wie stedelijk aan het water wil wonen. Weeg scholen, ruimte, prijs en bereikbaarheid af om de juiste keuze te maken voor uw gezin.

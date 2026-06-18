@@ -38,7 +38,7 @@ De makelaarscourtage bedraagt doorgaans 2% van de koopsom, vermeerderd met 5% bt
 Bij doorverkoop van een bestaande woning is een NOC (No Objection Certificate) van de ontwikkelaar nodig. Deze bevestigt dat er geen openstaande service charges zijn en dat de ontwikkelaar geen bezwaar heeft tegen de overdracht. De kosten lopen uiteen van enkele honderden tot enkele duizenden AED, afhankelijk van de ontwikkelaar. Bij off-plan vindt registratie plaats via Oqood in plaats van een directe title deed.
 
 ## Kosten bij off-plan
-Koopt u off-plan, dan beschermt een wettelijk verplichte escrow-rekening uw betalingen. De registratie verloopt via Oqood, en pas bij oplevering ontvangt u de definitieve title deed. Betaalplannen spreiden de kosten over de bouwperiode, maar de DLD-belasting blijft verschuldigd. Lees meer over [betaalplannen bij off-plan](slug:betaalplannen-off-plan-dubai).
+Koopt u off-plan, dan beschermt een wettelijk verplichte escrow-rekening uw betalingen. De registratie verloopt via Oqood, en pas bij oplevering ontvangt u de definitieve title deed. Betaalplannen spreiden de kosten over de bouwperiode, maar de DLD-belasting blijft verschuldigd. Controleer altijd of het project een geregistreerde escrow-rekening heeft.
 
 ## Financieringskosten
 Sluit u een hypotheek af, dan komen er kosten bij:
@@ -47,10 +47,10 @@ Sluit u een hypotheek af, dan komen er kosten bij:
 - Taxatiekosten: enkele duizenden AED
 - Eventueel een gekoppelde levensverzekering
 
-Bekijk de details in [hoe een hypotheek in Dubai werkt](slug:hoe-werkt-een-hypotheek-in-dubai). Reken deze posten mee bij uw budget als u financiert.
+Reken deze financieringskosten mee bij uw budget als u een hypotheek afsluit; ze kunnen samen oplopen tot enkele procenten van het leenbedrag.
 
 ## Doorlopende kosten na aankoop
-Na de aankoop betaalt u jaarlijkse [service charges](slug:service-charges-dubai) voor onderhoud van het gebouw of de community. Deze worden berekend per vierkante voet en verschillen sterk per project. Daarnaast betaalt u nutsvoorzieningen via DEWA en, bij verhuur, de Ejari-registratie. Deze lasten drukken het netto rendement en horen dus in elke berekening thuis.
+Na de aankoop betaalt u jaarlijkse [service charges](slug:service-charges-dubai) voor onderhoud van het gebouw of de community, berekend per vierkante voet en sterk verschillend per project. Daarnaast betaalt u nutsvoorzieningen via DEWA en, bij verhuur, de Ejari-registratie. Deze lasten drukken het netto rendement en horen dus in elke berekening thuis.
 
 ## Rekenvoorbeeld
 Bij een appartement van AED 1.500.000 ziet de eenmalige rekensom er ongeveer zo uit:

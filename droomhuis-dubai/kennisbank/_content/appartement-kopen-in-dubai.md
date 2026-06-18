@@ -24,7 +24,7 @@ Belangrijke voordelen op een rij:
 Tegelijk is het verstandig om met realistische verwachtingen te beginnen. De markt kent schommelingen, en niet elk appartement levert hetzelfde rendement op. Wijk, gebouw, oplevering en beheer maken een groot verschil.
 
 ## Freehold en eigendom voor buitenlanders
-Als buitenlander kunt u in zogenoemde freehold-zones 100% eigendom verkrijgen. U ontvangt dan een title deed (eigendomsbewijs) van het Dubai Land Department (DLD). Buiten freehold-zones geldt vaak leasehold, waarbij u het gebruiksrecht voor een lange periode verwerft maar niet de volledige eigendom. Wilt u het verschil precies begrijpen, lees dan [freehold versus leasehold in Dubai](slug:freehold-vs-leasehold-dubai).
+Als buitenlander kunt u in zogenoemde freehold-zones 100% eigendom verkrijgen. U ontvangt dan een title deed (eigendomsbewijs) van het Dubai Land Department (DLD). Buiten freehold-zones geldt vaak leasehold, waarbij u het gebruiksrecht voor een lange periode verwerft maar niet de volledige eigendom. Het is belangrijk dit onderscheid vooraf te begrijpen.
 
 Populaire freehold-wijken voor appartementen zijn onder andere [Dubai Marina](slug:dubai-marina-appartementen), Downtown, Business Bay, JVC en Dubai Creek Harbour. Elk van deze wijken heeft een eigen karakter, prijsniveau en huurdersprofiel, wat invloed heeft op uw strategie.
 
@@ -56,7 +56,7 @@ Naast de koopsom betaalt u eenmalige aankoopkosten. Reken globaal op 6 tot 8% bo
 - Eventuele NOC-kosten en registratiekosten
 - Bij financiering: hypotheekregistratie en bankkosten
 
-Een volledig overzicht vindt u in ons artikel over [kosten koper in Dubai](slug:kosten-koper-dubai). Vergeet daarnaast de doorlopende [service charges](slug:service-charges-dubai) niet, die het onderhoud van het gebouw en de gemeenschappelijke voorzieningen dekken en het netto rendement beïnvloeden.
+Een volledig overzicht vindt u in ons artikel over [kosten koper in Dubai](slug:kosten-koper-dubai). Vergeet daarnaast de doorlopende service charges niet, die het onderhoud van het gebouw en de gemeenschappelijke voorzieningen dekken en het netto rendement beïnvloeden.
 
 ## Nieuwbouw (off-plan) of bestaande bouw?
 U kunt kiezen tussen een bestaand appartement of een off-plan project dat nog gebouwd wordt. Off-plan biedt vaak gespreide betaalplannen en lagere instapprijzen, maar kent bouw- en opleverrisico's. Bestaande bouw levert direct huurinkomsten op en u ziet precies wat u koopt.
@@ -64,7 +64,7 @@ U kunt kiezen tussen een bestaand appartement of een off-plan project dat nog ge
 Bij off-plan worden uw betalingen beschermd via wettelijk verplichte escrow-rekeningen en geregistreerd via Oqood. Pas bij oplevering ontvangt u de definitieve title deed. Lees meer over de afweging in [off-plan versus bestaande bouw](slug:off-plan-vs-bestaande-bouw-dubai).
 
 ## Financiering en down payment
-Niet-residenten kunnen meestal een hypotheek krijgen tot 50-60% LTV, wat een aanbetaling van 40-50% betekent. Residenten komen vaak tot 75-80%. Bij off-plan begint de aanbetaling regelmatig al vanaf 10-20%, waarna u de rest in termijnen betaalt. Bekijk de details over [hoe een hypotheek in Dubai werkt](slug:hoe-werkt-een-hypotheek-in-dubai). Een hypotheek-preapproval geeft u vooraf duidelijkheid over uw budget en versterkt uw onderhandelingspositie.
+Niet-residenten kunnen meestal een hypotheek krijgen tot 50-60% LTV, wat een aanbetaling van 40-50% betekent. Residenten komen vaak tot 75-80%. Bij off-plan begint de aanbetaling regelmatig al vanaf 10-20%, waarna u de rest in termijnen betaalt. Een hypotheek-preapproval geeft u vooraf duidelijkheid over uw budget en versterkt uw onderhandelingspositie.
 
 ## Het koopproces in stappen
 Het proces is overzichtelijk en goed gereguleerd door DLD en RERA:

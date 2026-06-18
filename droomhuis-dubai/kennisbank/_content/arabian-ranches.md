@@ -63,5 +63,14 @@ De waardevastheid is een belangrijk argument. Grondgebonden woningen in gevestig
 
 Aandachtspunten zijn het lagere bruto rendement, de afstand tot het stadscentrum en service charges die bij grote villa's en gemeenschapsvoorzieningen oplopen. Bij oudere villa's kunnen daarnaast onderhouds- of renovatiekosten een rol spelen. Wie villa's en gezinslocaties vergelijkt, weegt Arabian Ranches af tegen [andere gezinswijken](slug:beste-wijken-voor-gezinnen-dubai) zoals Dubai Hills.
 
+## De drie fasen van Arabian Ranches
+Arabian Ranches is in de loop der jaren uitgebreid tot drie deelgebieden, elk met een eigen karakter en prijsniveau.
+
+- **Arabian Ranches (fase 1)**: de oorspronkelijke wijk, volledig volgroeid, met volwassen beplanting, gevestigde scholen en de golfbaan. Geliefd om de rust en de gemeenschapssfeer.
+- **Arabian Ranches 2**: modernere villa's en townhouses rond een centraal community-park en sportvoorzieningen, met een iets eigentijdser karakter.
+- **Arabian Ranches 3**: de nieuwste fase met hedendaagse architectuur, nieuwe voorzieningen en doorgaans toegankelijkere instapprijzen voor townhouses.
+
+Welke fase het best past, hangt af van uw budget en voorkeur voor een gevestigde of nieuwere omgeving. Wie waarde hecht aan volwassen groen en een bewezen community kiest fase 1; wie een moderne woning tegen een scherpere prijs zoekt, kijkt naar de nieuwere fasen. Vergelijk de opties altijd ook met een gids over [villa's kopen in Dubai](slug:villa-kopen-in-dubai) om de bredere markt te begrijpen.
+
 ## Conclusie
 Arabian Ranches is een gevestigde, rustige villawijk die ruimte, groen en een hechte gemeenschap biedt aan gezinnen. De Emaar-kwaliteit en waardevastheid maken het een stabiele keuze voor de lange termijn. Houd rekening met de afstand tot de stad, de afhankelijkheid van de auto en het bescheidener rendement dat bij villawijken hoort.

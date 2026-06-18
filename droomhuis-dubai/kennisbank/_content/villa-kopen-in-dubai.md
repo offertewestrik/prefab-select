@@ -78,7 +78,7 @@ Het villakoopproces verloopt vergelijkbaar met dat van een appartement en is ger
 Veel villa's liggen in gated communities met gedeelde voorzieningen zoals parken, zwembaden, sportscholen, scholen en winkels. Deze voorzieningen verhogen het woongenot en de waarde, maar brengen ook service charges met zich mee voor het onderhoud. Beoordeel bij uw keuze de kwaliteit van het beheer en de community: een goed onderhouden omgeving houdt zijn waarde beter vast en is aantrekkelijker voor huurders.
 
 ## Off-plan villa of bestaande bouw?
-Bij een off-plan villa profiteert u van gespreide betaalplannen en vaak een lagere instapprijs, maar u koopt iets dat nog gebouwd wordt. Bestaande villa's bieden zekerheid: u ziet de woning, de community is af en u kunt direct verhuren of betrekken. Weeg de voordelen tegen elkaar af. Lees meer in [off-plan versus bestaande bouw](slug:off-plan-vs-bestaande-bouw-dubai). Bij off-plan beschermt een wettelijke escrow-rekening uw betalingen.
+Bij een off-plan villa profiteert u van gespreide betaalplannen en vaak een lagere instapprijs, maar u koopt iets dat nog gebouwd wordt. Bestaande villa's bieden zekerheid: u ziet de woning, de community is af en u kunt direct verhuren of betrekken. Weeg de voordelen tegen elkaar af. Bij off-plan beschermt een wettelijke escrow-rekening uw betalingen tijdens de bouw.
 
 ## Voor wie is een villa geschikt?
 Een villa past goed bij:

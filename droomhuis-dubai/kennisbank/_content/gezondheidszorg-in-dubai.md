@@ -51,6 +51,12 @@ Gezinnen kiezen vaak een uitgebreidere polis met dekking voor kinderen, zwangers
 ## Apotheken en medicijnen
 Apotheken zijn ruim aanwezig en vaak lang geopend. Veel medicijnen zijn verkrijgbaar, maar let op: sommige in Nederland gangbare medicatie is in de VAE strikt gereguleerd of vereist een recept en soms een vergunning. Neem bij verhuizing voldoende voorraad en de bijbehorende recepten mee, en informeer vooraf of uw medicijnen toegestaan zijn. Dit voorkomt problemen bij invoer en zorgt voor continuïteit van uw behandeling.
 
+## Spoedeisende hulp en noodnummers
+In geval van nood is de medische zorg in Dubai snel en goed bereikbaar. Ziekenhuizen beschikken over moderne spoedeisende hulp en ambulances zijn doorgaans snel ter plaatse. Het is verstandig om bij aankomst de lokale noodnummers te noteren en te weten welk ziekenhuis het dichtst bij uw woning ligt en in uw verzekeringsnetwerk valt. Houd uw verzekeringsgegevens en Emirates ID altijd bij de hand, want deze worden bij opname gevraagd. Bij acute, levensbedreigende situaties wordt zorg in de regel direct verleend, maar de afhandeling en kosten verlopen alsnog via uw polis.
+
+## Zwangerschap en bevallen in Dubai
+Voor gezinnen die hun gezin willen uitbreiden, is het belangrijk te weten dat zwangerschapszorg en bevallingen vaak aparte dekking vereisen binnen een zorgverzekering. Niet elke basispolis dekt deze kosten volledig, en sommige polissen kennen een wachttijd voordat zwangerschapszorg wordt vergoed. De zorg rond zwangerschap en bevalling is van hoog niveau, met moderne klinieken en gespecialiseerde ziekenhuizen. Controleer ruim van tevoren of uw polis voldoende dekking biedt en welke voorwaarden gelden, zodat u niet voor onverwachte kosten komt te staan.
+
 ## Praktische tips
 Een paar adviezen om goed voorbereid te zijn:
 
