@@ -12,19 +12,23 @@
 
   /* ---- nav scroll + mobile menu ------------------------------------- */
   const nav = $("#nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+  if (nav) {
+    const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
 
   const burger = $("#burger"), navLinks = $("#navLinks");
-  burger.addEventListener("click", () => {
-    const open = navLinks.classList.toggle("open");
-    burger.classList.toggle("open", open);
-    document.body.style.overflow = open ? "hidden" : "";
-  });
-  $$("#navLinks a").forEach((a) => a.addEventListener("click", () => {
-    navLinks.classList.remove("open"); burger.classList.remove("open"); document.body.style.overflow = "";
-  }));
+  if (burger && navLinks) {
+    const setMenu = (open) => {
+      navLinks.classList.toggle("open", open);
+      burger.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", String(open));
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    burger.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+    $$("a", navLinks).forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  }
 
   /* ---- reveal on scroll --------------------------------------------- */
   const io = new IntersectionObserver(
@@ -38,7 +42,7 @@
   if (locGrid) {
     locGrid.innerHTML = D.LOCATIONS.map((l) => `
       <a class="loc-card" href="${l.href}">
-        <div class="loc-img"><img loading="lazy" src="${l.img}" alt="${l.name}"></div>
+        <div class="loc-img"><img loading="lazy" width="800" height="600" src="${l.img}" alt="Vastgoed te koop in ${l.name}, Dubai — ${l.desc}"></div>
         <div class="loc-cap">
           <h3>${l.name}</h3>
           <p>${l.desc}</p>
@@ -57,7 +61,7 @@
     propGrid.innerHTML = D.PROPERTIES.map((p) => `
       <article class="prop">
         <div class="prop-img">
-          <img loading="lazy" src="${p.img}" alt="${p.name} — ${p.loc}">
+          <img loading="lazy" width="1000" height="750" src="${p.img}" alt="${p.name} — luxe woning te koop in ${p.loc}, Dubai">
           <span class="prop-tag">${p.tag}</span>
           <div class="prop-imgcap">
             <h3>${p.name}</h3>
@@ -129,7 +133,7 @@
     const initials = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
     const card = (r) => `
       <article class="review">
-        <div class="r-stars">★★★★★</div>
+        <div class="r-stars" role="img" aria-label="5 van 5 sterren">★★★★★</div>
         <p>${r.text}</p>
         <div class="who">
           <span class="av">${initials(r.name)}</span>
@@ -182,8 +186,11 @@
   handleForm("#contactForm", "#contactSuccess");
 
   /* ---- background videos: autoplay only while in view (performance) -- */
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const vids = $$("video.bgvideo");
-  if (vids.length) {
+  if (vids.length && reduceMotion) {
+    vids.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); });
+  } else if (vids.length) {
     vids.forEach((v) => { v.muted = true; v.setAttribute("muted", ""); });
     const vio = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
@@ -193,6 +200,38 @@
       { threshold: 0.2 }
     );
     vids.forEach((v) => vio.observe(v));
+  }
+
+  /* ---- scroll progress bar ------------------------------------------ */
+  const prog = $("#scrollProgress");
+  if (prog) {
+    let ticking = false;
+    const upd = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+      ticking = false;
+    };
+    upd();
+    window.addEventListener("scroll", () => {
+      if (!ticking) { requestAnimationFrame(upd); ticking = true; }
+    }, { passive: true });
+  }
+
+  /* ---- nav scroll-spy ------------------------------------------------ */
+  const navA = $$("#navLinks a");
+  const secs = ["woningen", "locaties", "diensten", "over", "contact", "rendement"]
+    .map((id) => document.getElementById(id)).filter(Boolean);
+  if (secs.length) {
+    const sp = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const href = "#" + e.target.id;
+          navA.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === href));
+        }
+      }),
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    secs.forEach((s) => sp.observe(s));
   }
 
   observeReveals();
