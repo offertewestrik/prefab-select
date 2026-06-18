@@ -393,6 +393,38 @@ textarea.input { resize: vertical; min-height: 120px; }
 .about-bullets svg { width: 22px; height: 22px; color: var(--gold-deep); flex: none; }
 
 /* ===================================================================
+   INSTAGRAM — altijd het laatste nieuws
+   =================================================================== */
+.insta { background: var(--bg-2); }
+.insta-top { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(30px, 5vw, 70px); align-items: center; margin-bottom: 46px; }
+.insta-copy .ig-handle { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: var(--gold-deep); font-size: 1rem; margin-top: 14px; }
+.insta-copy .ig-handle svg { width: 20px; height: 20px; }
+.insta-copy h2 { font-size: clamp(2.1rem, 4.2vw, 3.2rem); margin: 16px 0 16px; }
+.insta-copy p { color: var(--muted); font-size: 1.1rem; margin: 0 0 26px; max-width: 46ch; }
+.insta-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+.ig-badge { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; background: var(--white); border: 1px solid var(--line-soft); font-size: 0.86rem; font-weight: 500; color: var(--navy); box-shadow: var(--shadow-s); }
+.ig-badge svg { width: 16px; height: 16px; color: var(--gold-deep); }
+.social-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.soc-pill { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 100px; font-size: 0.9rem; font-weight: 600; color: #fff; box-shadow: var(--shadow-s); transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+.soc-pill:hover { transform: translateY(-3px); box-shadow: var(--shadow-m); }
+.soc-pill svg { width: 18px; height: 18px; }
+.soc-pill.ig { background: linear-gradient(120deg, #f58529, #dd2a7b 50%, #8134af); }
+.soc-pill.tt { background: #111418; }
+.soc-pill.fb { background: #1877f2; }
+.soc-pill.li { background: #0a66c2; }
+.insta-stat { display: flex; gap: 36px; }
+.insta-stat div b { font-family: var(--serif); font-size: 2.4rem; font-weight: 600; color: var(--navy); line-height: 1; display: block; }
+.insta-stat div span { font-size: 0.84rem; color: var(--muted); }
+.insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.insta-tile { position: relative; aspect-ratio: 1; border-radius: var(--radius-s); overflow: hidden; box-shadow: var(--shadow-s); }
+.insta-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.insta-tile:hover img { transform: scale(1.1); }
+.insta-tile::after { content: ""; position: absolute; inset: 0; background: rgba(20,33,61,0); transition: background 0.4s; }
+.insta-tile:hover::after { background: rgba(20,33,61,0.45); }
+.insta-tile .ig-ico { position: absolute; inset: 0; margin: auto; width: 34px; height: 34px; color: #fff; opacity: 0; transform: scale(0.8); transition: 0.4s var(--ease); z-index: 2; }
+.insta-tile:hover .ig-ico { opacity: 1; transform: scale(1); }
+
+/* ===================================================================
    KNOWLEDGE CENTER teaser
    =================================================================== */
 .know { background: var(--bg); }
@@ -468,7 +500,8 @@ textarea.input { resize: vertical; min-height: 120px; }
   .know-grid { grid-template-columns: 1fr 1fr; }
   .trust-grid { grid-template-columns: repeat(3, 1fr); }
   .trust-card:nth-child(3)::before { display: none; }
-  .calc-shell, .about-grid, .contact-grid, .rev-feature, .services-row { grid-template-columns: 1fr; }
+  .calc-shell, .about-grid, .contact-grid, .rev-feature, .services-row, .insta-top { grid-template-columns: 1fr; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
   .foot-grid { grid-template-columns: 1fr 1fr 1fr; }
 }
 @media (max-width: 760px) {
@@ -484,6 +517,8 @@ textarea.input { resize: vertical; min-height: 120px; }
   .nav-links.open a { font-size: 1.6rem; font-family: var(--serif); padding: 12px 0; opacity: 1; }
   .why-grid, .know-grid, .props-grid, .creds, .foot-grid, .lf-grid { grid-template-columns: 1fr; }
   .loc-grid { grid-template-columns: 1fr 1fr; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  .insta-stat { gap: 24px; }
   .trust-grid { grid-template-columns: 1fr; }
   .trust-card + .trust-card::before { display: none; }
   .trust { margin-top: -30px; }

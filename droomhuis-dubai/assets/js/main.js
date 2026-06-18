@@ -139,6 +139,26 @@
     track.innerHTML = D.REVIEWS.map(card).join("") + D.REVIEWS.map(card).join("");
   }
 
+  /* ---- instagram feed ------------------------------------------------ */
+  const instaGrid = $("#instaGrid");
+  if (instaGrid) {
+    const igUrl = "https://www.instagram.com/enjoyrealestate.dubai/";
+    const igIco = '<svg class="ig-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+    const imgs = [
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf",
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+    ];
+    instaGrid.innerHTML = imgs.map((src) => `
+      <a class="insta-tile" href="${igUrl}" target="_blank" rel="noopener" aria-label="Bekijk op Instagram">
+        <img loading="lazy" src="${src}?q=80&w=500&auto=format&fit=crop" alt="Dubai vastgoed post op Instagram">
+        ${igIco}
+      </a>`).join("");
+  }
+
   /* ---- forms (demo) -------------------------------------------------- */
   const handleForm = (formId, successId) => {
     const form = $(formId); if (!form) return;
