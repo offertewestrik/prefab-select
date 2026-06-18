@@ -12,7 +12,7 @@ BODY:
 De gezondheidszorg in Dubai staat bekend om haar hoge kwaliteit en moderne voorzieningen. Voor expats is een zorgverzekering bovendien verplicht om een visum te krijgen. In dit artikel leest u hoe het zorgstelsel werkt, wat het kost en waar u op moet letten bij uw verhuizing.
 
 ## Een grotendeels privaat stelsel
-De zorg in Dubai is overwegend privaat. Er zijn talrijke moderne ziekenhuizen, klinieken en gespecialiseerde centra, vaak met internationaal opgeleide artsen. De kwaliteit is hoog en wachttijden zijn doorgaans kort, mits u goed verzekerd bent. Veel zorgverleners spreken Engels, wat de drempel voor Nederlandse expats verlaagt. Het stelsel is sterk gericht op service en comfort, met faciliteiten die vaak vergelijkbaar zijn met particuliere klinieken in West-Europa.
+De zorg in Dubai is overwegend privaat. Er zijn talrijke moderne ziekenhuizen, klinieken en gespecialiseerde centra, vaak met internationaal opgeleide artsen. De kwaliteit is hoog en wachttijden zijn doorgaans kort, mits u goed verzekerd bent. Veel zorgverleners spreken Engels, wat de drempel voor Nederlandse expats verlaagt. Het stelsel is sterk gericht op service en comfort, met faciliteiten die vaak vergelijkbaar zijn met particuliere klinieken in West-Europa. Dubai investeert daarnaast fors in medische voorzieningen en trekt internationaal opgeleide specialisten aan, waardoor ook complexe behandelingen lokaal beschikbaar zijn. Voor veel expats betekent dit dat ze voor vrijwel alle zorg in Dubai terechtkunnen, zonder naar het buitenland te hoeven reizen.
 
 ## Verplichte zorgverzekering
 Een geldige zorgverzekering is een voorwaarde voor uw residentievisum. Zonder dekking kunt u geen visum krijgen of verlengen. De polis bepaalt tot welke ziekenhuizen en behandelingen u toegang heeft, wat de keuze van uw verzekering belangrijk maakt. Let daarom goed op:
@@ -48,17 +48,15 @@ Het zorgstelsel in Dubai werkt anders dan het Nederlandse:
 
 Een goede polis is daardoor belangrijker dan in Nederland, omdat onverzekerde zorg snel kostbaar wordt. Het ontbreken van een verplichte huisartsenroute betekent dat u zelf meer regie heeft, maar ook zelf de juiste zorgverlener moet kiezen.
 
-## Zorg voor gezinnen
+## Zorg voor gezinnen en zwangerschap
 Gezinnen kiezen vaak een uitgebreidere polis met dekking voor kinderen, zwangerschap en tandheelkunde. Houd bij verhuizing rekening met inentingen, medische dossiers en de keuze van een vaste kliniek voor uw kinderen. Een ruime dekking voorkomt onverwachte kosten bij ziekenhuisopname of specialistische zorg. Het is verstandig vooraf te controleren of kinderziekenhuizen en vertrouwde merken in het netwerk van uw polis zitten.
 
-## Apotheken en medicijnen
+Voor wie het gezin wil uitbreiden, is het belangrijk te weten dat zwangerschapszorg en bevallingen vaak aparte dekking vereisen. Niet elke basispolis dekt deze kosten volledig, en sommige polissen kennen een wachttijd voordat zwangerschapszorg wordt vergoed. De zorg rond zwangerschap en bevalling is van hoog niveau, met moderne klinieken en gespecialiseerde ziekenhuizen. Controleer ruim van tevoren of uw polis voldoende dekking biedt en welke voorwaarden gelden, zodat u niet voor onverwachte kosten komt te staan.
+
+## Apotheken, medicijnen en spoedeisende hulp
 Apotheken zijn ruim aanwezig en vaak lang geopend. Veel medicijnen zijn verkrijgbaar, maar let op: sommige in Nederland gangbare medicatie is in de VAE strikt gereguleerd of vereist een recept en soms een vergunning. Neem bij verhuizing voldoende voorraad en de bijbehorende recepten mee, en informeer vooraf of uw medicijnen toegestaan zijn. Dit voorkomt problemen bij invoer en zorgt voor continuïteit van uw behandeling.
 
-## Spoedeisende hulp en noodnummers
 In geval van nood is de medische zorg in Dubai snel en goed bereikbaar. Ziekenhuizen beschikken over moderne spoedeisende hulp en ambulances zijn doorgaans snel ter plaatse. Het is verstandig om bij aankomst de lokale noodnummers te noteren en te weten welk ziekenhuis het dichtst bij uw woning ligt en in uw verzekeringsnetwerk valt. Houd uw verzekeringsgegevens en Emirates ID altijd bij de hand, want deze worden bij opname gevraagd. Bij acute, levensbedreigende situaties wordt zorg in de regel direct verleend, maar de afhandeling en kosten verlopen alsnog via uw polis.
-
-## Zwangerschap en bevallen in Dubai
-Voor gezinnen die hun gezin willen uitbreiden, is het belangrijk te weten dat zwangerschapszorg en bevallingen vaak aparte dekking vereisen binnen een zorgverzekering. Niet elke basispolis dekt deze kosten volledig, en sommige polissen kennen een wachttijd voordat zwangerschapszorg wordt vergoed. De zorg rond zwangerschap en bevalling is van hoog niveau, met moderne klinieken en gespecialiseerde ziekenhuizen. Controleer ruim van tevoren of uw polis voldoende dekking biedt en welke voorwaarden gelden, zodat u niet voor onverwachte kosten komt te staan.
 
 ## Praktische tips
 Een paar adviezen om goed voorbereid te zijn:

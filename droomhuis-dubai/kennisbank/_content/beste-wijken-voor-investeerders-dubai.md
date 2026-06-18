@@ -43,11 +43,10 @@ Onderstaande tabel geeft indicatieve cijfers voor 2026. Werkelijke rendementen v
 | Downtown Dubai | 1.800.000+ | 5-6% | Waardegroei |
 | Palm Jumeirah | 2.500.000+ | 4-6% | Prestige |
 
-## Kies een strategie die bij u past
+## Kies een strategie en verhuurvorm die bij u past
 Wilt u maximaal cashflowrendement, dan passen betaalbare wijken met sterke verhuurvraag het best. Mikt u vooral op waardegroei en een Golden Visa, dan zijn premiumwijken logischer. Veel ervaren beleggers combineren beide: een of meer rendementspanden in betaalbare wijken voor cashflow, aangevuld met een premiumpand voor vermogensgroei en visumvoordelen. Combineer cijfers altijd met een berekening van het netto rendement; ons artikel over [rendement van vastgoed in Dubai](slug:rendement-vastgoed-dubai) helpt daarbij.
 
-## Verhuurstrategie en service charges
-De verhuurstrategie beïnvloedt welke wijk het best past. Toeristische wijken aan het water lenen zich voor kortetermijnverhuur met hogere maar wisselende inkomsten, terwijl residentiële wijken stabielere langetermijnhuurders trekken. Kortetermijnverhuur vraagt meer beheer en kent seizoensinvloeden, maar kan in toplocaties het rendement opkrikken. Langetermijnverhuur biedt voorspelbaarheid en lagere beheerlasten. Stem de wijk dus af op uw beoogde aanpak en op de tijd die u in beheer wilt steken.
+De verhuurstrategie beïnvloedt eveneens welke wijk het best past. Toeristische wijken aan het water lenen zich voor kortetermijnverhuur met hogere maar wisselende inkomsten, terwijl residentiële wijken stabielere langetermijnhuurders trekken. Kortetermijnverhuur vraagt meer beheer en kent seizoensinvloeden, maar kan in toplocaties het rendement opkrikken. Langetermijnverhuur biedt voorspelbaarheid en lagere beheerlasten. Stem de wijk dus af op uw beoogde aanpak en op de tijd die u in beheer wilt steken.
 
 Daarnaast kan een wijk met een hoog bruto rendement tegenvallen zodra de doorlopende kosten meetellen. Service charges verschillen sterk per gebouw en wijk: torens met veel voorzieningen zoals zwembaden, gyms en conciërgediensten rekenen meer. Deze lasten drukken direct op uw netto rendement. Vraag daarom altijd de actuele service charges op voordat u koopt, en betrek ze in uw berekening naast eventuele leegstand en beheerkosten. Een verschil van enkele dirham per vierkante voet kan op jaarbasis duizenden dirham schelen.
 

@@ -20,7 +20,7 @@ Dubai kenmerkt zich door zeer lage criminaliteit. Geweldsdelicten, inbraken en s
 - Strikte straffen die afschrikkend werken
 - Een stabiele en welvarende samenleving
 
-Veel bewoners ervaren het als normaal om ook 's avonds veilig over straat te gaan en waardevolle spullen onbezorgd bij zich te dragen. Dit gevoel van veiligheid is een van de meest genoemde redenen waarom expats zich in Dubai prettig voelen.
+Veel bewoners ervaren het als normaal om ook 's avonds veilig over straat te gaan en waardevolle spullen onbezorgd bij zich te dragen. Dit gevoel van veiligheid is een van de meest genoemde redenen waarom expats zich in Dubai prettig voelen. Verloren voorwerpen worden bovendien opvallend vaak teruggevonden of teruggebracht, wat illustreert hoe sterk de sociale controle en de eerlijkheidsnorm in de stad zijn. Voor gezinnen en alleenstaanden geeft dit een gevoel van vrijheid dat in veel grote steden elders ontbreekt.
 
 ## Veilig voor gezinnen
 Voor gezinnen is Dubai aantrekkelijk vanwege de combinatie van veiligheid en voorzieningen. Kinderen kunnen relatief vrij bewegen in woonwijken, en openbare ruimtes, parken en winkelcentra zijn goed bewaakt. Veel residentiële wijken zijn afgesloten of voorzien van beveiliging, wat ouders extra gerust stelt. Bij de keuze van een woonwijk speelt veiligheid mee naast scholen en voorzieningen; lees [de beste wijken voor gezinnen in Dubai](slug:beste-wijken-voor-gezinnen-dubai).

@@ -174,7 +174,7 @@ const FOOTER = `
         </div>
       </div>
       <div class="foot-bottom">
-        <span>Droomhuis in Dubai © ${new Date().getFullYear()} · Joy van den Hurk</span>
+        <span>Droomhuis in Dubai © ${new Date().getFullYear()} · Joy Al Tahat</span>
         <span><a href="../index.html#top">Home</a> · Demo-ontwerp</span>
       </div>
     </div>
@@ -197,10 +197,10 @@ const HEAD = (title, desc, canonical, jsonld) => `<!doctype html>
   <meta property="og:locale" content="nl_NL" />
   <meta property="og:url" content="${canonical}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='62' fill='%23d9b673' text-anchor='middle' font-weight='600'%3ED%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23c9a76a'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='60' fill='%2314213d' text-anchor='middle' font-weight='700'%3ED%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/kennisbank.css" />
 ${jsonld}
@@ -249,7 +249,7 @@ function renderArticle(a, byslug) {
     inLanguage: "nl-NL",
     datePublished: UPDATED,
     dateModified: UPDATED,
-    author: { "@type": "Person", name: "Joy van den Hurk", jobTitle: "Luxury Real Estate Advisor Dubai" },
+    author: { "@type": "Person", name: "Joy Al Tahat", jobTitle: "Luxury Real Estate Advisor Dubai" },
     publisher: { "@type": "Organization", name: "Droomhuis in Dubai", url: SITE },
     mainEntityOfPage: canonical,
     keywords: a.keywords.join(", "),
@@ -296,15 +296,15 @@ function renderArticle(a, byslug) {
           ${bodyHtml}
           ${faqHtml}
           <div class="author-box">
-            <div class="author-av">JH</div>
+            <div class="author-av">JT</div>
             <div>
-              <b>Joy van den Hurk</b>
-              <span>Luxury Real Estate Advisor · Dubai</span>
+              <b>Joy Al Tahat</b>
+              <span>Nederlandse Luxury Real Estate Advisor · Dubai</span>
               <p>Joy begeleidt Nederlandse en internationale klanten van A tot Z bij het kopen, verkopen, verhuren en investeren in Dubai-vastgoed.</p>
             </div>
           </div>
           ${relatedHtml}
-          <section class="cta-band reveal">
+          <section class="kb-cta reveal">
             <div>
               <h2>Persoonlijk advies over ${esc(a.h1.toLowerCase())}?</h2>
               <p>Plan een vrijblijvend adviesgesprek met Joy en ontdek wat er voor uw situatie mogelijk is in Dubai.</p>
@@ -377,7 +377,7 @@ function renderIndex(articles) {
     <div class="wrap">
       <p class="kb-noresult" id="kbNoResult" hidden>Geen artikelen gevonden. Probeer een andere zoekterm.</p>
       ${sections}
-      <section class="cta-band reveal" style="margin-top:60px">
+      <section class="kb-cta reveal" style="margin-top:60px">
         <div>
           <h2>Staat uw vraag er niet bij?</h2>
           <p>Joy beantwoordt al uw vragen over vastgoed in Dubai persoonlijk en vrijblijvend.</p>

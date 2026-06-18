@@ -19,7 +19,7 @@ Om langdurig in Dubai te wonen heeft u een residentievisum nodig. Zonder visum k
 - Een [investor visa via vastgoed](slug:investor-visa-via-vastgoed-dubai)
 - De 10-jarige [Golden Visa](slug:golden-visa-dubai) bij vastgoed vanaf AED 2 miljoen
 
-Welke route het best past, hangt af van uw situatie: werkt u in loondienst, start u een bedrijf of investeert u in vastgoed? Met een residentievisum krijgt u een Emirates ID, toegang tot het bankwezen en de mogelijkheid uw gezin te sponsoren.
+Welke route het best past, hangt af van uw situatie: werkt u in loondienst, start u een bedrijf of investeert u in vastgoed? Met een residentievisum krijgt u een Emirates ID, toegang tot het bankwezen en de mogelijkheid uw gezin te sponsoren. Het visum vormt daarmee de sleutel tot vrijwel alle praktische zaken in Dubai, van een huurcontract tot een telefoonabonnement. Het loont daarom om vroeg in uw planning te bepalen welke route haalbaar is en wat de doorlooptijd en kosten zijn, zodat u niet voor verrassingen komt te staan bij aankomst.
 
 ## Fiscale gevolgen voor Nederlanders
 Dubai heft geen inkomstenbelasting, maar dat betekent niet automatisch dat u nergens belasting betaalt. Uw emigratie uit Nederland moet correct worden geregeld, waarbij onder meer de 183-dagenregel, uw woonplaats en eventuele vermogensbestanddelen meespelen. Een onjuiste afwikkeling kan leiden tot dubbele heffing of naheffingen. Belangrijk is het onderscheid tussen een visum hebben en daadwerkelijk fiscaal emigreren: dat zijn twee verschillende dingen. Schakel daarom altijd een fiscalist in die ervaring heeft met emigratie naar de VAE, voordat u onomkeerbare stappen zet.

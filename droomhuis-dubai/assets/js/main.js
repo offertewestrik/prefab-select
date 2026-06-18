@@ -1,193 +1,143 @@
 /* =====================================================================
-   Droomhuis in Dubai — interactions
+   Droomhuis in Dubai — homepage interactions
    ===================================================================== */
 (function () {
   "use strict";
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
-  const D = window.DH || { PROPERTIES: [], AREAS: [], REVIEWS: [] };
+  const D = window.DH || { PROPERTIES: [], LOCATIONS: [], REVIEWS: [] };
 
   /* ---- year ---------------------------------------------------------- */
   const yr = $("#year"); if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ---- nav scroll state + mobile menu -------------------------------- */
+  /* ---- nav scroll + mobile menu ------------------------------------- */
   const nav = $("#nav");
   const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  const burger = $("#burger");
-  const navLinks = $("#navLinks");
+  const burger = $("#burger"), navLinks = $("#navLinks");
   burger.addEventListener("click", () => {
     const open = navLinks.classList.toggle("open");
     burger.classList.toggle("open", open);
     document.body.style.overflow = open ? "hidden" : "";
   });
-  $$("#navLinks a").forEach((a) =>
-    a.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      burger.classList.remove("open");
-      document.body.style.overflow = "";
-    })
-  );
+  $$("#navLinks a").forEach((a) => a.addEventListener("click", () => {
+    navLinks.classList.remove("open"); burger.classList.remove("open"); document.body.style.overflow = "";
+  }));
 
-  /* ---- reveal on scroll ---------------------------------------------- */
+  /* ---- reveal on scroll --------------------------------------------- */
   const io = new IntersectionObserver(
     (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
-    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
   );
   const observeReveals = () => $$(".reveal:not(.in)").forEach((el) => io.observe(el));
 
-  /* ---- count-up stats ------------------------------------------------ */
-  const countUp = (el) => {
-    const target = parseFloat(el.dataset.count);
-    const suffix = el.dataset.suffix || "";
-    const dur = 1400; const start = performance.now();
-    const step = (now) => {
-      const p = Math.min((now - start) / dur, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      const val = Math.round(target * ease);
-      el.textContent = val + suffix;
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  const statIO = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (e.isIntersecting) { countUp(e.target); statIO.unobserve(e.target); }
-  }), { threshold: 0.6 });
-  $$("[data-count]").forEach((el) => statIO.observe(el));
+  /* ---- locations ----------------------------------------------------- */
+  const locGrid = $("#locGrid");
+  if (locGrid) {
+    locGrid.innerHTML = D.LOCATIONS.map((l) => `
+      <a class="loc-card" href="${l.href}">
+        <div class="loc-img"><img loading="lazy" src="${l.img}" alt="${l.name}"></div>
+        <div class="loc-cap">
+          <h3>${l.name}</h3>
+          <p>${l.desc}</p>
+          <span class="loc-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>`).join("");
+  }
 
   /* ---- properties ---------------------------------------------------- */
-  const grid = $("#propsGrid");
   const pin = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
-  const renderProps = (filter) => {
-    const items = D.PROPERTIES.filter((p) => filter === "all" || p.cat === filter);
-    grid.innerHTML = items.map((p) => `
-      <article class="prop${p.feat ? " feat" : ""}" data-cat="${p.cat}">
-        <div class="prop-img"><img loading="lazy" src="${p.img}" alt="${p.name} — ${p.loc}"></div>
-        <span class="prop-tag">${p.tag}</span>
-        <div class="prop-roi glass"><b>${p.roi}</b><span>ROI p/j</span></div>
-        <div class="prop-body">
-          <div class="prop-loc">${pin}${p.loc}</div>
-          <h3>${p.name}</h3>
-          <div class="prop-price">${p.price}</div>
-          <div class="prop-meta">
-            <div><b>${p.beds}</b><small>Slaapk.</small></div>
-            <div><b>${p.baths}</b><small>Badk.</small></div>
-            <div><b>${p.area}</b><small>Opp.</small></div>
+  const bedIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 18v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5M3 18v2M21 18v2M3 13h18M6 11V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg>';
+  const bathIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12V6a2 2 0 0 1 4 0M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-2ZM6 19l-1 2M18 19l1 2"/></svg>';
+  const areaIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>';
+  const propGrid = $("#propsGrid");
+  if (propGrid) {
+    propGrid.innerHTML = D.PROPERTIES.map((p) => `
+      <article class="prop">
+        <div class="prop-img">
+          <img loading="lazy" src="${p.img}" alt="${p.name} — ${p.loc}">
+          <span class="prop-tag">${p.tag}</span>
+          <div class="prop-imgcap">
+            <h3>${p.name}</h3>
+            <div class="prop-loc">${pin}${p.loc}</div>
           </div>
         </div>
+        <div class="prop-info">
+          <div class="prop-specs">
+            <div>${bedIco}${p.beds}</div>
+            <div>${bathIco}${p.baths}</div>
+            <div>${areaIco}${p.area}</div>
+          </div>
+          <div class="prop-figs">
+            <div class="prop-price">${p.price}<small>Vanaf</small></div>
+            <div class="prop-roi"><b>${p.roi}</b><span>ROI</span></div>
+          </div>
+          <a class="prop-more" href="#contact">Lees meer
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
       </article>`).join("");
-    observeReveals();
-    $$(".prop", grid).forEach((el, i) => { el.classList.add("reveal"); el.dataset.d = (i % 3) + 1; io.observe(el); });
-  };
-  renderProps("all");
-  $$("#filters .filter").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      $$("#filters .filter").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      renderProps(btn.dataset.f);
-    })
-  );
+  }
 
-  /* ---- interactive Dubai map ----------------------------------------- */
-  const pinsSvg = $("#mapPins");
-  const setArea = (a) => {
-    $("#areaTag").textContent = a.tag;
-    $("#areaName").textContent = a.name;
-    $("#areaDesc").textContent = a.desc;
-    $("#areaPrice").textContent = a.price;
-    $("#areaRoi").textContent = a.roi;
-    $$(".hot", pinsSvg).forEach((g) => g.classList.toggle("active", g.dataset.id === a.id));
-  };
-  pinsSvg.innerHTML = D.AREAS.map((a) => `
-    <g class="hot" data-id="${a.id}" transform="translate(${a.x}, ${a.y})">
-      <circle class="pulse" r="3"/>
-      <circle class="ring" r="6"/>
-      <circle r="3"/>
-      <text x="9" y="3">${a.name}</text>
-    </g>`).join("");
-  $$(".hot", pinsSvg).forEach((g) => {
-    const a = D.AREAS.find((x) => x.id === g.dataset.id);
-    g.addEventListener("click", () => setArea(a));
-    g.addEventListener("mouseenter", () => setArea(a));
-  });
-  if (D.AREAS[0]) setArea(D.AREAS[0]);
-
-  /* ---- calculator ---------------------------------------------------- */
+  /* ---- ROI calculator + dashboard ----------------------------------- */
   const fmt = (n) => "AED " + Math.round(n).toLocaleString("nl-NL");
-  const pct = (n) => n.toFixed(1).replace(".", ",") + "%";
   const setRangeFill = (input) => {
     const min = +input.min, max = +input.max, v = +input.value;
     input.style.setProperty("--p", ((v - min) / (max - min)) * 100 + "%");
   };
-
-  // tabs
-  $$(".calc-tab").forEach((tab) =>
-    tab.addEventListener("click", () => {
-      const t = tab.dataset.tab;
-      $$(".calc-tab").forEach((x) => x.classList.toggle("active", x === tab));
-      $$(".calc-pane").forEach((p) => { p.hidden = p.dataset.pane !== t; });
-    })
-  );
-
-  // ROI
-  const cPrice = $("#c-price"), cRent = $("#c-rent"), cCost = $("#c-cost");
-  const calcRoi = () => {
-    const price = +cPrice.value, rent = +cRent.value, cost = +cCost.value;
+  const cPrice = $("#c-price"), cRent = $("#c-rent"), cDown = $("#c-down");
+  const chart = $("#calcChart");
+  if (chart) {
+    // decorative 12-month bar chart that grows toward year-end
+    const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"];
+    const bw = 360 / 12;
+    chart.innerHTML = months.map((m, i) => {
+      const h = 26 + Math.round((i / 11) * 64 + (i % 2 ? 4 : 0));
+      const x = i * bw + 4;
+      return `<rect x="${x}" y="${100 - h}" width="${bw - 8}" height="${h}" rx="2" fill="${i >= 9 ? "#c9a76a" : "rgba(201,167,106,0.45)"}"></rect>`;
+    }).join("");
+  }
+  const calc = () => {
+    const price = +cPrice.value, rent = +cRent.value, downPct = +cDown.value;
     $("#lbl-price").textContent = fmt(price);
     $("#lbl-rent").textContent = fmt(rent);
-    $("#lbl-cost").textContent = fmt(cost);
-    const gross = (rent / price) * 100;
-    const netIncome = rent - cost;
-    const net = (netIncome / price) * 100;
-    const payback = netIncome > 0 ? price / netIncome : 0;
-    $("#r-net").textContent = net.toFixed(1).replace(".", ",");
-    $("#r-gross").textContent = pct(gross);
-    $("#r-income").textContent = fmt(netIncome);
-    $("#r-payback").textContent = payback > 0 ? Math.round(payback) + " jaar" : "—";
-    [cPrice, cRent, cCost].forEach(setRangeFill);
-  };
-  [cPrice, cRent, cCost].forEach((el) => el.addEventListener("input", calcRoi));
-  calcRoi();
+    $("#lbl-down").textContent = downPct + "%";
 
-  // Mortgage
-  const mPrice = $("#m-price"), mDown = $("#m-down"), mTerm = $("#m-term"), mRate = $("#m-rate");
-  const calcMortgage = () => {
-    const price = +mPrice.value, down = +mDown.value, term = +mTerm.value, rate = +mRate.value;
-    $("#lbl-mprice").textContent = fmt(price);
-    $("#lbl-down").textContent = down + "%";
-    $("#lbl-term").textContent = term + " jaar";
-    $("#lbl-rate").textContent = rate.toFixed(1).replace(".", ",") + "%";
-    const downVal = price * (down / 100);
-    const loan = price - downVal;
-    const r = rate / 100 / 12;
-    const n = term * 12;
-    const monthly = r > 0 ? (loan * r) / (1 - Math.pow(1 + r, -n)) : loan / n;
-    const totalInterest = monthly * n - loan;
-    $("#m-monthly").textContent = Math.round(monthly).toLocaleString("nl-NL");
-    $("#m-downval").textContent = fmt(downVal);
-    $("#m-loan").textContent = fmt(loan);
-    $("#m-interest").textContent = fmt(totalInterest);
-    [mPrice, mDown, mTerm, mRate].forEach(setRangeFill);
+    const costs = rent * 0.22;                 // service charges, beheer, onderhoud
+    const netIncome = rent - costs;
+    const grossYield = (rent / price) * 100;
+    const equity = price * (downPct / 100);
+    const loan = price - equity;
+    // annuïteit, 4,5% / 25 jaar
+    const r = 0.045 / 12, n = 25 * 12;
+    const annualDebt = loan > 0 ? ((loan * r) / (1 - Math.pow(1 + r, -n))) * 12 : 0;
+    const cashflowYr = netIncome - annualDebt;
+    const payback = netIncome > 0 ? price / netIncome : 0;
+
+    $("#r-yield").textContent = grossYield.toFixed(2).replace(".", ",");
+    $("#r-rent").textContent = fmt(rent);
+    $("#r-cash").textContent = fmt(cashflowYr / 12);
+    $("#r-payback").textContent = payback > 0 ? payback.toFixed(1).replace(".", ",") + " jaar" : "—";
+    [cPrice, cRent, cDown].forEach(setRangeFill);
   };
-  [mPrice, mDown, mTerm, mRate].forEach((el) => el.addEventListener("input", calcMortgage));
-  calcMortgage();
+  if (cPrice) { [cPrice, cRent, cDown].forEach((el) => el.addEventListener("input", calc)); calc(); }
 
   /* ---- reviews marquee ----------------------------------------------- */
   const track = $("#revTrack");
-  const initials = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
-  const card = (r) => `
-    <article class="review">
-      <div class="quo">&ldquo;</div>
-      <p>${r.text}</p>
-      <div class="who">
-        <span class="av">${initials(r.name)}</span>
-        <div><b>${r.name}</b><small>${r.role}</small></div>
-      </div>
-    </article>`;
-  // duplicate the set so the marquee loops seamlessly (-50%)
-  track.innerHTML = (D.REVIEWS.map(card).join("")) + (D.REVIEWS.map(card).join(""));
+  if (track) {
+    const initials = (name) => name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+    const card = (r) => `
+      <article class="review">
+        <div class="r-stars">★★★★★</div>
+        <p>${r.text}</p>
+        <div class="who">
+          <span class="av">${initials(r.name)}</span>
+          <div><b>${r.name}</b><small>${r.role}</small></div>
+        </div>
+      </article>`;
+    track.innerHTML = D.REVIEWS.map(card).join("") + D.REVIEWS.map(card).join("");
+  }
 
   /* ---- forms (demo) -------------------------------------------------- */
   const handleForm = (formId, successId) => {
@@ -195,22 +145,21 @@
     const success = $(successId);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const required = $$("input[required]", form);
       let ok = true;
-      required.forEach((inp) => {
+      $$("input[required]", form).forEach((inp) => {
         const valid = inp.checkValidity() && inp.value.trim() !== "";
         inp.style.borderColor = valid ? "" : "#c0564f";
         if (!valid) ok = false;
       });
       if (!ok) return;
       success.classList.add("show");
-      form.querySelector("button[type=submit]").textContent = "Verzonden ✓";
+      const btn = form.querySelector("button[type=submit]");
+      if (btn) btn.textContent = "Verzonden ✓";
       setTimeout(() => { form.reset(); $$("input,textarea", form).forEach((i) => (i.style.borderColor = "")); }, 400);
     });
   };
-  handleForm("#leadForm", "#leadSuccess");
+  handleForm("#gids", "#gidsSuccess");
   handleForm("#contactForm", "#contactSuccess");
 
-  /* ---- kick off reveals ---------------------------------------------- */
   observeReveals();
 })();

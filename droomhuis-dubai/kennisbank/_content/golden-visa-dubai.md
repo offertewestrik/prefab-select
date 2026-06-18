@@ -12,7 +12,7 @@ BODY:
 De Golden Visa Dubai is een langdurig residentievisum dat veel Nederlandse investeerders en ondernemers aantrekt. Via vastgoed vanaf AED 2 miljoen komt u in aanmerking voor een verblijf van tien jaar. In dit artikel leest u de voorwaarden, voordelen, het aanvraagproces en de fiscale aandachtspunten.
 
 ## Wat is de Golden Visa?
-De Golden Visa is een verblijfsvergunning die langdurig wonen in de Verenigde Arabische Emiraten mogelijk maakt zonder lokale sponsor. Het visum is bedoeld voor investeerders, ondernemers, talenten en gespecialiseerde professionals. Voor vastgoedkopers is de route via een woning of investering het meest gebruikt. De overheid introduceerde de Golden Visa om langetermijntalent en kapitaal aan het land te binden, wat het visum tot een stabiele basis voor uw verblijf maakt.
+De Golden Visa is een verblijfsvergunning die langdurig wonen in de Verenigde Arabische Emiraten mogelijk maakt zonder lokale sponsor. Het visum is bedoeld voor investeerders, ondernemers, talenten en gespecialiseerde professionals. Voor vastgoedkopers is de route via een woning of investering het meest gebruikt. De overheid introduceerde de Golden Visa om langetermijntalent en kapitaal aan het land te binden, wat het visum tot een stabiele basis voor uw verblijf maakt. In tegenstelling tot een regulier visum bent u niet afhankelijk van een werkgever of jaarlijkse verlenging, wat het bijzonder geschikt maakt voor wie zijn toekomst voor langere tijd in Dubai ziet. Dat geeft rust om vooruit te plannen, bijvoorbeeld bij de keuze van een woning, een school of het opzetten van een onderneming.
 
 ## Voorwaarden via vastgoed
 De meest voorkomende route voor Nederlandse kopers loopt via vastgoed. De belangrijkste uitgangspunten zijn:
@@ -24,6 +24,8 @@ De meest voorkomende route voor Nederlandse kopers loopt via vastgoed. De belang
 - Bij lagere bedragen kan een [investor visa via vastgoed](slug:investor-visa-via-vastgoed-dubai) van 2 jaar mogelijk zijn
 
 Voorwaarden kunnen per periode en per situatie verschillen; laat uw specifieke geval altijd toetsen voordat u een aankoop doet met het visum als doel.
+
+Hoewel vastgoed de meest gebruikte route is voor Nederlandse kopers, zijn er ook andere manieren om voor een Golden Visa in aanmerking te komen. Denk aan ondernemers met een aanzienlijke investering in een bedrijf, gespecialiseerde professionals in bepaalde sectoren, talenten op het gebied van wetenschap, kunst of sport, en uitmuntende studenten. Elke route kent eigen voorwaarden en bewijslast. Voor de meeste investeerders blijft de vastgoedroute het toegankelijkst en best te plannen, omdat de drempel helder is en de investering tegelijk rendement kan opleveren.
 
 ## Voordelen van de Golden Visa
 De Golden Visa biedt meer dan alleen verblijfsrecht:
@@ -71,9 +73,6 @@ De Golden Visa via vastgoed is namelijk gekoppeld aan het bezit van uw woning of
 
 ## Fiscale aandachtspunten voor Nederlanders
 Een Golden Visa regelt uw verblijf, maar niet automatisch uw fiscale status. Of u in Nederland nog belastingplichtig bent, hangt af van uw werkelijke woonplaats, de 183-dagenregel en hoe u uw emigratie afwikkelt. Een visum hebben is dus niet hetzelfde als fiscaal emigreren; veel mensen onderschatten dit verschil. Een onjuiste afwikkeling kan leiden tot dubbele heffing of naheffingen in Nederland. Win daarom professioneel belastingadvies in voordat u stappen zet.
-
-## Andere routes naar de Golden Visa
-Hoewel vastgoed de meest gebruikte route is voor Nederlandse kopers, zijn er ook andere manieren om voor een Golden Visa in aanmerking te komen. Denk aan ondernemers met een aanzienlijke investering in een bedrijf, gespecialiseerde professionals in bepaalde sectoren, talenten op het gebied van wetenschap, kunst of sport, en uitmuntende studenten. Elke route kent eigen voorwaarden en bewijslast. Voor de meeste investeerders blijft de vastgoedroute het toegankelijkst en best te plannen, omdat de drempel helder is en de investering tegelijk rendement kan opleveren. Laat u adviseren over welke route het best bij uw profiel past.
 
 ## Is de Golden Visa iets voor u?
 De Golden Visa is aantrekkelijk voor wie zich langdurig aan Dubai wil binden en de investeringsdrempel kan dragen. Combineer de visumkeuze altijd met een doordachte vastgoedstrategie en goed fiscaal advies, zodat het visum een logisch onderdeel van uw plannen wordt in plaats van een doel op zich. Wie eerst de bredere verhuisstap overweegt, leest [verhuizen naar Dubai](slug:verhuizen-naar-dubai) voor het complete plaatje.

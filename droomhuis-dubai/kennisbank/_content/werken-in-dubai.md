@@ -31,7 +31,7 @@ Dubai heeft een diverse, internationaal georiënteerde arbeidsmarkt die blijft g
 - Tech, marketing en consultancy
 - Gezondheidszorg en onderwijs
 
-Veel werkgevers werken in het Engels, wat de instap voor Nederlanders vergemakkelijkt. Netwerken speelt op de Dubai-arbeidsmarkt een grote rol; veel functies worden via contacten en gespecialiseerde recruiters ingevuld.
+Veel werkgevers werken in het Engels, wat de instap voor Nederlandse professionals aanzienlijk vergemakkelijkt. Netwerken speelt op de Dubai-arbeidsmarkt een grote rol; veel functies worden via contacten en gespecialiseerde recruiters ingevuld in plaats van uitsluitend via openbare vacatures. De stad trekt door haar gunstige fiscale klimaat en groeiende economie veel internationaal talent aan, wat zorgt voor een competitieve maar dynamische markt. Wie zich onderscheidt met relevante ervaring en een sterk netwerk, vindt doorgaans goede kansen binnen de gevraagde sectoren.
 
 ## Salaris en arbeidsvoorwaarden
 Salarissen lopen sterk uiteen per functie en sector. Pakketten bestaan vaak uit een basissalaris aangevuld met toeslagen voor huisvesting, transport en soms scholen. Let bij onderhandeling op het totale pakket, niet alleen het basissalaris, omdat de toeslagen een groot verschil maken in wat u netto overhoudt. Onderstaande tabel geeft globale indicaties.
@@ -58,11 +58,10 @@ De werkcultuur zelf is internationaal maar kent eigen gebruiken. De werkweek loo
 ## Werk, visum en wonen combineren
 Werken in Dubai gaat hand in hand met de bredere verhuisstap. Houd rekening met de [kosten van levensonderhoud in Dubai](slug:kosten-van-levensonderhoud-dubai), waarbij huur en scholen het besteedbaar inkomen drukken. Wie een vermogen opbouwt, kan via vastgoed bovendien een [Golden Visa](slug:golden-visa-dubai) overwegen voor langdurig verblijf los van een werkgever. Zo bent u niet afhankelijk van één arbeidscontract voor uw verblijfsrecht.
 
-## Arbeidsrechten en gratuity
+## Arbeidsrechten, gratuity en baanwisseling
 De arbeidswetgeving in de VAE is de afgelopen jaren gemoderniseerd en biedt werknemers diverse rechten, zoals geregeld verlof, ziekteverlof en bescherming bij ontslag. Een belangrijk element is de gratuity, een eindafrekening die werknemers bij het einde van hun dienstverband ontvangen, opgebouwd op basis van het aantal dienstjaren. Het is verstandig uw arbeidscontract zorgvuldig te lezen en te begrijpen welke rechten en verplichtingen erin staan, inclusief proeftijd, opzegtermijn en eventuele concurrentiebedingen. Bij twijfel kan een lokale arbeidsjurist uitkomst bieden voordat u tekent.
 
-## Van baan veranderen of vertrekken
-Omdat uw werkvisum doorgaans gekoppeld is aan uw werkgever, heeft een baanwisseling gevolgen voor uw verblijfsstatus. Bij een overstap moet uw visum worden overgezet naar de nieuwe werkgever. Verliest u uw baan, dan geldt meestal een respijtperiode waarin u een nieuwe werkgever moet vinden of uw verblijf op een andere manier moet regelen. Wie meer onafhankelijkheid wil van een enkele werkgever, kan op termijn een [Golden Visa](slug:golden-visa-dubai) via vastgoed overwegen, zodat het verblijfsrecht losstaat van het dienstverband. Plan dergelijke stappen tijdig om periodes zonder geldig visum te vermijden.
+Omdat uw werkvisum doorgaans gekoppeld is aan uw werkgever, heeft een baanwisseling bovendien gevolgen voor uw verblijfsstatus. Bij een overstap moet uw visum worden overgezet naar de nieuwe werkgever. Verliest u uw baan, dan geldt meestal een respijtperiode waarin u een nieuwe werkgever moet vinden of uw verblijf op een andere manier moet regelen. Wie meer onafhankelijkheid wil van een enkele werkgever, kan op termijn een Golden Visa via vastgoed overwegen, zodat het verblijfsrecht losstaat van het dienstverband. Plan dergelijke stappen tijdig om periodes zonder geldig visum te vermijden.
 
 ## Conclusie: kansen met goede voorbereiding
 Werken in Dubai biedt aantrekkelijke kansen, zeker door het ontbreken van inkomstenbelasting. Bekijk altijd het totale arbeidspakket, regel uw fiscale afwikkeling zorgvuldig en stem uw woonbudget af op uw netto inkomen. Voor het complete plaatje van de stap leest u [verhuizen naar Dubai](slug:verhuizen-naar-dubai).

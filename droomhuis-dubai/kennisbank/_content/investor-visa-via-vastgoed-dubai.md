@@ -12,7 +12,7 @@ BODY:
 De investor visa via vastgoed is een toegankelijke manier om verblijfsrecht in Dubai op te bouwen, ook als u (nog) niet de drempel voor de Golden Visa haalt. In dit artikel leest u de voorwaarden, bedragen, het aanvraagproces en hoe dit visum zich verhoudt tot de Golden Visa.
 
 ## Wat is een investor visa?
-Een investor visa is een residentievisum dat gekoppeld is aan een vastgoedinvestering. Het stelt u in staat in Dubai te wonen, een Emirates ID te krijgen en uw gezin te sponsoren, zonder lokale werkgever als sponsor. De looptijd is doorgaans twee jaar en verlengbaar zolang u aan de voorwaarden voldoet. Voor veel Nederlandse kopers is dit een logische eerste stap: u investeert in vastgoed dat tegelijk rendement kan opleveren én uw verblijf mogelijk maakt.
+Een investor visa is een residentievisum dat gekoppeld is aan een vastgoedinvestering. Het stelt u in staat in Dubai te wonen, een Emirates ID te krijgen en uw gezin te sponsoren, zonder lokale werkgever als sponsor. De looptijd is doorgaans twee jaar en verlengbaar zolang u aan de voorwaarden voldoet. Voor veel Nederlandse kopers is dit een logische eerste stap: u investeert in vastgoed dat tegelijk rendement kan opleveren én uw verblijf mogelijk maakt. Het visum is daarmee een toegankelijk alternatief voor wie de hogere drempel van de Golden Visa nog niet wil of kan halen, maar wel een voet aan de grond wil krijgen in Dubai. Doordat de investering in vastgoed zit, bouwt u bovendien vermogen op in plaats van alleen kosten te maken voor een verblijfsvergunning.
 
 ## Voorwaarden en bedragen
 De drempel voor de 2-jarige investor visa ligt lager dan die van de Golden Visa. Globaal gelden de volgende uitgangspunten:
