@@ -37,6 +37,18 @@ Bij kopen op afstand is verificatie cruciaal, omdat u de woning en partijen niet
 ## Betalingen vanuit Nederland
 Internationale overboekingen verlopen via uw Nederlandse bank naar de officiële trust- of escrow-rekening. Houd rekening met wisselkoersen, overboekingskosten en doorlooptijd. Schommelingen in de euro-dirhamkoers kunnen uw kosten beïnvloeden. Het openen van een lokale [bankrekening in Dubai](slug:bankrekening-openen-dubai) kan handig zijn, zeker voor huurinkomsten en doorlopende lasten zoals service charges en DEWA.
 
+## Bezichtigen op afstand
+Hoewel u niet ter plaatse bent, hoeft u niet blind te kopen. Moderne hulpmiddelen maken een grondige beoordeling op afstand mogelijk:
+- Live video-rondleidingen waarbij u zelf kunt sturen wat u wilt zien
+- Gedetailleerde foto's, plattegronden en 360-graden opnames
+- Onafhankelijke inspectierapporten van de bouwkwaliteit
+- Informatie over de wijk, voorzieningen en bereikbaarheid
+
+Vraag uw makelaar om eerlijke, ongefilterde beelden en wees alert op verbloemende presentaties. Een onafhankelijke inspectie geeft extra zekerheid over de staat van de woning.
+
+## Tijdzones en communicatie
+Tussen Nederland en Dubai zit een beperkt tijdverschil, wat communicatie eenvoudig maakt. Toch is het belangrijk duidelijke afspraken te maken over bereikbaarheid en reactietijden, zeker rond belangrijke momenten zoals het tekenen van contracten of de overdracht. Een adviseur die proactief communiceert en u in begrijpelijke taal op de hoogte houdt, maakt het proces aanzienlijk prettiger en transparanter.
+
 ## Vergelijking: op afstand versus ter plaatse
 | Aspect | Op afstand | Ter plaatse |
 |--------|-----------|-------------|

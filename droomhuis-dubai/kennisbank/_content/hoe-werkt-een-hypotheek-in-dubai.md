@@ -57,6 +57,12 @@ Een hypotheekaanvraag in Dubai verloopt globaal als volgt:
 ## Hypotheek bij off-plan
 Bij off-plan financiert u meestal pas bij oplevering, terwijl u tot dat moment via een betaalplan betaalt. Niet alle off-plan projecten komen in aanmerking voor een hypotheek bij elke bank; controleer dit vooraf. Lees over de afwegingen in [off-plan projecten Dubai](slug:off-plan-projecten-dubai).
 
+## Looptijd, aflossing en maandlasten
+De looptijd van een hypotheek in Dubai loopt vaak tot 25 jaar, afhankelijk van uw leeftijd en de bank. Een langere looptijd verlaagt de maandlasten maar verhoogt de totale rentekosten; een kortere looptijd doet het omgekeerde. Banken hanteren doorgaans een maximale verhouding tussen uw maandelijkse verplichtingen en uw inkomen, om te voorkomen dat de lasten te zwaar worden. Reken vooraf goed door welke maandlast bij u past, met een buffer voor tegenvallers.
+
+## Hypotheek versus contant kopen
+Veel Nederlandse kopers wegen af of ze contant kopen of een hypotheek afsluiten. Contant kopen bespaart rente en financieringskosten en versnelt het proces, maar legt veel kapitaal vast in één object. Een hypotheek laat kapitaal vrij voor spreiding of andere investeringen, maar brengt kosten en risico's mee. De juiste keuze hangt af van uw financiële situatie, doelen en risicobereidheid. Voor investeerders kan financiering het rendement op het eigen vermogen verhogen, mits de huuropbrengst de lasten ruim dekt.
+
 ## Pre-approval: verstandig vooraf
 Een pre-approval (voorlopige goedkeuring) geeft duidelijkheid over uw budget voordat u gaat zoeken. Het versterkt bovendien uw onderhandelingspositie tegenover verkopers. De goedkeuring is meestal enkele maanden geldig, dus vraag deze aan zodra u serieus gaat zoeken.
 

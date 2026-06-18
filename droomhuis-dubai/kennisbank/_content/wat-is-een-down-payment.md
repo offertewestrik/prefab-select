@@ -58,6 +58,25 @@ Enkele overwegingen:
 ## Down payment bij meerdere objecten
 Investeerders die meerdere woningen willen kopen, spreiden hun eigen vermogen graag. Bij off-plan met gespreide betaalplannen kunt u met relatief weinig startkapitaal meerdere posities innemen, mits u de toekomstige termijnen kunt dragen. Wees hierbij realistisch: als de markt tegenzit of de oplevering vertraagt, blijven de betaalverplichtingen bestaan. Een gezonde buffer is essentieel.
 
+## Down payment en betaalplannen bij off-plan
+Bij off-plan bestaat de financiering vaak uit een aanbetaling gevolgd door een betaalplan. Er zijn diverse varianten:
+- **Bouwgekoppeld plan**: u betaalt termijnen naarmate de bouw vordert
+- **Post-handover plan**: u betaalt een deel na oplevering, soms over enkele jaren
+- **Gelijkmatige plannen**: vaste maandelijkse of kwartaalbetalingen
+
+Een lagere aanbetaling met een ruim post-handover plan verlaagt de instapdrempel, maar verplicht u tot toekomstige betalingen. Zorg dat u die kunt dragen, ook als de markt of uw situatie verandert. De betalingen lopen via een escrow-rekening, wat uw geld beschermt.
+
+## Waar haalt u de down payment vandaan?
+Nederlandse kopers financieren de aanbetaling doorgaans uit eigen vermogen, spaargeld of de overwaarde van bestaand bezit. Houd rekening met de tijd die internationale overboekingen kosten en met wisselkoersschommelingen tussen euro en dirham. Plan uw liquiditeit zorgvuldig, zodat het geld op het juiste moment beschikbaar is voor de aanbetaling, de termijnen en de kosten koper.
+
+## Veelgemaakte misverstanden
+Rond de down payment bestaan enkele hardnekkige misverstanden:
+- Dat de aanbetaling de enige eigen inbreng is (de kosten koper komen erbij)
+- Dat een minimale aanbetaling altijd het slimst is (hogere inbreng verlaagt lasten)
+- Dat off-plan betalingen onbeschermd zijn (ze lopen juist via escrow)
+
+Een helder beeld van deze punten voorkomt verkeerde verwachtingen en financiële verrassingen.
+
 ## Tips voor uw down payment
 - Reserveer voldoende eigen vermogen, inclusief kosten koper
 - Houd een buffer aan voor onvoorziene uitgaven en valutarisico

@@ -34,6 +34,9 @@ De premie hangt af van leeftijd, gewenste dekking en gezinsgrootte. Onderstaande
 
 Werkgevers regelen vaak de basisverzekering voor de werknemer; gezinsleden en aanvullende dekking komen meestal voor eigen rekening. Reken deze post mee in uw [kosten van levensonderhoud in Dubai](slug:kosten-van-levensonderhoud-dubai), zeker bij een gezin.
 
+## Tandheelkunde en specialistische zorg
+Tandheelkundige zorg en specialistische behandelingen vallen niet altijd standaard onder een basispolis en vereisen vaak aanvullende dekking. De kwaliteit van tandartsen en specialisten in Dubai is hoog, met veel internationaal opgeleide behandelaars, maar zonder de juiste dekking kunnen de kosten flink oplopen. Wie verwacht regelmatig tandheelkundige of specialistische zorg nodig te hebben, doet er goed aan dit mee te nemen bij de keuze van een polis. Controleer welke behandelingen worden vergoed, of er een eigen bijdrage geldt en welke klinieken in het netwerk vallen, zodat u niet voor verrassingen komt te staan.
+
 ## Verschillen met Nederland
 Het zorgstelsel in Dubai werkt anders dan het Nederlandse:
 

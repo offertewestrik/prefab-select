@@ -1,6 +1,6 @@
 TITLE: Werken in Dubai in 2026: visum, salaris en arbeidsmarkt
 H1: Werken in Dubai
-DESCRIPTION: Werken in Dubai als Nederlander? Lees over werkvisum, salarissen, arbeidsmarkt, belasting en ondernemen, zodat u goed voorbereid de stap maakt.
+DESCRIPTION: Werken in Dubai als Nederlander? Lees over werkvisum, salarissen, arbeidsmarkt, belasting en ondernemen, zodat u goed voorbereid de stap naar Dubai maakt.
 CATEGORY: Wonen & verhuizen
 KEYWORDS: werken in dubai; werkvisum dubai; baan dubai nederlander; salaris dubai; ondernemen dubai
 RELATED: verhuizen-naar-dubai; kosten-van-levensonderhoud-dubai; golden-visa-dubai
@@ -52,6 +52,9 @@ Wilt u voor uzelf beginnen, dan kunt u een bedrijf oprichten in een free zone of
 
 ## Werk-privébalans en cultuur
 De werkcultuur in Dubai is internationaal maar kent eigen gebruiken. De werkweek loopt doorgaans van maandag tot vrijdag, met het weekend op zaterdag en zondag. Tijdens de ramadan gelden aangepaste werktijden. Respect voor lokale gebruiken en hiërarchie wordt gewaardeerd. Veel expats ervaren de combinatie van professionele kansen en een aangename leefomgeving als aantrekkelijk, al kan het tempo in sommige sectoren hoog liggen.
+
+## Een baan vinden in Dubai
+De praktische zoektocht naar werk verschilt van die in Nederland. Veel posities worden ingevuld via gespecialiseerde recruiters, online vacaturebanken en vooral via het eigen netwerk. Het loont om uw cv aan te passen aan de lokale gebruiken, uw LinkedIn-profiel up-to-date te houden en gericht te netwerken binnen uw sector en de Nederlandse gemeenschap. Sommige professionals reizen eerst af om kennis te maken met de markt, terwijl anderen al vanuit Nederland solliciteren. Houd er rekening mee dat het proces tijd kan kosten en dat een werkgever het visum pas regelt na een definitief aanbod. Een financiële buffer voor de zoekperiode is daarom verstandig.
 
 ## Werk, visum en wonen combineren
 Werken in Dubai gaat hand in hand met de bredere verhuisstap. Houd rekening met de [kosten van levensonderhoud in Dubai](slug:kosten-van-levensonderhoud-dubai), waarbij huur en scholen het besteedbaar inkomen drukken. Wie een vermogen opbouwt, kan via vastgoed bovendien een [Golden Visa](slug:golden-visa-dubai) overwegen voor langdurig verblijf los van een werkgever. Zo bent u niet afhankelijk van één arbeidscontract voor uw verblijfsrecht.

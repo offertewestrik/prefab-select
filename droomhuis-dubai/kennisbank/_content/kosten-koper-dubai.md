@@ -14,7 +14,7 @@ De kosten koper in Dubai bedragen doorgaans 6 tot 8% bovenop de koopsom. In dit 
 ## Wat zijn kosten koper?
 Kosten koper zijn de eenmalige bijkomende kosten die u bovenop de aankoopprijs betaalt om eigenaar te worden. In Dubai zijn deze grotendeels gestandaardiseerd en gereguleerd door het Dubai Land Department (DLD) en RERA, wat zorgt voor transparantie. Toch lopen de exacte bedragen uiteen, afhankelijk van of u contant koopt of financiert, en of het om bestaande bouw of off-plan gaat.
 
-Belangrijk: de kosten koper staan los van de [down payment](slug:wat-is-een-down-payment), de aanbetaling die deel uitmaakt van de koopsom zelf.
+Belangrijk om te onthouden: de kosten koper staan los van de [down payment](slug:wat-is-een-down-payment), de aanbetaling die deel uitmaakt van de koopsom zelf. Een veelgemaakte vergissing is deze twee verwarren, waardoor kopers bij de overdracht middelen tekortkomen. Reken daarom altijd zowel de aanbetaling als de kosten koper mee in uw budget.
 
 ## De belangrijkste kostenposten
 Onderstaande tabel geeft een overzicht van de gebruikelijke kosten koper in 2026.
@@ -28,17 +28,13 @@ Onderstaande tabel geeft een overzicht van de gebruikelijke kosten koper in 2026
 | Oqood-registratie | varieert | bij off-plan |
 | Title deed-uitgifte | enkele honderden AED | eigendomsbewijs |
 
-## De DLD-overdrachtsbelasting nader bekeken
-De grootste post is de 4% DLD-overdrachtsbelasting. Formeel is deze vaak gesplitst tussen koper en verkoper (2% elk), maar in de praktijk betaalt de koper doorgaans het volledige bedrag. Daarnaast geldt een vaste administratievergoeding van circa AED 580. Deze betaling is verplicht om de eigendomsoverdracht en de uitgifte van de [title deed](slug:eigendomsoverdracht-title-deed-dubai) te formaliseren. Zonder voldoening van deze belasting kan de overdracht niet plaatsvinden.
+## DLD-belasting, courtage en NOC
+De grootste post is de 4% DLD-overdrachtsbelasting. Formeel is deze vaak gesplitst tussen koper en verkoper (2% elk), maar in de praktijk betaalt de koper doorgaans het volledige bedrag. Daarnaast geldt een vaste administratievergoeding van circa AED 580. Deze betaling is verplicht om de eigendomsoverdracht en de uitgifte van de [title deed](slug:eigendomsoverdracht-title-deed-dubai) te formaliseren; zonder voldoening kan de overdracht niet plaatsvinden.
 
-## Makelaarscourtage
-De makelaarscourtage bedraagt doorgaans 2% van de koopsom, vermeerderd met 5% btw. Dit honorarium is voor de begeleiding bij zoeken, onderhandelen en afronden van de transactie. Maak vooraf duidelijke afspraken over wat de courtage dekt en werk alleen met RERA-geregistreerde makelaars, zodat u zeker bent van een legitieme en deskundige begeleiding.
+De makelaarscourtage bedraagt doorgaans 2% van de koopsom, vermeerderd met 5% btw. Dit honorarium is voor de begeleiding bij zoeken, onderhandelen en afronden van de transactie. Werk alleen met RERA-geregistreerde makelaars, zodat u zeker bent van legitieme en deskundige begeleiding. Bij doorverkoop van een bestaande woning is bovendien een NOC (No Objection Certificate) van de ontwikkelaar nodig, die bevestigt dat er geen openstaande service charges zijn. De kosten hiervan lopen uiteen van enkele honderden tot enkele duizenden AED. Bij off-plan vindt registratie plaats via Oqood in plaats van een directe title deed.
 
-## NOC en registratie bij doorverkoop
-Bij doorverkoop van een bestaande woning is een NOC (No Objection Certificate) van de ontwikkelaar nodig. Deze bevestigt dat er geen openstaande service charges zijn en dat de ontwikkelaar geen bezwaar heeft tegen de overdracht. De kosten lopen uiteen van enkele honderden tot enkele duizenden AED, afhankelijk van de ontwikkelaar. Bij off-plan vindt registratie plaats via Oqood in plaats van een directe title deed.
-
-## Kosten bij off-plan
-Koopt u off-plan, dan beschermt een wettelijk verplichte escrow-rekening uw betalingen. De registratie verloopt via Oqood, en pas bij oplevering ontvangt u de definitieve title deed. Betaalplannen spreiden de kosten over de bouwperiode, maar de DLD-belasting blijft verschuldigd. Controleer altijd of het project een geregistreerde escrow-rekening heeft.
+## Kosten bij off-plan versus bestaande bouw
+De kosten koper verschillen licht naargelang u off-plan of bestaande bouw koopt. Bij bestaande bouw betaalt u courtage, de 4% DLD-belasting, de NOC-kosten en de title deed-uitgifte. Bij off-plan koopt u vaak rechtstreeks bij de ontwikkelaar, soms zonder makelaarscourtage, maar betaalt u Oqood-registratie en mogelijk administratiekosten van de ontwikkelaar. Een wettelijk verplichte escrow-rekening beschermt uw betalingen, en pas bij oplevering ontvangt u de definitieve title deed. Betaalplannen spreiden de kosten over de bouwperiode, maar de DLD-belasting van 4% blijft in beide gevallen verschuldigd. Controleer altijd of het project een geregistreerde escrow-rekening heeft.
 
 ## Financieringskosten
 Sluit u een hypotheek af, dan komen er kosten bij:
@@ -47,25 +43,19 @@ Sluit u een hypotheek af, dan komen er kosten bij:
 - Taxatiekosten: enkele duizenden AED
 - Eventueel een gekoppelde levensverzekering
 
-Reken deze financieringskosten mee bij uw budget als u een hypotheek afsluit; ze kunnen samen oplopen tot enkele procenten van het leenbedrag.
+Reken deze financieringskosten mee bij uw budget als u een hypotheek afsluit; ze kunnen samen oplopen tot enkele procenten van het leenbedrag. Daarnaast zijn er kleinere posten die snel over het hoofd worden gezien, zoals kosten voor een trustkantoor dat de overdracht begeleidt en, bij kopen op afstand, het opstellen en legaliseren van een Power of Attorney.
 
 ## Doorlopende kosten na aankoop
-Na de aankoop betaalt u jaarlijkse [service charges](slug:service-charges-dubai) voor onderhoud van het gebouw of de community, berekend per vierkante voet en sterk verschillend per project. Daarnaast betaalt u nutsvoorzieningen via DEWA en, bij verhuur, de Ejari-registratie. Deze lasten drukken het netto rendement en horen dus in elke berekening thuis.
+Na de aankoop betaalt u jaarlijkse [service charges](slug:service-charges-dubai) voor onderhoud van het gebouw of de community, berekend per vierkante voet en sterk verschillend per project. Luxe torens en communities met veel voorzieningen kennen doorgaans hogere charges. Daarnaast betaalt u nutsvoorzieningen via DEWA en, bij verhuur, de Ejari-registratie van het huurcontract. Deze lasten drukken het netto rendement en horen dus in elke berekening thuis. Onderschat ze niet, want over de jaren tellen ze flink op.
 
-## Rekenvoorbeeld
+## Rekenvoorbeeld en zijn de kosten onderhandelbaar?
 Bij een appartement van AED 1.500.000 ziet de eenmalige rekensom er ongeveer zo uit:
 - DLD 4%: AED 60.000
 - Administratie: circa AED 580
 - Makelaarscourtage 2% + btw: circa AED 31.500
 - Diverse registratie: enkele honderden tot duizenden AED
 
-Totaal komt dit neer op ruwweg AED 92.000 aan kosten koper, exclusief eventuele financieringskosten. Bij financiering loopt dit verder op door de hypotheekregistratie en bankkosten.
-
-## Verschil tussen kosten koper bij off-plan en bestaande bouw
-De kosten koper verschillen licht naargelang u off-plan of bestaande bouw koopt. Bij bestaande bouw betaalt u courtage, de 4% DLD-belasting, de NOC-kosten en de title deed-uitgifte. Bij off-plan koopt u vaak rechtstreeks bij de ontwikkelaar, soms zonder makelaarscourtage, maar betaalt u Oqood-registratie en mogelijk administratiekosten van de ontwikkelaar. De DLD-belasting van 4% blijft in beide gevallen verschuldigd. Vraag altijd een complete specificatie op.
-
-## Zijn de kosten koper onderhandelbaar?
-De DLD-belasting en de vaste administratiekosten staan vast en zijn niet onderhandelbaar. De makelaarscourtage ligt doorgaans op 2% plus btw, maar hierover kunt u soms afspraken maken, zeker bij hogere transacties of als de makelaar zowel koper als verkoper bedient. Bij off-plan bieden ontwikkelaars regelmatig promoties aan, zoals het kwijtschelden of korten van de DLD-belasting. Informeer naar lopende acties, maar laat dit nooit de doorslag geven boven de kwaliteit van de woning.
+Totaal komt dit neer op ruwweg AED 92.000 aan kosten koper, exclusief eventuele financieringskosten. De DLD-belasting en de vaste administratiekosten staan vast en zijn niet onderhandelbaar. Over de makelaarscourtage kunt u soms afspraken maken, zeker bij hogere transacties. Bij off-plan bieden ontwikkelaars regelmatig promoties aan, zoals het kwijtschelden of korten van de DLD-belasting; informeer naar lopende acties, maar laat dit nooit de doorslag geven boven de kwaliteit van de woning.
 
 ## Tips om verrassingen te voorkomen
 - Reken altijd 6-8% kosten koper boven op de koopsom in uw budget

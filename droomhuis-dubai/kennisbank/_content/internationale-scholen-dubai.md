@@ -1,6 +1,6 @@
 TITLE: Internationale scholen in Dubai 2026 | Curriculum & kosten
 H1: Internationale scholen in Dubai
-DESCRIPTION: Internationale scholen in Dubai: lees over curricula, KHDA-rating, kosten, wachtlijsten en de beste keuze voor Nederlandse gezinnen in 2026.
+DESCRIPTION: Internationale scholen in Dubai: lees over curricula, KHDA-rating, kosten, wachtlijsten en het maken van de beste keuze voor Nederlandse gezinnen in 2026.
 CATEGORY: Wonen & verhuizen
 KEYWORDS: internationale scholen dubai; school dubai expat; curriculum dubai school; schoolkosten dubai; khda rating dubai
 RELATED: verhuizen-naar-dubai; beste-wijken-voor-gezinnen-dubai; kosten-van-levensonderhoud-dubai
@@ -44,6 +44,9 @@ Populaire scholen kennen wachtlijsten, zeker voor instroomklassen. Het inschrijf
 4. Plaatsing en bevestiging
 
 Begin ruim voor de verhuizing, soms een schooljaar van tevoren, om plaatsing op uw voorkeursschool te vergroten. Sommige scholen werken met een aanmeldfee die niet wordt terugbetaald, dus aanmelden bij meerdere scholen brengt kosten met zich mee.
+
+## Leeftijdsgroepen en instroom
+Internationale scholen in Dubai bedienen doorgaans het volledige traject, van peuter- en kleuteronderwijs (Early Years) tot het eindexamenjaar. Voor jonge kinderen is de instroom vaak eenvoudiger, terwijl plaatsing in hogere jaren afhankelijk is van beschikbare plekken en soms een toelatingstoets. Bij de overstap halverwege een opleiding is het verstandig te kijken naar de aansluiting van het curriculum, zodat uw kind niet onnodig achterstand oploopt of vakken mist. Scholen kunnen adviseren over het juiste instroomjaar op basis van leeftijd en eerdere schoolprestaties. Vraag hier expliciet naar tijdens het aanmeldproces.
 
 ## Locatie en wijkkeuze
 De ligging van de school bepaalt mede uw woonkeuze, omdat reistijd in Dubai flink kan oplopen door verkeer en afstanden. Veel gezinnen kiezen daarom een wijk dicht bij hun voorkeursschool om dagelijkse files te vermijden. Sommige wijken zijn juist ontwikkeld rond gezinsvoorzieningen, met scholen, parken en winkels in de buurt. Ons artikel over [de beste wijken voor gezinnen in Dubai](slug:beste-wijken-voor-gezinnen-dubai) helpt bij die afweging.

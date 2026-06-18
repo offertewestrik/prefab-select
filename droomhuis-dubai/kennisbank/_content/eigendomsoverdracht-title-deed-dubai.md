@@ -49,6 +49,19 @@ Koopt u off-plan, dan ontvangt u nog geen definitieve title deed. In plaats daar
 ## De NOC: onmisbaar bij doorverkoop
 Bij doorverkoop van een bestaande woning vraagt de verkoper een NOC (No Objection Certificate) aan bij de ontwikkelaar. De NOC bevestigt dat alle service charges zijn voldaan en dat de ontwikkelaar geen bezwaar heeft tegen de overdracht. Zonder NOC kan de overdracht niet doorgaan. De ontwikkelaar brengt hiervoor kosten in rekening, variërend van enkele honderden tot duizenden AED.
 
+## Wat staat er op een title deed?
+Een title deed bevat de essentiële gegevens van uw eigendom. Doorgaans vermeldt het document:
+- De naam van de eigenaar (of eigenaren) en hun aandeel
+- Een omschrijving en locatie van de woning
+- De oppervlakte in vierkante meters of vierkante voet
+- De eigendomsvorm, meestal freehold
+- Een uniek registratienummer bij het DLD
+
+Controleer al deze gegevens zorgvuldig na uitgifte. Een fout in bijvoorbeeld de naam, de oppervlakte of het aandeel kan later tot problemen leiden en moet direct worden gecorrigeerd.
+
+## De title deed bij verkoop of vererving
+De title deed is niet alleen bewijs van bezit, maar ook de basis voor toekomstige handelingen. Wilt u de woning later verkopen, dan vormt de title deed het uitgangspunt voor de nieuwe overdracht, opnieuw via het DLD en met een NOC van de ontwikkelaar. Bij vererving gelden in de VAE specifieke regels; een in de VAE geregistreerd testament kan duidelijkheid geven over hoe uw eigendom overgaat. Houd hier rekening mee bij uw planning, zeker als u meerdere objecten bezit.
+
 ## Kosten van de overdracht
 De belangrijkste kosten zijn de 4% DLD-belasting, de administratiekosten (circa AED 580) en de uitgifte van de title deed. Bij een hypotheek komt een hypotheekregistratie bij, vaak circa 0,25% van het leenbedrag. Een volledig overzicht vindt u in [kosten koper in Dubai](slug:kosten-koper-dubai).
 

@@ -41,6 +41,19 @@ Onderstaande tabel geeft een indicatie van de doorlooptijd bij bestaande bouw.
 
 Bij financiering komt er extra tijd bij voor taxatie en goedkeuring, vaak enkele weken.
 
+## De rol van het trustkantoor
+De daadwerkelijke overdracht vindt plaats bij een door het DLD erkend trustkantoor. Hier komen koper en verkoper (of hun gevolmachtigden) samen. Het trustkantoor controleert de documenten, verwerkt de betaling, int de DLD-belasting en zorgt voor de uitgifte van het nieuwe eigendomsbewijs. Dit gereguleerde systeem biedt zekerheid: de betaling en de eigendomsoverdracht vinden gelijktijdig en gecontroleerd plaats, zodat geen van beide partijen risico loopt. Voor de koper betekent dit dat het geld pas overgaat wanneer het eigendom daadwerkelijk wordt overgeschreven.
+
+## Wat heeft u nodig?
+Voor een soepel verloop zorgt u dat de volgende zaken op orde zijn:
+- Een geldig paspoort en, bij residenten, een Emirates ID
+- Voldoende fondsen voor de koopsom en de kosten koper
+- Bij financiering: een goedgekeurde hypotheek en taxatie
+- De ondertekende MOU / Form F en, bij doorverkoop, de NOC
+- Eventueel een gelegaliseerde Power of Attorney
+
+Met deze documenten compleet voorkomt u vertraging bij de overdracht.
+
 ## Off-plan: een ander proces
 Koopt u off-plan, dan verloopt het anders. U koopt rechtstreeks bij de ontwikkelaar, betaalt volgens een betaalplan en registreert via Oqood. Betalingen lopen via een wettelijk verplichte escrow-rekening, wat uw geld beschermt. De definitieve title deed volgt pas bij oplevering. Lees meer in [off-plan projecten Dubai](slug:off-plan-projecten-dubai).
 

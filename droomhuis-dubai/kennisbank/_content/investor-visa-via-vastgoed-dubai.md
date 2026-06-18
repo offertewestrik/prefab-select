@@ -60,16 +60,17 @@ Met dit visum krijgt u toegang tot het dagelijks leven in Dubai:
 
 Voor het openen van een rekening leest u [bankrekening openen in Dubai](slug:bankrekening-openen-dubai). De Emirates ID is daarbij vaak het sleutelelement.
 
-## Combineer visum en rendement
+## Combineer visum, rendement en het juiste vastgoed
 Een sterk punt van de investor visa is dat de vastgoedinvestering dubbel werk doet: ze verschaft verblijfsrecht én kan rendement opleveren. Kies daarom niet alleen op basis van de visumdrempel, maar ook op basis van de kwaliteit van het pand en de wijk. Een appartement in een wijk met sterke verhuurvraag levert huurinkomsten op terwijl u in Dubai woont of verblijft. Lees meer over de bredere strategie in [investeren in Dubai vastgoed](slug:investeren-in-dubai-vastgoed), zodat uw visumkeuze en beleggingsdoelen op elkaar aansluiten.
+
+Omdat de investor visa gekoppeld is aan kwalificerend vastgoed, is de keuze van het pand dubbel belangrijk. Niet alleen moet het aan de waardedrempel voldoen en in een freehold-zone liggen, het bepaalt ook uw rendement en de waarde van uw bezit op termijn. Let bij de keuze op de kwaliteit van de ontwikkelaar, de service charges en de verhuurbaarheid. Een goed gekozen pand werkt voor u op meerdere fronten: verblijf, rendement en vermogensopbouw tegelijk.
 
 ## Fiscale en praktische aandachtspunten
 Een investor visa regelt uw verblijf, maar niet uw fiscale status in Nederland. Of u fiscaal emigreert, hangt af van uw werkelijke woonplaats en de 183-dagenregel. Laat dit altijd toetsen door een belastingadviseur, want een visum hebben is iets anders dan fiscaal Nederland verlaten. Houd er bovendien rekening mee dat het visum vervalt als u het vastgoed verkoopt of de waarde onder de drempel zakt. Plan een eventuele verkoop daarom zorgvuldig in relatie tot uw verblijfsstatus.
 
-## Verlengen en doorgroeien naar de Golden Visa
-De investor visa is doorgaans twee jaar geldig en verlengbaar zolang u het kwalificerende vastgoed behoudt. Voor veel kopers is het een eerste stap: ze starten met een investering rond de instapdrempel en bouwen hun vastgoedportefeuille geleidelijk uit. Wanneer de totale waarde van uw vastgoed AED 2 miljoen bereikt, kunt u doorgroeien naar de 10-jarige Golden Visa met soepelere verblijfseisen. Door dit van tevoren te plannen, maakt u uw visumstrategie onderdeel van uw bredere investeringsplan. Een adviseur kan helpen bepalen welk groeipad bij uw budget en doelen past.
+## Verlengen, doorgroeien en financiering
+De investor visa is doorgaans twee jaar geldig en verlengbaar zolang u het kwalificerende vastgoed behoudt. Voor veel kopers is het een eerste stap: ze starten met een investering rond de instapdrempel en bouwen hun vastgoedportefeuille geleidelijk uit. Wanneer de totale waarde van uw vastgoed AED 2 miljoen bereikt, kunt u doorgroeien naar de 10-jarige Golden Visa met soepelere verblijfseisen. Door dit van tevoren te plannen, maakt u uw visumstrategie onderdeel van uw bredere investeringsplan.
 
-## Aandachtspunten bij financiering
 Wie het vastgoed deels met een hypotheek financiert, moet er rekening mee houden dat de visumeisen vaak uitgaan van een minimaal afgelost of ingebracht deel. Niet de volledige aankoopwaarde telt dan automatisch mee voor de drempel. Voor niet-residenten is de financieringsruimte bovendien beperkter, met een hogere vereiste eigen inbreng dan voor residenten. Het is daarom verstandig om vooraf goed te laten doorrekenen of uw beoogde aankoop, inclusief financiering, daadwerkelijk aan de visumvereisten voldoet. Zo voorkomt u dat u koopt in de veronderstelling van een visum dat u uiteindelijk niet krijgt.
 
 ## Conclusie: instapmodel met flexibiliteit
