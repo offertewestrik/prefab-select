@@ -26,6 +26,8 @@ Een typisch off-plan traject ziet er zo uit:
 - **Bouwtermijnen**: betalingen gekoppeld aan bouwfasen of vaste data.
 - **Oplevering**: het saldo, soms deels uitgesteld tot na de overdracht.
 
+De exacte verdeling verschilt per ontwikkelaar en project. Plannen lopen uiteen van 50/50 tot 80/20, waarbij het eerste getal staat voor het deel dat je tijdens de bouw betaalt en het tweede voor het deel bij of na oplevering.
+
 Steeds vaker bieden ontwikkelaars post-handover plannen, waarbij je een deel pas na oplevering betaalt. Meer hierover lees je in [betaalplannen off-plan in Dubai](slug:betaalplannen-off-plan-dubai).
 
 ### Een voorbeeld van een betaalplan
@@ -81,6 +83,8 @@ Off-plan is geen gegarandeerde winst. Houd rekening met:
 
 Kies daarom voor een ervaren, RERA-geregistreerde ontwikkelaar. Een overzicht van betrouwbare partijen en projecten vind je bij [nieuwbouwprojecten in Dubai](slug:nieuwbouwprojecten-dubai).
 
+Een nuchtere blik op deze risico's hoort bij elke aankoop. Een opleverdatum die met zes tot twaalf maanden uitloopt is in Dubai niet ongebruikelijk; reken daar mentaal en financieel op. Wie met een te krappe planning of een te optimistisch huurscenario rekent, komt sneller in de knel. Bekijk de bredere context van marktrisico in [risico's van investeren in Dubai](slug:risicos-investeren-dubai).
+
 ## Off-plan en doorverkoop
 
 Veel investeerders verkopen hun off-plan unit vóór oplevering door (assignment). Dit kan rendabel zijn in een stijgende markt, maar hangt af van de voorwaarden van de ontwikkelaar en het percentage dat je al hebt betaald. Veel ontwikkelaars staan doorverkoop pas toe nadat je een bepaald deel van de koopsom hebt voldaan, bijvoorbeeld 30 tot 40%. Bij doorverkoop is vaak een NOC (No Objection Certificate) van de ontwikkelaar nodig, waarvoor administratiekosten gelden. Reken ook hier de DLD-kosten en eventuele courtage mee.
@@ -95,4 +99,4 @@ Voor wie op afstand vanuit Nederland koopt, is off-plan goed te organiseren: de 
 
 ## Conclusie
 
-Off-plan projecten in Dubai bieden een toegankelijke manier om in te stappen, met lage aanbetalingen, gespreide betaalplannen en wettelijke bescherming via escrow en Oqood. Tegelijk vraagt het om aandacht voor opleverrisico, marktontwikkeling en de keuze van een betrouwbare ontwikkelaar. Wie deze afwegingen serieus maakt, kan off-plan slim inzetten als investering.
+Off-plan projecten in Dubai bieden een toegankelijke manier om in te stappen, met lage aanbetalingen, gespreide betaalplannen en wettelijke bescherming via escrow en Oqood. Tegelijk vraagt het om aandacht voor opleverrisico, marktontwikkeling en de keuze van een betrouwbare ontwikkelaar. De combinatie van een laag instapbedrag en een gestructureerd betaalplan maakt het aantrekkelijk voor wie gefaseerd vermogen wil opbouwen, terwijl de regulering door DLD en RERA een belangrijke laag zekerheid toevoegt. Wie deze afwegingen serieus maakt, met realistische cijfers en een ruime planning, kan off-plan slim inzetten als investering. Laat je vooraf adviseren door iemand die de lokale markt en de betrouwbaarheid van ontwikkelaars goed kent.

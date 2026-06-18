@@ -17,6 +17,8 @@ Het bruto huurrendement bereken je eenvoudig: de jaarhuur gedeeld door de koopso
 
 Het netto rendement is wat je daadwerkelijk overhoudt. Hiervoor trek je service charges, beheerkosten, onderhoud en leegstand af. In de praktijk ligt netto vaak 1,5 tot 3 procentpunt lager dan bruto. Een bruto rendement van 8% kan zo uitkomen op een netto rendement van rond de 5-6%.
 
+Het verschil tussen bruto en netto is geen detail, maar bepaalt of een investering werkelijk de moeite waard is. Advertenties tonen vrijwel altijd het bruto cijfer omdat dat het hoogst oogt. Wie zonder kostencorrectie vergelijkt, kan een pand met een mooi bruto rendement maar hoge service charges verkiezen boven een pand dat netto juist meer oplevert. Reken daarom standaard door naar netto voordat je twee opties tegen elkaar afweegt.
+
 ## Een rekenvoorbeeld
 
 Stel je koopt een appartement van AED 1.500.000 en verhuurt het voor AED 110.000 per jaar.

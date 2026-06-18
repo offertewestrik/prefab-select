@@ -35,6 +35,18 @@ Schoolgeld is na huur vaak de grootste uitgave voor expatgezinnen. De kosten var
 
 Naast het schoolgeld betaalt u vaak inschrijf-, examen-, bus- en materiaalkosten. Reken deze posten mee in uw budget. Met meerdere kinderen loopt de totale last fors op, dus neem dit vroeg mee in uw [kosten van levensonderhoud in Dubai](slug:kosten-van-levensonderhoud-dubai).
 
+## Bijkomende kosten naast het schoolgeld
+Het schoolgeld is de grootste, maar zeker niet de enige post. Veel gezinnen worden verrast door de optelsom van bijkomende kosten, die per kind per jaar flink kunnen oplopen. Houd onder meer rekening met:
+
+- **Inschrijf- en aanmeldkosten**, soms per school en niet altijd terugbetaalbaar
+- **Een aanbetaling of deposit** om een plek vast te leggen
+- **Schoolbusvervoer**, dat in Dubai door de afstanden vaak fors is
+- **Uniformen, boeken en materialen**
+- **Examengelden** voor IGCSE, A-levels of IB
+- **Buitenschoolse activiteiten, schoolreizen en lunch**
+
+Sommige scholen vragen daarnaast een eenmalige of jaarlijkse bijdrage voor faciliteiten. Vraag bij elke school een volledig overzicht van alle kosten op, zodat u de werkelijke jaarlast kunt vergelijken in plaats van alleen het basisschoolgeld. Met twee of meer kinderen is dit een van de bepalende posten in uw gezinsbudget. Houd er ook rekening mee dat scholen het schoolgeld jaarlijks kunnen aanpassen, doorgaans binnen door de KHDA gestelde kaders, zodat de kosten over de jaren kunnen oplopen.
+
 ## Wachtlijsten en inschrijving
 Populaire scholen kennen wachtlijsten, zeker voor instroomklassen. Het inschrijfproces omvat doorgaans:
 
@@ -43,7 +55,7 @@ Populaire scholen kennen wachtlijsten, zeker voor instroomklassen. Het inschrijf
 3. Toelatingsbeoordeling of assessment
 4. Plaatsing en bevestiging
 
-Begin ruim voor de verhuizing, soms een schooljaar van tevoren, om plaatsing op uw voorkeursschool te vergroten. Sommige scholen werken met een aanmeldfee die niet wordt terugbetaald, dus aanmelden bij meerdere scholen brengt kosten met zich mee.
+Begin ruim voor de verhuizing, soms een schooljaar van tevoren, om plaatsing op uw voorkeursschool te vergroten. Sommige scholen werken met een aanmeldfee die niet wordt terugbetaald, dus aanmelden bij meerdere scholen brengt kosten met zich mee. Houd er rekening mee dat een toelatingsbeoordeling of assessment voor oudere kinderen tot een afwijzing of een plek op een wachtlijst kan leiden, dus het is verstandig altijd een tweede en derde voorkeursschool achter de hand te hebben.
 
 ## Leeftijdsgroepen, instroom en het schooljaar
 Internationale scholen in Dubai bedienen doorgaans het volledige traject, van peuter- en kleuteronderwijs (Early Years) tot het eindexamenjaar. Voor jonge kinderen is de instroom vaak eenvoudiger, terwijl plaatsing in hogere jaren afhankelijk is van beschikbare plekken en soms een toelatingstoets. Bij de overstap halverwege een opleiding is het verstandig te kijken naar de aansluiting van het curriculum, zodat uw kind niet onnodig achterstand oploopt of vakken mist. Scholen kunnen adviseren over het juiste instroomjaar op basis van leeftijd en eerdere schoolprestaties.

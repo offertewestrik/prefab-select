@@ -54,6 +54,19 @@ Korte-termijnverhuur loont vooral op locaties met veel toeristische vraag en her
 
 In rustigere woonwijken is de vraag naar korte verblijven lager, waardoor langetermijnverhuur daar vaak logischer is.
 
+Binnen een wijk maakt het bovendien veel uit welk type woning je aanbiedt. Een goed gelegen studio of een-slaapkamerappartement met uitzicht en een hoge verdieping doet het in de regel beter dan een grote, afgelegen unit. Gasten betalen vooral voor locatie, uitzicht en sfeer. Een aantrekkelijk ingericht en professioneel gefotografeerd appartement onderscheidt zich sterk op de platforms en rechtvaardigt een hoger tarief per nacht.
+
+## Bezetting en seizoen
+
+De winst of het verlies van een holiday home wordt grotendeels bepaald door de bezettingsgraad: het percentage nachten dat je daadwerkelijk verhuurt. Een realistische jaarbezetting in goede toeristenwijken ligt vaak ergens tussen de 60% en 80%, maar dat is geen garantie en varieert sterk per woning, locatie en beheer.
+
+Dubai kent een uitgesproken seizoenspatroon:
+
+- **Hoogseizoen (oktober tot april)**: aangenaam weer, veel toeristen, hoge tarieven en bezetting.
+- **Laagseizoen (mei tot september)**: extreme hitte, minder bezoekers, lagere tarieven en bezetting.
+
+Tijdens grote evenementen, beurzen en feestdagen kun je de prijs flink verhogen. In de zomermaanden moet je juist scherper prijzen of accepteren dat de woning vaker leegstaat. Reken in je rendementsberekening dus nooit met de tarieven van het hoogseizoen voor het hele jaar; dat geeft een te rooskleurig beeld.
+
 ## De kosten op een rij
 
 Houd bij dit model rekening met meer kostenposten dan bij langetermijnverhuur:
@@ -67,6 +80,14 @@ Houd bij dit model rekening met meer kostenposten dan bij langetermijnverhuur:
 
 Deze kosten kunnen het bruto voordeel flink afromen, dus reken nauwkeurig.
 
+Een veelgemaakte fout is om alleen naar de hoge nachttarieven te kijken. Een appartement dat in het hoogseizoen AED 800 per nacht opbrengt, levert over het hele jaar gemiddeld veel minder op zodra je de leegstand, schoonmaak tussen elk verblijf, platformcommissies van vaak 15% tot 20% en de beheercommissie meerekent. Reken daarom altijd met een netto jaarbedrag en vergelijk dat eerlijk met wat dezelfde woning bij een vast jaarcontract zou opbrengen.
+
+## Zelf beheren of uitbesteden
+
+Een belangrijke keuze is of je de woning zelf beheert of een gespecialiseerde holiday-home operator inschakelt. Zelf beheren bespaart de commissie, maar kost veel tijd: je regelt check-ins en check-outs, schoonmaak, communicatie met gasten op alle uren, en je lost problemen ter plekke op. Voor wie op afstand investeert, bijvoorbeeld vanuit Nederland, is dat in de praktijk vrijwel onmogelijk.
+
+Een professionele beheerder neemt het volledige proces over, van fotografie en prijsoptimalisatie tot schoonmaak en gastcommunicatie, tegen een commissie die doorgaans tussen de 15% en 25% van de omzet ligt. Dat drukt je rendement, maar zorgt voor continuïteit en goede beoordelingen. Wie vanuit het buitenland investeert, kiest hier vrijwel altijd voor. Lees hoe verhuur op afstand in bredere zin werkt via [vastgoed kopen op afstand in Dubai](slug:vastgoed-kopen-op-afstand-dubai).
+
 ## Risico's en aandachtspunten
 
 - **Wisselende bezetting**: inkomsten zijn minder voorspelbaar.
@@ -76,6 +97,12 @@ Deze kosten kunnen het bruto voordeel flink afromen, dus reken nauwkeurig.
 - **Tijd of beheerkosten**: zelf beheren kost veel tijd, uitbesteden kost geld.
 
 Wie deze punten goed inschat, kan korte-termijnverhuur succesvol inzetten. Bekijk hoe het past in je strategie via [rendement op vastgoed in Dubai](slug:rendement-vastgoed-dubai).
+
+## Voor wie is dit model geschikt?
+
+Korte-termijnverhuur past het beste bij investeerders die het bewust als een actieve onderneming benaderen en niet als een passieve belegging. Het loont vooral wanneer aan een aantal voorwaarden is voldaan: de woning ligt in een toeristische toplocatie, het gebouw staat holiday homes toe, en je hebt of regelt professioneel beheer dat de bezetting en beoordelingen op peil houdt. Onder die voorwaarden kan het netto rendement merkbaar hoger uitvallen dan bij een vast jaarcontract.
+
+Zoek je daarentegen vooral rust, voorspelbare inkomsten en weinig omkijken, dan is het langetermijnmodel doorgaans de logischere keuze. Sommige investeerders combineren beide: ze verhuren in het drukke hoogseizoen kort en schakelen in de rustige zomermaanden over op een tijdelijk langer verblijf. Zo'n hybride aanpak vraagt wel meer flexibiliteit en kennis van de markt, en blijft gebonden aan de geldende vergunningseisen.
 
 ## Conclusie
 

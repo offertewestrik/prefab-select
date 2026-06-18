@@ -48,6 +48,21 @@ Het zorgstelsel in Dubai werkt anders dan het Nederlandse:
 
 Een goede polis is daardoor belangrijker dan in Nederland, omdat onverzekerde zorg snel kostbaar wordt. Het ontbreken van een verplichte huisartsenroute betekent dat u zelf meer regie heeft, maar ook zelf de juiste zorgverlener moet kiezen.
 
+## Een polis kiezen: waar u op let
+Omdat uw toegang tot zorg direct afhangt van uw verzekering, is de keuze van een polis een van de belangrijkste beslissingen bij uw verhuizing. Het laagste premiebedrag is zelden de beste keuze: goedkope basispolissen kennen vaak een beperkt netwerk van ziekenhuizen, een lagere dekkingslimiet en meer uitsluitingen. Onderstaande tabel helpt om verschillende polissen vergelijkbaar te beoordelen.
+
+| Onderdeel | Waarom het telt |
+|-----------|-----------------|
+| Netwerk | Bepaalt naar welke ziekenhuizen en klinieken u kunt |
+| Dekkingslimiet | Maximaal vergoed bedrag per jaar |
+| Eigen risico | Het deel dat u zelf betaalt per behandeling |
+| Uitsluitingen | Bestaande aandoeningen of zorg die niet wordt vergoed |
+| Extra dekking | Tandheelkunde, zwangerschap, zorg buiten de VAE |
+
+Vergelijk polissen dus op het geheel, niet alleen op de premie. Voor wie een bestaande aandoening heeft, is het extra belangrijk vooraf te controleren of deze wordt gedekt, want sommige polissen sluiten bestaande klachten uit of kennen een wachttijd. Laat u bij twijfel adviseren door een onafhankelijke verzekeringsadviseur die de lokale markt kent.
+
+Houd er ook rekening mee dat een door de werkgever geregelde basispolis vaak alleen de werknemer dekt en soms een beperkt netwerk kent. Wie een gezin heeft of gewend is aan ruime toegang tot specialisten, kiest er meestal voor om deze basisdekking zelf op te waarderen of aan te vullen. Deze kosten lopen mee in uw maandbudget en verdienen daarom een plek in uw bredere financiële planning rond de verhuizing.
+
 ## Zorg voor gezinnen en zwangerschap
 Gezinnen kiezen vaak een uitgebreidere polis met dekking voor kinderen, zwangerschap en tandheelkunde. Houd bij verhuizing rekening met inentingen, medische dossiers en de keuze van een vaste kliniek voor uw kinderen. Een ruime dekking voorkomt onverwachte kosten bij ziekenhuisopname of specialistische zorg. Het is verstandig vooraf te controleren of kinderziekenhuizen en vertrouwde merken in het netwerk van uw polis zitten.
 

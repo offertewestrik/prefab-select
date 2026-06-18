@@ -31,6 +31,15 @@ Niet alles is duur in Dubai. Een aantal posten is juist gunstig:
 
 Veel Nederlanders ervaren transport en uit eten als goedkoper dan in Nederland, terwijl geïmporteerde producten juist prijziger zijn.
 
+## Verschillen per gezinssituatie
+Het is lastig één bedrag te noemen voor "de kosten van levensonderhoud", omdat die sterk afhangen van uw situatie. Een alleenstaande expat in een studio of een-slaapkamerappartement heeft een heel ander uitgavenpatroon dan een gezin met schoolgaande kinderen in een villa.
+
+- **Alleenstaande of stel zonder kinderen**: huur en zorgverzekering zijn de grootste posten. Zonder schoolgeld blijft er, zeker met een goed salaris en zonder inkomstenbelasting, vaak fors over om te sparen.
+- **Gezin met kinderen**: hier komt schoolgeld als zware extra post bij, vaak de tweede uitgave na de huur. Ook de zorgverzekering en een grotere woning drukken op het budget.
+- **Premiumlevensstijl**: wonen aan het water, internationale topscholen, regelmatig uit eten en frequent reizen kunnen de maandlasten een veelvoud maken van een bescheiden levensstijl.
+
+Het is daarom verstandig uw budget niet op een algemeen gemiddelde te baseren, maar op uw eigen woon-, school- en levensstijlkeuzes. Reken vervolgens met een ruime marge, zeker in het eerste jaar. Wie overweegt te kopen in plaats van te huren, doet er goed aan ook de structurele lasten van eigendom mee te wegen, zoals service charges en onderhoud, naast de eenmalige kosten koper bij aankoop.
+
 ## Indicatief maandbudget
 Onderstaande tabel geeft een globaal beeld voor 2026. Werkelijke kosten hangen sterk af van uw keuzes en gezinsgrootte.
 
