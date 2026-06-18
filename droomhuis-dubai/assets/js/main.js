@@ -181,5 +181,19 @@
   handleForm("#gids", "#gidsSuccess");
   handleForm("#contactForm", "#contactSuccess");
 
+  /* ---- background videos: autoplay only while in view (performance) -- */
+  const vids = $$("video.bgvideo");
+  if (vids.length) {
+    vids.forEach((v) => { v.muted = true; v.setAttribute("muted", ""); });
+    const vio = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.play().catch(() => {}); }
+        else { e.target.pause(); }
+      }),
+      { threshold: 0.2 }
+    );
+    vids.forEach((v) => vio.observe(v));
+  }
+
   observeReveals();
 })();
