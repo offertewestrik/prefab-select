@@ -56,5 +56,11 @@ De werkcultuur in Dubai is internationaal maar kent eigen gebruiken. De werkweek
 ## Werk, visum en wonen combineren
 Werken in Dubai gaat hand in hand met de bredere verhuisstap. Houd rekening met de [kosten van levensonderhoud in Dubai](slug:kosten-van-levensonderhoud-dubai), waarbij huur en scholen het besteedbaar inkomen drukken. Wie een vermogen opbouwt, kan via vastgoed bovendien een [Golden Visa](slug:golden-visa-dubai) overwegen voor langdurig verblijf los van een werkgever. Zo bent u niet afhankelijk van één arbeidscontract voor uw verblijfsrecht.
 
+## Arbeidsrechten en gratuity
+De arbeidswetgeving in de VAE is de afgelopen jaren gemoderniseerd en biedt werknemers diverse rechten, zoals geregeld verlof, ziekteverlof en bescherming bij ontslag. Een belangrijk element is de gratuity, een eindafrekening die werknemers bij het einde van hun dienstverband ontvangen, opgebouwd op basis van het aantal dienstjaren. Het is verstandig uw arbeidscontract zorgvuldig te lezen en te begrijpen welke rechten en verplichtingen erin staan, inclusief proeftijd, opzegtermijn en eventuele concurrentiebedingen. Bij twijfel kan een lokale arbeidsjurist uitkomst bieden voordat u tekent.
+
+## Van baan veranderen of vertrekken
+Omdat uw werkvisum doorgaans gekoppeld is aan uw werkgever, heeft een baanwisseling gevolgen voor uw verblijfsstatus. Bij een overstap moet uw visum worden overgezet naar de nieuwe werkgever. Verliest u uw baan, dan geldt meestal een respijtperiode waarin u een nieuwe werkgever moet vinden of uw verblijf op een andere manier moet regelen. Wie meer onafhankelijkheid wil van een enkele werkgever, kan op termijn een [Golden Visa](slug:golden-visa-dubai) via vastgoed overwegen, zodat het verblijfsrecht losstaat van het dienstverband. Plan dergelijke stappen tijdig om periodes zonder geldig visum te vermijden.
+
 ## Conclusie: kansen met goede voorbereiding
 Werken in Dubai biedt aantrekkelijke kansen, zeker door het ontbreken van inkomstenbelasting. Bekijk altijd het totale arbeidspakket, regel uw fiscale afwikkeling zorgvuldig en stem uw woonbudget af op uw netto inkomen. Voor het complete plaatje van de stap leest u [verhuizen naar Dubai](slug:verhuizen-naar-dubai).

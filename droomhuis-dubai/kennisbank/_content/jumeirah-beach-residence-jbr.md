@@ -64,5 +64,16 @@ Bedenk bij kortetermijnverhuur wel dat dit extra inzet vraagt: vergunningen, sch
 
 Aandachtspunten zijn de leeftijd van sommige gebouwen (let op onderhoud en service charges), de drukte van de toeristische omgeving en relatief hoge instapprijzen door de toplocatie. Wie de levendigheid liever ruilt voor een wat rustiger waterfront met jachthaven, vergelijkt met [Dubai Marina](slug:dubai-marina-appartementen).
 
+## Kopen in JBR: praktische aandachtspunten
+JBR ligt in een freehold-zone, waardoor buitenlanders 100% eigendom kunnen verkrijgen met een title deed op naam. Het koopproces verloopt zoals elders in Dubai, onder toezicht van het DLD en RERA, met de gebruikelijke aankoopkosten van circa 4% overdrachtsbelasting plus registratie- en makelaarskosten.
+
+Specifiek voor JBR zijn deze punten belangrijk:
+- **Leeftijd en onderhoud**: de gebouwen dateren uit de eerste generatie waterfrontprojecten; let op de staat en het beheer.
+- **Service charges**: bij oudere torens kunnen deze hoger uitvallen; vraag de actuele tarieven op.
+- **Uitzicht**: zeezicht levert duidelijk meerwaarde op ten opzichte van Marina- of binnenzicht.
+- **Verhuurstrategie**: bepaal vooraf of u voor langetermijn- of vakantieverhuur gaat, want dat beïnvloedt de keuze van de unit.
+
+De combinatie van een toplocatie en bewezen verhuurvraag maakt JBR aantrekkelijk, maar de premium prijzen en de leeftijd van de gebouwen vragen om een zorgvuldige selectie. Laat u begeleiden door een adviseur die de verschillen tussen de torens kent.
+
 ## Conclusie
 JBR is een gevestigde beachfront-wijk die strandleven, voorzieningen en sterke verhuurvraag combineert. Het is ideaal voor wie aan zee wil wonen of inzet op vakantieverhuur met bewezen vraag. Houd rekening met de leeftijd van sommige torens, de drukte en de premium prijzen die bij deze toplocatie horen.

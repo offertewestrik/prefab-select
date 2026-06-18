@@ -66,13 +66,13 @@ Naast de koopsom betaalt u eenmalige aankoopkosten van circa 6 tot 8%:
 Een compleet overzicht vindt u in [kosten koper in Dubai](slug:kosten-koper-dubai). Houd ook rekening met service charges voor het onderhoud van de community, en met eigen kosten voor tuin- en zwembadonderhoud.
 
 ## Financiering en aanbetaling
-Niet-residenten krijgen doorgaans een hypotheek tot 50-60% LTV (40-50% [down payment](slug:wat-is-een-down-payment)), residenten tot 75-80%. Omdat villa's hogere bedragen betreffen, is de benodigde eigen inbreng substantieel. Plan uw financiering vooraf en vraag eventueel een preapproval aan. Bij off-plan villa's gelden vaak gespreide betaalplannen die de instap verlichten.
+Niet-residenten krijgen doorgaans een hypotheek tot 50-60% LTV (40-50% down payment), residenten tot 75-80%. Omdat villa's hogere bedragen betreffen, is de benodigde eigen inbreng substantieel. Plan uw financiering vooraf en vraag eventueel een preapproval aan. Bij off-plan villa's gelden vaak gespreide betaalplannen die de instap verlichten.
 
 ## Rendement en waardestijging
 Villa's leveren doorgaans een lager bruto huurrendement op dan appartementen (vaak 4-6%), maar kunnen profiteren van sterkere waardestijging, zeker op schaarse toplocaties. Voor investeerders gericht op cashflow zijn appartementen vaak interessanter; voor wie inzet op waardegroei en eigen gebruik is een villa aantrekkelijk. Reken altijd met netto cijfers, inclusief onderhoud en eventuele leegstand.
 
 ## Het koopproces
-Het villakoopproces verloopt vergelijkbaar met dat van een appartement en is gereguleerd door DLD en RERA: reservering, koopcontract (MOU / Form F) en aanbetaling, NOC bij doorverkoop, en overdracht met afgifte van de title deed. Het volledige [stappenplan](slug:koopproces-dubai-stappenplan) helpt u op weg. Kopen op afstand is mogelijk via een volmacht.
+Het villakoopproces verloopt vergelijkbaar met dat van een appartement en is gereguleerd door DLD en RERA: reservering, koopcontract (MOU / Form F) en aanbetaling, NOC bij doorverkoop, en overdracht met afgifte van de title deed. Een gestructureerd stappenplan helpt u op weg. Kopen op afstand is mogelijk via een volmacht.
 
 ## Gated communities en voorzieningen
 Veel villa's liggen in gated communities met gedeelde voorzieningen zoals parken, zwembaden, sportscholen, scholen en winkels. Deze voorzieningen verhogen het woongenot en de waarde, maar brengen ook service charges met zich mee voor het onderhoud. Beoordeel bij uw keuze de kwaliteit van het beheer en de community: een goed onderhouden omgeving houdt zijn waarde beter vast en is aantrekkelijker voor huurders.
