@@ -15,7 +15,7 @@ Het koopproces in Dubai is overzichtelijk en goed gereguleerd door het Dubai Lan
 Begin met het bepalen van uw doel (eigen gebruik of investeren), budget en gewenste wijk. Houd rekening met de koopsom plus circa 6-8% [kosten koper](slug:kosten-koper-dubai). Bekijk financiering vooraf en vraag eventueel een hypotheek-preapproval aan, zodat u weet welk bedrag haalbaar is. Een helder budget voorkomt teleurstellingen verderop in het traject.
 
 ## Stap 2: woning selecteren en bezichtigen
-Werk met een RERA-geregistreerde makelaar en selecteer woningen die passen bij uw doel. Bezichtig fysiek of op afstand via video. Vergelijk wijken, ontwikkelaars en hun oplevergeschiedenis. Voor investeerders is de gids [beste wijken voor investeerders](slug:beste-wijken-voor-investeerders-dubai) een nuttige bron. Let bij elke woning op ligging, staat, service charges en verhuurpotentieel.
+Werk met een RERA-geregistreerde makelaar en selecteer woningen die passen bij uw doel. Bezichtig fysiek of op afstand via video. Vergelijk wijken, ontwikkelaars en hun oplevergeschiedenis. Let bij elke woning op ligging, staat, service charges en verhuurpotentieel, zeker als u wilt investeren.
 
 ## Stap 3: bod uitbrengen en reserveren
 Brengt u een bod uit dat wordt geaccepteerd, dan ondertekent u een reserveringsformulier en betaalt u doorgaans een reserveringsbedrag. Hiermee wordt de woning voor u apart gehouden. In deze fase worden ook de hoofdvoorwaarden besproken, zoals prijs, opleverdatum en eventuele inboedel.
