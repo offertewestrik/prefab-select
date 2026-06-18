@@ -74,6 +74,8 @@ Let bij de selectie op:
 
 Vergelijk meerdere partijen en lees het beheercontract kritisch, vooral de opzegtermijn, de afdracht van huurgelden en wie waarvoor aansprakelijk is. Een lage prijs weegt niet op tegen slecht beheer dat leidt tot leegstand of conflicten.
 
+Let er ook op hoe en wanneer de beheerder de huurinkomsten aan u uitkeert. Worden de gelden op een aparte rekening gehouden, of lopen ze via de algemene rekening van de beheerder? Hoe snel ontvangt u uw deel na incasso? Een transparante, gescheiden afwikkeling beschermt u tegen problemen als de beheerder in financiële moeilijkheden komt. Vraag bovendien naar de rapportagefrequentie, zodat u op afstand een actueel beeld houdt van bezetting, kosten en eventuele achterstanden.
+
 ## Beheer en uw netto rendement
 Beheerkosten zijn geen weggegooid geld: goed beheer verhoogt vaak uw netto rendement door minder leegstand, betere huurders en tijdig onderhoud. Reken het echter wel correct mee. Een verschil tussen 5% en 10% beheer, of tussen long en short let, kan uw netto opbrengst merkbaar beïnvloeden.
 

@@ -1,4 +1,4 @@
-TITLE: Box 3 en Dubai-vastgoed voor Nederlanders 2026
+TITLE: Box 3 en Dubai-vastgoed: complete gids Nederlanders 2026
 H1: Box 3 en Dubai-vastgoed voor Nederlanders
 DESCRIPTION: Hoe werkt box 3 bij Dubai-vastgoed voor Nederlanders? Lees over het belastingverdrag, de 183-dagenregel, het M-biljet en emigratie, en waarom advies nodig is.
 CATEGORY: Investeren & rendement
