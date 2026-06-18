@@ -78,7 +78,7 @@
             <div class="prop-price">${p.price}<small>Vanaf</small></div>
             <div class="prop-roi"><b>${p.roi}</b><span>ROI</span></div>
           </div>
-          <a class="prop-more" href="#contact">Lees meer
+          <a class="prop-more" href="aanbod/${p.slug}.html">Bekijk woning
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>`).join("");
