@@ -1,9 +1,10 @@
 name: Deploy demo sites to GitHub Pages
 
-# Publishes BOTH standalone demo sites to GitHub Pages under one Pages site:
-#   /law-firm-dubai/  → Meridian Crowne (static)
-#   /aqua-flow/       → Al Naqaa / Aqua Flow (Next.js static export)
-# A root index links to both. Does NOT touch the Firebase-hosted production
+# Publishes the standalone demo sites to GitHub Pages under one Pages site:
+#   /law-firm-dubai/   → Meridian Crowne (static)
+#   /aqua-flow/        → Al Naqaa / Aqua Flow (Next.js static export)
+#   /droomhuis-dubai/  → Droomhuis in Dubai (luxury real estate, static)
+# A root index links to all. Does NOT touch the Firebase-hosted production
 # site (prefabselect.nl).
 
 on:
@@ -12,6 +13,7 @@ on:
     paths:
       - "law-firm-dubai/**"
       - "aqua-flow/**"
+      - "droomhuis-dubai/**"
       - ".github/workflows/pages-demos.yml"
   workflow_dispatch:
 
@@ -52,9 +54,10 @@ jobs:
 
       - name: Assemble combined site
         run: |
-          mkdir -p _site/law-firm-dubai _site/aqua-flow
+          mkdir -p _site/law-firm-dubai _site/aqua-flow _site/droomhuis-dubai
           cp -r law-firm-dubai/. _site/law-firm-dubai/
           cp -r aqua-flow/out/. _site/aqua-flow/
+          cp -r droomhuis-dubai/. _site/droomhuis-dubai/
           cat > _site/index.html <<'HTML'
           <!doctype html><html lang="en"><head><meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,6 +77,7 @@ jobs:
           <body><div class="wrap"><h1>Demo Sites</h1><div class="cards">
             <a href="./law-firm-dubai/"><b>Meridian Crowne</b><span>Luxury law firm · Dubai</span></a>
             <a href="./aqua-flow/"><b>Al Naqaa</b><span>Purified water delivery · Dubai</span></a>
+            <a href="./droomhuis-dubai/"><b>Droomhuis in Dubai</b><span>Luxury real estate · Dubai</span></a>
           </div></div></body></html>
           HTML
 
