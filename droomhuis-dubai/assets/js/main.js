@@ -84,6 +84,14 @@
       </article>`).join("");
   }
 
+  /* ---- reels (zelf-gehost, autoplay carousels) ---------------------- */
+  const reelCard = (r, i) =>
+    `<div class="reel-card"><video class="bgvideo reel-vid" loop muted autoplay playsinline preload="${i < 3 ? "metadata" : "none"}" poster="assets/video/reels/${r}.jpg"><source src="assets/video/reels/${r}.mp4" type="video/mp4"></video><button class="reel-mute" type="button" aria-label="Geluid aan of uit"></button></div>`;
+  const reelsGridEl = $("#reelsGrid");
+  if (reelsGridEl && D.REELS) reelsGridEl.innerHTML = D.REELS.map(reelCard).join("");
+  const reelsAboutEl = $("#reelsAbout");
+  if (reelsAboutEl && D.REELS) reelsAboutEl.innerHTML = D.REELS.slice(0, 6).map(reelCard).join("");
+
   /* ---- ROI calculator + dashboard ----------------------------------- */
   const fmt = (n) => "AED " + Math.round(n).toLocaleString("nl-NL");
   const setRangeFill = (input) => {
