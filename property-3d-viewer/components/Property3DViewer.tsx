@@ -2,10 +2,11 @@
 
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { Environment, OrbitControls, ContactShadows, SoftShadows } from "@react-three/drei";
+import { OrbitControls, ContactShadows, SoftShadows } from "@react-three/drei";
 import { AnimatePresence, motion } from "framer-motion";
 import * as THREE from "three";
-import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 import { property } from "@/data/properties3d";
 import Villa from "./Villa";
@@ -58,6 +59,28 @@ function CameraRig({
 /* =====================================================================
    Scene-lichten + omgeving voor dag/nacht
    ===================================================================== */
+/* Ingebouwde studio-omgeving via PMREM (RoomEnvironment) — geen externe
+   HDR/CDN nodig, dus snel en betrouwbaar. Intensiteit zakt 's nachts. */
+function EnvironmentRig({ night }: { night: boolean }) {
+  const { gl, scene } = useThree();
+  useEffect(() => {
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const env = pmrem.fromScene(new RoomEnvironment(), 0.04);
+    scene.environment = env.texture;
+    return () => {
+      env.texture.dispose();
+      pmrem.dispose();
+    };
+  }, [gl, scene]);
+  useEffect(() => {
+    // three r0.169: per-scene environment-intensiteit
+    (scene as THREE.Scene & { environmentIntensity?: number }).environmentIntensity = night
+      ? 0.25
+      : 1;
+  }, [scene, night]);
+  return null;
+}
+
 function SceneLighting({ night }: { night: boolean }) {
   return (
     <>
@@ -165,10 +188,10 @@ export default function Property3DViewer() {
         <fog attach="fog" args={[night ? "#0c1322" : "#dce8f2", 18, 40]} />
 
         <SoftShadows size={28} samples={12} focus={0.6} />
+        <EnvironmentRig night={night} />
         <SceneLighting night={night} />
 
         <Suspense fallback={<Loader />}>
-          <Environment preset={night ? "night" : "city"} />
           <ModelErrorBoundary fallback={<Villa material={material} night={night} />}>
             <Villa modelUrl={property.modelUrl} material={material} night={night} />
           </ModelErrorBoundary>
