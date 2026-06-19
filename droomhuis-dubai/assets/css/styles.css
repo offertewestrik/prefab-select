@@ -150,6 +150,10 @@ section { position: relative; }
 .nav-phone { font-size: 0.92rem; font-weight: 500; color: var(--navy); display: flex; align-items: center; gap: 8px; }
 .nav-phone svg { width: 16px; height: 16px; color: var(--gold-deep); }
 .nav .btn { padding: 12px 24px; font-size: 0.85rem; }
+.lang-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 100px; overflow: hidden; background: rgba(255,255,255,0.5); }
+.lang-switch button { background: transparent; border: 0; padding: 7px 12px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.04em; color: var(--navy); opacity: 0.55; transition: all 0.3s var(--ease); }
+.lang-switch button.active { background: var(--navy); color: #fff; opacity: 1; }
+.lang-switch button:not(.active):hover { opacity: 1; }
 .burger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; padding: 8px; z-index: 2; }
 .burger span { width: 25px; height: 2px; background: var(--navy); border-radius: 2px; transition: 0.35s var(--ease); }
 .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
