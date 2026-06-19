@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import type { MaterialPreset } from "@/data/properties3d";
+import { property, type MaterialPreset } from "@/data/properties3d";
 
 type Props = {
   modelUrl?: string;
@@ -23,6 +23,11 @@ export default function Villa({ modelUrl, material, night }: Props) {
   return <ProceduralVilla material={material} night={night} />;
 }
 
+// laad het model alvast (lazy preload) zodra de bundel geladen is
+if (property.modelUrl) {
+  useGLTF.preload(property.modelUrl);
+}
+
 /* ---- echte GLB ------------------------------------------------------ */
 const TARGET_SIZE = 6; // gewenste breedte van het model in scene-units
 
@@ -33,18 +38,21 @@ function GLTFVilla({ url, material }: { url: string; material: MaterialPreset })
   // ongeacht de bron-schaal of -oriëntatie
   const { object, scale, offset } = useMemo(() => {
     const root = scene.clone(true);
+    const tint = new THREE.Color(material.color);
     root.traverse((o) => {
       const mesh = o as THREE.Mesh;
       if (mesh.isMesh) {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-        // Behoud de ingebakken textuur, maar tint 'm met de gekozen afwerking:
-        // de preset-kleur wordt over de texture-map vermenigvuldigd.
+        // Behoud de ingebakken PBR-textuur en geef 'm een subtiele afwerk-tint:
+        // de basiskleur wordt deels naar de preset-kleur gemengd zodat de
+        // textuur leesbaar blijft maar de "afwerking" zichtbaar verandert.
         const apply = (src: THREE.Material) => {
           const m = (src as THREE.MeshStandardMaterial).clone() as THREE.MeshStandardMaterial;
-          if (m.color) m.color.set(material.color);
-          if ("roughness" in m) m.roughness = material.roughness;
-          if ("metalness" in m) m.metalness = material.metalness;
+          if (m.color) {
+            const base = m.map ? new THREE.Color("#ffffff") : new THREE.Color("#e9e2d5");
+            m.color.copy(base).lerp(tint, m.map ? 0.45 : 1);
+          }
           return m;
         };
         mesh.material = Array.isArray(mesh.material)

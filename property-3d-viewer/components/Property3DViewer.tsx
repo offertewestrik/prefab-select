@@ -13,6 +13,7 @@ import ViewerHotspot from "./ViewerHotspot";
 import MaterialSelector from "./MaterialSelector";
 import FloorplanOverlay from "./FloorplanOverlay";
 import Loader from "./Loader";
+import ModelErrorBoundary from "./ModelErrorBoundary";
 
 const START_CAM: [number, number, number] = [6, 4, 8];
 const HOME_TARGET = new THREE.Vector3(0, 1.4, 0);
@@ -88,7 +89,9 @@ export default function Property3DViewer() {
   const glRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.Camera | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
+  const [fullscreen, setFullscreen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [materialId, setMaterialId] = useState(property.materials[0].id);
   const [night, setNight] = useState(false);
@@ -112,6 +115,25 @@ export default function Property3DViewer() {
     setAutoRotate(true);
   }, []);
 
+  const resetView = useCallback(() => {
+    setActiveId(null);
+    setFloorOpen(false);
+    setAutoRotate(true);
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    if (!document.fullscreenElement) el.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  }, []);
+
+  useEffect(() => {
+    const onFs = () => setFullscreen(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", onFs);
+    return () => document.removeEventListener("fullscreenchange", onFs);
+  }, []);
+
   const screenshot = useCallback(() => {
     const gl = glRef.current;
     const scene = sceneRef.current;
@@ -126,7 +148,7 @@ export default function Property3DViewer() {
   }, []);
 
   return (
-    <div className={`viewer${night ? " night" : ""}`}>
+    <div className={`viewer${night ? " night" : ""}`} ref={rootRef}>
       <Canvas
         shadows
         dpr={[1, 2]}
@@ -147,7 +169,9 @@ export default function Property3DViewer() {
 
         <Suspense fallback={<Loader />}>
           <Environment preset={night ? "night" : "city"} />
-          <Villa modelUrl={property.modelUrl} material={material} night={night} />
+          <ModelErrorBoundary fallback={<Villa material={material} night={night} />}>
+            <Villa modelUrl={property.modelUrl} material={material} night={night} />
+          </ModelErrorBoundary>
           {property.hotspots.map((h) => (
             <ViewerHotspot
               key={h.id}
@@ -193,8 +217,17 @@ export default function Property3DViewer() {
         </div>
       </div>
 
-      {/* ---- dag/nacht + screenshot ---- */}
+      {/* ---- reset / dag-nacht / screenshot / fullscreen ---- */}
       <div className="ui-top-right">
+        <button
+          className="icon-btn glass"
+          onClick={resetView}
+          aria-label="Beginstand"
+          title="Beginstand"
+          type="button"
+        >
+          <HomeIcon />
+        </button>
         <button
           className={`icon-btn glass${night ? " active" : ""}`}
           onClick={() => setNight((v) => !v)}
@@ -212,6 +245,15 @@ export default function Property3DViewer() {
           type="button"
         >
           <CameraIcon />
+        </button>
+        <button
+          className={`icon-btn glass${fullscreen ? " active" : ""}`}
+          onClick={toggleFullscreen}
+          aria-label="Volledig scherm"
+          title="Volledig scherm"
+          type="button"
+        >
+          <FullscreenIcon />
         </button>
       </div>
 
@@ -298,6 +340,21 @@ function CameraIcon() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
       <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
+}
+function HomeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 11l9-8 9 8" />
+      <path d="M5 9.5V21h14V9.5" />
+    </svg>
+  );
+}
+function FullscreenIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 3H4a1 1 0 0 0-1 1v4M16 3h4a1 1 0 0 1 1 1v4M21 16v4a1 1 0 0 1-1 1h-4M3 16v4a1 1 0 0 0 1 1h4" />
     </svg>
   );
 }
