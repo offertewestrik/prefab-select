@@ -30,6 +30,7 @@
   <link rel="preload" as="image" href="assets/video/infinity-pool.jpg" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/premium.css" />
   <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 
   <script type="application/ld+json">
@@ -157,8 +158,8 @@
         <div><b>30+</b><span>Toplocaties in Dubai</span></div>
       </div>
       <div class="trust-card">
-        <span class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><path d="M3.6 19c0-3 2.4-5 5.4-5s5.4 2 5.4 5"/><path d="M15.5 6.3a3 3 0 0 1 0 5.4"/><path d="M17.2 14.2c1.9.7 3.2 2.4 3.2 4.8"/></svg></span>
-        <div><b>500+</b><span>Tevreden klanten</span></div>
+        <span class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="4"/><path d="M13.4 9.4 19 3.8"/><path d="M16 4h4v4"/><path d="M15 7l2 2"/></svg></span>
+        <div><b>Golden</b><span>Visa mogelijk</span></div>
       </div>
     </div>
   </div>
@@ -232,6 +233,41 @@
     </div>
   </section>
 
+  <!-- ============================ INTERACTIVE MAP ============================ -->
+  <section class="dmap section-pad" id="kaart">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow center">Interactieve kaart</span>
+        <h2>Ontdek Dubai per wijk</h2>
+        <p>Beweeg over de kaart en bekijk per locatie de gemiddelde prijzen, het verwachte rendement en het type woningen.</p>
+      </div>
+      <div class="dmap-shell reveal">
+        <div class="dmap-canvas">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect class="dmap-water" x="0" y="0" width="100" height="100"/>
+            <path class="dmap-coast" d="M2 30 Q 16 22 30 30 T 56 42 Q 70 50 78 64 T 100 84"/>
+            <path class="dmap-coast" d="M14 40 q 5 -7 12 -4 q 7 3 4 11 q -3 7 -12 4 q -7 -3 -4 -11 Z" opacity="0.5"/>
+          </svg>
+          <svg viewBox="0 0 100 100" id="dmapPins" aria-hidden="true"></svg>
+        </div>
+        <div class="dmap-info" id="dmapInfo">
+          <div class="dmap-info-body">
+            <span class="loc-k" id="dmKlabel">Wijk in beeld</span>
+            <h3 id="dmName"></h3>
+            <p id="dmDesc"></p>
+            <div class="area-stats">
+              <div><b id="dmPrice"></b><span>Vanaf</span></div>
+              <div><b id="dmRoi"></b><span>Rendement</span></div>
+              <div><b id="dmTypes"></b><span>Type</span></div>
+            </div>
+            <a class="btn btn-gold" id="dmLink" href="#">Bekijk wijk
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================ CALCULATOR ============================ -->
   <section class="calc section-pad" id="rendement">
     <div class="wrap">
@@ -282,7 +318,7 @@
         <a class="link-arrow" href="aanbod/index.html">Bekijk alle woningen
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <div class="props-grid reveal" id="propsGrid"></div>
+      <div class="cine-grid reveal" id="propsGrid"></div>
     </div>
   </section>
 
@@ -441,24 +477,18 @@
         <a class="link-arrow" href="kennisbank/index.html">Bekijk de kennisbank
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <div class="know-grid reveal">
-        <a class="know-card" href="kennisbank/investeren-in-dubai-vastgoed.html">
-          <span class="kc-k">Investeren &amp; rendement</span>
-          <h3>Investeren in Dubai vastgoed</h3>
-          <p>Rendement, kosten, financiering en risico's — de complete gids voor investeerders.</p>
-          <span class="kc-go">Lees verder →</span>
+      <div class="mag-grid reveal">
+        <a class="mag-card" href="kennisbank/investeren-in-dubai-vastgoed.html">
+          <div class="mag-img"><img loading="lazy" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=900&auto=format&fit=crop" alt="Investeren in Dubai vastgoed"><span class="mag-cat">Investeren &amp; rendement</span></div>
+          <div class="mag-body"><h3>Investeren in Dubai vastgoed</h3><p>Rendement, kosten, financiering en risico's — de complete gids voor investeerders.</p><span class="mag-go">Lees verder →</span></div>
         </a>
-        <a class="know-card" href="kennisbank/golden-visa-dubai.html">
-          <span class="kc-k">Wonen &amp; verhuizen</span>
-          <h3>Golden Visa Dubai</h3>
-          <p>Verkrijg via vastgoed een 10-jarig verblijfsvisum — voorwaarden en het aanvraagproces.</p>
-          <span class="kc-go">Lees verder →</span>
+        <a class="mag-card" href="kennisbank/golden-visa-dubai.html">
+          <div class="mag-img"><img loading="lazy" src="https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=900&auto=format&fit=crop" alt="Golden Visa Dubai"><span class="mag-cat">Wonen &amp; verhuizen</span></div>
+          <div class="mag-body"><h3>Golden Visa Dubai</h3><p>Verkrijg via vastgoed een 10-jarig verblijfsvisum — voorwaarden en het aanvraagproces.</p><span class="mag-go">Lees verder →</span></div>
         </a>
-        <a class="know-card" href="kennisbank/beste-wijken-van-dubai.html">
-          <span class="kc-k">Wijken &amp; locaties</span>
-          <h3>De beste wijken van Dubai</h3>
-          <p>Van Palm Jumeirah tot JVC — prijzen, rendement en sfeer per wijk vergeleken.</p>
-          <span class="kc-go">Lees verder →</span>
+        <a class="mag-card" href="kennisbank/beste-wijken-van-dubai.html">
+          <div class="mag-img"><img loading="lazy" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=900&auto=format&fit=crop" alt="De beste wijken van Dubai"><span class="mag-cat">Wijken &amp; locaties</span></div>
+          <div class="mag-body"><h3>De beste wijken van Dubai</h3><p>Van Palm Jumeirah tot JVC — prijzen, rendement en sfeer per wijk vergeleken.</p><span class="mag-go">Lees verder →</span></div>
         </a>
       </div>
     </div>
