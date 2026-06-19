@@ -2,7 +2,11 @@
 
 Zet hier je eigen villa-model neer als **`villa-dubai.glb`** (of `.gltf`).
 
-1. Exporteer/comprimeer naar GLB (Draco-compressie aanbevolen voor snelheid).
+1. Exporteer/comprimeer naar GLB. Meshopt-compressie is aanbevolen: drei
+   decodeert die met een ingebouwde decoder (geen externe CDN nodig).
+   Bijv.: `npx @gltf-transform/cli optimize in.glb villa-dubai.glb \
+   --texture-compress webp --texture-size 1024 --compress meshopt`
+   Het meegeleverde model is zo gemaakt (15 MB → ~1,2 MB).
 2. Plaats het bestand in deze map: `public/models/villa-dubai.glb`.
 3. Activeer het in `data/properties3d.ts`:
 

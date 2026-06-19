@@ -44,6 +44,8 @@ const PAGE = `<!doctype html><html><head><meta charset=utf8><style>html,body{mar
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const canvas=document.getElementById('c');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,preserveDrawingBuffer:true});
@@ -56,6 +58,10 @@ const cam=new THREE.PerspectiveCamera(42,1,0.1,100);
 const dir=new THREE.DirectionalLight('#fff4e0',1.6);dir.position.set(8,12,6);scene.add(dir);
 scene.add(new THREE.AmbientLight('#ffffff',0.4));
 const loader=new GLTFLoader();
+const draco=new DRACOLoader();
+draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+loader.setDRACOLoader(draco);
+loader.setMeshoptDecoder(MeshoptDecoder);
 window.__ready=false;window.__err=null;
 loader.load('/model.glb',(g)=>{
   const root=g.scene;
