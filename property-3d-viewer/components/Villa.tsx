@@ -24,18 +24,22 @@ export default function Villa({ modelUrl, material, night }: Props) {
 }
 
 /* ---- echte GLB ------------------------------------------------------ */
+const TARGET_SIZE = 6; // gewenste breedte van het model in scene-units
+
 function GLTFVilla({ url, material }: { url: string; material: MaterialPreset }) {
   const { scene } = useGLTF(url);
 
-  const cloned = useMemo(() => {
+  // auto-center + auto-scale zodat elk geïmporteerd model netjes past,
+  // ongeacht de bron-schaal of -oriëntatie
+  const { object, scale, offset } = useMemo(() => {
     const root = scene.clone(true);
     root.traverse((o) => {
       const mesh = o as THREE.Mesh;
       if (mesh.isMesh) {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-        // pas de hoofdafwerking toe op meshes die als "facade"/"wall" benoemd zijn
-        if (/facade|wall|muur|gevel|body/i.test(mesh.name)) {
+        // pas de hoofdafwerking toe op meshes met een gevel-achtige naam
+        if (/facade|wall|muur|gevel|body|house|villa/i.test(mesh.name)) {
           mesh.material = new THREE.MeshStandardMaterial({
             color: new THREE.Color(material.color),
             roughness: material.roughness,
@@ -44,10 +48,28 @@ function GLTFVilla({ url, material }: { url: string; material: MaterialPreset })
         }
       }
     });
-    return root;
+
+    const box = new THREE.Box3().setFromObject(root);
+    const size = new THREE.Vector3();
+    const center = new THREE.Vector3();
+    box.getSize(size);
+    box.getCenter(center);
+    const maxDim = Math.max(size.x, size.z) || 1;
+    const s = TARGET_SIZE / maxDim;
+
+    // centreer horizontaal en zet de onderkant op de grond (y=0)
+    return {
+      object: root,
+      scale: s,
+      offset: new THREE.Vector3(-center.x * s, -box.min.y * s, -center.z * s),
+    };
   }, [scene, material]);
 
-  return <primitive object={cloned} />;
+  return (
+    <group position={offset} scale={scale}>
+      <primitive object={object} />
+    </group>
+  );
 }
 
 /* ---- procedurele villa --------------------------------------------- */
