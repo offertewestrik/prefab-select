@@ -79,7 +79,7 @@
       "Discover what your investment could yield. Simple, fast and 100% free.",
     "Aankoopprijs (AED)": "Purchase price (AED)", "Verwachte huur per jaar (AED)": "Expected annual rent (AED)",
     "Eigen inbreng (%)": "Down payment (%)", "Geschat rendement": "Estimated return",
-    "per jaar": "per year", "Jaarlijkse huur": "Annual rent", "Maandelijkse cashflow": "Monthly cash flow",
+    "per jaar": "per year", "% per jaar": "% per year", "Jaarlijkse huur": "Annual rent", "Maandelijkse cashflow": "Monthly cash flow",
     "Terugverdientijd": "Payback period",
     "Indicatieve berekening. 0% inkomstenbelasting in Dubai is verwerkt. Vraag Joy om een persoonlijke analyse.":
       "Indicative calculation. Dubai's 0% income tax is included. Ask Joy for a personal analysis.",

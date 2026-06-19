@@ -113,13 +113,45 @@
       </a>`).join("");
   }
 
-  /* ---- reels (zelf-gehost, autoplay carousels) ---------------------- */
-  const reelCard = (r, i) =>
-    `<div class="reel-card"><video class="bgvideo reel-vid" loop muted autoplay playsinline preload="${i < 3 ? "metadata" : "none"}" poster="assets/video/reels/${r}.jpg"><source src="assets/video/reels/${r}.mp4" type="video/mp4"></video><button class="reel-mute" type="button" aria-label="Geluid aan of uit"></button></div>`;
+  /* ---- reels (klik om af te spelen — performant) -------------------- */
+  const reelPlayIco = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  const reelPauseIco = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  const reelCard = (r) =>
+    `<div class="reel-card"><video class="reel-vid" loop playsinline preload="none" poster="assets/video/reels/${r}.jpg"><source src="assets/video/reels/${r}.mp4" type="video/mp4"></video><button class="reel-play" type="button" aria-label="Reel afspelen">${reelPlayIco}</button></div>`;
   const reelsGridEl = $("#reelsGrid");
   if (reelsGridEl && D.REELS) reelsGridEl.innerHTML = D.REELS.map(reelCard).join("");
   const reelsAboutEl = $("#reelsAbout");
   if (reelsAboutEl && D.REELS) reelsAboutEl.innerHTML = D.REELS.slice(0, 6).map(reelCard).join("");
+
+  const allReels = $$(".reel-card");
+  if (allReels.length) {
+    const setState = (card, playing) => {
+      card.classList.toggle("playing", playing);
+      const btn = card.querySelector(".reel-play");
+      if (btn) { btn.innerHTML = playing ? reelPauseIco : reelPlayIco; btn.setAttribute("aria-label", playing ? "Reel pauzeren" : "Reel afspelen"); }
+    };
+    const toggle = (card) => {
+      const v = card.querySelector("video");
+      if (v.paused) {
+        allReels.forEach((o) => { if (o !== card) { const ov = o.querySelector("video"); ov.pause(); } });
+        v.muted = false;
+        v.play().catch(() => { v.muted = true; v.play().catch(() => {}); });
+      } else { v.pause(); }
+    };
+    allReels.forEach((card) => {
+      const v = card.querySelector("video");
+      const btn = card.querySelector(".reel-play");
+      btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(card); });
+      v.addEventListener("click", () => toggle(card));
+      v.addEventListener("play", () => setState(card, true));
+      v.addEventListener("pause", () => setState(card, false));
+    });
+    // pauzeer reels die uit beeld scrollen
+    const rio = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) e.target.querySelector("video").pause();
+    }), { threshold: 0.35 });
+    allReels.forEach((c) => rio.observe(c));
+  }
 
   /* ---- ROI calculator + dashboard ----------------------------------- */
   const fmt = (n) => "AED " + Math.round(n).toLocaleString("nl-NL");
@@ -128,17 +160,8 @@
     input.style.setProperty("--p", ((v - min) / (max - min)) * 100 + "%");
   };
   const cPrice = $("#c-price"), cRent = $("#c-rent"), cDown = $("#c-down");
-  const chart = $("#calcChart");
-  if (chart) {
-    // decorative 12-month bar chart that grows toward year-end
-    const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"];
-    const bw = 360 / 12;
-    chart.innerHTML = months.map((m, i) => {
-      const h = 26 + Math.round((i / 11) * 64 + (i % 2 ? 4 : 0));
-      const x = i * bw + 4;
-      return `<rect x="${x}" y="${100 - h}" width="${bw - 8}" height="${h}" rx="2" fill="${i >= 9 ? "#c9a76a" : "rgba(201,167,106,0.45)"}"></rect>`;
-    }).join("");
-  }
+  const gFill = $("#gFill");
+  const GC = 2 * Math.PI * 52;            // omtrek van de gauge-ring
   const calc = () => {
     const price = +cPrice.value, rent = +cRent.value, downPct = +cDown.value;
     $("#lbl-price").textContent = fmt(price);
@@ -156,10 +179,11 @@
     const cashflowYr = netIncome - annualDebt;
     const payback = netIncome > 0 ? price / netIncome : 0;
 
-    $("#r-yield").textContent = grossYield.toFixed(2).replace(".", ",");
+    $("#r-yield").textContent = grossYield.toFixed(1).replace(".", ",");
     $("#r-rent").textContent = fmt(rent);
     $("#r-cash").textContent = fmt(cashflowYr / 12);
     $("#r-payback").textContent = payback > 0 ? payback.toFixed(1).replace(".", ",") + " jaar" : "—";
+    if (gFill) { const p = Math.max(0, Math.min(grossYield / 12, 1)); gFill.style.strokeDashoffset = GC * (1 - p); }
     [cPrice, cRent, cDown].forEach(setRangeFill);
   };
   if (cPrice) { [cPrice, cRent, cDown].forEach((el) => el.addEventListener("input", calc)); calc(); }
@@ -238,27 +262,6 @@
     );
     vids.forEach((v) => vio.observe(v));
   }
-
-  /* ---- reels: tap to toggle sound ----------------------------------- */
-  const mutedIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
-  const soundIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>';
-  $$("video.reel-vid").forEach((v) => {
-    const btn = v.parentElement.querySelector(".reel-mute");
-    const sync = () => { if (btn) btn.innerHTML = v.muted ? mutedIco : soundIco; };
-    const toggle = () => {
-      // unmute this one, mute the others
-      if (v.muted) $$("video.reel-vid").forEach((o) => { if (o !== v) { o.muted = true; } });
-      v.muted = !v.muted;
-      if (!v.muted) v.play().catch(() => {});
-      $$("video.reel-vid").forEach((o) => {
-        const b = o.parentElement.querySelector(".reel-mute");
-        if (b) b.innerHTML = o.muted ? mutedIco : soundIco;
-      });
-    };
-    v.addEventListener("click", toggle);
-    if (btn) btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
-    sync();
-  });
 
   /* ---- scroll progress bar ------------------------------------------ */
   const prog = $("#scrollProgress");
