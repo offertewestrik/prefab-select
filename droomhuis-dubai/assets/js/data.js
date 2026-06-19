@@ -71,5 +71,11 @@ window.DH = (function () {
     { name: "Tanuja Paramasivam", role: "Verhuurder", text: "Joy was een genot om mee om te gaan. Ik heb mijn appartement snel en efficiënt verhuurd, voor een goede prijs. Ik raad haar ten zeerste aan. Ze is professioneel en efficiënt." },
   ];
 
-  return { PROPERTIES, LOCATIONS, REVIEWS };
+  // ---- Instagram reels (zelf-gehost, autoplay) -----------------------
+  const REELS = [
+    "joy-1", "joy-2", "joy-3", "joy-4", "joy-5", "joy-6",
+    "joy-7", "joy-8", "joy-9", "joy-10", "joy-11", "joy-12", "abu-dhabi",
+  ];
+
+  return { PROPERTIES, LOCATIONS, REVIEWS, REELS };
 })();

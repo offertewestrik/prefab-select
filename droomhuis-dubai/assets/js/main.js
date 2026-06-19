@@ -84,6 +84,14 @@
       </article>`).join("");
   }
 
+  /* ---- reels (zelf-gehost, autoplay carousels) ---------------------- */
+  const reelCard = (r, i) =>
+    `<div class="reel-card"><video class="bgvideo reel-vid" loop muted autoplay playsinline preload="${i < 3 ? "metadata" : "none"}" poster="assets/video/reels/${r}.jpg"><source src="assets/video/reels/${r}.mp4" type="video/mp4"></video><button class="reel-mute" type="button" aria-label="Geluid aan of uit"></button></div>`;
+  const reelsGridEl = $("#reelsGrid");
+  if (reelsGridEl && D.REELS) reelsGridEl.innerHTML = D.REELS.map(reelCard).join("");
+  const reelsAboutEl = $("#reelsAbout");
+  if (reelsAboutEl && D.REELS) reelsAboutEl.innerHTML = D.REELS.slice(0, 6).map(reelCard).join("");
+
   /* ---- ROI calculator + dashboard ----------------------------------- */
   const fmt = (n) => "AED " + Math.round(n).toLocaleString("nl-NL");
   const setRangeFill = (input) => {
@@ -201,6 +209,27 @@
     );
     vids.forEach((v) => vio.observe(v));
   }
+
+  /* ---- reels: tap to toggle sound ----------------------------------- */
+  const mutedIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
+  const soundIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>';
+  $$("video.reel-vid").forEach((v) => {
+    const btn = v.parentElement.querySelector(".reel-mute");
+    const sync = () => { if (btn) btn.innerHTML = v.muted ? mutedIco : soundIco; };
+    const toggle = () => {
+      // unmute this one, mute the others
+      if (v.muted) $$("video.reel-vid").forEach((o) => { if (o !== v) { o.muted = true; } });
+      v.muted = !v.muted;
+      if (!v.muted) v.play().catch(() => {});
+      $$("video.reel-vid").forEach((o) => {
+        const b = o.parentElement.querySelector(".reel-mute");
+        if (b) b.innerHTML = o.muted ? mutedIco : soundIco;
+      });
+    };
+    v.addEventListener("click", toggle);
+    if (btn) btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+    sync();
+  });
 
   /* ---- scroll progress bar ------------------------------------------ */
   const prog = $("#scrollProgress");

@@ -105,6 +105,7 @@
       "On Instagram, TikTok and Facebook we share the latest news daily: new off-plan projects, exclusive homes, market news and updates from Dubai. Follow us and never miss a thing.",
     "Nieuwe projecten": "New projects", "Marktnieuws": "Market news", "Exclusieve woningen": "Exclusive homes",
     "Updates uit Dubai": "Updates from Dubai", "Onze nieuwste reels": "Our latest reels",
+    "Bekijk mijn reels": "Watch my reels",
     "Dagelijks": "Daily", "nieuwe posts & stories": "new posts & stories", "Dubai vastgoed": "Dubai real estate",
 
     /* about */
