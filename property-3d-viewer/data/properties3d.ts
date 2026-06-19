@@ -42,8 +42,7 @@ export const property: Property3D = {
   name: "Signature Beachfront Villa",
   location: "Palm Jumeirah, Dubai",
   price: "AED 18.500.000",
-  // Drop hier je eigen model en zet de regel hieronder aan:
-  // modelUrl: "/models/villa-dubai.glb",
+  modelUrl: "/models/villa-dubai.glb",
   hotspots: [
     {
       id: "living",

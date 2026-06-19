@@ -38,14 +38,18 @@ function GLTFVilla({ url, material }: { url: string; material: MaterialPreset })
       if (mesh.isMesh) {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-        // pas de hoofdafwerking toe op meshes met een gevel-achtige naam
-        if (/facade|wall|muur|gevel|body|house|villa/i.test(mesh.name)) {
-          mesh.material = new THREE.MeshStandardMaterial({
-            color: new THREE.Color(material.color),
-            roughness: material.roughness,
-            metalness: material.metalness,
-          });
-        }
+        // Behoud de ingebakken textuur, maar tint 'm met de gekozen afwerking:
+        // de preset-kleur wordt over de texture-map vermenigvuldigd.
+        const apply = (src: THREE.Material) => {
+          const m = (src as THREE.MeshStandardMaterial).clone() as THREE.MeshStandardMaterial;
+          if (m.color) m.color.set(material.color);
+          if ("roughness" in m) m.roughness = material.roughness;
+          if ("metalness" in m) m.metalness = material.metalness;
+          return m;
+        };
+        mesh.material = Array.isArray(mesh.material)
+          ? mesh.material.map(apply)
+          : apply(mesh.material);
       }
     });
 
