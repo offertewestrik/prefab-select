@@ -63,7 +63,12 @@
 
     /* locations */
     "Populaire locaties": "Popular locations", "De beste wijken in Dubai": "The best areas in Dubai",
-    "Bekijk alle locaties": "View all locations",
+    "Bekijk alle locaties": "View all locations", "Wijk": "Area",
+    "Interactieve kaart": "Interactive map", "Ontdek Dubai per wijk": "Explore Dubai by area",
+    "Beweeg over de kaart en bekijk per locatie de gemiddelde prijzen, het verwachte rendement en het type woningen.":
+      "Hover the map to see average prices, expected returns and property types per area.",
+    "Wijk in beeld": "Area in focus", "Bekijk wijk": "View area", "Rendement": "Return", "Type": "Type",
+    "Vanaf · richtprijs": "From · guide price", "Visa mogelijk": "Visa eligible",
     "Iconisch wonen aan zee": "Iconic seaside living", "Luxe leven aan het water": "Luxury living by the water",
     "Hart van de stad": "Heart of the city", "Zakelijk centrum van Dubai": "Dubai's business hub",
     "Groen, luxe en exclusief": "Green, luxurious and exclusive", "Betaalbaar & gewild": "Affordable & popular",

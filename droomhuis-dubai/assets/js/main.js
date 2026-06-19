@@ -37,18 +37,54 @@
   );
   const observeReveals = () => $$(".reveal:not(.in)").forEach((el) => io.observe(el));
 
-  /* ---- locations ----------------------------------------------------- */
+  const arrowIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  /* ---- locations (gigantische bento-kaarten) ------------------------ */
   const locGrid = $("#locGrid");
   if (locGrid) {
     locGrid.innerHTML = D.LOCATIONS.map((l) => `
       <a class="loc-card" href="${l.href}">
-        <div class="loc-img"><img loading="lazy" width="800" height="600" src="${l.img}" alt="Vastgoed te koop in ${l.name}, Dubai — ${l.desc}"></div>
-        <div class="loc-cap">
+        <img loading="lazy" src="${l.img}" alt="Vastgoed in ${l.name}, Dubai — ${l.desc}">
+        <span class="loc-go">${arrowIco}</span>
+        <div class="loc-ov">
+          <span class="loc-k">Wijk</span>
           <h3>${l.name}</h3>
           <p>${l.desc}</p>
-          <span class="loc-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <div class="loc-stats">
+            <div><b>${l.price}</b><span>Vanaf</span></div>
+            <div><b>${l.roi}</b><span>ROI</span></div>
+            <div><b>${l.types}</b><span>Type</span></div>
+          </div>
         </div>
       </a>`).join("");
+  }
+
+  /* ---- interactieve Dubai-map --------------------------------------- */
+  const pins = $("#dmapPins"), dmapInfo = $("#dmapInfo");
+  if (pins && dmapInfo && D.LOCATIONS) {
+    const setArea = (l, i) => {
+      $("#dmName").textContent = l.name;
+      $("#dmDesc").textContent = l.desc;
+      $("#dmPrice").textContent = l.price;
+      $("#dmRoi").textContent = l.roi;
+      $("#dmTypes").textContent = l.types;
+      $("#dmLink").setAttribute("href", l.href);
+      let im = dmapInfo.querySelector("img");
+      if (!im) { im = document.createElement("img"); dmapInfo.prepend(im); }
+      im.src = l.img; im.alt = l.name;
+      $$(".hot", pins).forEach((g) => g.classList.toggle("active", +g.dataset.i === i));
+    };
+    pins.innerHTML = D.LOCATIONS.map((l, i) => `
+      <g class="hot" data-i="${i}" transform="translate(${l.x}, ${l.y})">
+        <circle class="pulse" r="1.6"/><circle class="ring" r="3.4"/><circle class="dot" r="1.6"/>
+        <text x="4.4" y="1.2">${l.name}</text>
+      </g>`).join("");
+    $$(".hot", pins).forEach((g) => {
+      const i = +g.dataset.i;
+      g.addEventListener("mouseenter", () => setArea(D.LOCATIONS[i], i));
+      g.addEventListener("click", () => setArea(D.LOCATIONS[i], i));
+    });
+    setArea(D.LOCATIONS[0], 0);
   }
 
   /* ---- properties ---------------------------------------------------- */
@@ -59,29 +95,22 @@
   const propGrid = $("#propsGrid");
   if (propGrid) {
     propGrid.innerHTML = D.PROPERTIES.map((p) => `
-      <article class="prop">
-        <div class="prop-img">
-          <img loading="lazy" width="1000" height="750" src="${p.img}" alt="${p.name} — luxe woning te koop in ${p.loc}, Dubai">
-          <span class="prop-tag">${p.tag}</span>
-          <div class="prop-imgcap">
-            <h3>${p.name}</h3>
-            <div class="prop-loc">${pin}${p.loc}</div>
-          </div>
-        </div>
-        <div class="prop-info">
-          <div class="prop-specs">
+      <a class="cine-card" href="aanbod/${p.slug}.html">
+        <div class="cine-media"><img loading="lazy" src="${p.img}" alt="${p.name} — luxe woning te koop in ${p.loc}, Dubai"></div>
+        <span class="cine-tag">${p.tag}</span>
+        <div class="cine-roi"><b>${p.roi}</b><span>ROI</span></div>
+        <div class="cine-ov">
+          <div class="prop-loc">${pin}${p.loc}</div>
+          <h3>${p.name}</h3>
+          <div class="cine-price">${p.price}<small>Vanaf · richtprijs</small></div>
+          <div class="cine-specs">
             <div>${bedIco}${p.beds}</div>
             <div>${bathIco}${p.baths}</div>
             <div>${areaIco}${p.area}</div>
           </div>
-          <div class="prop-figs">
-            <div class="prop-price">${p.price}<small>Vanaf</small></div>
-            <div class="prop-roi"><b>${p.roi}</b><span>ROI</span></div>
-          </div>
-          <a class="prop-more" href="aanbod/${p.slug}.html">Bekijk woning
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <span class="cine-cta">Bekijk woning ${arrowIco}</span>
         </div>
-      </article>`).join("");
+      </a>`).join("");
   }
 
   /* ---- reels (zelf-gehost, autoplay carousels) ---------------------- */
