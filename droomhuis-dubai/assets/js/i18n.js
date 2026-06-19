@@ -20,16 +20,17 @@
     "Vind uw": "Find your", "droomhuis": "dream home", "in Dubai": "in Dubai",
     "Nederlandse begeleiding bij het kopen, investeren en wonen in exclusief vastgoed in Dubai.":
       "Dutch guidance for buying, investing and living in exclusive Dubai real estate.",
-    "Bekijk woningen": "View properties", "Gratis Dubai Gids": "Free Dubai Guide",
+    "Bekijk woningen": "View properties", "Gratis adviesgesprek": "Free consultation",
 
-    /* lead form */
-    "Gratis download": "Free download",
-    "Ontvang gratis Dubai Vastgoed Gids": "Get the free Dubai Property Guide",
-    "De complete gids met wijken, rendementen en het koopproces.":
-      "The complete guide to areas, yields and the buying process.",
-    "Ontvang gratis gids": "Get the free guide",
+    /* lead form (consultation) */
+    "Gratis & vrijblijvend": "Free & no obligation",
+    "Plan een gratis adviesgesprek": "Schedule a free consultation",
+    "Vertel ons kort uw wensen — Joy neemt persoonlijk contact met u op.":
+      "Tell us briefly what you're looking for — Joy will personally get in touch.",
+    "Plan mijn adviesgesprek": "Schedule my consultation",
     "100% gratis · Geen verplichtingen": "100% free · No obligations",
-    "Bedankt! Uw gids is onderweg naar uw inbox.": "Thank you! Your guide is on its way to your inbox.",
+    "Bedankt! Joy neemt zo snel mogelijk persoonlijk contact met u op.":
+      "Thank you! Joy will personally get back to you as soon as possible.",
     "Voornaam": "First name", "Achternaam": "Last name", "E-mailadres": "Email address",
     "+31 Telefoonnummer": "Phone number",
 
