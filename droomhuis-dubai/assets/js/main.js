@@ -202,6 +202,27 @@
     vids.forEach((v) => vio.observe(v));
   }
 
+  /* ---- reels: tap to toggle sound ----------------------------------- */
+  const mutedIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
+  const soundIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>';
+  $$("video.reel-vid").forEach((v) => {
+    const btn = v.parentElement.querySelector(".reel-mute");
+    const sync = () => { if (btn) btn.innerHTML = v.muted ? mutedIco : soundIco; };
+    const toggle = () => {
+      // unmute this one, mute the others
+      if (v.muted) $$("video.reel-vid").forEach((o) => { if (o !== v) { o.muted = true; } });
+      v.muted = !v.muted;
+      if (!v.muted) v.play().catch(() => {});
+      $$("video.reel-vid").forEach((o) => {
+        const b = o.parentElement.querySelector(".reel-mute");
+        if (b) b.innerHTML = o.muted ? mutedIco : soundIco;
+      });
+    };
+    v.addEventListener("click", toggle);
+    if (btn) btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+    sync();
+  });
+
   /* ---- scroll progress bar ------------------------------------------ */
   const prog = $("#scrollProgress");
   if (prog) {

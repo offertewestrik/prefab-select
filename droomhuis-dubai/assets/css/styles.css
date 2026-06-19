@@ -436,6 +436,13 @@ a.service:hover .s-ico { background: var(--gold); color: #fff; }
 .reels-head { text-align: center; margin-bottom: 24px; }
 .reels-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); }
 .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+.reels-grid.reels-mp4 { max-width: 880px; margin: 0 auto; align-items: stretch; }
+.reel-card { position: relative; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-m); background: var(--navy); }
+.reel-card video { width: 100%; height: 100%; object-fit: cover; cursor: pointer; display: block; }
+.reel-mute { position: absolute; bottom: 14px; right: 14px; width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(20,33,61,0.55); color: #fff; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.3s; z-index: 2; }
+.reel-mute:hover { background: rgba(20,33,61,0.85); }
+.reel-mute svg { width: 18px; height: 18px; }
+@media (max-width: 680px) { .reels-grid.reels-mp4 { grid-template-columns: 1fr 1fr; max-width: 420px; gap: 12px; } }
 .reels-grid .instagram-media { min-width: 0 !important; width: 100% !important; margin: 0 auto !important; border-radius: var(--radius) !important; box-shadow: var(--shadow-m) !important; }
 @media (max-width: 1000px) { .reels-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 680px) { .reels-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }

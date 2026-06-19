@@ -422,13 +422,22 @@
         </div>
       </div>
       <div class="reels-head reveal"><span class="reels-label">Onze nieuwste reels</span></div>
-      <div class="reels-grid reveal" id="reelsGrid">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZsJKwIlZR8/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZnE3jlCIlu/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZnEIDKAsnS/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZcrs7WDB4d/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZXiTOEm1PR/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZF-bDKFdsA/" data-instgrm-version="14"></blockquote>
+      <div class="reels-grid reels-mp4 reveal" id="reelsGrid">
+        <div class="reel-card">
+          <video class="bgvideo reel-vid" loop muted autoplay playsinline preload="metadata" poster="assets/video/reels/joy-1.jpg">
+            <source src="assets/video/reels/joy-1.mp4" type="video/mp4"></video>
+          <button class="reel-mute" type="button" aria-label="Geluid aan of uit"></button>
+        </div>
+        <div class="reel-card">
+          <video class="bgvideo reel-vid" loop muted autoplay playsinline preload="none" poster="assets/video/reels/joy-2.jpg">
+            <source src="assets/video/reels/joy-2.mp4" type="video/mp4"></video>
+          <button class="reel-mute" type="button" aria-label="Geluid aan of uit"></button>
+        </div>
+        <div class="reel-card">
+          <video class="bgvideo reel-vid" loop muted autoplay playsinline preload="none" poster="assets/video/reels/joy-3.jpg">
+            <source src="assets/video/reels/joy-3.mp4" type="video/mp4"></video>
+          <button class="reel-mute" type="button" aria-label="Geluid aan of uit"></button>
+        </div>
       </div>
     </div>
   </section>
@@ -608,7 +617,6 @@
     <a class="btn btn-gold" href="#contact">Adviesgesprek</a>
   </nav>
 
-  <script async src="https://www.instagram.com/embed.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/i18n.js"></script>
