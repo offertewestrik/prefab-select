@@ -429,6 +429,12 @@ a.service:hover .s-ico { background: var(--gold); color: #fff; }
 .insta-tile:hover::after { background: rgba(20,33,61,0.45); }
 .insta-tile .ig-ico { position: absolute; inset: 0; margin: auto; width: 34px; height: 34px; color: #fff; opacity: 0; transform: scale(0.8); transition: 0.4s var(--ease); z-index: 2; }
 .insta-tile:hover .ig-ico { opacity: 1; transform: scale(1); }
+.reels-head { text-align: center; margin-bottom: 24px; }
+.reels-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); }
+.reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+.reels-grid .instagram-media { min-width: 0 !important; width: 100% !important; margin: 0 auto !important; border-radius: var(--radius) !important; box-shadow: var(--shadow-m) !important; }
+@media (max-width: 1000px) { .reels-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 680px) { .reels-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }
 
 /* ===================================================================
    DUBAI LIFESTYLE — video gallery
