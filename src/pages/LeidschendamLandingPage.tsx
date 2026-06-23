@@ -614,7 +614,7 @@ export default function LeidschendamLandingPage() {
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-3">
               <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DAYLIGHT OPTIMIZATION</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
-                Haagse zonlichtinval en woonsfeer
+                Leidschendamse zonlichtinval en woonsfeer
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
                 Een aanbouw levert niet sfeerloos extra meters, maar verrijkt uw dagelijks leven. Veel sfeervolle herenhuizen of sfeervol bebouwde herenwoningen kunnen binnenshuis soms wat donkerder uitvallen.
