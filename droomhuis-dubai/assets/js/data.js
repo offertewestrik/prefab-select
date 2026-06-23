@@ -49,8 +49,8 @@ window.DH = (function () {
 
   // ---- Popular locations / interactive map ---------------------------
   const LOCATIONS = [
-    { name: "Palm Jumeirah", desc: "Iconisch wonen aan zee", href: "kennisbank/palm-jumeirah-woningen.html", img: "assets/img/wijken/palm-jumeirah.jpg", price: "AED 9M+", roi: "6–7%", types: "Villa's & penthouses", x: 21, y: 44 },
-    { name: "Dubai Marina", desc: "Luxe leven aan het water", href: "kennisbank/dubai-marina-appartementen.html", img: "assets/img/wijken/dubai-marina.jpg", price: "AED 1,8M+", roi: "8–9%", types: "Appartementen", x: 33, y: 58 },
+    { name: "Palm Jumeirah", desc: "Iconisch wonen aan zee", href: "kennisbank/palm-jumeirah-woningen.html", img: "assets/img/wijken/palm-jumeirah.jpg", vid: "assets/video/palm-jumeirah.mp4", price: "AED 9M+", roi: "6–7%", types: "Villa's & penthouses", x: 21, y: 44 },
+    { name: "Dubai Marina", desc: "Luxe leven aan het water", href: "kennisbank/dubai-marina-appartementen.html", img: "assets/img/wijken/dubai-marina.jpg", vid: "assets/video/dubai-marina.mp4", price: "AED 1,8M+", roi: "8–9%", types: "Appartementen", x: 33, y: 58 },
     { name: "Downtown Dubai", desc: "Hart van de stad", href: "kennisbank/downtown-dubai-wonen.html", img: "assets/img/wijken/downtown-dubai.jpg", price: "AED 2,5M+", roi: "6–7%", types: "Appartementen & penthouses", x: 57, y: 60 },
     { name: "Business Bay", desc: "Zakelijk centrum van Dubai", href: "kennisbank/business-bay-vastgoed.html", img: "assets/img/wijken/business-bay.jpg", price: "AED 1,5M+", roi: "8–9%", types: "Appartementen", x: 60, y: 70 },
     { name: "Dubai Hills Estate", desc: "Groen, luxe en exclusief", href: "kennisbank/dubai-hills-estate.html", img: "assets/img/wijken/dubai-hills-estate.jpg", price: "AED 2M+", roi: "5–6%", types: "Villa's & appartementen", x: 46, y: 78 },

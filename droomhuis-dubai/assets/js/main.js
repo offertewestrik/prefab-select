@@ -44,7 +44,9 @@
   if (locGrid) {
     locGrid.innerHTML = D.LOCATIONS.map((l) => `
       <a class="loc-card" href="${l.href}">
-        <img loading="lazy" src="${l.img}" alt="Vastgoed in ${l.name}, Dubai — ${l.desc}">
+        ${l.vid
+          ? `<video class="bgvideo" autoplay muted loop playsinline preload="none" poster="${l.img}" aria-label="Beelden van ${l.name}, Dubai"><source src="${l.vid}" type="video/mp4"></video>`
+          : `<img loading="lazy" src="${l.img}" alt="Vastgoed in ${l.name}, Dubai — ${l.desc}">`}
         <span class="loc-go">${arrowIco}</span>
         <div class="loc-ov">
           <span class="loc-k">Wijk</span>
