@@ -507,6 +507,116 @@ Denk aan:
 
 Het gaat niet alleen om het aantal meters, maar vooral om hoe je de beschikbare ruimte optimaal benut.`,
     slug: "uitbouw-kleine-tuin"
+  },
+  {
+    id: 11,
+    title: "Mantelzorgwoning in 2026: regels, vergunning en kosten",
+    category: "Wonen & Zorg",
+    date: "10 Juni, 2026",
+    readTime: "6 min",
+    image: "https://i.imgur.com/fmQecXk.jpeg",
+    excerpt: "Een mantelzorgwoning plaatsen in 2026? Ontdek wanneer het vergunningsvrij mag, welke regels gelden en wat een prefab mantelzorgwoning kost.",
+    content: `Steeds meer mensen willen zorg voor een ouder of naaste dichtbij organiseren. Een **prefab mantelzorgwoning** in de tuin is daarvoor de ideale oplossing: zelfstandig wonen met privacy, maar toch dicht bij elkaar. In deze gids leggen we uit wat er in 2026 mogelijk is qua regels, vergunning en kosten.
+
+### Wat is een mantelzorgwoning?
+Een mantelzorgwoning is een zelfstandige woonruimte op eigen terrein, bedoeld voor iemand die zorg nodig heeft of juist zorg verleent. Denk aan een gelijkvloerse unit met woonkamer, keuken, slaapkamer en badkamer.
+
+### Is een mantelzorgwoning vergunningsvrij in 2026?
+In veel gevallen is een mantelzorgwoning **vergunningsvrij**, mits aan een aantal voorwaarden wordt voldaan:
+- Er is sprake van een aantoonbare **zorgbehoefte** (vaak via een verklaring).
+- De woning staat in het **achtererfgebied** op eigen terrein.
+- De afmetingen blijven binnen de landelijke richtlijnen voor bijgebouwen.
+
+> Let op: gemeenten kunnen aanvullende regels hanteren. Wij voeren altijd een gratis vergunningscheck uit voor uw specifieke adres.
+
+### Wat kost een prefab mantelzorgwoning?
+De kosten hangen af van grootte, afwerking en indeling:
+- Compacte modellen: vanaf **€40.000 – €60.000**
+- Ruime of luxe uitvoeringen: vanaf **€70.000+**
+
+Doordat de woning grotendeels in de fabriek wordt gebouwd, is de prijs vooraf duidelijk en de bouwtijd kort.
+
+### Waarom prefab?
+- **Snelle plaatsing** – vaak binnen enkele dagen
+- **Minder overlast** tijdens de bouw
+- **Vaste prijs** vooraf, zonder verrassingen
+- **Energiezuinig** met hoogwaardige isolatie
+
+### Slim ontworpen voor zorg
+Een goede mantelzorgwoning is gelijkvloers en drempelloos. Veelgekozen opties zijn een aangepaste badkamer, brede deuren, airco en vloerverwarming.
+
+Wilt u weten wat er op uw terrein mogelijk is? Bekijk onze [mantelzorgwoning oplossingen](/mantelzorgwoning) of [vraag direct een offerte aan](/offerte).`,
+    slug: "mantelzorgwoning-regels-2026"
+  },
+  {
+    id: 12,
+    title: "Poolhouse of tuinkamer: kosten, opties en mogelijkheden",
+    category: "Buitenleven",
+    date: "3 Juni, 2026",
+    readTime: "5 min",
+    image: "https://i.imgur.com/gGBOzjd.jpeg",
+    excerpt: "Wat kost een prefab poolhouse of tuinkamer en welke opties zijn er? Een complete gids over luxe buitenruimtes bij uw woning.",
+    content: `Een **poolhouse** of **tuinkamer** maakt van uw tuin een echte verblijfsruimte. Of u nu droomt van een loungeplek bij het zwembad, een buitenkeuken of een extra werkruimte in het groen: een prefab buitenruimte is snel geplaatst en jarenlang onderhoudsarm.
+
+### Wat is het verschil tussen een poolhouse en een tuinkamer?
+- Een **poolhouse** staat doorgaans bij het zwembad en combineert opslag, een kleedruimte en een loungegedeelte, vaak met buitenkeuken of bar.
+- Een **tuinkamer** is een meer gesloten, geïsoleerde ruimte die het hele jaar door bruikbaar is, bijvoorbeeld als thuiskantoor, hobbyruimte of extra zithoek.
+
+### Wat kost een prefab poolhouse of tuinkamer?
+De prijs hangt af van grootte, isolatie en afwerking:
+- Eenvoudige overkapping / open poolhouse: vanaf **€10.000 – €20.000**
+- Geïsoleerde tuinkamer (all-season): vanaf **€2.500 – €3.500 per m²**
+- Luxe poolhouse met buitenkeuken, sauna of glaspartijen: **€30.000+**
+
+> Een geïsoleerde tuinkamer is duurder dan een open poolhouse, maar het hele jaar door bruikbaar — een investering die zich vertaalt in extra woonplezier en woningwaarde.
+
+### Populaire opties
+- Grote glazen schuifpuien voor maximaal licht
+- Buitenkeuken of bar
+- Sauna of wellness-hoek
+- Geïntegreerde verlichting en verwarming
+- Onderhoudsarme gevelbekleding
+
+### Vergunning nodig?
+Een poolhouse of tuinkamer valt vaak onder de regels voor bijgebouwen en is in het achtererfgebied regelmatig vergunningsvrij tot een bepaalde oppervlakte. Wij checken dit gratis voor uw situatie.
+
+Benieuwd naar de mogelijkheden? Bekijk onze [prefab poolhouses](/prefab-poolhouse) of [vraag een offerte aan](/offerte).`,
+    slug: "poolhouse-tuinkamer-kosten"
+  },
+  {
+    id: 13,
+    title: "Vergunningsvrij uitbouwen: de regels onder de Omgevingswet",
+    category: "Regelgeving",
+    date: "27 Mei, 2026",
+    readTime: "7 min",
+    image: "https://i.imgur.com/covRQg3.jpeg",
+    excerpt: "Wanneer mag je vergunningsvrij uitbouwen? Alles over het achtererfgebied, de 4-meterregel en de Omgevingswet, helder uitgelegd.",
+    content: `Een van de meest gestelde vragen bij een uitbouw is: **heb ik een vergunning nodig?** Sinds de invoering van de Omgevingswet blijft veel hetzelfde, maar de termen veranderen. In dit artikel leggen we helder uit wanneer u vergunningsvrij mag uitbouwen.
+
+### Het achtererfgebied
+De belangrijkste regel draait om het **achtererfgebied**: het deel van uw perceel achter (de lijn op 1 meter achter) de voorkant van uw woning. Bouwen aan de achterzijde binnen dit gebied mag vaak zonder vergunning.
+
+### De richtlijn van 4 meter
+Als vuistregel geldt dat een uitbouw aan de achtergevel tot **4 meter diep** vergunningsvrij kan zijn, mits:
+- de uitbouw binnen het achtererfgebied valt;
+- een groot deel van het achtererf **onbebouwd** blijft (er gelden percentages bij grotere percelen);
+- de hoogte beperkt blijft (doorgaans tot circa 4 meter of niet hoger dan 30 cm boven de eerste verdiepingsvloer).
+
+> Belangrijk: dit zijn landelijke richtlijnen. Hoek- en tussenwoningen, beschermde stadsgezichten en monumenten kennen vaak afwijkende regels.
+
+### Wanneer is wél een vergunning nodig?
+- Bij **monumenten** en in **beschermde stadsgezichten**
+- Bij uitbouwen aan de **voor- of zijgevel** die grenst aan openbaar gebied
+- Wanneer u de maximale maten of bebouwingspercentages overschrijdt
+
+### Wat verandert de Omgevingswet?
+De Omgevingswet (in werking sinds 2024) bundelt de oude regels. Vergunningsvrij bouwen blijft grotendeels bestaan, maar gemeenten krijgen meer ruimte voor lokale regels in het **omgevingsplan**. Controleer daarom altijd de actuele situatie via het Omgevingsloket of laat het ons doen.
+
+### Wij regelen de check voor u
+Twijfelt u of uw uitbouw vergunningsvrij is? Prefab Select voert kosteloos een **vergunningscheck** uit en verzorgt indien nodig de complete aanvraag, inclusief tekeningen en welstand.
+
+Meer weten over de mogelijkheden? Bekijk onze [prefab uitbouw](/prefab-uitbouw) of [vraag een offerte aan](/offerte).`,
+    slug: "vergunningsvrij-uitbouwen-regels"
   }
 ];
 
@@ -4528,6 +4638,43 @@ function BlogPage() {
   const blog = useMemo(() => blogs.find(b => b.slug === slug), [slug]);
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  useEffect(() => {
+    if (!blog) return;
+    const prevTitle = document.title;
+    const pageTitle = `${blog.title} | Prefab Select`;
+    document.title = pageTitle;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const prevDesc = metaDesc?.getAttribute('content') ?? '';
+    if (metaDesc && blog.excerpt) metaDesc.setAttribute('content', blog.excerpt);
+
+    const url = `https://www.prefabselect.nl/blog/${blog.slug}`;
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.id = 'json-ld-blog';
+    ld.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      '@id': url,
+      headline: blog.title,
+      description: blog.excerpt ?? '',
+      image: blog.image ?? 'https://i.imgur.com/uYzANLQ.jpeg',
+      inLanguage: 'nl-NL',
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      author: { '@type': 'Organization', name: 'Prefab Select' },
+      publisher: { '@type': 'Organization', name: 'Prefab Select', logo: { '@type': 'ImageObject', url: 'https://www.prefabselect.nl/logo.png' } },
+    });
+    document.head.appendChild(ld);
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    return () => {
+      document.title = prevTitle;
+      if (metaDesc) metaDesc.setAttribute('content', prevDesc);
+      document.getElementById('json-ld-blog')?.remove();
+    };
+  }, [blog]);
 
   if (!blog) return <div className="py-24 text-center text-blue-950 font-bold font-display uppercase tracking-widest text-[10px]">Artikel niet gevonden.</div>;
 
