@@ -43,6 +43,7 @@ export interface RegioData {
   districtsIntro: string;
   wijken: { name: string; desc: string }[];
   analysisBoxes: { eyebrow: string; title: string; paragraphs: [string, string] }[];
+  extraBlocks?: { heading: string; paragraphs: string[] }[];
   faqs: { question: string; answer: string }[];
   noscript: string;
 }
@@ -366,6 +367,25 @@ export default function RegioLandingTemplate({ data }: { data: RegioData }) {
           </div>
         </div>
       </section>
+
+      {/* EXTRA LONG-FORM CONTENT */}
+      {data.extraBlocks && data.extraBlocks.length > 0 && (
+        <section className="py-24 bg-white border-t border-slate-100">
+          <div className="max-w-3xl mx-auto px-6">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-10 block text-center">VERDIEPING & ADVIES</span>
+            <div className="space-y-14">
+              {data.extraBlocks.map((block, i) => (
+                <article key={i}>
+                  <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">{block.heading}</h2>
+                  <div className="text-slate-500 text-base leading-relaxed font-medium space-y-5">
+                    {block.paragraphs.map((p, j) => <p key={j}>{p}</p>)}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* FAQ */}
       <section id="faq" className="py-24 md:py-32 bg-white">
