@@ -1657,6 +1657,356 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.800 en €4.600**. 
       { question: 'Houden jullie rekening met de welstandseisen in Hilversum?', answer: 'Zeker. In veel Hilversumse wijken, waaronder de Dudok-buurten, zijn de welstandseisen streng. Onze ontwerpers stemmen het ontwerp hier zorgvuldig op af.' },
       { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Bij monumenten en in beschermde gebieden wel. Wij checken dit gratis en regelen de aanvraag.' }
     ]
+  },
+  {
+    name: 'Steenbergen',
+    slug: 'steenbergen',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'West-Brabant',
+    title: 'Prefab Uitbouw Steenbergen – Uw Lokale Specialist op de Brabantse Wal',
+    content: `Zoekt u een betrouwbare specialist voor een **prefab uitbouw in Steenbergen**? Vanuit ons bedrijf in Halsteren zijn wij letterlijk bij u om de hoek. Of u nu woont in Steenbergen-centrum, Welberg of Kruisland: wij realiseren hoogwaardige uitbouwen en aanbouwen, snel en vakkundig.
+
+### Lokaal en dichtbij
+Als specialist op de **Brabantse Wal** kennen wij de regio en de gemeente Steenbergen goed. Korte lijnen, snelle service en persoonlijk advies bij u thuis.
+
+### Bouwen op de polderklei
+Steenbergen ligt in het polderlandschap met deels slappe kleigrond. Wij berekenen de juiste fundering vooraf, zodat uw uitbouw stabiel en scheurvrij blijft.
+
+### Wat kost een uitbouw in Steenbergen?
+Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**, inclusief plaatsing en afwerking.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Regio', value: 'BRAB. WAL' }
+    ],
+    advantages: [
+      { title: 'Bij u om de hoek', description: 'Onze vestiging in Halsteren ligt op enkele minuten van Steenbergen.' },
+      { title: 'Funderingsadvies', description: 'Stabiele fundering afgestemd op de polderklei rond Steenbergen.' },
+      { title: 'Snel geplaatst', description: 'Binnen één dag wind- en waterdicht, met minimale overlast.' }
+    ],
+    faqs: [
+      { question: 'Werken jullie ook in Steenbergen en de kernen?', answer: 'Ja. Vanuit Halsteren bedienen wij Steenbergen, Welberg, Kruisland, De Heen en Dinteloord. U zit altijd dicht bij onze vestiging.' },
+      { question: 'Wat kost een prefab uitbouw in Steenbergen?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond €44.000, afhankelijk van afwerking en fundering.' },
+      { question: 'Heb ik een vergunning nodig?', answer: 'Aan de achterzijde is een uitbouw vaak vergunningsvrij tot 4 meter diep. Wij verzorgen gratis de vergunningscheck bij de gemeente Steenbergen.' }
+    ]
+  },
+  {
+    name: 'Roosendaal',
+    slug: 'roosendaal',
+    image: 'https://i.imgur.com/fmQecXk.jpeg',
+    category: 'West-Brabant',
+    title: 'Prefab Uitbouw Roosendaal – Snel Extra Woonruimte in West-Brabant',
+    content: `Wilt u uw woning in **Roosendaal** vergroten? Een **prefab uitbouw in Roosendaal** van Prefab Select is dé snelle, schone manier om extra ruimte en licht te creëren. Of u nu woont in Tolberg, Kortendijk of Kalsdonk: wij leveren maatwerk van topkwaliteit.
+
+### Uw specialist uit de buurt
+Vanuit Halsteren zijn wij snel in Roosendaal. Dat betekent korte lijnen, persoonlijk advies en snelle service in heel West-Brabant.
+
+### Bouwen op Roosendaalse zandgrond
+Roosendaal ligt grotendeels op stevige zandgrond, ideaal voor een snelle en stabiele plaatsing van uw uitbouw.
+
+### Wat kost een uitbouw in Roosendaal?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Lokale service', description: 'Vanuit Halsteren snel ter plaatse in heel Roosendaal en omgeving.' },
+      { title: 'Snelle plaatsing', description: 'Stevige zandgrond maakt een snelle, stabiele montage mogelijk.' },
+      { title: 'Vaste prijs', description: 'Heldere offerte vooraf, zonder verrassingen achteraf.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Roosendaal?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000, afhankelijk van uw wensen.' },
+      { question: 'Heb ik een vergunning nodig in Roosendaal?', answer: 'Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' },
+      { question: 'Hoe snel kan de uitbouw geplaatst worden?', answer: 'De ruwbouw staat binnen één dag. Inclusief fundering en afwerking bent u doorgaans binnen 4 tot 6 weken klaar.' }
+    ]
+  },
+  {
+    name: 'Tholen',
+    slug: 'tholen',
+    image: 'https://i.imgur.com/covRQg3.jpeg',
+    category: 'Zeeland',
+    title: 'Prefab Uitbouw Tholen – Lokale Specialist net over de Eendracht',
+    content: `Een **prefab uitbouw op Tholen** laten plaatsen? Vanuit Halsteren steken wij zo de Eendracht over. Of u nu woont in Tholen-stad, Sint-Maartensdijk, Sint-Annaland of Oud-Vossemeer: wij realiseren hoogwaardige uitbouwen voor de hele gemeente Tholen.
+
+### Dichtbij, ondanks de provinciegrens
+Tholen ligt op een steenworp van onze vestiging in Halsteren. U profiteert van een lokale specialist met korte lijnen en snelle service.
+
+### Bouwen op Thoolse klei
+Het eiland Tholen kent voornamelijk kleigrond. Een goede fundering is hier belangrijk; wij berekenen dit vooraf voor een stabiele, scheurvrije uitbouw.
+
+### Wat kost een uitbouw op Tholen?
+Reken op **€2.500 tot €4.300 per m²**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Vlakbij Halsteren', description: 'Net over de Eendracht: wij zijn snel op Tholen ter plaatse.' },
+      { title: 'Fundering op klei', description: 'Stabiele fundering afgestemd op de Thoolse kleigrond.' },
+      { title: 'Maatwerk', description: 'Een uitbouw die past bij dorpse en landelijke woningen.' }
+    ],
+    faqs: [
+      { question: 'Bedienen jullie de hele gemeente Tholen?', answer: 'Ja. Vanuit Halsteren werken wij in Tholen-stad, Sint-Maartensdijk, Sint-Annaland, Stavenisse, Oud-Vossemeer en Sint Philipsland.' },
+      { question: 'Wat kost een prefab uitbouw op Tholen?', answer: 'Gemiddeld €2.500 tot €4.300 per m². Een uitbouw van 15 m² begint rond €44.000, afhankelijk van afwerking en fundering.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck bij de gemeente Tholen.' }
+    ]
+  },
+  {
+    name: 'Woensdrecht',
+    slug: 'woensdrecht',
+    image: 'https://i.imgur.com/v4jk0SK.jpeg',
+    category: 'Brabantse Wal',
+    title: 'Prefab Uitbouw Woensdrecht – Maatwerk op de Brabantse Wal',
+    content: `Wilt u uw woning in de gemeente **Woensdrecht** vergroten? Vanuit ons naburige Halsteren realiseren wij hoogwaardige prefab uitbouwen in Woensdrecht, Hoogerheide, Ossendrecht, Putte en Huijbergen.
+
+### Specialist van de Brabantse Wal
+Wij kennen de Brabantse Wal als geen ander. Korte reistijd, persoonlijk advies aan huis en snelle service in de hele gemeente.
+
+### Bouwen op de zandrug
+De Brabantse Wal bestaat grotendeels uit stevige zandgrond, ideaal voor een snelle en stabiele plaatsing van uw uitbouw.
+
+### Wat kost een uitbouw in Woensdrecht?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Regio', value: 'BRAB. WAL' }
+    ],
+    advantages: [
+      { title: 'Echt lokaal', description: 'Onze vestiging in Halsteren ligt vlak bij de gemeente Woensdrecht.' },
+      { title: 'Snelle plaatsing', description: 'Stevige zandgrond op de Wal maakt een snelle, stabiele montage mogelijk.' },
+      { title: 'Volledig ontzorgd', description: 'Van ontwerp en vergunningscheck tot productie en plaatsing.' }
+    ],
+    faqs: [
+      { question: 'Welke kernen bedienen jullie rond Woensdrecht?', answer: 'Vanuit Halsteren werken wij in Woensdrecht, Hoogerheide, Ossendrecht, Putte en Huijbergen.' },
+      { question: 'Wat kost een prefab uitbouw in Woensdrecht?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Heb ik een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck bij de gemeente Woensdrecht.' }
+    ]
+  },
+  {
+    name: 'Hoogerheide',
+    slug: 'hoogerheide',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'Brabantse Wal',
+    title: 'Prefab Uitbouw Hoogerheide – Snel Extra Ruimte op de Wal',
+    content: `Een **prefab uitbouw in Hoogerheide** laten plaatsen? Als specialist van de Brabantse Wal, gevestigd in Halsteren, zijn wij snel bij u ter plaatse. Wij bouwen hoogwaardige, geïsoleerde uitbouwen die in recordtijd staan.
+
+### Lokaal en betrokken
+Korte lijnen, persoonlijk advies en snelle service. Wij kennen Hoogerheide en de omliggende kernen op de Wal goed.
+
+### Stevige zandgrond
+Hoogerheide ligt op de zandrug van de Brabantse Wal, ideaal voor een snelle en stabiele plaatsing van uw uitbouw.
+
+### Wat kost een uitbouw in Hoogerheide?
+Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**, inclusief plaatsing en afwerking.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Vlakbij', description: 'Onze vestiging in Halsteren ligt op korte afstand van Hoogerheide.' },
+      { title: 'Snel & stabiel', description: 'Plaatsing op de stevige zandgrond van de Brabantse Wal.' },
+      { title: 'Toekomstbestendig', description: 'Standaard Rc 6.0 en voorbereid op vloerverwarming en warmtepomp.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Hoogerheide?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Komen jullie ook in Hoogerheide langs?', answer: 'Zeker. Vanuit Halsteren zijn wij snel in Hoogerheide voor een vrijblijvend adviesgesprek aan huis.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' }
+    ]
+  },
+  {
+    name: 'Ossendrecht',
+    slug: 'ossendrecht',
+    image: 'https://i.imgur.com/fmQecXk.jpeg',
+    category: 'Brabantse Wal',
+    title: 'Prefab Uitbouw Ossendrecht – Lokale Kwaliteit aan de Grens',
+    content: `Wilt u uw woning in **Ossendrecht** vergroten? Vanuit Halsteren realiseren wij hoogwaardige prefab uitbouwen en aanbouwen in Ossendrecht en de omliggende kernen op de Brabantse Wal.
+
+### Specialist uit de buurt
+Wij zijn echt lokaal: korte reistijd, persoonlijk advies en snelle service tot aan de Belgische grens.
+
+### Bouwen op de Wal
+Ossendrecht ligt op de stevige zandgrond van de Brabantse Wal, perfect voor een snelle en stabiele plaatsing.
+
+### Wat kost een uitbouw in Ossendrecht?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Regio', value: 'BRAB. WAL' }
+    ],
+    advantages: [
+      { title: 'Lokaal', description: 'Vanuit Halsteren snel ter plaatse in Ossendrecht en omgeving.' },
+      { title: 'Snelle plaatsing', description: 'Stevige zandgrond maakt een snelle, stabiele montage mogelijk.' },
+      { title: 'Vaste prijs', description: 'Heldere offerte vooraf, zonder verrassingen.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Ossendrecht?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Werken jullie ook in Ossendrecht?', answer: 'Ja. Vanuit ons naburige Halsteren zijn wij snel in Ossendrecht en de hele gemeente Woensdrecht.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' }
+    ]
+  },
+  {
+    name: 'Putte',
+    slug: 'putte',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'Brabantse Wal',
+    title: 'Prefab Uitbouw Putte – Maatwerk aan de Belgische Grens',
+    content: `Een **prefab uitbouw in Putte** laten plaatsen? Vanuit Halsteren bedienen wij Putte en omgeving met hoogwaardige, snel geplaatste uitbouwen en aanbouwen op maat.
+
+### Dichtbij en betrokken
+Als specialist van de Brabantse Wal zijn wij snel in Putte. U profiteert van korte lijnen en persoonlijk advies aan huis.
+
+### Stevige ondergrond
+Putte ligt op de zandgrond van de Wal, ideaal voor een snelle en stabiele plaatsing van uw uitbouw.
+
+### Wat kost een uitbouw in Putte?
+Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Lokaal', description: 'Vanuit Halsteren snel ter plaatse in Putte en omgeving.' },
+      { title: 'Snel geplaatst', description: 'Binnen één dag wind- en waterdicht op de Wal.' },
+      { title: 'Volledig ontzorgd', description: 'Van ontwerp tot plaatsing regelen wij alles.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Putte?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Komen jullie ook in Putte?', answer: 'Ja. Vanuit Halsteren zijn wij snel in Putte voor een vrijblijvend adviesgesprek.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' }
+    ]
+  },
+  {
+    name: 'Wouw',
+    slug: 'wouw',
+    image: 'https://i.imgur.com/fmQecXk.jpeg',
+    category: 'West-Brabant',
+    title: 'Prefab Uitbouw Wouw – Dorpse Charme, Moderne Ruimte',
+    content: `Wilt u uw woning in **Wouw** vergroten met behoud van het dorpse karakter? Vanuit Halsteren realiseren wij hoogwaardige prefab uitbouwen in Wouw, Heerle, Moerstraten en Wouwse Plantage.
+
+### Lokale specialist
+Wij kennen de dorpen rond Bergen op Zoom en Roosendaal goed. Korte lijnen, persoonlijk advies en snelle service.
+
+### Bouwen op zandgrond
+Wouw ligt op stevige zandgrond, ideaal voor een snelle en stabiele plaatsing van uw uitbouw.
+
+### Wat kost een uitbouw in Wouw?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Dorps maatwerk', description: 'Een uitbouw die past bij de karakteristieke woningen in Wouw.' },
+      { title: 'Lokaal', description: 'Vanuit Halsteren snel ter plaatse in Wouw en de omliggende kernen.' },
+      { title: 'Snel geplaatst', description: 'Binnen één dag wind- en waterdicht, met minimale overlast.' }
+    ],
+    faqs: [
+      { question: 'Welke kernen bedienen jullie rond Wouw?', answer: 'Vanuit Halsteren werken wij in Wouw, Heerle, Moerstraten en Wouwse Plantage.' },
+      { question: 'Wat kost een prefab uitbouw in Wouw?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' }
+    ]
+  },
+  {
+    name: 'Lepelstraat',
+    slug: 'lepelstraat',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'West-Brabant',
+    title: 'Prefab Uitbouw Lepelstraat – Uw Buurman uit Halsteren',
+    content: `Een **prefab uitbouw in Lepelstraat** laten plaatsen? Vanuit het naastgelegen Halsteren zijn wij letterlijk uw buurman. Wij realiseren hoogwaardige uitbouwen en aanbouwen, snel en met persoonlijke aandacht.
+
+### Echt om de hoek
+Lepelstraat ligt op een paar minuten van onze vestiging. Geen enkele aanbieder zit dichterbij — dat betekent snelle service en korte lijnen.
+
+### Bouwen op polderklei
+Lepelstraat ligt in het polderlandschap met deels kleigrond. Wij berekenen de juiste fundering vooraf voor een stabiele uitbouw.
+
+### Wat kost een uitbouw in Lepelstraat?
+Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Afstand', value: 'OM DE HOEK' }
+    ],
+    advantages: [
+      { title: 'Dichtstbijzijnde specialist', description: 'Onze vestiging in Halsteren ligt op enkele minuten van Lepelstraat.' },
+      { title: 'Funderingsadvies', description: 'Stabiele fundering afgestemd op de polderklei.' },
+      { title: 'Persoonlijke service', description: 'Korte lijnen en snelle opvolging, écht lokaal.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Lepelstraat?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Hoe snel kunnen jullie langskomen?', answer: 'Zeer snel: Lepelstraat ligt op enkele minuten van onze vestiging in Halsteren.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' }
+    ]
+  },
+  {
+    name: 'Nieuw-Vossemeer',
+    slug: 'nieuw-vossemeer',
+    image: 'https://i.imgur.com/covRQg3.jpeg',
+    category: 'West-Brabant',
+    title: 'Prefab Uitbouw Nieuw-Vossemeer – Lokaal Vakwerk in de Polder',
+    content: `Wilt u uw woning in **Nieuw-Vossemeer** vergroten? Vanuit Halsteren realiseren wij hoogwaardige prefab uitbouwen in Nieuw-Vossemeer en de omliggende polderdorpen.
+
+### Lokale specialist
+Wij kennen de dorpen rond Steenbergen en Bergen op Zoom goed. Korte reistijd, persoonlijk advies en snelle service.
+
+### Bouwen op polderklei
+Nieuw-Vossemeer ligt in het polderlandschap met kleigrond. Een goede fundering is belangrijk; wij berekenen dit vooraf voor een stabiele uitbouw.
+
+### Wat kost een uitbouw in Nieuw-Vossemeer?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Lokaal', description: 'Vanuit Halsteren snel ter plaatse in Nieuw-Vossemeer.' },
+      { title: 'Fundering op klei', description: 'Stabiele fundering afgestemd op de polderklei.' },
+      { title: 'Snel geplaatst', description: 'Binnen één dag wind- en waterdicht, met minimale overlast.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Nieuw-Vossemeer?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000.' },
+      { question: 'Werken jullie ook in Nieuw-Vossemeer?', answer: 'Ja. Vanuit Halsteren bedienen wij Nieuw-Vossemeer en de omliggende polderdorpen.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Wij verzorgen gratis de vergunningscheck.' }
+    ]
   }
 ];
 
