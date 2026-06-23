@@ -39,6 +39,8 @@ import DenBoschLandingPage from './pages/DenBoschLandingPage';
 import DenHaagLandingPage from './pages/DenHaagLandingPage';
 import LeidschendamLandingPage from './pages/LeidschendamLandingPage';
 import RotterdamLandingPage from './pages/RotterdamLandingPage';
+import RegioLandingTemplate from './pages/RegioLandingTemplate';
+import { regioData } from './pages/regioData';
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -2009,6 +2011,14 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. 
     ]
   }
 ];
+
+// Routes /regio/:slug to the rich long-form template when locally optimised
+// content exists, otherwise falls back to the generic CityLandingPage.
+function RegioPage() {
+  const { slug } = useParams();
+  if (slug && regioData[slug]) return <RegioLandingTemplate data={regioData[slug]} />;
+  return <CityLandingPage />;
+}
 
 function CityLandingPage() {
   const { slug } = useParams();
@@ -5437,7 +5447,7 @@ export default function App() {
           <Route path="/uitbouw-leidschendam" element={<LeidschendamLandingPage />} />
           <Route path="/regio/rotterdam" element={<RotterdamLandingPage />} />
           <Route path="/uitbouw-rotterdam" element={<RotterdamLandingPage />} />
-          <Route path="/regio/:slug" element={<CityLandingPage />} />
+          <Route path="/regio/:slug" element={<RegioPage />} />
           
           {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}
           <Route path="*" element={<HomePage />} />
