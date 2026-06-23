@@ -14,9 +14,9 @@
 .loc-card:nth-child(4) { grid-column: span 7; }
 .loc-card:nth-child(5) { grid-column: span 7; }
 .loc-card:nth-child(6) { grid-column: span 5; }
-.loc-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease); z-index: -2; }
+.loc-card img, .loc-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease); z-index: -2; }
 .loc-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(20,33,61,0) 30%, rgba(20,33,61,0.45) 62%, rgba(20,33,61,0.9) 100%); transition: background 0.5s; }
-.loc-card:hover img { transform: scale(1.08); }
+.loc-card:hover img, .loc-card:hover video { transform: scale(1.08); }
 .loc-card:hover::after { background: linear-gradient(180deg, rgba(20,33,61,0.15) 10%, rgba(20,33,61,0.55) 50%, rgba(20,33,61,0.94) 100%); }
 .loc-ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 34px; color: #fff; }
 .loc-ov .loc-k { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
