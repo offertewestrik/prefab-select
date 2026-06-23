@@ -1057,6 +1057,496 @@ Wij zorgen voor een compleet traject: van maatwerk ontwerp tot snelle realisatie
     category: 'Provincie Zeeland',
     title: 'Prefab Uitbouw & Dakkapel Zeeland – Hoogwaardige Woninguitbreiding',
     content: `Bent u op zoek naar meer ruimte in de prachtige provincie Zeeland? Of u nu woont in Middelburg, Vlissingen of Goes, een prefab uitbouw of dakkapel van Prefab Select is de ideale manier om uw wooncomfort te verhogen. Wij zijn dé specialist in Zeeland voor hoogwaardige modulaire bouwoplossingen.`
+  },
+  {
+    name: 'Arnhem',
+    slug: 'arnhem',
+    image: 'https://i.imgur.com/v4jk0SK.jpeg',
+    category: 'Gelderland',
+    title: 'Prefab Uitbouw Arnhem – Snel Extra Woonruimte aan de Veluwezoom',
+    content: `Wilt u uw woning in **Arnhem** vergroten zonder maandenlange bouwoverlast? Een **prefab uitbouw in Arnhem** van Prefab Select is dé manier om snel extra leefruimte, licht en woningwaarde te creëren. Of u nu woont in het sfeervolle Spijkerkwartier, het bruisende Klarendal of het groene Schaarsbergen aan de Veluwezoom: wij ontwerpen een uitbouw die naadloos aansluit op uw woning.
+
+### Bouwen op de Arnhemse zandgrond
+Arnhem ligt deels op de hoge, stevige zandgronden van de stuwwal en deels in het lager gelegen rivierengebied. Onze constructeurs bepalen vooraf de juiste fundering, zodat uw uitbouw levenslang stabiel en scheurvrij blijft.
+
+### Wat kost een uitbouw in Arnhem?
+Reken op een richtprijs van **€2.600 tot €4.300 per m²**, afhankelijk van afwerking en glaspartijen. Een uitbouw van 15 m² komt daarmee gemiddeld tussen de **€45.000 en €62.000** uit. U ontvangt altijd een heldere offerte vooraf.
+
+### Vergunningsvrij uitbouwen in Arnhem
+Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep binnen het achtererfgebied. Wij verzorgen gratis de vergunningscheck bij de gemeente Arnhem.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€45K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Lokaal maatwerk', description: 'Een uitbouw die past bij de Arnhemse bouwstijl, van vooroorlogs tot modern.' },
+      { title: 'Solide fundering', description: 'Funderingsadvies afgestemd op zandgrond én rivierengebied rond Arnhem.' },
+      { title: 'Snelle realisatie', description: 'Productie in de fabriek, plaatsing op locatie binnen één tot twee dagen.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Arnhem?', answer: 'Gemiddeld rekent u op €2.600 tot €4.300 per m². Een uitbouw van 15 m² ligt doorgaans tussen €45.000 en €62.000, afhankelijk van afwerking, kozijnen en eventuele lichtstraat.' },
+      { question: 'Heb ik een vergunning nodig in Arnhem?', answer: 'Een uitbouw aan de achterkant is vaak vergunningsvrij tot 4 meter diep binnen het achtererfgebied. Bij monumenten of beschermde stadsgezichten geldt een vergunningplicht. Wij checken dit gratis voor uw adres.' },
+      { question: 'Hoe snel staat mijn uitbouw in Arnhem?', answer: 'De ruwbouw staat meestal binnen één dag wind- en waterdicht. Inclusief fundering en afwerking bent u doorgaans binnen 4 tot 6 weken volledig klaar.' }
+    ]
+  },
+  {
+    name: 'Apeldoorn',
+    slug: 'apeldoorn',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'Gelderland',
+    title: 'Prefab Uitbouw Apeldoorn – Ruim Wonen aan de Veluwe',
+    content: `Een **prefab uitbouw in Apeldoorn** is ideaal voor wie aan de rand van de Veluwe meer woonruimte wil zonder gedoe. Of u nu woont in De Maten, Ugchelen of het groene buitengebied: Prefab Select realiseert hoogwaardige, geïsoleerde uitbouwen die in recordtijd staan.
+
+### Ruime kavels, eindeloze mogelijkheden
+Apeldoorn staat bekend om zijn ruime, groene wijken en vrijstaande woningen. Dat geeft volop ruimte voor een royale uitbouw met grote schuifpuien of een lichtstraat, zodat u het Veluwse groen letterlijk in huis haalt.
+
+### Wat kost een uitbouw in Apeldoorn?
+De **uitbouw kosten per m²** liggen in Apeldoorn gemiddeld tussen **€2.500 en €4.200**. Voor een uitbouw van 15 m² betekent dit een investering vanaf circa **€44.000**.
+
+### Energiezuinig op de zandgrond
+Op de stevige Veluwse zandgrond plaatsen wij snel en stabiel. Met een Rc-waarde van 6.0 en voorbereiding op vloerverwarming of een warmtepomp bouwt u direct toekomstbestendig.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Royaal ontwerp', description: 'Ruime kavels in Apeldoorn lenen zich perfect voor grote glaspartijen en lichtstraten.' },
+      { title: 'Stabiele plaatsing', description: 'Snelle, stabiele fundering op de stevige Veluwse zandgrond.' },
+      { title: 'Toekomstbestendig', description: 'Standaard Rc 6.0 en voorbereid op vloerverwarming en warmtepomp.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Apeldoorn?', answer: 'Reken op €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000, afhankelijk van uw wensen en afwerkingsniveau.' },
+      { question: 'Is een uitbouw in Apeldoorn vergunningsvrij?', answer: 'Aan de achterzijde is een uitbouw vaak vergunningsvrij tot 4 meter diep. In het buitengebied en bij monumenten gelden soms extra regels. Wij controleren dit gratis voor u.' },
+      { question: 'Hoe lang duurt het traject?', answer: 'Productie duurt 2 tot 4 weken, plaatsing 1 tot 2 dagen. De totale doorlooptijd is doorgaans 4 tot 6 weken.' }
+    ]
+  },
+  {
+    name: 'Ede',
+    slug: 'ede',
+    image: 'https://i.imgur.com/fmQecXk.jpeg',
+    category: 'Gelderland',
+    title: 'Prefab Aanbouw Ede – Meer Ruimte op de Veluwe',
+    content: `Zoekt u een specialist voor een **prefab aanbouw in Ede**? Of u nu woont in Ede-centrum, het groene Bennekom of Lunteren, Prefab Select bouwt hoogwaardige woninguitbreidingen die snel geplaatst worden en jarenlang meegaan.
+
+### Wonen tussen bos en heide
+Ede ligt midden op de Veluwe, met veel ruime en vrijstaande woningen. Een aanbouw biedt hier de perfecte kans om een lichte leefkeuken, thuiskantoor of extra slaapkamer toe te voegen met uitzicht op het groen.
+
+### Wat kost een aanbouw in Ede?
+Gemiddeld liggen de kosten op **€2.500 tot €4.200 per m²**. Een aanbouw van 15 m² komt daarmee vanaf circa **€44.000** uit, inclusief transport, plaatsing en afwerking.
+
+### Volledig ontzorgd
+Van ontwerp en vergunningscheck tot productie en plaatsing: wij regelen het complete traject, zodat u nergens omkijken naar heeft.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Maatwerk', description: 'Een aanbouw die past bij vrijstaande en twee-onder-een-kapwoningen in Ede.' },
+      { title: 'Snelle bouw', description: 'Minimale overlast dankzij fabrieksproductie en plaatsing in één dag.' },
+      { title: 'Complete ontzorging', description: 'Wij verzorgen ontwerp, vergunningscheck, productie en plaatsing.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab aanbouw in Ede?', answer: 'Reken op €2.500 tot €4.200 per m². Een aanbouw van 15 m² begint rond €44.000, afhankelijk van afwerking en opties.' },
+      { question: 'Heb ik een vergunning nodig in Ede?', answer: 'Vaak is een aanbouw aan de achterzijde vergunningsvrij tot 4 meter diep. In het buitengebied van de Veluwe gelden soms aanvullende regels; wij checken dit gratis.' },
+      { question: 'Hoe snel kan de aanbouw geplaatst worden?', answer: 'De plaatsing duurt 1 tot 2 dagen. Inclusief productie en afwerking bent u doorgaans binnen 4 tot 6 weken klaar.' }
+    ]
+  },
+  {
+    name: 'Zwolle',
+    slug: 'zwolle',
+    image: 'https://i.imgur.com/covRQg3.jpeg',
+    category: 'Overijssel',
+    title: 'Prefab Uitbouw Zwolle – Snel Extra Ruimte in de Hanzestad',
+    content: `Wilt u uw woning in **Zwolle** vergroten met een moderne, lichte leefruimte? Een **prefab uitbouw in Zwolle** van Prefab Select combineert snelheid met topkwaliteit. Of u nu woont in het gezellige Assendorp, het historische centrum of de groeiwijk Stadshagen: wij realiseren een uitbouw op maat.
+
+### Bouwen op klei en veen
+Zwolle ligt in het rivieren- en IJssellandschap met deels slappe klei- en veenbodems. Een goede, diepe fundering is hier cruciaal. Wij berekenen dit vooraf, zodat verzakkingen tot het verleden behoren.
+
+### Wat kost een uitbouw in Zwolle?
+De **uitbouw kosten per m²** liggen in Zwolle gemiddeld tussen **€2.600 en €4.300**. Voor een uitbouw van 15 m² betekent dit een investering tussen de **€45.000 en €62.000**.
+
+### Snel en met minimale overlast
+Omdat wij de uitbouw grotendeels in de fabriek maken, staat de constructie vaak binnen één dag wind- en waterdicht. Geen maandenlange bouwplaats in uw straat.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€45K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Funderingsexpertise', description: 'Diepe, stabiele fundering afgestemd op de Zwolse klei- en veenbodem.' },
+      { title: 'Minimale overlast', description: 'Plaatsing in één dag, zonder maandenlange bouwplaats in de wijk.' },
+      { title: 'Hoogwaardig', description: 'Foutloze fabriekskwaliteit met een Rc-waarde van 6.0.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Zwolle?', answer: 'Gemiddeld €2.600 tot €4.300 per m². Een uitbouw van 15 m² ligt tussen €45.000 en €62.000, afhankelijk van afwerking en fundering.' },
+      { question: 'Moet ik in Zwolle letten op de fundering?', answer: 'Ja. Delen van Zwolle hebben een slappe klei- en veenbodem. Wij berekenen vooraf de juiste paal- of schroeffundering om verzakkingen te voorkomen.' },
+      { question: 'Is een vergunning nodig?', answer: 'Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep. In het beschermde stadsgezicht van de binnenstad geldt een vergunningplicht. Wij checken dit gratis.' }
+    ]
+  },
+  {
+    name: 'Groningen',
+    slug: 'groningen',
+    image: 'https://i.imgur.com/v4jk0SK.jpeg',
+    category: 'Groningen',
+    title: 'Prefab Uitbouw Groningen – Licht & Lichtgewicht Bouwen',
+    content: `Een **prefab uitbouw in Groningen** is dé slimme manier om meer woonruimte te creëren in de noordelijke hoofdstad. Of u nu woont in het sfeervolle Helpman, de Oosterpoort of een nieuwbouwwijk als Meerstad: Prefab Select bouwt snel, vakkundig en met aandacht voor de Groningse bodem.
+
+### Lichtgewicht bouwen in aardbevingsgebied
+In delen van de provincie Groningen is rekening houden met bodembeweging belangrijk. Onze prefab modules zijn relatief licht en worden op een constructief doordachte fundering geplaatst, wat spanningen op de woning beperkt. Wij stemmen het ontwerp af op de lokale situatie.
+
+### Wat kost een uitbouw in Groningen?
+Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint daarmee vanaf circa **€44.000**, inclusief plaatsing en afwerking.
+
+### Snel klaar, weinig overlast
+Dankzij fabrieksproductie staat uw uitbouw vaak binnen één dag wind- en waterdicht. Ideaal in dichtbebouwde Groningse stadswijken.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Lichtgewicht constructie', description: 'Relatief lichte prefab modules, doordacht gefundeerd op de Groningse bodem.' },
+      { title: 'Lokaal afgestemd', description: 'Ontwerp en fundering afgestemd op de specifieke situatie van uw kavel.' },
+      { title: 'Snel & schoon', description: 'Binnen één dag wind- en waterdicht, met minimale overlast in de wijk.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Groningen?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond de €44.000, afhankelijk van afwerking en funderingseisen.' },
+      { question: 'Houden jullie rekening met bodembeweging?', answer: 'Ja. In delen van Groningen is dat belangrijk. Onze modules zijn relatief licht en wij plaatsen ze op een constructief doordachte fundering, afgestemd op de lokale situatie.' },
+      { question: 'Heb ik een vergunning nodig?', answer: 'Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep. Bij monumenten of beschermde gebieden geldt een vergunningplicht. Wij checken dit gratis voor uw adres.' }
+    ]
+  },
+  {
+    name: 'Deventer',
+    slug: 'deventer',
+    image: 'https://i.imgur.com/Mcivs2I.jpeg',
+    category: 'Overijssel',
+    title: 'Prefab Uitbouw Deventer – Karaktervol Uitbreiden aan de IJssel',
+    content: `Wilt u uw woning in **Deventer** vergroten met behoud van karakter? Een **prefab uitbouw in Deventer** van Prefab Select sluit naadloos aan op zowel de sfeervolle Hanzepanden in het centrum als de moderne woningen in Colmschate.
+
+### Bouwen aan de IJssel
+Deventer ligt aan de IJssel, met deels slappe rivierklei. Een goede fundering is daarom essentieel. Onze constructeurs berekenen vooraf de juiste oplossing voor een levenslang stabiele uitbouw.
+
+### Wat kost een uitbouw in Deventer?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
+
+### Respect voor erfgoed
+In de historische binnenstad van Deventer geldt vaak een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject zodat uw uitbouw perfect past bij de omgeving.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€44K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Karaktervol ontwerp', description: 'Een uitbouw die aansluit op zowel Hanzepanden als moderne woningen.' },
+      { title: 'Fundering op klei', description: 'Doordachte fundering afgestemd op de rivierklei langs de IJssel.' },
+      { title: 'Vergunning geregeld', description: 'Wij verzorgen vergunning en welstand, ook in beschermd stadsgezicht.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Deventer?', answer: 'Gemiddeld €2.500 tot €4.200 per m². Een uitbouw van 15 m² begint rond €44.000, afhankelijk van afwerking en fundering.' },
+      { question: 'Geldt er een beschermd stadsgezicht in Deventer?', answer: 'In de historische binnenstad vaak wel. Daar is een vergunning en welstandsadvies nodig. Wij nemen het volledige traject voor u uit handen.' },
+      { question: 'Hoe snel is mijn uitbouw klaar?', answer: 'De ruwbouw staat binnen één dag. Inclusief fundering en afwerking bent u doorgaans binnen 4 tot 6 weken volledig klaar.' }
+    ]
+  },
+  {
+    name: 'Enschede',
+    slug: 'enschede',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'Twente',
+    title: 'Prefab Uitbouw Enschede – Modern Wonen in Twente',
+    content: `Een **prefab uitbouw in Enschede** is de snelste manier om in Twente meer woonruimte te realiseren. Of u nu woont in het vernieuwde Roombeek, Boswinkel of een groene rand van de stad: Prefab Select levert hoogwaardige uitbouwen op maat.
+
+### Bouwen op Twentse zandgrond
+Enschede ligt op stevige zandgrond, ideaal voor een snelle en stabiele plaatsing. Onze modules staan vaak binnen één dag wind- en waterdicht op locatie.
+
+### Wat kost een uitbouw in Enschede?
+Reken op **€2.500 tot €4.100 per m²**. Een uitbouw van 15 m² begint daarmee vanaf circa **€43.000**, inclusief transport, plaatsing en afwerking.
+
+### Energiezuinig en comfortabel
+Met een Rc-waarde van 6.0 en voorbereiding op vloerverwarming bouwt u een uitbouw die het hele jaar door behaaglijk is en uw energierekening verlaagt.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€43K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Snelle plaatsing', description: 'Stevige Twentse zandgrond maakt een snelle, stabiele montage mogelijk.' },
+      { title: 'Modern design', description: 'Strakke uitbouwen die aansluiten op de moderne Enschedese architectuur.' },
+      { title: 'Laag energieverbruik', description: 'Standaard Rc 6.0, voorbereid op vloerverwarming en warmtepomp.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Enschede?', answer: 'Gemiddeld €2.500 tot €4.100 per m². Een uitbouw van 15 m² begint rond de €43.000, afhankelijk van uw wensen.' },
+      { question: 'Heb ik een vergunning nodig in Enschede?', answer: 'Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep binnen het achtererfgebied. Wij verzorgen gratis de vergunningscheck.' },
+      { question: 'Hoe lang duurt het traject?', answer: 'Productie 2 tot 4 weken, plaatsing 1 tot 2 dagen. Totale doorlooptijd doorgaans 4 tot 6 weken.' }
+    ]
+  },
+  {
+    name: 'Dordrecht',
+    slug: 'dordrecht',
+    image: 'https://i.imgur.com/covRQg3.jpeg',
+    category: 'Zuid-Holland',
+    title: 'Prefab Uitbouw Dordrecht – Slim Uitbreiden op het Eiland',
+    content: `Wilt u uw woning in **Dordrecht** vergroten? Een **prefab uitbouw in Dordrecht** van Prefab Select biedt snel extra ruimte op het eiland, of u nu woont in de historische binnenstad, Sterrenburg of Dubbeldam.
+
+### Bouwen op slappe bodem
+Dordrecht ligt op een diepe, slappe veen- en kleibodem. Een solide paal- of schroeffundering is daarom essentieel om verzakkingen te voorkomen. Onze constructeurs berekenen dit vooraf nauwkeurig.
+
+### Wat kost een uitbouw in Dordrecht?
+De **uitbouw kosten per m²** liggen in Dordrecht gemiddeld tussen **€2.600 en €4.400**. Een uitbouw van 15 m² komt daarmee tussen de **€46.000 en €64.000** uit.
+
+### Respect voor de oudste stad van Holland
+De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Wij verzorgen het volledige vergunnings- en welstandstraject voor een uitbouw die past bij de Dordtse sfeer.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€46K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Solide paalfundering', description: 'Berekend op de diepe, slappe veen- en kleibodem van Dordrecht.' },
+      { title: 'Erfgoedproof', description: 'Vergunning en welstand geregeld, ook in het beschermde stadsgezicht.' },
+      { title: 'Snel wind- en waterdicht', description: 'De ruwbouw staat doorgaans binnen één dag op locatie.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Dordrecht?', answer: 'Gemiddeld €2.600 tot €4.400 per m². Een uitbouw van 15 m² ligt tussen €46.000 en €64.000, mede afhankelijk van de benodigde paallengte.' },
+      { question: 'Moet ik in Dordrecht letten op de fundering?', answer: 'Ja, absoluut. Dordrecht is gebouwd op een slappe veen- en kleibodem. Een diepe paal- of schroeffundering is cruciaal en berekenen wij vooraf.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. In de historische binnenstad en bij monumenten wel. Wij checken dit gratis en regelen de aanvraag.' }
+    ]
+  },
+  {
+    name: 'Delft',
+    slug: 'delft',
+    image: 'https://i.imgur.com/fmQecXk.jpeg',
+    category: 'Zuid-Holland',
+    title: 'Prefab Uitbouw Delft – Modern Comfort in een Historische Stad',
+    content: `Een **prefab uitbouw in Delft** combineert moderne techniek met respect voor de historische stad. Of u nu woont in de binnenstad, Tanthof of Voorhof: Prefab Select bouwt hoogwaardige uitbouwen die snel geplaatst worden.
+
+### Bouwen op slappe Delftse bodem
+Delft ligt op een slappe veen- en kleibodem. Een goede paalfundering is essentieel voor een stabiele, scheurvrije uitbouw. Wij berekenen de fundering vooraf nauwkeurig.
+
+### Wat kost een uitbouw in Delft?
+Reken op **€2.700 tot €4.500 per m²**. Een uitbouw van 15 m² komt daarmee tussen de **€47.000 en €66.000** uit, afhankelijk van afwerking en fundering.
+
+### Monumenten en beschermd stadsgezicht
+De historische binnenstad van Delft kent veel monumenten en een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€47K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Stabiele fundering', description: 'Paalfundering berekend op de slappe veen- en kleibodem van Delft.' },
+      { title: 'Erfgoed-ervaring', description: 'Ervaren met vergunningen in het beschermde stadsgezicht en bij monumenten.' },
+      { title: 'Minimale overlast', description: 'Compacte logistiek, ideaal voor smalle straten in de Delftse binnenstad.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Delft?', answer: 'Gemiddeld €2.700 tot €4.500 per m². Een uitbouw van 15 m² ligt tussen €47.000 en €66.000, afhankelijk van afwerking en paallengte.' },
+      { question: 'Is mijn woning in Delft vergunningsvrij uit te bouwen?', answer: 'Aan de achterzijde vaak tot 4 meter diep. In de historische binnenstad en bij monumenten geldt een vergunningplicht. Wij checken dit gratis voor u.' },
+      { question: 'Hoe gaan jullie om met de slappe bodem?', answer: 'Wij berekenen vooraf een diepe paal- of schroeffundering, zodat uw uitbouw levenslang stabiel en scheurvrij blijft.' }
+    ]
+  },
+  {
+    name: 'Zoetermeer',
+    slug: 'zoetermeer',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'Zuid-Holland',
+    title: 'Prefab Uitbouw Zoetermeer – Ruim Wonen in een Groene Stad',
+    content: `Wilt u uw woning in **Zoetermeer** vergroten? Een **prefab uitbouw in Zoetermeer** van Prefab Select is ideaal voor de ruim opgezette wijken als Rokkeveen, Oosterheem en Meerzicht.
+
+### Ruime wijken, veel mogelijkheden
+Zoetermeer is een relatief jonge stad met ruime tuinen en brede achterommen. Dat maakt het plaatsen van een uitbouw eenvoudig en biedt volop ruimte voor grote schuifpuien en lichtstraten.
+
+### Bouwen op klei en veen
+De bodem in Zoetermeer bestaat deels uit veen en klei. Wij stemmen de fundering hierop af voor een stabiele, scheurvrije uitbouw.
+
+### Wat kost een uitbouw in Zoetermeer?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.600 en €4.300**. Een uitbouw van 15 m² komt daarmee tussen de **€45.000 en €62.000** uit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€45K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Royale uitbouw', description: 'Ruime tuinen en brede achterommen bieden volop ontwerpvrijheid.' },
+      { title: 'Funderingsadvies', description: 'Fundering afgestemd op de veen- en kleibodem van Zoetermeer.' },
+      { title: 'Snel geplaatst', description: 'Binnen één dag wind- en waterdicht, met minimale overlast.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Zoetermeer?', answer: 'Gemiddeld €2.600 tot €4.300 per m². Een uitbouw van 15 m² ligt tussen €45.000 en €62.000, afhankelijk van afwerking.' },
+      { question: 'Heb ik een vergunning nodig in Zoetermeer?', answer: 'Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep binnen het achtererfgebied. Wij verzorgen gratis de vergunningscheck.' },
+      { question: 'Hoe snel staat mijn uitbouw?', answer: 'De ruwbouw staat binnen één dag. Inclusief fundering en afwerking bent u doorgaans binnen 4 tot 6 weken klaar.' }
+    ]
+  },
+  {
+    name: 'Gouda',
+    slug: 'gouda',
+    image: 'https://i.imgur.com/Mcivs2I.jpeg',
+    category: 'Zuid-Holland',
+    title: 'Prefab Uitbouw Gouda – Stabiel Uitbreiden op Veengrond',
+    content: `Een **prefab uitbouw in Gouda** vraagt om vakmanschap én kennis van de bodem. Prefab Select bouwt hoogwaardige uitbouwen in de hele regio Gouda, van de historische binnenstad tot wijken als Bloemendaal en Goverwelle.
+
+### Bouwen op zeer slappe veengrond
+Gouda staat bekend om zijn slappe veenbodem. Een diepe, solide paalfundering is hier onmisbaar om verzakkingen te voorkomen. Onze constructeurs berekenen dit zorgvuldig vooraf, zodat uw uitbouw levenslang stabiel blijft ten opzichte van de woning.
+
+### Wat kost een uitbouw in Gouda?
+Reken op **€2.700 tot €4.500 per m²**. Een uitbouw van 15 m² komt daarmee tussen de **€47.000 en €66.000** uit, mede afhankelijk van de benodigde paallengte.
+
+### Respect voor het historische centrum
+De binnenstad van Gouda kent een beschermd stadsgezicht. Wij verzorgen het volledige vergunnings- en welstandstraject.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€47K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Veengrond-expertise', description: 'Diepe paalfundering, speciaal berekend op de slappe Goudse veenbodem.' },
+      { title: 'Erfgoedproof', description: 'Vergunning en welstand geregeld, ook in het beschermde stadsgezicht.' },
+      { title: 'Hoogwaardige kwaliteit', description: 'Foutloze fabrieksbouw met een Rc-waarde van 6.0.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Gouda?', answer: 'Gemiddeld €2.700 tot €4.500 per m². Een uitbouw van 15 m² ligt tussen €47.000 en €66.000, afhankelijk van afwerking en paallengte.' },
+      { question: 'Waarom is de fundering in Gouda zo belangrijk?', answer: 'Gouda heeft een zeer slappe veenbodem die kan zakken. Een diepe paal- of schroeffundering is essentieel; wij berekenen dit nauwkeurig vooraf.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. In het beschermde stadsgezicht van de binnenstad wel. Wij checken dit gratis en regelen de aanvraag.' }
+    ]
+  },
+  {
+    name: 'Maastricht',
+    slug: 'maastricht',
+    image: 'https://i.imgur.com/qTIctyr.jpeg',
+    category: 'Limburg',
+    title: 'Prefab Uitbouw Maastricht – Stijlvol Uitbreiden in het Heuvelland',
+    content: `Wilt u uw woning in **Maastricht** vergroten met respect voor de Bourgondische sfeer? Een **prefab uitbouw in Maastricht** van Prefab Select sluit naadloos aan op zowel de karakteristieke panden in Wyck als de woningen op Sint Pieter en in Amby.
+
+### Bouwen in het Limburgse heuvelland
+Maastricht ligt op löss- en mergelgrond in glooiend landschap. Onze constructeurs houden rekening met hoogteverschillen en bodemsoort voor een stabiele, perfect waterpas geplaatste uitbouw.
+
+### Wat kost een uitbouw in Maastricht?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.600 en €4.400**. Een uitbouw van 15 m² komt daarmee tussen de **€46.000 en €64.000** uit.
+
+### Respect voor erfgoed
+De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Wij verzorgen het volledige vergunnings- en welstandstraject zodat uw uitbouw stijlvol past bij de Maastrichtse architectuur.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€46K' },
+      { label: 'Doorlooptijd', value: '4-6 WK' }
+    ],
+    advantages: [
+      { title: 'Heuvelland-maatwerk', description: 'Rekening houdend met hoogteverschillen en löss- en mergelgrond.' },
+      { title: 'Stijlvol ontwerp', description: 'Een uitbouw die past bij de karakteristieke Maastrichtse architectuur.' },
+      { title: 'Vergunning geregeld', description: 'Compleet vergunnings- en welstandstraject, ook in beschermd stadsgezicht.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Maastricht?', answer: 'Gemiddeld €2.600 tot €4.400 per m². Een uitbouw van 15 m² ligt tussen €46.000 en €64.000, afhankelijk van afwerking en bodem.' },
+      { question: 'Houden jullie rekening met het heuvelland?', answer: 'Ja. Wij houden rekening met hoogteverschillen en de löss- en mergelgrond, zodat uw uitbouw stabiel en waterpas wordt geplaatst.' },
+      { question: 'Is een vergunning nodig in Maastricht?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. In de historische binnenstad en bij monumenten wel. Wij checken dit gratis voor uw adres.' }
+    ]
+  },
+  {
+    name: 'Amersfoort',
+    slug: 'amersfoort',
+    image: 'https://i.imgur.com/6VuTqto.jpeg',
+    category: 'Utrecht',
+    title: 'Prefab Uitbouw Amersfoort – Snel Extra Ruimte aan de Heuvelrug',
+    content: `Een **prefab uitbouw in Amersfoort** is de slimste manier om meer woonruimte te creëren aan de rand van de Utrechtse Heuvelrug. Of u nu woont in Vathorst, Kattenbroek of het historische centrum: Prefab Select bouwt snel en vakkundig.
+
+### Bouwen op stevige zandgrond
+Grote delen van Amersfoort liggen op stevige zandgrond, ideaal voor een snelle en stabiele plaatsing. Onze modules staan vaak binnen één dag wind- en waterdicht.
+
+### Wat kost een uitbouw in Amersfoort?
+Reken op **€2.600 tot €4.300 per m²**. Een uitbouw van 15 m² komt daarmee tussen de **€45.000 en €62.000** uit, inclusief plaatsing en afwerking.
+
+### Historische binnenstad
+De middeleeuwse binnenstad kent een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject zodat uw uitbouw perfect aansluit.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€45K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Snelle plaatsing', description: 'Stevige zandgrond maakt een snelle, stabiele montage mogelijk.' },
+      { title: 'Maatwerk', description: 'Een uitbouw die past bij zowel nieuwbouw als historische woningen.' },
+      { title: 'Vergunning geregeld', description: 'Compleet traject, ook in het beschermde stadsgezicht van de binnenstad.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Amersfoort?', answer: 'Gemiddeld €2.600 tot €4.300 per m². Een uitbouw van 15 m² ligt tussen €45.000 en €62.000, afhankelijk van afwerking.' },
+      { question: 'Heb ik een vergunning nodig in Amersfoort?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. In de historische binnenstad geldt een vergunningplicht. Wij checken dit gratis voor u.' },
+      { question: 'Hoe snel is mijn uitbouw klaar?', answer: 'De ruwbouw staat binnen één dag. Inclusief fundering en afwerking bent u doorgaans binnen 4 tot 6 weken volledig klaar.' }
+    ]
+  },
+  {
+    name: 'Hilversum',
+    slug: 'hilversum',
+    image: 'https://i.imgur.com/fmQecXk.jpeg',
+    category: "'t Gooi",
+    title: 'Prefab Uitbouw Hilversum – Architectonisch Uitbreiden in het Gooi',
+    content: `In **Hilversum** staan kwaliteit en architectuur voorop. Een **prefab uitbouw in Hilversum** van Prefab Select voldoet aan de hoogste esthetische eisen, of u nu woont in een villawijk, het centrum of een karakteristieke Dudok-buurt.
+
+### Respect voor architectonisch erfgoed
+Hilversum is wereldberoemd om de architectuur van Willem Dudok. In veel wijken ziet de welstandscommissie scherp toe op vormgeving, materialen en detaillering. Onze ontwerpers stemmen de uitbouw hier zorgvuldig op af.
+
+### Bouwen op Gooise zandgrond
+De stevige zandgrond van het Gooi maakt een snelle, stabiele plaatsing mogelijk. Vaak staat de uitbouw binnen één dag wind- en waterdicht.
+
+### Wat kost een uitbouw in Hilversum?
+De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.800 en €4.600**. Een uitbouw van 15 m² komt daarmee tussen de **€48.000 en €68.000** uit, passend bij het hoogwaardige afwerkingsniveau in het Gooi.
+
+[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+    stats: [
+      { label: 'Plaatsing', value: '1 DAG' },
+      { label: 'Isolatie', value: 'RC 6.0' },
+      { label: 'Vanafprijs', value: '€48K' },
+      { label: 'Garantie', value: '10 JAAR' }
+    ],
+    advantages: [
+      { title: 'Architectonisch maatwerk', description: 'Ontwerpen die voldoen aan de hoge welstandseisen in het Gooi.' },
+      { title: 'Luxe afwerking', description: 'Hoogwaardige materialen, weggewerkte kozijnen en grote glaspartijen.' },
+      { title: 'Snelle, stabiele bouw', description: 'Plaatsing op stevige Gooise zandgrond, vaak binnen één dag.' }
+    ],
+    faqs: [
+      { question: 'Wat kost een prefab uitbouw in Hilversum?', answer: 'Gemiddeld €2.800 tot €4.600 per m². Een uitbouw van 15 m² ligt tussen €48.000 en €68.000, passend bij het luxe afwerkingsniveau in het Gooi.' },
+      { question: 'Houden jullie rekening met de welstandseisen in Hilversum?', answer: 'Zeker. In veel Hilversumse wijken, waaronder de Dudok-buurten, zijn de welstandseisen streng. Onze ontwerpers stemmen het ontwerp hier zorgvuldig op af.' },
+      { question: 'Is een vergunning nodig?', answer: 'Aan de achterzijde vaak niet, tot 4 meter diep. Bij monumenten en in beschermde gebieden wel. Wij checken dit gratis en regelen de aanvraag.' }
+    ]
   }
 ];
 
@@ -1065,6 +1555,69 @@ function CityLandingPage() {
   const page = useMemo(() => cityPages.find(p => p.slug === slug), [slug]);
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
+
+  useEffect(() => {
+    if (!page) return;
+    const prevTitle = document.title;
+    const pageTitle = `${page.title} | Prefab Select`;
+    document.title = pageTitle;
+
+    const plain = page.content
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/[#>*`👉💰🧱📊🏠⚙️⏱️🚀🛠️]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const desc = plain.length > 155 ? `${plain.slice(0, 152).trimEnd()}…` : plain;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const prevDesc = metaDesc?.getAttribute('content') ?? '';
+    if (metaDesc) metaDesc.setAttribute('content', desc);
+
+    const url = `https://www.prefabselect.nl/regio/${page.slug}`;
+    const graph: any[] = [
+      {
+        '@type': 'WebPage',
+        '@id': url,
+        url,
+        name: pageTitle,
+        description: desc,
+        inLanguage: 'nl-NL',
+        isPartOf: { '@type': 'WebSite', name: 'Prefab Select', url: 'https://www.prefabselect.nl' },
+        about: { '@type': 'Service', name: `Prefab uitbouw ${page.name}`, provider: { '@type': 'GeneralContractor', name: 'Prefab Select' } },
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.prefabselect.nl' },
+            { '@type': 'ListItem', position: 2, name: page.name, item: url },
+          ],
+        },
+      },
+    ];
+    if (page.faqs && page.faqs.length) {
+      graph.push({
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
+      });
+    }
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.id = 'json-ld-regio';
+    ld.text = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+    document.head.appendChild(ld);
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    return () => {
+      document.title = prevTitle;
+      if (metaDesc) metaDesc.setAttribute('content', prevDesc);
+      document.getElementById('json-ld-regio')?.remove();
+    };
+  }, [page]);
 
   if (!page) return (
     <div className="h-screen flex flex-col items-center justify-center bg-blue-950 text-white">
