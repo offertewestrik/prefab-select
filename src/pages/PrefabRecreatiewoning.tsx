@@ -109,7 +109,7 @@ export default function PrefabRecreatiewoning() {
               "name": "Wat kost een prefab recreatiewoning gemiddeld?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "De prijzen variëren afhankelijk van de grootte en luxe van circa € 75.000 voor compacte lodges tot € 175.000+ voor luxe ecologische villa's met grote raampartijen, wellnessuitrustingen en warmtepomp."
+                "text": "Prefab recreatiewoningen beginnen vanaf circa € 2.500 per m². Afhankelijk van grootte en luxe varieert de richtprijs van circa € 112.500 voor een compacte lodge van 45 m² tot € 237.500 of meer voor een luxe ecologische villa van 95 m² met grote raampartijen, wellness en warmtepomp."
               }
             }
           ]
@@ -143,9 +143,9 @@ export default function PrefabRecreatiewoning() {
   ];
 
   const modelLines = [
-    { model: 'Compact Eco Studio (ca. 45 m²)', space: '1-2 Slaapkamers', range: 'Ideaal als natuur-lodge of verhuurmodel', price: 'vanaf € 75.000' },
-    { model: 'Modern Family Lodge (ca. 70 m²)', space: '2-3 Slaapkamers', range: 'Royale living, schuifpui en luxe badkamer', price: 'vanaf € 115.000' },
-    { model: 'Premium Exclusive Villa (ca. 95 m²)', space: '3-4 Slaapkamers', range: 'Inclusief wellness, warmtepomp & houten designgevel', price: 'vanaf € 165.000' }
+    { model: 'Compact Eco Studio (ca. 45 m²)', space: '1-2 Slaapkamers', range: 'Ideaal als natuur-lodge of verhuurmodel', price: 'vanaf € 112.500' },
+    { model: 'Modern Family Lodge (ca. 70 m²)', space: '2-3 Slaapkamers', range: 'Royale living, schuifpui en luxe badkamer', price: 'vanaf € 175.000' },
+    { model: 'Premium Exclusive Villa (ca. 95 m²)', space: '3-4 Slaapkamers', range: 'Inclusief wellness, warmtepomp & houten designgevel', price: 'vanaf € 237.500' }
   ];
 
   const compareAspects = [
@@ -563,7 +563,7 @@ export default function PrefabRecreatiewoning() {
               Wat kost een prefab recreatiewoning?
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-2xl mx-auto">
-              Onze ontwerpen zijn schaalbaar en modulair. Dit betekent dat we zowel instapklare basismodellen als op maat ontworpen, ecologische droomvilla's bouwen:
+              Onze prefab recreatiewoningen beginnen vanaf circa <strong>€ 2.500 per m²</strong>. Onze ontwerpen zijn schaalbaar en modulair, van instapklare basismodellen tot op maat ontworpen, ecologische droomvilla's:
             </p>
           </div>
 
