@@ -1,0 +1,75 @@
+# ============================================================================
+# Firebase App Hosting — Prefab Select CRM
+# Docs: https://firebase.google.com/docs/app-hosting/configure
+# Bevat Resend-, Supabase- en Google/Gmail-koppeling via Firebase secrets.
+# ============================================================================
+
+runConfig:
+  # Altijd minimaal 1 warme instance: geen koude starts, CRM direct bereikbaar.
+  minInstances: 1
+  maxInstances: 2
+
+env:
+  # --- Feature flag: echte koppelingen aanzetten (i.p.v. mocks) ---
+  - variable: USE_REAL_INTEGRATIONS
+    value: "true"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # --- Resend (offertes & facturen mailen) ---
+  - variable: RESEND_FROM_EMAIL
+    value: offerte@prefabselect.nl
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: RESEND_API_KEY
+    secret: resend-api-key
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # --- Supabase (database) ---
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    value: https://numqnwpkvlcxtvkiytmi.supabase.co
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: SUPABASE_SERVICE_ROLE_KEY
+    secret: supabase-service-key
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # --- Google / Gmail (mailen vanuit CRM) ---
+  - variable: GOOGLE_REDIRECT_URI
+    value: https://prefab-select--crm-systeem-prefab-select.europe-west4.hosted.app/api/integrations/google/callback
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GOOGLE_CLIENT_ID
+    secret: google-client-id
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: GOOGLE_CLIENT_SECRET
+    secret: google-client-secret
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # --- Team-toegang (inlogwachtwoord) ---
+  - variable: CRM_PASSWORD
+    secret: crm-password
+    availability:
+      - BUILD
+      - RUNTIME
+
+# Google-secrets bijgewerkt naar versie 2 (juiste client-id/secret).
+# trigger 1780926217
+# trigger 1780944729
+# trigger 1780946324
+# trigger 1781728012 — producten-fix, syncError, systeemstatus & AI-agents live
+# trigger 1781729238 — 14 AI-agents voor Prefab Select + CEO-agent
+# trigger 1781733575 — offerte-mail: echte foutreden + mailstatus in systeemstatus
+# trigger 1781733823 — Gmail-fout zichtbaar + echte mailstatus (token-validatie)
