@@ -728,7 +728,7 @@ export default function PrefabRecreatiewoning() {
           
           <div className="text-center mb-20" id="faq-headline">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block leading-none">
-              VREAGEN &amp; ANTWOORDEN
+              VRAGEN &amp; ANTWOORDEN
             </span>
             <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter mb-6 leading-none">
               Veelgestelde vragen <br />

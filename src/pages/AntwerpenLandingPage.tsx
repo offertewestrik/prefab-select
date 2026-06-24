@@ -89,7 +89,7 @@ export default function AntwerpenLandingPage() {
             },
             {
               "@type": "Question",
-              "name": "What kost een uitbouw in Antwerpen ongeveer?",
+              "name": "Wat kost een uitbouw in Antwerpen ongeveer?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Reken ter indicatie op ongeveer € 2.500 tot € 4.500 per vierkante meter, afhankelijk van de afwerking. Een compacte uitbouw begint rond de € 40.000. Een offerte op maat geeft het exacte bedrag voor uw woning."
@@ -387,7 +387,7 @@ export default function AntwerpenLandingPage() {
                   Regen, vrieskou of droogtijden hebben geen invloed op ons werkproces. De wanden, kozijnen en dakelementen worden in onze modern uitgeruste fabriekshal tot op de millimeter nauwkeurig gemonteerd.
                 </p>
                 <p>
-                  Tegelijkertijd bereiden we de fundering in uw achtertuin voor. Op de montagedag hijsen en plaatsen we de volledige ruwbouw in een recordtempo. Dit minimaliseert stof, geluidshinder en bouwveleiligheidsrisico's.
+                  Tegelijkertijd bereiden we de fundering in uw achtertuin voor. Op de montagedag hijsen en plaatsen we de volledige ruwbouw in een recordtempo. Dit minimaliseert stof, geluidshinder en bouwveiligheidsrisico's.
                 </p>
               </div>
             </div>
@@ -468,7 +468,7 @@ export default function AntwerpenLandingPage() {
               Wat kost een uitbouw in Antwerpen?
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-2xl mx-auto">
-              Uw gewenste afwerking (denk aan een telescoopkraan om over het dak te hijsen, en heipalen t.b.v. de Utrechtse veengrond) bepalen de calculatie:
+              Uw gewenste afwerking (denk aan een telescoopkraan om over het dak te hijsen, en heipalen t.b.v. de Antwerpse klei- en zandgrond) bepalen de calculatie:
             </p>
           </div>
 
@@ -619,7 +619,7 @@ export default function AntwerpenLandingPage() {
                 Antwerpse herenhuizen of rijwoningen kunnen van nature langwerpig en donkerder zijn gesitueerd omringd door dichte bebouwing.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Dankzij een royale glazen achtergevel, openslaande deuren of een lichte lichtstraat trekt u het natuurlijke daglecht diep binnenshuis en verbindt u de tuin nauwer met uw leefwereld.
+                Dankzij een royale glazen achtergevel, openslaande deuren of een lichte lichtstraat trekt u het natuurlijke daglicht diep binnenshuis en verbindt u de tuin nauwer met uw leefwereld.
               </p>
             </div>
 

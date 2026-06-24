@@ -323,7 +323,7 @@ export default function DenBoschLandingPage() {
               </h2>
               <div className="text-slate-500 text-base md:text-lg leading-relaxed font-medium space-y-6">
                 <p>
-                  's-Hertogenbosch is een bijzondere en levenslustige stad om in te wonen. De culturele voorzieningen, gezellige binnenstadpleinen en prachtige natuurgebieden zoals Het Bossche Broek maken dat Almeerders of Brabanders er zelden willen vertrekken.
+                  's-Hertogenbosch is een bijzondere en levenslustige stad om in te wonen. De culturele voorzieningen, gezellige binnenstadpleinen en prachtige natuurgebieden zoals Het Bossche Broek maken dat Bosschenaren en Brabanders er zelden willen vertrekken.
                 </p>
                 <p>
                   Met een hoogwaardige prefab uitbouw van Prefab Select vergroot u uw benedenverdieping aanzienlijk. Dit levert direct sfeervol en comfortabel woongenot op voor uw gezin en telt overtuigend mee in de waardevermindering en taxaties op de huizenmarkt.
@@ -497,7 +497,7 @@ export default function DenBoschLandingPage() {
           </div>
 
           <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed" id="cost-footer-note">
-            * Dit betreft richtbedragen incl. btw en installatie. Omdat s-Hertogenbosch in het rivierengebied ligt, is de ondergrond op veel laaggelegen locaties een slappe of natte rivierkleilaag; een doorslaggevende solide paalfundatie is hier onmisbaar t.b.v. een levenslange stabiliteit zonder verzakkingen.
+            * Dit betreft richtbedragen incl. btw en installatie. Omdat 's-Hertogenbosch in het rivierengebied ligt, is de ondergrond op veel laaggelegen locaties een slappe of natte rivierkleilaag; een doorslaggevende solide paalfundatie is hier onmisbaar t.b.v. een levenslange stabiliteit zonder verzakkingen.
           </p>
 
         </div>
@@ -556,7 +556,7 @@ export default function DenBoschLandingPage() {
               Bouwen per stadsgebied in Den Bosch
             </h2>
             <p className="text-base text-slate-500 leading-relaxed font-medium">
-              s-Hertogenbosch beschikt over erg diverse bouwvormen, wat de vergunningsregels en de logistiek sterk beïnvloedt:
+              's-Hertogenbosch beschikt over erg diverse bouwvormen, wat de vergunningsregels en de logistiek sterk beïnvloedt:
             </p>
           </div>
 
@@ -603,7 +603,7 @@ export default function DenBoschLandingPage() {
                 Grondige voorbereiding garandeert rust
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op rivierbakklei vooraf gedetailleerd in te schatten.
+                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op de lokale bodemgesteldheid vooraf gedetailleerd in te schatten.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Onze engineers en ontwerpers lopen al deze facetten grondig met u door voordat we in de fabriek overgaan tot fabricage, om elk risico of meerwerk in een later stadium 100% uit te sluiten.

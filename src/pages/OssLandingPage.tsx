@@ -113,7 +113,7 @@ export default function OssLandingPage() {
     {
       nr: '1',
       title: 'Kennismaking & Ontwerp',
-      desc: 'Samen brengen we uw woning, uw wensen en de mogelijkheden op uw plek in kaart. U ontvangt een ontwerp met een transparante oferte.'
+      desc: 'Samen brengen we uw woning, uw wensen en de mogelijkheden op uw plek in kaart. U ontvangt een ontwerp met een transparante offerte.'
     },
     {
       nr: '2',
@@ -617,7 +617,7 @@ export default function OssLandingPage() {
                 Daglicht binnenhalen via glas en lichtstraten
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Een uitbouw verandert niet alleen uw plattegrond, maar vooral de sfeer in huis. Tradionele woningen kunnen binnenshuis somber of diep gesitueerd zijn.
+                Een uitbouw verandert niet alleen uw plattegrond, maar vooral de sfeer in huis. Traditionele woningen kunnen binnenshuis somber of diep gesitueerd zijn.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Dankzij een royale glazen achterpui, tuindeuren of een luxe lichtstraat op het platte dak stroomt het daglicht rijkelijk binnen. Uw tuin wordt een natuurlijk verlengstuk van uw living.

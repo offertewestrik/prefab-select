@@ -68,7 +68,7 @@ export default function RotterdamLandingPage() {
               "name": "Heb ik een vergunning nodig voor een uitbouw in Rotterdam?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. In de negen beschermde stadsgezichten van Rotterdam (zoals Provenierswijk, Delfshaven of Scheepvaartkwartier) en bij monumenten is altijd een vergunning nodig. Doe de vergunningcheck voor uw adres."
+                "text": "Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig, als richtlijn tot vier meter diep en met een groot onbebouwd deel van het achtererf. In de negen beschermde stadsgezichten van Rotterdam (zoals Provenierswijk, Kralingen of Hillegersberg) en bij monumenten is altijd een vergunning nodig. Doe de vergunningcheck voor uw adres."
               }
             },
             {
@@ -603,7 +603,7 @@ export default function RotterdamLandingPage() {
                 Grondige voorbereiding garandeert rust
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op rivierbakklei vooraf gedetailleerd in te schatten.
+                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op de lokale bodemgesteldheid vooraf gedetailleerd in te schatten.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Onze engineers en ontwerpers lopen al deze facetten grondig met u door voordat we in de fabriek overgaan tot fabricage, om elk risico of meerwerk in een later stadium 100% uit te sluiten.
@@ -722,7 +722,7 @@ export default function RotterdamLandingPage() {
       <noscript>
         <article className="max-w-3xl mx-auto px-6 py-12 prose text-slate-700">
           <h1>Uitbouw in Rotterdam — prefab uitbouw op maat</h1>
-          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Rotterdam en de omliggende disciplines, waaronder Kralingen, Hillegersberg, Blijdorp, Prins Alexander, Nesselande en Hoek van Holland. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. Rotterdam kent 9 beschermde stadsgezichten waar altijd een vergunning vereist is en de Welstandsnota Rotterdam 2025 en de Koepelnota actief nageleefd over de kavel moeten worden.</p>
+          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Rotterdam en de omliggende gemeenten, waaronder Kralingen, Hillegersberg, Blijdorp, Prins Alexander, Nesselande en Hoek van Holland. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. Rotterdam kent 9 beschermde stadsgezichten waar altijd een vergunning vereist is en waar de Welstandsnota Rotterdam en de Koepelnota actief worden nageleefd.</p>
           <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject hangt op locatie af van transportspecificaties, constructieve grondberekeningen, paalfunderingen en eventueel benodigde omgevingsvergunningen op de kavel. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
         </article>
       </noscript>

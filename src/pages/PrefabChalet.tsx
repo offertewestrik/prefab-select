@@ -35,7 +35,7 @@ const PrefabChalet = () => {
                 Modern buitenleven, volledig op maat.
               </h1>
               <p className="text-xl md:text-2xl text-blue-50/80 mb-14 font-light leading-relaxed max-w-2xl mx-auto drop-shadow-md">
-                Hoogwaardige prefab recreatiewoningen met moderne architectuur, grootse raampartijen en premium afwerking.
+                Hoogwaardige prefab chalets met moderne architectuur, grootse raampartijen en premium afwerking.
               </p>
               
               <div className="flex flex-wrap gap-5 justify-center">

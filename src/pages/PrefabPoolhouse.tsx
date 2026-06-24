@@ -150,7 +150,7 @@ export default function PrefabPoolhouse() {
     },
     {
       title: 'Exclusieve Extra\'s',
-      desc: 'Mogelijkheden voor een luxe inbouwwsauna, een glazen fitnesshoek, handige bijkeuken of gastenverblijf.'
+      desc: 'Mogelijkheden voor een luxe inbouwsauna, een glazen fitnesshoek, handige bijkeuken of gastenverblijf.'
     }
   ];
 

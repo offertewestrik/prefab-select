@@ -71,7 +71,7 @@ export default function AmsterdamLandingPage() {
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Heb ik een vergunning rnodig voor een uitbouw in Amsterdam?",
+              "name": "Heb ik een vergunning nodig voor een uitbouw in Amsterdam?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Aan de achterzijde mag u onder bepaalde voorwaarden vaak tot 4 meter diep vergunningsvrij uitbouwen. Echter, door specifieke regels in Amsterdam (zoals beschermde stadsgezichten, erfgoedregels en de binnentuinen-regeling) is een vergunning of melding vaak wel vereist. Wij zoeken dit gratis voor uw adres uit."
@@ -429,7 +429,7 @@ export default function AmsterdamLandingPage() {
               </span>
             </h2>
             <p className="text-base text-slate-500 leading-relaxed font-semibold max-w-xl">
-              Bij traditionele bouw gebeurt werkelijk alles direct bij u in de tuin: metmetselen, drogen, wachten op goed weer. Onze prefab methode verandert dit proces fundamenteel voor uw comfort.
+              Bij traditionele bouw gebeurt werkelijk alles direct bij u in de tuin: metselen, drogen, wachten op goed weer. Onze prefab methode verandert dit proces fundamenteel voor uw comfort.
             </p>
           </div>
 
@@ -568,7 +568,7 @@ export default function AmsterdamLandingPage() {
           </div>
 
           <p className="text-[11px] text-slate-400 font-semibold text-center leading-relaxed">
-            * Dit betreft landelijke richtprijzen inclusief btw en montage. De uiteindelijke kosten zijn afhankelijk van de complexiteit van de Amsterdamse bodemgesteldheid (vundering) en de bereikbaarheid van uw perceel (bijvoorbeeld kraaninzet).
+            * Dit betreft landelijke richtprijzen inclusief btw en montage. De uiteindelijke kosten zijn afhankelijk van de complexiteit van de Amsterdamse bodemgesteldheid (fundering) en de bereikbaarheid van uw perceel (bijvoorbeeld kraaninzet).
           </p>
 
         </div>
@@ -663,7 +663,7 @@ export default function AmsterdamLandingPage() {
                 Niet elk ruimteknelpunt vraagt om exact dezelfde oplossing. Een traditionele uitbouw is de meest logische keuze wanneer u op de begane grond extra bruikbare ruimte mist, zoals voor een grotere keuken of riante woonkamer met zicht op uw tuin.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Mist u slapkamers of een werkkamer op een hogere verdieping? Dan is een dakopbpuw of dakkapel vaak een slimmere investering. We bekijken graag samen met u de mogelijkheden voor uw situatie.
+                Mist u slaapkamers of een werkkamer op een hogere verdieping? Dan is een dakopbouw of dakkapel vaak een slimmere investering. We bekijken graag samen met u de mogelijkheden voor uw situatie.
               </p>
             </div>
 

@@ -140,7 +140,7 @@ export default function HaarlemLandingPage() {
   const wijken = [
     { name: 'Centrum, Vijfhoek & Burgwal', desc: 'Historische straatjes, rijksbeschermd stadsgezicht en karakteristieke panden; hier is nauwkeurig ontwerpwerk vereist. We zetten slimme kraanlogistiek in om de elementen vlot en veilig over het dak te plaatsen.' },
     { name: 'Kleverpark, Garenkokerskwartier & Bomenbuurt', desc: 'Prachtige en gewilde jaren-30-wijken met stijlvolle woningen; prefab uitbouwen sluiten hier esthetisch feilloos op aan met kwalitatief hoogwaardig metselwerk of moderne glaspuien.' },
-    { name: 'Haarlem-Noord & Ramplaankwartier', desc: 'Ruimer opgezette gezinsbuurten met diepe tuinen; hier kunt u optimaal profiteren van vergunningsvrije regelgeving tot 4 meter diep voor een flinke woonkeuken of tuikamer.' },
+    { name: 'Haarlem-Noord & Ramplaankwartier', desc: 'Ruimer opgezette gezinsbuurten met diepe tuinen; hier kunt u optimaal profiteren van vergunningsvrije regelgeving tot 4 meter diep voor een flinke woonkeuken of tuinkamer.' },
     { name: 'Schalkwijk (Europawijk & Molenwijk)', desc: 'Naoorlogse wijken met uitstekende bereikbaarheid en royale achtertuinen waar een prefab uitbouw of leefkeuken direct extra leefkwaliteit en forse waardestijging oplevert.' }
   ];
 
@@ -312,7 +312,7 @@ export default function HaarlemLandingPage() {
             
             <div className="max-w-xl">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-                RUIMER WONEN MET COMMITTED KWALITEIT
+                RUIMER WONEN MET TOEGEWIJDE KWALITEIT
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-8">
                 Investeren in eigen huis <br />

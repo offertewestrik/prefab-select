@@ -128,7 +128,7 @@ export default function BredaLandingPage() {
     {
       nr: '1',
       title: 'Kennismaking & Ontwerp',
-      desc: 'Samen brengen we uw woning, uw wensen en de mogelijkheden op uw plek in kaart. U ontvangt een ontwerp met een transparante oferte.'
+      desc: 'Samen brengen we uw woning, uw wensen en de mogelijkheden op uw plek in kaart. U ontvangt een ontwerp met een transparante offerte.'
     },
     {
       nr: '2',
@@ -434,7 +434,7 @@ export default function BredaLandingPage() {
               
               <div className="text-blue-100/60 leading-relaxed font-semibold space-y-6 text-sm md:text-base max-w-2xl">
                 <p>
-                  Als algemene landelijke lijn mag een uitbouw aan de achterzijde vergunningsvrij gerealiseerd worden mits u binnen de diepte van 4 meter blijft en de welstandscriteria op te openbare weg niet worden geschonden. 
+                  Als algemene landelijke lijn mag een uitbouw aan de achterzijde vergunningsvrij gerealiseerd worden mits u binnen de diepte van 4 meter blijft en de welstandscriteria aan de openbare weg niet worden geschonden. 
                 </p>
                 <p>
                   Ligt uw woning echter in een beschermd historisch stadsgezicht of is uw Bredaas woonhuis een gemeentelijk of rijksmonument? Dan gelden strenge welstandskaders welke zijn vastgelegd in de Bredase <strong>Nota Ruimtelijke Kwaliteit</strong>. We bekijken dit altijd graag zorgvuldig en stemmen de visuele aansluiting feilloos af.
@@ -623,7 +623,7 @@ export default function BredaLandingPage() {
                 Denk vooraf aan de stabiliteit van de grond, uw exact erfgrenzen (goed afstemmen met de buren is hierbij goud waard), de logistieke aanvoerroutes voor de plaatsingsdag, en de leidingplaatsing van installaties.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                Onze adviseurs nemen deze vier essentiële factoren standdaard grondig met u door voordat we de productie in onze fabriek starten.
+                Onze adviseurs nemen deze vier essentiële factoren standaard grondig met u door voordat we de productie in onze fabriek starten.
               </p>
             </div>
 
@@ -634,7 +634,7 @@ export default function BredaLandingPage() {
                 Daglicht: de stille hoofdrolspeler
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Een uitbreiding gaat niet louter over extra vierkante meters, maar vooral over hoe die meters aanvoelen. Tradionele Bredase tussenwoningen kunnen binnenshuis diep en donker zijn.
+                Een uitbreiding gaat niet louter over extra vierkante meters, maar vooral over hoe die meters aanvoelen. Traditionele Bredase tussenwoningen kunnen binnenshuis diep en donker zijn.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Dankzij een luxe glasgevelpui, een moderne lichtstraat of tuindeuren stroomt het daglicht volop naar binnen. Uw tuin wordt een natuurlijk verlengstuk van uw woonkeuken of living.
@@ -648,7 +648,7 @@ export default function BredaLandingPage() {
                 Het hele jaar comfortabel &amp; behaaglijk
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Een matig geïsoleerde ruimte voelt \&apos;s winters kil aan. Onze prefab wanden en vloerelementen sluiten naden, tocht en koudebruggen volledig uit. 
+                Een matig geïsoleerde ruimte voelt &apos;s winters kil aan. Onze prefab wanden en vloerelementen sluiten naden, tocht en koudebruggen volledig uit. 
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Hiermee geniet u van optimale warmte-isolatie waarmee u tevens uw maandelijkse energielasten drukt. Koel in de zomer, warm in de winter.

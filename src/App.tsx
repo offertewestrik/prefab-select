@@ -476,7 +476,7 @@ Dit wordt allemaal vooraf meegenomen in het ontwerp. Het resultaat is vaak een v
   },
   {
     id: 8,
-    title: "Wat beïnvloedt the prijs van een uitbouw het meest?",
+    title: "Wat beïnvloedt de prijs van een uitbouw het meest?",
     excerpt: "Niet iedereen weet waar de grootste kosten zitten.",
     content: `Niet iedereen weet waar de grootste kosten zitten. Dit zijn de belangrijkste factoren:
 - Grootte van de uitbouw
@@ -685,7 +685,7 @@ Of het nu gaat om een functionele opslagruimte in de tuin of een architectonisch
     image: 'https://i.imgur.com/fmQecXk.jpeg',
     category: 'West-Brabant',
     title: 'Prefab Aanbouw Breda – Meer Ruimte, Licht en Woningwaarde',
-    content: `Wilt u uw woning in Breda vergroten zonder de maandenlange chaos van een traditionele verbouwing? Een **prefab aanbouw in Breda** is de ideale manier om direct extra comfort en licht in huis te halen. In populair wijken zoals Ginneken, Princenhage of de Belcrum zien we een enorme stijging in de vraag naar kwalitatieve woninguitbreidingen. Wij bedienen de gehele regio West-Brabant, inclusief [Tilburg](/regio/tilburg) en [Bergen op Zoom](/regio/bergen-op-zoom).
+    content: `Wilt u uw woning in Breda vergroten zonder de maandenlange chaos van een traditionele verbouwing? Een **prefab aanbouw in Breda** is de ideale manier om direct extra comfort en licht in huis te halen. In populaire wijken zoals Ginneken, Princenhage of de Belcrum zien we een enorme stijging in de vraag naar kwalitatieve woninguitbreidingen. Wij bedienen de gehele regio West-Brabant, inclusief [Tilburg](/regio/tilburg) en [Bergen op Zoom](/regio/bergen-op-zoom).
 
 Met een **aanbouw aan de woning** investeert u niet alleen in uw dagelijkse woongenot, maar ook in de toekomstige verkoopwaarde van uw huis. Onze prefab modules worden volledig afgewerkt geleverd, inclusief stucwerk, elektra en vloerverwarming indien gewenst.
 
@@ -871,7 +871,7 @@ Een **aanbouw aan de woning** in Den Haag zorgt voor de nodige extra leefruimte 
 - **Snelle plaatsing**: Vaak binnen **één dag** gerealiseerd.
 - **Duurzaam & Geïsoleerd**: Rc-waarde van 6.0 voor optimaal comfort.
 
-[Ontdek onze werkwijze](/diensten) or [vraag een offerte aan](/offerte)`
+[Ontdek onze werkwijze](/diensten) of [vraag een offerte aan](/offerte)`
   },
   {
     name: 'Amstelveen',
@@ -3286,7 +3286,7 @@ function SEOText() {
                 { step: "2", title: "Woning & Wensen", desc: "Wat is mogelijk? Wat past het beste bij uw situatie?" },
                 { step: "3", title: "Ontwerp op maat", desc: "Geen standaard oplossing, maar afgestemd op u." },
                 { step: "4", title: "Productie", desc: "Alles gebeurt gecontroleerd in onze eigen fabriek." },
-                { step: "5", title: "Plaatsing", desc: "Binnen 1 dag staat the uitbouw er vaak al!" }
+                { step: "5", title: "Plaatsing", desc: "Binnen 1 dag staat de uitbouw er vaak al!" }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/5 backdrop-blur-2xl p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 shadow-2xl transition-all hover:translate-y-[-10px] group">
                   <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.5em] mb-4 md:mb-6 block leading-none">Stap 0{item.step}</span>
@@ -3742,7 +3742,7 @@ function OfferteForm({ className = "", title = "Vraag direct een vrijblijvende o
                       className="w-full bg-blue-50/50 border border-blue-100 rounded-xl px-5 py-3.5 text-xs focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-blue-950 appearance-none uppercase tracking-widest cursor-pointer"
                     >
                       <option value="Geen stalen doorbraak vereist">Geen stalen doorbraak vereist</option>
-                      <option value="Standaard stalen portaalkonstructie">Standaard stalen bintenportaal (Berekend)</option>
+                      <option value="Standaard stalen portaalconstructie">Standaard stalen bintenportaal (Berekend)</option>
                       <option value="Zware constructieve geveldoorbraak">Zware doorbraak (Gehele achtergevel open)</option>
                     </select>
                     <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600/40">

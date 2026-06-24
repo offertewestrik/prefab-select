@@ -45,7 +45,7 @@ export const regioData: Record<string, RegioData> = {
     welstandHeading: ['Vergunningsvrij waar het kan', 'zorgvuldig waar het moet'],
     welstandParagraphs: [
       'De landelijke regels bieden ruime mogelijkheden: een uitbouw aan de achterzijde binnen het achtererfgebied is vaak vergunningsvrij, als richtlijn tot vier meter diep, mits een groot deel van het achtererf onbebouwd blijft. Wij doen kosteloos de vergunningcheck voor uw specifieke adres bij de gemeente Steenbergen.',
-      'Let op: voor monumenten en binnen het beschermde dorpsgezicht van de oude vesting gelden strengere regels. Dan is een omgevingsvergunning en soms welstandsadvies nodig. Onze ontwerpers verzorgen het complete traject, inclusief tekeningen en aanvraag.',
+      'Let op: voor monumenten en rond de historische vestingkern gelden strengere regels. Dan is een omgevingsvergunning en soms welstandsadvies nodig. Onze ontwerpers verzorgen het complete traject, inclusief tekeningen en aanvraag.',
       'Steenbergen ligt grotendeels in ingepolderd land met een kleibodem die plaatselijk slap kan zijn. Een doordachte fundering — afhankelijk van de locatie op staal of op palen — is daarom belangrijk voor een levenslang stabiele uitbouw. Wij berekenen dit altijd vooraf.',
     ],
     costHeading: 'Wat kost een uitbouw in Steenbergen?',
@@ -95,7 +95,7 @@ export const regioData: Record<string, RegioData> = {
     faqs: [
       { question: 'Werken jullie ook echt in Steenbergen en de kernen?', answer: 'Zeker. Onze vestiging staat in Halsteren, op slechts enkele minuten van Steenbergen. Wij bedienen Steenbergen, Welberg, Kruisland, De Heen, Dinteloord en Nieuw-Vossemeer met korte lijnen en snelle service.' },
       { question: 'Wat kost een prefab uitbouw in Steenbergen?', answer: 'Reken op een richtprijs van € 2.500 tot € 4.200 per m², afhankelijk van afwerking en fundering. Een uitbouw van 15 m² ligt doorgaans tussen € 44.000 en € 62.000. U ontvangt altijd een heldere offerte vooraf.' },
-      { question: 'Heb ik een vergunning nodig in Steenbergen?', answer: 'Een uitbouw aan de achterkant is vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. Bij monumenten of in het beschermde dorpsgezicht is wel een vergunning nodig. Wij checken dit gratis voor uw adres.' },
+      { question: 'Heb ik een vergunning nodig in Steenbergen?', answer: 'Een uitbouw aan de achterkant is vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. Bij monumenten of rond de historische vestingkern kan een vergunning nodig zijn. Wij checken dit gratis voor uw adres.' },
       { question: 'Moet ik letten op de fundering?', answer: 'Op laaggelegen polderlocaties kan de kleibodem slap zijn. Afhankelijk van uw kavel funderen we op staal of op palen. Wij berekenen dit altijd vooraf, zodat uw uitbouw levenslang stabiel blijft.' },
       { question: 'Hoelang duurt het plaatsen van een uitbouw?', answer: 'De ruwbouw staat doorgaans binnen één dag wind- en waterdicht. Inclusief fundering, grondwerk en de fijne afwerking bent u meestal binnen 4 tot 6 weken volledig klaar.' },
       { question: 'Kan ik een keuken in de uitbouw plaatsen?', answer: 'Ja, dat doen we regelmatig. Alle benodigde leidingen, afvoeren en elektra worden al in de fabriek technisch voorbereid, zodat uw keuken naadloos aansluit.' },
@@ -165,7 +165,7 @@ export const regioData: Record<string, RegioData> = {
     wijken: [
       { name: 'Tolberg & Kortendijk', desc: 'Ruim opgezette woonwijken met goede achterom-mogelijkheden. Ideaal voor royale uitbouwen met grote schuifpuien.' },
       { name: 'Kalsdonk & Langdonk', desc: 'Gevarieerde wijken waar wij de uitbouw zorgvuldig afstemmen op de bestaande architectuur en kavelmaat.' },
-      { name: 'Centrum & Burgerhout', desc: 'Dichter bebouwd, met soms een beschermd karakter. Hier verzorgen wij waar nodig het vergunnings- en welstandstraject.' },
+      { name: 'Centrum & Burgerhout', desc: 'Het oudere, dichter bebouwde hart van de stad. Hier verzorgen wij waar nodig het vergunnings- en welstandstraject.' },
     ],
     analysisBoxes: [
       { eyebrow: 'DE JUISTE KEUZE', title: 'Uitbouw, aanbouw of dakopbouw?', paragraphs: ['Voor extra leefruimte op de begane grond is een uitbouw de logische keuze: een grotere keuken, woonkamer of eetkamer.', 'Heeft u juist een extra slaap- of badkamer nodig? Dan kijken we samen naar een dakkapel of dakopbouw die binnen de regels past.'] },
@@ -455,7 +455,7 @@ export const regioData: Record<string, RegioData> = {
     districtsIntro: 'Hoogerheide kent gevarieerde buurten en grenst aan de andere kernen van de Wal. Wij stemmen ons ontwerp daarop af:',
     wijken: [
       { name: 'Centrum & Dorpsstraat', desc: 'Rond het winkelhart staat gevarieerde bebouwing. Hier benutten we de achterzijde vaak optimaal binnen de vergunningsvrije ruimte.' },
-      { name: 'Woonwijken Aanwas & Kromme Elleboog', desc: 'Ruime naoorlogse wijken met goede achterom-mogelijkheden, ideaal voor royale uitbouwen met veel glas.' },
+      { name: 'Naoorlogse woonwijken', desc: 'Ruime naoorlogse wijken met goede achterom-mogelijkheden, ideaal voor royale uitbouwen met veel glas.' },
       { name: 'Richting Woensdrecht & vliegbasis', desc: 'Landelijker gelegen woningen waar we het ontwerp afstemmen op de groene omgeving van de Wal.' },
     ],
     analysisBoxes: [
@@ -1995,7 +1995,7 @@ export const regioData: Record<string, RegioData> = {
     welstandParagraphs: [
       'Een uitbouw aan de achterzijde binnen het achtererfgebied is vaak vergunningsvrij, als richtlijn tot vier meter diep. Wij doen kosteloos de vergunningcheck voor uw adres bij de gemeente Maastricht.',
       'De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Daar is een omgevingsvergunning en welstandsadvies nodig. Onze ontwerpers verzorgen het complete traject zodat uw uitbouw stijlvol aansluit bij de Maastrichtse architectuur.',
-      'Maastricht ligt op löss- en mergelgrond in een glooiend landschap. Onze constructeurs houden rekening met hoogteverschillen en bodemsoort, zodat uw uitbouw stabiel en perfect waterpas wordt geplaatst.',
+      'In en rond Maastricht komen löss en mergel voor, vooral op de hogere delen zoals Sint Pieter, terwijl het Maasdal op rivierafzettingen ligt. Onze constructeurs houden rekening met hoogteverschillen en bodemsoort, zodat uw uitbouw stabiel en perfect waterpas wordt geplaatst.',
     ],
     costHeading: 'Wat kost een uitbouw in Maastricht?',
     costIntro: 'Uw gekozen kozijnen, glaspartijen en de funderingswijze bepalen de exacte calculatie. Onderstaande richtprijzen geven een goed startpunt:',

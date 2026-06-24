@@ -73,7 +73,7 @@ export default function AlmereLandingPage() {
             },
             {
               "@type": "Question",
-              "name": "What betekent welstandsvrij bouwen in Almere?",
+              "name": "Wat betekent welstandsvrij bouwen in Almere?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "In Almere zijn de meeste woongebieden welstandsvrij: de gemeente toetst uw bouwplan niet vooraf op het uiterlijk. Dat geeft u uitzonderlijk veel vrijheid in vorm en materiaal. Een omgevingsvergunning kan nog wel nodig zijn als uw uitbouw buiten de vergunningsvrije regels valt."
@@ -517,7 +517,7 @@ export default function AlmereLandingPage() {
           
           <div className="max-w-3xl mb-20 text-left" id="steps-header">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-              ZORGELOZE REALSATIE
+              ZORGELOZE REALISATIE
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
               Uw Almeers bouwtraject stap-voor-stap <br />
@@ -611,7 +611,7 @@ export default function AlmereLandingPage() {
                 Grondige polderondergrond-analyse
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Almere ligt volledig op de bodem van de voormalige Zuiderzee. De polderbodem van Flevoland kennmerkt zich door slap zeeklei en diepgelegen veenlagen.
+                Almere ligt volledig op de bodem van de voormalige Zuiderzee. De polderbodem van Flevoland kenmerkt zich door slappe zeeklei en diepgelegen veenlagen.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Wij voeren standaard een grondsondering en constructieve berekening uit t.b.v. een exact berekende paalfundering, om op lange termijn elke vorm van verzakking of structurele schade 100% uit te sluiten.

@@ -508,7 +508,7 @@ export default function AmstelveenLandingPage() {
           
           <div className="max-w-3xl mb-20 text-left">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-              ZORGELOZE REALSATIE
+              ZORGELOZE REALISATIE
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">
               Het bouwtraject van begin tot eind <br />
