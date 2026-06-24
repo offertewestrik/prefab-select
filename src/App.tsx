@@ -1,46 +1,60 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import React, { useState, useEffect, useMemo, PropsWithChildren } from 'react';
+import React, { useState, useEffect, useMemo, PropsWithChildren, lazy, Suspense } from 'react';
 import { Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { KellyCTA } from './KellyCTA';
 import { MetaPixel } from './components/MetaPixel';
 import { CookieConsent } from './components/CookieConsent';
-import AgencyApp from './agency/AgencyApp';
-import Diensten from './pages/Diensten';
-import PrefabUitbouw from './pages/PrefabUitbouw';
-import PrefabAanbouw from './pages/PrefabAanbouw';
-import Mantelzorgwoning from './pages/Mantelzorgwoning';
-import Poolhouse from './pages/Poolhouse';
-import PrefabChalet from './pages/PrefabChalet';
-import Vakantiewoningen from './pages/Vakantiewoningen';
-import PrefabRecreatiewoning from './pages/PrefabRecreatiewoning';
-import PrefabPoolhouse from './pages/PrefabPoolhouse';
-import Zakelijk from './pages/Zakelijk';
-import AIExpert from './pages/AIExpert';
-import AboutPage from './pages/About';
-import FAQPage from './pages/FAQPage';
-import Werkwijze from './pages/Werkwijze';
-import ZeelandLandingPage from './pages/ZeelandLandingPage';
-import ZeelandSchuurtjesProject from './pages/ZeelandSchuurtjesProject';
-import HalsterenLandingPage from './pages/HalsterenLandingPage';
-import EindhovenLandingPage from './pages/EindhovenLandingPage';
-import AmsterdamLandingPage from './pages/AmsterdamLandingPage';
-import BredaLandingPage from './pages/BredaLandingPage';
-import BergenOpZoomLandingPage from './pages/BergenOpZoomLandingPage';
-import OssLandingPage from './pages/OssLandingPage';
-import AmstelveenLandingPage from './pages/AmstelveenLandingPage';
-import UtrechtLandingPage from './pages/UtrechtLandingPage';
-import AntwerpenLandingPage from './pages/AntwerpenLandingPage';
-import HaarlemLandingPage from './pages/HaarlemLandingPage';
-import LarenLandingPage from './pages/LarenLandingPage';
-import AlmereLandingPage from './pages/AlmereLandingPage';
-import TilburgLandingPage from './pages/TilburgLandingPage';
-import DenBoschLandingPage from './pages/DenBoschLandingPage';
-import DenHaagLandingPage from './pages/DenHaagLandingPage';
-import LeidschendamLandingPage from './pages/LeidschendamLandingPage';
-import RotterdamLandingPage from './pages/RotterdamLandingPage';
-import RegioLandingTemplate from './pages/RegioLandingTemplate';
-import { regioData } from './pages/regioData';
+
+// Route-level code splitting: each page (and the heavy agency dashboard with
+// Firebase) loads in its own chunk, so the homepage no longer ships everything.
+const AgencyApp = lazy(() => import('./agency/AgencyApp'));
+const Diensten = lazy(() => import('./pages/Diensten'));
+const PrefabUitbouw = lazy(() => import('./pages/PrefabUitbouw'));
+const PrefabAanbouw = lazy(() => import('./pages/PrefabAanbouw'));
+const Mantelzorgwoning = lazy(() => import('./pages/Mantelzorgwoning'));
+const Poolhouse = lazy(() => import('./pages/Poolhouse'));
+const PrefabChalet = lazy(() => import('./pages/PrefabChalet'));
+const Vakantiewoningen = lazy(() => import('./pages/Vakantiewoningen'));
+const PrefabRecreatiewoning = lazy(() => import('./pages/PrefabRecreatiewoning'));
+const PrefabPoolhouse = lazy(() => import('./pages/PrefabPoolhouse'));
+const Zakelijk = lazy(() => import('./pages/Zakelijk'));
+const AIExpert = lazy(() => import('./pages/AIExpert'));
+const AboutPage = lazy(() => import('./pages/About'));
+const FAQPage = lazy(() => import('./pages/FAQPage'));
+const Werkwijze = lazy(() => import('./pages/Werkwijze'));
+const ZeelandLandingPage = lazy(() => import('./pages/ZeelandLandingPage'));
+const ZeelandSchuurtjesProject = lazy(() => import('./pages/ZeelandSchuurtjesProject'));
+const HalsterenLandingPage = lazy(() => import('./pages/HalsterenLandingPage'));
+const EindhovenLandingPage = lazy(() => import('./pages/EindhovenLandingPage'));
+const AmsterdamLandingPage = lazy(() => import('./pages/AmsterdamLandingPage'));
+const BredaLandingPage = lazy(() => import('./pages/BredaLandingPage'));
+const BergenOpZoomLandingPage = lazy(() => import('./pages/BergenOpZoomLandingPage'));
+const OssLandingPage = lazy(() => import('./pages/OssLandingPage'));
+const AmstelveenLandingPage = lazy(() => import('./pages/AmstelveenLandingPage'));
+const UtrechtLandingPage = lazy(() => import('./pages/UtrechtLandingPage'));
+const AntwerpenLandingPage = lazy(() => import('./pages/AntwerpenLandingPage'));
+const HaarlemLandingPage = lazy(() => import('./pages/HaarlemLandingPage'));
+const LarenLandingPage = lazy(() => import('./pages/LarenLandingPage'));
+const AlmereLandingPage = lazy(() => import('./pages/AlmereLandingPage'));
+const TilburgLandingPage = lazy(() => import('./pages/TilburgLandingPage'));
+const DenBoschLandingPage = lazy(() => import('./pages/DenBoschLandingPage'));
+const DenHaagLandingPage = lazy(() => import('./pages/DenHaagLandingPage'));
+const LeidschendamLandingPage = lazy(() => import('./pages/LeidschendamLandingPage'));
+const RotterdamLandingPage = lazy(() => import('./pages/RotterdamLandingPage'));
+const RegioRich = lazy(() => import('./pages/RegioRich'));
+
+// Slugs that have rich long-form content (rendered via the lazy RegioRich chunk).
+const RICH_REGIO_SLUGS = new Set([
+  'steenbergen', 'roosendaal', 'tholen', 'woensdrecht', 'hoogerheide', 'ossendrecht',
+  'putte', 'wouw', 'lepelstraat', 'nieuw-vossemeer', 'arnhem', 'apeldoorn', 'ede',
+  'zwolle', 'groningen', 'deventer', 'enschede', 'dordrecht', 'delft', 'zoetermeer',
+  'gouda', 'maastricht', 'amersfoort', 'hilversum',
+]);
+
+function PageFallback() {
+  return <div className="min-h-screen bg-white" aria-busy="true" />;
+}
 import { 
   CheckCircle2, 
   ArrowRight, 
@@ -2016,7 +2030,7 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. 
 // content exists, otherwise falls back to the generic CityLandingPage.
 function RegioPage() {
   const { slug } = useParams();
-  if (slug && regioData[slug]) return <RegioLandingTemplate data={regioData[slug]} />;
+  if (slug && RICH_REGIO_SLUGS.has(slug)) return <RegioRich />;
   return <CityLandingPage />;
 }
 
@@ -5360,7 +5374,11 @@ export default function App() {
   // /agency/* with its own dark layout (sidebar, topbar, auth). It deliberately
   // renders without the marketing chrome (Navbar/Footer/pixels).
   if (pathname === '/agency' || pathname.startsWith('/agency/')) {
-    return <AgencyApp />;
+    return (
+      <Suspense fallback={<PageFallback />}>
+        <AgencyApp />
+      </Suspense>
+    );
   }
 
   return (
@@ -5373,6 +5391,7 @@ export default function App() {
       <WhatsAppButton />
       <StickyMobileCTA />
       <main id="main-content">
+        <Suspense fallback={<PageFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/offerte" element={<OfferteLandingPage />} />
@@ -5452,6 +5471,7 @@ export default function App() {
           {/* Wildcard fallback to home page to prevent white blank pages for legacy links */}
           <Route path="*" element={<HomePage />} />
         </Routes>
+        </Suspense>
       </main>
       <Footer />
     </div>
