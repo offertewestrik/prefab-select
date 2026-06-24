@@ -95,7 +95,7 @@ const PrefabAanbouw = () => {
                 Moderne prefab aanbouwen met hoogwaardige afwerking.
               </h1>
               <p className="text-xl md:text-2xl text-blue-100/70 mb-12 font-light leading-relaxed max-w-2xl">
-                Sneller bouwen, minder overlast en volledig maatwerk voor een moderne uitbreiding van jouw woning.
+                Sneller bouwen, minder overlast en volledig maatwerk voor een moderne uitbreiding van uw woning.
               </p>
               
               <div className="flex flex-wrap gap-4">
@@ -181,12 +181,12 @@ const PrefabAanbouw = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Moderne woonuitbreidingen", desc: "Creëer extra leefruimte met een moderne prefab aanbouw volledig afgestemd op jouw woning.", icon: <Home size={24} /> },
-              { title: "Luxe leefkeukens", desc: "Vergroot je woning met een ruime leefkeuken voorzien van veel licht en moderne schuifpuien.", icon: <Utensils size={24} /> },
+              { title: "Moderne woonuitbreidingen", desc: "Creëer extra leefruimte met een moderne prefab aanbouw volledig afgestemd op uw woning.", icon: <Home size={24} /> },
+              { title: "Luxe leefkeukens", desc: "Vergroot uw woning met een ruime leefkeuken voorzien van veel licht en moderne schuifpuien.", icon: <Utensils size={24} /> },
               { title: "Aanbouwen met lichtstraat", desc: "Meer daglicht en een luxe uitstraling dankzij moderne lichtstraten en grote glaspartijen.", icon: <Sun size={24} /> },
               { title: "Modulaire uitbreidingen", desc: "Flexibele prefab oplossingen die eenvoudig aangepast of uitgebreid kunnen worden.", icon: <Layers size={24} /> },
               { title: "Luxe gevelafwerkingen", desc: "Van strak wit stucwerk tot moderne houten gevelaccenten en aluminium kozijnen.", icon: <Palette size={24} /> },
-              { title: "Volledig maatwerk", desc: "Iedere prefab aanbouw wordt afgestemd op jouw wensen, woning en architectuur.", icon: <PenTool size={24} /> },
+              { title: "Volledig maatwerk", desc: "Iedere prefab aanbouw wordt afgestemd op uw wensen, woning en architectuur.", icon: <PenTool size={24} /> },
             ].map((card, i) => (
               <motion.div 
                 key={i}

@@ -339,7 +339,7 @@ export default function AmsterdamLandingPage() {
               </h2>
               <div className="text-slate-500 text-base md:text-lg leading-relaxed font-medium space-y-6">
                 <p>
-                  Je houdt van je huis, van de straat, van de levendige buurt waar de lokale bakker en koffiebar je naam kennen. Alleen begint het binnenshuis te knellen. Een uitbouw of aanbouw biedt daarvoor de ultieme oplossing door de begane grond aan de achterzijde flink te verlengen.
+                  U houdt van uw huis, van de straat, van de levendige buurt waar de lokale bakker en koffiebar uw naam kennen. Alleen begint het binnenshuis te knellen. Een uitbouw of aanbouw biedt daarvoor de ultieme oplossing door de begane grond aan de achterzijde flink te verlengen.
                 </p>
                 <p>
                   Bij Prefab Select ontwerpen en bouwen we uw uitbreiding met hoogwaardige prefab elementen in onze eigen droge werkplaats. Dit scheelt u weken of zelfs maandenlange bouwoverlast aan huis en levert een resultaat op dat tot op de millimeter nauwkeurig klopt.

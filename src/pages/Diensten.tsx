@@ -121,12 +121,12 @@ const benefits = [
   },
   {
     title: "Volledig maatwerk",
-    description: "Van moderne prefab uitbouwen tot luxe aanbouwen met lichtstraat: alles wordt afgestemd op jouw stijl en wensen.",
+    description: "Van moderne prefab uitbouwen tot luxe aanbouwen met lichtstraat: alles wordt afgestemd op uw stijl en wensen.",
     icon: <PenTool className="w-10 h-10 text-blue-600" />
   },
   {
     title: "Waardevermeerdering",
-    description: "Niet alleen extra leefruimte en meer comfort, maar ook direct een hogere marktwaarde van jouw woning.",
+    description: "Niet alleen extra leefruimte en meer comfort, maar ook direct een hogere marktwaarde van uw woning.",
     icon: <TrendingUp className="w-10 h-10 text-blue-600" />
   },
   {
@@ -136,7 +136,7 @@ const benefits = [
   },
   {
     title: "Transparante prijzen",
-    description: "Weten waar je aan toe bent met heldere offertes. Geen verborgen kosten of onverwachte meerprijzen achteraf.",
+    description: "Weten waar u aan toe bent met heldere offertes. Geen verborgen kosten of onverwachte meerprijzen achteraf.",
     icon: <ShieldCheck className="w-10 h-10 text-blue-600" />
   }
 ];
@@ -425,7 +425,7 @@ export default function Diensten() {
                 <span className="text-blue-600 italic font-light lowercase">mogelijkheden.</span>
               </h2>
               <p className="text-lg text-slate-500 font-normal leading-[1.8] tracking-wide max-w-sm">
-                Van luxe prefab uitbouwen en mantelzorgwoningen tot moderne chalets en modulaire woningen — wij realiseren hoogwaardige prefab oplossingen die volledig aansluiten op jouw wensen, woning en manier van leven.
+                Van luxe prefab uitbouwen en mantelzorgwoningen tot moderne chalets en modulaire woningen — wij realiseren hoogwaardige prefab oplossingen die volledig aansluiten op uw wensen, woning en manier van leven.
               </p>
             </div>
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-8">

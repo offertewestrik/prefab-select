@@ -19,7 +19,7 @@ const faqData: FAQCategory[] = [
     items: [
       {
         question: 'Hoe kan ik een bestemmingsplan inzien?',
-        answer: 'Tegenwoordig zijn veel bestemmingsplannen online in te zien via de website van de gemeente en/of via het Omgevingsloket. Kun je jouw bestemmingsplan hier niet vinden? Neem dan contact op met jouw gemeente.'
+        answer: 'Tegenwoordig zijn veel bestemmingsplannen online in te zien via de website van de gemeente en/of via het Omgevingsloket. Kunt u uw bestemmingsplan hier niet vinden? Neem dan contact op met uw gemeente.'
       }
     ]
   },
@@ -28,15 +28,15 @@ const faqData: FAQCategory[] = [
     items: [
       {
         question: 'Wanneer heb ik een omgevingsvergunning nodig?',
-        answer: 'Om te weten of er een omgevingsvergunning nodig is voor jouw project, kun je via het Omgevingsloket een vergunningscheck doen. Met deze check wordt in enkele stappen bekeken of een vergunning noodzakelijk is voor jouw situatie.'
+        answer: 'Om te weten of er een omgevingsvergunning nodig is voor uw project, kunt u via het Omgevingsloket een vergunningscheck doen. Met deze check wordt in enkele stappen bekeken of een vergunning noodzakelijk is voor uw situatie.'
       },
       {
-        question: 'Heb je een vergunning nodig voor een aanbouw?',
-        answer: 'In veel gevallen mag je in Nederland vergunningsvrij uitbouwen tot ongeveer 4 meter aan de achterzijde van de woning. Wanneer jouw woning bijvoorbeeld een monument is, in beschermd stadsgezicht ligt of wanneer de gemeente aanvullende regels hanteert, kan alsnog een vergunning nodig zijn. Wij adviseren daarom altijd een vergunningcheck.'
+        question: 'Heeft u een vergunning nodig voor een aanbouw?',
+        answer: 'In veel gevallen mag u in Nederland vergunningsvrij uitbouwen tot ongeveer 4 meter aan de achterzijde van de woning. Wanneer uw woning bijvoorbeeld een monument is, in beschermd stadsgezicht ligt of wanneer de gemeente aanvullende regels hanteert, kan alsnog een vergunning nodig zijn. Wij adviseren daarom altijd een vergunningcheck.'
       },
       {
         question: 'Kan Prefab Select ook mijn vergunning verzorgen?',
-        answer: 'Jazeker. Prefab Select kan het volledige vergunningstraject verzorgen. Dankzij onze ervaring weten wij precies welke stappen nodig zijn voor een efficiënte aanvraag. Dit bespaart jou veel tijd en zorgen tijdens het proces.'
+        answer: 'Jazeker. Prefab Select kan het volledige vergunningstraject verzorgen. Dankzij onze ervaring weten wij precies welke stappen nodig zijn voor een efficiënte aanvraag. Dit bespaart u veel tijd en zorgen tijdens het proces.'
       },
       {
         question: 'Hoe lang duurt een omgevingsvergunning?',
@@ -48,16 +48,16 @@ const faqData: FAQCategory[] = [
     title: 'Toestemming',
     items: [
       {
-        question: 'Heb je akkoord van de buren nodig om uit te bouwen?',
-        answer: 'In principe mag je zonder akkoord uitbouwen wanneer je binnen de regelgeving bouwt. Natuurlijk adviseren wij wel om jouw plannen vooraf met de buren te bespreken.'
+        question: 'Heeft u akkoord van de buren nodig om uit te bouwen?',
+        answer: 'In principe mag u zonder akkoord uitbouwen wanneer u binnen de regelgeving bouwt. Natuurlijk adviseren wij wel om uw plannen vooraf met de buren te bespreken.'
       },
       {
         question: 'Beide buren hebben een uitbouw, is het mogelijk om daartussen te bouwen?',
         answer: 'Ja, dat is mogelijk. Ons prefab systeem maakt het goed mogelijk om tussen bestaande uitbouwen een nieuwe aanbouw te realiseren. Afhankelijk van de situatie kunnen wij de constructie perfect laten aansluiten op de bestaande bebouwing.'
       },
       {
-        question: 'Heb je toestemming nodig van de VvE?',
-        answer: 'Ja, dat kan. Wanneer jouw woning onderdeel uitmaakt van een Vereniging van Eigenaren kan toestemming van de VvE nodig zijn.'
+        question: 'Heeft u toestemming nodig van de VvE?',
+        answer: 'Ja, dat kan. Wanneer uw woning onderdeel uitmaakt van een Vereniging van Eigenaren kan toestemming van de VvE nodig zijn.'
       }
     ]
   },
@@ -149,7 +149,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: 'Hoe groot mag ik uitbouwen?',
-        answer: 'Hoe groot je mag uitbouwen hangt af van het bestemmingsplan, perceel, achtererfgebied en gemeentelijke regelgeving.'
+        answer: 'Hoe groot u mag uitbouwen hangt af van het bestemmingsplan, perceel, achtererfgebied en gemeentelijke regelgeving.'
       },
       {
         question: 'Kan Prefab Select het tekenwerk verzorgen?',
@@ -186,7 +186,7 @@ const faqData: FAQCategory[] = [
     items: [
       {
         question: 'Hebben jullie een showroom?',
-        answer: 'Ja. In onze showroom kun je materialen, kleuren, afwerkingen en mogelijkheden bekijken. Hier bespreken wij samen de wensen en mogelijkheden voor jouw project.'
+        answer: 'Ja. In onze showroom kunt u materialen, kleuren, afwerkingen en mogelijkheden bekijken. Hier bespreken wij samen de wensen en mogelijkheden voor uw project.'
       }
     ]
   },
@@ -262,7 +262,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: 'Heb ik ergens niet aan gedacht?',
-        answer: 'Geen zorgen. Tijdens het traject begeleiden wij je stap voor stap en denken wij mee over alle praktische en technische zaken rondom jouw prefab project.'
+        answer: 'Geen zorgen. Tijdens het traject begeleiden wij u stap voor stap en denken wij mee over alle praktische en technische zaken rondom uw prefab project.'
       }
     ]
   }
@@ -350,7 +350,7 @@ export default function FAQPage() {
               transition={{ delay: 0.2 }}
               className="text-lg text-slate-500 max-w-xl leading-relaxed"
             >
-              Alles wat je moet weten over vergunningen, de bouw, kosten en de unieke prefab methode van Prefab Select.
+              Alles wat u moet weten over vergunningen, de bouw, kosten en de unieke prefab methode van Prefab Select.
             </motion.p>
           </div>
           
@@ -442,11 +442,11 @@ export default function FAQPage() {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-tight text-white mb-6">
-                Staat jouw vraag er <br />
+                Staat uw vraag er <br />
                 <span className="text-blue-400 italic font-light">niet tussen?</span>
               </h2>
               <p className="text-white/60 text-base md:text-lg mb-8 max-w-xl">
-                Onze experts staan elke werkdag voor je klaar om alle vragen over jouw toekomstige prefab project te beantwoorden.
+                Onze experts staan elke werkdag voor u klaar om alle vragen over uw toekomstige prefab project te beantwoorden.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/contact" className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3">
