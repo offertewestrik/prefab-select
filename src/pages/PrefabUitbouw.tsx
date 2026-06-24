@@ -108,6 +108,30 @@ export default function PrefabUitbouw() {
                 "@type": "Answer",
                 "text": "Prefab is vooral voorspelbaarder in prijs en sneller, en daardoor vaak gunstig. De totale kosten zijn vergelijkbaar met traditioneel en hangen sterk af van de afwerking; reken op een richtprijs van circa € 2.500 tot € 4.500 per m²."
               }
+            },
+            {
+              "@type": "Question",
+              "name": "Wat kost een prefab uitbouw van 15 m²?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Reken op een richtprijs van circa € 2.500 tot € 4.500 per m². Een uitbouw van 15 m² komt daarmee gemiddeld uit tussen de € 45.000 en € 55.000, afhankelijk van afwerking, kozijnen en opties zoals een lichtstraat of vloerverwarming."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Heb ik een vergunning nodig voor een uitbouw?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In veel gevallen is een uitbouw aan de achterzijde vergunningsvrij binnen het achtererfgebied, als richtlijn tot vier meter diep. Bij hoekwoningen, monumenten of in beschermde stadsgezichten gelden andere regels. Wij voeren altijd kosteloos een vergunningcheck uit voor uw adres."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Hoelang duurt het plaatsen van een prefab uitbouw?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "De productie in de fabriek duurt doorgaans 2 tot 4 weken. De ruwbouw staat vervolgens binnen 1 dag wind- en waterdicht op locatie. Inclusief fundering en afwerking bent u meestal binnen 4 tot 6 weken volledig klaar."
+              }
             }
           ]
         }
@@ -174,6 +198,18 @@ export default function PrefabUitbouw() {
     {
       question: 'Is prefab net zo stevig en mooi als traditioneel metselwerk?',
       answer: 'Zeker. Integendeel: constructies die onder constante fabriekscondities worden geassembleerd, zijn vaak strakker, stabieler en bezitten superieure isolatiewaarden vergeleken met traditioneel metselwerk op een natte, koude bouwplaats. Wat betreft de esthetische uitstraling kunt u zelf alles bepalen; van strak wit stucwerk tot moderne houten gevelaccenten.'
+    },
+    {
+      question: 'Wat kost een prefab uitbouw van 15 m²?',
+      answer: 'Reken op een richtprijs van circa € 2.500 tot € 4.500 per m². Een uitbouw van 15 m² komt daarmee gemiddeld uit tussen de € 45.000 en € 55.000, afhankelijk van afwerking, kozijnen en opties zoals een lichtstraat of vloerverwarming. U ontvangt altijd een duidelijke offerte vooraf.'
+    },
+    {
+      question: 'Heb ik een vergunning nodig voor een uitbouw?',
+      answer: 'In veel gevallen is een uitbouw aan de achterzijde vergunningsvrij binnen het achtererfgebied, als richtlijn tot vier meter diep. Bij hoekwoningen, monumenten of in beschermde stadsgezichten gelden andere regels. Wij voeren altijd kosteloos een vergunningcheck uit voor uw adres.'
+    },
+    {
+      question: 'Hoelang duurt het plaatsen van een prefab uitbouw?',
+      answer: 'De productie in de fabriek duurt doorgaans 2 tot 4 weken. De ruwbouw staat vervolgens binnen 1 dag wind- en waterdicht op locatie. Inclusief fundering en afwerking bent u meestal binnen 4 tot 6 weken volledig klaar.'
     }
   ];
 
@@ -644,6 +680,56 @@ export default function PrefabUitbouw() {
 
           </div>
 
+        </div>
+      </section>
+
+      {/* EXTRA SEO CONTENT */}
+      <section className="py-24 bg-white border-t border-slate-100" id="seo-content-section">
+        <div className="max-w-3xl mx-auto px-6">
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-10 block text-center">ALLES OVER PREFAB UITBOUW</span>
+          <div className="space-y-14">
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">Prefab uitbouw: dé manier om snel ruimte te winnen</h2>
+              <div className="text-slate-500 text-base leading-relaxed font-medium space-y-5">
+                <p>Een <strong>prefab uitbouw</strong> is de slimste manier om uw woning te vergroten zonder maandenlange verbouwing. Omdat wij de wanden, het dak en de constructie vooraf in onze eigen werkplaats bouwen, staat de ruwbouw vaak al binnen één dag wind- en waterdicht op locatie. U wint kostbare vierkante meters voor een grotere woonkamer, een open leefkeuken of een lichte eetkamer — met minimale overlast en een vaste prijs vooraf.</p>
+                <p>Veel huiseigenaren kiezen voor een uitbouw aan de achterzijde van de woning. Daar is binnen het achtererfgebied vaak geen vergunning nodig, als richtlijn tot vier meter diep. Wij voeren altijd kosteloos een vergunningcheck uit, zodat u precies weet waar u aan toe bent.</p>
+              </div>
+            </article>
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">Welke soorten uitbouw zijn er?</h2>
+              <div className="text-slate-500 text-base leading-relaxed font-medium space-y-5">
+                <p>Een uitbouw kan volledig op maat worden gemaakt. De meest gekozen varianten zijn:</p>
+                <ul className="space-y-2 list-disc pl-5">
+                  <li><strong>Keuken uitbouw</strong> — creëer een ruime, lichte leefkeuken met kookeiland en directe verbinding naar de tuin.</li>
+                  <li><strong>Woonkamer uitbouw</strong> — verleng uw woonkamer met een glazen achtergevel of schuifpui voor maximaal daglicht.</li>
+                  <li><strong>Hoekuitbouw</strong> — benut de volledige breedte én diepte van uw achtertuin voor een royale leefruimte.</li>
+                  <li><strong>Uitbouw met lichtstraat</strong> — haal extra daglicht binnen, ook diep in de bestaande woning.</li>
+                </ul>
+                <p>Twijfelt u tussen een uitbouw en een volwaardige <Link to="/prefab-aanbouw">prefab aanbouw</Link>? Een uitbouw is doorgaans een verlenging van een bestaande ruimte, terwijl een aanbouw vaak een complete extra kamer toevoegt. Wij adviseren u graag welke oplossing het best bij uw woning en wensen past.</p>
+              </div>
+            </article>
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">Wat kost een prefab uitbouw?</h2>
+              <div className="text-slate-500 text-base leading-relaxed font-medium space-y-5">
+                <p>De kosten van een prefab uitbouw liggen gemiddeld tussen de <strong>€ 2.500 en € 4.500 per m²</strong>, afhankelijk van de afwerking, kozijnen en eventuele extra's zoals een lichtstraat of vloerverwarming. Voor een veelgekozen uitbouw van 15 m² betekent dit een investering vanaf ongeveer <strong>€ 45.000</strong>. U ontvangt altijd een heldere offerte vooraf, zonder verrassingen achteraf.</p>
+                <p>Een uitbouw is bovendien een verstandige investering: extra woonoppervlak vertaalt zich vrijwel altijd in een hogere woningwaarde, terwijl u dagelijks geniet van meer ruimte, licht en comfort.</p>
+              </div>
+            </article>
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">Prefab uitbouw in heel Nederland</h2>
+              <div className="text-slate-500 text-base leading-relaxed font-medium space-y-5">
+                <p>Prefab Select bouwt hoogwaardige uitbouwen door heel Nederland. Vanuit onze vestiging in Halsteren zijn wij thuis op de Brabantse Wal en in West-Brabant, en werken we daarnaast in de Randstad, Gelderland, Overijssel, Limburg en Zeeland. Bekijk de mogelijkheden in uw regio:</p>
+                <p className="text-sm leading-loose">
+                  <Link to="/regio/bergen-op-zoom">Bergen op Zoom</Link> · <Link to="/regio/halsteren">Halsteren</Link> · <Link to="/regio/steenbergen">Steenbergen</Link> · <Link to="/regio/roosendaal">Roosendaal</Link> · <Link to="/regio/tholen">Tholen</Link> · <Link to="/regio/woensdrecht">Woensdrecht</Link> · <Link to="/regio/breda">Breda</Link> · <Link to="/regio/tilburg">Tilburg</Link> · <Link to="/regio/eindhoven">Eindhoven</Link> · <Link to="/regio/den-bosch">Den Bosch</Link> · <Link to="/regio/rotterdam">Rotterdam</Link> · <Link to="/regio/den-haag">Den Haag</Link> · <Link to="/regio/amsterdam">Amsterdam</Link> · <Link to="/regio/utrecht">Utrecht</Link> · <Link to="/regio/dordrecht">Dordrecht</Link> · <Link to="/regio/delft">Delft</Link> · <Link to="/regio/gouda">Gouda</Link> · <Link to="/regio/arnhem">Arnhem</Link> · <Link to="/regio/apeldoorn">Apeldoorn</Link> · <Link to="/regio/zwolle">Zwolle</Link> · <Link to="/regio/groningen">Groningen</Link> · <Link to="/regio/maastricht">Maastricht</Link> · <Link to="/regio/amersfoort">Amersfoort</Link> · <Link to="/regio/hilversum">Hilversum</Link>
+                </p>
+              </div>
+            </article>
+
+          </div>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Clock, Box, ShieldCheck, Leaf, ArrowRight, CheckCircle2, ChevronRight, Zap, Sun, Utensils, Home, Layers, Palette, PenTool } from 'lucide-react';
@@ -6,6 +6,63 @@ import { KellyCTA } from '../KellyCTA';
 import { PrefabSteps } from '../App';
 
 const PrefabAanbouw = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = 'Prefab aanbouw: kosten, mogelijkheden en voordelen | Prefab Select';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const prevDesc = metaDesc?.getAttribute('content') ?? '';
+    if (metaDesc) metaDesc.setAttribute('content', 'Een prefab aanbouw laten bouwen? Lees alles over kosten, mogelijkheden, vergunning en voordelen. Prefab Select bouwt snel, vakkundig en met vaste prijs — vaak binnen 1 dag geplaatst.');
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'json-ld-prefab-aanbouw-schema';
+    script.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': 'https://www.prefabselect.nl/prefab-aanbouw',
+          url: 'https://www.prefabselect.nl/prefab-aanbouw',
+          name: 'Prefab aanbouw: kosten, mogelijkheden en voordelen | Prefab Select',
+          inLanguage: 'nl-NL',
+          isPartOf: { '@type': 'WebSite', name: 'Prefab Select', url: 'https://www.prefabselect.nl' },
+          about: { '@type': 'Service', name: 'Prefab aanbouw', provider: { '@type': 'GeneralContractor', name: 'Prefab Select' } },
+        },
+        {
+          '@type': 'FAQPage',
+          '@id': 'https://www.prefabselect.nl/prefab-aanbouw#faq',
+          mainEntity: [
+            { '@type': 'Question', name: 'Wat is een prefab aanbouw?', acceptedAnswer: { '@type': 'Answer', text: 'Een prefab aanbouw is een volwaardige uitbreiding van uw woning waarvan de wanden, het dak en de constructie vooraf in onze werkplaats worden gebouwd en daarna op locatie worden gemonteerd. Daardoor staat de ruwbouw vaak binnen één dag wind- en waterdicht.' } },
+            { '@type': 'Question', name: 'Wat is het verschil tussen een aanbouw en een uitbouw?', acceptedAnswer: { '@type': 'Answer', text: 'Een uitbouw is doorgaans een verlenging van een bestaande ruimte, zoals een diepere woonkamer. Een aanbouw voegt vaak een volwaardige extra ruimte toe, bijvoorbeeld een slaapkamer, kantoor of bijkeuken. Beide bouwen wij prefab op maat.' } },
+            { '@type': 'Question', name: 'Wat kost een prefab aanbouw?', acceptedAnswer: { '@type': 'Answer', text: 'De richtprijs ligt gemiddeld tussen € 2.500 en € 4.500 per m². Een aanbouw van 15 m² komt daarmee vanaf circa € 45.000 uit, afhankelijk van afwerking, kozijnen en opties. U ontvangt altijd een vaste prijs vooraf.' } },
+            { '@type': 'Question', name: 'Heb ik een vergunning nodig voor een aanbouw?', acceptedAnswer: { '@type': 'Answer', text: 'Een aanbouw aan de achterzijde is binnen het achtererfgebied vaak vergunningsvrij, als richtlijn tot vier meter diep. Bij hoekwoningen, monumenten of beschermde stadsgezichten gelden andere regels. Wij voeren kosteloos een vergunningcheck uit.' } },
+            { '@type': 'Question', name: 'Hoe snel staat een prefab aanbouw?', acceptedAnswer: { '@type': 'Answer', text: 'De productie duurt 2 tot 4 weken. De ruwbouw staat binnen 1 dag wind- en waterdicht op locatie. Inclusief fundering en afwerking bent u doorgaans binnen 4 tot 6 weken klaar.' } },
+          ],
+        },
+      ],
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      document.title = prevTitle;
+      if (metaDesc) metaDesc.setAttribute('content', prevDesc);
+      document.getElementById('json-ld-prefab-aanbouw-schema')?.remove();
+    };
+  }, []);
+
+  const faqs = [
+    { question: 'Wat is een prefab aanbouw?', answer: 'Een prefab aanbouw is een volwaardige uitbreiding van uw woning waarvan de wanden, het dak en de constructie vooraf in onze werkplaats worden gebouwd en daarna op locatie worden gemonteerd. Daardoor staat de ruwbouw vaak binnen één dag wind- en waterdicht en is de bouwtijd op locatie kort.' },
+    { question: 'Wat is het verschil tussen een aanbouw en een uitbouw?', answer: 'Een uitbouw is doorgaans een verlenging van een bestaande ruimte, zoals een diepere woonkamer of keuken. Een aanbouw voegt vaak een volwaardige extra ruimte toe, bijvoorbeeld een slaapkamer, thuiskantoor of bijkeuken. Beide realiseren wij prefab en volledig op maat.' },
+    { question: 'Wat kost een prefab aanbouw?', answer: 'De richtprijs ligt gemiddeld tussen € 2.500 en € 4.500 per m². Een aanbouw van 15 m² komt daarmee vanaf circa € 45.000 uit, afhankelijk van afwerking, kozijnen en opties zoals een lichtstraat of vloerverwarming. U ontvangt altijd een vaste prijs vooraf.' },
+    { question: 'Heb ik een vergunning nodig voor een aanbouw?', answer: 'Een aanbouw aan de achterzijde is binnen het achtererfgebied vaak vergunningsvrij, als richtlijn tot vier meter diep. Bij hoekwoningen, monumenten of in beschermde stadsgezichten gelden andere regels. Wij voeren altijd kosteloos een vergunningcheck uit voor uw adres.' },
+    { question: 'Hoe snel staat een prefab aanbouw?', answer: 'De productie in de fabriek duurt doorgaans 2 tot 4 weken. De ruwbouw staat vervolgens binnen 1 dag wind- en waterdicht op locatie. Inclusief fundering en afwerking bent u meestal binnen 4 tot 6 weken volledig klaar.' },
+    { question: 'Is een prefab aanbouw net zo stevig als traditionele bouw?', answer: 'Zeker. Doordat de constructie onder constante, droge fabrieksomstandigheden wordt gebouwd, is de kwaliteit vaak strakker en stabieler dan bij bouw op een natte, koude bouwplaats. De isolatiewaarden (tot Rc 6.0) zijn uitstekend.' },
+  ];
+
+  const toggleFaq = (index: number) => setOpenFaq(openFaq === index ? null : index);
+
   return (
     <div className="bg-white min-h-screen pt-0 font-sans">
       {/* HERO SECTION */}
@@ -273,6 +330,71 @@ const PrefabAanbouw = () => {
                 Vraag offerte aan
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EXTRA SEO CONTENT */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-3xl mx-auto px-6">
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-10 block text-center">ALLES OVER PREFAB AANBOUW</span>
+          <div className="space-y-14">
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">Prefab aanbouw: een volwaardige kamer erbij</h2>
+              <div className="text-slate-600 text-base leading-relaxed space-y-5">
+                <p>Een <strong>prefab aanbouw</strong> is dé manier om uw woning uit te breiden met een volwaardige extra ruimte: een ruime leefkeuken, een thuiskantoor, een extra slaapkamer op de begane grond of een praktische bijkeuken. Omdat wij de wanden, het dak en de constructie vooraf in onze werkplaats bouwen, staat de ruwbouw vaak al binnen één dag wind- en waterdicht — met minimale overlast en een vaste prijs vooraf.</p>
+                <p>Wilt u liever een bestaande ruimte verlengen in plaats van een complete kamer toevoegen? Bekijk dan onze <Link to="/prefab-uitbouw">prefab uitbouw</Link>. Twijfelt u welke oplossing het best past? Wij adviseren u graag, geheel vrijblijvend.</p>
+              </div>
+            </article>
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">De voordelen van een prefab aanbouw</h2>
+              <div className="text-slate-600 text-base leading-relaxed space-y-5">
+                <ul className="space-y-2 list-disc pl-5">
+                  <li><strong>Snel geplaatst</strong> — de ruwbouw staat vaak binnen 1 dag, de totale doorlooptijd is doorgaans 4 tot 6 weken.</li>
+                  <li><strong>Vaste prijs vooraf</strong> — geen onverwachte meerkosten tijdens de bouw.</li>
+                  <li><strong>Minder overlast</strong> — geen maandenlange bouwplaats in uw tuin.</li>
+                  <li><strong>Hoogwaardige isolatie</strong> — standaard tot Rc 6.0, klaar voor vloerverwarming en warmtepomp.</li>
+                  <li><strong>Waardevermeerdering</strong> — extra woonoppervlak verhoogt direct de waarde van uw woning.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article>
+              <h2 className="text-2xl md:text-4xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-6">Prefab aanbouw in heel Nederland</h2>
+              <div className="text-slate-600 text-base leading-relaxed space-y-5">
+                <p>Vanuit onze vestiging in Halsteren realiseren wij prefab aanbouwen door heel Nederland, met een sterke thuisbasis op de Brabantse Wal en in West-Brabant. Bekijk de mogelijkheden in uw regio:</p>
+                <p className="text-sm leading-loose">
+                  <Link to="/regio/bergen-op-zoom">Bergen op Zoom</Link> · <Link to="/regio/steenbergen">Steenbergen</Link> · <Link to="/regio/roosendaal">Roosendaal</Link> · <Link to="/regio/tholen">Tholen</Link> · <Link to="/regio/woensdrecht">Woensdrecht</Link> · <Link to="/regio/breda">Breda</Link> · <Link to="/regio/tilburg">Tilburg</Link> · <Link to="/regio/eindhoven">Eindhoven</Link> · <Link to="/regio/rotterdam">Rotterdam</Link> · <Link to="/regio/amsterdam">Amsterdam</Link> · <Link to="/regio/utrecht">Utrecht</Link> · <Link to="/regio/arnhem">Arnhem</Link> · <Link to="/regio/zwolle">Zwolle</Link> · <Link to="/regio/maastricht">Maastricht</Link> · <Link to="/regio/amersfoort">Amersfoort</Link>
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ ACCORDION */}
+      <section id="faq" className="py-24 md:py-32 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block leading-none">VRAGEN OVER PREFAB AANBOUW</span>
+            <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none">Veelgestelde vragen</h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div key={idx} className="bg-white border border-slate-100 rounded-[2rem] p-8 shadow-xs hover:shadow-md transition-all duration-300">
+                  <button onClick={() => toggleFaq(idx)} className="w-full flex items-center justify-between text-left gap-4 font-display font-black text-lg md:text-xl text-blue-950 uppercase tracking-tighter">
+                    <span>{faq.question}</span>
+                    <span className={`w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>+</span>
+                  </button>
+                  {isOpen && <div className="mt-4 pt-4 border-t border-slate-100 text-slate-600 text-sm leading-relaxed">{faq.answer}</div>}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
