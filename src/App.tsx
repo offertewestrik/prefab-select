@@ -280,9 +280,9 @@ const constructionModules = [
 
 const steps: Step[] = [
   { 
-    title: 'Ontwerp je droom', 
-    description: 'Ontwerp zelf je aanbouw of bezoek onze showroom.',
-    cta: 'Ontwerp je aanbouw',
+    title: 'Ontwerp uw droom', 
+    description: 'Ontwerp zelf uw aanbouw of bezoek onze showroom.',
+    cta: 'Ontwerp uw aanbouw',
     link: 'https://prefabselect-configurator-551195834943.europe-west2.run.app/'
   },
   { 
@@ -702,7 +702,7 @@ Huiseigenaren in West-Brabant kiezen voor Prefab Select vanwege onze focus op kw
 2. **Weerbestendig**: Omdat we in de fabriek bouwen, heeft regen geen invloed op de kwaliteit van de constructie.
 3. **Hoogwaardige isolatie**: Onze wanden halen standaard een Rc-waarde van 6.0, wat zorgt voor een lagere energierekening.
 
-Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen](/prefab-bouwen) service of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/).`
+Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen](/prefab-bouwen) service of [Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/).`
   },
   {
     name: 'Tilburg',
@@ -722,7 +722,7 @@ Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen]
 ### Kosten indicatie regio Tilburg
 Voor een **prefab uitbouw van 15m² in Tilburg** kunt u rekenen op een vanafprijs van circa €45.000. Wilt u een complete woning laten bouwen? Bekijk dan onze pagina over [Prefab Bouwen](/prefab-bouwen).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Den Bosch',
@@ -856,7 +856,7 @@ Dankzij onze **modulaire bouwmethode** kunnen we in Amsterdam bouwen met minimal
 ### Kosten uitbouw Amsterdam
 Door de complexe logistiek in Amsterdam kunnen kosten variëren. Gemiddeld investeert u €3.000 tot €4.500 per m² voor een luxe, zorgeloze uitvoering.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Den Haag',
@@ -886,7 +886,7 @@ Met een **hoogwaardige prefab aanbouw** in Amstelveen kiest u voor een snelle, s
 - **Luxe afwerking**: Inclusief opties voor lichtstraten en grote glaspartijen.
 - **Toekomstbestendig**: Energieneutraal gebouwd met de hoogste isolatienormen.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Nijmegen',
@@ -906,7 +906,7 @@ Nijmegen is een stad van innovatie en duurzaamheid. Onze **modulaire aanbouw** o
 ### Wat kost een uitbouw in Nijmegen?
 Gemiddeld liggen de **uitbouw kosten per m²** in Nijmegen tussen de €2.500 en €4.000, afhankelijk van de luxe en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Antwerpen',
@@ -958,7 +958,7 @@ Wij realiseren **hoogwaardige aanbouw** projecten die naadloos aansluiten op de 
 - **Hoogwaardige afwerking**: Strak gestucte wanden en luxe kozijnen naar keuze.
 - **Zorgeloos**: Wij regelen de vergunningscheck en het transport.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Utrecht',
@@ -1000,7 +1000,7 @@ Met een **prefab uitbouw in Almere** kiest u voor de hoogste isolatienormen (Rc 
 ### Kosten indicatie Almere
 Voor een kwalitatieve uitbouw in Almere kunt u rekenen op een vanafprijs van ca. €2.500 per m². Of u nu zoekt naar een [prefab uitbouw](/prefab-uitbouw-laten-plaatsen) of een [aanbouw woning](/prefab-aanbouw), wij helpen u verder.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Haarlem',
@@ -1020,7 +1020,7 @@ Een **prefab aanbouw in Haarlem** is de ideale manier om snel extra meters te wi
 ### Kosten uitbouw Haarlem
 Gemiddeld liggen de **kosten per m² voor een uitbouw** in Haarlem tussen de €2.600 en €4.500. Dit is inclusief onze volledige begeleiding van vergunningscheck tot oplevering.
 
-[Ontdek onze luxe chalets](/chalets) of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontdek onze luxe chalets](/chalets) of [Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Mantelzorgwoning',
@@ -1064,7 +1064,7 @@ Wij bieden diverse mogelijkheden voor de indeling:
 ### Vergunning nodig?
 In veel gevallen is een mantelzorgwoning vergunningsvrij, mits er sprake is van een zorgsituatie en de woning op eigen terrein staat. Wij helpen je met het controleren van de regels.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Recreatiewoning',
@@ -1081,7 +1081,7 @@ Of het nu gaat om een luxe chalet aan de kust of een moderne vakantiewoning in d
 
 Ontdek onze verschillende [Vakantiewoningen](/vakantiewoningen) en [Chalets](/chalets).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Prefab Uitbouw',
@@ -1160,7 +1160,7 @@ Ja, een prefab uitbouw zorgt voor meer woonruimte, meer licht en een betere inde
 ### Waarom kiezen voor Prefabselect.nl?
 Wij zorgen voor een compleet traject: van maatwerk ontwerp tot snelle realisatie en hoogwaardige afwerking. Geen verrassingen achteraf, maar duidelijke communicatie en vakmanschap.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Zeeland',
@@ -1187,7 +1187,7 @@ Reken op een richtprijs van **€2.600 tot €4.300 per m²**, afhankelijk van a
 ### Vergunningsvrij uitbouwen in Arnhem
 Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep binnen het achtererfgebied. Wij verzorgen gratis de vergunningscheck bij de gemeente Arnhem.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1222,7 +1222,7 @@ De **uitbouw kosten per m²** liggen in Apeldoorn gemiddeld tussen **€2.500 en
 ### Energiezuinig op de zandgrond
 Op de stevige Veluwse zandgrond plaatsen wij snel en stabiel. Met een Rc-waarde van 6.0 en voorbereiding op vloerverwarming of een warmtepomp bouwt u direct toekomstbestendig.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1257,7 +1257,7 @@ Gemiddeld liggen de kosten op **€2.500 tot €4.200 per m²**. Een aanbouw van
 ### Volledig ontzorgd
 Van ontwerp en vergunningscheck tot productie en plaatsing: wij regelen het complete traject, zodat u nergens omkijken naar heeft.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1292,7 +1292,7 @@ De **uitbouw kosten per m²** liggen in Zwolle gemiddeld tussen **€2.600 en �
 ### Snel en met minimale overlast
 Omdat wij de uitbouw grotendeels in de fabriek maken, staat de constructie vaak binnen één dag wind- en waterdicht. Geen maandenlange bouwplaats in uw straat.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1327,7 +1327,7 @@ Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint daarme
 ### Snel klaar, weinig overlast
 Dankzij fabrieksproductie staat uw uitbouw vaak binnen één dag wind- en waterdicht. Ideaal in dichtbebouwde Groningse stadswijken.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1362,7 +1362,7 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. 
 ### Respect voor erfgoed
 In de historische binnenstad van Deventer geldt vaak een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject zodat uw uitbouw perfect past bij de omgeving.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1397,7 +1397,7 @@ Reken op **€2.500 tot €4.100 per m²**. Een uitbouw van 15 m² begint daarme
 ### Energiezuinig en comfortabel
 Met een Rc-waarde van 6.0 en voorbereiding op vloerverwarming bouwt u een uitbouw die het hele jaar door behaaglijk is en uw energierekening verlaagt.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1432,7 +1432,7 @@ De **uitbouw kosten per m²** liggen in Dordrecht gemiddeld tussen **€2.600 en
 ### Respect voor de oudste stad van Holland
 De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Wij verzorgen het volledige vergunnings- en welstandstraject voor een uitbouw die past bij de Dordtse sfeer.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1467,7 +1467,7 @@ Reken op **€2.700 tot €4.500 per m²**. Een uitbouw van 15 m² komt daarmee 
 ### Monumenten en beschermd stadsgezicht
 De historische binnenstad van Delft kent veel monumenten en een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1502,7 +1502,7 @@ De bodem in Zoetermeer bestaat deels uit veen en klei. Wij stemmen de fundering 
 ### Wat kost een uitbouw in Zoetermeer?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.600 en €4.300**. Een uitbouw van 15 m² komt daarmee tussen de **€45.000 en €62.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1537,7 +1537,7 @@ Reken op **€2.700 tot €4.500 per m²**. Een uitbouw van 15 m² komt daarmee 
 ### Respect voor het historische centrum
 De binnenstad van Gouda kent een beschermd stadsgezicht. Wij verzorgen het volledige vergunnings- en welstandstraject.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1572,7 +1572,7 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.600 en €4.400**. 
 ### Respect voor erfgoed
 De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Wij verzorgen het volledige vergunnings- en welstandstraject zodat uw uitbouw stijlvol past bij de Maastrichtse architectuur.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1607,7 +1607,7 @@ Reken op **€2.600 tot €4.300 per m²**. Een uitbouw van 15 m² komt daarmee 
 ### Historische binnenstad
 De middeleeuwse binnenstad kent een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject zodat uw uitbouw perfect aansluit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1642,7 +1642,7 @@ De stevige zandgrond van het Gooi maakt een snelle, stabiele plaatsing mogelijk.
 ### Wat kost een uitbouw in Hilversum?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.800 en €4.600**. Een uitbouw van 15 m² komt daarmee tussen de **€48.000 en €68.000** uit, passend bij het hoogwaardige afwerkingsniveau in het Gooi.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1677,7 +1677,7 @@ Steenbergen ligt in het polderlandschap met deels slappe kleigrond. Wij berekene
 ### Wat kost een uitbouw in Steenbergen?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**, inclusief plaatsing en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1712,7 +1712,7 @@ Roosendaal ligt grotendeels op stevige zandgrond, ideaal voor een snelle en stab
 ### Wat kost een uitbouw in Roosendaal?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1747,7 +1747,7 @@ Het eiland Tholen kent voornamelijk kleigrond. Een goede fundering is hier belan
 ### Wat kost een uitbouw op Tholen?
 Reken op **€2.500 tot €4.300 per m²**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1782,7 +1782,7 @@ De Brabantse Wal bestaat grotendeels uit stevige zandgrond, ideaal voor een snel
 ### Wat kost een uitbouw in Woensdrecht?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1817,7 +1817,7 @@ Hoogerheide ligt op de zandrug van de Brabantse Wal, ideaal voor een snelle en s
 ### Wat kost een uitbouw in Hoogerheide?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**, inclusief plaatsing en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1852,7 +1852,7 @@ Ossendrecht ligt op de stevige zandgrond van de Brabantse Wal, perfect voor een 
 ### Wat kost een uitbouw in Ossendrecht?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1887,7 +1887,7 @@ Putte ligt op de zandgrond van de Wal, ideaal voor een snelle en stabiele plaats
 ### Wat kost een uitbouw in Putte?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1922,7 +1922,7 @@ Wouw ligt op stevige zandgrond, ideaal voor een snelle en stabiele plaatsing van
 ### Wat kost een uitbouw in Wouw?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1957,7 +1957,7 @@ Lepelstraat ligt in het polderlandschap met deels kleigrond. Wij berekenen de ju
 ### Wat kost een uitbouw in Lepelstraat?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1992,7 +1992,7 @@ Nieuw-Vossemeer ligt in het polderlandschap met kleigrond. Een goede fundering i
 ### Wat kost een uitbouw in Nieuw-Vossemeer?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -2166,7 +2166,7 @@ function CityLandingPage() {
               />
               <div className="bg-blue-600 p-8 rounded-[2.5rem] text-white shadow-xl">
                 <p className="font-display font-black text-2xl uppercase tracking-tighter leading-none mb-3">Premium Maatwerk</p>
-                <p className="text-[11px] font-black uppercase tracking-widest opacity-60">Architectural quality</p>
+                <p className="text-[11px] font-black uppercase tracking-widest opacity-60">Architectonische kwaliteit</p>
               </div>
             </div>
           </div>
@@ -4083,7 +4083,7 @@ function Hero() {
                   <Home size={14} className="text-white" />
                   <Plus size={10} className="text-blue-300 stroke-[3]" />
                 </div>
-                Ontwerp je aanbouw
+                Ontwerp uw aanbouw
               </a>
               <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl shadow-sm w-full sm:w-auto backdrop-blur-md">
                 <img 
@@ -4764,7 +4764,7 @@ export function ConfiguratorTeaser() {
           <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
             <img 
               src="https://i.imgur.com/SCJSCLJ.jpeg" 
-              alt="Ontwerp je aanbouw" 
+              alt="Ontwerp uw aanbouw" 
               className="w-full aspect-[4/3] object-cover"
               referrerPolicy="no-referrer"
             />
@@ -4807,7 +4807,7 @@ export function ConfiguratorTeaser() {
                 rel="noopener noreferrer" 
                 className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-700 transition-all border border-blue-500/20 group"
               >
-                Ontwerp je aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                Ontwerp uw aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
                 <img 
@@ -4870,7 +4870,7 @@ function WhyChooseUsPage() {
           >
             <div className="inline-flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-blue-400" />
-              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 leading-none">THE ARCHITECTURAL CHOICE</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 leading-none">DE ARCHITECTONISCHE KEUZE</span>
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-10">

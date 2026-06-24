@@ -383,7 +383,7 @@ export default function AmsterdamLandingPage() {
               <div className="rounded-[3.5rem] overflow-hidden border border-slate-200/80 shadow-md">
                 <img 
                   src="https://i.imgur.com/zfWAbPd.jpeg" 
-                  alt="Ontwerp je aanbouw" 
+                  alt="Ontwerp uw aanbouw" 
                   className="w-full aspect-[4/3] object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -655,7 +655,7 @@ export default function AmsterdamLandingPage() {
             
             {/* Box 1 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DASHBOARD ALTERNATIEVEN</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">SLIMME ALTERNATIEVEN</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Uitbouw, opbouw of toch iets anders?
               </h3>
@@ -669,7 +669,7 @@ export default function AmsterdamLandingPage() {
 
             {/* Box 2 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">CRITICAL FACTORS</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">BELANGRIJKE FACTOREN</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Waar u op moet letten voor u begint
               </h3>

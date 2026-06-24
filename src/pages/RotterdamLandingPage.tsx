@@ -584,7 +584,7 @@ export default function RotterdamLandingPage() {
             
             {/* Box 1 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-1">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">STRATEGIC SELECTION</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DE JUISTE KEUZE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Is een aanbouw de beste oplossing voor uw gezin?
               </h3>
@@ -598,7 +598,7 @@ export default function RotterdamLandingPage() {
 
             {/* Box 2 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-2">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">PREPARED START</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">GOEDE VOORBEREIDING</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Grondige voorbereiding garandeert rust
               </h3>
@@ -612,7 +612,7 @@ export default function RotterdamLandingPage() {
 
             {/* Box 3 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-3">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DAYLIGHT OPTIMIZATION</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">OPTIMAAL DAGLICHT</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Rotterdamse zonlichtinval en woonsfeer
               </h3>
@@ -626,7 +626,7 @@ export default function RotterdamLandingPage() {
 
             {/* Box 4 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-4">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMAL EXCELLENCE</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMISCHE TOPKLASSE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Tochtvrij, duurzaam &amp; buitengewoon behaaglijk
               </h3>

@@ -159,7 +159,7 @@ export default function AIExpert() {
               </button>
             </div>
             <div className="mt-4 flex items-center justify-center gap-6 text-[9px] font-black uppercase tracking-[0.4em] text-blue-100/30">
-              <span className="flex items-center gap-1.5"><Sparkles size={10} className="text-blue-400" /> Powered by Gemini AI</span>
+              <span className="flex items-center gap-1.5"><Sparkles size={10} className="text-blue-400" /> Aangedreven door AI</span>
               <span className="hidden md:block">•</span>
               <span className="hidden md:block">Geoptimaliseerd voor Prefab Select</span>
             </div>

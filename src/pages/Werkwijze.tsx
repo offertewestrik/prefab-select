@@ -119,7 +119,7 @@ export default function Werkwijze() {
             <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
               <img 
                 src="https://i.imgur.com/ueZgFnN.jpeg" 
-                alt="Ontwerp je aanbouw" 
+                alt="Ontwerp uw aanbouw" 
                 className="w-full aspect-[4/3] object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -157,7 +157,7 @@ export default function Werkwijze() {
               {/* CTA and Small Image/Thumbnail next to it to visually represent what they config */}
               <div className="flex flex-col sm:flex-row items-center gap-6 mt-10">
                 <Link to="https://prefabselect-configurator-551195834943.europe-west2.run.app/" target="_blank" className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-700 transition-all border border-blue-500/20 group">
-                  Ontwerp je aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  Ontwerp uw aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
                   <img 

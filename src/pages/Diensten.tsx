@@ -194,7 +194,7 @@ export default function Diensten() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="text-[9px] font-black uppercase tracking-[0.5em] text-blue-400 mb-4 md:mb-6 block leading-none"
               >
-                PREMIUM PREFAB SOLUTIONS
+                PREMIUM PREFAB OPLOSSINGEN
               </motion.span>
               
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-white leading-[1] md:leading-[0.9] mb-6 md:mb-8 tracking-tighter uppercase">

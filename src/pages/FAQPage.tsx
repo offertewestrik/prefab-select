@@ -333,7 +333,7 @@ export default function FAQPage() {
               className="flex items-center gap-3 mb-6"
             >
               <div className="w-12 h-[2px] bg-blue-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600">Knowledge Hub</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600">Kenniscentrum</span>
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}

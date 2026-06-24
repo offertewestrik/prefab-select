@@ -352,7 +352,7 @@ export default function PrefabRecreatiewoning() {
             
             <div className="max-w-xl" id="intro-design-text">
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">
-                ARTISANS OF SPACE
+                VAKMANSCHAP IN RUIMTE
               </span>
               <h2 className="text-3xl md:text-5xl font-display font-black text-blue-950 uppercase tracking-tighter leading-none mb-8">
                 Wat is een prefab <br />
@@ -677,7 +677,7 @@ export default function PrefabRecreatiewoning() {
 
             {/* Box 2 */}
             <div className="bg-slate-50/50 p-10 md:p-14 border border-slate-100 rounded-[3rem]" id="investment-box-2">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DURABILITY &amp; RESALE</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DUURZAAMHEID &amp; WAARDE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Waardevastheid en levensduur
               </h3>
@@ -691,7 +691,7 @@ export default function PrefabRecreatiewoning() {
 
             {/* Box 3 */}
             <div className="bg-slate-50/50 p-10 md:p-14 border border-slate-100 rounded-[3rem]" id="investment-box-3">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">ZERO EMISSION LIFE</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">EMISSIEVRIJ WONEN</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Ecotoerisme en energiezuinigheid
               </h3>
@@ -705,7 +705,7 @@ export default function PrefabRecreatiewoning() {
 
             {/* Box 4 */}
             <div className="bg-slate-50/50 p-10 md:p-14 border border-slate-100 rounded-[3rem]" id="investment-box-4">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">CUSTOMIZATION ON POINT</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">MAATWERK TOT IN DETAIL</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Talloze custom opties &amp; indelingen
               </h3>
