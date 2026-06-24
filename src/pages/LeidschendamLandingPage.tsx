@@ -149,7 +149,7 @@ export default function LeidschendamLandingPage() {
       answer: 'Voor een uitbouw aan de achterkant binnen het achtererfgebied is vaak geen vergunning nodig (bijvoorbeeld tot vier meter diep en mits een flink deel van de tuin onbebouwd blijft). In de beschermde dorpsgezichten van de gemeente Leidschendam-Voorburg (zoals Oud-Voorburg en het Damcentrum) en bij monumentale panden is echter wel altijd een omgevingsvergunning vereist. Doe altijd de vergunningcheck voor uw adres.'
     },
     {
-      question: 'Welkie beschermde gezichten kent Leidschendam-Voorburg?',
+      question: 'Welke beschermde gezichten kent Leidschendam-Voorburg?',
       answer: 'De bekendste beschermde gebieden zijn de historische kern Oud-Voorburg en het beeldbepalende Damcentrum langs de Vliet. Hier gelden extra strenge esthetische richtlijnen, ontwerprichtingen en specifieke erfgoedregels.'
     },
     {
@@ -262,7 +262,7 @@ export default function LeidschendamLandingPage() {
                     </div>
                     <div>
                       <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">Slappe Bodemberekening</p>
-                      <p className="text-[10px] text-blue-200/50 leading-none">Doordachte en stabiele paalfunderigen</p>
+                      <p className="text-[10px] text-blue-200/50 leading-none">Doordachte en stabiele paalfunderingen</p>
                     </div>
                   </div>
                 </div>
@@ -603,7 +603,7 @@ export default function LeidschendamLandingPage() {
                 Grondige voorbereiding garandeert rust
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op rivierbakklei vooraf gedetailleerd in te schatten.
+                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op de lokale bodemgesteldheid vooraf gedetailleerd in te schatten.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Onze engineers en ontwerpers lopen al deze facetten grondig met u door voordat we in de fabriek overgaan tot fabricage, om elk risico of meerwerk in een later stadium 100% uit te sluiten.
@@ -722,7 +722,7 @@ export default function LeidschendamLandingPage() {
       <noscript>
         <article className="max-w-3xl mx-auto px-6 py-12 prose text-slate-700">
           <h1>Uitbouw in Leidschendam — prefab uitbouw op maat</h1>
-          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Leidschendam en de gemeente Leidschendam-Voorburg, waaronder De Heuvel, Prinsenhof, Leidschendam-Noord, Essesteijn, \'t Loo, Voorburg en Stompwijk. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. In de beschermde dorpsgezichten Oud-Voorburg en het Damcentrum langs de Vliet en bij monumenten is wel een vergunning nodig. Let op de slappe veen- en kleibodem: een doordachte fundering is essentieel.</p>
+          <p>Prefab Select bouwt hoogwaardige prefab uitbouwen in Leidschendam en de gemeente Leidschendam-Voorburg, waaronder De Heuvel, Prinsenhof, Leidschendam-Noord, Essesteijn, 't Loo, Voorburg en Stompwijk. Een uitbouw vergroot uw woning aan de achterzijde, vaak vergunningsvrij tot vier meter diep binnen het achtererfgebied. In de beschermde dorpsgezichten Oud-Voorburg en het Damcentrum langs de Vliet en bij monumenten is wel een vergunning nodig. Let op de slappe veen- en kleibodem: een doordachte fundering is essentieel.</p>
           <p>Richtprijs: circa € 2.500 tot € 4.500 per m², afhankelijk van de afwerking. De ruwbouw staat doorgaans in één dag; het totale traject hangt op locatie af van transportspecificaties, constructieve grondberekeningen en eventueel benodigde omgevingsvergunningen op de kavel. Offerte aanvragen? Mail offerte@prefabselect.nl of bezoek www.prefabselect.nl.</p>
         </article>
       </noscript>

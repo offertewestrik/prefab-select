@@ -92,12 +92,12 @@ export default function BergenOpZoomLandingPage() {
               "name": "Hoe snel staat een prefab uitbouw?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "De constructieve ruwbouw wordt binnen één enkele dag geplaatst en winddicht gemaakt. Inclusief voorbereiding, de fundering en de binnenzijde afwerking duurt het gehele montagetraject op locatie doorgaans één to twee weken."
+                "text": "De constructieve ruwbouw wordt binnen één enkele dag geplaatst en winddicht gemaakt. Inclusief voorbereiding, de fundering en de binnenzijde afwerking duurt het gehele montagetraject op locatie doorgaans één tot twee weken."
               }
             },
             {
               "@type": "Question",
-              "name": "What betaal ik gemiddeld voor een aanbouw?",
+              "name": "Wat betaal ik gemiddeld voor een aanbouw?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "U kunt uitgaan van een gemiddelde indicatieve richtprijs van €2.500 tot €4.500 per m², sterk bepaald door de luxe van uw afwerking (bijv. een glazen schuifpui of vloerverwarming). Voor een compacte uitbouw start het traject vanaf ca. €40.000."
@@ -334,7 +334,7 @@ export default function BergenOpZoomLandingPage() {
                   Misschien herkent u het wel. De leefruimte die voorheen prima voldeed, voelt sinds het thuiswerken of gezinsuitbreiding krap. De keuken is te klein voor gezellige diners, en de woonkamer mist die fijne verbinding naar de tuin.
                 </p>
                 <p>
-                  Een verhuizing in Bergen op Zoom kost u direct een forse meerwaarde aan hypotheeklasten, makelaarscursussen en administratieve overdrachtsbelasting. Door uw bestaande woning slim uit te bouwen, investeert u direct in uw eigen wooncomfort én de waarde van uw huis.
+                  Een verhuizing in Bergen op Zoom kost u direct een forse meerwaarde aan hypotheeklasten, makelaarskosten en administratieve overdrachtsbelasting. Door uw bestaande woning slim uit te bouwen, investeert u direct in uw eigen wooncomfort én de waarde van uw huis.
                 </p>
               </div>
             </div>

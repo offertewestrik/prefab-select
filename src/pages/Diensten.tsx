@@ -71,9 +71,9 @@ const moduleTypes = [
   },
   {
     title: 'Poolhouses',
-    description: 'Luxe prefab poolhouses: de perfecte aanvulling op uw zwembad voor maximaal ontspanning en comfort.',
+    description: 'Luxe prefab poolhouses: de perfecte aanvulling op uw zwembad voor maximale ontspanning en comfort.',
     image: 'https://i.imgur.com/gGBOzjd.jpeg',
-    link: '/dienst/poolhouses'
+    link: '/diensten/poolhouse'
   }
 ];
 

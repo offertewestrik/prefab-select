@@ -138,7 +138,7 @@ export default function UtrechtLandingPage() {
   ];
 
   const wijken = [
-    { name: 'Wittevrouwen & Oudwijk', desc: 'Sfeervolle en histortische negentiende-eeuwse wijken met beschermde stadsgezichten en beperkte logistieke ruimte; hier is prefab aanvoer over het dak een perfecte en schone oplossing.' },
+    { name: 'Wittevrouwen & Oudwijk', desc: 'Sfeervolle en historische negentiende-eeuwse wijken met beschermde stadsgezichten en beperkte logistieke ruimte; hier is prefab aanvoer over het dak een perfecte en schone oplossing.' },
     { name: 'Leidsche Rijn & Vleuten-De Meern', desc: 'Ruime moderne nieuwbouwwijken met diepe tuinen en uitstekende bereikbaarheid waar vergunningsvrije uitbouwen tot 4 meter diep efficiënt en vlot gerealiseerd kunnen worden.' },
     { name: 'Tuindorp, Lombok & Oog in Al', desc: 'Geliefde, gevestigde wijken met gevarieerde bouwstijlen waar we met zorgvuldig afgestemde gevelontwerpen extra volume creëren dat naadloos aansluit bij de omgeving.' },
     { name: 'Hoograven, Lunetten & Overvecht', desc: 'Naoorlogse gezinswijken met prima tuinoppervlaktes waar we met prefab uitbouwen een riante leefkeuken of lichte tuinkamer toevoegen t.b.v. directe waardestijging.' }
@@ -602,7 +602,7 @@ export default function UtrechtLandingPage() {
                 Goed voorbereid van start gaan
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Zorg dat u zaken als de erfgrens (altijd belangrijk om met de buren te communiceren), de bodemstabiliteit en deLogistieke aanvoer routes vroegtijdig in kaart brengt.
+                Zorg dat u zaken als de erfgrens (altijd belangrijk om met de buren te communiceren), de bodemstabiliteit en de logistieke aanvoerroutes vroegtijdig in kaart brengt.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Onze engineers lopen deze belangrijke aspecten stap-voor-stap met u door voordat we overgaan tot productie, om elk risico uit te sluiten.

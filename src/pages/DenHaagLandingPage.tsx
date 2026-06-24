@@ -420,7 +420,7 @@ export default function DenHaagLandingPage() {
                   Den Haag is rijkelijk voorzien van rijksbeschermde stadsgezichten. Denk aan het <strong>Statenkwartier, de Archipelbuurt, Duinoord, Benoordenhout of het Zeeheldenkwartier</strong>. In deze zones is vooroverleg met de gemeente en akkoord van de Welstands- en Monumentencommissie uiterst belangrijk.
                 </p>
                 <p>
-                  Onze vakkundige ontwerpers bezitten jarenlange ervaring met deze Bossche en Haagse erfgoedregels. Wij handelen de omgevingsvergunning en de nodige esthetische afstemmingen volledig voor u af, zodat uw droomuitbouw probleemloos past binnen het historische straatbeeld.
+                  Onze vakkundige ontwerpers bezitten jarenlange ervaring met deze Haagse erfgoedregels. Wij handelen de omgevingsvergunning en de nodige esthetische afstemmingen volledig voor u af, zodat uw droomuitbouw probleemloos past binnen het historische straatbeeld.
                 </p>
               </div>
 
@@ -603,7 +603,7 @@ export default function DenHaagLandingPage() {
                 Grondige voorbereiding garandeert rust
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
-                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op rivierbakklei vooraf gedetailleerd in te schatten.
+                Het is berekend om kritieke randvoorwaarden zoals kraantoegankelijkheid in compacte straten, exacte kadastrale erfgrenzen en funderingseisen op de lokale bodemgesteldheid vooraf gedetailleerd in te schatten.
               </p>
               <p className="text-xs text-slate-500 leading-relaxed font-semibold">
                 Onze engineers en ontwerpers lopen al deze facetten grondig met u door voordat we in de fabriek overgaan tot fabricage, om elk risico of meerwerk in een later stadium 100% uit te sluiten.
