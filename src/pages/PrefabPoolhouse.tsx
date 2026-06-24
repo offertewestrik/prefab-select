@@ -316,7 +316,7 @@ export default function PrefabPoolhouse() {
                 </li>
                 <li className="flex justify-between">
                   <span>Garantie:</span>
-                  <span className="text-blue-950 font-bold">20 jaar constructie</span>
+                  <span className="text-blue-950 font-bold">10 jaar constructie</span>
                 </li>
               </ul>
             </div>

@@ -280,20 +280,20 @@ const constructionModules = [
 
 const steps: Step[] = [
   { 
-    title: 'Ontwerp je droom', 
-    description: 'Ontwerp zelf je aanbouw of bezoek onze showroom.',
-    cta: 'Ontwerp je aanbouw',
+    title: 'Ontwerp uw droom', 
+    description: 'Ontwerp zelf uw aanbouw of bezoek onze showroom.',
+    cta: 'Ontwerp uw aanbouw',
     link: 'https://prefabselect-configurator-551195834943.europe-west2.run.app/'
   },
   { 
     title: 'Inmeten & Advies', 
-    description: 'Al jouw wensen bekend? Dan komen we langs en meten alles in.',
+    description: 'Al uw wensen bekend? Dan komen we langs en meten alles in.',
     cta: 'Bekijk werkwijze',
     link: '/diensten'
   },
   { 
     title: 'Snelle Plaatsing', 
-    description: 'Tijd voor het plaatsen. Binnen 5 dagen staat je aanbouw.',
+    description: 'Tijd voor het plaatsen. Binnen 5 dagen staat uw aanbouw.',
     cta: 'Vraag Offerte',
     link: '/offerte'
   }
@@ -301,7 +301,7 @@ const steps: Step[] = [
 
 const faqs: FAQ[] = [
   { question: 'Wat kost een prefab uitbouw ongeveer?', answer: 'Een prefab uitbouw van ±15 m² begint rond de €45.000. Luxe varianten liggen rond de €55.000. Bij ons krijgt u altijd een duidelijke prijs vooraf, zonder verrassingen achteraf.' },
-  { question: 'Is een vergunning nodig voor een uitbouw?', answer: 'Dat hangt af van je woning en gemeente. In veel gevallen is een uitbouw aan de achterzijde vergunningsvrij, maar we checken dit altijd voor je bij jouw gemeente.' },
+  { question: 'Is een vergunning nodig voor een uitbouw?', answer: 'Dat hangt af van uw woning en gemeente. In veel gevallen is een uitbouw aan de achterzijde vergunningsvrij, maar we checken dit altijd voor u bij uw gemeente.' },
   { question: 'Hoe snel wordt een uitbouw geplaatst?', answer: 'Omdat wij het grootste deel vooraf in de fabriek maken, kunnen we de uitbouw vaak binnen 1 tot 2 dagen plaatsen en binnen 4 tot 6 weken compleet opleveren.' },
   { question: 'Kan ik een keuken in de uitbouw plaatsen?', answer: 'Ja, dat doen we regelmatig. Wij zorgen dat alle benodigde leidingen en elektra al technisch goed voorbereid zijn in de fabriek.' },
   { question: 'Is prefab wel stevig genoeg?', answer: 'Ja — alles wordt onder gecontroleerde omstandigheden in de fabriek gebouwd, wat vaak een betere en constantere kwaliteit oplevert dan traditionele bouw op locatie.' }
@@ -315,10 +315,10 @@ const blogs = [
     date: "12 Mei, 2024",
     readTime: "5 min",
     image: "https://i.imgur.com/fmQecXk.jpeg",
-    excerpt: "Als je overweegt om een uitbouw te laten plaatsen, is dit waarschijnlijk je eerste vraag: wat kost het eigenlijk?",
+    excerpt: "Als u overweegt om een uitbouw te laten plaatsen, is dit waarschijnlijk uw eerste vraag: wat kost het eigenlijk?",
     content: `Prefab bouwen is de afgelopen jaren enorm populair geworden. Niet alleen vanwege de snelheid, maar ook door de voorspelbare kosten en hoge kwaliteit. 
 
-Toch is één vraag het belangrijkst: **wat kost prefab bouwen per m²?** In deze gids leggen we alles duidelijk uit, zodat je precies weet waar je aan toe bent.
+Toch is één vraag het belangrijkst: **wat kost prefab bouwen per m²?** In deze gids leggen we alles duidelijk uit, zodat u precies weet waar u aan toe bent.
 
 ### 💰 Gemiddelde prijs prefab bouwen per m²
 
@@ -326,7 +326,7 @@ De prijs van prefab bouwen begint gemiddeld vanaf:
 - **€2.500 per m²** (basis uitvoering)
 - **€4.500 per m²** (luxe uitvoering)
 
-Waar je uiteindelijk op uitkomt, hangt volledig af van jouw wensen. Een eenvoudige prefab uitbouw is uiteraard goedkoper dan een luxe afgewerkte woning met grote glaspartijen en extra voorzieningen.
+Waar u uiteindelijk op uitkomt, hangt volledig af van uw wensen. Een eenvoudige prefab uitbouw is uiteraard goedkoper dan een luxe afgewerkte woning met grote glaspartijen en extra voorzieningen.
 
 ### 🧱 Waar bestaat de prijs uit?
 
@@ -412,18 +412,18 @@ Een traditionele uitbouw kan nog steeds interessant zijn bij complexe projecten,
     readTime: "4 min",
     image: "https://i.imgur.com/6VuTqto.jpeg",
     excerpt: "De duur van een uitbouw verschilt enorm per type.",
-    content: `De duur van een uitbouw verschilt enorm per type. Bij traditionele bouw moet je denken aan 6 tot 10 weken. Bij prefab ligt dat totaal anders:
+    content: `De duur van een uitbouw verschilt enorm per type. Bij traditionele bouw moet u denken aan 6 tot 10 weken. Bij prefab ligt dat totaal anders:
 - **Productie**: 2–4 weken
 - **Plaatsing**: 1–2 dagen
 
-Dat is vaak het moment waar klanten van schrikken — hoe snel het ineens gaat. De echte winst zit niet alleen in tijd, maar ook in rust. Je zit niet wekenlang in een bouwplaats.`,
+Dat is vaak het moment waar klanten van schrikken — hoe snel het ineens gaat. De echte winst zit niet alleen in tijd, maar ook in rust. U zit niet wekenlang in een bouwplaats.`,
     slug: "duur-plaatsen-uitbouw"
   },
   {
     id: 4,
-    title: "Heb je een vergunning nodig voor een uitbouw?",
+    title: "Heeft u een vergunning nodig voor een uitbouw?",
     excerpt: "Dit is een vraag die bijna iedereen stelt — en het antwoord is: soms.",
-    content: `Dit is een vraag die bijna iedereen stelt — en het antwoord is: soms. In veel gevallen is een uitbouw aan de achterkant van de woning vergunningsvrij, zolang je binnen bepaalde afmetingen blijft.
+    content: `Dit is een vraag die bijna iedereen stelt — en het antwoord is: soms. In veel gevallen is een uitbouw aan de achterkant van de woning vergunningsvrij, zolang u binnen bepaalde afmetingen blijft.
 
 Maar let op:
 - Regels verschillen per gemeente
@@ -457,12 +457,12 @@ Wat klanten vaak zeggen is dat ze het proces veel minder zwaar vonden dan verwac
 - Efficiënter productieproces
 - Betere isolatie mogelijk
 
-Omdat alles in een gecontroleerde omgeving wordt gemaakt, is de kwaliteit vaak consistenter. Dat zie je terug in energieverbruik en comfort.`,
+Omdat alles in een gecontroleerde omgeving wordt gemaakt, is de kwaliteit vaak consistenter. Dat ziet u terug in energieverbruik en comfort.`,
     slug: "duurzaamheid-prefab-uitbouw"
   },
   {
     id: 7,
-    title: "Kun je een keuken in een uitbouw plaatsen?",
+    title: "Kunt u een keuken in een uitbouw plaatsen?",
     excerpt: "Ja, en dit gebeurt heel vaak.",
     content: `Ja, en dit gebeurt heel vaak. Een uitbouw wordt juist vaak gebruikt om een grotere, open keuken te creëren.
 
@@ -484,7 +484,7 @@ Dit wordt allemaal vooraf meegenomen in het ontwerp. Het resultaat is vaak een v
 - Afwerkingsniveau
 - Extra opties (lichtstraat, schuifpui)
 
-Vooral grote schuifpuien en lichtstraten kunnen de prijs flink verhogen. Daarom is het slim om vooraf te bepalen wat voor jou echt belangrijk is.`,
+Vooral grote schuifpuien en lichtstraten kunnen de prijs flink verhogen. Daarom is het slim om vooraf te bepalen wat voor u echt belangrijk is.`,
     slug: "factoren-prijs-uitbouw"
   },
   {
@@ -493,7 +493,7 @@ Vooral grote schuifpuien en lichtstraten kunnen de prijs flink verhogen. Daarom 
     excerpt: "In veel gevallen: ja.",
     content: `In veel gevallen: ja. Een uitbouw zorgt voor meer woonruimte, meer licht en vaak een hogere woningwaarde.
 
-Vooral in steden waar ruimte schaars is, kan een uitbouw de waarde van je woning aanzienlijk verhogen. Daarnaast verhoogt het direct je dagelijkse wooncomfort.`,
+Vooral in steden waar ruimte schaars is, kan een uitbouw de waarde van uw woning aanzienlijk verhogen. Daarnaast verhoogt het direct uw dagelijkse wooncomfort.`,
     slug: "investering-uitbouw"
   },
   {
@@ -507,7 +507,7 @@ Denk aan:
 - Veel glasgebruik voor ruimtelijk gevoel
 - Slimme verbinding tussen binnen en buiten
 
-Het gaat niet alleen om het aantal meters, maar vooral om hoe je de beschikbare ruimte optimaal benut.`,
+Het gaat niet alleen om het aantal meters, maar vooral om hoe u de beschikbare ruimte optimaal benut.`,
     slug: "uitbouw-kleine-tuin"
   },
   {
@@ -592,7 +592,7 @@ Benieuwd naar de mogelijkheden? Bekijk onze [prefab poolhouses](/prefab-poolhous
     date: "27 Mei, 2026",
     readTime: "7 min",
     image: "https://i.imgur.com/covRQg3.jpeg",
-    excerpt: "Wanneer mag je vergunningsvrij uitbouwen? Alles over het achtererfgebied, de 4-meterregel en de Omgevingswet, helder uitgelegd.",
+    excerpt: "Wanneer mag u vergunningsvrij uitbouwen? Alles over het achtererfgebied, de 4-meterregel en de Omgevingswet, helder uitgelegd.",
     content: `Een van de meest gestelde vragen bij een uitbouw is: **heb ik een vergunning nodig?** Sinds de invoering van de Omgevingswet blijft veel hetzelfde, maar de termen veranderen. In dit artikel leggen we helder uit wanneer u vergunningsvrij mag uitbouwen.
 
 ### Het achtererfgebied
@@ -702,7 +702,7 @@ Huiseigenaren in West-Brabant kiezen voor Prefab Select vanwege onze focus op kw
 2. **Weerbestendig**: Omdat we in de fabriek bouwen, heeft regen geen invloed op de kwaliteit van de constructie.
 3. **Hoogwaardige isolatie**: Onze wanden halen standaard een Rc-waarde van 6.0, wat zorgt voor een lagere energierekening.
 
-Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen](/prefab-bouwen) service of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/).`
+Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen](/prefab-bouwen) service of [Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/).`
   },
   {
     name: 'Tilburg',
@@ -722,7 +722,7 @@ Nieuwsgierig naar wat er mogelijk is voor uw woning? Verken onze [Prefab Bouwen]
 ### Kosten indicatie regio Tilburg
 Voor een **prefab uitbouw van 15m² in Tilburg** kunt u rekenen op een vanafprijs van circa €45.000. Wilt u een complete woning laten bouwen? Bekijk dan onze pagina over [Prefab Bouwen](/prefab-bouwen).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Den Bosch',
@@ -730,7 +730,7 @@ Voor een **prefab uitbouw van 15m² in Tilburg** kunt u rekenen op een vanafprij
     image: 'https://i.imgur.com/Mcivs2I.jpeg',
     category: 'Noord-Brabant',
     title: 'Uitbouw Den Bosch – Luxe Prefab Woninguitbreiding op Maat',
-    content: `Woon je in 's-Hertogenbosch en droom je van een grotere woonkeuken of een lichte woonkamer met zicht op de tuin? Een **uitbouw in Den Bosch** laten plaatsen was nog nooit zo eenvoudig. Wij combineren vakmanschap met de snelheid van moderne prefab technologie.
+    content: `Woont u in 's-Hertogenbosch en droomt u van een grotere woonkeuken of een lichte woonkamer met zicht op de tuin? Een **uitbouw in Den Bosch** laten plaatsen was nog nooit zo eenvoudig. Wij combineren vakmanschap met de snelheid van moderne prefab technologie.
 
 In Den Bosch hechten bewoners veel waarde aan architectonische kwaliteit. Daarom zijn onze **prefab aanbouw** modules volledig aanpasbaar aan de stijl van uw woning, of dat nu een moderne villa in Maaspoort is of een sfeervolle jaren '30 woning in Zuid.
 
@@ -753,19 +753,19 @@ Benieuwd naar onze andere diensten? Ontdek onze [Luxe Chalets](/chalets) of [Vak
     image: 'https://i.imgur.com/covRQg3.jpeg',
     category: 'Zuid-Holland',
     title: 'Uitbouw Rotterdam – Slimme Ruimteoplossingen in de Havenstad',
-    content: `Woon je in Rotterdam en merk je dat je woning te klein begint te worden? In een stad waar ruimte schaars is, zoeken steeds meer huiseigenaren naar manieren om hun woning slimmer te benutten met een **prefab uitbouw in Rotterdam**.
+    content: `Woont u in Rotterdam en merkt u dat uw woning te klein begint te worden? In een stad waar ruimte schaars is, zoeken steeds meer huiseigenaren naar manieren om hun woning slimmer te benutten met een **prefab uitbouw in Rotterdam**.
 
-Een uitbouw laten plaatsen is in Rotterdam vaak de meest logische stap. In plaats van verhuizen — wat in Rotterdam vaak duur en lastig is — kun je je huidige woning uitbreiden met een **hoogwaardige aanbouw**. Wij zijn ook uw partner in nabijgelegen steden zoals [Den Haag](/regio/den-haag) en [Leidschendam](/regio/leidschendam).
+Een uitbouw laten plaatsen is in Rotterdam vaak de meest logische stap. In plaats van verhuizen — wat in Rotterdam vaak duur en lastig is — kunt u uw huidige woning uitbreiden met een **hoogwaardige aanbouw**. Wij zijn ook uw partner in nabijgelegen steden zoals [Den Haag](/regio/den-haag) en [Leidschendam](/regio/leidschendam).
 
 ### Waarom een uitbouw in Rotterdam?
-In Rotterdam draait alles om efficiënt gebruik van ruimte. Met een **prefab aanbouw woning** kun je:
-- Je woonkamer aanzienlijk vergroten
+In Rotterdam draait alles om efficiënt gebruik van ruimte. Met een **prefab aanbouw woning** kunt u:
+- Uw woonkamer aanzienlijk vergroten
 - Een open woonkeuken creëren met kookeiland
 - Meer lichtinval realiseren door grote schuifpuien
 - De woningwaarde direct verhogen
 
 ### Wat kost een uitbouw in Rotterdam?
-De prijs hangt af van jouw keuzes, maar gemiddeld liggen de **uitbouw kosten per m²** in Rotterdam op:
+De prijs hangt af van uw keuzes, maar gemiddeld liggen de **uitbouw kosten per m²** in Rotterdam op:
 - **€2.600 per m²** voor een standaard uitvoering
 - **€4.000 per m²** voor een luxe architectonische uitvoering
 
@@ -780,7 +780,7 @@ In een drukke stad als Rotterdam wilt u zo min mogelijk overlast. Daarom kiezen 
     name: 'Bergen op Zoom',
     slug: 'bergen-op-zoom',
     title: 'Prefab Uitbouw Bergen op Zoom – Hoogwaardige Woninguitbreiding',
-    content: `Woon je in Bergen op Zoom of Halsteren en merk je dat je woning niet meer voldoende ruimte biedt? Een **prefab uitbouw in Bergen op Zoom** is de perfecte manier om uw leefomgeving te vergroten zonder de stress van een lange verbouwing.
+    content: `Woont u in Bergen op Zoom of Halsteren en merkt u dat uw woning niet meer voldoende ruimte biedt? Een **prefab uitbouw in Bergen op Zoom** is de perfecte manier om uw leefomgeving te vergroten zonder de stress van een lange verbouwing.
 
 In Bergen op Zoom zien we vooral een grote vraag naar **moderne aanbouw** oplossingen voor gezinswoningen. Of het nu gaat om een kantoor aan huis of een verlenging van uw woonkamer, Prefab Select levert topkwaliteit met een Rc-waarde van 6.0.
 
@@ -856,7 +856,7 @@ Dankzij onze **modulaire bouwmethode** kunnen we in Amsterdam bouwen met minimal
 ### Kosten uitbouw Amsterdam
 Door de complexe logistiek in Amsterdam kunnen kosten variëren. Gemiddeld investeert u €3.000 tot €4.500 per m² voor een luxe, zorgeloze uitvoering.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Den Haag',
@@ -886,7 +886,7 @@ Met een **hoogwaardige prefab aanbouw** in Amstelveen kiest u voor een snelle, s
 - **Luxe afwerking**: Inclusief opties voor lichtstraten en grote glaspartijen.
 - **Toekomstbestendig**: Energieneutraal gebouwd met de hoogste isolatienormen.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Nijmegen',
@@ -906,7 +906,7 @@ Nijmegen is een stad van innovatie en duurzaamheid. Onze **modulaire aanbouw** o
 ### Wat kost een uitbouw in Nijmegen?
 Gemiddeld liggen de **uitbouw kosten per m²** in Nijmegen tussen de €2.500 en €4.000, afhankelijk van de luxe en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Antwerpen',
@@ -958,7 +958,7 @@ Wij realiseren **hoogwaardige aanbouw** projecten die naadloos aansluiten op de 
 - **Hoogwaardige afwerking**: Strak gestucte wanden en luxe kozijnen naar keuze.
 - **Zorgeloos**: Wij regelen de vergunningscheck en het transport.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Utrecht',
@@ -1000,7 +1000,7 @@ Met een **prefab uitbouw in Almere** kiest u voor de hoogste isolatienormen (Rc 
 ### Kosten indicatie Almere
 Voor een kwalitatieve uitbouw in Almere kunt u rekenen op een vanafprijs van ca. €2.500 per m². Of u nu zoekt naar een [prefab uitbouw](/prefab-uitbouw-laten-plaatsen) of een [aanbouw woning](/prefab-aanbouw), wij helpen u verder.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Haarlem',
@@ -1020,18 +1020,18 @@ Een **prefab aanbouw in Haarlem** is de ideale manier om snel extra meters te wi
 ### Kosten uitbouw Haarlem
 Gemiddeld liggen de **kosten per m² voor een uitbouw** in Haarlem tussen de €2.600 en €4.500. Dit is inclusief onze volledige begeleiding van vergunningscheck tot oplevering.
 
-[Ontdek onze luxe chalets](/chalets) of [Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontdek onze luxe chalets](/chalets) of [Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Mantelzorgwoning',
     slug: 'mantelzorgwoning-prefab',
     title: 'Mantelzorgwoning prefab – comfortabel wonen dichtbij huis',
-    content: `Wil je een mantelzorgwoning laten plaatsen voor een ouder, familielid of naaste? Dan is een prefab mantelzorgwoning een snelle en praktische oplossing om zorg dichtbij huis te organiseren.
+    content: `Wilt u een mantelzorgwoning laten plaatsen voor een ouder, familielid of naaste? Dan is een prefab mantelzorgwoning een snelle en praktische oplossing om zorg dichtbij huis te organiseren.
 
-Bij Prefabselect.nl realiseren wij mantelzorgwoningen op maat, volledig afgestemd op jouw situatie. Zo creëer je een zelfstandige woonruimte in de tuin, zonder dat iemand zijn vertrouwde omgeving hoeft te verlaten.
+Bij Prefabselect.nl realiseren wij mantelzorgwoningen op maat, volledig afgestemd op uw situatie. Zo creëert u een zelfstandige woonruimte in de tuin, zonder dat iemand zijn vertrouwde omgeving hoeft te verlaten.
 
 ### Wat is een mantelzorgwoning?
-Een mantelzorgwoning is een zelfstandige woonruimte op eigen terrein, bedoeld voor iemand die zorg nodig heeft of juist zorg verleent. Het grote voordeel: je woont dicht bij elkaar, maar behoudt toch privacy en zelfstandigheid.
+Een mantelzorgwoning is een zelfstandige woonruimte op eigen terrein, bedoeld voor iemand die zorg nodig heeft of juist zorg verleent. Het grote voordeel: u woont dicht bij elkaar, maar behoudt toch privacy en zelfstandigheid.
 
 ### Waarom kiezen voor een prefab mantelzorgwoning?
 Steeds meer mensen kiezen voor een prefab mantelzorgwoning in plaats van traditionele bouw. Voordelen:
@@ -1042,7 +1042,7 @@ Steeds meer mensen kiezen voor een prefab mantelzorgwoning in plaats van traditi
 - Energiezuinige bouw
 
 ### Wat kost een mantelzorgwoning?
-De kosten hangen af van grootte, afwerking en indeling. Gemiddeld kun je denken aan:
+De kosten hangen af van grootte, afwerking en indeling. Gemiddeld kunt u denken aan:
 - Vanaf **€40.000 – €60.000** voor compacte modellen
 - Grotere en luxe uitvoeringen vanaf **€70.000+**
 
@@ -1056,15 +1056,15 @@ Wij bieden diverse mogelijkheden voor de indeling:
 
 ### Hoe werkt het traject?
 1. **Offerte aanvragen**: Ontvang een eerste indicatie.
-2. **Advies en ontwerp**: We maken een maatwerk ontwerp voor jouw situatie.
+2. **Advies en ontwerp**: We maken een maatwerk ontwerp voor uw situatie.
 3. **Productie**: De woning wordt volledig voorbereid in de fabriek.
 4. **Plaatsing**: Binnen korte tijd wordt de woning geplaatst.
 5. **Afwerking**: De woning wordt gebruiksklaar gemaakt.
 
 ### Vergunning nodig?
-In veel gevallen is een mantelzorgwoning vergunningsvrij, mits er sprake is van een zorgsituatie en de woning op eigen terrein staat. Wij helpen je met het controleren van de regels.
+In veel gevallen is een mantelzorgwoning vergunningsvrij, mits er sprake is van een zorgsituatie en de woning op eigen terrein staat. Wij helpen u met het controleren van de regels.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Recreatiewoning',
@@ -1081,20 +1081,20 @@ Of het nu gaat om een luxe chalet aan de kust of een moderne vakantiewoning in d
 
 Ontdek onze verschillende [Vakantiewoningen](/vakantiewoningen) en [Chalets](/chalets).
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Prefab Uitbouw',
     slug: 'prefab-uitbouw-laten-plaatsen',
     title: 'Prefab uitbouw laten plaatsen – snel extra ruimte zonder lange verbouwing',
-    content: `Wil je jouw woning vergroten zonder maandenlang in een verbouwing te zitten? Dan is een prefab uitbouw de slimste oplossing.
+    content: `Wilt u uw woning vergroten zonder maandenlang in een verbouwing te zitten? Dan is een prefab uitbouw de slimste oplossing.
 
 Bij Prefabselect.nl realiseren wij complete prefab uitbouwen op maat, die binnen korte tijd geplaatst worden en direct zorgen voor meer ruimte, licht en comfort.
 
 👉 **Vaak al binnen 1 tot 2 dagen geplaatst**
 
 ### Wat is een prefab uitbouw?
-Een prefab uitbouw is een woninguitbreiding die grotendeels in de fabriek wordt gemaakt. Denk aan wanden, kozijnen, isolatie en afwerking — alles wordt vooraf voorbereid. Daarna wordt de uitbouw in één keer bij jouw woning geplaatst.
+Een prefab uitbouw is een woninguitbreiding die grotendeels in de fabriek wordt gemaakt. Denk aan wanden, kozijnen, isolatie en afwerking — alles wordt vooraf voorbereid. Daarna wordt de uitbouw in één keer bij uw woning geplaatst.
 
 **Het resultaat:**
 - Snellere bouw
@@ -1111,16 +1111,16 @@ Steeds meer huiseigenaren kiezen voor prefab in plaats van traditionele bouw.
 - Vaste prijs vooraf
 - Strakke en consistente afwerking
 
-Vooral als je snel resultaat wilt zonder gedoe, is prefab de beste keuze.
+Vooral als u snel resultaat wilt zonder gedoe, is prefab de beste keuze.
 
 ### Wat kost een prefab uitbouw?
-De prijs van een prefab uitbouw laten plaatsen hangt af van jouw wensen. Gemiddeld liggen de prefab uitbouw kosten per m² op:
+De prijs van een prefab uitbouw laten plaatsen hangt af van uw wensen. Gemiddeld liggen de prefab uitbouw kosten per m² op:
 - Vanaf **€2.500 per m²** (standaard uitvoering)
 - Vanaf **€3.000 per m²** (luxe uitvoering)
 
 Voor een prefab uitbouw van 15 m² betekent dit een investering van ongeveer **€45.000 tot €55.000**. De uiteindelijke prijs wordt bepaald door de grootte, type kozijnen, afwerking en extra opties zoals een lichtstraat of vloerverwarming.
 
-👉 **Je ontvangt altijd een duidelijke offerte vooraf.**
+👉 **U ontvangt altijd een duidelijke offerte vooraf.**
 
 ### Hoe lang duurt een prefab uitbouw?
 Een traditionele uitbouw kan 6 tot 10 weken duren. Bij prefab is dit veel sneller:
@@ -1132,9 +1132,9 @@ Dit is voor veel mensen de belangrijkste reden om voor prefab te kiezen.
 
 ### Hoe werkt een prefab uitbouw laten plaatsen?
 Wij houden het proces overzichtelijk:
-1. **Offerte aanvragen**: Je geeft je wensen door en ontvangt een prijsindicatie.
-2. **Advies en inmeten**: We bekijken jouw woning en bespreken de mogelijkheden.
-3. **Ontwerp op maat**: Je krijgt een ontwerp dat perfect aansluit op jouw situatie.
+1. **Offerte aanvragen**: U geeft uw wensen door en ontvangt een prijsindicatie.
+2. **Advies en inmeten**: We bekijken uw woning en bespreken de mogelijkheden.
+3. **Ontwerp op maat**: U krijgt een ontwerp dat perfect aansluit op uw situatie.
 4. **Productie van de uitbouw**: De prefab uitbouw wordt in de fabriek gemaakt.
 5. **Plaatsing op locatie**: Binnen korte tijd wordt de uitbouw geplaatst.
 6. **Afwerking en oplevering**: Alles wordt netjes afgewerkt en gebruiksklaar gemaakt.
@@ -1148,19 +1148,19 @@ Een prefab uitbouw kan volledig op maat worden gemaakt. Veel gekozen opties zijn
 - Vloerverwarming en luxe afwerking
 - Elektra en waterleidingen volledig voorbereid
 
-### Heb je een vergunning nodig?
-In veel gevallen is een uitbouw vergunningsvrij, vooral aan de achterzijde van de woning. Dit hangt af van de grootte, locatie en gemeentelijke regels. Wij helpen je met het controleren hiervan.
+### Heeft u een vergunning nodig?
+In veel gevallen is een uitbouw vergunningsvrij, vooral aan de achterzijde van de woning. Dit hangt af van de grootte, locatie en gemeentelijke regels. Wij helpen u met het controleren hiervan.
 
 ### Prefab uitbouw vs traditionele uitbouw
-Bij prefab kies je voor snelheid, minder overlast en een vaste planning. Bij traditionele bouw heb je vaak te maken met een langere bouwtijd, meer rommel en meer afhankelijkheid van het weer. Voor wie snelheid en duidelijkheid wil, is prefab meestal de beste keuze.
+Bij prefab kiest u voor snelheid, minder overlast en een vaste planning. Bij traditionele bouw heeft u vaak te maken met een langere bouwtijd, meer rommel en meer afhankelijkheid van het weer. Voor wie snelheid en duidelijkheid wil, is prefab meestal de beste keuze.
 
 ### Is een prefab uitbouw een goede investering?
-Ja, een prefab uitbouw zorgt voor meer woonruimte, meer licht en een betere indeling. Dit vertaalt zich direct in een waardeverhoging van je woning en meer dagelijks wooncomfort.
+Ja, een prefab uitbouw zorgt voor meer woonruimte, meer licht en een betere indeling. Dit vertaalt zich direct in een waardeverhoging van uw woning en meer dagelijks wooncomfort.
 
 ### Waarom kiezen voor Prefabselect.nl?
 Wij zorgen voor een compleet traject: van maatwerk ontwerp tot snelle realisatie en hoogwaardige afwerking. Geen verrassingen achteraf, maar duidelijke communicatie en vakmanschap.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`
   },
   {
     name: 'Zeeland',
@@ -1187,7 +1187,7 @@ Reken op een richtprijs van **€2.600 tot €4.300 per m²**, afhankelijk van a
 ### Vergunningsvrij uitbouwen in Arnhem
 Een uitbouw aan de achterzijde is vaak vergunningsvrij tot 4 meter diep binnen het achtererfgebied. Wij verzorgen gratis de vergunningscheck bij de gemeente Arnhem.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1222,7 +1222,7 @@ De **uitbouw kosten per m²** liggen in Apeldoorn gemiddeld tussen **€2.500 en
 ### Energiezuinig op de zandgrond
 Op de stevige Veluwse zandgrond plaatsen wij snel en stabiel. Met een Rc-waarde van 6.0 en voorbereiding op vloerverwarming of een warmtepomp bouwt u direct toekomstbestendig.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1257,7 +1257,7 @@ Gemiddeld liggen de kosten op **€2.500 tot €4.200 per m²**. Een aanbouw van
 ### Volledig ontzorgd
 Van ontwerp en vergunningscheck tot productie en plaatsing: wij regelen het complete traject, zodat u nergens omkijken naar heeft.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1292,7 +1292,7 @@ De **uitbouw kosten per m²** liggen in Zwolle gemiddeld tussen **€2.600 en �
 ### Snel en met minimale overlast
 Omdat wij de uitbouw grotendeels in de fabriek maken, staat de constructie vaak binnen één dag wind- en waterdicht. Geen maandenlange bouwplaats in uw straat.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1327,7 +1327,7 @@ Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint daarme
 ### Snel klaar, weinig overlast
 Dankzij fabrieksproductie staat uw uitbouw vaak binnen één dag wind- en waterdicht. Ideaal in dichtbebouwde Groningse stadswijken.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1362,7 +1362,7 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. 
 ### Respect voor erfgoed
 In de historische binnenstad van Deventer geldt vaak een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject zodat uw uitbouw perfect past bij de omgeving.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1397,7 +1397,7 @@ Reken op **€2.500 tot €4.100 per m²**. Een uitbouw van 15 m² begint daarme
 ### Energiezuinig en comfortabel
 Met een Rc-waarde van 6.0 en voorbereiding op vloerverwarming bouwt u een uitbouw die het hele jaar door behaaglijk is en uw energierekening verlaagt.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1432,7 +1432,7 @@ De **uitbouw kosten per m²** liggen in Dordrecht gemiddeld tussen **€2.600 en
 ### Respect voor de oudste stad van Holland
 De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Wij verzorgen het volledige vergunnings- en welstandstraject voor een uitbouw die past bij de Dordtse sfeer.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1467,7 +1467,7 @@ Reken op **€2.700 tot €4.500 per m²**. Een uitbouw van 15 m² komt daarmee 
 ### Monumenten en beschermd stadsgezicht
 De historische binnenstad van Delft kent veel monumenten en een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1502,7 +1502,7 @@ De bodem in Zoetermeer bestaat deels uit veen en klei. Wij stemmen de fundering 
 ### Wat kost een uitbouw in Zoetermeer?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.600 en €4.300**. Een uitbouw van 15 m² komt daarmee tussen de **€45.000 en €62.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1537,7 +1537,7 @@ Reken op **€2.700 tot €4.500 per m²**. Een uitbouw van 15 m² komt daarmee 
 ### Respect voor het historische centrum
 De binnenstad van Gouda kent een beschermd stadsgezicht. Wij verzorgen het volledige vergunnings- en welstandstraject.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1572,7 +1572,7 @@ De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.600 en €4.400**. 
 ### Respect voor erfgoed
 De historische binnenstad kent een beschermd stadsgezicht en veel monumenten. Wij verzorgen het volledige vergunnings- en welstandstraject zodat uw uitbouw stijlvol past bij de Maastrichtse architectuur.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1607,7 +1607,7 @@ Reken op **€2.600 tot €4.300 per m²**. Een uitbouw van 15 m² komt daarmee 
 ### Historische binnenstad
 De middeleeuwse binnenstad kent een beschermd stadsgezicht. Wij verzorgen het complete vergunnings- en welstandstraject zodat uw uitbouw perfect aansluit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1642,7 +1642,7 @@ De stevige zandgrond van het Gooi maakt een snelle, stabiele plaatsing mogelijk.
 ### Wat kost een uitbouw in Hilversum?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.800 en €4.600**. Een uitbouw van 15 m² komt daarmee tussen de **€48.000 en €68.000** uit, passend bij het hoogwaardige afwerkingsniveau in het Gooi.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1677,7 +1677,7 @@ Steenbergen ligt in het polderlandschap met deels slappe kleigrond. Wij berekene
 ### Wat kost een uitbouw in Steenbergen?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**, inclusief plaatsing en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1712,7 +1712,7 @@ Roosendaal ligt grotendeels op stevige zandgrond, ideaal voor een snelle en stab
 ### Wat kost een uitbouw in Roosendaal?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1747,7 +1747,7 @@ Het eiland Tholen kent voornamelijk kleigrond. Een goede fundering is hier belan
 ### Wat kost een uitbouw op Tholen?
 Reken op **€2.500 tot €4.300 per m²**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1782,7 +1782,7 @@ De Brabantse Wal bestaat grotendeels uit stevige zandgrond, ideaal voor een snel
 ### Wat kost een uitbouw in Woensdrecht?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1817,7 +1817,7 @@ Hoogerheide ligt op de zandrug van de Brabantse Wal, ideaal voor een snelle en s
 ### Wat kost een uitbouw in Hoogerheide?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**, inclusief plaatsing en afwerking.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1852,7 +1852,7 @@ Ossendrecht ligt op de stevige zandgrond van de Brabantse Wal, perfect voor een 
 ### Wat kost een uitbouw in Ossendrecht?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1887,7 +1887,7 @@ Putte ligt op de zandgrond van de Wal, ideaal voor een snelle en stabiele plaats
 ### Wat kost een uitbouw in Putte?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1922,7 +1922,7 @@ Wouw ligt op stevige zandgrond, ideaal voor een snelle en stabiele plaatsing van
 ### Wat kost een uitbouw in Wouw?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1957,7 +1957,7 @@ Lepelstraat ligt in het polderlandschap met deels kleigrond. Wij berekenen de ju
 ### Wat kost een uitbouw in Lepelstraat?
 Reken op **€2.500 tot €4.200 per m²**. Een uitbouw van 15 m² begint vanaf circa **€44.000**.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -1992,7 +1992,7 @@ Nieuw-Vossemeer ligt in het polderlandschap met kleigrond. Een goede fundering i
 ### Wat kost een uitbouw in Nieuw-Vossemeer?
 De **uitbouw kosten per m²** liggen gemiddeld tussen **€2.500 en €4.200**. Een uitbouw van 15 m² komt daarmee vanaf circa **€44.000** uit.
 
-[Ontwerp je aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
+[Ontwerp uw aanbouw](https://prefabselect-configurator-551195834943.europe-west2.run.app/)`,
     stats: [
       { label: 'Plaatsing', value: '1 DAG' },
       { label: 'Isolatie', value: 'RC 6.0' },
@@ -2166,7 +2166,7 @@ function CityLandingPage() {
               />
               <div className="bg-blue-600 p-8 rounded-[2.5rem] text-white shadow-xl">
                 <p className="font-display font-black text-2xl uppercase tracking-tighter leading-none mb-3">Premium Maatwerk</p>
-                <p className="text-[11px] font-black uppercase tracking-widest opacity-60">Architectural quality</p>
+                <p className="text-[11px] font-black uppercase tracking-widest opacity-60">Architectonische kwaliteit</p>
               </div>
             </div>
           </div>
@@ -2265,7 +2265,7 @@ function CityLandingPage() {
               💬
             </div>
             <div>
-              <p className="text-[10px] text-blue-100 font-black uppercase tracking-widest opacity-70">Kelly staat voor je klaar</p>
+              <p className="text-[10px] text-blue-100 font-black uppercase tracking-widest opacity-70">Kelly staat voor u klaar</p>
               <p className="font-display font-black uppercase tracking-tighter text-sm">Vraag Direct Een Offerte Aan</p>
             </div>
           </Link>
@@ -2375,11 +2375,11 @@ function CityLandingPage() {
                   </div>
                   <div>
                     <p className="text-xs text-blue-100 font-bold uppercase tracking-widest">Altijd dichtbij</p>
-                    <p className="text-lg font-display font-black uppercase tracking-tighter">Kelly helpt je verder</p>
+                    <p className="text-lg font-display font-black uppercase tracking-tighter">Kelly helpt u verder</p>
                   </div>
                 </div>
                 <p className="text-sm text-blue-100 mb-8 leading-relaxed font-medium">
-                  Heb je specifieke vragen over een project in {page.name}? Ik sta klaar om je te adviseren over de beste prefab oplossing.
+                  Heeft u specifieke vragen over een project in {page.name}? Ik sta klaar om u te adviseren over de beste prefab oplossing.
                 </p>
                 <Link to="/contact" className="inline-flex items-center gap-3 bg-white text-blue-600 px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl hover:bg-blue-50 transition-all">
                   Contact opnemen <ArrowRight size={14} />
@@ -2726,7 +2726,7 @@ function Navbar() {
                       Neem vrijblijvend <br /> contact met ons op.
                     </h3>
                     <p className="text-slate-600 text-sm leading-relaxed mb-10">
-                      We helpen je graag met advies, vragen of een vrijblijvende offerte.
+                      We helpen u graag met advies, vragen of een vrijblijvende offerte.
                     </p>
 
                     <div className="space-y-4">
@@ -3228,7 +3228,7 @@ function SEOText() {
             </h2>
             <div className="prose prose-invert lg:prose-xl max-w-none">
               <p className="text-xl leading-relaxed text-blue-50/70">
-                Steeds meer mensen kiezen ervoor om hun woning uit te breiden in plaats van te verhuizen. Logisch ook — verhuizen is duur, kost tijd en je levert vaak in op locatie. Wat wij merken bij klanten van <strong>Prefabselect.nl</strong>, is dat ze vooral één ding willen: 
+                Steeds meer mensen kiezen ervoor om hun woning uit te breiden in plaats van te verhuizen. Logisch ook — verhuizen is duur, kost tijd en u levert vaak in op locatie. Wat wij merken bij klanten van <strong>Prefabselect.nl</strong>, is dat ze vooral één ding willen: 
                 <span className="text-blue-400 font-bold ml-2 italic">snel meer ruimte, zonder maandenlang in een bouwput te zitten.</span>
               </p>
             </div>
@@ -3254,7 +3254,7 @@ function SEOText() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] -mr-32 -mt-32 transition-all duration-1000 group-hover:bg-blue-600/20"></div>
             <h3 className="text-xl md:text-4xl font-black text-white uppercase tracking-tighter mb-8 md:mb-12 leading-none">Wat kost een prefab uitbouw ongeveer?</h3>
             <div className="prose prose-invert max-w-none mb-8 md:mb-12">
-              <p className="text-base md:text-lg text-blue-50/70 mb-8">De prijs hangt natuurlijk af van jouw wensen, maar om je een eerlijk beeld te geven:</p>
+              <p className="text-base md:text-lg text-blue-50/70 mb-8">De prijs hangt natuurlijk af van uw wensen, maar om u een eerlijk beeld te geven:</p>
               <ul className="text-lg list-none p-0 space-y-6">
                 <li className="flex items-center gap-6">
                   <div className="w-3 h-3 rounded-full bg-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.8)]"></div>
@@ -3272,7 +3272,7 @@ function SEOText() {
             </div>
             <div className="bg-white/5 p-10 rounded-3xl border border-white/10 backdrop-blur-xl">
               <p className="text-xs font-black uppercase tracking-[0.4em] text-blue-400 leading-relaxed text-center">
-                Wat we belangrijk vinden: je krijgt bij ons altijd een duidelijke prijs vooraf, zonder verrassingen achteraf.
+                Wat we belangrijk vinden: u krijgt bij ons altijd een duidelijke prijs vooraf, zonder verrassingen achteraf.
               </p>
             </div>
           </div>
@@ -3282,7 +3282,7 @@ function SEOText() {
             <h3 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter text-center">Hoe het traject er in de praktijk uitziet</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {[
-                { step: "1", title: "Offerte aanvragen", desc: "Binnen korte tijd nemen we contact met je op." },
+                { step: "1", title: "Offerte aanvragen", desc: "Binnen korte tijd nemen we contact met u op." },
                 { step: "2", title: "Woning & Wensen", desc: "Wat is mogelijk? Wat past het beste bij uw situatie?" },
                 { step: "3", title: "Ontwerp op maat", desc: "Geen standaard oplossing, maar afgestemd op u." },
                 { step: "4", title: "Productie", desc: "Alles gebeurt gecontroleerd in onze eigen fabriek." },
@@ -3300,19 +3300,19 @@ function SEOText() {
           {/* Considerations Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center pt-12 md:pt-24">
             <div className="space-y-8 md:space-y-10">
-              <h3 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">Waar moet je rekening mee houden?</h3>
+              <h3 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">Waar moet u rekening mee houden?</h3>
               <p className="text-base md:text-lg leading-relaxed text-blue-50/70 border-l-4 border-blue-600 pl-6 md:pl-10">
                 Eerlijk is eerlijk: een uitbouw is maatwerk. Dingen die invloed hebben op de uiteindelijke uitkomst: de grootte, het type kozijnen of schuifpui, de afwerking (basis of luxe) en extra's zoals keuken of vloerverwarming. 
               </p>
               <p className="text-[10px] md:text-[11px] font-black text-blue-400 uppercase tracking-[0.5em] leading-none">
-                Twijfel je wat slim is? Dat is precies waar wij je bij helpen.
+                Twijfelt u wat slim is? Dat is precies waar wij u bij helpen.
               </p>
             </div>
             <div className="bg-white/5 backdrop-blur-[80px] p-10 md:p-16 rounded-[2.5rem] md:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden border border-white/10 group">
                <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
                <h4 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 text-blue-400 leading-none">Direct duidelijkheid</h4>
                <p className="text-[10px] text-white/40 leading-relaxed font-black uppercase tracking-[0.3em] mb-12">
-                 Benieuwd wat er bij jouw woning mogelijk is? Vraag vrijblijvend een offerte aan via <a href="https://www.prefabselect.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-400 transition-colors">www.prefabselect.nl</a>
+                 Benieuwd wat er bij uw woning mogelijk is? Vraag vrijblijvend een offerte aan via <a href="https://www.prefabselect.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-400 transition-colors">www.prefabselect.nl</a>
                </p>
                <Link to="/offerte" className="w-full bg-blue-600 text-white py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-blue-500 hover:translate-y-[-4px] hover:shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all duration-300 shadow-2xl active:scale-95 group flex items-center justify-center gap-4 border border-blue-400/20">
                  Vraag Offerte Aan <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -4083,7 +4083,7 @@ function Hero() {
                   <Home size={14} className="text-white" />
                   <Plus size={10} className="text-blue-300 stroke-[3]" />
                 </div>
-                Ontwerp je aanbouw
+                Ontwerp uw aanbouw
               </a>
               <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl shadow-sm w-full sm:w-auto backdrop-blur-md">
                 <img 
@@ -4131,12 +4131,12 @@ function WhyChooseUsSection() {
     },
     {
       title: "Volledig maatwerk",
-      description: "Van moderne prefab uitbouwen tot luxe aanbouwen met lichtstraat: alles wordt afgestemd op jouw stijl en wensen.",
+      description: "Van moderne prefab uitbouwen tot luxe aanbouwen met lichtstraat: alles wordt afgestemd op uw stijl en wensen.",
       icon: <PenTool className="w-10 h-10 text-blue-600" />
     },
     {
       title: "Waardevermeerdering",
-      description: "Niet alleen extra leefruimte en meer comfort, maar ook direct een hogere marktwaarde van jouw woning.",
+      description: "Niet alleen extra leefruimte en meer comfort, maar ook direct een hogere marktwaarde van uw woning.",
       icon: <TrendingUp className="w-10 h-10 text-blue-600" />
     },
     {
@@ -4146,7 +4146,7 @@ function WhyChooseUsSection() {
     },
     {
       title: "Transparante prijzen",
-      description: "Weten waar je aan toe bent met heldere offertes. Geen verborgen kosten of onverwachte meerprijzen achteraf.",
+      description: "Weten waar u aan toe bent met heldere offertes. Geen verborgen kosten of onverwachte meerprijzen achteraf.",
       icon: <ShieldCheck className="w-10 h-10 text-blue-600" />
     }
   ];
@@ -4764,7 +4764,7 @@ export function ConfiguratorTeaser() {
           <div className="rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200">
             <img 
               src="https://i.imgur.com/SCJSCLJ.jpeg" 
-              alt="Ontwerp je aanbouw" 
+              alt="Ontwerp uw aanbouw" 
               className="w-full aspect-[4/3] object-cover"
               referrerPolicy="no-referrer"
             />
@@ -4807,7 +4807,7 @@ export function ConfiguratorTeaser() {
                 rel="noopener noreferrer" 
                 className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-blue-700 transition-all border border-blue-500/20 group"
               >
-                Ontwerp je aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                Ontwerp uw aanbouw <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <div className="flex items-center gap-3 bg-white border border-slate-200/80 p-2.5 rounded-2xl shadow-xs w-full sm:w-auto">
                 <img 
@@ -4870,7 +4870,7 @@ function WhyChooseUsPage() {
           >
             <div className="inline-flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-blue-400" />
-              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 leading-none">THE ARCHITECTURAL CHOICE</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-400 leading-none">DE ARCHITECTONISCHE KEUZE</span>
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-10">
@@ -4884,7 +4884,7 @@ function WhyChooseUsPage() {
             
             <div className="flex flex-wrap gap-8 items-center pt-4">
               <Link to="/offerte" className="bg-blue-600 text-white px-12 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] shadow-2xl hover:bg-blue-500 hover:-translate-y-1 transition-all active:scale-95 group flex items-center gap-4 border border-blue-400/20">
-                Start jouw project <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                Start uw project <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <a href="#benefits" className="text-white/40 hover:text-white text-[11px] font-black uppercase tracking-[0.3em] transition-all flex items-center gap-3 group">
                 <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/40 transition-all">

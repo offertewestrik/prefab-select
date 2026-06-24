@@ -31,7 +31,7 @@ export default function EindhovenLandingPage() {
     if (metaDesc) {
       metaDesc.setAttribute(
         "content", 
-        "Prefab uitbouw of aanbouw in Eindhoven? Prefab Select levert snel, duurzaam en met vaste prijs. 20 jaar garantie. Vraag vrijblijvend uw offerte aan."
+        "Prefab uitbouw of aanbouw in Eindhoven? Prefab Select levert snel, duurzaam en met vaste prijs. 10 jaar garantie. Vraag vrijblijvend uw offerte aan."
       );
     }
 
@@ -47,7 +47,7 @@ export default function EindhovenLandingPage() {
           "@id": "https://www.prefabselect.nl/regio/eindhoven",
           "url": "https://www.prefabselect.nl/regio/eindhoven",
           "name": "Prefab Uitbouw & Aanbouw Eindhoven | Prefab Select",
-          "description": "Prefab uitbouw of aanbouw in Eindhoven? Prefab Select levert snel, duurzaam en met vaste prijs. 20 jaar garantie. Vraag vrijblijvend uw offerte aan.",
+          "description": "Prefab uitbouw of aanbouw in Eindhoven? Prefab Select levert snel, duurzaam en met vaste prijs. 10 jaar garantie. Vraag vrijblijvend uw offerte aan.",
           "inLanguage": "nl-NL",
           "isPartOf": { "@type": "WebSite", "name": "Prefab Select", "url": "https://www.prefabselect.nl" },
           "about": { 
@@ -96,7 +96,7 @@ export default function EindhovenLandingPage() {
               "name": "Welke garantie krijg ik?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Wij bieden standaard 20 jaar garantie op de gehele dragende constructie van uw prefab aanbouw, zodat u verzekerd bent van absolute kwaliteit."
+                "text": "Wij bieden standaard 10 jaar garantie op de gehele dragende constructie van uw prefab aanbouw, zodat u verzekerd bent van absolute kwaliteit."
               }
             }
           ]
@@ -158,11 +158,11 @@ export default function EindhovenLandingPage() {
     },
     {
       question: 'Wat kost een prefab uitbouw of aanbouw?',
-      answer: 'Als indicatie ligt een prefab uitbouw doorgaans tussen circa 1.100 en 2.000 euro per m², afhankelijk van afmetingen, afwerking en fundering. U ontvangt altijd een heldere offerte met prijsgarantie tot 12 maanden.'
+      answer: 'Als indicatie ligt een prefab uitbouw doorgaans tussen circa 2.500 en 4.500 euro per m², afhankelijk van afmetingen, afwerking en fundering. U ontvangt altijd een heldere offerte met prijsgarantie tot 12 maanden.'
     },
     {
       question: 'Welke garantie krijg ik?',
-      answer: 'Op de volledige constructie geven wij 20 jaar garantie. Daarnaast geldt een prijsgarantie tot 12 maanden, zodat u niet voor verrassingen komt te staan.'
+      answer: 'Op de volledige constructie geven wij 10 jaar garantie. Daarnaast geldt een prijsgarantie tot 12 maanden, zodat u niet voor verrassingen komt te staan.'
     },
     {
       question: 'Is prefab net zo hoogwaardig als traditionele bouw?',
@@ -254,7 +254,7 @@ export default function EindhovenLandingPage() {
                       <ShieldCheck size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">20 JAAR GARANTIE</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">10 JAAR GARANTIE</p>
                       <p className="text-[10px] text-blue-200/50 leading-none">Op de gehele constructie</p>
                     </div>
                   </div>
@@ -297,7 +297,7 @@ export default function EindhovenLandingPage() {
 
                 {/* Trust badge with 20 Year Warranty accent */}
                 <div className="absolute -bottom-6 -left-6 bg-blue-600 text-white rounded-[2rem] px-6 py-5 shadow-2xl border border-white/10 animate-float">
-                  <span className="block font-display font-black text-2xl leading-none">20 JAAR</span>
+                  <span className="block font-display font-black text-2xl leading-none">10 JAAR</span>
                   <span className="block text-[8px] font-black uppercase tracking-widest leading-none mt-1 opacity-80">
                     Constructie garantie
                   </span>
@@ -497,8 +497,8 @@ export default function EindhovenLandingPage() {
                 icon: <Leaf size={22} />
               },
               {
-                title: '20 jaar garantie',
-                desc: 'Op de volledige constructie van onze woningen en uitbreidingen geven wij 20 jaar garantie.',
+                title: '10 jaar garantie',
+                desc: 'Op de volledige constructie van onze woningen en uitbreidingen geven wij 10 jaar garantie.',
                 icon: <Award size={22} />
               },
               {
@@ -647,7 +647,7 @@ export default function EindhovenLandingPage() {
               </h2>
               
               <p className="text-lg text-blue-100/60 leading-relaxed mb-12 font-medium max-w-xl mx-auto">
-                Ontvang een vrijblijvende offerte met vaste prijs en 20 jaar garantie. Wij denken graag met u mee over de mogelijkheden voor uw woning in Eindhoven.
+                Ontvang een vrijblijvende offerte met vaste prijs en 10 jaar garantie. Wij denken graag met u mee over de mogelijkheden voor uw woning in Eindhoven.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

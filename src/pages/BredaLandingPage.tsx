@@ -278,7 +278,7 @@ export default function BredaLandingPage() {
                       <Gem size={16} />
                     </div>
                     <div>
-                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">20 JAAR GARANTIE</p>
+                      <p className="text-white text-xs font-black uppercase tracking-wider leading-none mb-1">10 JAAR GARANTIE</p>
                       <p className="text-[10px] text-blue-200/50 leading-none">Op de volledige constructie</p>
                     </div>
                   </div>
@@ -601,7 +601,7 @@ export default function BredaLandingPage() {
             
             {/* Box 1 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DASHBOARD DECISIONS</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">SLIMME KEUZES</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Past een uitbouw het best bij uw plan?
               </h3>
@@ -643,7 +643,7 @@ export default function BredaLandingPage() {
 
             {/* Box 4 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMAL COMFORT</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMISCH COMFORT</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Het hele jaar comfortabel &amp; behaaglijk
               </h3>

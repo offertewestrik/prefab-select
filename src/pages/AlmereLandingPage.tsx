@@ -592,7 +592,7 @@ export default function AlmereLandingPage() {
             
             {/* Box 1 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-1">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">STRATEGIC CHOICE</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">STRATEGISCHE KEUZE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Is een prefab aanbouw uw beste optie?
               </h3>
@@ -606,7 +606,7 @@ export default function AlmereLandingPage() {
 
             {/* Box 2 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-2">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">PREPARED START</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">GOEDE VOORBEREIDING</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Grondige polderondergrond-analyse
               </h3>
@@ -620,7 +620,7 @@ export default function AlmereLandingPage() {
 
             {/* Box 3 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-3">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">DAYLIGHT OPTIMIZATION</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">OPTIMAAL DAGLICHT</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Daglichtbepaling en leefcomfort
               </h3>
@@ -634,7 +634,7 @@ export default function AlmereLandingPage() {
 
             {/* Box 4 */}
             <div className="bg-white p-10 md:p-14 border border-slate-100 rounded-[3rem] shadow-3xs" id="analysis-box-4">
-              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMAL EXCELLENCE</span>
+              <span className="text-[9px] font-black uppercase tracking-widest text-blue-600 mb-2 block">THERMISCHE TOPKLASSE</span>
               <h3 className="text-2xl font-display font-black uppercase tracking-tighter text-blue-950 mb-4">
                 Uitmuntende en duurzame thermische isolatie
               </h3>

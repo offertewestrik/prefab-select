@@ -128,10 +128,10 @@ const Poolhouse = () => {
             {[
               { title: "Lounge ruimtes", desc: "Creëer een luxe buitenruimte voor ontspanning en comfort.", icon: <Sofa size={24} /> },
               { title: "Buitenkeukens", desc: "Moderne poolhouses met luxe buitenkeuken en bar mogelijkheden.", icon: <Utensils size={24} /> },
-              { title: "Wellness ruimtes", desc: "Combineer jouw poolhouse met wellness voorzieningen zoals sauna’s of jacuzzi’s.", icon: <Droplets size={24} /> },
+              { title: "Wellness ruimtes", desc: "Combineer uw poolhouse met wellness voorzieningen zoals sauna’s of jacuzzi’s.", icon: <Droplets size={24} /> },
               { title: "Grote glaspartijen", desc: "Maximaal daglicht dankzij moderne schuifpuien en glaswanden.", icon: <Sun size={24} /> },
               { title: "Luxe gevelafwerkingen", desc: "Van strak wit stucwerk tot moderne houten gevelaccenten.", icon: <Box size={24} /> },
-              { title: "Volledig maatwerk", desc: "Ieder poolhouse wordt afgestemd op jouw woning, tuin en wensen.", icon: <CheckCircle2 size={24} /> },
+              { title: "Volledig maatwerk", desc: "Ieder poolhouse wordt afgestemd op uw woning, tuin en wensen.", icon: <CheckCircle2 size={24} /> },
             ].map((card, i) => (
               <motion.div 
                 key={i}
