@@ -7,6 +7,7 @@ const nav: NavItem[] = [
   { label: "Steden", href: "/admin/cities" },
   { label: "SEO-pagina's", href: "/admin/seo-pages" },
   { label: "Leads", href: "/admin/leads" },
+  { label: "Aankopen", href: "/admin/purchases" },
   { label: "Vakmannen", href: "/admin/installers" },
   { label: "Artikelen", href: "/admin/articles" },
 ];

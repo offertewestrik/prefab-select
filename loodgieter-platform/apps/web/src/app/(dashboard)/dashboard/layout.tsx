@@ -4,6 +4,7 @@ import { SidebarLayout, type NavItem } from "@/components/dashboard/sidebar-layo
 const nav: NavItem[] = [
   { label: "Overzicht", href: "/dashboard" },
   { label: "Nieuwe leads", href: "/dashboard/leads" },
+  { label: "Mijn leads", href: "/dashboard/mijn-leads" },
   { label: "Offertes", href: "/dashboard/quotes" },
   { label: "Reviews", href: "/dashboard/reviews" },
   { label: "Instellingen", href: "/dashboard/settings" },
