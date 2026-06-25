@@ -568,23 +568,33 @@ model LeadAttachment {
 }
 
 model Quote {
-  id          String           @id @default(cuid())
-  companyId   String
-  leadId      String?
-  number      String           @unique
-  lineItems   Json             // [{ description, qty, unitPrice }]
-  subtotalCents Int
-  vatCents    Int
-  totalCents  Int
-  status      QuoteStatus      @default(DRAFT)
-  validUntil  DateTime?
-  pdfUrl      String?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
-  company     InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  lead        LeadRequest?     @relation(fields: [leadId], references: [id])
+  id            String           @id @default(cuid())
+  companyId     String
+  leadId        String?
+  number        String           @unique
+  title         String?
+  introText     String?          @db.Text
+  lineItems     Json             // [{ description, qty, unitPriceCents }]
+  subtotalCents Int              @default(0)
+  vatRate       Int              @default(21) // btw-percentage
+  vatCents      Int              @default(0)
+  totalCents    Int              @default(0)
+  terms         String?          @db.Text
+  notes         String?          @db.Text
+  status        QuoteStatus      @default(DRAFT)
+  validUntil    DateTime?
+  pdfUrl        String?
+  accessToken   String?          @unique // beveiligde klant-link
+  sentAt        DateTime?
+  acceptedAt    DateTime?
+  rejectedAt    DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  company       InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  lead          LeadRequest?     @relation(fields: [leadId], references: [id])
 
   @@index([companyId])
+  @@index([leadId])
 }
 
 model LeadMatch {

@@ -74,28 +74,3 @@ export async function buyLead(companyId: string, leadId: string): Promise<BuyRes
   }
 }
 
-/** Maakt een offerteconcept (DRAFT) voor een gekochte lead. */
-export async function createQuoteDraft(companyId: string, leadId: string): Promise<{ ok: boolean; quoteId?: string }> {
-  // Alleen toegestaan als de lead daadwerkelijk gekocht is door dit bedrijf.
-  const purchase = await prisma.leadPurchase.findFirst({
-    where: { companyId, match: { leadId } },
-  });
-  if (!purchase) return { ok: false };
-
-  const count = await prisma.quote.count({ where: { companyId } });
-  const number = `OFF-${new Date().getFullYear()}-${String(count + 1).padStart(4, "0")}`;
-
-  const quote = await prisma.quote.create({
-    data: {
-      companyId,
-      leadId,
-      number,
-      lineItems: [],
-      subtotalCents: 0,
-      vatCents: 0,
-      totalCents: 0,
-      status: "DRAFT",
-    },
-  });
-  return { ok: true, quoteId: quote.id };
-}

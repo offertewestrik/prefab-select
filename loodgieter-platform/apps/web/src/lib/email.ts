@@ -63,3 +63,57 @@ export function sendInternalLeadNotification(input: {
     </div>`;
   return send(to, `Nieuwe lead: ${input.serviceName} (${input.city})`, html, input.email);
 }
+
+function euro(cents: number): string {
+  return new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR" }).format(cents / 100);
+}
+
+/** Offerte verstuurd → naar de klant, met beveiligde link. */
+export function sendQuoteSentEmail(input: {
+  to: string;
+  customerName: string;
+  companyName: string;
+  quoteNumber: string;
+  totalCents: number;
+  url: string;
+}): Promise<SendResult> {
+  const html = `
+    <div style="font-family:system-ui,sans-serif;max-width:560px">
+      <h1 style="color:#1D4ED8">Je offerte van ${input.companyName}</h1>
+      <p>Beste ${input.customerName},</p>
+      <p>Je hebt een offerte ontvangen (nr. <strong>${input.quoteNumber}</strong>) met een
+      totaalbedrag van <strong>${euro(input.totalCents)}</strong> incl. btw.</p>
+      <p><a href="${input.url}" style="display:inline-block;background:#2563EB;color:#fff;padding:12px 20px;border-radius:10px;text-decoration:none">Bekijk &amp; reageer op je offerte</a></p>
+      <p style="color:#64748b;font-size:13px">Of kopieer deze link: ${input.url}</p>
+    </div>`;
+  return send(input.to, `Je offerte ${input.quoteNumber} van ${input.companyName}`, html);
+}
+
+/** Offerte geaccepteerd → naar de installateur (en intern). */
+export function sendQuoteAcceptedEmail(input: {
+  to: string;
+  quoteNumber: string;
+  customerName: string;
+}): Promise<SendResult> {
+  const html = `
+    <div style="font-family:system-ui,sans-serif;max-width:560px">
+      <h1 style="color:#16A34A">Offerte geaccepteerd 🎉</h1>
+      <p>Goed nieuws! ${input.customerName} heeft offerte <strong>${input.quoteNumber}</strong> geaccepteerd.</p>
+      <p>Neem contact op met de klant om de klus in te plannen.</p>
+    </div>`;
+  return send(input.to, `Offerte ${input.quoteNumber} geaccepteerd`, html);
+}
+
+/** Offerte afgewezen → naar de installateur (optioneel). */
+export function sendQuoteRejectedEmail(input: {
+  to: string;
+  quoteNumber: string;
+  customerName: string;
+}): Promise<SendResult> {
+  const html = `
+    <div style="font-family:system-ui,sans-serif;max-width:560px">
+      <h1>Offerte afgewezen</h1>
+      <p>${input.customerName} heeft offerte <strong>${input.quoteNumber}</strong> afgewezen.</p>
+    </div>`;
+  return send(input.to, `Offerte ${input.quoteNumber} afgewezen`, html);
+}

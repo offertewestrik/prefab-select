@@ -3,9 +3,9 @@ import { Lock, MapPin, Calendar, Clock, Paperclip } from "lucide-react";
 import { Button, Card, CardContent } from "@repo/ui";
 import { PageHeading } from "@/components/dashboard/sidebar-layout";
 import { getSessionUser, getCurrentCompany } from "@/lib/guards";
+import Link from "next/link";
 import { getLeadView } from "@/features/leads/server/access";
 import { BuyLeadButton } from "@/features/leads/components/buy-lead-button";
-import { createQuoteAction } from "@/features/leads/server/actions";
 
 export default async function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -68,10 +68,9 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
           </Card>
 
           {unlocked && (
-            <form action={createQuoteAction}>
-              <input type="hidden" name="leadId" value={data.id} />
-              <Button type="submit" variant="outline">Maak offerteconcept</Button>
-            </form>
+            <Link href={`/dashboard/leads/${data.id}/offerte`}>
+              <Button variant="outline">Maak offerte</Button>
+            </Link>
           )}
         </div>
 

@@ -1,9 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { requireRole, getCurrentCompany } from "@/lib/guards";
-import { buyLead, createQuoteDraft } from "./purchase";
+import { buyLead } from "./purchase";
 
 const REASONS: Record<string, string> = {
   not_available: "Deze lead is niet (meer) aan jou aangeboden.",
@@ -32,17 +31,4 @@ export async function buyLeadAction(_prev: BuyState, formData: FormData): Promis
   revalidatePath("/dashboard/mijn-leads");
   revalidatePath("/dashboard");
   return { ok: true, message: "Lead gekocht! De klantgegevens zijn vrijgegeven." };
-}
-
-/** Maakt een offerteconcept voor een gekochte lead en gaat naar offertes. */
-export async function createQuoteAction(formData: FormData): Promise<void> {
-  await requireRole("INSTALLER");
-  const company = await getCurrentCompany();
-  if (!company) return;
-  const leadId = String(formData.get("leadId") ?? "");
-  if (!leadId) return;
-
-  const result = await createQuoteDraft(company.id, leadId);
-  revalidatePath("/dashboard/quotes");
-  if (result.ok) redirect("/dashboard/quotes");
 }
