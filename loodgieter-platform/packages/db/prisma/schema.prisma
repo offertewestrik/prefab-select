@@ -187,14 +187,23 @@ model InstallerCompany {
   phone         String
   website       String?
   logoUrl       String?
+  coverImageUrl String?
+  shortDescription String?
   description   String?       @db.Text
+  specialties   String[]
   foundedYear   Int?
+  yearsExperience Int?
+  employees     Int?
+  openingHours  Json?
+  emergencyService Boolean    @default(false)
+  warrantyText  String?       @db.Text
   contactName   String?
   street        String?
   postcode      String?
   city          String?
   province      String?
   status        CompanyStatus @default(PENDING_REVIEW)
+  publicVisible Boolean       @default(true)
   ratingAvg     Float         @default(0)
   ratingCount   Int           @default(0)
   creditBalance Int           @default(0)
@@ -207,6 +216,7 @@ model InstallerCompany {
   services       CompanyService[]
   coverage       CompanyCoverage[]
   certifications Certification[]
+  photos         CompanyPhoto[]
   matches        LeadMatch[]
   purchases      LeadPurchase[]
   appointments   Appointment[]
@@ -237,7 +247,21 @@ model Certification {
   type       String
   number     String?
   validUntil DateTime?
+  fileUrl    String?
   company    InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+}
+
+// Portfolio-foto's van een bedrijf (publiek profiel).
+model CompanyPhoto {
+  id        String           @id @default(cuid())
+  companyId String
+  url       String
+  caption   String?
+  order     Int              @default(0)
+  createdAt DateTime         @default(now())
+  company   InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   @@index([companyId])
 }

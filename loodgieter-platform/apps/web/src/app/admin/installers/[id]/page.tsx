@@ -5,6 +5,7 @@ import { Button, Card, CardContent } from "@repo/ui";
 import { PageHeading } from "@/components/dashboard/sidebar-layout";
 import { getCompanyForAdmin } from "@/features/installers/server/admin";
 import { approveCompanyAction, rejectCompanyAction, suspendCompanyAction } from "@/features/installers/server/actions";
+import { setVisibilityAction } from "@/features/installers/server/profile-actions";
 
 export default async function AdminInstallerDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -68,7 +69,18 @@ export default async function AdminInstallerDetail({ params }: { params: Promise
           <input type="hidden" name="companyId" value={company.id} />
           <Button type="submit" variant="outline" disabled={company.status === "SUSPENDED"}>Schorsen</Button>
         </form>
+        <form action={setVisibilityAction}>
+          <input type="hidden" name="companyId" value={company.id} />
+          <input type="hidden" name="visible" value={company.publicVisible ? "false" : "true"} />
+          <Button type="submit" variant="outline">{company.publicVisible ? "Verberg publiek profiel" : "Toon publiek profiel"}</Button>
+        </form>
       </div>
+
+      {company.status === "APPROVED" && company.publicVisible && (
+        <Link href={`/vakmannen/${company.slug}`} className="text-sm font-medium text-primary-600 hover:underline">
+          Bekijk publiek profiel →
+        </Link>
+      )}
     </div>
   );
 }
