@@ -10,16 +10,30 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "lint": "turbo run lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "turbo run typecheck",
+    "check": "pnpm db:generate && pnpm typecheck && pnpm lint && pnpm build",
     "db:generate": "pnpm --filter @repo/db generate",
     "db:migrate": "pnpm --filter @repo/db migrate",
     "db:seed": "pnpm --filter @repo/db seed",
-    "db:studio": "pnpm --filter @repo/db studio"
+    "db:studio": "pnpm --filter @repo/db studio",
+    "db:create-admin": "pnpm --filter @repo/db create-admin",
+    "db:create-installer": "pnpm --filter @repo/db create-installer",
+    "db:create-homeowner": "pnpm --filter @repo/db create-homeowner",
+    "db:create-dev-users": "pnpm --filter @repo/db create-dev-users"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@next/eslint-plugin-next": "^15.2.3",
+    "eslint": "^9.17.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^15.14.0",
     "prettier": "^3.3.3",
     "turbo": "^2.3.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.18.0"
   }
 }

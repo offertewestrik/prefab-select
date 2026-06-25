@@ -14,6 +14,7 @@ const credsSchema = z.object({
 const nextAuth = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" }, // vereist i.c.m. Credentials provider
+  trustHost: true, // self-hosted achter proxy (Vercel/Cloudflare)
   pages: { signIn: "/login" },
   providers: [
     Credentials({

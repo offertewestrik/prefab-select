@@ -46,8 +46,31 @@ Handige commando's:
 | `pnpm dev` | alle apps in dev-modus |
 | `pnpm build` | productie-build |
 | `pnpm typecheck` | TypeScript controleren |
+| `pnpm lint` / `pnpm lint:fix` | ESLint controleren / autofixen |
+| `pnpm check` | alles ineen: db:generate + typecheck + lint + build |
 | `pnpm db:studio` | Prisma Studio (database-UI) |
 | `pnpm db:seed` | seeds (her)inladen — idempotent |
+
+### Test-/dev-gebruikers (⚠️ alleen lokaal/development)
+
+Voor het testen van login en rollen:
+
+```bash
+pnpm db:create-dev-users      # alle drie ineens
+# of afzonderlijk:
+pnpm db:create-admin
+pnpm db:create-installer      # incl. demo-bedrijf, werkgebied & diensten
+pnpm db:create-homeowner
+```
+
+| Rol | E-mail | Wachtwoord (dev) |
+|-----|--------|------------------|
+| ADMIN | `admin@loodgieterplatform.nl` | `Admin!2026dev` |
+| INSTALLER | `installateur@loodgieterplatform.nl` | `Installer!2026dev` |
+| HOMEOWNER | `klant@loodgieterplatform.nl` | `Klant!2026dev` |
+
+> ⛔ Deze accounts en wachtwoorden zijn **uitsluitend** voor lokaal/development.
+> Gebruik ze nooit in productie. Log in via `/login`.
 
 ## Wat zit er in Fase 0
 
