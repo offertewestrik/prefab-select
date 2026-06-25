@@ -9,6 +9,7 @@ import { CookieConsent } from './components/CookieConsent';
 // Route-level code splitting: each page (and the heavy agency dashboard with
 // Firebase) loads in its own chunk, so the homepage no longer ships everything.
 const AgencyApp = lazy(() => import('./agency/AgencyApp'));
+const AanbouwApp = lazy(() => import('./aanbouw/AanbouwApp'));
 const Diensten = lazy(() => import('./pages/Diensten'));
 const PrefabUitbouw = lazy(() => import('./pages/PrefabUitbouw'));
 const PrefabAanbouw = lazy(() => import('./pages/PrefabAanbouw'));
@@ -5377,6 +5378,17 @@ export default function App() {
     return (
       <Suspense fallback={<PageFallback />}>
         <AgencyApp />
+      </Suspense>
+    );
+  }
+
+  // AanbouwPlatform.nl — a self-contained lead- & offerteplatform for aanbouw /
+  // uitbouw projects, mounted under /aanbouw/* with its own light premium layout
+  // (sidebar, topbar, auth). Renders without the marketing chrome.
+  if (pathname === '/aanbouw' || pathname.startsWith('/aanbouw/')) {
+    return (
+      <Suspense fallback={<PageFallback />}>
+        <AanbouwApp />
       </Suspense>
     );
   }

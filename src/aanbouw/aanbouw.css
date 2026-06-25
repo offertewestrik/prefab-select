@@ -1,0 +1,151 @@
+/* =========================================================================
+   AanbouwPlatform.nl — premium, light, trustworthy building-platform theme.
+   White surfaces, deep navy structure, warm orange accents. Fully
+   self-contained: imported only by AanbouwApp.tsx and scoped under .abp-root
+   so it can never leak into the marketing site.
+   ========================================================================= */
+.abp-root {
+  --abp-bg: #f4f7fb;
+  --abp-surface: #ffffff;
+  --abp-surface-2: #f8fafc;
+  --abp-border: #e2e8f0;
+  --abp-border-strong: #cbd5e1;
+  --abp-navy: #0e2a47;
+  --abp-navy-2: #15426b;
+  --abp-navy-soft: #1e3a5f;
+  --abp-text: #0f1b2d;
+  --abp-muted: #5b6b82;
+  --abp-faint: #8595a8;
+  --abp-accent: #f97316;
+  --abp-accent-strong: #ea580c;
+  --abp-accent-soft: #fff4ec;
+
+  color: var(--abp-text);
+  background:
+    radial-gradient(1200px 520px at 12% -8%, rgba(14, 42, 71, 0.06), transparent 60%),
+    radial-gradient(900px 480px at 100% 0%, rgba(249, 115, 22, 0.07), transparent 55%),
+    var(--abp-bg);
+  min-height: 100vh;
+  font-family: var(--font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+.abp-root h1, .abp-root h2, .abp-root h3, .abp-root h4, .abp-root h5, .abp-root h6 {
+  color: var(--abp-navy);
+  font-family: var(--font-display, "Space Grotesk", "Inter", sans-serif);
+  letter-spacing: -0.02em;
+}
+
+/* --- Surfaces ----------------------------------------------------------- */
+.abp-card {
+  background: var(--abp-surface);
+  border: 1px solid var(--abp-border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.04), 0 12px 28px -22px rgba(15, 27, 45, 0.45);
+}
+
+.abp-card-hover {
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.abp-card-hover:hover {
+  border-color: var(--abp-border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(15, 27, 45, 0.05), 0 22px 44px -26px rgba(15, 27, 45, 0.55);
+}
+
+.abp-panel {
+  background: var(--abp-surface);
+  border: 1px solid var(--abp-border);
+}
+
+/* Navy panel used for the sidebar + brand surfaces. */
+.abp-navy-panel {
+  background: linear-gradient(180deg, #0e2a47 0%, #0b2340 100%);
+  color: #dbe6f2;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.abp-gradient-text {
+  background: linear-gradient(115deg, var(--abp-navy) 0%, var(--abp-navy-2) 55%, var(--abp-accent) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- Inputs ------------------------------------------------------------- */
+.abp-input {
+  background: var(--abp-surface);
+  border: 1px solid var(--abp-border-strong);
+  color: var(--abp-text);
+  border-radius: 0.7rem;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.abp-input::placeholder { color: var(--abp-faint); }
+.abp-input:focus {
+  outline: none;
+  border-color: var(--abp-accent);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
+}
+
+/* --- Scrollbar ---------------------------------------------------------- */
+.abp-scroll::-webkit-scrollbar { width: 9px; height: 9px; }
+.abp-scroll::-webkit-scrollbar-track { background: transparent; }
+.abp-scroll::-webkit-scrollbar-thumb {
+  background: rgba(15, 27, 45, 0.16);
+  border-radius: 999px;
+}
+.abp-scroll::-webkit-scrollbar-thumb:hover { background: rgba(15, 27, 45, 0.28); }
+
+/* --- Sidebar nav (on the navy panel) ------------------------------------ */
+.abp-nav-link {
+  color: rgba(219, 230, 242, 0.72);
+  transition: background-color .15s ease, color .15s ease;
+}
+.abp-nav-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.07); }
+.abp-nav-link-active { color: #ffffff; background: rgba(249, 115, 22, 0.16); }
+
+/* --- Pulse for live dots ------------------------------------------------ */
+@keyframes abp-pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+.abp-pulse { animation: abp-pulse-ring 1.8s infinite; }
+
+/* --- Wizard step bar ---------------------------------------------------- */
+.abp-step-dot {
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+  border: 2px solid var(--abp-border-strong);
+  background: var(--abp-surface);
+  color: var(--abp-faint);
+  transition: all .2s ease;
+}
+.abp-step-dot-active {
+  border-color: var(--abp-accent);
+  background: var(--abp-accent);
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(249, 115, 22, 0.6);
+}
+.abp-step-dot-done {
+  border-color: var(--abp-navy);
+  background: var(--abp-navy);
+  color: #fff;
+}
+
+/* Selectable option tiles (build type, finish, etc.) */
+.abp-choice {
+  border: 1.5px solid var(--abp-border);
+  background: var(--abp-surface);
+  border-radius: 0.85rem;
+  transition: all .15s ease;
+  cursor: pointer;
+}
+.abp-choice:hover { border-color: var(--abp-accent); background: var(--abp-accent-soft); }
+.abp-choice-active {
+  border-color: var(--abp-accent);
+  background: var(--abp-accent-soft);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.14);
+}
