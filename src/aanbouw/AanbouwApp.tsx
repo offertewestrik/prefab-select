@@ -7,6 +7,7 @@ import { DashboardLayout } from './components/layout/DashboardLayout';
 import { Spinner, EmptyState, Button } from './components/ui';
 import type { Permission } from './lib/rbac';
 
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 // Admin
@@ -61,10 +62,10 @@ export default function AanbouwApp() {
     <AuthProvider>
       <DataProvider>
         <Routes>
+          <Route path="/aanbouw" element={<HomePage />} />
           <Route path="/aanbouw/login" element={<LoginPage />} />
           <Route element={<RequireAuth />}>
             <Route element={<DashboardLayout />}>
-              <Route path="/aanbouw" element={<Navigate to="/aanbouw/dashboard" replace />} />
               <Route path="/aanbouw/dashboard" element={<DashboardPage />} />
 
               {/* Admin */}

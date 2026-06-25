@@ -22,7 +22,7 @@ export function StatCard({
   };
   return (
     <div
-      className={cn('abp-card p-4 sm:p-5', onClick && 'abp-card-hover cursor-pointer')}
+      className={cn('abp-card abp-statcard-accent p-4 sm:p-5', onClick && 'abp-card-hover cursor-pointer')}
       onClick={onClick}
     >
       <div className="flex items-start justify-between gap-3">

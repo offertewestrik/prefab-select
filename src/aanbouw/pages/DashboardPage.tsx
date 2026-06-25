@@ -33,9 +33,10 @@ function AdminDashboard() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight">Platform dashboard</h1>
-        <p className="text-sm text-[var(--abp-muted)] mt-1">Overzicht van alle aanvragen, bouwbedrijven en klanten op AanbouwPlatform.nl.</p>
+      <div className="abp-dash-hero p-6 sm:p-7 mb-6">
+        <span className="abp-eyebrow abp-eyebrow-light">Platformbeheer</span>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-2">Platform dashboard</h1>
+        <p className="text-sm text-white/70 mt-1">Overzicht van alle aanvragen, bouwbedrijven en klanten op AanbouwPlatform.nl.</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
@@ -105,9 +106,17 @@ function ContractorDashboard() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight">Welkom, {myCompany?.contactPerson?.split(' ')[0] ?? 'aannemer'}</h1>
-        <p className="text-sm text-[var(--abp-muted)] mt-1">{myCompany?.name} — uw leads, offertes en projecten in één overzicht.</p>
+      <div className="abp-dash-hero p-6 sm:p-7 mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span className="abp-eyebrow abp-eyebrow-light">{myCompany?.verified ? 'Geverifieerd bouwbedrijf' : 'Bouwbedrijf'}</span>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-2">Welkom, {myCompany?.contactPerson?.split(' ')[0] ?? 'aannemer'}</h1>
+          <p className="text-sm text-white/70 mt-1">{myCompany?.name} — uw leads, offertes en projecten in één overzicht.</p>
+        </div>
+        {myCompany?.verified && (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm text-white">
+            <ShieldCheck size={15} className="text-emerald-400" /> Geverifieerd
+          </span>
+        )}
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
