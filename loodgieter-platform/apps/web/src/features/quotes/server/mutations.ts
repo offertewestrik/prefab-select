@@ -3,9 +3,11 @@ import { siteUrl } from "@repo/seo";
 import { brand } from "@repo/core";
 import { prisma } from "@/lib/prisma";
 import { saveQuoteSchema, sendQuoteSchema } from "../schema";
+import { euro } from "@/lib/format";
 import { computeTotals, makeAccessToken } from "./service";
 import { parseLineItems } from "./queries";
-import { sendQuoteSentEmail, sendQuoteAcceptedEmail, sendQuoteRejectedEmail } from "@/lib/email";
+import { sendQuoteSent, sendQuoteAccepted, sendQuoteRejected, sendAdminNotification } from "@/features/notifications/email/send";
+import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
 
 // Pure, request-context-onafhankelijke mutaties (testbaar). De server-acties
 // (actions.ts) doen auth/rol-checks en roepen deze functies aan.
@@ -64,12 +66,12 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
     data: { status: "SENT", sentAt: new Date(), accessToken: token },
   });
 
-  await sendQuoteSentEmail({
+  await sendQuoteSent({
     to: quote.lead.contactEmail,
-    customerName: quote.lead.contactName,
     companyName: quote.company.name,
     quoteNumber: quote.number,
-    totalCents: quote.totalCents,
+    totalText: euro(quote.totalCents / 100),
+    validUntil: quote.validUntil ? quote.validUntil.toLocaleDateString("nl-NL") : undefined,
     url: siteUrl(`/offertes/${quoteId}?token=${token}`),
   });
   return { ok: true };
@@ -88,8 +90,24 @@ export async function applyDecision(quoteId: string, kind: "accept" | "reject"):
 
   const installerEmail = quote.company.email || process.env.CONTACT_RECEIVER_EMAIL || brand.email;
   const customerName = quote.lead?.contactName ?? "De klant";
-  if (kind === "accept") await sendQuoteAcceptedEmail({ to: installerEmail, quoteNumber: quote.number, customerName });
-  else await sendQuoteRejectedEmail({ to: installerEmail, quoteNumber: quote.number, customerName });
+  const dashboardUrl = siteUrl("/dashboard/mijn-leads");
+
+  if (kind === "accept") {
+    await sendQuoteAccepted({
+      to: installerEmail,
+      quoteNumber: quote.number,
+      customerName,
+      customerContact: [quote.lead?.contactPhone, quote.lead?.contactEmail].filter(Boolean).join(" · "),
+      totalText: euro(quote.totalCents / 100),
+      dashboardUrl,
+    });
+    await notifyCompany(quote.companyId, { type: "quote.accepted", title: `Offerte ${quote.number} geaccepteerd`, body: customerName, href: "/dashboard/quotes" });
+    await notifyAdmins({ type: "quote.accepted", title: `Offerte ${quote.number} geaccepteerd`, body: quote.company.name, href: "/admin" });
+    void sendAdminNotification({ title: `Offerte ${quote.number} geaccepteerd`, lines: [`Vakman: ${quote.company.name}`, `Bedrag: ${euro(quote.totalCents / 100)}`], url: siteUrl("/admin") });
+  } else {
+    await sendQuoteRejected({ to: installerEmail, quoteNumber: quote.number, customerName });
+    await notifyCompany(quote.companyId, { type: "quote.rejected", title: `Offerte ${quote.number} afgewezen`, body: customerName, href: "/dashboard/quotes" });
+  }
 
   return { ok: true };
 }

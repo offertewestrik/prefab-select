@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Droplets } from "lucide-react";
 import { brand } from "@repo/core";
 
-export type NavItem = { label: string; href: string };
+export type NavItem = { label: string; href: string; badge?: number };
 
 // Herbruikbare donkere zijbalk-layout voor dashboard én admin (tijdelijke
 // basis-layout; Claude Design werkt het uiterlijk verder af).
@@ -30,9 +30,14 @@ export function SidebarLayout({
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-[var(--radius-md)] px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              className="flex items-center justify-between rounded-[var(--radius-md)] px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
-              {item.label}
+              <span>{item.label}</span>
+              {item.badge ? (
+                <span className="grid h-5 min-w-5 place-items-center rounded-full bg-accent-500 px-1.5 text-xs font-semibold text-white">
+                  {item.badge}
+                </span>
+              ) : null}
             </Link>
           ))}
         </nav>

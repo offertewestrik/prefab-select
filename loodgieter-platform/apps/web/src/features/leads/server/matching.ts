@@ -1,5 +1,9 @@
 import "server-only";
+import { urgencyLabels } from "@repo/core";
+import { siteUrl } from "@repo/seo";
 import { prisma } from "@/lib/prisma";
+import { sendLeadAvailable } from "@/features/notifications/email/send";
+import { notifyCompany } from "@/features/notifications/server/service";
 
 /**
  * Matching-fundering (schaalbaar, bewust eenvoudig — zie docs/05 §3).
@@ -11,7 +15,10 @@ import { prisma } from "@/lib/prisma";
  * Maakt LeadMatch-records (OFFERED) voor de top-N (maxBuyers).
  */
 export async function matchLead(leadId: string): Promise<number> {
-  const lead = await prisma.leadRequest.findUnique({ where: { id: leadId } });
+  const lead = await prisma.leadRequest.findUnique({
+    where: { id: leadId },
+    include: { service: true, municipality: true },
+  });
   if (!lead) return 0;
 
   const candidates = await prisma.installerCompany.findMany({
@@ -24,7 +31,7 @@ export async function matchLead(leadId: string): Promise<number> {
     // Ranking: hoogste rating eerst (later: abonnement/voorrang, responstijd).
     orderBy: [{ ratingAvg: "desc" }, { ratingCount: "desc" }],
     take: lead.maxBuyers,
-    select: { id: true },
+    select: { id: true, email: true },
   });
 
   if (candidates.length === 0) {
@@ -42,6 +49,13 @@ export async function matchLead(leadId: string): Promise<number> {
     ),
     prisma.leadRequest.update({ where: { id: leadId }, data: { status: "DISTRIBUTED" } }),
   ]);
+
+  // Melding naar gematchte installateurs — PII-vrij (alleen dienst/plaats/urgentie).
+  const leadUrl = siteUrl(`/dashboard/leads/${leadId}`);
+  for (const c of candidates) {
+    void sendLeadAvailable({ to: c.email, serviceName: lead.service.name, city: lead.municipality.name, urgencyLabel: urgencyLabels[lead.urgency], leadUrl });
+    await notifyCompany(c.id, { type: "lead.available", title: `Nieuwe lead: ${lead.service.name}`, body: `${lead.municipality.name} · ${urgencyLabels[lead.urgency]}`, href: `/dashboard/leads/${leadId}` });
+  }
 
   return candidates.length;
 }

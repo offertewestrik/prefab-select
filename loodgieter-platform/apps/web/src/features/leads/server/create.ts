@@ -1,7 +1,10 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { slugify, type LeadInput } from "@repo/core";
-import { sendLeadConfirmation, sendInternalLeadNotification } from "@/lib/email";
+import { siteUrl } from "@repo/seo";
+import { priceRange } from "@/lib/format";
+import { sendLeadConfirmation, sendAdminNotification } from "@/features/notifications/email/send";
+import { notifyAdmins } from "@/features/notifications/server/service";
 import { computeLeadPriceCredits } from "./pricing";
 import { matchLead } from "./matching";
 
@@ -67,20 +70,24 @@ export async function createLead(
     },
   });
 
-  // 3. E-mails (best-effort, blokkeert de aanvraag niet).
+  // 3. E-mails + admin-notificatie (best-effort, blokkeert de aanvraag niet).
+  const priceText = resolvedService.priceFrom
+    ? priceRange(resolvedService.priceFrom, resolvedService.priceTo, resolvedService.priceUnit)
+    : undefined;
   void sendLeadConfirmation({
     to: input.contactEmail,
-    name: input.contactName,
+    customerName: input.contactName,
     serviceName: resolvedService.name,
     city: municipality.name,
+    priceText,
+    accountUrl: lead.homeownerId ? siteUrl("/mijn-aanvragen") : undefined,
   });
-  void sendInternalLeadNotification({
-    serviceName: resolvedService.name,
-    city: municipality.name,
-    name: input.contactName,
-    phone: input.contactPhone,
-    email: input.contactEmail,
+  void sendAdminNotification({
+    title: `Nieuwe lead: ${resolvedService.name} (${municipality.name})`,
+    lines: [`Klant: ${input.contactName}`, `Telefoon: ${input.contactPhone}`, `E-mail: ${input.contactEmail}`],
+    url: siteUrl("/admin/leads"),
   });
+  await notifyAdmins({ type: "lead.new", title: `Nieuwe lead: ${resolvedService.name}`, body: municipality.name, href: "/admin/leads" });
 
   // 4. Matching starten (best-effort).
   let matched = 0;

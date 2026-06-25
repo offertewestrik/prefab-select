@@ -1,7 +1,10 @@
 import "server-only";
 import bcrypt from "bcryptjs";
 import { slugify } from "@repo/core";
+import { siteUrl } from "@repo/seo";
 import { prisma } from "@/lib/prisma";
+import { sendAdminNotification } from "@/features/notifications/email/send";
+import { notifyAdmins } from "@/features/notifications/server/service";
 import type { RegisterInstallerInput } from "../schema";
 
 export type RegisterResult =
@@ -86,6 +89,12 @@ export async function submitForReview(companyId: string): Promise<{ ok: boolean;
   if (company._count.coverage === 0) return { ok: false, reason: "no_coverage" };
   if (company.status === "DRAFT") {
     await prisma.installerCompany.update({ where: { id: companyId }, data: { status: "PENDING_REVIEW" } });
+    void sendAdminNotification({
+      title: `Nieuwe vakman wacht op goedkeuring: ${company.name}`,
+      lines: [`Bedrijf: ${company.name}`, `E-mail: ${company.email}`],
+      url: siteUrl(`/admin/installers/${companyId}`),
+    });
+    await notifyAdmins({ type: "installer.pending", title: "Nieuwe vakman wacht op goedkeuring", body: company.name, href: `/admin/installers/${companyId}` });
   }
   return { ok: true };
 }
