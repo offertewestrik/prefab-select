@@ -1,0 +1,4 @@
+{
+  "extends": "@repo/config/tsconfig/next",
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

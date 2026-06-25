@@ -1,20 +1,19 @@
 // ─────────────────────────────────────────────────────────────────────────
-//  MERKINSTELLINGEN — pas hier alles aan (naam, telefoon, e-mail, regio's).
-//  Dit is de enige plek die je hoeft te wijzigen om de hele site bij te werken.
+//  MERKINSTELLINGEN — één plek voor naam, contact en werkgebied.
 // ─────────────────────────────────────────────────────────────────────────
 
 export const brand = {
   name: "Loodgieterplatform.nl",
   shortName: "Loodgieterplatform",
   domain: "loodgieterplatform.nl",
-  tagline: "Snel een vakkundige loodgieter aan huis",
+  tagline: "Vind binnen 2 minuten een betrouwbare loodgieter",
 
-  // Pas deze contactgegevens aan naar jullie eigen nummer/adres:
-  phone: "085 - 808 00 00",
-  phoneHref: "tel:+31858080000",
+  // Pas aan naar de eigen contactgegevens:
+  phone: "085 - 060 58 72",
+  phoneHref: "tel:+31850605872",
   email: "info@loodgieterplatform.nl",
 
-  // Werkgebied (provincies). Voeg toe of haal weg naar wens:
+  // Werkgebied (provincies). Sturen ook de teksten op de site aan.
   regions: [
     "Noord-Brabant",
     "Gelderland",
@@ -22,9 +21,8 @@ export const brand = {
     "Noord-Holland",
     "Utrecht",
   ],
-};
+} as const;
 
-// Korte, leesbare opsomming van het werkgebied, bv. "Noord-Brabant, Gelderland ... en Utrecht"
 export function regionsSentence(): string {
   const r = brand.regions;
   if (r.length <= 1) return r[0] ?? "";

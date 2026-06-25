@@ -1,11 +1,23 @@
+# dependencies
 node_modules/
+.pnpm-store/
+
+# builds
 .next/
 out/
-build/
 dist/
+.turbo/
+
+# env
+.env
+.env.local
+.env*.local
+
+# prisma
+packages/db/prisma/*.db
+
+# misc
 .DS_Store
 *.log
-.env*
-!.env.example
-leads_fallback.json
+coverage/
 next-env.d.ts
