@@ -23,11 +23,16 @@ export function CookieConsent() {
       }
     }
 
-    // To ensure you can preview, test, and view the cookie block immediately,
-    // we show the banner by default on page load.
-    const timer = setTimeout(() => {
-      setShowBanner(true);
-    }, 800);
+    // Toon de banner alleen aan bezoekers die nog geen keuze hebben gemaakt.
+    // Wie al toestemming gaf (of weigerde) ziet de banner niet opnieuw, maar
+    // kan zijn voorkeuren altijd aanpassen via de "Cookie Instellingen"-knop
+    // in de footer (dispatcht het 'openPrefabCookieConsent'-event hieronder).
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    if (!consent) {
+      timer = setTimeout(() => {
+        setShowBanner(true);
+      }, 800);
+    }
 
     const handleOpen = () => {
       setShowBanner(true);
