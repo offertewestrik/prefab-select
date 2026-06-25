@@ -83,6 +83,29 @@ export function faqLd(faqs: { question: string; answer: string }[]): Json {
   };
 }
 
+export function articleLd(input: {
+  title: string;
+  description?: string;
+  path: string;
+  author?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  imageUrl?: string;
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: input.title,
+    description: input.description,
+    url: siteUrl(input.path),
+    image: input.imageUrl,
+    datePublished: input.publishedAt,
+    dateModified: input.updatedAt ?? input.publishedAt,
+    author: input.author ? { "@type": "Person", name: input.author } : { "@type": "Organization", name: brand.name },
+    publisher: { "@type": "Organization", name: brand.name },
+  };
+}
+
 export function localBusinessLd(input: {
   name: string;
   slug: string;

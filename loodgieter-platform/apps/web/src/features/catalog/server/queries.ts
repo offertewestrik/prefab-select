@@ -37,6 +37,21 @@ export async function getAllServiceSlugs() {
   return rows;
 }
 
+/** Alle merken (voor /merken). */
+export async function getAllBrands() {
+  return prisma.brand.findMany({ orderBy: { name: "asc" } });
+}
+
+/** Eén merk op slug, met gekoppelde diensten. */
+export async function getBrandBySlug(slug: string) {
+  return prisma.brand.findUnique({
+    where: { slug },
+    include: {
+      services: { include: { service: true } },
+    },
+  });
+}
+
 /** Prioriteits-combinaties (dienst × grootste gemeenten) voor build-time prerender. */
 export async function getPriorityServiceCityPairs(topServices = 30, topCities = 50) {
   const [services, cities] = await Promise.all([
