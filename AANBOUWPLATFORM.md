@@ -1,11 +1,14 @@
 # AanbouwPlatform.nl
 
-A premium **lead- & offerteplatform** for homeowners who want an *aanbouw,
-uitbouw, dakopbouw, garage-ombouw* or renovation — and the bouwbedrijven /
-aannemers that deliver them. Built into this repo with the same technical
-structure, auth, dashboards, database approach and seed scripts as the agency
-dashboard, but with its own **light, premium theme** (white surfaces, deep navy
-structure, warm orange accents) suited to projects of €30.000–€150.000.
+A premium **lead- & offerteplatform** for **woninguitbreiding** in the broadest
+sense — homeowners who want an *aanbouw, uitbouw, dakopbouw, mantelzorgwoning,
+poolhouse, veranda, tuinkantoor, garageverbouwing* or *prefab woning* — and the
+bouwbedrijven / aannemers that deliver them. The merknaam stays
+`AanbouwPlatform.nl`; only the positioning is broadened to capture far more
+zoekverkeer and leads. Built into this repo with the same technical structure,
+auth, dashboards, database approach and seed scripts as the agency dashboard,
+but with its own **light, premium theme** (white surfaces, deep navy structure,
+warm orange accents) suited to projects of €30.000–€150.000.
 
 It is mounted at **`/aanbouw`** and runs alongside the existing Prefab Select
 marketing website (and the `/agency` dashboard) without touching them.
@@ -57,7 +60,7 @@ reloads. Reset anytime via **Instellingen → Demo-data resetten**.
 - Berichten en offertes per aanvraag
 
 ### Aanvraagformulier (4 stappen)
-1. **Wat wil je bouwen?** — Aanbouw, Uitbouw, Dakopbouw, Garage ombouw, Mantelzorgwoning, Poolhouse, Anders
+1. **Wat wil je bouwen?** — Aanbouw, Uitbouw, Dakopbouw, Garage ombouw, Mantelzorgwoning, Poolhouse, Veranda, Tuinkantoor, Prefab woning, Anders
 2. **Afmetingen** — breedte, diepte, m² (auto), afwerking (casco / standaard / luxe)
 3. **Situatie** — bestaande woning, fundering nodig?, vergunning nodig?, startdatum, budgetindicatie
 4. **Contactgegevens** — naam, telefoon, e-mail, postcode, plaats
@@ -78,7 +81,7 @@ src/aanbouw/
 ├── services/firestoreService.ts  # Data backend (localStorage now → Firestore later)
 ├── lib/
 │   ├── rbac.ts                # Roles → permissions
-│   ├── services.ts            # Dienstencatalogus + bouwtypes + budgetranges
+│   ├── services.ts            # Dienstencatalogus (13) + bouwtypes + budgetranges
 │   ├── match.ts               # Score bouwbedrijf ↔ aanvraag (dienst + werkgebied)
 │   ├── status.ts              # Status → badge-tone mapping
 │   └── format.ts              # nl-NL currency/date formatters + quoteTotals

@@ -9,7 +9,10 @@ export const SERVICES: ServiceDef[] = [
   { key: 'uitbouw', label: 'Uitbouw', description: 'Uitbreiding van een bestaande ruimte, bijv. de woonkamer.' },
   { key: 'dakopbouw', label: 'Dakopbouw', description: 'Een extra verdieping of opbouw op het bestaande dak.' },
   { key: 'garage-ombouw', label: 'Garage ombouw', description: 'Een garage verbouwen tot volwaardige leefruimte.' },
-  { key: 'fundering', label: 'Fundering', description: 'Funderingswerk en grondwerk voor de aanbouw.' },
+  { key: 'veranda', label: 'Veranda', description: 'Overdekt terras of veranda aan de woning of in de tuin.' },
+  { key: 'tuinkantoor', label: 'Tuinkantoor', description: 'Een vrijstaand tuinkantoor of werkruimte in de tuin.' },
+  { key: 'prefab-woning', label: 'Prefab woning', description: 'Volledige prefab (mantelzorg)woning of recreatiewoning.' },
+  { key: 'fundering', label: 'Fundering', description: 'Funderingswerk en grondwerk voor de uitbreiding.' },
   { key: 'staalconstructie', label: 'Staalconstructie', description: 'Stalen draagconstructies en spanten.' },
   { key: 'kozijnen', label: 'Kozijnen', description: 'Levering en plaatsing van kozijnen.' },
   { key: 'schuifpui', label: 'Schuifpui', description: 'Schuifpuien en grote glaspartijen.' },
@@ -25,7 +28,8 @@ export const serviceLabel = (key: ServiceKey): string => SERVICE_LABELS[key] ?? 
 
 /** What a homeowner can choose to build (Stap 1 of the aanvraagformulier). */
 export const BUILD_TYPES: BuildType[] = [
-  'Aanbouw', 'Uitbouw', 'Dakopbouw', 'Garage ombouw', 'Mantelzorgwoning', 'Poolhouse', 'Anders',
+  'Aanbouw', 'Uitbouw', 'Dakopbouw', 'Garage ombouw', 'Mantelzorgwoning',
+  'Poolhouse', 'Veranda', 'Tuinkantoor', 'Prefab woning', 'Anders',
 ];
 
 export const FINISHES: { key: Finish; label: string; description: string }[] = [
@@ -50,4 +54,9 @@ export const buildTypeToService: Partial<Record<BuildType, ServiceKey>> = {
   Uitbouw: 'uitbouw',
   Dakopbouw: 'dakopbouw',
   'Garage ombouw': 'garage-ombouw',
+  Veranda: 'veranda',
+  Tuinkantoor: 'tuinkantoor',
+  'Prefab woning': 'prefab-woning',
+  Mantelzorgwoning: 'prefab-woning',
+  Poolhouse: 'tuinkantoor',
 };

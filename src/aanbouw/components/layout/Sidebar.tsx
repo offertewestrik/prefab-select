@@ -29,7 +29,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
             </div>
             <div className="leading-tight">
               <p className="text-sm font-bold text-white">AanbouwPlatform</p>
-              <p className="text-[10px] text-white/55 tracking-wide">.NL — BOUW & OFFERTES</p>
+              <p className="text-[10px] text-white/55 tracking-wide">.NL — WONINGUITBREIDING</p>
             </div>
           </div>
           <button className="lg:hidden text-white/70" onClick={onClose} aria-label="Sluit menu"><X size={18} /></button>

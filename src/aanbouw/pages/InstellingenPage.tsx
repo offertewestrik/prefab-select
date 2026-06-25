@@ -36,12 +36,12 @@ export default function InstellingenPage() {
         <Card className="p-5">
           <CardHeader title="Over dit platform" icon={<ShieldCheck size={16} />} />
           <p className="text-sm text-[var(--abp-muted)] leading-relaxed">
-            AanbouwPlatform.nl is een lead- en offerteplatform voor aanbouw, uitbouw, dakopbouw, garage-ombouw en renovatie.
+            AanbouwPlatform.nl is hét lead- en offerteplatform voor woninguitbreiding — van aanbouw, uitbouw en dakopbouw tot mantelzorgwoning, poolhouse, veranda, tuinkantoor en prefab woning.
             Deze demo draait volledig op lokale data (localStorage) — wijzigingen blijven bewaard tot u ze reset.
           </p>
           <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
             <div className="p-2 rounded-xl bg-[var(--abp-surface-2)]"><p className="font-bold text-[var(--abp-navy)]">3</p><p className="text-[var(--abp-muted)]">rollen</p></div>
-            <div className="p-2 rounded-xl bg-[var(--abp-surface-2)]"><p className="font-bold text-[var(--abp-navy)]">10</p><p className="text-[var(--abp-muted)]">diensten</p></div>
+            <div className="p-2 rounded-xl bg-[var(--abp-surface-2)]"><p className="font-bold text-[var(--abp-navy)]">13</p><p className="text-[var(--abp-muted)]">diensten</p></div>
             <div className="p-2 rounded-xl bg-[var(--abp-surface-2)]"><p className="font-bold text-[var(--abp-navy)]">nl-NL</p><p className="text-[var(--abp-muted)]">locale</p></div>
           </div>
         </Card>

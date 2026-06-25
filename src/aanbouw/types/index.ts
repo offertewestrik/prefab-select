@@ -37,6 +37,9 @@ export type ServiceKey =
   | 'uitbouw'
   | 'dakopbouw'
   | 'garage-ombouw'
+  | 'veranda'
+  | 'tuinkantoor'
+  | 'prefab-woning'
   | 'fundering'
   | 'staalconstructie'
   | 'kozijnen'
@@ -111,6 +114,9 @@ export type BuildType =
   | 'Garage ombouw'
   | 'Mantelzorgwoning'
   | 'Poolhouse'
+  | 'Veranda'
+  | 'Tuinkantoor'
+  | 'Prefab woning'
   | 'Anders';
 
 export type Finish = 'casco' | 'standaard' | 'luxe';

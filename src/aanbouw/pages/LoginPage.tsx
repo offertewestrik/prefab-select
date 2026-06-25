@@ -36,14 +36,14 @@ export default function LoginPage() {
             </div>
             <div>
               <p className="text-xl font-bold text-[var(--abp-navy)]">AanbouwPlatform<span className="text-[var(--abp-accent)]">.nl</span></p>
-              <p className="text-xs text-[var(--abp-muted)] tracking-wide">HÉT PLATFORM VOOR AANBOUW & UITBOUW</p>
+              <p className="text-xs text-[var(--abp-muted)] tracking-wide">HÉT PLATFORM VOOR WONINGUITBREIDING</p>
             </div>
           </div>
           <h1 className="text-4xl font-bold leading-tight mb-4">
             Van aanvraag tot<br /><span className="text-[var(--abp-accent)]">opgeleverd project</span>.
           </h1>
           <p className="text-[var(--abp-muted)] text-base leading-relaxed max-w-md mb-8">
-            Particulieren vinden geverifieerde bouwbedrijven voor hun aanbouw, uitbouw, dakopbouw of garage-ombouw. Aannemers ontvangen gerichte aanvragen in hun werkgebied.
+            Particulieren vinden geverifieerde bouwbedrijven voor élke woninguitbreiding — aanbouw, uitbouw, dakopbouw, mantelzorgwoning, poolhouse, veranda, tuinkantoor of prefab woning. Aannemers ontvangen gerichte aanvragen in hun werkgebied.
           </p>
           <div className="grid grid-cols-2 gap-3 max-w-md">
             {['Geverifieerde bouwbedrijven', 'Gerichte aanvragen per regio', 'Offertes & berichten op één plek', 'Projecten van €30k tot €150k'].map((f) => (
