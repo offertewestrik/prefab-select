@@ -329,3 +329,109 @@
   background: var(--abp-grad-orange); opacity:.0; transition: opacity .2s ease;
 }
 .abp-statcard-accent:hover::before { opacity:.9; }
+
+/* =========================================================================
+   CINEMATIC HOMEPAGE LAYER — Apple daylight-minimal. Big architecture,
+   editorial whitespace, glass, scroll storytelling. (Used by HomePage.tsx)
+   ========================================================================= */
+.abp-h {
+  --h-ink: #0a1626;
+  --h-soft: #5a6b80;
+  --h-line: #e8edf3;
+  background: #ffffff;
+  color: var(--h-ink);
+  font-family: var(--font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
+}
+.abp-h ::selection { background: rgba(249,115,22,.18); }
+
+.abp-h-display {
+  font-family: var(--font-display, "Space Grotesk", "Inter", sans-serif);
+  font-weight: 700; letter-spacing: -0.035em; line-height: 0.98;
+}
+.abp-h-mega { font-size: clamp(2.7rem, 8.5vw, 7.5rem); }
+.abp-h-h2   { font-size: clamp(2rem, 5.2vw, 4.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; }
+.abp-h-lead { font-size: clamp(1.05rem, 1.7vw, 1.45rem); line-height: 1.5; color: var(--h-soft); font-weight: 400; }
+.abp-h-kicker {
+  font-size: .78rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--abp-accent-strong);
+}
+.abp-h-kicker-light { color: rgba(255,255,255,.75); }
+
+.abp-h-container { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: 1.5rem; }
+.abp-h-container-wide { width: 100%; max-width: 1500px; margin-inline: auto; padding-inline: 1.5rem; }
+.abp-h-section { padding-block: clamp(5rem, 12vw, 11rem); }
+
+/* Hero ------------------------------------------------------------------- */
+.abp-h-hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background:#0a1626; }
+.abp-h-hero-media { position:absolute; inset:-6% -2%; will-change: transform; }
+.abp-h-hero-img { width:100%; height:100%; object-fit: cover; }
+@keyframes abp-kenburns { from { transform: scale(1.04); } to { transform: scale(1.14); } }
+.abp-kenburns { animation: abp-kenburns 18s ease-out forwards; }
+.abp-hero-veil {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(100deg, rgba(8,18,32,.68) 0%, rgba(8,18,32,.40) 32%, rgba(8,18,32,.05) 62%, rgba(8,18,32,0) 80%),
+    linear-gradient(180deg, rgba(8,18,32,.34) 0%, rgba(8,18,32,0) 24%, rgba(8,18,32,0) 52%, rgba(8,18,32,.55) 100%);
+}
+.abp-hero-veil-2 { position:absolute; inset:0; background: radial-gradient(120% 80% at 50% 120%, rgba(8,18,32,.40), transparent 60%); }
+
+.abp-on-img { color:#fff; text-shadow: 0 2px 30px rgba(8,18,32,.35); }
+/* Force white on dark/image-overlay headings (beats base .abp-root h1/h2 navy rule). */
+.abp-h .abp-hw { color:#fff; }
+
+/* Glass --------------------------------------------------------------- */
+.abp-glass-white {
+  background: rgba(255,255,255,.62);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: 0 30px 80px -40px rgba(8,22,38,.5);
+}
+.abp-glass-ondark {
+  background: rgba(255,255,255,.10);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,.22);
+}
+
+/* Nav -------------------------------------------------------------------- */
+.abp-h-nav { position: fixed; top:0; left:0; right:0; z-index: 60; }
+.abp-h-navlink { font-size:.92rem; font-weight:500; letter-spacing:-.01em; transition: color .2s ease, opacity .2s ease; }
+
+/* Pills / buttons -------------------------------------------------------- */
+.abp-pill {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.78rem 1.4rem; border-radius:999px; font-weight:600; font-size:.95rem;
+  transition: transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.abp-pill-dark { background: var(--h-ink); color:#fff; }
+.abp-pill-dark:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -16px rgba(10,22,38,.6); }
+.abp-pill-orange { background: var(--abp-grad-orange); color:#fff; box-shadow: 0 16px 34px -16px rgba(234,88,12,.7); }
+.abp-pill-orange:hover { transform: translateY(-2px); box-shadow: 0 22px 44px -14px rgba(234,88,12,.8); }
+.abp-pill-light { background:#fff; color: var(--h-ink); border:1px solid var(--h-line); }
+.abp-pill-light:hover { transform: translateY(-2px); border-color:#cfd9e4; }
+.abp-pill-glass { background: rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.32); }
+.abp-pill-glass:hover { background: rgba(255,255,255,.24); }
+
+/* Full-bleed image bands ------------------------------------------------- */
+.abp-bleed { position: relative; height: clamp(420px, 70vh, 760px); overflow: hidden; }
+.abp-bleed-media { position:absolute; inset:-10% 0; will-change: transform; }
+.abp-bleed-media img { width:100%; height:120%; object-fit: cover; }
+
+/* Material swatches (configurator) -------------------------------------- */
+.abp-swatch { width:2.6rem; height:2.6rem; border-radius:.7rem; border:2px solid #fff; box-shadow: 0 6px 16px -8px rgba(10,22,38,.4); cursor:pointer; transition: transform .18s ease; }
+.abp-swatch:hover { transform: translateY(-3px) scale(1.05); }
+.abp-swatch-active { outline: 2px solid var(--abp-accent); outline-offset: 2px; }
+
+/* Diensten editorial rows ----------------------------------------------- */
+.abp-row { border-top: 1px solid var(--h-line); }
+.abp-row:last-child { border-bottom: 1px solid var(--h-line); }
+.abp-row-num { font-family: var(--font-display,"Space Grotesk",sans-serif); font-weight:700; color:#cdd7e2; transition: color .25s ease; }
+.abp-row:hover .abp-row-num { color: var(--abp-accent); }
+.abp-row-title { transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.abp-row:hover .abp-row-title { transform: translateX(10px); }
+
+/* Marquee for trust strip */
+@keyframes abp-marquee { from { transform: translateX(0);} to { transform: translateX(-50%);} }
+.abp-marquee { display:flex; width:max-content; animation: abp-marquee 32s linear infinite; }
+@media (prefers-reduced-motion: reduce){ .abp-marquee,.abp-kenburns{ animation:none; } }

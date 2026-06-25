@@ -1,382 +1,368 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  Home, Menu, X, ArrowRight, Star, ShieldCheck, Check, Sparkles,
-  PencilRuler, Handshake, Hammer, Quote, MapPin, ChevronRight, Box,
-} from 'lucide-react';
-import { BUILD_TYPES, SERVICES } from '../lib/services';
-import { BUILD_ICON, SHOWCASE_PROJECTS, REVIEWS, PLATFORM_STATS } from '../lib/showcase';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
+import heroVilla from '../assets/hero-villa.webp';
+import { BUILD_TYPES } from '../lib/services';
+import { REVIEWS, PLATFORM_STATS } from '../lib/showcase';
 
-/* ========================================================================= */
-/*  AanbouwPlatform.nl — premium public homepage (mounted at /aanbouw)        */
-/* ========================================================================= */
+/* =========================================================================
+   AanbouwPlatform.nl — cinematic homepage. Apple daylight-minimal.
+   One signature architecture render, editorial whitespace, scroll storytelling.
+   Functionaliteit identiek: alle CTA's leiden naar /aanbouw/login.
+   ========================================================================= */
+
+const EASE = [0.2, 0.7, 0.2, 1] as const;
+
+function Reveal({ children, y = 26, delay = 0, className }: { children: React.ReactNode; y?: number; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.85, ease: EASE, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function HomePage() {
   return (
-    <div className="abp-root">
-      <MarketingNav />
+    <div className="abp-root abp-h">
+      <Nav />
       <Hero />
-      <TrustBar />
-      <HowItWorks />
-      <ConfiguratorSection />
+      <Intro />
+      <BleedBand />
+      <Configurator />
       <Diensten />
-      <Projecten />
-      <Reviews />
-      <CtaBand />
+      <Proof />
+      <Voices />
+      <ClosingCta />
       <Footer />
     </div>
   );
 }
 
 /* --- Nav ----------------------------------------------------------------- */
-function MarketingNav() {
-  const [open, setOpen] = useState(false);
+function Nav() {
+  const [solid, setSolid] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setSolid(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const links = [
-    { href: '#hoe', label: 'Hoe het werkt' },
+    { href: '#ontwerp', label: 'Ontwerpen' },
     { href: '#configurator', label: 'Configurator' },
-    { href: '#diensten', label: 'Diensten' },
-    { href: '#projecten', label: 'Projecten' },
+    { href: '#diensten', label: 'Mogelijkheden' },
+    { href: '#verhaal', label: 'Verhaal' },
   ];
   return (
-    <header className="abp-mnav">
-      <div className="abp-container flex items-center justify-between h-16">
-        <a href="#top" className="flex items-center gap-2.5">
-          <span className="w-9 h-9 rounded-xl bg-[var(--abp-accent)] flex items-center justify-center shadow-lg shadow-orange-500/30">
-            <Home size={18} className="text-white" />
-          </span>
-          <span className="font-bold text-[var(--abp-navy)] leading-none">AanbouwPlatform<span className="text-[var(--abp-accent)]">.nl</span></span>
-        </a>
-        <nav className="hidden md:flex items-center gap-7">
-          {links.map((l) => <a key={l.href} href={l.href} className="abp-mnav-link">{l.label}</a>)}
-        </nav>
-        <div className="hidden md:flex items-center gap-2.5">
-          <Link to="/aanbouw/login" className="abp-mnav-link px-2">Inloggen</Link>
-          <Link to="/aanbouw/login" className="abp-btn-xl abp-btn-orange !px-4 !py-2 !text-sm">Gratis aanvraag <ArrowRight size={15} /></Link>
-        </div>
-        <button className="md:hidden text-[var(--abp-navy)]" onClick={() => setOpen((v) => !v)} aria-label="Menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-      {open && (
-        <div className="md:hidden border-t border-[var(--abp-border)] bg-white">
-          <div className="abp-container py-3 flex flex-col gap-1">
-            {links.map((l) => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2 abp-mnav-link">{l.label}</a>)}
-            <Link to="/aanbouw/login" className="abp-btn-xl abp-btn-orange mt-2">Gratis aanvraag <ArrowRight size={16} /></Link>
+    <div className="abp-h-nav">
+      <motion.div
+        initial={false}
+        animate={{
+          backgroundColor: solid ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0)',
+          borderColor: solid ? 'rgba(232,237,243,1)' : 'rgba(232,237,243,0)',
+          backdropFilter: solid ? 'blur(16px)' : 'blur(0px)',
+        }}
+        transition={{ duration: 0.4, ease: EASE }}
+        style={{ borderBottom: '1px solid' }}
+      >
+        <div className="abp-h-container-wide flex items-center justify-between h-[68px]">
+          <a href="#top" className="flex items-center gap-2.5">
+            <span className={`w-8 h-8 rounded-[10px] flex items-center justify-center transition-colors ${solid ? 'bg-[var(--abp-accent)]' : 'bg-white/85'}`}>
+              <BrandMark className={solid ? 'text-white' : 'text-[var(--h-ink)]'} />
+            </span>
+            <span className={`font-semibold tracking-tight transition-colors ${solid ? 'text-[var(--h-ink)]' : 'abp-on-img text-white'}`}>
+              AanbouwPlatform<span className="text-[var(--abp-accent)]">.</span>
+            </span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8">
+            {links.map((l) => (
+              <a key={l.href} href={l.href} className={`abp-h-navlink ${solid ? 'text-[var(--h-soft)] hover:text-[var(--h-ink)]' : 'abp-on-img text-white/90 hover:text-white'}`}>{l.label}</a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
+            <Link to="/aanbouw/login" className={`abp-h-navlink hidden sm:inline ${solid ? 'text-[var(--h-soft)] hover:text-[var(--h-ink)]' : 'abp-on-img text-white/90 hover:text-white'}`}>Inloggen</Link>
+            <Link to="/aanbouw/login" className={`abp-pill !py-2.5 !px-4 !text-sm ${solid ? 'abp-pill-dark' : 'abp-pill-glass'}`}>Start je ontwerp</Link>
           </div>
         </div>
-      )}
-    </header>
+      </motion.div>
+    </div>
+  );
+}
+
+function BrandMark({ className = '' }: { className?: string }) {
+  // Custom mark: a roofline + extension — not a stock icon.
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M3 11.5 12 4l9 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 10.5V20h7v-5.5h4.5V20H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
 /* --- Hero ---------------------------------------------------------------- */
 function Hero() {
-  const navigate = useNavigate();
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  // mouse parallax for the floating card
+  const mx = useMotionValue(0); const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 120, damping: 20 });
+  const sy = useSpring(my, { stiffness: 120, damping: 20 });
+  const onMove = (e: React.MouseEvent) => {
+    const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    mx.set(((e.clientX - r.left) / r.width - 0.5) * 18);
+    my.set(((e.clientY - r.top) / r.height - 0.5) * 18);
+  };
+
   return (
-    <section id="top" className="abp-hero">
-      <div className="absolute inset-0 abp-grid-bg opacity-60" />
-      <div className="abp-container relative grid lg:grid-cols-[1.05fr_1fr] gap-12 items-center pt-14 pb-20 lg:pt-20 lg:pb-28">
-        <div>
-          <span className="abp-eyebrow abp-rise">Hét platform voor woninguitbreiding</span>
-          <h1 className="abp-display mt-5 abp-rise abp-rise-2">
-            Bouw de <span className="abp-accent-ink">ruimte</span><br />die je altijd<br />al wilde.
+    <section id="top" ref={ref} className="abp-h-hero" onMouseMove={onMove}>
+      <motion.div className="abp-h-hero-media" style={{ y, scale }}>
+        <img src={heroVilla} alt="Moderne villa met glazen aanbouw en zwembad" className="abp-h-hero-img abp-kenburns" />
+      </motion.div>
+      <div className="abp-hero-veil" />
+      <div className="abp-hero-veil-2" />
+
+      <motion.div className="absolute inset-0 flex flex-col justify-center" style={{ y: textY, opacity: textOpacity }}>
+        <div className="abp-h-container-wide w-full">
+          <motion.span
+            className="abp-h-kicker abp-h-kicker-light block mb-5"
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
+          >
+            Woninguitbreiding · opnieuw uitgevonden
+          </motion.span>
+          <h1 className="abp-h-display abp-h-mega abp-on-img abp-hw max-w-[16ch]">
+            {['Bouw de ruimte', 'die je altijd', 'al wilde.'].map((line, i) => (
+              <motion.span key={line} className="block" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: EASE, delay: 0.25 + i * 0.12 }}>
+                {line}
+              </motion.span>
+            ))}
           </h1>
-          <p className="mt-6 text-lg text-[var(--abp-muted)] max-w-xl leading-relaxed abp-rise abp-rise-3">
-            Van aanbouw tot prefab woning — ontwerp je project, ontvang offertes van geverifieerde
-            bouwbedrijven in jouw regio en zie direct wat het kost. Gratis en vrijblijvend.
+          <motion.p
+            className="abp-on-img text-white/85 text-lg sm:text-xl max-w-xl mt-7 leading-relaxed"
+            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
+          >
+            Ontwerp je aanbouw, zie direct wat het kost en laat geverifieerde bouwbedrijven
+            in jouw regie strijden om jouw project.
+          </motion.p>
+          <motion.div
+            className="flex flex-wrap items-center gap-3 mt-9"
+            initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.85 }}
+          >
+            <a href="#configurator" className="abp-pill abp-pill-orange !px-6 !py-3.5 !text-base">Ontwerp jouw aanbouw</a>
+            <a href="#verhaal" className="abp-pill abp-pill-glass !px-6 !py-3.5 !text-base">Ontdek hoe het werkt</a>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* floating glass spec card */}
+      <motion.div
+        className="hidden lg:block absolute right-[6%] bottom-[12%] abp-glass-ondark rounded-2xl p-5 w-64"
+        style={{ x: sx, y: sy }}
+        initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: EASE, delay: 1 }}
+      >
+        <p className="text-white/60 text-[11px] font-semibold uppercase tracking-wider">Live prijsindicatie</p>
+        <p className="abp-h-display text-white text-3xl mt-1">€ 54.800</p>
+        <div className="h-1 rounded-full bg-white/20 mt-3 overflow-hidden"><div className="h-full w-3/4 rounded-full" style={{ background: 'var(--abp-grad-orange)' }} /></div>
+        <p className="text-white/55 text-[11px] mt-2">Aanbouw 24 m² · schuifpui · eiken vloer</p>
+      </motion.div>
+
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-6 flex flex-col items-center gap-2">
+        <span className="abp-on-img text-white/70 text-[11px] tracking-widest uppercase">Scroll</span>
+        <motion.span className="w-[1px] h-8 bg-white/50" animate={{ scaleY: [0.3, 1, 0.3], originY: 0 }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }} style={{ transformOrigin: 'top' }} />
+      </div>
+    </section>
+  );
+}
+
+/* --- Intro story --------------------------------------------------------- */
+function Intro() {
+  return (
+    <section id="verhaal" className="abp-h-section bg-white">
+      <div className="abp-h-container">
+        <Reveal><span className="abp-h-kicker">Het begint met een droom</span></Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="abp-h-display abp-h-h2 mt-6 max-w-[20ch]">
+            Meer ruimte begint niet met een offerte.<br />
+            <span className="text-[var(--h-soft)]">Het begint met een idee.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="abp-h-lead max-w-2xl mt-8">
+            Een lichtere keuken. Een thuiswerkplek met zicht op de tuin. Ruimte voor wie je
+            liefhebt. Wij brengen die droom tot leven — van eerste schets tot de dag dat je
+            de schuifpui voor het eerst opent.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3 abp-rise abp-rise-4">
-            <button onClick={() => navigate('/aanbouw/login')} className="abp-btn-xl abp-btn-orange">Start je ontwerp <ArrowRight size={18} /></button>
-            <a href="#hoe" className="abp-btn-xl abp-btn-light">Hoe het werkt</a>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-[var(--abp-muted)] abp-rise abp-rise-4">
-            <span className="flex items-center gap-1.5">
-              <span className="flex">{[0, 1, 2, 3, 4].map((i) => <Star key={i} size={15} className="text-[var(--abp-gold)] fill-[var(--abp-gold)]" />)}</span>
-              <strong className="text-[var(--abp-navy)]">4.8</strong> / 5
-            </span>
-            <span className="flex items-center gap-1.5"><ShieldCheck size={16} className="text-emerald-500" /> Geverifieerde bouwbedrijven</span>
-            <span className="hidden sm:flex items-center gap-1.5"><Check size={16} className="text-emerald-500" /> 1.200+ projecten</span>
-          </div>
-        </div>
-
-        {/* Hero visual: configurator preview */}
-        <div className="relative abp-rise abp-rise-3">
-          <ConfiguratorPreview />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-/** Compact 3D-ish render used in the hero. */
-function ConfiguratorPreview() {
+/* --- Full-bleed parallax band -------------------------------------------- */
+function BleedBand() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
   return (
-    <div className="relative">
-      <div className="abp-config-stage aspect-[4/3.2] p-6">
-        <HouseScene />
-        <div className="abp-config-floor" />
-        {/* floating chips */}
-        <div className="absolute top-5 left-5 abp-glass-dark rounded-xl px-3 py-2 text-xs text-white/90 flex items-center gap-2">
-          <Box size={14} className="text-[var(--abp-accent-2)]" /> Aanbouw · 24 m²
-        </div>
-        <div className="absolute bottom-6 right-5 abp-glass-dark rounded-xl px-3 py-2 text-xs text-white/90">
-          Schuifpui 4 m
-        </div>
-      </div>
-      {/* price card */}
-      <div className="absolute -bottom-6 -left-4 sm:-left-6 abp-glass-card rounded-2xl p-4 w-52 shadow-xl">
-        <p className="text-[11px] font-semibold text-[var(--abp-muted)]">Prijsindicatie</p>
-        <p className="abp-stat-num text-2xl text-[var(--abp-navy)] mt-0.5">€ 54.800</p>
-        <div className="mt-2 h-1.5 rounded-full bg-slate-200 overflow-hidden"><div className="h-full w-3/4 rounded-full" style={{ background: 'var(--abp-grad-orange)' }} /></div>
-        <p className="text-[10px] text-[var(--abp-faint)] mt-1.5">live bijgewerkt tijdens ontwerp</p>
-      </div>
-    </div>
-  );
-}
-
-/** A stylised house + glass aanbouw rendered purely with CSS. */
-function HouseScene() {
-  return (
-    <div className="relative w-full h-full flex items-end justify-center pb-[12%]">
-      <div className="relative flex items-end" style={{ filter: 'drop-shadow(0 24px 30px rgba(0,0,0,.45))' }}>
-        {/* main house */}
-        <div className="relative">
-          <div className="abp-house w-28 sm:w-32 h-24 sm:h-28" style={{ background: 'linear-gradient(180deg,#e7eef6,#c7d6e6)' }} />
-          {/* roof */}
-          <div className="absolute -top-5 -left-2 right-[-8px] h-6"
-            style={{ background: 'linear-gradient(180deg,#324d6b,#22384f)', clipPath: 'polygon(8% 100%, 50% 0, 92% 100%)' }} />
-          {/* window */}
-          <div className="absolute top-4 left-4 w-6 h-6 rounded-sm" style={{ background: 'linear-gradient(135deg,#9cc0e6,#5d87b3)' }} />
-        </div>
-        {/* glass aanbouw */}
-        <div className="relative -ml-1 mb-0 w-20 sm:w-24 h-16 sm:h-20 rounded-md overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, rgba(160,200,235,.92), rgba(90,140,185,.85))', boxShadow: 'inset 0 0 0 2px rgba(255,255,255,.35)' }}>
-          {/* schuifpui mullions */}
-          <div className="absolute inset-0 grid grid-cols-3">
-            <div className="border-r border-white/40" /><div className="border-r border-white/40" /><div />
-          </div>
-          {/* lichtstraat glint */}
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-white/60" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* --- Trust bar ----------------------------------------------------------- */
-function TrustBar() {
-  return (
-    <section className="border-y border-[var(--abp-border)] bg-white">
-      <div className="abp-container py-8 grid grid-cols-2 lg:grid-cols-4 gap-6">
-        {PLATFORM_STATS.map((s) => (
-          <div key={s.label} className="text-center lg:text-left">
-            <p className="abp-stat-num text-3xl text-[var(--abp-navy)]">{s.value}</p>
-            <p className="text-sm text-[var(--abp-muted)] mt-0.5">{s.label}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* --- How it works -------------------------------------------------------- */
-function HowItWorks() {
-  const steps = [
-    { icon: PencilRuler, title: 'Ontwerp & plaats je aanvraag', body: 'Stel je project samen in de configurator of via het aanvraagformulier. Je ziet meteen een prijsindicatie.' },
-    { icon: Handshake, title: 'Ontvang gerichte offertes', body: 'Geverifieerde bouwbedrijven in jouw regio bekijken je aanvraag en sturen een passende offerte.' },
-    { icon: Hammer, title: 'Kies je aannemer & bouw', body: 'Vergelijk offertes en reviews, stel vragen via berichten en kies met een gerust hart de beste match.' },
-  ];
-  return (
-    <section id="hoe" className="abp-section">
-      <div className="abp-container">
-        <div className="max-w-2xl">
-          <span className="abp-eyebrow">Zo werkt het</span>
-          <h2 className="abp-display !text-[clamp(1.9rem,4vw,2.8rem)] mt-4">In drie stappen van idee naar oplevering</h2>
-        </div>
-        <div className="grid md:grid-cols-3 gap-5 mt-10">
-          {steps.map((s, i) => (
-            <div key={s.title} className="abp-tile p-7">
-              <div className="flex items-center justify-between mb-5">
-                <span className="abp-tile-icon"><s.icon size={22} /></span>
-                <span className="abp-stat-num text-4xl text-slate-200">0{i + 1}</span>
-              </div>
-              <h3 className="text-lg font-bold">{s.title}</h3>
-              <p className="text-[var(--abp-muted)] mt-2 leading-relaxed">{s.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* --- Configurator showcase (the USP) ------------------------------------- */
-function ConfiguratorSection() {
-  const steps = ['Woningtype', 'Aanbouw', 'Afmetingen', 'Steen', 'Kozijnen', 'Schuifpui', 'Lichtstraat', 'Vloer'];
-  const priceLines = [
-    { label: 'Aanbouw 24 m² — casco', value: '€ 38.000' },
-    { label: 'Schuifpui 4 m', value: '€ 6.500' },
-    { label: 'Lichtstraat 2×1 m', value: '€ 2.800' },
-    { label: 'Eiken vloer', value: '€ 4.200' },
-    { label: 'Gevelsteen — handvorm', value: '€ 3.300' },
-  ];
-  return (
-    <section id="configurator" className="abp-ink-section">
-      <div className="absolute inset-0 abp-grid-bg opacity-[0.12]" />
-      <div className="abp-container relative abp-section">
-        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center">
-          <div>
-            <span className="abp-eyebrow abp-eyebrow-light">Binnenkort · uniek in Nederland</span>
-            <h2 className="abp-display !text-[clamp(2rem,4.4vw,3.2rem)] mt-4 text-white">Ontwerp je aanbouw<br />in <span className="text-[var(--abp-accent-2)]">3D</span>.</h2>
-            <p className="mt-5 text-white/70 text-lg leading-relaxed max-w-lg">
-              Sleep de aanbouw tegen je woning, kies afmetingen, steen, kozijnen, schuifpui en vloer —
-              en zie direct een realistische visual én prijsindicatie. Geen enkel platform in Nederland
-              doet dit.
+    <section ref={ref} className="abp-bleed">
+      <motion.div className="abp-bleed-media" style={{ y }}>
+        <img src={heroVilla} alt="Glazen aanbouw met zwembad" style={{ objectPosition: '50% 70%' }} />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a1626]/60 via-transparent to-transparent" />
+      <div className="absolute inset-0 flex items-end">
+        <div className="abp-h-container-wide w-full pb-12">
+          <Reveal>
+            <p className="abp-on-img abp-h-display text-white text-[clamp(1.8rem,4vw,3.4rem)] max-w-[18ch] leading-[1.05]">
+              Van schets tot sleutel.<br />Alles op één plek.
             </p>
-            <div className="mt-7 flex flex-wrap gap-2.5">
-              {steps.map((s, i) => (
-                <span key={s} className={`px-3.5 py-1.5 rounded-full text-sm font-semibold border ${i === 1 ? 'bg-[var(--abp-accent)] text-white border-transparent' : 'abp-glass-dark text-white/80'}`}>
-                  {i + 1}. {s}
-                </span>
-              ))}
-            </div>
-          </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          {/* Mock configurator UI */}
-          <div className="abp-glass-dark rounded-3xl p-4 sm:p-5">
-            <div className="flex items-center gap-1.5 px-1 pb-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-white/25" />
-              <span className="w-2.5 h-2.5 rounded-full bg-white/25" />
-              <span className="w-2.5 h-2.5 rounded-full bg-white/25" />
-              <span className="ml-2 text-[11px] text-white/50">AanbouwPlatform · Configurator</span>
-            </div>
-            <div className="grid sm:grid-cols-[1fr_auto] gap-3">
-              <div className="abp-config-stage aspect-[5/4] p-6 relative">
-                <HouseScene />
-                <div className="abp-config-floor" />
-                <div className="absolute top-4 left-4 abp-glass-dark rounded-lg px-2.5 py-1.5 text-[11px] text-white/90">Sleep om te draaien</div>
+/* --- Configurator (Apple-style showcase) --------------------------------- */
+const MATERIALS = [
+  { name: 'Eiken', c: 'linear-gradient(135deg,#d6a772,#b07d44)' },
+  { name: 'Antraciet', c: 'linear-gradient(135deg,#5b6470,#363c45)' },
+  { name: 'Wit stucwerk', c: 'linear-gradient(135deg,#f4f5f7,#d9dde2)' },
+  { name: 'Handvorm steen', c: 'linear-gradient(135deg,#a6735a,#774634)' },
+  { name: 'Zwart staal', c: 'linear-gradient(135deg,#2a2e34,#101316)' },
+];
+
+function Configurator() {
+  const [mat, setMat] = useState(0);
+  const navigate = useNavigate();
+  const lines = [
+    ['Aanbouw 24 m² — casco', '€ 38.000'],
+    ['Schuifpui 4 meter', '€ 6.500'],
+    ['Lichtstraat 2×1 m', '€ 2.800'],
+    [`Afwerking — ${MATERIALS[mat].name}`, '€ 7.500'],
+  ];
+  return (
+    <section id="configurator" className="abp-h-section bg-[#f6f8fb]">
+      <div className="abp-h-container-wide">
+        <div className="text-center max-w-3xl mx-auto">
+          <Reveal><span className="abp-h-kicker">De configurator · uniek in Nederland</span></Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="abp-h-display abp-h-h2 mt-6">Ontwerp 'm zelf.<br />Tot op de laatste steen.</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="abp-h-lead mt-6 mx-auto max-w-xl">Kies woningtype, afmetingen, materialen, kozijnen en vloer — en zie je aanbouw én de prijs live veranderen. Alsof Apple een woningconfigurator bouwde.</p>
+          </Reveal>
+        </div>
+
+        <Reveal delay={0.1} className="mt-14">
+          <div className="abp-glass-white rounded-[28px] p-3 sm:p-4 max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-[1.55fr_1fr] gap-3">
+              {/* stage */}
+              <div className="relative rounded-[22px] overflow-hidden bg-[#0a1626] aspect-[16/11]">
+                <motion.img
+                  key={mat}
+                  src={heroVilla} alt="Configuratie preview"
+                  className="w-full h-full object-cover"
+                  initial={{ opacity: 0.6, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: EASE }}
+                  style={{ objectPosition: '50% 55%' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1626]/40 to-transparent" />
+                <div className="absolute top-4 left-4 abp-glass-ondark rounded-xl px-3 py-2 text-xs text-white/90">Sleep om te draaien</div>
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                  <div className="flex gap-2.5">
+                    {MATERIALS.map((m, i) => (
+                      <button key={m.name} aria-label={m.name} onClick={() => setMat(i)} className={`abp-swatch ${mat === i ? 'abp-swatch-active' : ''}`} style={{ background: m.c }} />
+                    ))}
+                  </div>
+                  <span className="abp-glass-ondark rounded-lg px-3 py-1.5 text-xs text-white font-medium">{MATERIALS[mat].name}</span>
+                </div>
               </div>
-              <div className="bg-white rounded-2xl p-4 w-full sm:w-56">
-                <p className="text-[11px] font-semibold text-[var(--abp-muted)]">Live prijsindicatie</p>
-                <div className="mt-2 space-y-1.5">
-                  {priceLines.map((l) => (
-                    <div key={l.label} className="flex items-center justify-between text-[12px]">
-                      <span className="text-[var(--abp-text)] truncate pr-2">{l.label}</span>
-                      <span className="text-[var(--abp-muted)] shrink-0">{l.value}</span>
+              {/* price panel */}
+              <div className="bg-white rounded-[22px] p-6 flex flex-col">
+                <p className="abp-h-kicker">Jouw ontwerp</p>
+                <div className="mt-4 space-y-2.5 flex-1">
+                  {lines.map(([l, v]) => (
+                    <div key={l} className="flex items-center justify-between text-sm">
+                      <span className="text-[var(--h-soft)] pr-2">{l}</span>
+                      <span className="font-medium text-[var(--h-ink)] shrink-0">{v}</span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-[var(--abp-border)] mt-2.5 pt-2.5 flex items-center justify-between">
-                  <span className="text-sm font-bold text-[var(--abp-navy)]">Totaal</span>
-                  <span className="abp-stat-num text-lg text-[var(--abp-navy)]">€ 54.800</span>
+                <div className="border-t border-[var(--h-line)] mt-4 pt-4">
+                  <div className="flex items-end justify-between">
+                    <span className="text-sm text-[var(--h-soft)]">Indicatie totaal</span>
+                    <span className="abp-h-display text-3xl">€ 54.800</span>
+                  </div>
+                  <button onClick={() => navigate('/aanbouw/login')} className="abp-pill abp-pill-orange w-full justify-center mt-5">Probeer de configurator</button>
+                  <p className="text-center text-[11px] text-[var(--h-soft)] mt-3">Gratis · vrijblijvend · in 2 minuten</p>
                 </div>
-                <button className="abp-btn-xl abp-btn-orange w-full mt-3 !py-2.5 !text-sm">Aanvraag versturen</button>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-/* --- Diensten ------------------------------------------------------------ */
+/* --- Diensten (editorial rows, geen kleine cards) ------------------------ */
 function Diensten() {
   const types = BUILD_TYPES.filter((t) => t !== 'Anders');
-  const descByService = Object.fromEntries(SERVICES.map((s) => [s.label, s.description]));
   return (
-    <section id="diensten" className="abp-section bg-[var(--abp-surface-2)]">
-      <div className="abp-container">
-        <div className="max-w-2xl">
-          <span className="abp-eyebrow">Wat kun je bouwen</span>
-          <h2 className="abp-display !text-[clamp(1.9rem,4vw,2.8rem)] mt-4">Elke vorm van woninguitbreiding</h2>
-          <p className="text-[var(--abp-muted)] mt-3 text-lg">Eén platform, alle specialisten. Kies je type en ontvang offertes van bouwbedrijven die er écht in uitblinken.</p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-          {types.map((t) => {
-            const Icon = BUILD_ICON[t];
-            return (
-              <Link key={t} to="/aanbouw/login" className="abp-tile p-6 group">
-                <div className="flex items-center justify-between">
-                  <span className="abp-tile-icon"><Icon size={22} /></span>
-                  <ChevronRight size={18} className="text-[var(--abp-faint)] group-hover:text-[var(--abp-accent)] transition-colors" />
-                </div>
-                <h3 className="text-lg font-bold mt-4">{t}</h3>
-                <p className="text-sm text-[var(--abp-muted)] mt-1 leading-relaxed">{descByService[t] ?? 'Vakkundig gerealiseerd door geverifieerde bouwbedrijven.'}</p>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* --- Projecten / portfolio ----------------------------------------------- */
-function Projecten() {
-  return (
-    <section id="projecten" className="abp-section">
-      <div className="abp-container">
-        <div className="flex flex-wrap items-end justify-between gap-4 max-w-full">
-          <div className="max-w-2xl">
-            <span className="abp-eyebrow">Gerealiseerde projecten</span>
-            <h2 className="abp-display !text-[clamp(1.9rem,4vw,2.8rem)] mt-4">Inspiratie uit het hele land</h2>
+    <section id="diensten" className="abp-h-section bg-white">
+      <div className="abp-h-container">
+        <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20 items-start">
+          <div className="lg:sticky lg:top-28">
+            <Reveal><span className="abp-h-kicker">Wat we bouwen</span></Reveal>
+            <Reveal delay={0.05}><h2 className="abp-h-display abp-h-h2 mt-6">Elke vorm van<br />woninguitbreiding.</h2></Reveal>
+            <Reveal delay={0.1}><p className="abp-h-lead mt-6 max-w-sm">Eén platform, alle specialisten. Van een lichte uitbouw tot een complete prefab woning — altijd door geverifieerde vakmensen.</p></Reveal>
           </div>
-          <Link to="/aanbouw/login" className="abp-btn-xl abp-btn-light !py-2.5 !text-sm">Bekijk alle projecten <ArrowRight size={15} /></Link>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-          {SHOWCASE_PROJECTS.map((p) => {
-            const Icon = BUILD_ICON[p.type];
-            return (
-              <article key={p.title} className="group">
-                <div className="abp-photo abp-photo-grain aspect-[4/3]" style={{ background: p.gradient }}>
-                  <div className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full bg-white/90 text-[11px] font-semibold text-[var(--abp-navy)] flex items-center gap-1.5">
-                    <Icon size={12} className="text-[var(--abp-accent-strong)]" /> {p.type}
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-90">
-                    <HouseScene />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 z-10 p-4 text-white">
-                    <p className="font-semibold leading-tight">{p.title}</p>
-                    <p className="text-xs text-white/80 flex items-center gap-1.5 mt-0.5"><MapPin size={12} /> {p.plaats} · {p.m2} m² · {p.finish}</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between px-1 mt-3">
-                  <span className="text-sm text-[var(--abp-muted)]">Indicatie</span>
-                  <span className="font-bold text-[var(--abp-navy)]">{p.value}</span>
-                </div>
-              </article>
-            );
-          })}
+          <div id="ontwerp">
+            {types.map((t, i) => (
+              <Reveal key={t} delay={Math.min(i * 0.04, 0.2)}>
+                <Link to="/aanbouw/login" className="abp-row flex items-center gap-6 py-6 group">
+                  <span className="abp-row-num text-2xl w-12 shrink-0">0{i + 1}</span>
+                  <span className="abp-row-title abp-h-display text-[clamp(1.5rem,3.2vw,2.4rem)] flex-1">{t}</span>
+                  <Arrow className="text-[var(--h-soft)] group-hover:text-[var(--abp-accent)] transition-colors shrink-0" />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* --- Reviews ------------------------------------------------------------- */
-function Reviews() {
+function Arrow({ className = '' }: { className?: string }) {
   return (
-    <section className="abp-section bg-[var(--abp-surface-2)]">
-      <div className="abp-container">
-        <div className="max-w-2xl">
-          <span className="abp-eyebrow">Wat klanten zeggen</span>
-          <h2 className="abp-display !text-[clamp(1.9rem,4vw,2.8rem)] mt-4">Beoordeeld met een 4.8</h2>
-        </div>
-        <div className="grid md:grid-cols-3 gap-5 mt-10">
-          {REVIEWS.map((r) => (
-            <div key={r.name} className="abp-tile p-7 flex flex-col">
-              <Quote size={28} className="text-[var(--abp-accent)]/30" />
-              <div className="flex gap-0.5 mt-3">{Array.from({ length: r.rating }).map((_, i) => <Star key={i} size={15} className="text-[var(--abp-gold)] fill-[var(--abp-gold)]" />)}</div>
-              <p className="text-[var(--abp-text)] mt-3 leading-relaxed flex-1">“{r.quote}”</p>
-              <div className="mt-5 pt-4 border-t border-[var(--abp-border)] flex items-center gap-3">
-                <span className="w-10 h-10 rounded-full bg-[var(--abp-navy)] text-white text-sm font-bold flex items-center justify-center">{r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>
-                <div>
-                  <p className="text-sm font-semibold">{r.name}</p>
-                  <p className="text-[11px] text-[var(--abp-muted)]">{r.project} · {r.plaats}</p>
-                </div>
-              </div>
-            </div>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* --- Proof (big numbers) ------------------------------------------------- */
+function Proof() {
+  return (
+    <section className="abp-h-section bg-[#0a1626] text-white relative overflow-hidden">
+      <div className="absolute inset-0 abp-grid-bg opacity-[0.08]" />
+      <div className="abp-h-container relative">
+        <Reveal><span className="abp-h-kicker abp-h-kicker-light">Vertrouwd door heel Nederland</span></Reveal>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 mt-12">
+          {PLATFORM_STATS.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.08}>
+              <p className="abp-h-display text-[clamp(2.6rem,6vw,4.5rem)] text-white">{s.value}</p>
+              <p className="text-white/55 mt-2">{s.label}</p>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -384,27 +370,56 @@ function Reviews() {
   );
 }
 
-/* --- CTA band ------------------------------------------------------------ */
-function CtaBand() {
-  const navigate = useNavigate();
-  const usps = ['Gratis & vrijblijvend', 'Geverifieerde bouwbedrijven', 'Direct een prijsindicatie', 'Alles op één plek'];
+/* --- Voices (one big quote) ---------------------------------------------- */
+function Voices() {
+  const r = REVIEWS[0];
   return (
-    <section className="abp-section">
-      <div className="abp-container">
-        <div className="abp-ink-section rounded-[2rem] px-7 sm:px-12 py-12 sm:py-16 text-center relative">
-          <div className="absolute inset-0 abp-grid-bg opacity-[0.1] rounded-[2rem]" />
-          <div className="relative max-w-2xl mx-auto">
-            <Sparkles size={28} className="text-[var(--abp-accent-2)] mx-auto" />
-            <h2 className="abp-display !text-[clamp(2rem,4.4vw,3rem)] mt-4 text-white">Klaar om te bouwen?</h2>
-            <p className="text-white/70 text-lg mt-4">Plaats vandaag nog je aanvraag en ontvang offertes van de beste bouwbedrijven in jouw regio.</p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <button onClick={() => navigate('/aanbouw/login')} className="abp-btn-xl abp-btn-orange">Start je aanvraag <ArrowRight size={18} /></button>
-              <Link to="/aanbouw/login" className="abp-btn-xl abp-btn-glass">Inloggen als bouwbedrijf</Link>
-            </div>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-              {usps.map((u) => <span key={u} className="flex items-center gap-1.5 text-sm text-white/80"><Check size={15} className="text-emerald-400" /> {u}</span>)}
+    <section className="abp-h-section bg-white">
+      <div className="abp-h-container text-center max-w-4xl">
+        <Reveal>
+          <p className="abp-h-display text-[clamp(1.6rem,3.6vw,2.8rem)] leading-[1.18] tracking-[-0.02em]">
+            “{r.quote}”
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <span className="w-11 h-11 rounded-full bg-[var(--h-ink)] text-white text-sm font-bold flex items-center justify-center">{r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>
+            <div className="text-left">
+              <p className="font-semibold text-[var(--h-ink)]">{r.name}</p>
+              <p className="text-sm text-[var(--h-soft)]">{r.project} · {r.plaats}</p>
             </div>
           </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* --- Closing CTA --------------------------------------------------------- */
+function ClosingCta() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  return (
+    <section ref={ref} className="relative h-[88vh] min-h-[560px] overflow-hidden">
+      <motion.div className="absolute inset-[-10%_0]" style={{ y }}>
+        <img src={heroVilla} alt="" className="w-full h-[120%] object-cover" style={{ objectPosition: '50% 30%' }} />
+      </motion.div>
+      <div className="absolute inset-0 bg-[#0a1626]/55" />
+      <div className="absolute inset-0 flex items-center">
+        <div className="abp-h-container-wide w-full text-center">
+          <Reveal>
+            <h2 className="abp-h-display abp-hw text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">Klaar om te bouwen?</h2>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="abp-on-img text-white/80 text-lg mt-6 max-w-xl mx-auto">Ontwerp je aanbouw vandaag en ontvang offertes van de beste bouwbedrijven in jouw regio.</p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-9">
+              <Link to="/aanbouw/login" className="abp-pill abp-pill-orange !px-7 !py-4 !text-base">Start je ontwerp</Link>
+              <Link to="/aanbouw/login" className="abp-pill abp-pill-glass !px-7 !py-4 !text-base">Inloggen als bouwbedrijf</Link>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -414,38 +429,33 @@ function CtaBand() {
 /* --- Footer -------------------------------------------------------------- */
 function Footer() {
   const cols = [
-    { title: 'Diensten', links: ['Aanbouw', 'Uitbouw', 'Dakopbouw', 'Mantelzorgwoning', 'Prefab woning'] },
-    { title: 'Platform', links: ['Hoe het werkt', 'Configurator', 'Projecten', 'Reviews'] },
-    { title: 'Voor bouwbedrijven', links: ['Aanmelden', 'Leads ontvangen', 'Werkgebied', 'Inloggen'] },
+    { title: 'Bouwen', links: ['Aanbouw', 'Uitbouw', 'Dakopbouw', 'Mantelzorgwoning', 'Prefab woning'] },
+    { title: 'Platform', links: ['Configurator', 'Hoe het werkt', 'Projecten', 'Reviews'] },
+    { title: 'Bouwbedrijven', links: ['Aanmelden', 'Leads ontvangen', 'Werkgebied', 'Inloggen'] },
   ];
   return (
-    <footer className="abp-ink-section">
-      <div className="abp-container py-14">
-        <div className="grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-8">
+    <footer className="bg-white border-t border-[var(--h-line)]">
+      <div className="abp-h-container py-16">
+        <div className="grid md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10">
           <div>
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className="w-9 h-9 rounded-xl bg-[var(--abp-accent)] flex items-center justify-center"><Home size={18} className="text-white" /></span>
-              <span className="font-bold text-white">AanbouwPlatform<span className="text-[var(--abp-accent)]">.nl</span></span>
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="w-8 h-8 rounded-[10px] bg-[var(--abp-accent)] flex items-center justify-center"><BrandMark className="text-white" /></span>
+              <span className="font-semibold text-[var(--h-ink)]">AanbouwPlatform<span className="text-[var(--abp-accent)]">.</span></span>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed max-w-xs">Hét platform voor woninguitbreiding in Nederland. Geverifieerde bouwbedrijven, gerichte offertes en een 3D-configurator.</p>
-            <div className="flex items-center gap-1 mt-4">
-              {[0, 1, 2, 3, 4].map((i) => <Star key={i} size={15} className="text-[var(--abp-gold)] fill-[var(--abp-gold)]" />)}
-              <span className="text-white/70 text-sm ml-1.5">4.8 / 5 · 640+ reviews</span>
-            </div>
+            <p className="text-[var(--h-soft)] text-sm leading-relaxed max-w-xs">Hét platform voor woninguitbreiding in Nederland. Ontwerp, vergelijk en bouw — met geverifieerde vakmensen.</p>
           </div>
           {cols.map((c) => (
             <div key={c.title}>
-              <p className="text-white font-semibold text-sm mb-3">{c.title}</p>
-              <ul className="space-y-2">
-                {c.links.map((l) => <li key={l}><Link to="/aanbouw/login" className="text-white/60 hover:text-white text-sm transition-colors">{l}</Link></li>)}
+              <p className="font-semibold text-[var(--h-ink)] text-sm mb-3">{c.title}</p>
+              <ul className="space-y-2.5">
+                {c.links.map((l) => <li key={l}><Link to="/aanbouw/login" className="text-[var(--h-soft)] hover:text-[var(--h-ink)] text-sm transition-colors">{l}</Link></li>)}
               </ul>
             </div>
           ))}
         </div>
-        <div className="abp-divider-fade my-8 opacity-40" />
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-white/50 text-xs">
+        <div className="mt-12 pt-6 border-t border-[var(--h-line)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--h-soft)]">
           <p>© 2026 AanbouwPlatform.nl — onderdeel van Prefab Select.</p>
-          <p className="flex items-center gap-1.5"><ShieldCheck size={13} className="text-emerald-400" /> Veilig · geverifieerd · vrijblijvend</p>
+          <p>Ontworpen in Nederland · gebouwd met vakmanschap</p>
         </div>
       </div>
     </footer>
