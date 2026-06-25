@@ -92,10 +92,28 @@ async function seedGeo() {
   console.log(`✓ Geo: ${provinces.length} provincies, ${municipalities.length} gemeenten (startset)`);
 }
 
+const creditPackages = [
+  { slug: "starter", name: "Starter", credits: 50, priceCents: 5000, order: 1 },
+  { slug: "pro", name: "Pro", credits: 150, priceCents: 13500, order: 2 },
+  { slug: "premium", name: "Premium", credits: 500, priceCents: 40000, order: 3 },
+];
+
+async function seedPackages() {
+  for (const p of creditPackages) {
+    await prisma.creditPackage.upsert({
+      where: { slug: p.slug },
+      update: { name: p.name, credits: p.credits, priceCents: p.priceCents, order: p.order, active: true },
+      create: { ...p, active: true },
+    });
+  }
+  console.log(`✓ Credit-pakketten: ${creditPackages.length}`);
+}
+
 async function main() {
   console.log("→ Seeden van Loodgieterplatform.nl…");
   await seedCatalog();
   await seedGeo();
+  await seedPackages();
   console.log("✓ Klaar.");
 }
 

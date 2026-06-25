@@ -114,6 +114,14 @@ enum QuoteStatus {
   EXPIRED
 }
 
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELED
+  REFUNDED
+}
+
 // ──────────────────────── Identity & Access ───────────────────────
 model User {
   id            String    @id @default(cuid())
@@ -200,6 +208,7 @@ model InstallerCompany {
   creditTxns     CreditTransaction[]
   invoices       Invoice[]
   quotes         Quote[]
+  payments       Payment[]
   subscription   Subscription?
 
   @@index([status])
@@ -653,6 +662,47 @@ model CreditTransaction {
   company      InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   @@index([companyId])
+}
+
+// Admin-beheerbare credit-pakketten.
+model CreditPackage {
+  id         String    @id @default(cuid())
+  slug       String    @unique
+  name       String
+  credits    Int
+  priceCents Int
+  currency   String    @default("eur")
+  active     Boolean   @default(true)
+  order      Int       @default(0)
+  payments   Payment[]
+}
+
+// Een betaling/checkout-sessie voor credits (tevens de StripeCheckoutSession-record).
+model Payment {
+  id                    String           @id @default(cuid())
+  companyId             String
+  packageId             String?
+  credits               Int
+  amountCents           Int
+  currency              String           @default("eur")
+  status                PaymentStatus    @default(PENDING)
+  stripeSessionId       String?          @unique
+  stripePaymentIntentId String?
+  creditTxnId           String?
+  createdAt             DateTime         @default(now())
+  paidAt                DateTime?
+  company               InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  package               CreditPackage?   @relation(fields: [packageId], references: [id])
+
+  @@index([companyId])
+  @@index([status])
+}
+
+// Idempotentie voor Stripe-webhooks: elk event-id wordt maar één keer verwerkt.
+model StripeEvent {
+  id          String   @id // Stripe event id (evt_...)
+  type        String
+  processedAt DateTime @default(now())
 }
 
 model Invoice {

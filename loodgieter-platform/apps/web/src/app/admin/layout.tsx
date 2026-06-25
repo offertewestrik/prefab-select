@@ -8,6 +8,8 @@ const nav: NavItem[] = [
   { label: "SEO-pagina's", href: "/admin/seo-pages" },
   { label: "Leads", href: "/admin/leads" },
   { label: "Aankopen", href: "/admin/purchases" },
+  { label: "Betalingen", href: "/admin/payments" },
+  { label: "Credit-pakketten", href: "/admin/credit-packages" },
   { label: "Vakmannen", href: "/admin/installers" },
   { label: "Artikelen", href: "/admin/articles" },
 ];
