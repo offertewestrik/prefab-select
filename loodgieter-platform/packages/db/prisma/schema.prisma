@@ -18,7 +18,8 @@ enum UserRole {
 
 enum CompanyRole {
   OWNER
-  MEMBER
+  MANAGER
+  STAFF
 }
 
 enum CompanyStatus {
@@ -98,6 +99,19 @@ enum CreditTxnType {
 enum PublishState {
   ACTIVE
   HIDDEN
+}
+
+enum AttachmentKind {
+  PHOTO
+  DOCUMENT
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
 }
 
 // ──────────────────────── Identity & Access ───────────────────────
@@ -185,6 +199,7 @@ model InstallerCompany {
   reviews        Review[]
   creditTxns     CreditTransaction[]
   invoices       Invoice[]
+  quotes         Quote[]
   subscription   Subscription?
 
   @@index([status])
@@ -194,7 +209,7 @@ model CompanyMember {
   id        String      @id @default(cuid())
   companyId String
   userId    String
-  role      CompanyRole @default(MEMBER)
+  role      CompanyRole @default(STAFF)
   company   InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
   user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -229,8 +244,9 @@ model Municipality {
   population Int?
   lat        Float
   lng        Float
-  publish    PublishState @default(ACTIVE)
-  province   Province     @relation(fields: [provinceId], references: [id])
+  publish       PublishState @default(ACTIVE)
+  contentBlocks Json?
+  province      Province     @relation(fields: [provinceId], references: [id])
 
   places     Place[]
   coverage   CompanyCoverage[]
@@ -295,12 +311,14 @@ model Service {
   seoTitle         String?
   metaDescription  String?
   keywords         String[]
+  contentBlocks    Json?           // flexibele blokken (zie packages/content)
   publish          PublishState    @default(ACTIVE)
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
   category         ServiceCategory @relation(fields: [categoryId], references: [id])
 
   brands       ServiceBrand[]
+  brandPages   ServiceBrandPage[]
   faqs         Faq[]
   relatedFrom  ServiceRelation[] @relation("relFrom")
   relatedTo    ServiceRelation[] @relation("relTo")
@@ -312,13 +330,34 @@ model Service {
 }
 
 model Brand {
-  id       String         @id @default(cuid())
-  slug     String         @unique
-  name     String
-  logoUrl  String?
-  type     String?
-  services ServiceBrand[]
-  leads    LeadRequest[]
+  id            String             @id @default(cuid())
+  slug          String             @unique
+  name          String
+  logoUrl       String?
+  type          String?
+  description   String?            @db.Text
+  contentBlocks Json?
+  seoTitle      String?
+  metaDescription String?
+  services      ServiceBrand[]
+  brandPages    ServiceBrandPage[]
+  leads         LeadRequest[]
+}
+
+// Dienst × merk-paginacontent (bv. "CV-ketel vervangen — Intergas").
+model ServiceBrandPage {
+  id              String   @id @default(cuid())
+  serviceId       String
+  brandId         String
+  introHtml       String?  @db.Text
+  contentBlocks   Json?
+  seoTitle        String?
+  metaDescription String?
+  noindex         Boolean  @default(false)
+  service         Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  brand           Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  @@unique([serviceId, brandId])
 }
 
 model ServiceBrand {
@@ -355,6 +394,7 @@ model LandingContent {
   serviceId       String
   municipalityId  String
   introHtml       String?      @db.Text
+  contentBlocks   Json?
   customFaqs      Json?
   seoTitle        String?
   metaDescription String?
@@ -380,6 +420,8 @@ model SeoMeta {
   path        String   @unique
   title       String?
   description String?
+  h1          String?
+  h2          Json?    // optionele lijst van H2-koppen
   ogImageUrl  String?
   canonical   String?
   noindex     Boolean  @default(false)
@@ -501,23 +543,46 @@ model LeadRequest {
   service      Service      @relation(fields: [serviceId], references: [id])
   brand        Brand?       @relation(fields: [brandId], references: [id])
   municipality Municipality @relation(fields: [municipalityId], references: [id])
-  photos       LeadPhoto[]
+  attachments  LeadAttachment[]
   matches      LeadMatch[]
   appointments Appointment[]
+  quotes       Quote[]
 
   @@index([serviceId])
   @@index([municipalityId])
   @@index([status])
 }
 
-model LeadPhoto {
-  id         String      @id @default(cuid())
+model LeadAttachment {
+  id         String         @id @default(cuid())
   leadId     String
   url        String
+  kind       AttachmentKind @default(PHOTO)
+  name       String?
   aiAnalysis Json?
-  lead       LeadRequest @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  lead       LeadRequest    @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   @@index([leadId])
+}
+
+model Quote {
+  id          String           @id @default(cuid())
+  companyId   String
+  leadId      String?
+  number      String           @unique
+  lineItems   Json             // [{ description, qty, unitPrice }]
+  subtotalCents Int
+  vatCents    Int
+  totalCents  Int
+  status      QuoteStatus      @default(DRAFT)
+  validUntil  DateTime?
+  pdfUrl      String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  company     InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  lead        LeadRequest?     @relation(fields: [leadId], references: [id])
+
+  @@index([companyId])
 }
 
 model LeadMatch {
