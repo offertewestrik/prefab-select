@@ -71,7 +71,7 @@ export async function getNearbyCities(
 export async function countInstallersFor(serviceId: string, municipalityId: string) {
   return prisma.installerCompany.count({
     where: {
-      status: "ACTIVE",
+      status: "APPROVED",
       services: { some: { serviceId } },
       coverage: { some: { municipalityId } },
     },

@@ -66,7 +66,7 @@ export default function LoginPage() {
         </div>
         <p className="mt-4 text-center text-sm text-neutral-500">
           Nog geen account?{" "}
-          <Link href="/registreren" className="font-medium text-primary-600">
+          <Link href="/aanmelden-vakman" className="font-medium text-primary-600">
             Word partner
           </Link>
         </p>

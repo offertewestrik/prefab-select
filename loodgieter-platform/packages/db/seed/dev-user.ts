@@ -55,13 +55,13 @@ async function createUser(kind: Kind) {
   if (kind === "installer") {
     const company = await prisma.installerCompany.upsert({
       where: { slug: "demo-installatiebedrijf" },
-      update: { status: "ACTIVE" },
+      update: { status: "APPROVED" },
       create: {
         slug: "demo-installatiebedrijf",
         name: "Demo Installatiebedrijf",
         email: cfg.email,
         phone: "085 060 58 72",
-        status: "ACTIVE",
+        status: "APPROVED",
         creditBalance: 100,
         description: "Demo-bedrijf voor lokaal testen.",
       },

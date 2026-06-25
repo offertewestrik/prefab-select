@@ -7,6 +7,8 @@ const nav: NavItem[] = [
   { label: "Mijn leads", href: "/dashboard/mijn-leads" },
   { label: "Offertes", href: "/dashboard/quotes" },
   { label: "Credits", href: "/dashboard/credits" },
+  { label: "Diensten", href: "/dashboard/diensten" },
+  { label: "Werkgebied", href: "/dashboard/werkgebied" },
   { label: "Reviews", href: "/dashboard/reviews" },
   { label: "Instellingen", href: "/dashboard/settings" },
 ];

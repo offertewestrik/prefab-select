@@ -16,7 +16,7 @@ export async function matchLead(leadId: string): Promise<number> {
 
   const candidates = await prisma.installerCompany.findMany({
     where: {
-      status: "ACTIVE",
+      status: "APPROVED",
       services: { some: { serviceId: lead.serviceId } },
       coverage: { some: { municipalityId: lead.municipalityId } },
       creditBalance: { gte: lead.priceCredits },

@@ -23,10 +23,11 @@ enum CompanyRole {
 }
 
 enum CompanyStatus {
-  PENDING
-  ACTIVE
-  SUSPENDED
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
   REJECTED
+  SUSPENDED
 }
 
 enum LeadStatus {
@@ -188,7 +189,12 @@ model InstallerCompany {
   logoUrl       String?
   description   String?       @db.Text
   foundedYear   Int?
-  status        CompanyStatus @default(PENDING)
+  contactName   String?
+  street        String?
+  postcode      String?
+  city          String?
+  province      String?
+  status        CompanyStatus @default(PENDING_REVIEW)
   ratingAvg     Float         @default(0)
   ratingCount   Int           @default(0)
   creditBalance Int           @default(0)

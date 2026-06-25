@@ -49,9 +49,18 @@ export const LeadStatus = {
 export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus];
 
 export const CompanyStatus = {
-  PENDING: "PENDING",
-  ACTIVE: "ACTIVE",
-  SUSPENDED: "SUSPENDED",
+  DRAFT: "DRAFT",
+  PENDING_REVIEW: "PENDING_REVIEW",
+  APPROVED: "APPROVED",
   REJECTED: "REJECTED",
+  SUSPENDED: "SUSPENDED",
 } as const;
 export type CompanyStatus = (typeof CompanyStatus)[keyof typeof CompanyStatus];
+
+export const companyStatusLabels: Record<CompanyStatus, string> = {
+  DRAFT: "Concept",
+  PENDING_REVIEW: "In behandeling",
+  APPROVED: "Goedgekeurd",
+  REJECTED: "Afgewezen",
+  SUSPENDED: "Geschorst",
+};

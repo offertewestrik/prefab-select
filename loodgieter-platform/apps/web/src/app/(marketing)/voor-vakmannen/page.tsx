@@ -31,7 +31,7 @@ export default function ForProfessionalsPage() {
             uit jouw regio. Jij bepaalt je werkgebied en diensten.
           </p>
           <div className="mt-8">
-            <Link href="/registreren">
+            <Link href="/aanmelden-vakman">
               <Button size="lg" variant="accent">Word partner</Button>
             </Link>
           </div>
