@@ -25,6 +25,7 @@
   "devDependencies": {
     "@repo/config": "workspace:*",
     "@repo/core": "workspace:*",
+    "@types/node": "^22.14.0",
     "prisma": "^6.1.0",
     "tsx": "^4.21.0",
     "typescript": "^5.8.2"

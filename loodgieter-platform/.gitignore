@@ -19,5 +19,6 @@ packages/db/prisma/*.db
 # misc
 .DS_Store
 *.log
+*.tsbuildinfo
 coverage/
 next-env.d.ts

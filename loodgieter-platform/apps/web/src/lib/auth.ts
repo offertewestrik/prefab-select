@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthResult } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
@@ -11,7 +11,7 @@ const credsSchema = z.object({
   password: z.string().min(8),
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+const nextAuth = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" }, // vereist i.c.m. Credentials provider
   pages: { signIn: "/login" },
@@ -43,3 +43,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
 });
+
+// Expliciete annotaties i.v.m. NextAuth v5 + pnpm type-portabiliteit (TS2742).
+export const handlers: NextAuthResult["handlers"] = nextAuth.handlers;
+export const auth: NextAuthResult["auth"] = nextAuth.auth;
+export const signIn: NextAuthResult["signIn"] = nextAuth.signIn;
+export const signOut: NextAuthResult["signOut"] = nextAuth.signOut;

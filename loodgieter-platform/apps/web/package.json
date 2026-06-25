@@ -11,14 +11,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@auth/core": "0.37.2",
     "@auth/prisma-adapter": "^2.7.4",
     "@repo/config": "workspace:*",
+    "@repo/content": "workspace:*",
     "@repo/core": "workspace:*",
     "@repo/db": "workspace:*",
     "@repo/seo": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "^5.62.7",
     "bcryptjs": "^2.4.3",
+    "resend": "^6.12.3",
     "framer-motion": "^12.0.0",
     "lucide-react": "^0.546.0",
     "next": "^15.2.3",
