@@ -72,7 +72,7 @@ function footHTML(u){
    <div><h5>${u.foot_c2}</h5><a href="../index.html#work">${u.werk}</a><a href="../index.html#gallery">${lang==='nl'?'In actie':(lang==='en'?'In action':'قيد العمل')}</a><a href="../index.html#faq">FAQ</a></div>
    <div><h5>${u.foot_c3}</h5><a href="../index.html#contact">${u.cta}</a><a href="../index.html#contact">${u.foot_quote}</a></div>
   </div>
-  <div class="foot-bot"><span>${u.foot_copy}</span><span>${u.foot_built}</span></div>
+  <div class="foot-bot"><span>${u.foot_copy}</span><a href="#" class="js-open-cookie-settings"></a><span>${u.foot_built}</span></div>
  </div>`;
 }
 
