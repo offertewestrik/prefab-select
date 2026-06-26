@@ -1,0 +1,117 @@
+import { notFound } from "next/navigation";
+import { Lock, MapPin, Calendar, Clock, Paperclip } from "lucide-react";
+import { Button, Card, CardContent } from "@repo/ui";
+import { PageHeading } from "@/components/dashboard/sidebar-layout";
+import { getSessionUser, getCurrentCompany } from "@/lib/guards";
+import Link from "next/link";
+import { getLeadView } from "@/features/leads/server/access";
+import { BuyLeadButton } from "@/features/leads/components/buy-lead-button";
+
+export default async function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const user = await getSessionUser();
+  const isAdmin = (user as { role?: string } | null)?.role === "ADMIN";
+  const company = await getCurrentCompany();
+
+  const view = await getLeadView(id, company?.id ?? null, isAdmin);
+  if (view.status === "forbidden") notFound();
+
+  const { unlocked, data } = view;
+
+  return (
+    <div>
+      <PageHeading title={`${data.serviceName} — ${data.city}`} subtitle={`Status: ${data.status}`} />
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Klusinformatie (altijd zichtbaar) */}
+        <div className="lg:col-span-2 space-y-4">
+          <Card>
+            <CardContent>
+              <h2 className="font-semibold text-neutral-900">Klusinformatie</h2>
+              <div className="mt-3 grid gap-2 text-sm text-neutral-700">
+                <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-primary-600" /> {data.city}, {data.province} ({data.postcodeArea}…)</span>
+                <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4 text-primary-600" /> {data.urgencyLabel}</span>
+                <span className="inline-flex items-center gap-2"><Calendar className="h-4 w-4 text-primary-600" /> {data.preferredDate ?? "Geen voorkeursdatum"} · {data.daypartLabel}</span>
+                <span className="inline-flex items-center gap-2"><Paperclip className="h-4 w-4 text-primary-600" /> {data.attachmentCount} bijlage(n)</span>
+              </div>
+              <h3 className="mt-4 text-sm font-semibold text-neutral-900">Omschrijving</h3>
+              <p className="mt-1 whitespace-pre-wrap text-sm text-neutral-700">{data.description}</p>
+            </CardContent>
+          </Card>
+
+          {/* Klantgegevens: gegrendeld of vrijgegeven */}
+          <Card>
+            <CardContent>
+              <h2 className="font-semibold text-neutral-900">Klantgegevens</h2>
+              {unlocked ? (
+                <dl className="mt-3 grid gap-2 text-sm">
+                  <Row label="Naam" value={data.contactName} />
+                  <Row label="Telefoon" value={data.contactPhone} />
+                  <Row label="E-mail" value={data.contactEmail} />
+                  <Row label="Adres" value={[data.street, data.houseNumber].filter(Boolean).join(" ")} />
+                  <Row label="Postcode" value={data.postcode} />
+                </dl>
+              ) : (
+                <div className="mt-3 rounded-[var(--radius-md)] bg-neutral-50 p-4 text-sm text-neutral-500">
+                  <p className="flex items-center gap-2 font-medium text-neutral-700">
+                    <Lock className="h-4 w-4" /> Gegevens vergrendeld
+                  </p>
+                  <dl className="mt-3 grid gap-2">
+                    <Row label="Naam" value={data.maskedName} />
+                    <Row label="Telefoon" value="•• •• •• ••" />
+                    <Row label="E-mail" value="verborgen tot aankoop" />
+                    <Row label="Adres" value="verborgen tot aankoop" />
+                  </dl>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {unlocked && (
+            <Link href={`/dashboard/leads/${data.id}/offerte`}>
+              <Button variant="outline">Maak offerte</Button>
+            </Link>
+          )}
+        </div>
+
+        {/* Aankoop-paneel */}
+        <aside>
+          <Card>
+            <CardContent>
+              {unlocked ? (
+                <div className="text-sm">
+                  <p className="font-semibold text-success-500">Lead in jouw bezit</p>
+                  <p className="mt-1 text-neutral-500">Je hebt volledige toegang tot deze klant.</p>
+                </div>
+              ) : (
+                <>
+                  <div className="text-sm text-neutral-500">Prijs</div>
+                  <div className="text-3xl font-bold text-neutral-900">{data.priceCredits} credits</div>
+                  <p className="mt-1 text-xs text-neutral-500">
+                    {data.soldCount}/{data.maxBuyers} verkocht
+                  </p>
+                  <div className="mt-4">
+                    <BuyLeadButton
+                      leadId={data.id}
+                      priceCredits={data.priceCredits}
+                      disabled={data.soldCount >= data.maxBuyers}
+                    />
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+function Row({ label, value }: { label: string; value?: string }) {
+  return (
+    <div className="flex justify-between gap-4">
+      <dt className="text-neutral-500">{label}</dt>
+      <dd className="text-right font-medium text-neutral-900">{value || "—"}</dd>
+    </div>
+  );
+}

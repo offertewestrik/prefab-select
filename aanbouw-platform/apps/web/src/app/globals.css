@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@repo/config/theme.css";
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}

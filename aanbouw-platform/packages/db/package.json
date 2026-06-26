@@ -1,0 +1,39 @@
+{
+  "name": "@repo/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "seed": "tsx seed/index.ts",
+    "create-admin": "tsx seed/dev-user.ts admin",
+    "create-installer": "tsx seed/dev-user.ts installer",
+    "create-homeowner": "tsx seed/dev-user.ts homeowner",
+    "create-dev-users": "tsx seed/dev-user.ts all",
+    "studio": "prisma studio",
+    "typecheck": "tsc --noEmit"
+  },
+  "prisma": {
+    "seed": "tsx seed/index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.1.0"
+  },
+  "devDependencies": {
+    "@repo/config": "workspace:*",
+    "@repo/core": "workspace:*",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.14.0",
+    "bcryptjs": "^2.4.3",
+    "prisma": "^6.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.2"
+  }
+}
