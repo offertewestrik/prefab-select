@@ -949,6 +949,36 @@ model AiDailyReport {
   createdAt  DateTime @default(now())
 }
 
+// ───────────────────────────── Jobs / Queue ─────────────────────────────
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  RETRYING
+}
+
+// Generieke achtergrondtaak. Zware/trage acties (AI, e-mail, matching) lopen
+// hierlangs zodat verzoeken (lead-aanmaak, reviews) snel blijven.
+model Job {
+  id          String    @id @default(cuid())
+  type        String
+  payload     Json
+  status      JobStatus @default(PENDING)
+  attempts    Int       @default(0)
+  maxAttempts Int       @default(3)
+  runAt       DateTime  @default(now())
+  lockedAt    DateTime?
+  error       String?
+  result      Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status, runAt])
+  @@index([type])
+}
+
 // Prijsindicatie per lead (Price Advisor of rule-based fallback).
 model PriceEstimate {
   id              String      @id @default(cuid())

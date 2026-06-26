@@ -15,6 +15,7 @@ const nav: NavItem[] = [
   { label: "Reviews", href: "/admin/reviews" },
   { label: "Artikelen", href: "/admin/articles" },
   { label: "AI", href: "/admin/ai" },
+  { label: "Jobs", href: "/admin/jobs" },
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

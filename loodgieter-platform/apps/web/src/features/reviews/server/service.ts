@@ -5,7 +5,7 @@ import { makeAccessToken } from "@/features/quotes/server/service";
 import { sendEmail, sendAdminNotification } from "@/features/notifications/email/send";
 import { reviewThanks } from "@/features/notifications/email/templates";
 import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
-import { detectReviewFraud } from "@/features/ai/services";
+import { enqueue } from "@/features/jobs/queue";
 
 export interface ReviewFormInput {
   rating: number;
@@ -77,12 +77,8 @@ async function persistReview(
     },
   });
 
-  // Fraudedetectie (best-effort); de review blijft PENDING tot moderatie.
-  try {
-    await detectReviewFraud(review.id);
-  } catch {
-    // negeer; blokkeert het indienen niet
-  }
+  // Fraudedetectie via de queue; de review blijft PENDING tot moderatie.
+  await enqueue("review.fraud_check", { reviewId: review.id });
 
   if (opts.inviteToken) {
     await prisma.reviewInvite.updateMany({ where: { token: opts.inviteToken }, data: { usedAt: new Date() } });

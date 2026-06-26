@@ -1,24 +1,25 @@
 import { NextResponse } from "next/server";
-import { enqueue } from "@/features/jobs/queue";
+import { processJobs } from "@/features/jobs/queue";
 
 export const dynamic = "force-dynamic";
 
 /**
- * Cron: genereert het Admin AI-ochtendrapport. Beveiligd met CRON_SECRET
- * (Bearer of ?secret), zelfde patroon als /api/cron/expire-quotes.
+ * Worker-endpoint: verwerkt klaarstaande jobs. Beveiligd met CRON_SECRET
+ * (Bearer of ?secret). Batchgrootte instelbaar via ?batch=N (default 10, max 50).
  */
 async function handle(req: Request): Promise<Response> {
   const secret = process.env.CRON_SECRET;
   if (!secret) return NextResponse.json({ error: "cron_disabled" }, { status: 401 });
 
+  const url = new URL(req.url);
   const auth = req.headers.get("authorization");
   const bearer = auth?.startsWith("Bearer ") ? auth.slice(7) : null;
-  const provided = bearer ?? new URL(req.url).searchParams.get("secret");
+  const provided = bearer ?? url.searchParams.get("secret");
   if (provided !== secret) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  // Via de queue zodat het rapport mee profiteert van retries/locking.
-  const jobId = await enqueue("ai.daily_report", {});
-  return NextResponse.json({ ok: true, queued: jobId });
+  const batch = Math.min(50, Math.max(1, Number(url.searchParams.get("batch")) || 10));
+  const result = await processJobs(batch);
+  return NextResponse.json({ ok: true, ...result });
 }
 
 export const GET = handle;

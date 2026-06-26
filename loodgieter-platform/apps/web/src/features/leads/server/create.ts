@@ -1,13 +1,12 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
-import { slugify, type LeadInput } from "@repo/core";
+import { slugify, brand, type LeadInput } from "@repo/core";
 import { siteUrl } from "@repo/seo";
 import { priceRange } from "@/lib/format";
-import { sendLeadConfirmation, sendAdminNotification } from "@/features/notifications/email/send";
 import { notifyAdmins } from "@/features/notifications/server/service";
 import { computeLeadPriceCredits } from "./pricing";
-import { matchLead } from "./matching";
-import { enrichNewLead } from "@/features/ai/services";
+import { leadConfirmation, adminNotification } from "@/features/notifications/email/templates";
+import { enqueue } from "@/features/jobs/queue";
 
 export interface CreateLeadResult {
   id: string;
@@ -71,39 +70,35 @@ export async function createLead(
     },
   });
 
-  // 3. E-mails + admin-notificatie (best-effort, blokkeert de aanvraag niet).
+  // 3. In-app admin-melding (snel, alleen DB).
+  await notifyAdmins({ type: "lead.new", title: `Nieuwe lead: ${resolvedService.name}`, body: municipality.name, href: "/admin/leads" });
+
+  // 4. Zware/trage taken naar de queue zodat de aanvraag direct kan terugkeren:
+  //    AI-verrijking, matching + match-notificaties, en e-mails.
   const priceText = resolvedService.priceFrom
     ? priceRange(resolvedService.priceFrom, resolvedService.priceTo, resolvedService.priceUnit)
     : undefined;
-  void sendLeadConfirmation({
-    to: input.contactEmail,
+  const confirmation = leadConfirmation({
     customerName: input.contactName,
     serviceName: resolvedService.name,
     city: municipality.name,
     priceText,
     accountUrl: lead.homeownerId ? siteUrl("/mijn-aanvragen") : undefined,
   });
-  void sendAdminNotification({
+  const adminMail = adminNotification({
     title: `Nieuwe lead: ${resolvedService.name} (${municipality.name})`,
     lines: [`Klant: ${input.contactName}`, `Telefoon: ${input.contactPhone}`, `E-mail: ${input.contactEmail}`],
     url: siteUrl("/admin/leads"),
   });
-  await notifyAdmins({ type: "lead.new", title: `Nieuwe lead: ${resolvedService.name}`, body: municipality.name, href: "/admin/leads" });
+  const adminEmail = process.env.CONTACT_RECEIVER_EMAIL || brand.email;
 
-  // 4. AI-verrijking: Lead Analyzer + Price Advisor + Fraud Detector (best-effort).
-  try {
-    await enrichNewLead(lead.id);
-  } catch {
-    // AI-fouten mogen de aanvraag nooit blokkeren.
-  }
+  await Promise.all([
+    enqueue("lead.enrich_ai", { leadId: lead.id }),
+    enqueue("lead.notify_matches", { leadId: lead.id }),
+    enqueue("email.send", { to: input.contactEmail, subject: confirmation.subject, html: confirmation.html }),
+    enqueue("email.send", { to: adminEmail, subject: adminMail.subject, html: adminMail.html }),
+  ]);
 
-  // 5. Matching starten (best-effort).
-  let matched = 0;
-  try {
-    matched = await matchLead(lead.id);
-  } catch {
-    matched = 0;
-  }
-
-  return { id: lead.id, matched };
+  // Matching gebeurt nu asynchroon; geen synchroon aantal meer.
+  return { id: lead.id, matched: 0 };
 }
