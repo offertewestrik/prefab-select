@@ -1,9 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { requireRole, getCurrentCompany, getSessionUser } from "@/lib/guards";
 import { getQuoteForViewer } from "./queries";
-import { saveDraft, sendQuote, applyDecision, type MutResult } from "./mutations";
+import { saveDraft, sendQuote, applyDecision, duplicateQuote, type MutResult } from "./mutations";
 
 export type ActionState = { ok?: boolean; message?: string };
 
@@ -44,6 +45,15 @@ export async function sendQuoteAction(quoteId: string, _prev: ActionState, _form
   revalidatePath(`/dashboard/offertes/${quoteId}`);
   revalidatePath("/dashboard/quotes");
   return msg(result, "Offerte verstuurd naar de klant.");
+}
+
+/** Dupliceert een (bijv. verlopen) offerte naar een nieuw concept en opent de editor. */
+export async function duplicateQuoteAction(formData: FormData): Promise<void> {
+  const company = await companyGuard();
+  const quoteId = String(formData.get("quoteId") ?? "");
+  const result = await duplicateQuote(company.id, quoteId);
+  revalidatePath("/dashboard/quotes");
+  if (result.ok) redirect(`/dashboard/offertes/${result.quoteId}`);
 }
 
 export async function acceptQuoteAction(_prev: ActionState, formData: FormData): Promise<ActionState> {

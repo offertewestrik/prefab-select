@@ -1,4 +1,5 @@
 import "server-only";
+import type { Prisma } from "@repo/db";
 import { siteUrl } from "@repo/seo";
 import { brand } from "@repo/core";
 import { prisma } from "@/lib/prisma";
@@ -155,4 +156,47 @@ export async function expireQuotes(now: Date = new Date()): Promise<{ scanned: n
   }
 
   return { scanned: candidates.length, expired };
+}
+
+/** Uniek offertenummer voor een bedrijf (OFF-JAAR-0001), botsingsvrij. */
+async function nextQuoteNumber(companyId: string): Promise<string> {
+  const year = new Date().getFullYear();
+  const base = await prisma.quote.count({ where: { companyId } });
+  for (let i = base + 1; ; i++) {
+    const number = `OFF-${year}-${String(i).padStart(4, "0")}`;
+    if (!(await prisma.quote.findUnique({ where: { number } }))) return number;
+  }
+}
+
+/**
+ * Dupliceert een offerte naar een nieuw DRAFT (incl. regels/teksten), met een
+ * vers nummer en zonder verzend-/beslis-/token-gegevens. Vereist eigendom.
+ */
+export async function duplicateQuote(
+  companyId: string,
+  quoteId: string,
+): Promise<{ ok: true; quoteId: string } | { ok: false; reason: string }> {
+  const source = await prisma.quote.findUnique({ where: { id: quoteId } });
+  if (!source || source.companyId !== companyId) return { ok: false, reason: "not_found" };
+
+  const number = await nextQuoteNumber(companyId);
+  const created = await prisma.quote.create({
+    data: {
+      companyId,
+      leadId: source.leadId,
+      number,
+      title: source.title,
+      introText: source.introText,
+      lineItems: (source.lineItems ?? []) as Prisma.InputJsonValue,
+      subtotalCents: source.subtotalCents,
+      vatRate: source.vatRate,
+      vatCents: source.vatCents,
+      totalCents: source.totalCents,
+      terms: source.terms,
+      notes: source.notes,
+      status: "DRAFT",
+      // validUntil/accessToken/sentAt/acceptedAt/rejectedAt/expiredAt bewust leeg.
+    },
+  });
+  return { ok: true, quoteId: created.id };
 }
