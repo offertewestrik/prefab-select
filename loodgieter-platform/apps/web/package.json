@@ -19,6 +19,7 @@
     "@repo/ai": "workspace:*",
     "@repo/db": "workspace:*",
     "@repo/maps": "workspace:*",
+    "@repo/photo-ai": "workspace:*",
     "@repo/seo": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "^5.62.7",

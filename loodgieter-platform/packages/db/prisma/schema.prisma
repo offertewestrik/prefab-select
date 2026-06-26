@@ -980,6 +980,70 @@ model Job {
   @@index([type])
 }
 
+// ───────────────────────────── Photo Analyzer ─────────────────────────────
+
+enum PhotoAnalysisStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum PhotoRiskLevel {
+  LAAG
+  GEMIDDELD
+  HOOG
+  ONBEKEND
+}
+
+model PhotoAnalysis {
+  id                String              @id @default(cuid())
+  leadId            String?
+  createdBy         String?
+  provider          String
+  detector          String
+  status            PhotoAnalysisStatus @default(PENDING)
+  confidence        Float               @default(0)
+  summary           String?             @db.Text
+  recommendations   String[]
+  riskLevel         PhotoRiskLevel      @default(ONBEKEND)
+  maintenanceScore  Int?
+  estimatedPriceMin Int?
+  estimatedPriceMax Int?
+  rawResponse       Json?
+  createdAt         DateTime            @default(now())
+
+  objects PhotoObject[]
+  images  PhotoAnalysisImage[]
+
+  @@index([leadId])
+  @@index([detector, status])
+}
+
+model PhotoObject {
+  id         String        @id @default(cuid())
+  analysisId String
+  type       String
+  label      String
+  confidence Float         @default(0)
+  position   Json?
+  metadata   Json?
+  analysis   PhotoAnalysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+
+  @@index([analysisId])
+}
+
+model PhotoAnalysisImage {
+  id         String        @id @default(cuid())
+  analysisId String
+  imageUrl   String
+  width      Int?
+  height     Int?
+  createdAt  DateTime      @default(now())
+  analysis   PhotoAnalysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+
+  @@index([analysisId])
+}
+
 // Prijsindicatie per lead (Price Advisor of rule-based fallback).
 model PriceEstimate {
   id              String      @id @default(cuid())

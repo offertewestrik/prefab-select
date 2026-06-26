@@ -68,6 +68,9 @@ importers:
       '@repo/maps':
         specifier: workspace:*
         version: link:../../packages/maps
+      '@repo/photo-ai':
+        specifier: workspace:*
+        version: link:../../packages/photo-ai
       '@repo/seo':
         specifier: workspace:*
         version: link:../../packages/seo
@@ -237,6 +240,22 @@ importers:
         version: 5.9.3
 
   packages/maps:
+    devDependencies:
+      '@repo/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.14.0
+        version: 22.20.0
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  packages/photo-ai:
+    dependencies:
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
     devDependencies:
       '@repo/config':
         specifier: workspace:*
