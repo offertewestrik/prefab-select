@@ -136,6 +136,40 @@ export async function moderateReview(id: string, status: "APPROVED" | "REJECTED"
   return review;
 }
 
-export function getAllReviews() {
-  return prisma.review.findMany({ orderBy: [{ status: "asc" }, { createdAt: "desc" }], take: 200, include: { company: true } });
+export function getAllReviews(filter?: {
+  status?: "PENDING" | "APPROVED" | "REJECTED" | "HIDDEN";
+  serviceSlug?: string;
+  cityName?: string;
+  q?: string;
+}) {
+  return prisma.review.findMany({
+    where: {
+      status: filter?.status,
+      serviceSlug: filter?.serviceSlug || undefined,
+      cityName: filter?.cityName ? { equals: filter.cityName, mode: "insensitive" } : undefined,
+      ...(filter?.q
+        ? {
+            OR: [
+              { customerName: { contains: filter.q, mode: "insensitive" } },
+              { company: { name: { contains: filter.q, mode: "insensitive" } } },
+            ],
+          }
+        : {}),
+    },
+    orderBy: [{ status: "asc" }, { createdAt: "desc" }],
+    take: 200,
+    include: { company: true },
+  });
+}
+
+/** Distinct waarden voor de admin-filters. */
+export async function getReviewFilterOptions() {
+  const [services, cities] = await Promise.all([
+    prisma.review.findMany({ where: { serviceSlug: { not: null } }, select: { serviceSlug: true }, distinct: ["serviceSlug"] }),
+    prisma.review.findMany({ where: { cityName: { not: null } }, select: { cityName: true }, distinct: ["cityName"] }),
+  ]);
+  return {
+    services: services.map((s) => s.serviceSlug!).sort(),
+    cities: cities.map((c) => c.cityName!).sort(),
+  };
 }

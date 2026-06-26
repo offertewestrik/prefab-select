@@ -51,6 +51,8 @@ export function serviceLd(input: {
   path: string;
   areaServed?: string;
   priceFrom?: number | null;
+  rating?: { value: number; count: number };
+  reviews?: { author: string; rating: number; title?: string | null; body: string }[];
 }): Json {
   const ld: Json = {
     "@context": "https://schema.org",
@@ -68,6 +70,25 @@ export function serviceLd(input: {
       price: input.priceFrom,
       priceSpecification: { "@type": "PriceSpecification", minPrice: input.priceFrom },
     };
+  // Alleen toevoegen wanneer er daadwerkelijk (approved) reviews zijn.
+  if (input.rating && input.rating.count > 0) {
+    ld.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: Number(input.rating.value.toFixed(1)),
+      reviewCount: input.rating.count,
+      bestRating: 5,
+      worstRating: 1,
+    };
+  }
+  if (input.reviews && input.reviews.length > 0) {
+    ld.review = input.reviews.map((r) => ({
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+      author: { "@type": "Person", name: r.author },
+      name: r.title ?? undefined,
+      reviewBody: r.body,
+    }));
+  }
   return ld;
 }
 

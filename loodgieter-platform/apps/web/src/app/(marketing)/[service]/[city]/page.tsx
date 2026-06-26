@@ -8,6 +8,8 @@ import { buildMetadata } from "@/features/seo/metadata";
 import { getServiceCityData } from "@/features/seo/service-city";
 import { serviceCityLinks } from "@/features/seo/internal-links";
 import { getPriorityServiceCityPairs } from "@/features/catalog/server/queries";
+import { getReviewsForServiceCity } from "@/features/reviews/server/aggregation";
+import { ReviewsSection } from "@/components/marketing/reviews-section";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -53,6 +55,7 @@ export default async function ServiceCityPage({
   });
 
   const path = urls.serviceCity(service, city);
+  const reviews = await getReviewsForServiceCity(data.service.slug, data.city.name);
 
   return (
     <>
@@ -70,6 +73,8 @@ export default async function ServiceCityPage({
             path,
             areaServed: data.city.name,
             priceFrom: data.service.priceFrom,
+            rating: reviews.count > 0 ? { value: reviews.average, count: reviews.count } : undefined,
+            reviews: reviews.latest.map((r) => ({ author: r.authorLabel, rating: r.rating, title: r.title, body: r.body })),
           }),
           ...(data.service.faqs.length
             ? [faqLd(data.service.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
@@ -77,6 +82,11 @@ export default async function ServiceCityPage({
         ]}
       />
       <ServiceCityTemplate data={data} links={links} />
+      {reviews.count > 0 && (
+        <div className="mx-auto max-w-(--container-max) px-6 pb-8">
+          <ReviewsSection data={reviews} heading={`Beoordelingen voor ${data.service.name} in ${data.city.name}`} />
+        </div>
+      )}
     </>
   );
 }

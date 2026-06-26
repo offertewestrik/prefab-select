@@ -1,5 +1,5 @@
 import { PageHeading, EmptyState } from "@/components/dashboard/sidebar-layout";
-import { getAllReviews } from "@/features/reviews/server/service";
+import { getAllReviews, getReviewFilterOptions } from "@/features/reviews/server/service";
 import {
   approveReviewAction,
   rejectReviewAction,
@@ -7,14 +7,60 @@ import {
   republishReviewAction,
 } from "@/features/reviews/server/actions";
 
-export default async function AdminReviews() {
-  const reviews = await getAllReviews();
+type Status = "PENDING" | "APPROVED" | "REJECTED" | "HIDDEN";
+
+export default async function AdminReviews({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string; service?: string; city?: string; q?: string }>;
+}) {
+  const sp = await searchParams;
+  const status = (["PENDING", "APPROVED", "REJECTED", "HIDDEN"].includes(sp.status ?? "") ? sp.status : undefined) as Status | undefined;
+
+  const [reviews, options] = await Promise.all([
+    getAllReviews({ status, serviceSlug: sp.service, cityName: sp.city, q: sp.q }),
+    getReviewFilterOptions(),
+  ]);
 
   return (
     <div>
       <PageHeading title="Reviews" subtitle="Modereer reviews. Alleen goedgekeurde reviews zijn publiek zichtbaar." />
+
+      {/* Filters (GET) */}
+      <form className="mb-6 flex flex-wrap items-end gap-3 rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-4 text-sm">
+        <label>
+          <span className="mb-1 block font-medium text-neutral-900">Status</span>
+          <select name="status" defaultValue={sp.status ?? ""} className="h-10 rounded-[var(--radius-md)] border border-neutral-200 px-2">
+            <option value="">Alle</option>
+            <option value="PENDING">In behandeling</option>
+            <option value="APPROVED">Goedgekeurd</option>
+            <option value="REJECTED">Afgewezen</option>
+            <option value="HIDDEN">Verborgen</option>
+          </select>
+        </label>
+        <label>
+          <span className="mb-1 block font-medium text-neutral-900">Dienst</span>
+          <select name="service" defaultValue={sp.service ?? ""} className="h-10 rounded-[var(--radius-md)] border border-neutral-200 px-2">
+            <option value="">Alle</option>
+            {options.services.map((s) => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </label>
+        <label>
+          <span className="mb-1 block font-medium text-neutral-900">Plaats</span>
+          <select name="city" defaultValue={sp.city ?? ""} className="h-10 rounded-[var(--radius-md)] border border-neutral-200 px-2">
+            <option value="">Alle</option>
+            {options.cities.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </label>
+        <label className="flex-1">
+          <span className="mb-1 block font-medium text-neutral-900">Zoek (klant/bedrijf)</span>
+          <input name="q" defaultValue={sp.q ?? ""} className="h-10 w-full rounded-[var(--radius-md)] border border-neutral-200 px-3" />
+        </label>
+        <button className="h-10 rounded-[var(--radius-md)] bg-primary-500 px-4 font-medium text-white">Filter</button>
+      </form>
+
       {reviews.length === 0 ? (
-        <EmptyState>Er zijn nog geen reviews.</EmptyState>
+        <EmptyState>Geen reviews gevonden.</EmptyState>
       ) : (
         <ul className="space-y-3">
           {reviews.map((r) => (
@@ -29,7 +75,7 @@ export default async function AdminReviews() {
                   {r.title && <div className="mt-1 font-medium text-neutral-900">{r.title}</div>}
                   <p className="mt-1 text-sm text-neutral-500">{r.body}</p>
                   <div className="mt-1 text-xs text-neutral-400">
-                    {r.customerName}{r.cityName ? ` · ${r.cityName}` : ""}{r.serviceSlug ? ` · ${r.serviceSlug}` : ""} · {r.createdAt.toLocaleDateString("nl-NL")}
+                    {r.showName ? r.customerName : "Anoniem"}{r.cityName ? ` · ${r.cityName}` : ""}{r.serviceSlug ? ` · ${r.serviceSlug}` : ""} · {r.createdAt.toLocaleDateString("nl-NL")}
                   </div>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-1.5">

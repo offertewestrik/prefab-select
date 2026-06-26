@@ -10,6 +10,8 @@ import { LeadCta } from "@/components/marketing/lead-cta";
 import { buildMetadata } from "@/features/seo/metadata";
 import { getCityBySlug, getAllCitySlugs, getNearbyCities } from "@/features/geo/server/queries";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
+import { getReviewsForCity } from "@/features/reviews/server/aggregation";
+import { ReviewsSection } from "@/components/marketing/reviews-section";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -39,9 +41,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
   const city = await getCityBySlug(slug);
   if (!city) notFound();
 
-  const [categories, nearby] = await Promise.all([
+  const [categories, nearby, reviews] = await Promise.all([
     getServicesByCategory(),
     getNearbyCities(city.lat, city.lng, city.slug, 8),
+    getReviewsForCity(city.name),
   ]);
 
   return (
@@ -82,6 +85,8 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             </div>
           </section>
         ))}
+
+        {reviews.count > 0 && <ReviewsSection data={reviews} heading={`Wat klanten in ${city.name} zeggen`} />}
 
         <section>
           <h2 className="text-xl font-bold text-neutral-900">Nabije gemeenten</h2>

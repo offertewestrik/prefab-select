@@ -10,6 +10,8 @@ import { LeadCta } from "@/components/marketing/lead-cta";
 import { priceRange } from "@/lib/format";
 import { getServiceBySlug, getAllServiceSlugs } from "@/features/catalog/server/queries";
 import { getTopCities } from "@/features/geo/server/queries";
+import { getReviewsForService } from "@/features/reviews/server/aggregation";
+import { ReviewsSection } from "@/components/marketing/reviews-section";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -48,7 +50,7 @@ export default async function ServicePage({
   const service = await getServiceBySlug(slug);
   if (!service) notFound();
 
-  const [topCities] = await Promise.all([getTopCities(12)]);
+  const [topCities, reviews] = await Promise.all([getTopCities(12), getReviewsForService(slug)]);
   const related = service.relatedFrom.map((r) => r.to).filter((t) => t.publish === "ACTIVE");
 
   return (
@@ -65,6 +67,8 @@ export default async function ServicePage({
             description: service.shortDescription,
             path: urls.service(slug),
             priceFrom: service.priceFrom,
+            rating: reviews.count > 0 ? { value: reviews.average, count: reviews.count } : undefined,
+            reviews: reviews.latest.map((r) => ({ author: r.authorLabel, rating: r.rating, title: r.title, body: r.body })),
           }),
           ...(service.faqs.length
             ? [faqLd(service.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
@@ -156,6 +160,12 @@ export default async function ServicePage({
           </div>
         </aside>
       </div>
+
+      {reviews.count > 0 && (
+        <div className="mx-auto max-w-(--container-max) px-6 pb-8">
+          <ReviewsSection data={reviews} heading={`Beoordelingen voor ${service.name}`} />
+        </div>
+      )}
 
       {related.length > 0 && (
         <section className="mx-auto max-w-(--container-max) px-6 pb-8">
