@@ -3,6 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireRole, getCurrentCompany, getSessionUser } from "@/lib/guards";
+import { quoteAssistant } from "@repo/ai";
+import { prisma } from "@/lib/prisma";
+import { runAgent } from "@/features/ai/run";
 import { getQuoteForViewer } from "./queries";
 import { saveDraft, sendQuote, applyDecision, duplicateQuote, type MutResult } from "./mutations";
 
@@ -54,6 +57,46 @@ export async function duplicateQuoteAction(formData: FormData): Promise<void> {
   const result = await duplicateQuote(company.id, quoteId);
   revalidatePath("/dashboard/quotes");
   if (result.ok) redirect(`/dashboard/offertes/${result.quoteId}`);
+}
+
+/**
+ * AI-offertevoorstel: vult het DRAFT met titel/intro/regels/voorwaarden. De
+ * installateur moet altijd zelf controleren en handmatig versturen.
+ */
+export async function aiQuoteDraftAction(quoteId: string, _prev: ActionState, _formData: FormData): Promise<ActionState> {
+  const company = await companyGuard();
+  const quote = await prisma.quote.findUnique({
+    where: { id: quoteId },
+    include: { lead: { include: { service: true, municipality: true, priceEstimate: true } } },
+  });
+  if (!quote || quote.companyId !== company.id) return { ok: false, message: MESSAGES.not_found };
+  if (quote.status !== "DRAFT") return { ok: false, message: MESSAGES.not_draft };
+
+  const lead = quote.lead;
+  const res = await runAgent(
+    quoteAssistant,
+    {
+      service: lead?.service.name ?? "Installatiewerk",
+      city: lead?.municipality.name ?? "",
+      description: lead?.description ?? "",
+      marketPriceCents: lead?.priceEstimate?.marketPriceCents ?? null,
+    },
+    { summary: `AI-offerte ${lead?.service.name ?? "concept"}`, companyId: company.id, leadId: quote.leadId },
+  );
+  if (!res.ok || !res.data) return { ok: false, message: "AI kon geen voorstel maken. Probeer het later opnieuw." };
+
+  // Opslaan als concept (DRAFT). Verzenden blijft een handmatige stap.
+  const result = await saveDraft(company.id, quoteId, {
+    title: res.data.title,
+    introText: res.data.introText,
+    lineItems: res.data.lineItems,
+    vatRate: 21,
+    terms: res.data.terms,
+    notes: `Planning: ${res.data.planning}`,
+    validUntil: null,
+  });
+  revalidatePath(`/dashboard/offertes/${quoteId}`);
+  return msg(result, "AI-voorstel ingevuld als concept. Controleer en verstuur zelf.");
 }
 
 export async function acceptQuoteAction(_prev: ActionState, formData: FormData): Promise<ActionState> {

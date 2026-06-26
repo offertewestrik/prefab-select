@@ -16,7 +16,7 @@ export default async function MyRequestDetail({ params }: { params: Promise<{ id
 
   const lead = await prisma.leadRequest.findUnique({
     where: { id },
-    include: { service: true, municipality: true },
+    include: { service: true, municipality: true, priceEstimate: true },
   });
   // Alleen de eigenaar (of admin) mag de aanvraag zien.
   const isAdmin = (user as { role?: string }).role === "ADMIN";
@@ -34,6 +34,18 @@ export default async function MyRequestDetail({ params }: { params: Promise<{ id
       <h1 className="mt-4 text-3xl font-bold tracking-tight text-neutral-900">{lead.service.name}</h1>
       <p className="mt-1 text-neutral-500">{lead.municipality.name} · status {lead.status}</p>
       <p className="mt-4 whitespace-pre-wrap text-sm text-neutral-700">{lead.description}</p>
+
+      {lead.priceEstimate && (
+        <div className="mt-6 rounded-[var(--radius-xl)] border border-neutral-200 bg-neutral-50 p-4">
+          <div className="text-sm font-medium text-neutral-900">Vrijblijvende prijsindicatie</div>
+          <div className="mt-1 text-2xl font-bold text-neutral-900">
+            € {(lead.priceEstimate.rangeMinCents / 100).toFixed(0)} – € {(lead.priceEstimate.rangeMaxCents / 100).toFixed(0)}
+          </div>
+          <p className="mt-1 text-xs text-neutral-500">
+            Dit is een automatische indicatie, geen offerte. De definitieve prijs ontvang je van de vakman.
+          </p>
+        </div>
+      )}
 
       <h2 className="mt-10 text-xl font-bold text-neutral-900">Ontvangen offertes</h2>
       {quotes.length === 0 ? (

@@ -20,6 +20,16 @@ export default async function AdminLeads() {
           { key: "city", label: "Plaats", render: (l) => l.municipality.name },
           { key: "name", label: "Naam", render: (l) => l.contactName },
           { key: "status", label: "Status", render: (l) => l.status },
+          {
+            key: "risk",
+            label: "Risico",
+            render: (l) =>
+              l.fraudScore != null && l.fraudScore >= 70 ? (
+                <span className="rounded-full bg-[color:var(--color-status-danger,#DC2626)]/10 px-2 py-0.5 text-xs font-medium text-[color:var(--color-status-danger,#DC2626)]">⚠ {l.fraudScore}</span>
+              ) : (
+                <span className="text-xs text-neutral-300">—</span>
+              ),
+          },
           { key: "date", label: "Datum", render: (l) => l.createdAt.toLocaleDateString("nl-NL") },
         ]}
       />

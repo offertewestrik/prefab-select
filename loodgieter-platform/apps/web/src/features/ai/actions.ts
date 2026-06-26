@@ -1,11 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { AGENTS, type AgentKey } from "@repo/ai";
+import { AGENTS, seoWriter, type AgentKey } from "@repo/ai";
 import { requireRole } from "@/lib/guards";
 import { rateLimit } from "@/lib/ratelimit";
 import { runAgent } from "./run";
-import { runDailyReport } from "./services";
+import { runDailyReport, summarizeCompanyReviews } from "./services";
 
 // Representatieve demo-input per agent voor een "test run" vanuit het dashboard.
 const DEMO_INPUTS: Record<AgentKey, unknown> = {
@@ -45,4 +45,30 @@ export async function generateDailyReportAction(): Promise<void> {
   await requireRole("ADMIN");
   await runDailyReport();
   revalidatePath("/admin/ai");
+}
+
+/** Reviews van een bedrijf samenvatten (admin-only; intern opgeslagen). */
+export async function summarizeReviewsAction(formData: FormData): Promise<void> {
+  await requireRole("ADMIN");
+  const companyId = String(formData.get("companyId") ?? "");
+  if (companyId) {
+    await summarizeCompanyReviews(companyId);
+    revalidatePath(`/admin/installers/${companyId}`);
+  }
+}
+
+export type SeoConceptState = { ok?: boolean; output?: string; error?: string };
+
+/** SEO-conceptgenerator (admin-only). Levert alleen een concept; publiceert nooit. */
+export async function seoConceptAction(_prev: SeoConceptState, formData: FormData): Promise<SeoConceptState> {
+  await requireRole("ADMIN");
+  const kindRaw = String(formData.get("kind") ?? "service");
+  const kind = (["service", "city", "article", "service-city"].includes(kindRaw) ? kindRaw : "service") as
+    | "service" | "city" | "article" | "service-city";
+  const topic = String(formData.get("topic") ?? "").trim();
+  if (!topic) return { ok: false, error: "Vul een onderwerp in." };
+
+  const res = await runAgent(seoWriter, { kind, topic, context: String(formData.get("context") ?? "") }, { summary: `SEO-concept ${kind}: ${topic}` });
+  if (!res.ok || !res.data) return { ok: false, error: "AI kon geen concept maken." };
+  return { ok: true, output: JSON.stringify(res.data, null, 2) };
 }

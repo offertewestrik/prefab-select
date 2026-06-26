@@ -71,6 +71,11 @@ export default async function AdminReviews({
                     <span className="text-trust">{"★".repeat(r.rating)}</span>
                     <span className="text-sm font-medium text-neutral-900">{r.company.name}</span>
                     <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">{r.status}</span>
+                    {r.fraudScore != null && r.fraudScore >= 70 && (
+                      <span className="rounded-full bg-[color:var(--color-status-danger,#DC2626)]/10 px-2 py-0.5 text-xs font-medium text-[color:var(--color-status-danger,#DC2626)]">
+                        ⚠ verdacht ({r.fraudScore})
+                      </span>
+                    )}
                   </div>
                   {r.title && <div className="mt-1 font-medium text-neutral-900">{r.title}</div>}
                   <p className="mt-1 text-sm text-neutral-500">{r.body}</p>

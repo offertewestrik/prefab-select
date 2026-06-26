@@ -25,6 +25,20 @@ export interface LeadViewData {
   soldCount: number;
   maxBuyers: number;
   status: string;
+  // AI-verrijking (intern; geen PII). Zichtbaar voor installateur/admin.
+  ai?: {
+    summary: string;
+    urgency: string;
+    complexity: string;
+    risks: string[];
+    missingInfo: string[];
+    estimatedDurationHours: number;
+    recommendedServices: string[];
+    recommendedBrands: string[];
+  };
+  priceIndication?: { marketCents: number; minCents: number; maxCents: number };
+  // Alleen voor admin:
+  fraud?: { score: number; flags: string[] };
   // Alleen aanwezig wanneer unlocked (gekocht of admin):
   contactName?: string;
   contactEmail?: string;
@@ -60,6 +74,7 @@ export async function getLeadView(
       service: { include: { category: true } },
       municipality: { include: { province: true } },
       attachments: true,
+      priceEstimate: true,
     },
   });
   if (!lead) return { status: "forbidden" };
@@ -92,6 +107,15 @@ export async function getLeadView(
     soldCount: lead.soldCount,
     maxBuyers: lead.maxBuyers,
     status: lead.status,
+    ai: (lead.aiAnalysis as LeadViewData["ai"]) ?? undefined,
+    priceIndication: lead.priceEstimate
+      ? {
+          marketCents: lead.priceEstimate.marketPriceCents,
+          minCents: lead.priceEstimate.rangeMinCents,
+          maxCents: lead.priceEstimate.rangeMaxCents,
+        }
+      : undefined,
+    fraud: isAdmin && lead.fraudScore != null ? { score: lead.fraudScore, flags: lead.fraudFlags } : undefined,
   };
 
   if (unlocked) {

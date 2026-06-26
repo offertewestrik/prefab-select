@@ -6,7 +6,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@repo/ui";
 import { quoteStatusLabels, type QuoteStatus } from "@repo/core";
 import { computeTotals } from "../server/service";
-import { saveQuoteAction, sendQuoteAction } from "../server/actions";
+import { saveQuoteAction, sendQuoteAction, aiQuoteDraftAction } from "../server/actions";
 import { QuotePreview } from "./quote-preview";
 import type { LineItem } from "../schema";
 
@@ -86,6 +86,13 @@ export function QuoteEditor({
       if (r.ok) router.refresh();
     });
   }
+  function onAiDraft() {
+    start(async () => {
+      const r = await aiQuoteDraftAction(quoteId, {}, new FormData());
+      setMsg({ ok: !!r.ok, text: r.message ?? "" });
+      if (r.ok) router.refresh(); // herlaadt het concept met de AI-inhoud
+    });
+  }
 
   const setLine = (i: number, patch: Partial<EditorLine>) =>
     setLines((ls) => ls.map((l, idx) => (idx === i ? { ...l, ...patch } : l)));
@@ -148,9 +155,17 @@ export function QuoteEditor({
         </Field>
 
         {!readOnly && (
-          <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={onSave} disabled={pending}>Concept opslaan</Button>
-            <Button variant="accent" onClick={onSend} disabled={pending}>Versturen naar klant</Button>
+          <div className="space-y-3">
+            <div className="rounded-[var(--radius-md)] border border-primary-200 bg-primary-50/50 p-3">
+              <button type="button" onClick={onAiDraft} disabled={pending} className="text-sm font-medium text-primary-700 hover:underline disabled:opacity-60">
+                ✨ AI-offertevoorstel maken
+              </button>
+              <p className="mt-1 text-xs text-neutral-500">Vult titel, werkzaamheden en voorwaarden als concept. Controleer altijd zelf vóór verzenden.</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button variant="outline" onClick={onSave} disabled={pending}>Concept opslaan</Button>
+              <Button variant="accent" onClick={onSend} disabled={pending}>Versturen naar klant</Button>
+            </div>
           </div>
         )}
         {msg && <p className={`text-sm ${msg.ok ? "text-success-500" : "text-[color:var(--color-status-danger,#DC2626)]"}`}>{msg.text}</p>}

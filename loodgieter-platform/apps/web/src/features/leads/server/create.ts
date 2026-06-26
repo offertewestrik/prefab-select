@@ -7,6 +7,7 @@ import { sendLeadConfirmation, sendAdminNotification } from "@/features/notifica
 import { notifyAdmins } from "@/features/notifications/server/service";
 import { computeLeadPriceCredits } from "./pricing";
 import { matchLead } from "./matching";
+import { enrichNewLead } from "@/features/ai/services";
 
 export interface CreateLeadResult {
   id: string;
@@ -89,7 +90,14 @@ export async function createLead(
   });
   await notifyAdmins({ type: "lead.new", title: `Nieuwe lead: ${resolvedService.name}`, body: municipality.name, href: "/admin/leads" });
 
-  // 4. Matching starten (best-effort).
+  // 4. AI-verrijking: Lead Analyzer + Price Advisor + Fraud Detector (best-effort).
+  try {
+    await enrichNewLead(lead.id);
+  } catch {
+    // AI-fouten mogen de aanvraag nooit blokkeren.
+  }
+
+  // 5. Matching starten (best-effort).
   let matched = 0;
   try {
     matched = await matchLead(lead.id);

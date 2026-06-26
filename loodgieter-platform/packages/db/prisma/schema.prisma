@@ -245,6 +245,8 @@ model InstallerCompany {
   publicVisible Boolean       @default(true)
   ratingAvg     Float         @default(0)
   ratingCount   Int           @default(0)
+  reviewSummary Json?
+  reviewSummaryAt DateTime?
   creditBalance Int           @default(0)
   autoBuy       Boolean       @default(false)
   stripeCustomerId String?
@@ -617,6 +619,10 @@ model LeadRequest {
   utm              Json?
   spamScore        Float?
   ipHash           String?
+  // AI-verrijking (intern; bevat geen extra PII).
+  aiAnalysis       Json?
+  fraudScore       Int?
+  fraudFlags       String[]
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
 
@@ -628,6 +634,7 @@ model LeadRequest {
   matches      LeadMatch[]
   appointments Appointment[]
   quotes       Quote[]
+  priceEstimate PriceEstimate?
 
   @@index([serviceId])
   @@index([municipalityId])
@@ -829,6 +836,8 @@ model Review {
   status       ReviewStatus     @default(PENDING)
   source       ReviewSource     @default(PLATFORM)
   verified     Boolean          @default(false)
+  fraudScore   Int?
+  fraudFlags   String[]
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
   company      InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
@@ -938,4 +947,22 @@ model AiDailyReport {
   date       String   @unique // YYYY-MM-DD
   reportJson Json
   createdAt  DateTime @default(now())
+}
+
+// Prijsindicatie per lead (Price Advisor of rule-based fallback).
+model PriceEstimate {
+  id              String      @id @default(cuid())
+  leadId          String      @unique
+  source          String      @default("ai") // "ai" | "rule"
+  marketPriceCents Int
+  rangeMinCents   Int
+  rangeMaxCents   Int
+  materialCents   Int         @default(0)
+  labourHours     Float       @default(0)
+  vatRate         Int         @default(21)
+  regionalFactor  Float       @default(1)
+  advice          String?     @db.Text
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  lead            LeadRequest @relation(fields: [leadId], references: [id], onDelete: Cascade)
 }

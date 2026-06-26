@@ -1,6 +1,7 @@
 import { PageHeading } from "@/components/dashboard/sidebar-layout";
 import { AdminTable } from "@/components/dashboard/admin-table";
 import { prisma } from "@/lib/prisma";
+import { SeoConceptGenerator } from "@/features/ai/components/seo-concept-generator";
 
 export default async function AdminSeoPages() {
   const [overrides, redirects] = await Promise.all([
@@ -14,6 +15,11 @@ export default async function AdminSeoPages() {
         title="SEO-pagina's"
         subtitle="Meta-overrides en redirects. Sitemaps worden automatisch gegenereerd."
       />
+
+      <div className="mb-8">
+        <SeoConceptGenerator />
+      </div>
+
       <h2 className="mb-2 text-sm font-semibold text-neutral-900">Meta-overrides</h2>
       <AdminTable
         rows={overrides}

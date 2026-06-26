@@ -5,6 +5,7 @@ import { makeAccessToken } from "@/features/quotes/server/service";
 import { sendEmail, sendAdminNotification } from "@/features/notifications/email/send";
 import { reviewThanks } from "@/features/notifications/email/templates";
 import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
+import { detectReviewFraud } from "@/features/ai/services";
 
 export interface ReviewFormInput {
   rating: number;
@@ -58,7 +59,7 @@ async function persistReview(
 
   const customerName = input.customerName?.trim() || ctx.lead?.contactName || "Klant";
 
-  await prisma.review.create({
+  const review = await prisma.review.create({
     data: {
       companyId: ctx.companyId,
       homeownerId: opts.homeownerId ?? null,
@@ -75,6 +76,13 @@ async function persistReview(
       source: "PLATFORM",
     },
   });
+
+  // Fraudedetectie (best-effort); de review blijft PENDING tot moderatie.
+  try {
+    await detectReviewFraud(review.id);
+  } catch {
+    // negeer; blokkeert het indienen niet
+  }
 
   if (opts.inviteToken) {
     await prisma.reviewInvite.updateMany({ where: { token: opts.inviteToken }, data: { usedAt: new Date() } });

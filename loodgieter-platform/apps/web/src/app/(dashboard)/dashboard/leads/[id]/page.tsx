@@ -39,6 +39,54 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
             </CardContent>
           </Card>
 
+          {data.ai && (
+            <Card>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <h2 className="font-semibold text-neutral-900">AI-analyse</h2>
+                  <span className="text-xs text-neutral-400">automatisch · ter indicatie</span>
+                </div>
+                <p className="mt-2 text-sm text-neutral-700">{data.ai.summary}</p>
+                <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                  <span className="rounded-full bg-neutral-100 px-2 py-0.5">Urgentie: {data.ai.urgency}</span>
+                  <span className="rounded-full bg-neutral-100 px-2 py-0.5">Complexiteit: {data.ai.complexity}</span>
+                  <span className="rounded-full bg-neutral-100 px-2 py-0.5">± {data.ai.estimatedDurationHours} uur</span>
+                </div>
+                {data.ai.risks.length > 0 && (
+                  <p className="mt-3 text-sm text-neutral-600"><span className="font-medium">Risico&apos;s:</span> {data.ai.risks.join(", ")}</p>
+                )}
+                {data.ai.missingInfo.length > 0 && (
+                  <p className="mt-1 text-sm text-accent-600"><span className="font-medium">Ontbrekende info:</span> {data.ai.missingInfo.join(", ")}</p>
+                )}
+                {data.ai.recommendedServices.length > 0 && (
+                  <p className="mt-1 text-sm text-neutral-600"><span className="font-medium">Aanbevolen diensten:</span> {data.ai.recommendedServices.join(", ")}</p>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {data.priceIndication && (
+            <Card>
+              <CardContent>
+                <h2 className="font-semibold text-neutral-900">Prijsindicatie (AI)</h2>
+                <p className="mt-1 text-sm text-neutral-500">Vrijblijvende indicatie — geen offerte.</p>
+                <p className="mt-2 text-2xl font-bold text-neutral-900">
+                  € {(data.priceIndication.minCents / 100).toFixed(0)} – € {(data.priceIndication.maxCents / 100).toFixed(0)}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {data.fraud && data.fraud.score >= 50 && (
+            <Card>
+              <CardContent>
+                <h2 className="font-semibold text-[color:var(--color-status-danger,#DC2626)]">⚠ Mogelijk verdachte aanvraag</h2>
+                <p className="mt-1 text-sm text-neutral-700">Risicoscore: {data.fraud.score}/100</p>
+                {data.fraud.flags.length > 0 && <p className="mt-1 text-sm text-neutral-600">{data.fraud.flags.join(", ")}</p>}
+              </CardContent>
+            </Card>
+          )}
+
           {/* Klantgegevens: gegrendeld of vrijgegeven */}
           <Card>
             <CardContent>
