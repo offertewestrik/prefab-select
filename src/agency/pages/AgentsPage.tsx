@@ -1,34 +1,29 @@
 import React, { useMemo, useState } from 'react';
 import {
   Bot, Play, Square, Send, Sparkles, CheckCircle2, XCircle, Activity,
-  Users, FileText, Globe, Search, Megaphone, PenLine, BarChart3,
-  Headphones, Github, Flame,
+  Network, ListChecks, Zap, Timer, CircleDollarSign,
 } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { StatCard } from '../components/StatCard';
 import {
   Card, CardHeader, Button, Badge, EmptyState, PageHeader, Modal, Input, Spinner, cn,
 } from '../components/ui';
+import { AgentOrb } from '../components/AgentOrb';
+import { AgentGraph } from '../components/agents/AgentGraph';
 import { aiService } from '../services/aiService';
 import { formatRelative } from '../lib/format';
-import { agentStatusTone } from './_shared';
-import type { Agent, AgentKind, AgentLog } from '../types';
-
-const KIND_ICONS: Record<AgentKind, React.ReactNode> = {
-  'lead-follow-up': <Users size={18} />,
-  quote: <FileText size={18} />,
-  'website-analysis': <Globe size={18} />,
-  seo: <Search size={18} />,
-  'meta-ads-analysis': <Megaphone size={18} />,
-  content: <PenLine size={18} />,
-  reporting: <BarChart3 size={18} />,
-  'customer-service': <Headphones size={18} />,
-  'github-review': <Github size={18} />,
-  'firebase-monitor': <Flame size={18} />,
-};
+import { AGENT_VISUALS, agentMetrics, agentStatusLabel } from '../lib/agentVisuals';
+import type { Agent, AgentLog } from '../types';
 
 const LOG_DOT: Record<AgentLog['level'], string> = {
   info: 'bg-blue-400', success: 'bg-emerald-400', warn: 'bg-amber-400', error: 'bg-red-400',
+};
+
+const STATUS_PILL: Record<Agent['status'], string> = {
+  running: 'bg-blue-500/15 text-blue-300 border-blue-400/30',
+  completed: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/30',
+  failed: 'bg-red-500/15 text-red-300 border-red-400/30',
+  idle: 'bg-white/8 text-[var(--acc-muted)] border-white/15',
 };
 
 const EXAMPLE_PROMPTS = [
@@ -44,6 +39,7 @@ export default function AgentsPage() {
 
   const [busy, setBusy] = useState<Record<string, boolean>>({});
   const [openAgentId, setOpenAgentId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const cAgents = useMemo(
     () => (cid ? agents.items.filter((a) => a.companyId === cid) : []),
@@ -62,14 +58,14 @@ export default function AgentsPage() {
 
   async function start(agent: Agent) {
     const now = () => new Date().toISOString();
-    agents.update(agent.id, { status: 'running', lastAction: 'Bezig...' });
+    agents.update(agent.id, { status: 'running', lastAction: 'Bezig met verwerken…' });
     setBusy((b) => ({ ...b, [agent.id]: true }));
     try {
       const result = await aiService.runAgent(agent, { company: selectedCompany!, leads: scopedLeads, campaigns: scopedCampaigns });
       agents.update(agent.id, {
         status: 'completed',
         output: result.output,
-        lastAction: result.output.slice(0, 60),
+        lastAction: result.output.slice(0, 70),
         updatedAt: now(),
       });
       for (const line of result.logLines) {
@@ -87,85 +83,130 @@ export default function AgentsPage() {
     setBusy((b) => ({ ...b, [agent.id]: false }));
   }
 
+  async function runAll() {
+    for (const a of cAgents) { if (a.status !== 'running') void start(a); }
+  }
+
   const openAgent = cAgents.find((a) => a.id === openAgentId) ?? null;
   const openAgentLogs = openAgent ? agentLogs.items.filter((l) => l.agentId === openAgent.id) : [];
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title="AI Agents"
-        subtitle="Autonome agents per klant"
-        actions={<Badge tone="purple" dot>{aiService.provider()}</Badge>}
+        title="AI Agents — The Team"
+        subtitle={`Jouw autonome team voor ${selectedCompany.name}`}
+        actions={
+          <div className="flex items-center gap-2">
+            <Badge tone="purple" dot>{aiService.provider()}</Badge>
+            <Button size="sm" icon={<Zap size={14} />} onClick={runAll}>Start allemaal</Button>
+          </div>
+        }
       />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <StatCard label="Agents totaal" value={cAgents.length} icon={<Bot size={18} />} />
-        <StatCard label="Running" value={running} icon={<Activity size={18} />} sparkColor="#60a5fa" />
-        <StatCard label="Completed" value={completed} icon={<CheckCircle2 size={18} />} sparkColor="#34d399" />
-        <StatCard label="Failed" value={failed} icon={<XCircle size={18} />} sparkColor="#f87171" />
+        <StatCard label="Agents in team" value={cAgents.length} icon={<Bot size={18} />} />
+        <StatCard label="Actief" value={running} icon={<Activity size={18} />} sparkColor="#60a5fa" />
+        <StatCard label="Klaar" value={completed} icon={<CheckCircle2 size={18} />} sparkColor="#34d399" />
+        <StatCard label="Mislukt" value={failed} icon={<XCircle size={18} />} sparkColor="#f87171" />
       </div>
 
       {cAgents.length === 0 ? (
         <Card className="p-5"><EmptyState icon={<Bot size={28} />} title="Geen agents" description="Er zijn nog geen agents voor deze klant." /></Card>
       ) : (
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {cAgents.map((a) => {
-            const isRunning = a.status === 'running';
-            const isBusy = busy[a.id];
-            return (
-              <Card key={a.id} hover className="p-5 flex flex-col gap-3 cursor-pointer" onClick={() => setOpenAgentId(a.id)}>
-                <div className="flex items-start gap-3">
-                  <div className="w-11 h-11 rounded-xl acc-glass flex items-center justify-center text-blue-300 shrink-0">
-                    {KIND_ICONS[a.kind]}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
+        <>
+          {/* The Team — node graph */}
+          <Card className="p-5">
+            <CardHeader
+              title="The Team"
+              subtitle="Hoe je agents samenwerken — klik een bol om te focussen"
+              icon={<Network size={16} />}
+            />
+            <AgentGraph agents={cAgents} selectedId={selectedId} onSelect={setSelectedId} />
+          </Card>
+
+          {/* Agent cards */}
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {cAgents.map((a) => {
+              const v = AGENT_VISUALS[a.kind];
+              const m = agentMetrics(a);
+              const isRunning = a.status === 'running';
+              const isBusy = busy[a.id];
+              const selected = selectedId === a.id;
+              return (
+                <Card
+                  key={a.id}
+                  hover
+                  onClick={() => setOpenAgentId(a.id)}
+                  className={cn('p-5 flex flex-col gap-4 cursor-pointer', selected && 'ring-2 ring-offset-0')}
+                  style={selected ? { boxShadow: `0 0 0 2px ${v.color}, 0 24px 60px -28px ${v.color}66` } : undefined}
+                >
+                  <div className="flex items-start gap-3.5">
+                    <AgentOrb color={v.color} size={52} active={isRunning} />
+                    <div className="min-w-0 flex-1">
                       <h3 className="text-sm font-semibold truncate">{a.name}</h3>
-                      <Badge tone={agentStatusTone(a.status)}>
-                        <span className={cn('w-1.5 h-1.5 rounded-full bg-current', isRunning && 'acc-pulse')} />
-                        {a.status}
-                      </Badge>
+                      <p className="text-[11px] uppercase tracking-wider text-[var(--acc-muted)] font-semibold mt-0.5">{v.role}</p>
                     </div>
-                    <p className="text-[11px] text-[var(--acc-muted)] leading-relaxed mt-1 line-clamp-2">{a.goal}</p>
+                    <span className={cn('inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold border tracking-wide', STATUS_PILL[a.status])}>
+                      <span className={cn('w-1.5 h-1.5 rounded-full bg-current', isRunning && 'acc-pulse')} />
+                      {agentStatusLabel(a.status)}
+                    </span>
                   </div>
-                </div>
 
-                <div className="acc-glass rounded-xl p-2.5">
-                  <p className="text-[10px] uppercase tracking-wider text-[var(--acc-muted)] font-semibold mb-0.5">Laatste actie</p>
-                  <p className="text-xs leading-snug line-clamp-2">{a.lastAction}</p>
-                </div>
+                  <div className="rounded-xl p-2.5 border border-[var(--acc-border)] bg-white/[0.02]">
+                    <p className="text-[10px] uppercase tracking-wider text-[var(--acc-muted)] font-semibold mb-0.5">Laatste actie</p>
+                    <p className="text-xs leading-snug line-clamp-2">{a.lastAction}</p>
+                  </div>
 
-                <div className="flex items-center justify-between gap-2 pt-1 mt-auto" onClick={(e) => e.stopPropagation()}>
-                  <span className="text-[11px] text-[var(--acc-muted)]">{formatRelative(a.updatedAt)}</span>
-                  {isRunning ? (
-                    <Button size="sm" variant="danger" icon={<Square size={13} />} onClick={() => stop(a)}>Stop</Button>
-                  ) : (
-                    <Button size="sm" icon={isBusy ? <Spinner size={13} /> : <Play size={13} />} onClick={() => start(a)} disabled={isBusy}>Start</Button>
-                  )}
-                </div>
-              </Card>
-            );
-          })}
-        </div>
+                  {/* metrics row */}
+                  <div className="grid grid-cols-4 divide-x divide-[var(--acc-border)]">
+                    <Metric icon={<ListChecks size={12} />} label="Taken" value={String(m.tasks)} />
+                    <Metric icon={<Zap size={12} />} label="Impact" value={`${m.impact}%`} accent="#34d399" />
+                    <Metric icon={<Timer size={12} />} label="Tijd" value={m.avgTime} />
+                    <Metric icon={<CircleDollarSign size={12} />} label="Kosten" value={m.cost} />
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 pt-1 mt-auto" onClick={(e) => e.stopPropagation()}>
+                    <span className="text-[11px] text-[var(--acc-muted)]">{formatRelative(a.updatedAt)}</span>
+                    {isRunning ? (
+                      <Button size="sm" variant="danger" icon={<Square size={13} />} onClick={() => stop(a)}>Stop</Button>
+                    ) : (
+                      <Button size="sm" icon={isBusy ? <Spinner size={13} /> : <Play size={13} />} onClick={() => start(a)} disabled={isBusy}>Start</Button>
+                    )}
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+        </>
       )}
 
-      <CommandCenter
-        company={selectedCompany}
-        scopedLeads={scopedLeads}
-        scopedCampaigns={scopedCampaigns}
-      />
+      <CommandCenter company={selectedCompany} scopedLeads={scopedLeads} scopedCampaigns={scopedCampaigns} />
 
-      <Modal
-        open={!!openAgent}
-        onClose={() => setOpenAgentId(null)}
-        title={openAgent?.name ?? ''}
-        wide
-      >
+      <Modal open={!!openAgent} onClose={() => setOpenAgentId(null)} title={openAgent?.name ?? ''} wide>
         {openAgent && (
           <div className="space-y-5">
-            <div className="flex items-center gap-2">
-              <Badge tone={agentStatusTone(openAgent.status)} dot>{openAgent.status}</Badge>
-              <span className="text-xs text-[var(--acc-muted)]">{formatRelative(openAgent.updatedAt)}</span>
+            <div className="flex items-center gap-4">
+              <AgentOrb color={AGENT_VISUALS[openAgent.kind].color} size={56} active={openAgent.status === 'running'} />
+              <div className="min-w-0">
+                <p className="text-[11px] uppercase tracking-wider text-[var(--acc-muted)] font-semibold">{AGENT_VISUALS[openAgent.kind].role}</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className={cn('inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold border tracking-wide', STATUS_PILL[openAgent.status])}>
+                    {agentStatusLabel(openAgent.status)}
+                  </span>
+                  <span className="text-xs text-[var(--acc-muted)]">{formatRelative(openAgent.updatedAt)}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 divide-x divide-[var(--acc-border)] acc-glass rounded-xl py-1">
+              {(() => { const m = agentMetrics(openAgent); return (
+                <>
+                  <Metric icon={<ListChecks size={12} />} label="Taken" value={String(m.tasks)} />
+                  <Metric icon={<Zap size={12} />} label="Impact" value={`${m.impact}%`} accent="#34d399" />
+                  <Metric icon={<Timer size={12} />} label="Tijd" value={m.avgTime} />
+                  <Metric icon={<CircleDollarSign size={12} />} label="Kosten" value={m.cost} />
+                </>
+              ); })()}
             </div>
 
             <div>
@@ -209,9 +250,24 @@ export default function AgentsPage() {
                 ))}
               </div>
             </div>
+
+            <div className="flex justify-end gap-2 pt-1">
+              {openAgent.status === 'running'
+                ? <Button variant="danger" icon={<Square size={14} />} onClick={() => stop(openAgent)}>Stop agent</Button>
+                : <Button icon={busy[openAgent.id] ? <Spinner size={14} /> : <Play size={14} />} disabled={busy[openAgent.id]} onClick={() => start(openAgent)}>Start agent</Button>}
+            </div>
           </div>
         )}
       </Modal>
+    </div>
+  );
+}
+
+function Metric({ icon, label, value, accent }: { icon: React.ReactNode; label: string; value: string; accent?: string }) {
+  return (
+    <div className="px-2 first:pl-0 text-center">
+      <div className="flex items-center justify-center gap-1 text-[var(--acc-muted)] mb-0.5">{icon}<span className="text-[9px] uppercase tracking-wider font-semibold">{label}</span></div>
+      <p className="text-sm font-bold tabular-nums" style={accent ? { color: accent } : undefined}>{value}</p>
     </div>
   );
 }
@@ -249,10 +305,7 @@ function CommandCenter({ company, scopedLeads, scopedCampaigns }: {
     setAnswer(null);
     try {
       const result = await aiService.sendCommand(q, {
-        companies: [company],
-        leads: scopedLeads,
-        campaigns: scopedCampaigns,
-        activeCompanyId: company.id,
+        companies: [company], leads: scopedLeads, campaigns: scopedCampaigns, activeCompanyId: company.id,
       });
       setAnswer(result.text);
       setSuggestions(result.suggestions);
@@ -265,49 +318,28 @@ function CommandCenter({ company, scopedLeads, scopedCampaigns }: {
     <Card className="p-5">
       <CardHeader title="AI Command Center" subtitle="Stel een vraag of geef een opdracht" icon={<Sparkles size={16} />} />
 
-      <form
-        className="flex items-center gap-2"
-        onSubmit={(e) => { e.preventDefault(); send(prompt); }}
-      >
-        <Input
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Bijv. Analyseer leads deze week…"
-        />
+      <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); send(prompt); }}>
+        <Input value={prompt} onChange={(e) => setPrompt(e.target.value)} placeholder="Bijv. Analyseer leads deze week…" />
         <Button type="submit" icon={loading ? <Spinner size={14} /> : <Send size={15} />} disabled={loading || !prompt.trim()}>Stuur</Button>
       </form>
 
       <div className="flex flex-wrap gap-1.5 mt-3">
         {EXAMPLE_PROMPTS.map((p) => (
-          <button
-            key={p}
-            onClick={() => { setPrompt(p); send(p); }}
-            className="text-[11px] px-2.5 py-1 rounded-full acc-glass hover:border-white/30 text-[var(--acc-muted)] hover:text-white transition-colors"
-          >
+          <button key={p} onClick={() => { setPrompt(p); send(p); }} className="text-[11px] px-2.5 py-1 rounded-full acc-glass hover:border-white/30 text-[var(--acc-muted)] hover:text-white transition-colors">
             {p}
           </button>
         ))}
       </div>
 
-      {loading && (
-        <div className="flex items-center gap-2 text-sm text-[var(--acc-muted)] mt-4"><Spinner /> Aan het nadenken…</div>
-      )}
+      {loading && <div className="flex items-center gap-2 text-sm text-[var(--acc-muted)] mt-4"><Spinner /> Aan het nadenken…</div>}
 
       {answer && !loading && (
         <div className="mt-4 space-y-3">
-          <div className="acc-glass rounded-xl p-4 text-sm text-[var(--acc-text)] space-y-0.5">
-            {renderBold(answer)}
-          </div>
+          <div className="acc-glass rounded-xl p-4 text-sm text-[var(--acc-text)] space-y-0.5">{renderBold(answer)}</div>
           {suggestions.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {suggestions.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setPrompt(s)}
-                  className="text-[11px] px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-300 border border-blue-400/20 hover:bg-blue-500/25 transition-colors"
-                >
-                  {s}
-                </button>
+                <button key={s} onClick={() => setPrompt(s)} className="text-[11px] px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-300 border border-blue-400/20 hover:bg-blue-500/25 transition-colors">{s}</button>
               ))}
             </div>
           )}
