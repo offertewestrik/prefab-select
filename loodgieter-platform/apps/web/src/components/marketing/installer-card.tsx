@@ -56,6 +56,10 @@ export function InstallerCard({ c }: { c: InstallerCardData }) {
         )}
       </div>
 
+      {c.shortDescription && (
+        <p className="mt-3 line-clamp-2 text-sm text-neutral-600">{c.shortDescription}</p>
+      )}
+
       {c.services.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-1.5">
           {c.services.slice(0, 5).map((s) => (

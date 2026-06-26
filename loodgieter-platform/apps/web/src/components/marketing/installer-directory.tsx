@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { urls } from "@repo/seo";
 import { InstallerCard } from "./installer-card";
 import { InstallerFilters } from "./installer-filters";
 import { LeadCta } from "./lead-cta";
@@ -8,6 +10,11 @@ interface Options {
   provinces: { slug: string; name: string }[];
   cities: { slug: string; name: string }[];
   certs: string[];
+}
+
+interface InternalLinks {
+  services: { slug: string; name: string }[];
+  cities: { slug: string; name: string }[];
 }
 
 /** Volledig overzichtsblok: filters + resultaten + CTA. Herbruikt door alle vakmannen-pagina's. */
@@ -22,6 +29,7 @@ export function InstallerDirectory({
   ctaServiceSlug,
   ctaCitySlug,
   originLabel,
+  internalLinks,
 }: {
   title: string;
   intro: string;
@@ -33,6 +41,7 @@ export function InstallerDirectory({
   ctaServiceSlug?: string;
   ctaCitySlug?: string;
   originLabel?: string | null;
+  internalLinks?: InternalLinks;
 }) {
   return (
     <div className="space-y-8">
@@ -63,6 +72,35 @@ export function InstallerDirectory({
       )}
 
       <LeadCta serviceSlug={ctaServiceSlug} citySlug={ctaCitySlug} title="Liever direct offertes vergelijken?" />
+
+      {internalLinks && (internalLinks.services.length > 0 || internalLinks.cities.length > 0) && (
+        <nav className="grid gap-8 border-t border-neutral-200 pt-8 sm:grid-cols-2" aria-label="Interne links">
+          {internalLinks.services.length > 0 && (
+            <div>
+              <h2 className="text-sm font-semibold text-neutral-900">Populaire diensten</h2>
+              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+                {internalLinks.services.map((s) => (
+                  <li key={s.slug}>
+                    <Link href={urls.service(s.slug)} className="text-primary-600 hover:underline">{s.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {internalLinks.cities.length > 0 && (
+            <div>
+              <h2 className="text-sm font-semibold text-neutral-900">Vakmannen per plaats</h2>
+              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+                {internalLinks.cities.map((c) => (
+                  <li key={c.slug}>
+                    <Link href={urls.installersByFacet(c.slug)} className="text-primary-600 hover:underline">{c.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </nav>
+      )}
     </div>
   );
 }

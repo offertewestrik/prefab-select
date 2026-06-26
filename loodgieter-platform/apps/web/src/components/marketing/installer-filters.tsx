@@ -106,8 +106,9 @@ export function InstallerFilters({ options, current }: { options: Options; curre
             <option value="distance">Dichtstbij (vul ‘bij jou’ in)</option>
             <option value="rating">Beste beoordeling</option>
             <option value="reviews">Meeste reviews</option>
+            <option value="region">Regio (A–Z)</option>
             <option value="city">Plaats (A–Z)</option>
-            <option value="recent">Recent actief</option>
+            <option value="recent">Nieuw toegevoegd</option>
           </select>
         </label>
       </div>

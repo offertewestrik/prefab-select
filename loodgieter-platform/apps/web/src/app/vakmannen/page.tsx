@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { brand, regionsSentence } from "@repo/core";
-import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
+import { urls, breadcrumbLd, itemListLd, localBusinessLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { InstallerDirectory } from "@/components/marketing/installer-directory";
 import { buildMetadata } from "@/features/seo/metadata";
@@ -42,6 +42,12 @@ export default async function InstallersIndexPage({
             { name: "Vakmannen", path: urls.installers() },
           ]),
           itemListLd(items.map((c) => ({ name: c.name, path: urls.installer(c.slug) }))),
+          // AggregateRating per vakman met beoordelingen (rich results waar mogelijk).
+          ...items
+            .filter((c) => c.ratingCount > 0)
+            .map((c) =>
+              localBusinessLd({ name: c.name, slug: c.slug, city: c.city ?? undefined, ratingAvg: c.ratingAvg, ratingCount: c.ratingCount }),
+            ),
         ]}
       />
       <InstallerDirectory
@@ -55,6 +61,7 @@ export default async function InstallersIndexPage({
         ctaServiceSlug={filter.service}
         ctaCitySlug={filter.city}
         originLabel={origin?.label ?? null}
+        internalLinks={{ services: options.services.slice(0, 12), cities: options.cities.slice(0, 12) }}
       />
     </main>
   );

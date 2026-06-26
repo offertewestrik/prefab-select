@@ -4,7 +4,7 @@ import { haversineKm, centroid, type LatLng } from "@repo/maps";
 import { prisma } from "@/lib/prisma";
 import { geocodeOrigin, type GeoPoint } from "@/features/geo/server/geocode";
 
-export type InstallerSort = "rating" | "reviews" | "city" | "recent" | "distance";
+export type InstallerSort = "rating" | "reviews" | "city" | "recent" | "distance" | "region";
 
 export interface DirectoryFilter {
   q?: string;
@@ -36,19 +36,22 @@ export interface InstallerCardData {
   /** Aantal gemeenten in het werkgebied. */
   coverageCount: number;
   certifications: string[];
+  /** Korte omschrijving voor de kaart. */
+  shortDescription: string | null;
   /** Afstand (km) tot de herkomst — alleen gevuld bij een `near`-zoekopdracht. */
   distanceKm: number | null;
 }
 
 const TAKE = 60;
 
-const SORTS: InstallerSort[] = ["rating", "reviews", "city", "recent", "distance"];
+const SORTS: InstallerSort[] = ["rating", "reviews", "city", "recent", "distance", "region"];
 
 /** Vertaalt query-params (NL-namen) naar een gevalideerd DirectoryFilter. */
 export function parseDirectoryParams(sp: Record<string, string | string[] | undefined>): DirectoryFilter {
   const str = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)?.trim() || undefined;
   let sort = str(sp.sort);
   if (sort === "afstand") sort = "distance";
+  if (sort === "regio") sort = "region";
   const rating = Number(str(sp.score));
   const radius = Number(str(sp.straal));
   return {
@@ -78,10 +81,33 @@ function baseWhere(filter: DirectoryFilter): Prisma.InstallerCompanyWhereInput {
     and.push({ coverage: { some: { municipality: { province: { slug: filter.province } } } } });
   if (filter.cert) and.push({ certifications: { some: { type: filter.cert } } });
 
+  // Vrije zoekterm: bedrijfsnaam, plaats, dienst (naam/slug) of specialisatie.
+  if (filter.q) {
+    const q = filter.q;
+    and.push({
+      OR: [
+        { name: { contains: q, mode: "insensitive" } },
+        { city: { contains: q, mode: "insensitive" } },
+        { specialties: { has: q } },
+        {
+          services: {
+            some: {
+              service: {
+                OR: [
+                  { name: { contains: q, mode: "insensitive" } },
+                  { slug: { contains: q, mode: "insensitive" } },
+                ],
+              },
+            },
+          },
+        },
+      ],
+    });
+  }
+
   return {
     status: "APPROVED",
     publicVisible: true,
-    ...(filter.q ? { name: { contains: filter.q, mode: "insensitive" } } : {}),
     ...(filter.minRating && filter.minRating > 0 ? { ratingAvg: { gte: filter.minRating } } : {}),
     ...(filter.emergency ? { emergencyService: true } : {}),
     ...(and.length ? { AND: and } : {}),
@@ -96,7 +122,11 @@ function orderBy(sort: InstallerSort = "rating"): Prisma.InstallerCompanyOrderBy
       // "afstand/plaats": zonder bezoekerslocatie sorteren we alfabetisch op vestigingsplaats.
       return [{ city: "asc" }, { name: "asc" }];
     case "recent":
-      return [{ updatedAt: "desc" }];
+      // "Nieuw toegevoegd": nieuwste bedrijven eerst.
+      return [{ createdAt: "desc" }];
+    case "region":
+      // Vestigingsprovincie (vrij tekstveld) alfabetisch.
+      return [{ province: "asc" }, { city: "asc" }, { name: "asc" }];
     case "rating":
     default:
       return [{ ratingAvg: "desc" }, { ratingCount: "desc" }];
@@ -112,6 +142,7 @@ const SELECT = {
   ratingCount: true,
   emergencyService: true,
   city: true,
+  shortDescription: true,
   services: { select: { service: { select: { name: true, slug: true } } }, take: 8 },
   coverage: {
     select: { municipality: { select: { name: true, lat: true, lng: true, province: { select: { name: true } } } } },
@@ -155,6 +186,7 @@ function toCard(row: Row, distanceKm: number | null): InstallerCardData {
     ].sort(),
     coverageCount: row.coverage.filter((cv) => cv.municipality).length,
     certifications: [...new Set(row.certifications.map((cert) => cert.type))],
+    shortDescription: row.shortDescription,
     distanceKm,
   };
 }
@@ -166,6 +198,7 @@ function jsSort(items: InstallerCardData[], sort: InstallerSort): InstallerCardD
     rating: (a, b) => b.ratingAvg - a.ratingAvg || b.ratingCount - a.ratingCount,
     reviews: (a, b) => b.ratingCount - a.ratingCount || b.ratingAvg - a.ratingAvg,
     city: (a, b) => (a.city ?? "").localeCompare(b.city ?? ""),
+    region: (a, b) => (a.provinces[0] ?? "").localeCompare(b.provinces[0] ?? ""),
     recent: (a, b) => nullsLast(a.distanceKm) - nullsLast(b.distanceKm), // val terug op afstand
   };
   return [...items].sort(cmp[sort] ?? cmp.distance);
