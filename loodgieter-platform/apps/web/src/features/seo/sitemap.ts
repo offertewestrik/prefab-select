@@ -1,6 +1,7 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { urls, siteUrl } from "@repo/seo";
+import { getPriorityServiceCityPairs } from "@/features/catalog/server/queries";
 
 export type SitemapUrl = { loc: string; lastmod?: string };
 
@@ -14,7 +15,7 @@ export async function getSitemapSegments(): Promise<string[]> {
   ]);
   const comboChunks = Math.max(1, Math.ceil((serviceCount * cityCount) / COMBO_CHUNK));
 
-  const segments = ["paginas", "diensten", "steden", "merken", "kennisbank"];
+  const segments = ["paginas", "diensten", "steden", "merken", "kennisbank", "vakmannen"];
   for (let i = 0; i < comboChunks; i++) segments.push(`combinaties-${i}`);
   return segments;
 }
@@ -22,9 +23,30 @@ export async function getSitemapSegments(): Promise<string[]> {
 /** URL's voor één segment. */
 export async function getSegmentUrls(segment: string): Promise<SitemapUrl[]> {
   if (segment === "paginas") {
-    return [urls.home(), urls.services(), urls.cities(), "/voor-vakmannen", "/over-ons", "/contact", "/reviews"].map(
+    return [urls.home(), urls.services(), urls.cities(), urls.installers(), "/voor-vakmannen", "/over-ons", "/contact", "/reviews"].map(
       (p) => ({ loc: siteUrl(p) }),
     );
+  }
+
+  if (segment === "vakmannen") {
+    const [services, cities, companies] = await Promise.all([
+      prisma.service.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
+      prisma.municipality.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
+      prisma.installerCompany.findMany({
+        where: { status: "APPROVED", publicVisible: true },
+        select: { slug: true, updatedAt: true },
+      }),
+    ]);
+    const out: SitemapUrl[] = [];
+    for (const s of services) out.push({ loc: siteUrl(urls.installersByFacet(s.slug)) });
+    for (const c of cities) out.push({ loc: siteUrl(urls.installersByFacet(c.slug)) });
+    for (const co of companies)
+      out.push({ loc: siteUrl(urls.installer(co.slug)), lastmod: co.updatedAt.toISOString() });
+    // High-value dienst×stad-combinaties (zelfde set als de prerender).
+    for (const p of await getPriorityServiceCityPairs(20, 30)) {
+      out.push({ loc: siteUrl(urls.installersByServiceCity(p.service, p.city)) });
+    }
+    return out;
   }
 
   if (segment === "diensten") {

@@ -3,32 +3,118 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MapPin, Phone, Star, ShieldCheck, Wrench } from "lucide-react";
-import { brand } from "@repo/core";
-import { urls, breadcrumbLd, localBusinessLd, siteUrl } from "@repo/seo";
+import { brand, regionsSentence } from "@repo/core";
+import { urls, breadcrumbLd, localBusinessLd, itemListLd, siteUrl } from "@repo/seo";
 import { Button } from "@repo/ui";
+import { prisma } from "@/lib/prisma";
 import { JsonLd } from "@/components/json-ld";
+import { InstallerDirectory } from "@/components/marketing/installer-directory";
 import { buildMetadata } from "@/features/seo/metadata";
 import { getPublicProfile } from "@/features/installers/server/profile";
+import {
+  searchInstallers,
+  getDirectoryFilterOptions,
+  parseDirectoryParams,
+  resolveDirectorySegment,
+  type DirectorySegment,
+} from "@/features/installers/server/directory";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const c = await getPublicProfile(slug);
-  if (!c) return { robots: { index: false, follow: false } };
-  return buildMetadata({
-    title: `${c.name} — installateur & loodgieter`,
-    description: c.shortDescription ?? `${c.name} via ${brand.name}. Vraag vrijblijvend een offerte aan.`,
-    path: `/vakmannen/${slug}`,
-    ogImageUrl: c.logoUrl ?? undefined,
-  });
+/** Prerender: dienst- en stadfilters + goedgekeurde bedrijfsprofielen. */
+export async function generateStaticParams() {
+  const [services, cities, companies] = await Promise.all([
+    prisma.service.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
+    prisma.municipality.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
+    prisma.installerCompany.findMany({
+      where: { status: "APPROVED", publicVisible: true },
+      select: { slug: true },
+    }),
+  ]);
+  return [...services, ...cities, ...companies].map((r) => ({ slug: r.slug }));
 }
 
-export default async function PublicProfilePage({ params }: { params: Promise<{ slug: string }> }) {
+function facetCopy(seg: DirectorySegment) {
+  if (seg.kind === "service") {
+    return {
+      title: `${seg.name} — vakmannen vergelijken`,
+      metaTitle: `${seg.name}: loodgieters & installateurs vergelijken`,
+      intro: `Gecertificeerde vakmannen voor ${seg.name.toLowerCase()} in ${regionsSentence()}. Vergelijk beoordelingen en vraag gratis offertes aan.`,
+      metaDesc: `Vergelijk vakmannen voor ${seg.name.toLowerCase()} via ${brand.name}. Filter op plaats, beoordeling en spoedservice en vraag gratis offertes aan.`,
+    };
+  }
+  return {
+    title: `Vakmannen in ${seg.name}`,
+    metaTitle: `Loodgieters & installateurs in ${seg.name}`,
+    intro: `Gecertificeerde loodgieters en installateurs met werkgebied ${seg.name} (${seg.province}). Vergelijk beoordelingen en vraag gratis offertes aan.`,
+    metaDesc: `Vind een betrouwbare loodgieter of installateur in ${seg.name}. Vergelijk vakmannen op beoordeling en keurmerk via ${brand.name}.`,
+  };
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+
   const c = await getPublicProfile(slug);
-  if (!c) notFound(); // niet APPROVED / verborgen / bestaat niet
+  if (c) {
+    return buildMetadata({
+      title: `${c.name} — installateur & loodgieter`,
+      description: c.shortDescription ?? `${c.name} via ${brand.name}. Vraag vrijblijvend een offerte aan.`,
+      path: urls.installer(slug),
+      ogImageUrl: c.logoUrl ?? undefined,
+    });
+  }
+
+  const seg = await resolveDirectorySegment(slug);
+  if (seg) {
+    const copy = facetCopy(seg);
+    return buildMetadata({ title: copy.metaTitle, description: copy.metaDesc, path: urls.installersByFacet(slug) });
+  }
+
+  return { robots: { index: false, follow: false } };
+}
+
+export default async function InstallerSlugPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { slug } = await params;
+
+  // 1) Bedrijfsprofiel (alleen APPROVED + zichtbaar).
+  const c = await getPublicProfile(slug);
+  if (c) return <ProfileView slug={slug} c={c} />;
+
+  // 2) Anders: dienst- of stadfilterpagina.
+  const seg = await resolveDirectorySegment(slug);
+  if (!seg) notFound();
+  return <FacetView slug={slug} seg={seg} searchParams={await searchParams} />;
+}
+
+async function FacetView({
+  slug,
+  seg,
+  searchParams,
+}: {
+  slug: string;
+  seg: DirectorySegment;
+  searchParams: Record<string, string | string[] | undefined>;
+}) {
+  // De facet uit het pad heeft voorrang; overige filters mogen uit de query komen.
+  const base = parseDirectoryParams(searchParams);
+  const filter =
+    seg.kind === "service"
+      ? { ...base, service: seg.slug }
+      : { ...base, city: seg.slug };
+
+  const [{ items, total, truncated }, options] = await Promise.all([
+    searchInstallers(filter),
+    getDirectoryFilterOptions(),
+  ]);
+  const copy = facetCopy(seg);
+  const path = urls.installersByFacet(slug);
 
   return (
     <main className="mx-auto max-w-(--container-max) px-6 py-10">
@@ -36,14 +122,43 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
         data={[
           breadcrumbLd([
             { name: "Home", path: "/" },
-            { name: "Vakmannen", path: "/vakmannen" },
-            { name: c.name, path: `/vakmannen/${slug}` },
+            { name: "Vakmannen", path: urls.installers() },
+            { name: seg.name, path },
+          ]),
+          itemListLd(items.map((x) => ({ name: x.name, path: urls.installer(x.slug) }))),
+        ]}
+      />
+      <InstallerDirectory
+        title={copy.title}
+        intro={copy.intro}
+        items={items}
+        total={total}
+        truncated={truncated}
+        options={options}
+        current={filter}
+        ctaServiceSlug={filter.service}
+        ctaCitySlug={filter.city}
+      />
+    </main>
+  );
+}
+
+type PublicProfile = NonNullable<Awaited<ReturnType<typeof getPublicProfile>>>;
+
+function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
+  return (
+    <main className="mx-auto max-w-(--container-max) px-6 py-10">
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Vakmannen", path: urls.installers() },
+            { name: c.name, path: urls.installer(slug) },
           ]),
           localBusinessLd({ name: c.name, slug: c.slug, city: c.city ?? undefined, ratingAvg: c.ratingAvg, ratingCount: c.ratingCount }),
         ]}
       />
 
-      {/* Omslag + kop */}
       {c.coverImageUrl && <img src={c.coverImageUrl} alt="" className="mb-6 h-48 w-full rounded-[var(--radius-2xl)] object-cover" />}
       <div className="flex flex-wrap items-center gap-4">
         {c.logoUrl ? <img src={c.logoUrl} alt={c.name} className="h-20 w-20 rounded-[var(--radius-lg)] object-cover" /> : <div className="grid h-20 w-20 place-items-center rounded-[var(--radius-lg)] bg-primary-50 text-primary-600"><Wrench className="h-8 w-8" /></div>}
@@ -137,7 +252,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
         </aside>
       </div>
 
-      <p className="mt-10 text-center text-xs text-neutral-400">{siteUrl(`/vakmannen/${slug}`)}</p>
+      <p className="mt-10 text-center text-xs text-neutral-400">{siteUrl(urls.installer(slug))}</p>
     </main>
   );
 }

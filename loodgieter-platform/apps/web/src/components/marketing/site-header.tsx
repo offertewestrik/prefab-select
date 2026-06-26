@@ -5,6 +5,7 @@ import { Button } from "@repo/ui";
 
 const nav = [
   { label: "Diensten", href: "/diensten" },
+  { label: "Vakmannen", href: "/vakmannen" },
   { label: "Hoe het werkt", href: "/#hoe-het-werkt" },
   { label: "Reviews", href: "/reviews" },
   { label: "Voor vakmannen", href: "/voor-vakmannen" },

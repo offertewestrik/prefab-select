@@ -92,6 +92,20 @@ export function serviceLd(input: {
   return ld;
 }
 
+/** Geordende lijst (ItemList) — voor overzichts-/directorypagina's. */
+export function itemListLd(items: { name: string; path: string }[]): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: siteUrl(it.path),
+    })),
+  };
+}
+
 export function faqLd(faqs: { question: string; answer: string }[]): Json {
   return {
     "@context": "https://schema.org",
@@ -138,7 +152,7 @@ export function localBusinessLd(input: {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     name: input.name,
-    url: siteUrl(`/vakman/${input.slug}`),
+    url: siteUrl(`/vakmannen/${input.slug}`),
   };
   if (input.city) ld.areaServed = input.city;
   if (input.ratingCount && input.ratingCount > 0)

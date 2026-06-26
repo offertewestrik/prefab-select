@@ -17,4 +17,10 @@ export const urls = {
   brand: (brandSlug: string) => `/merken/${brandSlug}`,
   article: (categorySlug: string, slug: string) => `/kennisbank/${categorySlug}/${slug}`,
   request: () => "/aanvraag",
+  /** Vakmannen-index + profiel + voor-gefilterde landingspagina's. */
+  installers: () => "/vakmannen",
+  installer: (slug: string) => `/vakmannen/${slug}`,
+  installersByFacet: (facetSlug: string) => `/vakmannen/${facetSlug}`,
+  installersByServiceCity: (serviceSlug: string, citySlug: string) =>
+    `/vakmannen/${serviceSlug}/${citySlug}`,
 };
