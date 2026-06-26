@@ -5,6 +5,7 @@ import { siteUrl } from "@repo/seo";
 import { prisma } from "@/lib/prisma";
 import { sendAdminNotification } from "@/features/notifications/email/send";
 import { notifyAdmins } from "@/features/notifications/server/service";
+import { createEmailVerification } from "@/features/auth/server/tokens";
 import type { RegisterInstallerInput } from "../schema";
 
 export type RegisterResult =
@@ -48,6 +49,8 @@ export async function registerInstaller(input: RegisterInstallerInput): Promise<
       await tx.companyMember.create({ data: { companyId: company.id, userId: user.id, role: "OWNER" } });
       return { userId: user.id, companyId: company.id };
     });
+    // Verificatiemail (buiten de transactie; fire-and-forget).
+    void createEmailVerification(result.userId, input.email);
     return { ok: true, ...result };
   } catch {
     return { ok: false, reason: "error" };

@@ -59,6 +59,11 @@ export default function LoginPage() {
               />
             </div>
             {error && <p className="text-sm text-[color:var(--color-status-danger,#DC2626)]">{error}</p>}
+            <div className="text-right">
+              <Link href="/wachtwoord-vergeten" className="text-sm font-medium text-primary-600 hover:underline">
+                Wachtwoord vergeten?
+              </Link>
+            </div>
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? "Bezig…" : "Inloggen"}
             </Button>

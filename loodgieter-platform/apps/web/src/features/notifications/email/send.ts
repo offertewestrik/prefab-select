@@ -54,5 +54,11 @@ export const sendOnboardingApproved = (i: Parameters<typeof t.onboardingApproved
 export const sendOnboardingRejected = (i: Parameters<typeof t.onboardingRejected>[0] & { to: string }) =>
   sendEmail(i.to, t.onboardingRejected(i));
 
+export const sendVerifyEmail = (i: Parameters<typeof t.verifyEmail>[0] & { to: string }) =>
+  sendEmail(i.to, t.verifyEmail(i));
+
+export const sendPasswordReset = (i: Parameters<typeof t.passwordReset>[0] & { to: string }) =>
+  sendEmail(i.to, t.passwordReset(i));
+
 export const sendAdminNotification = (i: Parameters<typeof t.adminNotification>[0]) =>
   sendEmail(adminEmail, t.adminNotification(i));

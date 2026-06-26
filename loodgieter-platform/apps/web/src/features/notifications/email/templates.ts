@@ -191,6 +191,34 @@ export function reviewThanks(input: { companyName: string; url: string; kind: "i
   };
 }
 
+// 9. E-mailverificatie
+export function verifyEmail(input: { url: string }): EmailContent {
+  return {
+    subject: "Bevestig je e-mailadres",
+    html: layout({
+      heading: "Bevestig je e-mailadres",
+      bodyHtml:
+        p("Klik op de knop hieronder om je e-mailadres te bevestigen. Deze link is 24 uur geldig.") +
+        muted("Heb je dit niet aangevraagd? Dan kun je deze e-mail negeren."),
+      cta: { label: "E-mailadres bevestigen", url: input.url },
+    }),
+  };
+}
+
+// 10. Wachtwoordreset
+export function passwordReset(input: { url: string }): EmailContent {
+  return {
+    subject: "Stel een nieuw wachtwoord in",
+    html: layout({
+      heading: "Wachtwoord opnieuw instellen",
+      bodyHtml:
+        p("Je hebt gevraagd om je wachtwoord opnieuw in te stellen. Klik op de knop hieronder. Deze link is 1 uur geldig en kan maar één keer worden gebruikt.") +
+        muted("Heb je dit niet aangevraagd? Negeer deze e-mail; je wachtwoord blijft ongewijzigd."),
+      cta: { label: "Nieuw wachtwoord instellen", url: input.url },
+    }),
+  };
+}
+
 // 8. Admin — interne meldingen
 export function adminNotification(input: { title: string; lines: string[]; url: string }): EmailContent {
   return {

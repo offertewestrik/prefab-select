@@ -1,10 +1,16 @@
 import { requireRole } from "@/lib/guards";
+import { prisma } from "@/lib/prisma";
 import { SidebarLayout, type NavItem } from "@/components/dashboard/sidebar-layout";
 import { unreadCount } from "@/features/notifications/server/service";
+import { VerifyEmailBanner } from "@/features/auth/components/verify-email-banner";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const user = await requireRole("INSTALLER");
-  const unread = await unreadCount((user as { id: string }).id);
+  const userId = (user as { id: string }).id;
+  const [unread, dbUser] = await Promise.all([
+    unreadCount(userId),
+    prisma.user.findUnique({ where: { id: userId }, select: { emailVerified: true } }),
+  ]);
 
   const nav: NavItem[] = [
     { label: "Overzicht", href: "/dashboard" },
@@ -22,6 +28,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <SidebarLayout title="Vakman-dashboard" nav={nav}>
+      {!dbUser?.emailVerified && <VerifyEmailBanner />}
       {children}
     </SidebarLayout>
   );
