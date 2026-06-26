@@ -39,18 +39,18 @@
 /* --- Surfaces ----------------------------------------------------------- */
 .abp-card {
   background: var(--abp-surface);
-  border: 1px solid var(--abp-border);
-  border-radius: 1rem;
-  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.04), 0 12px 28px -22px rgba(15, 27, 45, 0.45);
+  border: 1px solid #eef1f5;
+  border-radius: 1.1rem;
+  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.03), 0 10px 30px -26px rgba(15, 27, 45, 0.4);
 }
 
 .abp-card-hover {
   transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 .abp-card-hover:hover {
-  border-color: var(--abp-border-strong);
+  border-color: #e4e9f0;
   transform: translateY(-2px);
-  box-shadow: 0 2px 4px rgba(15, 27, 45, 0.05), 0 22px 44px -26px rgba(15, 27, 45, 0.55);
+  box-shadow: 0 2px 6px rgba(15, 27, 45, 0.04), 0 24px 50px -30px rgba(15, 27, 45, 0.45);
 }
 
 .abp-panel {
@@ -516,7 +516,7 @@
   position:relative; border-radius: 26px; overflow:hidden;
   box-shadow: 0 50px 120px -40px rgba(17,22,29,.55), 0 12px 30px -18px rgba(17,22,29,.3);
 }
-.abp-frame img { display:block; width:100%; height:100%; object-fit:cover; }
+.abp-frame img, .abp-frame video { display:block; width:100%; height:100%; object-fit:cover; }
 
 /* Floating glass card */
 .abp-float {

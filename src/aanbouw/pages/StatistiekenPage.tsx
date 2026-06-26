@@ -58,14 +58,14 @@ export default function StatistiekenPage() {
       <div className="grid lg:grid-cols-2 gap-5 mb-5">
         <Card className="p-5">
           <CardHeader title="Aanvragen per type" subtitle="Verdeling over bouwtypes" icon={<BarChart3 size={16} />} />
-          <div className="space-y-3">
+          <div className="space-y-4">
             {stats.byType.map((r) => (
               <div key={r.type}>
                 <div className="flex items-center justify-between text-sm mb-1">
                   <span className="font-medium">{r.type}</span>
                   <span className="text-[var(--abp-muted)]">{r.count} · {formatCurrency(r.value)}</span>
                 </div>
-                <div className="h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
                   <div className="h-full rounded-full bg-[var(--abp-accent)]" style={{ width: `${(r.count / maxType) * 100}%` }} />
                 </div>
               </div>
@@ -75,14 +75,14 @@ export default function StatistiekenPage() {
 
         <Card className="p-5">
           <CardHeader title="Pijplijn" subtitle="Aanvragen per status" icon={<TrendingUp size={16} />} />
-          <div className="space-y-3">
+          <div className="space-y-4">
             {stats.byStatus.map((r) => (
               <div key={r.status}>
                 <div className="flex items-center justify-between text-sm mb-1">
                   <span className="font-medium">{r.status}</span>
                   <span className="text-[var(--abp-muted)]">{r.count}</span>
                 </div>
-                <div className="h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
                   <div className="h-full rounded-full bg-[var(--abp-navy)]" style={{ width: `${(r.count / maxStatus) * 100}%` }} />
                 </div>
               </div>

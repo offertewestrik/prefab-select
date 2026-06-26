@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion, useScroll, useTransform, useMotionValue, useSpring, type MotionValue } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, type MotionValue } from 'motion/react';
 import {
-  Star, ShieldCheck, ArrowRight, Check, Plus, Minus, Play, MapPin, MoveHorizontal,
+  Star, ShieldCheck, ArrowRight, Check, Plus, Minus, Play, MapPin, MoveHorizontal, X,
 } from 'lucide-react';
 import heroVilla from '../assets/hero-villa.webp';
+import { MEDIA } from '../lib/media';
 
 /* =========================================================================
    AanbouwPlatform.nl — homepage v3. Behandeld als product design (Apple /
@@ -168,8 +169,10 @@ function Hero() {
         {/* framed architecture object with floating cards */}
         <motion.div style={{ y: frameY }} className="relative">
           <motion.div className="abp-frame aspect-[5/6] sm:aspect-[4/4.4] max-w-[560px] mx-auto" style={{ rotateX: tiltX, rotateY: tiltY, transformPerspective: 1000 }}>
-            <img src={heroVilla} alt="Moderne woning met glazen aanbouw" className="abp-grade-warm" />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(10,16,24,.35))' }} />
+            <video className="w-full h-full object-cover abp-grade-warm" poster={MEDIA.heroPoster} autoPlay muted loop playsInline preload="none">
+              <source src={MEDIA.heroVideo} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(10,16,24,.35))' }} />
           </motion.div>
 
           <FloatCard mx={mx} my={my} depth={14} idle={6} className="left-[-4%] top-[14%]">
@@ -382,23 +385,27 @@ function Portfolio() {
 
 /* --- Reviews (before/after + pull quote) --------------------------------- */
 function Reviews() {
+  const [vid, setVid] = useState<typeof MEDIA.reviewVideos[number] | null>(null);
+  const afterGrade = MEDIA.beforeIsReal ? '' : 'abp-grade-warm';
+  const beforeGrade = MEDIA.beforeIsReal ? '' : 'abp-grade-mono';
   return (
     <section className="abp-p-section relative overflow-hidden">
       <div className="abp-p-wrap grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-center">
         <Reveal className="relative">
           <div className="abp-ba aspect-[4/3]">
-            <img src={heroVilla} alt="Na de verbouwing" className="w-full h-full object-cover abp-grade-warm" />
+            <img src={MEDIA.afterImg} alt="Na de verbouwing" className={`w-full h-full object-cover ${afterGrade}`} />
             <div className="absolute inset-0 overflow-hidden" style={{ clipPath: 'inset(0 50% 0 0)' }}>
-              <img src={heroVilla} alt="Voor de verbouwing" className="w-full h-full object-cover abp-grade-mono" />
+              <img src={MEDIA.beforeImg} alt="Voor de verbouwing" className={`w-full h-full object-cover ${beforeGrade}`} />
             </div>
             <div className="abp-ba-divider" style={{ left: '50%' }}>
               <span className="abp-ba-handle" style={{ left: '50%', top: '50%' }}><MoveHorizontal size={17} className="text-[var(--p-ink)]" /></span>
             </div>
             <span className="absolute top-3 left-3 text-[11px] font-semibold text-white bg-black/35 rounded-full px-2.5 py-1">Voor</span>
             <span className="absolute top-3 right-3 text-[11px] font-semibold text-white bg-[var(--abp-accent)] rounded-full px-2.5 py-1">Na</span>
-            <button className="absolute left-1/2 bottom-4 -translate-x-1/2 abp-float px-3.5 py-2 flex items-center gap-2 text-[13px] font-semibold text-[var(--p-ink)]"><span className="w-6 h-6 rounded-full bg-[var(--abp-accent)] text-white flex items-center justify-center"><Play size={11} className="ml-0.5" /></span> Bekijk videoreview</button>
+            <button onClick={() => setVid(MEDIA.reviewVideos[0])} className="absolute left-1/2 bottom-4 -translate-x-1/2 abp-float px-3.5 py-2 flex items-center gap-2 text-[13px] font-semibold text-[var(--p-ink)] hover:scale-[1.03] transition-transform"><span className="w-6 h-6 rounded-full bg-[var(--abp-accent)] text-white flex items-center justify-center"><Play size={11} className="ml-0.5" /></span> Bekijk videoreview</button>
           </div>
         </Reveal>
+        <VideoModal vid={vid} onClose={() => setVid(null)} />
 
         <div>
           <Reveal><span className="abp-p-eyebrow">Echte verhalen</span></Reveal>
@@ -423,6 +430,25 @@ function Reviews() {
         </div>
       </div>
     </section>
+  );
+}
+
+function VideoModal({ vid, onClose }: { vid: typeof MEDIA.reviewVideos[number] | null; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      {vid && (
+        <motion.div className="fixed inset-0 z-[120] flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={onClose} />
+          <motion.div className="relative w-full max-w-sm" initial={{ scale: 0.92, y: 24 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0 }} transition={{ duration: 0.35, ease: EASE }}>
+            <button onClick={onClose} className="absolute -top-10 right-0 text-white/80 hover:text-white" aria-label="Sluiten"><X size={22} /></button>
+            <div className="rounded-2xl overflow-hidden bg-black aspect-[9/16] shadow-2xl">
+              <video src={vid.src} poster={vid.poster} controls autoPlay playsInline className="w-full h-full object-cover" />
+            </div>
+            <div className="mt-3 text-center text-white"><p className="font-semibold">{vid.name}</p><p className="text-sm text-white/70">{vid.project}</p></div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 

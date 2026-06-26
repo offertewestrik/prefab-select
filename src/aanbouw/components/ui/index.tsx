@@ -211,10 +211,10 @@ export function Table({ children }: { children: React.ReactNode }) {
   );
 }
 export function Th({ children, className }: { children?: React.ReactNode; className?: string }) {
-  return <th className={cn('text-left text-[11px] uppercase tracking-wider font-semibold text-[var(--abp-faint)] px-3 py-2.5', className)}>{children}</th>;
+  return <th className={cn('text-left text-[11px] uppercase tracking-wider font-semibold text-[var(--abp-faint)] px-3.5 py-3', className)}>{children}</th>;
 }
 export function Td({ children, className }: { children?: React.ReactNode; className?: string }) {
-  return <td className={cn('px-3 py-3 border-t border-[var(--abp-border)] align-middle', className)}>{children}</td>;
+  return <td className={cn('px-3.5 py-4 border-t border-[#f1f4f8] align-middle', className)}>{children}</td>;
 }
 
 // ---------------------------------------------------------------------------
