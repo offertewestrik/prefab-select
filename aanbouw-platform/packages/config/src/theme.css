@@ -3,15 +3,15 @@
 
 @theme {
   /* Kleuren */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-500: #2563eb;
-  --color-primary-600: #1d4ed8;
-  --color-primary-700: #1e40af;
+  --color-primary-50: #eaf1f8;
+  --color-primary-100: #c9daec;
+  --color-primary-500: #15426b;
+  --color-primary-600: #0e2a47;
+  --color-primary-700: #0a1f38;
 
-  --color-navy-700: #111827;
-  --color-navy-800: #0f172a;
-  --color-navy-900: #0b1220;
+  --color-navy-700: #15426b;
+  --color-navy-800: #0e2a47;
+  --color-navy-900: #0a1f38;
 
   --color-accent-500: #f97316;
   --color-accent-600: #ea580c;

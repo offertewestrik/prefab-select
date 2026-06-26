@@ -65,14 +65,14 @@ const ctaBlock = z.object({
 const calculatorBlock = z.object({
   type: z.literal("calculator"),
   calculator: z.enum([
-    "cv",
-    "warmtepomp",
-    "badkamer",
-    "airco",
-    "vloerverwarming",
-    "radiator",
-    "subsidie",
-    "besparing",
+    "aanbouw",
+    "uitbouw",
+    "dakopbouw",
+    "garage-ombouw",
+    "mantelzorgwoning",
+    "veranda",
+    "fundering",
+    "vergunning",
   ]),
   heading: z.string().optional(),
 });

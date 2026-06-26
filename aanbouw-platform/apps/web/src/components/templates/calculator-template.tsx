@@ -1,7 +1,7 @@
 import { LeadCta } from "@/components/marketing/lead-cta";
 
 // Tijdelijke basis-template voor calculators. De interactieve rekenlogica
-// (CV/warmtepomp/badkamer/airco/vloerverwarming/radiator/subsidie/besparing)
+// (aanbouw/uitbouw/dakopbouw/garage-ombouw/mantelzorgwoning/veranda/fundering/vergunning)
 // volgt in een latere fase; structuur + SEO staan nu klaar.
 export function CalculatorTemplate({
   title,
