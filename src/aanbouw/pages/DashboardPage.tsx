@@ -33,9 +33,10 @@ function AdminDashboard() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight">Platform dashboard</h1>
-        <p className="text-sm text-[var(--abp-muted)] mt-1">Overzicht van alle aanvragen, bouwbedrijven en klanten op AanbouwPlatform.nl.</p>
+      <div className="mb-8">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--abp-faint)]">Platformbeheer</p>
+        <h1 className="text-[1.75rem] font-bold tracking-tight mt-1.5">Platform dashboard</h1>
+        <p className="text-sm text-[var(--abp-muted)] mt-1.5">Overzicht van alle aanvragen, bouwbedrijven en klanten op AanbouwPlatform.nl.</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
@@ -105,9 +106,17 @@ function ContractorDashboard() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight">Welkom, {myCompany?.contactPerson?.split(' ')[0] ?? 'aannemer'}</h1>
-        <p className="text-sm text-[var(--abp-muted)] mt-1">{myCompany?.name} — uw leads, offertes en projecten in één overzicht.</p>
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--abp-faint)]">{myCompany?.verified ? 'Geverifieerd bouwbedrijf' : 'Bouwbedrijf'}</p>
+          <h1 className="text-[1.75rem] font-bold tracking-tight mt-1.5">Welkom, {myCompany?.contactPerson?.split(' ')[0] ?? 'aannemer'}</h1>
+          <p className="text-sm text-[var(--abp-muted)] mt-1.5">{myCompany?.name} — uw leads, offertes en projecten in één overzicht.</p>
+        </div>
+        {myCompany?.verified && (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-sm text-emerald-700 font-medium">
+            <ShieldCheck size={15} /> Geverifieerd
+          </span>
+        )}
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">

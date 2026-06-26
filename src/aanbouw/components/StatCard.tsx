@@ -12,27 +12,21 @@ export function StatCard({
   hint?: string;
   onClick?: () => void;
 }) {
-  const tones: Record<string, string> = {
-    navy: 'text-[#0e2a47] bg-[#0e2a47]/8',
-    orange: 'text-[#c2410c] bg-[#f97316]/12',
-    green: 'text-emerald-700 bg-emerald-500/12',
-    amber: 'text-amber-700 bg-amber-500/15',
-    red: 'text-red-700 bg-red-500/12',
-    blue: 'text-sky-700 bg-sky-500/12',
+  const iconTone: Record<string, string> = {
+    navy: 'text-[#1e3a5f]', orange: 'text-[#c2410c]', green: 'text-emerald-600',
+    amber: 'text-amber-600', red: 'text-red-600', blue: 'text-sky-600',
   };
   return (
     <div
-      className={cn('abp-card p-4 sm:p-5', onClick && 'abp-card-hover cursor-pointer')}
+      className={cn('abp-card p-5 sm:p-6', onClick && 'abp-card-hover cursor-pointer')}
       onClick={onClick}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs font-semibold text-[var(--abp-muted)] truncate">{label}</p>
-          <p className="text-2xl font-bold text-[var(--abp-navy)] mt-1 leading-none">{value}</p>
-          {hint && <p className="text-[11px] text-[var(--abp-faint)] mt-1.5">{hint}</p>}
-        </div>
-        {icon && <span className={cn('w-10 h-10 rounded-xl flex items-center justify-center shrink-0', tones[tone])}>{icon}</span>}
+      <div className="flex items-center justify-between gap-3 mb-3.5">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--abp-faint)] truncate">{label}</p>
+        {icon && <span className={cn('shrink-0 opacity-80', iconTone[tone])}>{icon}</span>}
       </div>
+      <p className="text-[1.85rem] font-bold text-[var(--abp-navy)] leading-none tracking-tight">{value}</p>
+      {hint && <p className="text-xs text-[var(--abp-muted)] mt-2.5">{hint}</p>}
     </div>
   );
 }
