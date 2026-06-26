@@ -435,3 +435,55 @@
 @keyframes abp-marquee { from { transform: translateX(0);} to { transform: translateX(-50%);} }
 .abp-marquee { display:flex; width:max-content; animation: abp-marquee 32s linear infinite; }
 @media (prefers-reduced-motion: reduce){ .abp-marquee,.abp-kenburns{ animation:none; } }
+
+/* =========================================================================
+   MARKETPLACE LAYER — warm dusk homepage matching the approved mockup.
+   ========================================================================= */
+.abp-m { background:#fff; color:#0f1c2e; }
+.abp-m-ink { --m-ink:#0f1c2e; }
+
+/* Warm dusk hero overlay over the architecture render */
+.abp-m-hero-veil {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(96deg, rgba(11,21,34,.86) 0%, rgba(11,21,34,.55) 34%, rgba(11,21,34,.12) 62%, rgba(11,21,34,.34) 100%),
+    linear-gradient(180deg, rgba(11,21,34,.40) 0%, rgba(11,21,34,0) 30%, rgba(11,21,34,.30) 100%),
+    radial-gradient(60% 50% at 72% 60%, rgba(249,140,60,.20), transparent 60%);
+}
+/* Warm "golden hour" grade so the daylight render reads as evening */
+.abp-m-warm-grade { filter: saturate(1.08) contrast(1.04) brightness(.92) sepia(.12) hue-rotate(-6deg); }
+
+/* Service tile (label + image) */
+.abp-m-tile {
+  border:1px solid var(--abp-border); border-radius:.9rem; overflow:hidden; background:#fff;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.abp-m-tile:hover { transform: translateY(-4px); border-color: rgba(249,115,22,.4); box-shadow: 0 22px 40px -26px rgba(15,28,46,.5); }
+.abp-m-thumb { position:relative; height:88px; overflow:hidden; }
+.abp-m-thumb::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(11,21,34,.45)); }
+.abp-m-thumb-grain::before { content:""; position:absolute; inset:0; opacity:.5; background-image:radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px); background-size:12px 12px; }
+
+/* Dashed connector for the steps */
+.abp-m-steps-line { position:absolute; top:22px; left:8%; right:8%; height:2px; background:repeating-linear-gradient(90deg, var(--abp-border-strong) 0 8px, transparent 8px 16px); }
+
+/* Dark configurator + CTA panels */
+.abp-m-dark {
+  background:
+    radial-gradient(120% 120% at 100% 0%, rgba(249,115,22,.16), transparent 55%),
+    linear-gradient(160deg,#13243a 0%, #0e1c2e 60%, #0a1626 100%);
+  color:#e7eef6;
+}
+.abp-m-dark h2,.abp-m-dark h3 { color:#fff; }
+
+/* Project card */
+.abp-m-proj { position:relative; border-radius:1rem; overflow:hidden; box-shadow: var(--abp-shadow-card); }
+.abp-m-proj::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 45%, rgba(11,21,34,.78)); }
+.abp-m-proj:hover img { transform: scale(1.05); }
+.abp-m-proj img { transition: transform .5s ease; }
+
+/* Review card */
+.abp-m-review { background:#fff; border:1px solid var(--abp-border); border-radius:1rem; box-shadow: var(--abp-shadow-card); }
+
+/* Nav on dark hero */
+.abp-m-navlink { color: rgba(255,255,255,.82); font-weight:500; font-size:.92rem; transition: color .15s ease; }
+.abp-m-navlink:hover { color:#fff; }
