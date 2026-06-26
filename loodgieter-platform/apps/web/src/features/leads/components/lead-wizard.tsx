@@ -1,8 +1,10 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui";
+import { UploadDropzone } from "@/lib/uploadthing-client";
 import {
   leadStep1Schema,
   leadStep3Schema,
@@ -155,10 +157,39 @@ export function LeadWizard({
 
         {step === 2 && (
           <Field label="Foto's toevoegen (optioneel)">
-            <p className="text-sm text-neutral-500">
-              Foto&apos;s helpen vakmannen een betere inschatting te maken. Deze stap is
-              optioneel — uploaden wordt binnenkort toegevoegd. Je kunt deze stap overslaan.
+            <p className="mb-3 text-sm text-neutral-500">
+              Foto&apos;s helpen vakmannen een betere inschatting te maken. Max 8 foto&apos;s, 8&nbsp;MB per foto
+              (jpg, png, webp, heic).
             </p>
+            {(data.photos?.length ?? 0) > 0 && (
+              <div className="mb-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
+                {(data.photos ?? []).map((url) => (
+                  <div key={url} className="relative">
+                    <img src={url} alt="" className="h-24 w-full rounded-[var(--radius-md)] object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => set({ photos: (data.photos ?? []).filter((u) => u !== url) })}
+                      className="absolute right-1 top-1 grid h-6 w-6 place-items-center rounded-full bg-black/60 text-xs text-white hover:bg-black/80"
+                      aria-label="Verwijder foto"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            {(data.photos?.length ?? 0) < 8 && (
+              <UploadDropzone
+                endpoint="leadPhoto"
+                onClientUploadComplete={(res) => {
+                  const urls = (res ?? []).map((r) => (r as { ufsUrl?: string; url?: string }).ufsUrl ?? r.url).filter(Boolean) as string[];
+                  set({ photos: [...(data.photos ?? []), ...urls].slice(0, 8) });
+                }}
+                onUploadError={(e) => setError(e.message)}
+                config={{ mode: "auto" }}
+                appearance={{ container: "rounded-[var(--radius-md)] border-neutral-200" }}
+              />
+            )}
           </Field>
         )}
 

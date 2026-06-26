@@ -7,6 +7,7 @@ import { notifyAdmins } from "@/features/notifications/server/service";
 import { computeLeadPriceCredits } from "./pricing";
 import { leadConfirmation, adminNotification } from "@/features/notifications/email/templates";
 import { enqueue } from "@/features/jobs/queue";
+import { detectorForService, createPendingPhotoAnalysis } from "@/features/photo-ai/service";
 
 export interface CreateLeadResult {
   id: string;
@@ -98,6 +99,20 @@ export async function createLead(
     enqueue("email.send", { to: input.contactEmail, subject: confirmation.subject, html: confirmation.html }),
     enqueue("email.send", { to: adminEmail, subject: adminMail.subject, html: adminMail.html }),
   ]);
+
+  // 5. Foto-analyse: PENDING-record aanmaken + photo.analyze-job (buiten de hot path).
+  if (input.photos?.length) {
+    const detector = detectorForService(resolvedService.slug);
+    const analysisId = await createPendingPhotoAnalysis({
+      detector,
+      imageUrls: input.photos,
+      leadId: lead.id,
+      createdBy: lead.homeownerId,
+    });
+    if (analysisId) {
+      await enqueue("photo.analyze", { analysisId, detector, leadId: lead.id });
+    }
+  }
 
   // Matching gebeurt nu asynchroon; geen synchroon aantal meer.
   return { id: lead.id, matched: 0 };

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { notFound } from "next/navigation";
 import { Lock, MapPin, Calendar, Clock, Paperclip } from "lucide-react";
 import { Button, Card, CardContent } from "@repo/ui";
@@ -114,6 +115,59 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
               )}
             </CardContent>
           </Card>
+
+          {unlocked && data.attachments && data.attachments.length > 0 && (
+            <Card>
+              <CardContent>
+                <h2 className="font-semibold text-neutral-900">Foto&apos;s</h2>
+                <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
+                  {data.attachments.map((a) => (
+                    <a key={a.id} href={a.url} target="_blank" rel="noreferrer">
+                      <img src={a.url} alt="" className="h-24 w-full rounded-[var(--radius-md)] object-cover" />
+                    </a>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {unlocked && data.photoAnalysis && (
+            <Card>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <h2 className="font-semibold text-neutral-900">AI foto-analyse</h2>
+                  <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">
+                    {data.photoAnalysis.status}
+                    {data.photoAnalysis.status === "COMPLETED" && ` · ${Math.round(data.photoAnalysis.confidence * 100)}%`}
+                  </span>
+                </div>
+                {data.photoAnalysis.status === "PENDING" ? (
+                  <p className="mt-2 text-sm text-neutral-500">Analyse wordt verwerkt…</p>
+                ) : data.photoAnalysis.status === "FAILED" ? (
+                  <p className="mt-2 text-sm text-neutral-500">Analyse niet beschikbaar.</p>
+                ) : (
+                  <div className="mt-2 space-y-2 text-sm text-neutral-700">
+                    {data.photoAnalysis.summary && <p>{data.photoAnalysis.summary}</p>}
+                    <p>
+                      <span className="font-medium">Risico:</span> {data.photoAnalysis.riskLevel}
+                      {data.photoAnalysis.estimatedPriceMin != null && (
+                        <>
+                          {" · "}
+                          <span className="font-medium">Indicatie:</span> € {(data.photoAnalysis.estimatedPriceMin / 100).toFixed(0)}–€ {((data.photoAnalysis.estimatedPriceMax ?? 0) / 100).toFixed(0)}
+                        </>
+                      )}
+                    </p>
+                    {data.photoAnalysis.objects.length > 0 && (
+                      <p><span className="font-medium">Herkend:</span> {data.photoAnalysis.objects.map((o) => o.label).join(", ")}</p>
+                    )}
+                    {data.photoAnalysis.recommendations.length > 0 && (
+                      <p><span className="font-medium">Aanbevelingen:</span> {data.photoAnalysis.recommendations.join(", ")}</p>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {unlocked && (
             <Link href={`/dashboard/leads/${data.id}/offerte`}>

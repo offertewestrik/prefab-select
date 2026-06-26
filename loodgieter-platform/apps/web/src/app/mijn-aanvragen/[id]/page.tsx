@@ -16,7 +16,7 @@ export default async function MyRequestDetail({ params }: { params: Promise<{ id
 
   const lead = await prisma.leadRequest.findUnique({
     where: { id },
-    include: { service: true, municipality: true, priceEstimate: true },
+    include: { service: true, municipality: true, priceEstimate: true, _count: { select: { attachments: true } } },
   });
   // Alleen de eigenaar (of admin) mag de aanvraag zien.
   const isAdmin = (user as { role?: string }).role === "ADMIN";
@@ -34,6 +34,12 @@ export default async function MyRequestDetail({ params }: { params: Promise<{ id
       <h1 className="mt-4 text-3xl font-bold tracking-tight text-neutral-900">{lead.service.name}</h1>
       <p className="mt-1 text-neutral-500">{lead.municipality.name} · status {lead.status}</p>
       <p className="mt-4 whitespace-pre-wrap text-sm text-neutral-700">{lead.description}</p>
+
+      {lead._count.attachments > 0 && (
+        <p className="mt-4 rounded-[var(--radius-md)] bg-neutral-50 p-3 text-sm text-neutral-600">
+          Uw foto&apos;s zijn ontvangen en worden gebruikt om uw aanvraag beter te beoordelen.
+        </p>
+      )}
 
       {lead.priceEstimate && (
         <div className="mt-6 rounded-[var(--radius-xl)] border border-neutral-200 bg-neutral-50 p-4">

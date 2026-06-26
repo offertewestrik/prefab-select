@@ -39,6 +39,19 @@ export interface LeadViewData {
   priceIndication?: { marketCents: number; minCents: number; maxCents: number };
   // Alleen voor admin:
   fraud?: { score: number; flags: string[] };
+  // Foto-analyse (technisch) — alleen wanneer unlocked (gekocht of admin):
+  photoAnalysis?: {
+    status: string;
+    confidence: number;
+    summary: string | null;
+    riskLevel: string;
+    recommendations: string[];
+    estimatedPriceMin: number | null;
+    estimatedPriceMax: number | null;
+    objects: { type: string; label: string; confidence: number }[];
+  };
+  // Of er foto's bij de aanvraag zitten (ook zichtbaar bij locked, zonder de foto's zelf).
+  hasPhotos?: boolean;
   // Alleen aanwezig wanneer unlocked (gekocht of admin):
   contactName?: string;
   contactEmail?: string;
@@ -116,9 +129,16 @@ export async function getLeadView(
         }
       : undefined,
     fraud: isAdmin && lead.fraudScore != null ? { score: lead.fraudScore, flags: lead.fraudFlags } : undefined,
+    hasPhotos: lead.attachments.length > 0,
   };
 
   if (unlocked) {
+    // Technische foto-analyse alleen voor gekochte/admin-toegang.
+    const analysis = await prisma.photoAnalysis.findFirst({
+      where: { leadId },
+      orderBy: { createdAt: "desc" },
+      include: { objects: true },
+    });
     return {
       status: "ok",
       unlocked: true,
@@ -131,6 +151,18 @@ export async function getLeadView(
         houseNumber: lead.houseNumber ?? undefined,
         postcode: lead.postcode,
         attachments: lead.attachments.map((a) => ({ id: a.id, url: a.url, name: a.name })),
+        photoAnalysis: analysis
+          ? {
+              status: analysis.status,
+              confidence: analysis.confidence,
+              summary: analysis.summary,
+              riskLevel: analysis.riskLevel,
+              recommendations: analysis.recommendations,
+              estimatedPriceMin: analysis.estimatedPriceMin,
+              estimatedPriceMax: analysis.estimatedPriceMax,
+              objects: analysis.objects.map((o) => ({ type: o.type, label: o.label, confidence: o.confidence })),
+            }
+          : undefined,
       },
     };
   }

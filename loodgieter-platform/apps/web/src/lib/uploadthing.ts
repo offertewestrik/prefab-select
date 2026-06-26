@@ -41,6 +41,15 @@ export const ourFileRouter = {
       await addCertification(metadata.companyId, { type: "Certificaat", fileUrl: file.ufsUrl });
       return { url: file.ufsUrl };
     }),
+
+  // Klusfoto's bij de aanvraag — publiek (gast/klant), vóór er een lead bestaat.
+  // Type + grootte + aantal worden door UploadThing afgedwongen; de URL's worden
+  // client-side verzameld en met de aanvraag meegestuurd.
+  leadPhoto: f({ image: { maxFileSize: "8MB", maxFileCount: 8 } })
+    .middleware(async () => ({}))
+    .onUploadComplete(async ({ file }) => {
+      return { url: file.ufsUrl };
+    }),
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
