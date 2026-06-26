@@ -16,6 +16,7 @@
     "@repo/config": "workspace:*",
     "@repo/content": "workspace:*",
     "@repo/core": "workspace:*",
+    "@repo/ai": "workspace:*",
     "@repo/db": "workspace:*",
     "@repo/maps": "workspace:*",
     "@repo/seo": "workspace:*",

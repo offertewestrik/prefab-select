@@ -7,8 +7,12 @@
   "types": "./src/index.ts",
   "exports": { ".": "./src/index.ts" },
   "scripts": { "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
   "devDependencies": {
     "@repo/config": "workspace:*",
+    "@types/node": "^22.14.0",
     "typescript": "^5.8.2"
   }
 }

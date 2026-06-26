@@ -50,6 +50,9 @@ importers:
       '@auth/prisma-adapter':
         specifier: ^2.7.4
         version: 2.11.2(@prisma/client@6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3))
+      '@repo/ai':
+        specifier: workspace:*
+        version: link:../../packages/ai
       '@repo/config':
         specifier: workspace:*
         version: link:../../packages/config
@@ -146,10 +149,17 @@ importers:
         version: 5.9.3
 
   packages/ai:
+    dependencies:
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
     devDependencies:
       '@repo/config':
         specifier: workspace:*
         version: link:../config
+      '@types/node':
+        specifier: ^22.14.0
+        version: 22.20.0
       typescript:
         specifier: ^5.8.2
         version: 5.9.3

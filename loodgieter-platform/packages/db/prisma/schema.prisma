@@ -901,3 +901,41 @@ model AuditLog {
 
   @@index([entityType, entityId])
 }
+
+// ───────────────────────────── AI ─────────────────────────────
+
+enum AiStatus {
+  OK
+  ERROR
+}
+
+// Log van elke AI-agentaanroep. Bevat GEEN PII (alleen een korte input-samenvatting).
+model AiInvocation {
+  id               String   @id @default(cuid())
+  agent            String
+  provider         String
+  model            String
+  status           AiStatus @default(OK)
+  inputSummary     String
+  outputJson       Json?
+  promptTokens     Int      @default(0)
+  completionTokens Int      @default(0)
+  totalTokens      Int      @default(0)
+  latencyMs        Int      @default(0)
+  errorMessage     String?
+  userId           String?
+  companyId        String?
+  leadId           String?
+  createdAt        DateTime @default(now())
+
+  @@index([agent, createdAt])
+  @@index([status])
+}
+
+// Door Admin AI gegenereerd ochtendrapport (één per dag).
+model AiDailyReport {
+  id         String   @id @default(cuid())
+  date       String   @unique // YYYY-MM-DD
+  reportJson Json
+  createdAt  DateTime @default(now())
+}
