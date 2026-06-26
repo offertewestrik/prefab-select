@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/guards";
 import { getQuotesForLead } from "@/features/quotes/server/queries";
+import { QuoteStatusBadge } from "@/features/quotes/components/quote-status-badge";
 import { euro } from "@/lib/format";
 
 export const metadata: Metadata = { title: "Aanvraag", robots: { index: false, follow: false } };
@@ -43,7 +44,10 @@ export default async function MyRequestDetail({ params }: { params: Promise<{ id
             <li key={q.id} className="flex items-center justify-between rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-4">
               <div>
                 <div className="font-semibold text-neutral-900">{q.company.name}</div>
-                <div className="text-sm text-neutral-500">{q.number} · {euro(q.totalCents / 100)} incl. btw · {q.status}</div>
+                <div className="mt-0.5 flex items-center gap-2 text-sm text-neutral-500">
+                  <span>{q.number} · {euro(q.totalCents / 100)} incl. btw</span>
+                  <QuoteStatusBadge status={q.status} />
+                </div>
               </div>
               <Link href={`/offertes/${q.id}`} className="font-medium text-primary-600 hover:underline">
                 Bekijk

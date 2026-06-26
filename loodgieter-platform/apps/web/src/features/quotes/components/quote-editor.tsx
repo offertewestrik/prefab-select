@@ -4,6 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@repo/ui";
+import { quoteStatusLabels, type QuoteStatus } from "@repo/core";
 import { computeTotals } from "../server/service";
 import { saveQuoteAction, sendQuoteAction } from "../server/actions";
 import { QuotePreview } from "./quote-preview";
@@ -95,7 +96,10 @@ export function QuoteEditor({
       <div className="space-y-4">
         {readOnly && (
           <div className="rounded-[var(--radius-md)] bg-neutral-100 p-3 text-sm text-neutral-600">
-            Status: <strong>{status}</strong> — een verstuurde offerte kan niet meer worden bewerkt.
+            Status: <strong>{quoteStatusLabels[status as QuoteStatus] ?? status}</strong> —{" "}
+            {status === "EXPIRED"
+              ? "de geldigheidsdatum is verstreken; deze offerte kan niet meer worden geaccepteerd."
+              : "een verstuurde offerte kan niet meer worden bewerkt."}
           </div>
         )}
         <Field label="Titel">

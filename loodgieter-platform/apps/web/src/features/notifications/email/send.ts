@@ -45,6 +45,9 @@ export const sendQuoteAccepted = (i: Parameters<typeof t.quoteAccepted>[0] & { t
 export const sendQuoteRejected = (i: Parameters<typeof t.quoteRejected>[0] & { to: string }) =>
   sendEmail(i.to, t.quoteRejected(i));
 
+export const sendQuoteExpired = (i: Parameters<typeof t.quoteExpired>[0] & { to: string }) =>
+  sendEmail(i.to, t.quoteExpired(i));
+
 export const sendOnboardingApproved = (i: Parameters<typeof t.onboardingApproved>[0] & { to: string }) =>
   sendEmail(i.to, t.onboardingApproved(i));
 

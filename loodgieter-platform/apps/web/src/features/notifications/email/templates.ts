@@ -123,6 +123,24 @@ export function quoteRejected(input: { quoteNumber: string; customerName: string
   };
 }
 
+// 5b. Offerte verlopen (installateur of klant)
+export function quoteExpired(input: {
+  quoteNumber: string;
+  companyName: string;
+  audience: "installer" | "customer";
+}): EmailContent {
+  const isInstaller = input.audience === "installer";
+  return {
+    subject: `Offerte ${input.quoteNumber} verlopen`,
+    html: layout({
+      heading: "Offerte verlopen",
+      bodyHtml: isInstaller
+        ? p(`Offerte <strong>${input.quoteNumber}</strong> is verlopen omdat de geldigheidsdatum is verstreken. De klant kan deze niet meer accepteren. Maak desgewenst een nieuwe offerte aan.`)
+        : p(`De geldigheidsdatum van offerte <strong>${input.quoteNumber}</strong> van ${input.companyName} is verstreken. Wil je alsnog verder? Neem contact op of vraag een nieuwe offerte aan.`),
+    }),
+  };
+}
+
 // 6. Vakman — onboarding goedgekeurd
 export function onboardingApproved(input: { companyName: string; creditsUrl: string }): EmailContent {
   return {

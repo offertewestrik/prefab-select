@@ -8,6 +8,23 @@ export const UserRole = {
 } as const;
 export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 
+export const QuoteStatus = {
+  DRAFT: "DRAFT",
+  SENT: "SENT",
+  ACCEPTED: "ACCEPTED",
+  REJECTED: "REJECTED",
+  EXPIRED: "EXPIRED",
+} as const;
+export type QuoteStatus = (typeof QuoteStatus)[keyof typeof QuoteStatus];
+
+export const quoteStatusLabels: Record<QuoteStatus, string> = {
+  DRAFT: "Concept",
+  SENT: "Verstuurd",
+  ACCEPTED: "Geaccepteerd",
+  REJECTED: "Afgewezen",
+  EXPIRED: "Verlopen",
+};
+
 export const Urgency = {
   SPOED: "SPOED",
   BINNEN_WEEK: "BINNEN_WEEK",

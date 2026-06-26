@@ -58,3 +58,15 @@ export async function getQuotesForLead(leadId: string) {
     include: { company: true },
   });
 }
+
+/** Admin: alle offertes, optioneel gefilterd op status (incl. EXPIRED). */
+export async function getAllQuotes(filter?: {
+  status?: "DRAFT" | "SENT" | "ACCEPTED" | "REJECTED" | "EXPIRED";
+}) {
+  return prisma.quote.findMany({
+    where: { status: filter?.status },
+    orderBy: { updatedAt: "desc" },
+    take: 200,
+    include: { company: true, lead: true },
+  });
+}

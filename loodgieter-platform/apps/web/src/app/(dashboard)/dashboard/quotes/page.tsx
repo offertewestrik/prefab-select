@@ -3,6 +3,7 @@ import { PageHeading, EmptyState } from "@/components/dashboard/sidebar-layout";
 import { getCurrentCompany } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 import { euro } from "@/lib/format";
+import { QuoteStatusBadge } from "@/features/quotes/components/quote-status-badge";
 
 export default async function DashboardQuotes() {
   const company = await getCurrentCompany();
@@ -37,7 +38,7 @@ export default async function DashboardQuotes() {
                   <td className="p-3 font-medium text-neutral-900">{q.number}</td>
                   <td className="p-3">{q.lead?.contactName ?? "—"}</td>
                   <td className="p-3">{euro(q.totalCents / 100)}</td>
-                  <td className="p-3">{q.status}</td>
+                  <td className="p-3"><QuoteStatusBadge status={q.status} /></td>
                   <td className="p-3 text-right">
                     <Link href={`/dashboard/offertes/${q.id}`} className="font-medium text-primary-600 hover:underline">
                       {q.status === "DRAFT" ? "Bewerken" : "Bekijken"}

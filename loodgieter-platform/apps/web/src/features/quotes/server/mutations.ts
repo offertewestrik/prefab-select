@@ -6,7 +6,7 @@ import { saveQuoteSchema, sendQuoteSchema } from "../schema";
 import { euro } from "@/lib/format";
 import { computeTotals, makeAccessToken } from "./service";
 import { parseLineItems } from "./queries";
-import { sendQuoteSent, sendQuoteAccepted, sendQuoteRejected, sendAdminNotification } from "@/features/notifications/email/send";
+import { sendQuoteSent, sendQuoteAccepted, sendQuoteRejected, sendQuoteExpired, sendAdminNotification } from "@/features/notifications/email/send";
 import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
 import { createReviewInviteForQuote } from "@/features/reviews/server/service";
 
@@ -112,4 +112,47 @@ export async function applyDecision(quoteId: string, kind: "accept" | "reject"):
   }
 
   return { ok: true };
+}
+
+/**
+ * Laat verlopen SENT-offertes verlopen (validUntil < now → EXPIRED).
+ *
+ * Alleen SENT gaat naar EXPIRED; DRAFT/ACCEPTED/REJECTED blijven onaangeraakt.
+ * De statusovergang gebeurt per offerte via een atomaire `updateMany` met guard
+ * `status: "SENT"`: alleen de run die de overgang daadwerkelijk uitvoert
+ * (count === 1) verstuurt meldingen/e-mails. Zo levert een dubbele of
+ * gelijktijdige cron-run nooit dubbele notificaties op (idempotent).
+ */
+export async function expireQuotes(now: Date = new Date()): Promise<{ scanned: number; expired: number }> {
+  const candidates = await prisma.quote.findMany({
+    where: { status: "SENT", validUntil: { not: null, lt: now } },
+    include: { company: true, lead: true },
+  });
+
+  let expired = 0;
+  for (const quote of candidates) {
+    const res = await prisma.quote.updateMany({
+      where: { id: quote.id, status: "SENT" },
+      data: { status: "EXPIRED", expiredAt: now },
+    });
+    if (res.count !== 1) continue; // andere run was eerder → niet nogmaals melden
+    expired++;
+
+    const customerName = quote.lead?.contactName ?? "de klant";
+    // In-app melding voor de installateur (deterministisch).
+    await notifyCompany(quote.companyId, {
+      type: "quote.expired",
+      title: `Offerte ${quote.number} verlopen`,
+      body: customerName,
+      href: "/dashboard/quotes",
+    });
+    // E-mails (fire-and-forget; gegate door de atomaire overgang hierboven).
+    const installerEmail = quote.company.email || process.env.CONTACT_RECEIVER_EMAIL || brand.email;
+    void sendQuoteExpired({ to: installerEmail, quoteNumber: quote.number, companyName: quote.company.name, audience: "installer" });
+    if (quote.lead?.contactEmail) {
+      void sendQuoteExpired({ to: quote.lead.contactEmail, quoteNumber: quote.number, companyName: quote.company.name, audience: "customer" });
+    }
+  }
+
+  return { scanned: candidates.length, expired };
 }
