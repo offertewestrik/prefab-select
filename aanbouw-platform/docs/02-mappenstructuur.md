@@ -6,7 +6,7 @@ de app-logica — en kunnen we later een tweede app (bv. mobiel/admin-only)
 toevoegen zonder herstructurering.
 
 ```
-loodgieter-platform/
+aannemer-platform/
 ├── apps/
 │   └── web/                         # de Next.js 15 applicatie
 ├── packages/

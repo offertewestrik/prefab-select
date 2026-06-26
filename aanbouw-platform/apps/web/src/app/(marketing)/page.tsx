@@ -44,8 +44,8 @@ export default async function HomePage() {
               {brand.tagline}
             </h1>
             <p className="mt-5 text-lg text-neutral-500">
-              Vergelijk gratis offertes van gecertificeerde loodgieters en
-              installateurs in {regionsSentence()}. Snel, makkelijk en betrouwbaar.
+              Vergelijk gratis offertes van gecertificeerde bouwbedrijven en
+              bouwbedrijven in {regionsSentence()}. Snel, makkelijk en betrouwbaar.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/aanvraag">

@@ -19,8 +19,8 @@ export async function SiteFooter() {
           <div>
             <div className="text-lg font-bold text-neutral-900">{brand.name}</div>
             <p className="mt-3 text-sm text-neutral-500">
-              Vergelijk gratis offertes van gecertificeerde loodgieters en
-              installateurs in {regionsSentence()}.
+              Vergelijk gratis offertes van gecertificeerde bouwbedrijven en
+              bouwbedrijven in {regionsSentence()}.
             </p>
             <a href={brand.phoneHref} className="mt-4 block text-sm font-semibold text-primary-600">
               {brand.phone}

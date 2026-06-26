@@ -1,5 +1,5 @@
 // Pure e-mailtemplate-builders: geven { subject, html } terug. Geen I/O, geen
-// Resend — daardoor goed te unit-testen (o.a. dat installateur-mails GEEN PII
+// Resend — daardoor goed te unit-testen (o.a. dat aannemer-mails GEEN PII
 // bevatten vóór aankoop). Verzenden gebeurt in send.ts.
 
 import { brand } from "@repo/core";
@@ -49,7 +49,7 @@ export function leadConfirmation(input: {
   };
 }
 
-// 2. Installateur — nieuwe lead beschikbaar (GEEN PII)
+// 2. Aannemer — nieuwe lead beschikbaar (GEEN PII)
 export function leadAvailable(input: {
   serviceName: string;
   city: string;
@@ -91,7 +91,7 @@ export function quoteSent(input: {
   };
 }
 
-// 4. Installateur — offerte geaccepteerd (met klantgegevens, want eigen klant)
+// 4. Aannemer — offerte geaccepteerd (met klantgegevens, want eigen klant)
 export function quoteAccepted(input: {
   quoteNumber: string;
   customerName: string;
@@ -112,7 +112,7 @@ export function quoteAccepted(input: {
   };
 }
 
-// 5. Installateur — offerte afgewezen
+// 5. Aannemer — offerte afgewezen
 export function quoteRejected(input: { quoteNumber: string; customerName: string }): EmailContent {
   return {
     subject: `Offerte ${input.quoteNumber} afgewezen`,
@@ -123,7 +123,7 @@ export function quoteRejected(input: { quoteNumber: string; customerName: string
   };
 }
 
-// 5b. Offerte verlopen (installateur of klant)
+// 5b. Offerte verlopen (aannemer of klant)
 export function quoteExpired(input: {
   quoteNumber: string;
   companyName: string;

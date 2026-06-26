@@ -7,7 +7,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Alle diensten",
-  description: `Bekijk alle installatie- en loodgietersdiensten van ${brand.name}: van CV-ketel en warmtepomp tot lekkage, badkamer en ontstopping.`,
+  description: `Bekijk alle diensten voor woninguitbreiding van : van aanbouw en uitbouw tot dakopbouw, kozijnen en vergunningsbegeleiding.`,
   alternates: { canonical: "/diensten" },
 };
 

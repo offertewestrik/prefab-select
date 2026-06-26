@@ -21,7 +21,7 @@ export async function requireRole(...roles: UserRole[]) {
   redirect("/");
 }
 
-/** Het bedrijf van de ingelogde installateur (eerste lidmaatschap). */
+/** Het bedrijf van de ingelogde aannemer (eerste lidmaatschap). */
 export async function getCurrentCompany() {
   const user = await getSessionUser();
   if (!user) return null;

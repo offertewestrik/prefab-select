@@ -14,8 +14,8 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
-    title: `Vakmannen vergelijken — loodgieters & installateurs`,
-    description: `Vergelijk gecertificeerde loodgieters en installateurs in ${regionsSentence()}. Filter op dienst, plaats, beoordeling en spoedservice. Vraag gratis offertes aan via ${brand.name}.`,
+    title: `Vakmannen vergelijken — bouwbedrijven & bouwbedrijven`,
+    description: `Vergelijk gecertificeerde bouwbedrijven en bouwbedrijven in ${regionsSentence()}. Filter op dienst, plaats, beoordeling en spoedservice. Vraag gratis offertes aan via ${brand.name}.`,
     path: urls.installers(),
   });
 }
@@ -52,7 +52,7 @@ export default async function InstallersIndexPage({
       />
       <InstallerDirectory
         title="Vind een betrouwbare vakman"
-        intro={`Vergelijk gecertificeerde loodgieters en installateurs in ${regionsSentence()}. Filter op dienst, plaats, beoordeling, keurmerk en spoedservice.`}
+        intro={`Vergelijk gecertificeerde bouwbedrijven en bouwbedrijven in ${regionsSentence()}. Filter op dienst, plaats, beoordeling, keurmerk en spoedservice.`}
         items={items}
         total={total}
         truncated={truncated}

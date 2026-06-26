@@ -13,19 +13,19 @@ import { prisma } from "../src/index";
 
 const DEV_USERS = {
   admin: {
-    email: "admin@loodgieterplatform.nl",
+    email: "admin@aanbouwplatform.nl",
     name: "Dev Admin",
     role: "ADMIN" as const,
     password: "Admin!2026dev",
   },
   installer: {
-    email: "installateur@loodgieterplatform.nl",
-    name: "Dev Installateur",
+    email: "aannemer@aanbouwplatform.nl",
+    name: "Dev Aannemer",
     role: "INSTALLER" as const,
     password: "Installer!2026dev",
   },
   homeowner: {
-    email: "klant@loodgieterplatform.nl",
+    email: "klant@aanbouwplatform.nl",
     name: "Dev Klant",
     role: "HOMEOWNER" as const,
     password: "Klant!2026dev",
@@ -50,7 +50,7 @@ async function createUser(kind: Kind) {
     },
   });
 
-  // Installateur krijgt een actief bedrijf + werkgebied + diensten, zodat het
+  // Aannemer krijgt een actief bedrijf + werkgebied + diensten, zodat het
   // dashboard en de matching meteen data tonen.
   if (kind === "installer") {
     const company = await prisma.installerCompany.upsert({

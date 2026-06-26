@@ -19,7 +19,7 @@ navy-900     #0B1220
 navy-800     #0F172A      // sidebar achtergrond
 navy-700     #111827
 
-// Accent — spoed/urgentie (oranje CTA's "Spoed loodgieter")
+// Accent — spoed/urgentie (oranje CTA's "Spoed aannemer")
 accent-500   #F97316
 accent-600   #EA580C
 

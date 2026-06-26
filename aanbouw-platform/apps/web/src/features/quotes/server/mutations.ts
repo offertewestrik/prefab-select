@@ -140,7 +140,7 @@ export async function expireQuotes(now: Date = new Date()): Promise<{ scanned: n
     expired++;
 
     const customerName = quote.lead?.contactName ?? "de klant";
-    // In-app melding voor de installateur (deterministisch).
+    // In-app melding voor de aannemer (deterministisch).
     await notifyCompany(quote.companyId, {
       type: "quote.expired",
       title: `Offerte ${quote.number} verlopen`,

@@ -25,7 +25,7 @@ export async function generateMetadata({
   const b = await getBrandBySlug(slug);
   if (!b) return {};
   return buildMetadata({
-    title: b.seoTitle ?? `${b.name} installateur & onderhoud`,
+    title: b.seoTitle ?? `${b.name} aannemer & onderhoud`,
     description:
       b.metaDescription ??
       `${b.name} laten installeren of onderhouden? Vergelijk gratis offertes van gecertificeerde ${b.name}-vakmannen via ${siteBrand.name}.`,

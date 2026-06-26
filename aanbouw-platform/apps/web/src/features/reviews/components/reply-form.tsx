@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { saveReplyAction, type ReviewState } from "@/features/reviews/server/actions";
 
 /**
- * Reactieformulier voor de installateur. Alleen bruikbaar zolang er nog geen
+ * Reactieformulier voor de aannemer. Alleen bruikbaar zolang er nog geen
  * beoordeelde reactie is (PENDING of geen reactie). De server bewaakt dit nogmaals.
  */
 export function ReplyForm({ reviewId, initialBody, editable }: { reviewId: string; initialBody: string; editable: boolean }) {

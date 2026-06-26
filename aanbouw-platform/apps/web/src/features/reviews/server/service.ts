@@ -80,7 +80,7 @@ async function persistReview(
     await prisma.reviewInvite.updateMany({ where: { token: opts.inviteToken }, data: { usedAt: new Date() } });
   }
 
-  // Meldingen: installateur + admin (in-app, deterministisch) + admin-mail.
+  // Meldingen: aannemer + admin (in-app, deterministisch) + admin-mail.
   await notifyCompany(ctx.companyId, { type: "review.new", title: "Nieuwe review ontvangen", body: `${input.rating}★ van ${customerName}`, href: "/dashboard/reviews" });
   await notifyAdmins({ type: "review.pending", title: "Review wacht op goedkeuring", body: ctx.company.name, href: "/admin/reviews" });
   void sendAdminNotification({ title: "Nieuwe review wacht op goedkeuring", lines: [`Vakman: ${ctx.company.name}`, `Score: ${input.rating}★`], url: siteUrl("/admin/reviews") });

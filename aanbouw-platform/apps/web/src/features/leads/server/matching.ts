@@ -50,7 +50,7 @@ export async function matchLead(leadId: string): Promise<number> {
     prisma.leadRequest.update({ where: { id: leadId }, data: { status: "DISTRIBUTED" } }),
   ]);
 
-  // Melding naar gematchte installateurs — PII-vrij (alleen dienst/plaats/urgentie).
+  // Melding naar gematchte bouwbedrijven — PII-vrij (alleen dienst/plaats/urgentie).
   const leadUrl = siteUrl(`/dashboard/leads/${leadId}`);
   for (const c of candidates) {
     void sendLeadAvailable({ to: c.email, serviceName: lead.service.name, city: lead.municipality.name, urgencyLabel: urgencyLabels[lead.urgency], leadUrl });

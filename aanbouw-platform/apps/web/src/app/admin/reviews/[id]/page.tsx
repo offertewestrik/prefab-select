@@ -34,12 +34,12 @@ export default async function AdminReviewDetail({ params }: { params: Promise<{ 
 
       <div className="mt-6 rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-5">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-semibold text-neutral-900">Reactie van de installateur</h2>
+          <h2 className="font-semibold text-neutral-900">Reactie van de aannemer</h2>
           {reply && <ReplyStatusBadge status={reply.status} />}
         </div>
 
         {!reply ? (
-          <p className="text-sm text-neutral-500">Deze installateur heeft (nog) niet gereageerd.</p>
+          <p className="text-sm text-neutral-500">Deze aannemer heeft (nog) niet gereageerd.</p>
         ) : (
           <>
             <AdminReplyEditor replyId={reply.id} initialBody={reply.body} action={adminEditReplyAction} />

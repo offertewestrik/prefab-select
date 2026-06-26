@@ -7,7 +7,7 @@ import { sendAdminNotification } from "@/features/notifications/email/send";
 export type ReplyResult = { ok: true } | { ok: false; reason: string };
 
 /**
- * Maakt of bewerkt de reactie van de installateur op een review van het EIGEN
+ * Maakt of bewerkt de reactie van de aannemer op een review van het EIGEN
  * bedrijf. Bewerken kan alleen zolang de reactie nog PENDING is. Elke
  * (her)indiening zet de status op PENDING en stelt admins op de hoogte.
  */
@@ -53,7 +53,7 @@ export async function upsertReply(
   return { ok: true };
 }
 
-/** Installateur verwijdert de eigen reactie (ongeacht status). */
+/** Aannemer verwijdert de eigen reactie (ongeacht status). */
 export async function deleteOwnReply(companyId: string, reviewId: string): Promise<ReplyResult> {
   const res = await prisma.reviewReply.deleteMany({ where: { reviewId, companyId } });
   return res.count > 0 ? { ok: true } : { ok: false, reason: "not_found" };
@@ -76,7 +76,7 @@ export async function moderateReply(id: string, status: "APPROVED" | "REJECTED" 
       rejectedAt: status === "REJECTED" ? now : null,
     },
   });
-  // Installateur op de hoogte stellen van de uitkomst.
+  // Aannemer op de hoogte stellen van de uitkomst.
   if (status === "APPROVED" || status === "REJECTED") {
     await notifyCompany(reply.companyId, {
       type: `reply.${status.toLowerCase()}`,

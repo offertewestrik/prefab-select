@@ -1,7 +1,7 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 
-/** Overzicht voor de credits-pagina van een installateur. */
+/** Overzicht voor de credits-pagina van een aannemer. */
 export async function getCreditOverview(companyId: string) {
   const [company, transactions, payments, purchases] = await Promise.all([
     prisma.installerCompany.findUnique({ where: { id: companyId } }),

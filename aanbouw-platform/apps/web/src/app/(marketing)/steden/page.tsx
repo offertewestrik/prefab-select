@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Steden & regio's",
-  description: `${brand.name} werkt met gecertificeerde vakmannen in ${regionsSentence()}. Vind een loodgieter of installateur in jouw gemeente.`,
+  description: `${brand.name} werkt met gecertificeerde vakmannen in ${regionsSentence()}. Vind een aannemer of aannemer in jouw gemeente.`,
   alternates: { canonical: "/steden" },
 };
 
@@ -19,7 +19,7 @@ export default async function CitiesPage() {
     <main className="mx-auto max-w-(--container-max) px-6 py-16">
       <h1 className="text-4xl font-bold tracking-tight text-neutral-900">Steden & regio&apos;s</h1>
       <p className="mt-3 max-w-2xl text-neutral-500">
-        Vind gecertificeerde loodgieters en installateurs in jouw gemeente.
+        Vind gecertificeerde bouwbedrijven en bouwbedrijven in jouw gemeente.
       </p>
 
       <div className="mt-12 space-y-10">

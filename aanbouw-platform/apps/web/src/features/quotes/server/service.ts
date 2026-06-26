@@ -12,7 +12,7 @@ export function makeAccessToken(seed: string): string {
   // Deterministische maar niet-raadbare-genoeg token (geen Math.random nodig).
   let h1 = 0x811c9dc5;
   let h2 = 0x1000193;
-  const salt = `${seed}:${Date.now()}:loodgieterplatform`;
+  const salt = `${seed}:${Date.now()}:aanbouwplatform`;
   for (let i = 0; i < salt.length; i++) {
     const c = salt.charCodeAt(i);
     h1 = Math.imul(h1 ^ c, 0x01000193) >>> 0;

@@ -69,7 +69,7 @@ levert waarde. We bouwen pas na goedkeuring, fase voor fase.
 ---
 
 ### Open beslissingen vóór bouw (fase 0)
-1. **Merknaam** — "Loodgieterplatform.nl" of "LoodgieterDirect" (uit het design)?
+1. **Merknaam** — "AanbouwPlatform.nl" of "LoodgieterDirect" (uit het design)?
 2. **Monetisatie** — start met **credits per lead** (voorstel) — akkoord?
 3. **Hosting** — **Vercel + Cloudflare** (voorstel) — akkoord?
 4. **Auth** — **Auth.js + Prisma** (voorstel) — akkoord?

@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { requireRole, getCurrentCompany } from "@/lib/guards";
 
 // Zorgt dat er een concept-offerte bestaat voor deze (gekochte) lead en gaat
-// door naar de editor. Alleen toegankelijk voor de installateur die de lead kocht.
+// door naar de editor. Alleen toegankelijk voor de aannemer die de lead kocht.
 export default async function NewQuoteForLead({ params }: { params: Promise<{ id: string }> }) {
   const { id: leadId } = await params;
   await requireRole("INSTALLER");

@@ -40,16 +40,16 @@ function facetCopy(seg: DirectorySegment) {
   if (seg.kind === "service") {
     return {
       title: `${seg.name} — vakmannen vergelijken`,
-      metaTitle: `${seg.name}: loodgieters & installateurs vergelijken`,
+      metaTitle: `${seg.name}: bouwbedrijven & bouwbedrijven vergelijken`,
       intro: `Gecertificeerde vakmannen voor ${seg.name.toLowerCase()} in ${regionsSentence()}. Vergelijk beoordelingen en vraag gratis offertes aan.`,
       metaDesc: `Vergelijk vakmannen voor ${seg.name.toLowerCase()} via ${brand.name}. Filter op plaats, beoordeling en spoedservice en vraag gratis offertes aan.`,
     };
   }
   return {
     title: `Vakmannen in ${seg.name}`,
-    metaTitle: `Loodgieters & installateurs in ${seg.name}`,
-    intro: `Gecertificeerde loodgieters en installateurs met werkgebied ${seg.name} (${seg.province}). Vergelijk beoordelingen en vraag gratis offertes aan.`,
-    metaDesc: `Vind een betrouwbare loodgieter of installateur in ${seg.name}. Vergelijk vakmannen op beoordeling en keurmerk via ${brand.name}.`,
+    metaTitle: `Bouwbedrijven & bouwbedrijven in ${seg.name}`,
+    intro: `Gecertificeerde bouwbedrijven en bouwbedrijven met werkgebied ${seg.name} (${seg.province}). Vergelijk beoordelingen en vraag gratis offertes aan.`,
+    metaDesc: `Vind een betrouwbare aannemer of aannemer in ${seg.name}. Vergelijk vakmannen op beoordeling en keurmerk via ${brand.name}.`,
   };
 }
 
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = await getPublicProfile(slug);
   if (c) {
     return buildMetadata({
-      title: `${c.name} — installateur & loodgieter`,
+      title: `${c.name} — aannemer & aannemer`,
       description: c.shortDescription ?? `${c.name} via ${brand.name}. Vraag vrijblijvend een offerte aan.`,
       path: urls.installer(slug),
       ogImageUrl: c.logoUrl ?? undefined,
@@ -241,7 +241,7 @@ function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
             <div className="mt-3 space-y-1.5 text-neutral-700">
               {c.phone && <div className="inline-flex items-center gap-2"><Phone className="h-4 w-4 text-primary-600" /> {c.phone}</div>}
               {c.yearsExperience != null && <div>{c.yearsExperience} jaar ervaring</div>}
-              {c.employees != null && <div>{c.employees} monteurs</div>}
+              {c.employees != null && <div>{c.employees} vakmannen</div>}
               {c.specialties.length > 0 && <div>Specialisaties: {c.specialties.join(", ")}</div>}
             </div>
           </div>

@@ -30,8 +30,8 @@ export async function generateMetadata({
   const city = await getCityBySlug(slug);
   if (!city) return {};
   return buildMetadata({
-    title: `Loodgieter & installateur in ${city.name}`,
-    description: `Op zoek naar een loodgieter of installateur in ${city.name}? Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}.`,
+    title: `Aannemer & aannemer in ${city.name}`,
+    description: `Op zoek naar een aannemer of aannemer in ${city.name}? Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}.`,
     path: urls.city(slug),
   });
 }
@@ -60,10 +60,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
       <section className="border-b border-neutral-200 bg-gradient-to-b from-primary-50/60 to-white">
         <div className="mx-auto max-w-(--container-max) px-6 py-14">
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900">
-            Loodgieter & installateur in {city.name}
+            Aannemer & aannemer in {city.name}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-neutral-500">
-            Alle installatie- en loodgietersdiensten in {city.name} ({city.province.name}).
+            Alle diensten voor woninguitbreiding in {city.name} ({city.province.name}).
             Vergelijk gratis offertes van gecertificeerde vakmannen uit de regio.
           </p>
           <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-neutral-700">

@@ -8,7 +8,7 @@ export default async function AdminCreditPackages() {
 
   return (
     <div>
-      <PageHeading title="Credit-pakketten" subtitle="De pakketten die installateurs kunnen kopen." />
+      <PageHeading title="Credit-pakketten" subtitle="De pakketten die bouwbedrijven kunnen kopen." />
       <AdminTable
         rows={packages}
         empty="Nog geen pakketten. Voeg ze toe via de seed of database."

@@ -7,7 +7,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Reviews",
-  description: `Lees ervaringen van klanten van ${brand.name}. Beoordelingen van gecertificeerde loodgieters en installateurs.`,
+  description: `Lees ervaringen van klanten van ${brand.name}. Beoordelingen van gecertificeerde bouwbedrijven en bouwbedrijven.`,
   alternates: { canonical: "/reviews" },
 };
 

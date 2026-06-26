@@ -6,7 +6,7 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Vergelijken",
-  description: `Vergelijk diensten, merken en prijzen voor installatie- en loodgieterswerk via ${brand.name}.`,
+  description: `Vergelijk diensten, bouwbedrijven en richtprijzen voor woninguitbreiding via .`,
   alternates: { canonical: "/vergelijken" },
 };
 

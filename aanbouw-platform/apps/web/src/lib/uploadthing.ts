@@ -5,11 +5,11 @@ import { setCompanyMedia, addPortfolioPhoto, addCertification } from "@/features
 
 const f = createUploadthing();
 
-// Alleen ingelogde installateurs mogen uploaden; bestandstype + grootte worden
+// Alleen ingelogde bouwbedrijven mogen uploaden; bestandstype + grootte worden
 // door UploadThing afgedwongen (image/pdf, maxFileSize).
 async function requireCompany() {
   const company = await getCurrentCompany();
-  if (!company) throw new UploadThingError("Alleen ingelogde installateurs kunnen uploaden.");
+  if (!company) throw new UploadThingError("Alleen ingelogde bouwbedrijven kunnen uploaden.");
   return { companyId: company.id };
 }
 

@@ -45,7 +45,7 @@ function maskName(name: string): string {
 }
 
 /**
- * Haalt een lead op voor een installateur (of admin). Bepaalt of de lead is
+ * Haalt een lead op voor een aannemer (of admin). Bepaalt of de lead is
  * vrijgegeven (gekocht door dit bedrijf, of admin) en projecteert alleen de
  * toegestane velden.
  */
@@ -70,7 +70,7 @@ export async function getLeadView(
       })
     : null;
 
-  // Een installateur mag een lead alleen zien als die aan hem is aangeboden.
+  // Een aannemer mag een lead alleen zien als die aan hem is aangeboden.
   if (!isAdmin && !match) return { status: "forbidden" };
 
   const purchased = match?.status === "PURCHASED";

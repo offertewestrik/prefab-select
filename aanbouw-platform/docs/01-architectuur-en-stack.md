@@ -6,7 +6,7 @@ Een tweezijdige marketplace:
 
 - **Vraagzijde** — huiseigenaren met een klus (cv-ketel, lekkage, badkamer…).
   Ze vinden ons via Google (programmatic SEO) en doen een gratis aanvraag.
-- **Aanbodzijde** — gecertificeerde installateurs/loodgieters. Ze ontvangen
+- **Aanbodzijde** — gecertificeerde bouwbedrijven/bouwbedrijven. Ze ontvangen
   leads in hun werkgebied, kopen die met credits, en plannen de klus in.
 
 Het platform verdient aan de aanbodzijde (credits per lead, later abonnementen).

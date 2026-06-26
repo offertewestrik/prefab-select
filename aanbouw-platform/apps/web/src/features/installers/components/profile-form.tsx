@@ -37,7 +37,7 @@ export function ProfileForm({ initial }: { initial: ProfileInitial }) {
         <T label="Specialisaties (komma-gescheiden)" name="specialties" def={initial.specialties} />
         <div className="grid grid-cols-2 gap-3">
           <T label="Jaren ervaring" name="yearsExperience" type="number" def={initial.yearsExperience} />
-          <T label="Aantal monteurs" name="employees" type="number" def={initial.employees} />
+          <T label="Aantal vakmannen" name="employees" type="number" def={initial.employees} />
         </div>
       </Card>
 

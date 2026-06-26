@@ -110,7 +110,7 @@ async function seedPackages() {
 }
 
 async function main() {
-  console.log("→ Seeden van Loodgieterplatform.nl…");
+  console.log("→ Seeden van AanbouwPlatform.nl…");
   await seedCatalog();
   await seedGeo();
   await seedPackages();

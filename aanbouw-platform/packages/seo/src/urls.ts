@@ -2,7 +2,7 @@
 // (zie docs/04). Voorkomt inconsistente links/canonicals.
 
 export function siteUrl(path = "/"): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://loodgieterplatform.nl";
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aanbouwplatform.nl";
   return new URL(path, base).toString();
 }
 

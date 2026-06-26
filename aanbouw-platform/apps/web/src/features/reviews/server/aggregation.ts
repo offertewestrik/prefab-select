@@ -13,7 +13,7 @@ export interface ReviewCard {
   companyName: string;
   companySlug: string | null; // alleen als publiek profiel zichtbaar
   createdAt: Date;
-  /** Goedgekeurde reactie van de installateur (anders null). */
+  /** Goedgekeurde reactie van de aannemer (anders null). */
   reply: { body: string; companyName: string } | null;
 }
 

@@ -18,7 +18,7 @@ export interface QuotePreviewData {
   terms?: string | null;
 }
 
-// Nette, herbruikbare offerte-preview (installateur-editor én klant-view).
+// Nette, herbruikbare offerte-preview (aannemer-editor én klant-view).
 export function QuotePreview({ data }: { data: QuotePreviewData }) {
   return (
     <div className="rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-8 shadow-[var(--shadow-sm)]">
