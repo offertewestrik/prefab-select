@@ -98,7 +98,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
                     <div className="text-trust">{"★".repeat(r.rating)}</div>
                     {r.title && <div className="mt-1 font-medium text-neutral-900">{r.title}</div>}
                     <p className="mt-1 text-sm text-neutral-500">{r.body}</p>
-                    <div className="mt-2 text-xs text-neutral-400">{r.authorName}</div>
+                    <div className="mt-2 text-xs text-neutral-400">{r.showName ? r.customerName : "Anonieme klant"}{r.cityName ? ` · ${r.cityName}` : ""}</div>
                   </div>
                 ))}
               </div>

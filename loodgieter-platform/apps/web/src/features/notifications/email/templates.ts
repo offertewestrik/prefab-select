@@ -152,6 +152,27 @@ export function onboardingRejected(input: { companyName: string; reason?: string
   };
 }
 
+// Review — uitnodiging (na geaccepteerde offerte) of bedankje (na indienen)
+export function reviewThanks(input: { companyName: string; url: string; kind: "invite" | "thanks" }): EmailContent {
+  if (input.kind === "invite") {
+    return {
+      subject: `Hoe was je ervaring met ${input.companyName}?`,
+      html: layout({
+        heading: "Deel je ervaring",
+        bodyHtml: p(`Je hebt de offerte van <strong>${input.companyName}</strong> geaccepteerd. We horen graag hoe het ging — je review helpt andere klanten.`),
+        cta: { label: "Laat een review achter", url: input.url },
+      }),
+    };
+  }
+  return {
+    subject: "Bedankt voor je review!",
+    html: layout({
+      heading: "Bedankt voor je review",
+      bodyHtml: p("We hebben je review ontvangen. Na een korte controle plaatsen we 'm op het profiel van de vakman."),
+    }),
+  };
+}
+
 // 8. Admin — interne meldingen
 export function adminNotification(input: { title: string; lines: string[]; url: string }): EmailContent {
   return {

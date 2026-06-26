@@ -11,6 +11,7 @@ const nav: NavItem[] = [
   { label: "Betalingen", href: "/admin/payments" },
   { label: "Credit-pakketten", href: "/admin/credit-packages" },
   { label: "Vakmannen", href: "/admin/installers" },
+  { label: "Reviews", href: "/admin/reviews" },
   { label: "Artikelen", href: "/admin/articles" },
 ];
 

@@ -8,6 +8,7 @@ import { computeTotals, makeAccessToken } from "./service";
 import { parseLineItems } from "./queries";
 import { sendQuoteSent, sendQuoteAccepted, sendQuoteRejected, sendAdminNotification } from "@/features/notifications/email/send";
 import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
+import { createReviewInviteForQuote } from "@/features/reviews/server/service";
 
 // Pure, request-context-onafhankelijke mutaties (testbaar). De server-acties
 // (actions.ts) doen auth/rol-checks en roepen deze functies aan.
@@ -104,6 +105,7 @@ export async function applyDecision(quoteId: string, kind: "accept" | "reject"):
     await notifyCompany(quote.companyId, { type: "quote.accepted", title: `Offerte ${quote.number} geaccepteerd`, body: customerName, href: "/dashboard/quotes" });
     await notifyAdmins({ type: "quote.accepted", title: `Offerte ${quote.number} geaccepteerd`, body: quote.company.name, href: "/admin" });
     void sendAdminNotification({ title: `Offerte ${quote.number} geaccepteerd`, lines: [`Vakman: ${quote.company.name}`, `Bedrag: ${euro(quote.totalCents / 100)}`], url: siteUrl("/admin") });
+    void createReviewInviteForQuote(quoteId); // review-uitnodiging naar de klant
   } else {
     await sendQuoteRejected({ to: installerEmail, quoteNumber: quote.number, customerName });
     await notifyCompany(quote.companyId, { type: "quote.rejected", title: `Offerte ${quote.number} afgewezen`, body: customerName, href: "/dashboard/quotes" });

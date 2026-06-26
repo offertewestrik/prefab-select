@@ -52,6 +52,14 @@ export default async function MyRequestDetail({ params }: { params: Promise<{ id
           ))}
         </ul>
       )}
+
+      {quotes.some((q) => q.status === "ACCEPTED") && (
+        <div className="mt-6">
+          <Link href={`/mijn-aanvragen/${lead.id}/review`} className="font-medium text-primary-600 hover:underline">
+            Laat een review achter →
+          </Link>
+        </div>
+      )}
     </main>
   );
 }

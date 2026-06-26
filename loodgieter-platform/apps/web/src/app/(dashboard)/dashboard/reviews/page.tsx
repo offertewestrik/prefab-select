@@ -18,7 +18,7 @@ export default async function DashboardReviews() {
           {reviews.map((r) => (
             <li key={r.id} className="rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-4">
               <div className="flex items-center justify-between">
-                <span className="font-medium text-neutral-900">{r.authorName}</span>
+                <span className="font-medium text-neutral-900">{r.showName ? r.customerName : "Anonieme klant"}</span>
                 <span className="text-sm text-trust">{"★".repeat(r.rating)}</span>
               </div>
               {r.title && <div className="mt-1 text-sm font-medium">{r.title}</div>}

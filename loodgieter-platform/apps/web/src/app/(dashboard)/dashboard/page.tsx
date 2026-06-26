@@ -33,7 +33,7 @@ export default async function DashboardOverview() {
     ? await Promise.all([
         prisma.leadMatch.count({ where: { companyId: company.id, status: "OFFERED" } }),
         prisma.quote.count({ where: { companyId: company.id } }),
-        prisma.review.count({ where: { companyId: company.id, status: "PUBLISHED" } }),
+        prisma.review.count({ where: { companyId: company.id, status: "APPROVED" } }),
       ])
     : [0, 0, 0];
 

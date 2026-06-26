@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function ReviewsPage() {
   const reviews = await prisma.review
-    .findMany({ where: { status: "PUBLISHED" }, orderBy: { createdAt: "desc" }, take: 30, include: { company: true } })
+    .findMany({ where: { status: "APPROVED" }, orderBy: { createdAt: "desc" }, take: 30, include: { company: true } })
     .catch(() => []);
 
   return (
@@ -33,7 +33,7 @@ export default async function ReviewsPage() {
               {r.title && <div className="mt-2 font-semibold text-neutral-900">{r.title}</div>}
               <p className="mt-1 text-sm text-neutral-500">{r.body}</p>
               <div className="mt-3 text-xs text-neutral-500">
-                {r.authorName} · {r.company.name}
+                {r.showName ? r.customerName : "Anonieme klant"} · {r.company.name}
               </div>
             </div>
           ))}

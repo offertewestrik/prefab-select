@@ -73,8 +73,15 @@ enum AppointmentStatus {
 
 enum ReviewStatus {
   PENDING
-  PUBLISHED
+  APPROVED
   REJECTED
+  HIDDEN
+}
+
+enum ReviewSource {
+  PLATFORM
+  IMPORTED
+  MANUAL
 }
 
 enum ArticleStatus {
@@ -773,28 +780,39 @@ model Subscription {
 
 // ───────────────────────────── Reviews ────────────────────────────
 model Review {
-  id         String           @id @default(cuid())
-  companyId  String
-  leadId     String?
-  authorName String
-  rating     Int
-  title      String?
-  body       String           @db.Text
-  status     ReviewStatus     @default(PENDING)
-  reply      String?
-  verified   Boolean          @default(false)
-  createdAt  DateTime         @default(now())
-  company    InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  id           String           @id @default(cuid())
+  companyId    String
+  homeownerId  String?
+  leadId       String?
+  quoteId      String?
+  rating       Int
+  title        String?
+  body         String           @db.Text
+  serviceSlug  String?
+  cityName     String?
+  customerName String
+  showName     Boolean          @default(true)
+  status       ReviewStatus     @default(PENDING)
+  source       ReviewSource     @default(PLATFORM)
+  reply        String?
+  verified     Boolean          @default(false)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  company      InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   @@index([companyId, status])
 }
 
 model ReviewInvite {
-  id        String    @id @default(cuid())
-  leadId    String
-  companyId String
-  token     String    @unique
-  sentAt    DateTime?
+  id            String    @id @default(cuid())
+  companyId     String
+  leadId        String?
+  quoteId       String?   @unique
+  token         String    @unique
+  customerEmail String?
+  sentAt        DateTime?
+  usedAt        DateTime?
+  createdAt     DateTime  @default(now())
 }
 
 // ─────────────────────────── Cross-cutting ────────────────────────
