@@ -7,7 +7,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Kennisbank",
-  description: `Praktische artikelen en advies over CV, warmtepompen, badkamers, lekkages en meer — van de experts van ${brand.name}.`,
+  description: `Praktische artikelen en advies over aanbouw, uitbouw, dakopbouw, vergunningen en meer — van de experts van ${brand.name}.`,
   alternates: { canonical: "/kennisbank" },
 };
 

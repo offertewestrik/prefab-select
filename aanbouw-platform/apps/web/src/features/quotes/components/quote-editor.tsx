@@ -103,7 +103,7 @@ export function QuoteEditor({
           </div>
         )}
         <Field label="Titel">
-          <input className="inp" value={title} disabled={readOnly} onChange={(e) => setTitle(e.target.value)} placeholder="Bijv. Vervangen CV-ketel" />
+          <input className="inp" value={title} disabled={readOnly} onChange={(e) => setTitle(e.target.value)} placeholder="Bijv. Aanbouw woonkeuken" />
         </Field>
         <Field label="Introtekst">
           <textarea className="inp min-h-20" value={introText} disabled={readOnly} onChange={(e) => setIntro(e.target.value)} />

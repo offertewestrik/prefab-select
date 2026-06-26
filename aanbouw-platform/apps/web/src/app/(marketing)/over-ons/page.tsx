@@ -15,7 +15,7 @@ export default function AboutPage() {
         <p>
           {brand.name} verbindt huiseigenaren met gecertificeerde bouwbedrijven en
           bouwbedrijven in {regionsSentence()}. Of het nu gaat om een nieuwe
-          CV-ketel, een warmtepomp, een lekkage of een complete badkamerrenovatie:
+          aanbouw, een uitbouw, een dakopbouw of een complete verbouwing:
           wij zorgen dat je snel en eenvoudig de juiste vakman vindt.
         </p>
         <p>

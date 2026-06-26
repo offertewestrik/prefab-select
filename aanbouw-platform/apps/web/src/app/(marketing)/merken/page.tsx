@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Merken",
-  description: `Alle merken die onze vakmannen installeren en onderhouden — van CV-ketels tot warmtepompen en airco. Vergelijk via ${siteBrand.name}.`,
+  description: `Merken en materialen waarmee onze bouwbedrijven werken — van kozijnen en schuifpuien tot gevelstenen. Vergelijk via ${siteBrand.name}.`,
   alternates: { canonical: "/merken" },
 };
 
