@@ -42,6 +42,11 @@ export function InstallerCard({ c }: { c: InstallerCardData }) {
                 <MapPin className="h-4 w-4" /> {c.city}
               </span>
             )}
+            {c.distanceKm != null && (
+              <span className="inline-flex items-center gap-1 font-medium text-primary-700">
+                ± {Math.round(c.distanceKm)} km
+              </span>
+            )}
           </div>
         </div>
         {c.emergencyService && (

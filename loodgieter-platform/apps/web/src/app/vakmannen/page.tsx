@@ -28,7 +28,7 @@ export default async function InstallersIndexPage({
   const sp = await searchParams;
   const filter = parseDirectoryParams(sp);
 
-  const [{ items, total, truncated }, options] = await Promise.all([
+  const [{ items, total, truncated, origin }, options] = await Promise.all([
     searchInstallers(filter),
     getDirectoryFilterOptions(),
   ]);
@@ -54,6 +54,7 @@ export default async function InstallersIndexPage({
         current={filter}
         ctaServiceSlug={filter.service}
         ctaCitySlug={filter.city}
+        originLabel={origin?.label ?? null}
       />
     </main>
   );

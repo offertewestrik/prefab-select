@@ -21,6 +21,7 @@ export function InstallerDirectory({
   current,
   ctaServiceSlug,
   ctaCitySlug,
+  originLabel,
 }: {
   title: string;
   intro: string;
@@ -31,6 +32,7 @@ export function InstallerDirectory({
   current: DirectoryFilter;
   ctaServiceSlug?: string;
   ctaCitySlug?: string;
+  originLabel?: string | null;
 }) {
   return (
     <div className="space-y-8">
@@ -43,6 +45,7 @@ export function InstallerDirectory({
 
       <p className="text-sm text-neutral-500">
         {total === 0 ? "Geen vakmannen gevonden" : `${total} ${total === 1 ? "vakman" : "vakmannen"} gevonden`}
+        {originLabel && ` in de buurt van ${originLabel}`}
         {truncated && ` — eerste ${items.length} getoond`}
       </p>
 

@@ -2,12 +2,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Phone, Star, ShieldCheck, Wrench } from "lucide-react";
+import { MapPin, Phone, Star, ShieldCheck, Wrench, Zap } from "lucide-react";
 import { brand, regionsSentence } from "@repo/core";
 import { urls, breadcrumbLd, localBusinessLd, itemListLd, siteUrl } from "@repo/seo";
 import { Button } from "@repo/ui";
 import { prisma } from "@/lib/prisma";
 import { JsonLd } from "@/components/json-ld";
+import { CoverageMap } from "@/components/marketing/coverage-map";
 import { InstallerDirectory } from "@/components/marketing/installer-directory";
 import { buildMetadata } from "@/features/seo/metadata";
 import { getPublicProfile } from "@/features/installers/server/profile";
@@ -146,6 +147,13 @@ async function FacetView({
 type PublicProfile = NonNullable<Awaited<ReturnType<typeof getPublicProfile>>>;
 
 function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
+  const coverageMunis = c.coverage
+    .map((cv) => cv.municipality)
+    .filter((m): m is NonNullable<typeof m> => !!m)
+    .map((m) => ({ name: m.name, lat: m.lat, lng: m.lng }));
+  const homeBase =
+    (c.city && coverageMunis.find((m) => m.name.toLowerCase() === c.city!.toLowerCase())) || null;
+
   return (
     <main className="mx-auto max-w-(--container-max) px-6 py-10">
       <JsonLd
@@ -247,10 +255,25 @@ function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
             <div className="rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-5 text-sm">
               <h3 className="font-semibold text-neutral-900">Werkgebied</h3>
               <p className="mt-2 text-neutral-700">{c.coverage.map((cv) => cv.municipality?.name).filter(Boolean).join(", ")}</p>
+              {c.coverage[0]?.radiusKm ? <p className="mt-1 text-neutral-500">Straal: ± {c.coverage[0].radiusKm} km</p> : null}
+              {c.emergencyService && (
+                <p className="mt-2 inline-flex items-center gap-1.5 text-accent-600">
+                  <Zap className="h-4 w-4" /> 24/7 spoedservice in dit gebied
+                </p>
+              )}
             </div>
           )}
         </aside>
       </div>
+
+      {coverageMunis.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-xl font-bold text-neutral-900">Werkgebied op de kaart</h2>
+          <div className="mt-4">
+            <CoverageMap municipalities={coverageMunis} homeBase={homeBase} radiusKm={c.coverage[0]?.radiusKm ?? null} />
+          </div>
+        </section>
+      )}
 
       <p className="mt-10 text-center text-xs text-neutral-400">{siteUrl(urls.installer(slug))}</p>
     </main>

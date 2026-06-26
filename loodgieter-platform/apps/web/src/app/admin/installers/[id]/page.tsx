@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { companyStatusLabels, type CompanyStatus } from "@repo/core";
 import { Button, Card, CardContent } from "@repo/ui";
 import { PageHeading } from "@/components/dashboard/sidebar-layout";
+import { CoverageMap } from "@/components/marketing/coverage-map";
 import { getCompanyForAdmin } from "@/features/installers/server/admin";
 import { approveCompanyAction, rejectCompanyAction, suspendCompanyAction } from "@/features/installers/server/actions";
 import { setVisibilityAction } from "@/features/installers/server/profile-actions";
@@ -51,9 +52,37 @@ export default async function AdminInstallerDetail({ params }: { params: Promise
               {company.coverage.map((c) => <li key={c.id}>{c.municipality?.name ?? "—"}</li>)}
               {company.coverage.length === 0 && <li className="text-neutral-400">Geen</li>}
             </ul>
+            {company.coverage[0]?.radiusKm ? <p className="mt-2 text-sm text-neutral-500">Straal: ± {company.coverage[0].radiusKm} km</p> : null}
           </CardContent>
         </Card>
       </div>
+
+      {company.coverage.some((c) => c.municipality) && (
+        <Card>
+          <CardContent>
+            <h2 className="font-semibold text-neutral-900">Werkgebied op de kaart</h2>
+            <div className="mt-3">
+              <CoverageMap
+                municipalities={company.coverage
+                  .map((c) => c.municipality)
+                  .filter((m): m is NonNullable<typeof m> => !!m)
+                  .map((m) => ({ name: m.name, lat: m.lat, lng: m.lng }))}
+                homeBase={
+                  (company.city &&
+                    company.coverage
+                      .map((c) => c.municipality)
+                      .filter((m): m is NonNullable<typeof m> => !!m)
+                      .map((m) => ({ name: m.name, lat: m.lat, lng: m.lng }))
+                      .find((m) => m.name.toLowerCase() === company.city!.toLowerCase())) ||
+                  null
+                }
+                radiusKm={company.coverage[0]?.radiusKm ?? null}
+                height={280}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Acties */}
       <div className="flex flex-wrap gap-3">

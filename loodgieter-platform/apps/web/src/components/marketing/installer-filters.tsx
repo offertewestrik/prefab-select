@@ -80,8 +80,30 @@ export function InstallerFilters({ options, current }: { options: Options; curre
         </label>
 
         <label>
+          <span className={labelCls}>Bij jou (plaats of postcode)</span>
+          <input
+            name="bij"
+            defaultValue={current.near ?? ""}
+            placeholder="bijv. Eindhoven of 5611"
+            className="h-10 w-full rounded-[var(--radius-md)] border border-neutral-200 px-3 text-sm"
+          />
+        </label>
+
+        <label>
+          <span className={labelCls}>Binnen straal</span>
+          <select name="straal" defaultValue={current.radiusKm ? String(current.radiusKm) : ""} className={selectCls}>
+            <option value="">Geen maximum</option>
+            <option value="10">10 km</option>
+            <option value="25">25 km</option>
+            <option value="50">50 km</option>
+            <option value="100">100 km</option>
+          </select>
+        </label>
+
+        <label>
           <span className={labelCls}>Sorteren</span>
           <select name="sort" defaultValue={current.sort ?? "rating"} className={selectCls}>
+            <option value="distance">Dichtstbij (vul ‘bij jou’ in)</option>
             <option value="rating">Beste beoordeling</option>
             <option value="reviews">Meeste reviews</option>
             <option value="city">Plaats (A–Z)</option>

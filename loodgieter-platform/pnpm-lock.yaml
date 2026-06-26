@@ -62,6 +62,9 @@ importers:
       '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@repo/maps':
+        specifier: workspace:*
+        version: link:../../packages/maps
       '@repo/seo':
         specifier: workspace:*
         version: link:../../packages/seo
@@ -228,6 +231,9 @@ importers:
       '@repo/config':
         specifier: workspace:*
         version: link:../config
+      '@types/node':
+        specifier: ^22.14.0
+        version: 22.20.0
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
