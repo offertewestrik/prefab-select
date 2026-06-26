@@ -13,6 +13,8 @@ export interface ReviewCard {
   companyName: string;
   companySlug: string | null; // alleen als publiek profiel zichtbaar
   createdAt: Date;
+  /** Goedgekeurde reactie van de installateur (anders null). */
+  reply: { body: string; companyName: string } | null;
 }
 
 export interface ReviewAggregate {
@@ -31,7 +33,10 @@ async function aggregate(where: Prisma.ReviewWhereInput): Promise<ReviewAggregat
       where: scoped,
       orderBy: { createdAt: "desc" },
       take: 6,
-      include: { company: { select: { name: true, slug: true, status: true, publicVisible: true } } },
+      include: {
+        company: { select: { name: true, slug: true, status: true, publicVisible: true } },
+        replyEntry: { select: { body: true, status: true } },
+      },
     }),
   ]);
 
@@ -56,6 +61,10 @@ async function aggregate(where: Prisma.ReviewWhereInput): Promise<ReviewAggregat
       companyName: r.company.name,
       companySlug: r.company.status === "APPROVED" && r.company.publicVisible ? r.company.slug : null,
       createdAt: r.createdAt,
+      reply:
+        r.replyEntry && r.replyEntry.status === "APPROVED"
+          ? { body: r.replyEntry.body, companyName: r.company.name }
+          : null,
     })),
   };
 }

@@ -158,7 +158,15 @@ export function getAllReviews(filter?: {
     },
     orderBy: [{ status: "asc" }, { createdAt: "desc" }],
     take: 200,
-    include: { company: true },
+    include: { company: true, replyEntry: { select: { id: true, status: true } } },
+  });
+}
+
+/** Eén review + reactie voor de admin-detailpagina. */
+export function getReviewForAdmin(id: string) {
+  return prisma.review.findUnique({
+    where: { id },
+    include: { company: true, replyEntry: true },
   });
 }
 

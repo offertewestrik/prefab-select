@@ -98,7 +98,12 @@ export async function getPublicProfile(slug: string) {
       coverage: { include: { municipality: true } },
       certifications: true,
       photos: { orderBy: { order: "asc" } },
-      reviews: { where: { status: "APPROVED" }, orderBy: { createdAt: "desc" }, take: 10 },
+      reviews: {
+        where: { status: "APPROVED" },
+        orderBy: { createdAt: "desc" },
+        take: 10,
+        include: { replyEntry: { select: { body: true, status: true } } },
+      },
     },
   });
   return company;

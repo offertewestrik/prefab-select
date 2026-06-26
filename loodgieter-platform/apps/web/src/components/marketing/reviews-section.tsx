@@ -60,6 +60,12 @@ export function ReviewsSection({ data, heading }: { data: ReviewAggregate; headi
                 r.companyName
               )}
             </div>
+            {r.reply && (
+              <div className="mt-3 rounded-[var(--radius-md)] border-l-2 border-primary-200 bg-neutral-50 p-3">
+                <div className="text-xs font-semibold text-neutral-700">Reactie van {r.reply.companyName}</div>
+                <p className="mt-1 line-clamp-4 text-sm text-neutral-600">{r.reply.body}</p>
+              </div>
+            )}
           </div>
         ))}
       </div>

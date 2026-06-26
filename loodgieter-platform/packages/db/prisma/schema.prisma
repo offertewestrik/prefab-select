@@ -260,6 +260,7 @@ model InstallerCompany {
   purchases      LeadPurchase[]
   appointments   Appointment[]
   reviews        Review[]
+  reviewReplies  ReviewReply[]
   creditTxns     CreditTransaction[]
   invoices       Invoice[]
   quotes         Quote[]
@@ -827,10 +828,28 @@ model Review {
   showName     Boolean          @default(true)
   status       ReviewStatus     @default(PENDING)
   source       ReviewSource     @default(PLATFORM)
-  reply        String?
   verified     Boolean          @default(false)
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
+  company      InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  replyEntry   ReviewReply?
+
+  @@index([companyId, status])
+}
+
+// Publieke reactie van de installateur op een review (apart modereerbaar).
+model ReviewReply {
+  id           String       @id @default(cuid())
+  reviewId     String       @unique
+  companyId    String
+  authorUserId String?
+  body         String       @db.Text
+  status       ReviewStatus @default(PENDING)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  approvedAt   DateTime?
+  rejectedAt   DateTime?
+  review       Review           @relation(fields: [reviewId], references: [id], onDelete: Cascade)
   company      InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   @@index([companyId, status])

@@ -78,11 +78,18 @@ export default async function AdminReviews({
                     {r.showName ? r.customerName : "Anoniem"}{r.cityName ? ` · ${r.cityName}` : ""}{r.serviceSlug ? ` · ${r.serviceSlug}` : ""} · {r.createdAt.toLocaleDateString("nl-NL")}
                   </div>
                 </div>
-                <div className="flex shrink-0 flex-wrap gap-1.5">
-                  {r.status !== "APPROVED" && <ModBtn action={approveReviewAction} id={r.id} label="Goedkeuren" />}
-                  {r.status !== "REJECTED" && <ModBtn action={rejectReviewAction} id={r.id} label="Afwijzen" />}
-                  {r.status === "APPROVED" && <ModBtn action={hideReviewAction} id={r.id} label="Verbergen" />}
-                  {r.status === "HIDDEN" && <ModBtn action={republishReviewAction} id={r.id} label="Opnieuw publiceren" />}
+                <div className="flex shrink-0 flex-col items-end gap-1.5">
+                  <div className="flex flex-wrap justify-end gap-1.5">
+                    {r.status !== "APPROVED" && <ModBtn action={approveReviewAction} id={r.id} label="Goedkeuren" />}
+                    {r.status !== "REJECTED" && <ModBtn action={rejectReviewAction} id={r.id} label="Afwijzen" />}
+                    {r.status === "APPROVED" && <ModBtn action={hideReviewAction} id={r.id} label="Verbergen" />}
+                    {r.status === "HIDDEN" && <ModBtn action={republishReviewAction} id={r.id} label="Opnieuw publiceren" />}
+                  </div>
+                  {r.replyEntry && (
+                    <a href={`/admin/reviews/${r.id}`} className="text-xs font-medium text-primary-600 hover:underline">
+                      Reactie ({r.replyEntry.status === "PENDING" ? "wacht op goedkeuring" : r.replyEntry.status.toLowerCase()}) →
+                    </a>
+                  )}
                 </div>
               </div>
             </li>

@@ -222,6 +222,12 @@ function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
                     {r.title && <div className="mt-1 font-medium text-neutral-900">{r.title}</div>}
                     <p className="mt-1 text-sm text-neutral-500">{r.body}</p>
                     <div className="mt-2 text-xs text-neutral-400">{r.showName ? r.customerName : "Anonieme klant"}{r.cityName ? ` · ${r.cityName}` : ""}</div>
+                    {r.replyEntry && r.replyEntry.status === "APPROVED" && (
+                      <div className="mt-3 rounded-[var(--radius-md)] border-l-2 border-primary-200 bg-neutral-50 p-3">
+                        <div className="text-xs font-semibold text-neutral-700">Reactie van {c.name}</div>
+                        <p className="mt-1 text-sm text-neutral-600">{r.replyEntry.body}</p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

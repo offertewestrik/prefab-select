@@ -1,8 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { requireRole, getSessionUser } from "@/lib/guards";
+import { requireRole, getSessionUser, getCurrentCompany } from "@/lib/guards";
 import { submitReviewByToken, submitReviewByAccount, moderateReview, type ReviewFormInput } from "./service";
+import {
+  upsertReply,
+  deleteOwnReply,
+  moderateReply,
+  adminEditReplyBody,
+  adminDeleteReply,
+} from "./replies";
 
 export type ReviewState = { ok?: boolean; message?: string };
 
@@ -60,3 +67,69 @@ export async function approveReviewAction(formData: FormData) { await moderate(f
 export async function rejectReviewAction(formData: FormData) { await moderate(formData, "REJECTED"); }
 export async function hideReviewAction(formData: FormData) { await moderate(formData, "HIDDEN"); }
 export async function republishReviewAction(formData: FormData) { await moderate(formData, "APPROVED"); }
+
+// ── Installateur: reageren op eigen reviews ──
+const REPLY_REASONS: Record<string, string> = {
+  invalid_body: "Schrijf een reactie van minimaal 5 tekens.",
+  too_long: "Reactie is te lang (max. 1500 tekens).",
+  forbidden: "Je kunt alleen reageren op reviews over je eigen bedrijf.",
+  not_found: "Review niet gevonden.",
+  locked: "Deze reactie is al beoordeeld en kan niet meer worden bewerkt.",
+};
+
+export async function saveReplyAction(_prev: ReviewState, formData: FormData): Promise<ReviewState> {
+  await requireRole("INSTALLER");
+  const company = await getCurrentCompany();
+  if (!company) return { ok: false, message: "Geen bedrijf gekoppeld." };
+  const user = await getSessionUser();
+
+  const reviewId = String(formData.get("reviewId") ?? "");
+  const body = String(formData.get("body") ?? "");
+  const result = await upsertReply(company.id, reviewId, (user as { id?: string } | null)?.id ?? null, body);
+  if (!result.ok) return { ok: false, message: REPLY_REASONS[result.reason] ?? "Er ging iets mis." };
+  revalidatePath(`/dashboard/reviews/${reviewId}`);
+  revalidatePath("/dashboard/reviews");
+  return { ok: true, message: "Reactie opgeslagen. Na goedkeuring is deze publiek zichtbaar." };
+}
+
+export async function deleteReplyAction(formData: FormData) {
+  await requireRole("INSTALLER");
+  const company = await getCurrentCompany();
+  if (!company) return;
+  const reviewId = String(formData.get("reviewId") ?? "");
+  await deleteOwnReply(company.id, reviewId);
+  revalidatePath(`/dashboard/reviews/${reviewId}`);
+  revalidatePath("/dashboard/reviews");
+}
+
+// ── Admin: reacties modereren ──
+async function moderateReplyForm(formData: FormData, status: "APPROVED" | "REJECTED" | "HIDDEN") {
+  await requireRole("ADMIN");
+  const id = String(formData.get("replyId") ?? "");
+  if (id) {
+    await moderateReply(id, status);
+    revalidatePath("/admin/reviews");
+  }
+}
+export async function approveReplyAction(formData: FormData) { await moderateReplyForm(formData, "APPROVED"); }
+export async function rejectReplyAction(formData: FormData) { await moderateReplyForm(formData, "REJECTED"); }
+export async function hideReplyAction(formData: FormData) { await moderateReplyForm(formData, "HIDDEN"); }
+
+export async function adminEditReplyAction(_prev: ReviewState, formData: FormData): Promise<ReviewState> {
+  await requireRole("ADMIN");
+  const id = String(formData.get("replyId") ?? "");
+  const body = String(formData.get("body") ?? "");
+  const result = await adminEditReplyBody(id, body);
+  if (!result.ok) return { ok: false, message: REPLY_REASONS[result.reason] ?? "Er ging iets mis." };
+  revalidatePath("/admin/reviews");
+  return { ok: true, message: "Reactie bijgewerkt." };
+}
+
+export async function adminDeleteReplyAction(formData: FormData) {
+  await requireRole("ADMIN");
+  const id = String(formData.get("replyId") ?? "");
+  if (id) {
+    await adminDeleteReply(id);
+    revalidatePath("/admin/reviews");
+  }
+}
