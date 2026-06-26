@@ -35,6 +35,43 @@ export interface ProcessResult {
   retrying: number;
 }
 
+export interface ReapResult {
+  reaped: number;
+  failed: number;
+}
+
+/**
+ * Herstelt vastgelopen jobs: RUNNING-jobs waarvan `lockedAt` ouder is dan
+ * `maxRunningMinutes` (worker gecrasht). attempts wordt NIET opnieuw verhoogd
+ * (de poging was al geteld bij het claimen). Jobs die hun maxAttempts al hebben
+ * bereikt gaan naar FAILED; de rest naar RETRYING zodat ze opnieuw worden opgepakt.
+ */
+export async function reapStaleJobs(maxRunningMinutes = 10, now: Date = new Date()): Promise<ReapResult> {
+  const cutoff = new Date(now.getTime() - maxRunningMinutes * 60 * 1000);
+  const stale = await prisma.job.findMany({
+    where: { status: "RUNNING", lockedAt: { lt: cutoff } },
+    select: { id: true, attempts: true, maxAttempts: true },
+  });
+
+  const res: ReapResult = { reaped: 0, failed: 0 };
+  for (const job of stale) {
+    if (job.attempts >= job.maxAttempts) {
+      const claim = await prisma.job.updateMany({
+        where: { id: job.id, status: "RUNNING" },
+        data: { status: "FAILED", error: "Vastgelopen (worker gecrasht); maxAttempts bereikt", lockedAt: null },
+      });
+      if (claim.count === 1) res.failed++;
+    } else {
+      const claim = await prisma.job.updateMany({
+        where: { id: job.id, status: "RUNNING" },
+        data: { status: "RETRYING", error: "Vastgelopen; opnieuw ingepland", lockedAt: null, runAt: now },
+      });
+      if (claim.count === 1) res.reaped++;
+    }
+  }
+  return res;
+}
+
 /**
  * Verwerkt tot `batchSize` jobs die klaarstaan. Elke job wordt atomair geclaimd
  * (status → RUNNING met guard) zodat gelijktijdige workers dezelfde job niet
@@ -72,11 +109,12 @@ export async function processJobs(batchSize = 10, now: Date = new Date()): Promi
       continue;
     }
 
+    const startedAt = Date.now();
     try {
       const result = await (handler as (p: unknown) => Promise<unknown>)(job.payload);
       await prisma.job.update({
         where: { id },
-        data: { status: "COMPLETED", result: (result ?? {}) as object, error: null, lockedAt: null },
+        data: { status: "COMPLETED", result: (result ?? {}) as object, error: null, lockedAt: null, durationMs: Date.now() - startedAt },
       });
       res.completed++;
     } catch (e) {

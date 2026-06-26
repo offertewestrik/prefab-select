@@ -972,6 +972,7 @@ model Job {
   lockedAt    DateTime?
   error       String?
   result      Json?
+  durationMs  Int?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 

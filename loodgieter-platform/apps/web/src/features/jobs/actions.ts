@@ -27,3 +27,12 @@ export async function cancelJobAction(formData: FormData): Promise<void> {
   });
   revalidatePath("/admin/jobs");
 }
+
+/** Admin: ruim voltooide jobs ouder dan X dagen op (default 7). */
+export async function clearCompletedJobsAction(formData: FormData): Promise<void> {
+  await requireRole("ADMIN");
+  const days = Math.min(365, Math.max(1, Number(formData.get("days")) || 7));
+  const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+  await prisma.job.deleteMany({ where: { status: "COMPLETED", updatedAt: { lt: cutoff } } });
+  revalidatePath("/admin/jobs");
+}
