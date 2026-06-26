@@ -11,3 +11,4 @@ export * from './types';
 export * from './brain';
 export * from './agents';
 export * from './runner';
+export * from './voice';
