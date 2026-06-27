@@ -1,12 +1,29 @@
 import Link from "next/link";
 import { PageHeading, EmptyState } from "@/components/dashboard/sidebar-layout";
-import { DETECTOR_LIST, getVisionProvider } from "@repo/photo-ai";
-import { listPhotoAnalyses, getPhotoAnalyzerStats } from "@/features/photo-ai/service";
+import { DETECTOR_LIST, DETECTOR_KEYS, getVisionProvider } from "@repo/photo-ai";
+import { listPhotoAnalyses, getPhotoAnalyzerStats, getProviderBreakdown } from "@/features/photo-ai/service";
+import { ReanalyzeButton } from "@/features/photo-ai/components/reanalyze-button";
+import { cleanupOrphansAction } from "@/features/photo-ai/actions";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminPhotoAnalyzer() {
-  const [analyses, stats] = await Promise.all([listPhotoAnalyses({ take: 50 }), getPhotoAnalyzerStats()]);
+type Status = "PENDING" | "COMPLETED" | "FAILED";
+
+export default async function AdminPhotoAnalyzer({
+  searchParams,
+}: {
+  searchParams: Promise<{ provider?: string; status?: string; detector?: string; fallback?: string }>;
+}) {
+  const sp = await searchParams;
+  const status = (["PENDING", "COMPLETED", "FAILED"].includes(sp.status ?? "") ? sp.status : undefined) as Status | undefined;
+  const detector = DETECTOR_KEYS.includes(sp.detector as never) ? sp.detector : undefined;
+  const fallbackOnly = sp.fallback === "1";
+
+  const [analyses, stats, breakdown] = await Promise.all([
+    listPhotoAnalyses({ take: 100, provider: sp.provider || undefined, status, detector, fallbackOnly }),
+    getPhotoAnalyzerStats(),
+    getProviderBreakdown(),
+  ]);
   const provider = getVisionProvider().name;
   const model = provider === "openai" ? process.env.OPENAI_VISION_MODEL ?? "gpt-4o-mini" : "mock";
 
@@ -24,13 +41,41 @@ export default async function AdminPhotoAnalyzer() {
         <Stat label="Gem. confidence" value={stats.avgConfidence != null ? `${stats.avgConfidence}%` : "—"} />
       </div>
 
-      <div className="mb-6 flex flex-wrap gap-2">
-        {DETECTOR_LIST.map((d) => (
-          <span key={d.key} className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-sm text-neutral-700" title={d.description}>
-            {d.label}
-          </span>
+      <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+        <span className="font-medium text-neutral-700">Per provider:</span>
+        {breakdown.length === 0 ? <span>—</span> : breakdown.map((b) => (
+          <span key={b.provider} className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs">{b.provider}: {b.count}</span>
         ))}
+        <form action={cleanupOrphansAction} className="ml-auto">
+          <button className="rounded-[var(--radius-md)] border border-neutral-200 px-3 py-1.5 text-xs font-medium text-neutral-700 hover:bg-neutral-50">
+            Orphan-uploads opruimen
+          </button>
+        </form>
       </div>
+
+      {/* Filters */}
+      <form className="mb-4 flex flex-wrap items-end gap-2 text-sm">
+        <select name="provider" defaultValue={sp.provider ?? ""} className="h-9 rounded-[var(--radius-md)] border border-neutral-200 px-2">
+          <option value="">Alle providers</option>
+          <option value="openai">openai</option>
+          <option value="mock">mock</option>
+          <option value="pending">pending</option>
+        </select>
+        <select name="status" defaultValue={sp.status ?? ""} className="h-9 rounded-[var(--radius-md)] border border-neutral-200 px-2">
+          <option value="">Alle statussen</option>
+          <option value="PENDING">PENDING</option>
+          <option value="COMPLETED">COMPLETED</option>
+          <option value="FAILED">FAILED</option>
+        </select>
+        <select name="detector" defaultValue={sp.detector ?? ""} className="h-9 rounded-[var(--radius-md)] border border-neutral-200 px-2">
+          <option value="">Alle detectors</option>
+          {DETECTOR_KEYS.map((k) => <option key={k} value={k}>{k}</option>)}
+        </select>
+        <label className="inline-flex items-center gap-1 text-xs text-neutral-600">
+          <input type="checkbox" name="fallback" value="1" defaultChecked={fallbackOnly} /> alleen fallback
+        </label>
+        <button className="h-9 rounded-[var(--radius-md)] bg-primary-500 px-3 font-medium text-white">Filter</button>
+      </form>
 
       {stats.recentErrors.length > 0 && (
         <div className="mb-6 rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-4">
@@ -57,6 +102,7 @@ export default async function AdminPhotoAnalyzer() {
                 <th className="p-3">Risico</th>
                 <th className="p-3">Objecten</th>
                 <th className="p-3">Datum</th>
+                <th className="p-3"></th>
               </tr>
             </thead>
             <tbody>
@@ -69,6 +115,7 @@ export default async function AdminPhotoAnalyzer() {
                   <td className="p-3">{a.riskLevel}</td>
                   <td className="p-3">{a._count.objects}</td>
                   <td className="p-3 text-neutral-500">{a.createdAt.toLocaleDateString("nl-NL")}</td>
+                  <td className="p-3 text-right">{a.leadId ? <ReanalyzeButton leadId={a.leadId} allowForce compact /> : null}</td>
                 </tr>
               ))}
             </tbody>

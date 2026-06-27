@@ -5,10 +5,25 @@ import {
   runDetector,
   filterSupportedImages,
   isSupportedImage,
+  MockVisionProvider,
+  OpenAiVisionProvider,
+  type VisionProvider,
   type DetectorKey,
   type VisionImage,
 } from "@repo/photo-ai";
 import { prisma } from "@/lib/prisma";
+
+export type ForceProvider = "mock" | "openai" | "default";
+
+/** Max. analyses per lead (anti-misbruik). */
+export const MAX_ANALYSES_PER_LEAD = 10;
+
+/** Kiest de provider; "default" volgt de env, "mock"/"openai" forceren. */
+function resolveProvider(force?: ForceProvider | null): VisionProvider {
+  if (force === "mock") return new MockVisionProvider();
+  if (force === "openai") return new OpenAiVisionProvider();
+  return getVisionProvider();
+}
 
 /** Bepaalt de detector op basis van de dienst-slug. */
 export function detectorForService(serviceSlug: string): DetectorKey {
@@ -57,12 +72,15 @@ export async function createPendingPhotoAnalysis(input: PendingAnalysisInput): P
  * (COMPLETED/FAILED). Idempotent: een al-afgeronde analyse wordt overgeslagen.
  * Logt via de bestaande AiInvocation (geen PII).
  */
-export async function runPhotoAnalysis(analysisId: string): Promise<{ ok: boolean; status: "COMPLETED" | "FAILED" | "SKIPPED" }> {
+export async function runPhotoAnalysis(
+  analysisId: string,
+  opts?: { forceProvider?: ForceProvider },
+): Promise<{ ok: boolean; status: "COMPLETED" | "FAILED" | "SKIPPED" }> {
   const analysis = await prisma.photoAnalysis.findUnique({ where: { id: analysisId }, include: { images: true } });
   if (!analysis) return { ok: false, status: "FAILED" };
   if (analysis.status !== "PENDING") return { ok: true, status: "SKIPPED" };
 
-  const provider = getVisionProvider();
+  const provider = resolveProvider(opts?.forceProvider);
   const detector = getDetector(analysis.detector);
   const visionImages: VisionImage[] = analysis.images.map((i) => ({ url: i.imageUrl, width: i.width ?? undefined, height: i.height ?? undefined }));
   const summaryLabel = `Foto-analyse: ${detector.key} (${analysis.images.length} afbeeldingen)`;
@@ -148,6 +166,39 @@ export async function analyzePhotos(input: PendingAnalysisInput): Promise<{ ok: 
   return { ok: r.ok, analysisId: id };
 }
 
+/**
+ * Heranalyse van een lead: maakt een nieuw PENDING-record met de bestaande
+ * foto's (uit de laatste analyse, anders uit de lead-bijlagen). Begrenst het
+ * aantal analyses per lead. Geeft de nieuwe analysisId terug (of een reden).
+ */
+export async function reanalyzeLead(
+  leadId: string,
+): Promise<{ ok: true; analysisId: string } | { ok: false; reason: string }> {
+  const count = await prisma.photoAnalysis.count({ where: { leadId } });
+  if (count >= MAX_ANALYSES_PER_LEAD) return { ok: false, reason: "limit_reached" };
+
+  const last = await prisma.photoAnalysis.findFirst({
+    where: { leadId },
+    orderBy: { createdAt: "desc" },
+    include: { images: true },
+  });
+  let imageUrls = last?.images.map((i) => i.imageUrl) ?? [];
+  if (imageUrls.length === 0) {
+    const attachments = await prisma.leadAttachment.findMany({ where: { leadId }, select: { url: true } });
+    imageUrls = attachments.map((a) => a.url);
+  }
+  if (filterSupportedImages(imageUrls).length === 0) return { ok: false, reason: "no_images" };
+
+  const lead = await prisma.leadRequest.findUnique({ where: { id: leadId }, include: { service: true } });
+  const detector = last
+    ? (last.detector as DetectorKey)
+    : detectorForService(lead?.service.slug ?? "general");
+
+  const analysisId = await createPendingPhotoAnalysis({ detector, imageUrls, leadId });
+  if (!analysisId) return { ok: false, reason: "no_images" };
+  return { ok: true, analysisId };
+}
+
 /** Eén analyse ophalen met objecten + afbeeldingen (ADMIN/INSTALLER). */
 export function getPhotoAnalysis(id: string) {
   return prisma.photoAnalysis.findUnique({ where: { id }, include: { objects: true, images: true } });
@@ -187,12 +238,31 @@ export async function getPhotoAnalyzerStats() {
   };
 }
 
-/** Recente analyses (ADMIN-overzicht / dashboard). */
-export function listPhotoAnalyses(opts?: { leadId?: string; take?: number }) {
+/** Recente analyses (ADMIN-overzicht / dashboard) met optionele filters. */
+export function listPhotoAnalyses(opts?: {
+  leadId?: string;
+  take?: number;
+  provider?: string;
+  status?: "PENDING" | "COMPLETED" | "FAILED";
+  detector?: string;
+  fallbackOnly?: boolean;
+}) {
   return prisma.photoAnalysis.findMany({
-    where: opts?.leadId ? { leadId: opts.leadId } : undefined,
+    where: {
+      ...(opts?.leadId ? { leadId: opts.leadId } : {}),
+      ...(opts?.provider ? { provider: opts.provider } : {}),
+      ...(opts?.status ? { status: opts.status } : {}),
+      ...(opts?.detector ? { detector: opts.detector } : {}),
+      ...(opts?.fallbackOnly ? { rawResponse: { path: ["fallback"], equals: true } } : {}),
+    },
     orderBy: { createdAt: "desc" },
     take: opts?.take ?? 50,
     include: { _count: { select: { objects: true, images: true } } },
   });
+}
+
+/** Aantallen per provider (admin-observability). */
+export async function getProviderBreakdown() {
+  const grouped = await prisma.photoAnalysis.groupBy({ by: ["provider"], _count: { _all: true } });
+  return grouped.map((g) => ({ provider: g.provider, count: g._count._all })).sort((a, b) => b.count - a.count);
 }

@@ -7,6 +7,7 @@ import { getSessionUser, getCurrentCompany } from "@/lib/guards";
 import Link from "next/link";
 import { getLeadView } from "@/features/leads/server/access";
 import { BuyLeadButton } from "@/features/leads/components/buy-lead-button";
+import { ReanalyzeButton } from "@/features/photo-ai/components/reanalyze-button";
 
 export default async function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -165,6 +166,9 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
                     )}
                   </div>
                 )}
+                <div className="mt-3 border-t border-neutral-100 pt-3">
+                  <ReanalyzeButton leadId={data.id} />
+                </div>
               </CardContent>
             </Card>
           )}

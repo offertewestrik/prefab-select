@@ -8,6 +8,7 @@ import { matchLead } from "@/features/leads/server/matching";
 import { expireQuotes } from "@/features/quotes/server/mutations";
 import { sendEmail, sendQuoteSent } from "@/features/notifications/email/send";
 import { runPhotoAnalysis } from "@/features/photo-ai/service";
+import { cleanupOrphanUploads } from "@/features/photo-ai/cleanup";
 
 type Handler<T extends JobType> = (payload: JobPayloads[T]) => Promise<unknown>;
 
@@ -48,7 +49,10 @@ export const HANDLERS: { [T in JobType]: Handler<T> } = {
   "quote.expire": async () => {
     return expireQuotes();
   },
-  "photo.analyze": async ({ analysisId }) => {
-    return runPhotoAnalysis(analysisId);
+  "photo.analyze": async ({ analysisId, forceProvider }) => {
+    return runPhotoAnalysis(analysisId, { forceProvider });
+  },
+  "photo.cleanup_orphans": async () => {
+    return cleanupOrphanUploads();
   },
 };

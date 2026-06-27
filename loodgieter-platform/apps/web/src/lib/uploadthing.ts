@@ -1,7 +1,11 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { getCurrentCompany } from "@/lib/guards";
+import { rateLimit } from "@/lib/ratelimit";
 import { setCompanyMedia, addPortfolioPhoto, addCertification } from "@/features/installers/server/profile";
+
+// Max. uploadverzoeken per IP per uur op de publieke klusfoto-route.
+const LEAD_UPLOAD_LIMIT = 20;
 
 const f = createUploadthing();
 
@@ -46,7 +50,16 @@ export const ourFileRouter = {
   // Type + grootte + aantal worden door UploadThing afgedwongen; de URL's worden
   // client-side verzameld en met de aanvraag meegestuurd.
   leadPhoto: f({ image: { maxFileSize: "8MB", maxFileCount: 8 } })
-    .middleware(async () => ({}))
+    .middleware(async ({ req }) => {
+      // Server-side rate limit per IP (anti-misbruik op de publieke route).
+      const ip =
+        req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+        req.headers.get("x-real-ip") ||
+        "unknown";
+      const rl = await rateLimit(`leadupload:${ip}`, LEAD_UPLOAD_LIMIT, 3600);
+      if (!rl.ok) throw new UploadThingError("Te veel uploads. Probeer het later opnieuw.");
+      return {};
+    })
     .onUploadComplete(async ({ file }) => {
       return { url: file.ufsUrl };
     }),

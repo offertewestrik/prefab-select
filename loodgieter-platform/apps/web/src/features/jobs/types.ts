@@ -8,7 +8,8 @@ export type JobType =
   | "ai.daily_report"
   | "email.send"
   | "quote.expire"
-  | "photo.analyze";
+  | "photo.analyze"
+  | "photo.cleanup_orphans";
 
 export interface JobPayloads {
   "lead.enrich_ai": { leadId: string };
@@ -19,7 +20,8 @@ export interface JobPayloads {
   "email.send": { to: string; subject: string; html: string };
   "quote.expire": Record<string, never>;
   /** analysisId is de idempotente sleutel; detector/leadId puur informatief. */
-  "photo.analyze": { analysisId: string; detector?: string; leadId?: string; createdBy?: string };
+  "photo.analyze": { analysisId: string; detector?: string; leadId?: string; createdBy?: string; forceProvider?: "mock" | "openai" | "default" };
+  "photo.cleanup_orphans": Record<string, never>;
 }
 
 export const JOB_TYPES: JobType[] = [
@@ -31,4 +33,5 @@ export const JOB_TYPES: JobType[] = [
   "email.send",
   "quote.expire",
   "photo.analyze",
+  "photo.cleanup_orphans",
 ];
