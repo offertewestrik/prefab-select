@@ -158,6 +158,60 @@ export async function runPhotoAnalysis(
   }
 }
 
+export interface LiveTestResult {
+  ok: boolean;
+  error?: string;
+  providerUsed?: string;
+  fallbackReason?: string | null;
+  confidence?: number;
+  summary?: string;
+  riskLevel?: string;
+  objects?: { type: string; label: string; confidence: number }[];
+}
+
+/**
+ * Live-test (admin): draait de geconfigureerde of geforceerde provider op één
+ * image-URL zónder een PhotoAnalysis op te slaan. Logt wél een AiInvocation
+ * (zonder PII) zodat de test zichtbaar is in de observability.
+ */
+export async function liveTestDetector(input: {
+  imageUrl: string;
+  detector: DetectorKey;
+  force?: ForceProvider;
+}): Promise<LiveTestResult> {
+  if (!isSupportedImage(input.imageUrl)) return { ok: false, error: "unsupported_image" };
+
+  const provider = resolveProvider(input.force);
+  const detector = getDetector(input.detector);
+  const start = Date.now();
+  try {
+    const result = await runDetector(detector, { images: [{ url: input.imageUrl }], provider, context: {} });
+    const latencyMs = Date.now() - start;
+    await prisma.aiInvocation.create({
+      data: {
+        agent: "photo-analyzer",
+        provider: result.providerUsed,
+        model: result.providerUsed === "openai" ? process.env.OPENAI_VISION_MODEL ?? "gpt-4o-mini" : "mock",
+        status: "OK",
+        inputSummary: `Live-test: ${detector.key}`,
+        outputJson: { confidence: result.confidence, riskLevel: result.riskLevel, fallback: result.fallback?.reason ?? null } as object,
+        latencyMs,
+      },
+    });
+    return {
+      ok: true,
+      providerUsed: result.providerUsed,
+      fallbackReason: result.fallback?.reason ?? null,
+      confidence: result.confidence,
+      summary: result.summary,
+      riskLevel: result.riskLevel,
+      objects: result.objects.map((o) => ({ type: o.type, label: o.label, confidence: o.confidence })),
+    };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message.slice(0, 200) : "error" };
+  }
+}
+
 /** Directe one-shot (PENDING aanmaken + meteen draaien). Handig voor tests/handmatig. */
 export async function analyzePhotos(input: PendingAnalysisInput): Promise<{ ok: boolean; analysisId?: string; error?: string }> {
   const id = await createPendingPhotoAnalysis(input);

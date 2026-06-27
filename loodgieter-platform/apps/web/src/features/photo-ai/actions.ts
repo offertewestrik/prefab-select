@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { getSessionUser, requireRole } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 import { enqueue } from "@/features/jobs/queue";
-import { reanalyzeLead, type ForceProvider } from "./service";
+import { reanalyzeLead, liveTestDetector, type ForceProvider, type LiveTestResult } from "./service";
+import { DETECTOR_KEYS, type DetectorKey } from "@repo/photo-ai";
 
 /**
  * Mag deze gebruiker een heranalyse starten voor de lead?
@@ -61,4 +62,23 @@ export async function cleanupOrphansAction(): Promise<void> {
   await requireRole("ADMIN");
   await enqueue("photo.cleanup_orphans", {});
   revalidatePath("/admin/ai/photo-analyzer");
+}
+
+export type LiveTestState = { result?: LiveTestResult; error?: string };
+
+/** Admin: live-test van de Photo Analyzer op één image-URL. */
+export async function liveTestAction(_prev: LiveTestState, formData: FormData): Promise<LiveTestState> {
+  await requireRole("ADMIN");
+  const imageUrl = String(formData.get("imageUrl") ?? "").trim();
+  if (!imageUrl || !/^https?:\/\//.test(imageUrl)) return { error: "Vul een geldige https image-URL in." };
+
+  const detectorRaw = String(formData.get("detector") ?? "general");
+  const detector = (DETECTOR_KEYS.includes(detectorRaw as DetectorKey) ? detectorRaw : "general") as DetectorKey;
+
+  const forceRaw = String(formData.get("force") ?? "default");
+  const force = (["default", "mock", "openai"].includes(forceRaw) ? forceRaw : "default") as ForceProvider;
+
+  const result = await liveTestDetector({ imageUrl, detector, force });
+  if (!result.ok) return { error: result.error === "unsupported_image" ? "Niet-ondersteund bestandstype (jpg/png/webp/heic)." : "Analyse mislukt." };
+  return { result };
 }

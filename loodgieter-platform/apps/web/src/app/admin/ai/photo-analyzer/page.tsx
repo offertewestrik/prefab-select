@@ -29,7 +29,10 @@ export default async function AdminPhotoAnalyzer({
 
   return (
     <div>
-      <Link href="/admin/ai" className="text-sm text-neutral-500 hover:text-neutral-900">← AI Command Center</Link>
+      <div className="flex items-center justify-between">
+        <Link href="/admin/ai" className="text-sm text-neutral-500 hover:text-neutral-900">← AI Command Center</Link>
+        <Link href="/admin/ai/photo-analyzer/live-test" className="text-sm font-medium text-primary-600 hover:underline">Live-test →</Link>
+      </div>
       <PageHeading title="Photo Analyzer" subtitle={`Provider: ${provider} · model: ${model} · ${DETECTOR_LIST.length} detectors`} />
 
       <div className="mb-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
