@@ -6,6 +6,10 @@ import { Button } from "@repo/ui";
 import { JsonLd } from "@/components/json-ld";
 import { ServiceCard } from "@/components/marketing/service-card";
 import { LeadCta } from "@/components/marketing/lead-cta";
+import { TrustBar } from "@/components/marketing/trust/trust-bar";
+import { UspGrid } from "@/components/marketing/trust/usp-grid";
+import { StatsBand } from "@/components/marketing/trust/stats-band";
+import { CertificationWall } from "@/components/marketing/trust/certification-wall";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 
 export const revalidate = 3600;
@@ -66,6 +70,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Vertrouwensbalk */}
+      <TrustBar />
+
       {/* Populaire diensten */}
       {popular.length > 0 && (
         <section className="mx-auto max-w-(--container-max) px-6 py-16">
@@ -77,6 +84,9 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* USP's */}
+      <UspGrid />
 
       {/* Hoe het werkt */}
       <section id="hoe-het-werkt" className="bg-white">
@@ -99,7 +109,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-(--container-max) px-6 pb-8">
+      {/* Statistieken */}
+      <StatsBand />
+
+      {/* Keurmerken */}
+      <CertificationWall />
+
+      <div className="mx-auto max-w-(--container-max) px-6 py-8">
         <LeadCta />
       </div>
     </main>

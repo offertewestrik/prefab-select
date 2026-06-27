@@ -7,6 +7,7 @@ import { urls, breadcrumbLd, serviceLd, faqLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { ServiceCard } from "@/components/marketing/service-card";
 import { LeadCta } from "@/components/marketing/lead-cta";
+import { BrandWall } from "@/components/marketing/trust/brand-wall";
 import { priceRange } from "@/lib/format";
 import { getServiceBySlug, getAllServiceSlugs } from "@/features/catalog/server/queries";
 import { getTopCities } from "@/features/geo/server/queries";
@@ -100,21 +101,14 @@ export default async function ServicePage({
             <p className="text-neutral-700">{service.longDescription}</p>
           </article>
 
-          {service.brands.length > 0 && (
-            <div className="mt-8">
-              <h2 className="text-lg font-semibold text-neutral-900">Merken</h2>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {service.brands.map((b) => (
-                  <span
-                    key={b.brand.id}
-                    className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-sm text-neutral-700"
-                  >
-                    {b.brand.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
+          <div className="mt-8">
+            <BrandWall
+              variant="compact"
+              category={service.category.slug}
+              title={`A-merken voor ${service.name.toLowerCase()}`}
+              subtitle="Onze vakmannen werken uitsluitend met onderdelen van gerenommeerde fabrikanten."
+            />
+          </div>
 
           {service.faqs.length > 0 && (
             <div className="mt-10">
