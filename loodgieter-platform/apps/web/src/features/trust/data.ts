@@ -24,6 +24,7 @@ export type Keurmerk = Omit<TrustLogo, "categories"> & {
 const VERWARMING = ["cv-en-verwarming", "warmtepompen", "warm-water"];
 const SANITAIR = ["badkamer-en-sanitair", "leidingwerk"];
 const DAK = ["dak-en-zink"];
+const DUURZAAM = ["duurzaam-en-elektra"];
 
 /** Erkende A-merken waar aangesloten vakmannen mee werken. */
 export const A_MERKEN: TrustLogo[] = [
@@ -61,6 +62,10 @@ export const A_MERKEN: TrustLogo[] = [
   { name: "Bauder", file: "bauder.png", categories: DAK },
   { name: "RheinZink", file: "rheinzink.png", categories: DAK },
   { name: "Rockwool", file: "rockwool.png", categories: DAK },
+  // Zonne-energie & opslag
+  { name: "SolarEdge", file: "solaredge.png", categories: DUURZAAM },
+  { name: "Enphase", file: "enphase.png", categories: DUURZAAM },
+  { name: "Growatt", file: "growatt.png", categories: DUURZAAM },
 ];
 
 /** A-merken die bij een bepaalde dienstcategorie horen. */
