@@ -74,4 +74,8 @@ export interface DetectorResult {
   riskLevel: RiskLevel;
   maintenanceScore?: number | null;
   raw?: unknown;
+  /** Welke provider de analyse uiteindelijk leverde (kan "mock" zijn bij fallback). */
+  providerUsed: string;
+  /** Gevuld wanneer er naar de MockProvider is teruggevallen. */
+  fallback?: { reason: string } | null;
 }

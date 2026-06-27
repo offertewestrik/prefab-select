@@ -30,3 +30,22 @@ export class ProviderNotConfiguredError extends Error {
     this.name = "ProviderNotConfiguredError";
   }
 }
+
+/** Reden waarom een provider faalde — gebruikt voor de fallback-tracking (geen PII). */
+export type FallbackReason = "no_key" | "timeout" | "invalid_json" | "rate_limit" | "provider_error";
+
+export class VisionProviderError extends Error {
+  readonly reason: FallbackReason;
+  constructor(reason: FallbackReason, message?: string) {
+    super(message ?? reason);
+    this.name = "VisionProviderError";
+    this.reason = reason;
+  }
+}
+
+/** Classificeert een willekeurige fout naar een FallbackReason (zonder PII). */
+export function classifyError(e: unknown): FallbackReason {
+  if (e instanceof VisionProviderError) return e.reason;
+  if (e instanceof Error && e.name === "AbortError") return "timeout";
+  return "provider_error";
+}

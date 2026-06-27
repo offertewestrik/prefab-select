@@ -42,6 +42,7 @@ export interface LeadViewData {
   // Foto-analyse (technisch) — alleen wanneer unlocked (gekocht of admin):
   photoAnalysis?: {
     status: string;
+    provider: string;
     confidence: number;
     summary: string | null;
     riskLevel: string;
@@ -154,6 +155,7 @@ export async function getLeadView(
         photoAnalysis: analysis
           ? {
               status: analysis.status,
+              provider: analysis.provider,
               confidence: analysis.confidence,
               summary: analysis.summary,
               riskLevel: analysis.riskLevel,

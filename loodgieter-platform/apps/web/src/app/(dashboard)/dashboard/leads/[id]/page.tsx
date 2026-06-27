@@ -138,7 +138,7 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
                   <h2 className="font-semibold text-neutral-900">AI foto-analyse</h2>
                   <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">
                     {data.photoAnalysis.status}
-                    {data.photoAnalysis.status === "COMPLETED" && ` · ${Math.round(data.photoAnalysis.confidence * 100)}%`}
+                    {data.photoAnalysis.status === "COMPLETED" && ` · ${data.photoAnalysis.provider === "openai" ? "OpenAI" : "Mock"} · ${Math.round(data.photoAnalysis.confidence * 100)}%`}
                   </span>
                 </div>
                 {data.photoAnalysis.status === "PENDING" ? (

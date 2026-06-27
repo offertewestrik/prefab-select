@@ -3,7 +3,13 @@
 
 export * from "./types";
 export * from "./utils";
-export { type VisionProvider, ProviderNotConfiguredError } from "./providers/provider";
+export {
+  type VisionProvider,
+  ProviderNotConfiguredError,
+  VisionProviderError,
+  classifyError,
+  type FallbackReason,
+} from "./providers/provider";
 export { MockVisionProvider } from "./providers/mock";
 export { OpenAiVisionProvider } from "./providers/openai";
 export { GeminiVisionProvider } from "./providers/gemini";

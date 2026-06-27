@@ -77,7 +77,7 @@ export async function runPhotoAnalysis(analysisId: string): Promise<{ ok: boolea
       prisma.photoAnalysis.update({
         where: { id: analysisId },
         data: {
-          provider: provider.name,
+          provider: result.providerUsed,
           status: "COMPLETED",
           confidence: result.confidence,
           summary: result.summary,
@@ -103,11 +103,16 @@ export async function runPhotoAnalysis(analysisId: string): Promise<{ ok: boolea
     await prisma.aiInvocation.create({
       data: {
         agent: "photo-analyzer",
-        provider: provider.name,
-        model: "vision",
+        provider: result.providerUsed,
+        model: result.providerUsed === "openai" ? process.env.OPENAI_VISION_MODEL ?? "gpt-4o-mini" : "mock",
         status: "OK",
         inputSummary: summaryLabel,
-        outputJson: { detector: result.detector, confidence: result.confidence, riskLevel: result.riskLevel } as object,
+        outputJson: {
+          detector: result.detector,
+          confidence: result.confidence,
+          riskLevel: result.riskLevel,
+          fallback: result.fallback?.reason ?? null,
+        } as object,
         latencyMs,
         leadId: analysis.leadId ?? null,
         userId: analysis.createdBy ?? null,
@@ -155,6 +160,31 @@ export function getLeadPhotoAnalysis(leadId: string) {
     orderBy: { createdAt: "desc" },
     include: { objects: true, images: true },
   });
+}
+
+/** Observability voor het admin photo-analyzer-dashboard. */
+export async function getPhotoAnalyzerStats() {
+  const [grouped, confAgg, fallbackCount, recentErrors] = await Promise.all([
+    prisma.photoAnalysis.groupBy({ by: ["status"], _count: { _all: true } }),
+    prisma.photoAnalysis.aggregate({ where: { status: "COMPLETED" }, _avg: { confidence: true } }),
+    prisma.photoAnalysis.count({ where: { rawResponse: { path: ["fallback"], equals: true } } }),
+    prisma.aiInvocation.findMany({
+      where: { agent: "photo-analyzer", status: "ERROR" },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      select: { errorMessage: true, createdAt: true, provider: true },
+    }),
+  ]);
+  const map = new Map(grouped.map((g) => [g.status, g._count._all]));
+  return {
+    total: grouped.reduce((s, g) => s + g._count._all, 0),
+    completed: map.get("COMPLETED") ?? 0,
+    failed: map.get("FAILED") ?? 0,
+    pending: map.get("PENDING") ?? 0,
+    fallbackCount,
+    avgConfidence: confAgg._avg.confidence != null ? Math.round(confAgg._avg.confidence * 100) : null,
+    recentErrors,
+  };
 }
 
 /** Recente analyses (ADMIN-overzicht / dashboard). */
