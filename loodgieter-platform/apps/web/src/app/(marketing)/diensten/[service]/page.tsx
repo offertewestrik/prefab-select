@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ServiceCard } from "@/components/marketing/service-card";
 import { LeadCta } from "@/components/marketing/lead-cta";
 import { BrandWall } from "@/components/marketing/trust/brand-wall";
+import { CertificationWall } from "@/components/marketing/trust/certification-wall";
 import { priceRange } from "@/lib/format";
 import { getServiceBySlug, getAllServiceSlugs } from "@/features/catalog/server/queries";
 import { getTopCities } from "@/features/geo/server/queries";
@@ -101,12 +102,18 @@ export default async function ServicePage({
             <p className="text-neutral-700">{service.longDescription}</p>
           </article>
 
-          <div className="mt-8">
+          <div className="mt-8 space-y-6">
             <BrandWall
               variant="compact"
               category={service.category.slug}
               title={`A-merken voor ${service.name.toLowerCase()}`}
               subtitle="Onze vakmannen werken uitsluitend met onderdelen van gerenommeerde fabrikanten."
+            />
+            <CertificationWall
+              variant="compact"
+              category={service.category.slug}
+              title="Keurmerken & erkenningen"
+              subtitle="Vakmannen voor deze klus zijn aangesloten bij erkende dakkeurmerken."
             />
           </div>
 

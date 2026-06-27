@@ -68,7 +68,7 @@ export function brandsForCategory(categorySlug: string): TrustLogo[] {
   return A_MERKEN.filter((m) => m.categories.includes(categorySlug));
 }
 
-/** Keurmerken en erkenningen waaraan aangesloten vakmannen voldoen. */
+/** Algemene keurmerken en erkenningen waaraan aangesloten vakmannen voldoen. */
 export const KEURMERKEN: Keurmerk[] = [
   { name: "InstallQ", file: "installq.png", desc: "Erkenningsregeling voor installatiebedrijven" },
   { name: "Kiwa", file: "kiwa.png", desc: "Onafhankelijke certificering en keuring" },
@@ -82,6 +82,26 @@ export const KEURMERKEN: Keurmerk[] = [
   { name: "SBB", file: "sbb.png", desc: "Erkend leerbedrijf" },
   { name: "Kwaliteitsvakman", file: "kwaliteitsvakman.png", desc: "Onafhankelijk vakmanschapskeurmerk" },
 ];
+
+/** Keurmerken specifiek voor dakwerk (categorie dak-en-zink). */
+export const DAK_KEURMERKEN: Keurmerk[] = [
+  { name: "Dakmerk", file: "dak/dakmerk.png", desc: "Erkend kwaliteitskeurmerk voor dakdekkers" },
+  { name: "Techniek Nederland", file: "dak/techniek_nederland.png", desc: "Brancheorganisatie installatie- en dakbedrijven" },
+  { name: "KOMO SKG-IKOB", file: "dak/komo_skg_ikob.png", desc: "Productcertificering voor de bouw" },
+  { name: "Kiwa KVO", file: "dak/kvo.png", desc: "Keurmerk Veilig Ondernemen" },
+  { name: "ISO 9001", file: "dak/iso9001.png", desc: "Gecertificeerd kwaliteitsmanagement" },
+  { name: "VCA", file: "dak/vca.png", desc: "Veiligheid, Gezondheid en Milieu" },
+  { name: "SBB", file: "dak/sbb.png", desc: "Erkend leerbedrijf" },
+];
+
+/**
+ * Categorie-specifieke keurmerken (bv. dakwerk). Geeft een lege lijst terug
+ * als er geen aparte set is — algemene keurmerken staan op home/Trust Center.
+ */
+export function keurmerkenForCategory(categorySlug: string): Keurmerk[] {
+  if (categorySlug === "dak-en-zink") return DAK_KEURMERKEN;
+  return [];
+}
 
 /** Kerncijfers voor de statistiekenband. */
 export const TRUST_STATS: { value: string; label: string }[] = [

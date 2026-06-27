@@ -1,16 +1,54 @@
 import Image from "next/image";
-import { KEURMERKEN } from "@/features/trust/data";
+import { KEURMERKEN, keurmerkenForCategory, type Keurmerk } from "@/features/trust/data";
 
-/** Wand met keurmerken en erkenningen, met korte uitleg per keurmerk. */
+/**
+ * Wand met keurmerken en erkenningen, met korte uitleg per keurmerk.
+ * - Zonder `category`: algemene keurmerken (home / Trust Center).
+ * - Met `category`: categorie-specifieke keurmerken (bv. dakwerk). Rendert
+ *   niets als die categorie geen aparte set heeft.
+ * - `variant="compact"` voor een strakkere variant op dienstpagina's.
+ */
 export function CertificationWall({
   title = "Gecertificeerde vakmannen",
   subtitle = "Onze loodgieters voldoen aan de hoogste kwaliteitseisen en zijn aangesloten bij erkende keurmerken.",
+  category,
+  variant = "full",
   withDescriptions = true,
 }: {
   title?: string;
   subtitle?: string;
+  category?: string;
+  variant?: "full" | "compact";
   withDescriptions?: boolean;
 }) {
+  const keurmerken: Keurmerk[] = category ? keurmerkenForCategory(category) : KEURMERKEN;
+  if (keurmerken.length === 0) return null;
+
+  if (variant === "compact") {
+    return (
+      <div className="rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-6">
+        <h3 className="font-semibold text-neutral-900">{title}</h3>
+        <p className="mt-1 text-sm text-neutral-500">{subtitle}</p>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {keurmerken.map((k) => (
+            <div
+              key={k.file}
+              className="flex h-16 items-center justify-center rounded-[var(--radius-md)] border border-neutral-200 bg-white px-3"
+            >
+              <Image
+                src={`/keurmerken/${k.file}`}
+                alt={`${k.name} keurmerk`}
+                width={420}
+                height={180}
+                className="h-10 w-auto max-w-[120px] object-contain"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-(--container-max) px-6 py-16">
@@ -19,7 +57,7 @@ export function CertificationWall({
           <p className="mt-2 text-neutral-500">{subtitle}</p>
         </div>
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {KEURMERKEN.map((k) => (
+          {keurmerken.map((k) => (
             <div
               key={k.file}
               className="flex flex-col items-center rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-5 text-center"
@@ -28,7 +66,7 @@ export function CertificationWall({
                 <Image
                   src={`/keurmerken/${k.file}`}
                   alt={`${k.name} keurmerk`}
-                  width={320}
+                  width={420}
                   height={180}
                   className="h-14 w-auto max-w-[140px] object-contain"
                 />
