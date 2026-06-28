@@ -1,22 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { brand, regionsSentence } from "@repo/core";
-import { urls } from "@repo/seo";
+import { regionsSentence } from "@repo/core";
+import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
+import { JsonLd } from "@/components/json-ld";
+import { buildMetadata } from "@/features/seo/metadata";
 import { getCitiesByProvince } from "@/features/geo/server/queries";
 import { C, HEAD, BODY, PAGE_BG, CONTAINER, IcPin, IcArrow } from "@/components/marketing/ds";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Steden & regio's",
-  description: `${brand.name} werkt met gecertificeerde vakmannen in ${regionsSentence()}. Vind een loodgieter of installateur in jouw gemeente.`,
-  alternates: { canonical: "/steden" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Loodgieter of installateur in jouw gemeente",
+    description: `Kies je gemeente en vergelijk gecertificeerde loodgieters en installateurs in ${regionsSentence()}. Vraag gratis en vrijblijvend offertes aan in jouw regio.`,
+    path: urls.cities(),
+  });
+}
 
 export default async function CitiesPage() {
   const provinces = await getCitiesByProvince();
 
   const totalCities = provinces.reduce((acc, p) => acc + p.municipalities.length, 0);
+
+  const cityList = provinces.flatMap((p) =>
+    p.municipalities.map((m) => ({ name: m.name, path: urls.city(m.slug) })),
+  );
 
   const css = `
     .lph-steden *{box-sizing:border-box}
@@ -32,6 +40,16 @@ export default async function CitiesPage() {
       style={{ background: PAGE_BG, fontFamily: BODY, color: C.body, minHeight: "100vh" }}
     >
       <style dangerouslySetInnerHTML={{ __html: css }} />
+
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Steden", path: urls.cities() },
+          ]),
+          itemListLd(cityList),
+        ]}
+      />
 
       {/* Hero */}
       <section style={{ maxWidth: CONTAINER, margin: "0 auto", padding: "0 28px" }}>
@@ -136,6 +154,8 @@ export default async function CitiesPage() {
                     key={m.id}
                     href={urls.city(m.slug)}
                     className="lph-chip"
+                    title={`Loodgieter en installateur in ${m.name} (${p.name})`}
+                    aria-label={`Loodgieter en installateur in ${m.name}`}
                     style={{
                       fontSize: 13,
                       fontWeight: 600,

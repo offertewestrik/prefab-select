@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { brand } from "@repo/core";
-import { urls } from "@repo/seo";
+import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
+import { JsonLd } from "@/components/json-ld";
 import { C, HEAD, BODY, PAGE_BG, CONTAINER, euro, IcArrow, IcCategory } from "@/components/marketing/ds";
 import { BrandWall } from "@/components/marketing/trust/brand-wall";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 
 export const revalidate = 3600;
 
+const metaTitle = "Alle installatie- & loodgietersdiensten";
+const metaDescription = `Bekijk alle installatie- en loodgietersdiensten van ${brand.name}: van CV-ketel en warmtepomp tot lekkage en ontstopping. Vraag gratis offertes aan.`;
+
 export const metadata: Metadata = {
-  title: "Alle diensten",
-  description: `Bekijk alle installatie- en loodgietersdiensten van ${brand.name}: van CV-ketel en warmtepomp tot lekkage, badkamer en ontstopping.`,
-  alternates: { canonical: "/diensten" },
+  title: metaTitle,
+  description: metaDescription,
+  alternates: { canonical: urls.services() },
+  openGraph: { title: metaTitle, description: metaDescription, url: urls.services() },
 };
 
 const css = `
@@ -28,12 +33,25 @@ export default async function ServicesPage() {
 
   const serviceCount = categories.reduce((n, c) => n + c.services.length, 0);
 
+  const allServices = categories.flatMap((c) =>
+    c.services.map((s) => ({ name: s.name, path: urls.service(s.slug) })),
+  );
+
   return (
     <main
       className="lph-diensten"
       style={{ background: PAGE_BG, fontFamily: BODY, color: C.body, minHeight: "100vh" }}
     >
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Home", path: urls.home() },
+            { name: "Diensten", path: urls.services() },
+          ]),
+          ...(allServices.length ? [itemListLd(allServices)] : []),
+        ]}
+      />
 
       {/* Hero header */}
       <div style={{ maxWidth: CONTAINER, margin: "0 auto", padding: "64px 28px 8px" }}>

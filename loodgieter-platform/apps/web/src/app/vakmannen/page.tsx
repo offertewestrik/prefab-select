@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { brand, regionsSentence } from "@repo/core";
+import { regionsSentence } from "@repo/core";
 import { urls, breadcrumbLd, itemListLd, localBusinessLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { InstallerDirectory } from "@/components/marketing/installer-directory";
@@ -15,7 +15,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: `Vakmannen vergelijken — loodgieters & installateurs`,
-    description: `Vergelijk gecertificeerde loodgieters en installateurs in ${regionsSentence()}. Filter op dienst, plaats, beoordeling en spoedservice. Vraag gratis offertes aan via ${brand.name}.`,
+    description: `Vergelijk gecertificeerde loodgieters en installateurs in ${regionsSentence()}. Filter op dienst, plaats, beoordeling en spoedservice en vraag direct gratis offertes aan.`,
     path: urls.installers(),
   });
 }

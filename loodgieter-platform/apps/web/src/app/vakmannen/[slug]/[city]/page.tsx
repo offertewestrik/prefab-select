@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { brand } from "@repo/core";
 import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { InstallerDirectory } from "@/components/marketing/installer-directory";
@@ -40,7 +39,7 @@ export async function generateMetadata({
   if (!data) return { robots: { index: false, follow: false } };
   return buildMetadata({
     title: `${data.service.name} in ${data.city.name} — vakmannen vergelijken`,
-    description: `Vergelijk vakmannen voor ${data.service.name.toLowerCase()} in ${data.city.name}. Beoordelingen, keurmerken en gratis offertes via ${brand.name}.`,
+    description: `Vergelijk gecertificeerde vakmannen voor ${data.service.name.toLowerCase()} in ${data.city.name} (${data.city.province.name}) op beoordeling en keurmerk en vraag gratis offertes aan.`,
     path: urls.installersByServiceCity(slug, city),
   });
 }

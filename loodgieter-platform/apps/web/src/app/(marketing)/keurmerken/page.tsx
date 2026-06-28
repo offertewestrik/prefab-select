@@ -1,22 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { brand, regionsSentence } from "@repo/core";
+import { siteUrl, breadcrumbLd } from "@repo/seo";
 import { Button } from "@repo/ui";
+import { JsonLd } from "@/components/json-ld";
 import { UspGrid } from "@/components/marketing/trust/usp-grid";
 import { StatsBand } from "@/components/marketing/trust/stats-band";
 import { BrandWall } from "@/components/marketing/trust/brand-wall";
 import { CertificationWall } from "@/components/marketing/trust/certification-wall";
 import { LeadCta } from "@/components/marketing/lead-cta";
 
+const title = "Keurmerken & A-merken — gecertificeerde vakmannen";
+const description = `Erkende keurmerken (InstallQ, Kiwa, KOMO, VCA, STEK), A-merken en garanties bij ${brand.name}. Vergelijk gecertificeerde loodgieters in ${regionsSentence()}.`;
+
 export const metadata: Metadata = {
-  title: "Keurmerken & A-merken — waarom kiezen voor ons",
-  description: `Het Trust Center van ${brand.name}: erkende keurmerken (InstallQ, Kiwa, KOMO, VCA, STEK), A-merken en garanties. Vergelijk gecertificeerde loodgieters in ${regionsSentence()}.`,
+  title,
+  description,
   alternates: { canonical: "/keurmerken" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl("/keurmerken"),
+    type: "website",
+    locale: "nl_NL",
+  },
 };
 
 export default function TrustCenterPage() {
   return (
     <main>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Keurmerken & A-merken", path: "/keurmerken" },
+        ])}
+      />
       {/* Hero */}
       <section className="border-b border-neutral-200 bg-gradient-to-b from-primary-50/60 to-white">
         <div className="mx-auto max-w-(--container-max) px-6 py-16">
@@ -35,7 +53,7 @@ export default function TrustCenterPage() {
                 <Button size="lg" variant="accent">Vraag gratis offertes aan</Button>
               </Link>
               <Link href="/vakmannen">
-                <Button size="lg" variant="outline">Bekijk vakmannen</Button>
+                <Button size="lg" variant="outline">Bekijk gecertificeerde vakmannen</Button>
               </Link>
             </div>
           </div>

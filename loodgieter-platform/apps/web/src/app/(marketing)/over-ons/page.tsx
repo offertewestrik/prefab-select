@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import { brand, regionsSentence } from "@repo/core";
+import { siteUrl } from "@repo/seo";
+
+const title = "Over ons — gecertificeerde loodgieters vinden";
+const description = `${brand.name} koppelt huiseigenaren aan gecertificeerde loodgieters en installateurs in ${regionsSentence()}. Vrijblijvend offertes vergelijken.`;
 
 export const metadata: Metadata = {
-  title: "Over ons",
-  description: `Over ${brand.name}: het platform dat huiseigenaren koppelt aan gecertificeerde loodgieters en installateurs in ${regionsSentence()}.`,
+  title,
+  description,
   alternates: { canonical: "/over-ons" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl("/over-ons"),
+    type: "website",
+    locale: "nl_NL",
+  },
 };
 
 export default function AboutPage() {

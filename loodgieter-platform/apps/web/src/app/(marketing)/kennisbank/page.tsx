@@ -1,14 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { brand } from "@repo/core";
+import { urls, siteUrl, breadcrumbLd, itemListLd } from "@repo/seo";
+import { JsonLd } from "@/components/json-ld";
 import { getArticles, getArticleCategories } from "@/features/content/server/queries";
 
 export const revalidate = 3600;
 
+const title = "Kennisbank — advies over CV, warmtepomp & lekkage";
+const description = `Praktische artikelen en advies over CV-ketels, warmtepompen, badkamers, lekkages en meer — van de experts van ${brand.name}.`;
+
 export const metadata: Metadata = {
-  title: "Kennisbank",
-  description: `Praktische artikelen en advies over CV, warmtepompen, badkamers, lekkages en meer — van de experts van ${brand.name}.`,
+  title,
+  description,
   alternates: { canonical: "/kennisbank" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl("/kennisbank"),
+    type: "website",
+    locale: "nl_NL",
+  },
 };
 
 export default async function KnowledgeBasePage() {
@@ -16,6 +28,22 @@ export default async function KnowledgeBasePage() {
 
   return (
     <main className="mx-auto max-w-(--container-max) px-6 py-16">
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Kennisbank", path: "/kennisbank" },
+          ]),
+          itemListLd(
+            articles
+              .filter((a) => a.category)
+              .map((a) => ({
+                name: a.title,
+                path: urls.article(a.category!.slug, a.slug),
+              })),
+          ),
+        ]}
+      />
       <h1 className="text-4xl font-bold tracking-tight text-neutral-900">Kennisbank</h1>
       <p className="mt-3 max-w-2xl text-neutral-500">
         Praktische artikelen en advies over installatie- en loodgieterswerk.
@@ -27,6 +55,7 @@ export default async function KnowledgeBasePage() {
             <Link
               key={c.id}
               href={`/kennisbank/${c.slug}`}
+              aria-label={`Artikelen over ${c.name}`}
               className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-sm text-neutral-700 hover:border-primary-500"
             >
               {c.name}

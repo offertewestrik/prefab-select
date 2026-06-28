@@ -6,8 +6,23 @@ import { HouseExplorer } from "@/components/marketing/home/house-explorer";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 import { searchInstallers, type InstallerCardData } from "@/features/installers/server/directory";
 import { getInstallerCountByProvince } from "@/features/geo/server/queries";
+import type { Metadata } from "next";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: { absolute: "Loodgieterplatform.nl — Vergelijk gratis offertes van vakmannen" },
+  description:
+    "Het grootste installatieplatform van Nederland. Vergelijk gratis offertes van gecertificeerde loodgieters en installateurs uit jouw regio. 100% vrijblijvend, binnen 2 minuten geregeld.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Loodgieterplatform.nl — Vergelijk gratis offertes van vakmannen",
+    description:
+      "Vergelijk gratis offertes van gecertificeerde loodgieters en installateurs uit jouw regio. 100% gratis en vrijblijvend.",
+    url: "/",
+    type: "website",
+  },
+};
 
 // ── Design tokens (Nederlands Loodgieterplatform Design System) ──
 const HEAD = "var(--font-sora), 'Sora', sans-serif";

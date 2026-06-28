@@ -1,14 +1,26 @@
 import type { Metadata } from "next";
 import { brand } from "@repo/core";
+import { siteUrl, breadcrumbLd } from "@repo/seo";
 import { prisma } from "@/lib/prisma";
+import { JsonLd } from "@/components/json-ld";
 import { LeadCta } from "@/components/marketing/lead-cta";
 
 export const revalidate = 3600;
 
+const title = "Reviews — ervaringen met onze vakmannen";
+const description = `Lees echte ervaringen van klanten van ${brand.name}. Beoordelingen van gecertificeerde loodgieters en installateurs die via ons platform een klus uitvoerden.`;
+
 export const metadata: Metadata = {
-  title: "Reviews",
-  description: `Lees ervaringen van klanten van ${brand.name}. Beoordelingen van gecertificeerde loodgieters en installateurs.`,
+  title,
+  description,
   alternates: { canonical: "/reviews" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl("/reviews"),
+    type: "website",
+    locale: "nl_NL",
+  },
 };
 
 export default async function ReviewsPage() {
@@ -18,6 +30,12 @@ export default async function ReviewsPage() {
 
   return (
     <main className="mx-auto max-w-(--container-max) px-6 py-16">
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Reviews", path: "/reviews" },
+        ])}
+      />
       <h1 className="text-4xl font-bold tracking-tight text-neutral-900">Wat klanten zeggen</h1>
       <p className="mt-3 max-w-2xl text-neutral-500">
         Echte ervaringen van klanten die via {brand.name} een vakman vonden.

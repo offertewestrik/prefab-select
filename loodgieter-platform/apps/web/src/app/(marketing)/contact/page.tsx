@@ -2,12 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
 import { brand } from "@repo/core";
+import { siteUrl } from "@repo/seo";
 import { Button } from "@repo/ui";
 
+const title = "Contact — vragen of offerte aanvragen";
+const description = `Neem contact op met ${brand.name}. Bel ${brand.phone}, mail ons of vraag direct gratis en vrijblijvend offertes aan bij vakmannen uit je regio.`;
+
 export const metadata: Metadata = {
-  title: "Contact",
-  description: `Neem contact op met ${brand.name}. Bel ${brand.phone} of stuur een e-mail.`,
+  title,
+  description,
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl("/contact"),
+    type: "website",
+    locale: "nl_NL",
+  },
 };
 
 export default function ContactPage() {

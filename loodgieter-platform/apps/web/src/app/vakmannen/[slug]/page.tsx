@@ -59,8 +59,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = await getPublicProfile(slug);
   if (c) {
     return buildMetadata({
-      title: `${c.name} — installateur & loodgieter`,
-      description: c.shortDescription ?? `${c.name} via ${brand.name}. Vraag vrijblijvend een offerte aan.`,
+      title: c.city ? `${c.name} — loodgieter in ${c.city}` : `${c.name} — loodgieter & installateur`,
+      description:
+        c.shortDescription ??
+        `Bekijk beoordelingen, diensten en het werkgebied van ${c.name}${c.city ? ` in ${c.city}` : ""}. Vraag vrijblijvend een gratis offerte aan.`,
       path: urls.installer(slug),
       ogImageUrl: c.logoUrl ?? undefined,
     });
@@ -167,9 +169,9 @@ function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
         ]}
       />
 
-      {c.coverImageUrl && <img src={c.coverImageUrl} alt="" className="mb-6 h-48 w-full rounded-[var(--radius-2xl)] object-cover" />}
+      {c.coverImageUrl && <img src={c.coverImageUrl} alt={`${c.name} — loodgieter en installateur${c.city ? ` in ${c.city}` : ""}`} className="mb-6 h-48 w-full rounded-[var(--radius-2xl)] object-cover" />}
       <div className="flex flex-wrap items-center gap-4">
-        {c.logoUrl ? <img src={c.logoUrl} alt={c.name} className="h-20 w-20 rounded-[var(--radius-lg)] object-cover" /> : <div className="grid h-20 w-20 place-items-center rounded-[var(--radius-lg)] bg-primary-50 text-primary-600"><Wrench className="h-8 w-8" /></div>}
+        {c.logoUrl ? <img src={c.logoUrl} alt={`Logo van ${c.name}`} className="h-20 w-20 rounded-[var(--radius-lg)] object-cover" /> : <div className="grid h-20 w-20 place-items-center rounded-[var(--radius-lg)] bg-primary-50 text-primary-600"><Wrench className="h-8 w-8" /></div>}
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-neutral-900">{c.name}</h1>
           <div className="mt-1 flex items-center gap-3 text-sm text-neutral-500">
@@ -207,7 +209,7 @@ function ProfileView({ slug, c }: { slug: string; c: PublicProfile }) {
             <section>
               <h2 className="text-xl font-bold text-neutral-900">Portfolio</h2>
               <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {c.photos.map((ph) => <img key={ph.id} src={ph.url} alt={ph.caption ?? ""} className="h-36 w-full rounded-[var(--radius-md)] object-cover" />)}
+                {c.photos.map((ph, i) => <img key={ph.id} src={ph.url} alt={ph.caption ?? `Werk van ${c.name} — foto ${i + 1}`} className="h-36 w-full rounded-[var(--radius-md)] object-cover" />)}
               </div>
             </section>
           )}

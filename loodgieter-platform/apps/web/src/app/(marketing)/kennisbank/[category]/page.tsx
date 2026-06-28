@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
 import { prisma } from "@/lib/prisma";
+import { JsonLd } from "@/components/json-ld";
 import { buildMetadata } from "@/features/seo/metadata";
 import { getArticles } from "@/features/content/server/queries";
 
@@ -36,6 +38,18 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <main className="mx-auto max-w-(--container-max) px-6 py-16">
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Kennisbank", path: "/kennisbank" },
+            { name: cat.name, path: `/kennisbank/${category}` },
+          ]),
+          itemListLd(
+            articles.map((a) => ({ name: a.title, path: urls.article(category, a.slug) })),
+          ),
+        ]}
+      />
       <nav className="text-sm text-neutral-500">
         <Link href="/kennisbank" className="hover:text-neutral-900">Kennisbank</Link>
         <span className="mx-2">/</span>

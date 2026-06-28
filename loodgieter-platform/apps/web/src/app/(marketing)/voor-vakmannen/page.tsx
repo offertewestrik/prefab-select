@@ -2,12 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { brand, regionsSentence } from "@repo/core";
+import { siteUrl, breadcrumbLd } from "@repo/seo";
 import { Button } from "@repo/ui";
+import { JsonLd } from "@/components/json-ld";
+
+const title = "Voor vakmannen — exclusieve leads in jouw regio";
+const description = `Word partner van ${brand.name} en ontvang exclusieve leads in jouw werkgebied. Geen abonnement, betaal per lead en bepaal zelf je diensten en regio.`;
 
 export const metadata: Metadata = {
-  title: "Voor vakmannen",
-  description: `Word partner van ${brand.name} en ontvang exclusieve leads in jouw werkgebied. Geen abonnementsverplichting, betaal per lead.`,
+  title,
+  description,
   alternates: { canonical: "/voor-vakmannen" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl("/voor-vakmannen"),
+    type: "website",
+    locale: "nl_NL",
+  },
 };
 
 const benefits = [
@@ -21,6 +33,12 @@ const benefits = [
 export default function ForProfessionalsPage() {
   return (
     <main>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Voor vakmannen", path: "/voor-vakmannen" },
+        ])}
+      />
       <section className="border-b border-neutral-200 bg-navy-800 py-20 text-white">
         <div className="mx-auto max-w-(--container-max) px-6">
           <h1 className="max-w-3xl text-4xl font-bold leading-tight">

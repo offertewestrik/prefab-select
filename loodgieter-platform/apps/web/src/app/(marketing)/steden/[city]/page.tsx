@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MapPin } from "lucide-react";
-import { brand } from "@repo/core";
-import { urls, breadcrumbLd } from "@repo/seo";
+import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { ServiceCard } from "@/components/marketing/service-card";
 import { LeadCta } from "@/components/marketing/lead-cta";
@@ -31,7 +30,7 @@ export async function generateMetadata({
   if (!city) return {};
   return buildMetadata({
     title: `Loodgieter & installateur in ${city.name}`,
-    description: `Op zoek naar een loodgieter of installateur in ${city.name}? Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}.`,
+    description: `Zoek je een loodgieter of installateur in ${city.name} (${city.province.name})? Vergelijk gecertificeerde vakmannen uit de regio en vraag gratis offertes aan.`,
     path: urls.city(slug),
   });
 }
@@ -47,14 +46,24 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     getReviewsForCity(city.name),
   ]);
 
+  const serviceList = categories.flatMap((cat) =>
+    cat.services.map((s) => ({
+      name: `${s.name} in ${city.name}`,
+      path: urls.serviceCity(s.slug, city.slug),
+    })),
+  );
+
   return (
     <main>
       <JsonLd
-        data={breadcrumbLd([
-          { name: "Home", path: "/" },
-          { name: "Steden", path: "/steden" },
-          { name: city.name, path: urls.city(slug) },
-        ])}
+        data={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Steden", path: urls.cities() },
+            { name: city.name, path: urls.city(slug) },
+          ]),
+          ...(serviceList.length > 0 ? [itemListLd(serviceList)] : []),
+        ]}
       />
 
       <section className="border-b border-neutral-200 bg-gradient-to-b from-primary-50/60 to-white">
@@ -93,7 +102,11 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
             {nearby.map((c) => (
               <li key={c.slug}>
-                <Link href={urls.city(c.slug)} className="text-primary-600 hover:underline">
+                <Link
+                  href={urls.city(c.slug)}
+                  className="text-primary-600 hover:underline"
+                  title={`Loodgieter en installateur in ${c.name}`}
+                >
                   {c.name}
                 </Link>
               </li>

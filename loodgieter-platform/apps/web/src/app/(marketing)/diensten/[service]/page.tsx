@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { brand } from "@repo/core";
+import { brand, regionsSentence } from "@repo/core";
 import { urls, breadcrumbLd, serviceLd, faqLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { getServiceBySlug, getAllServiceSlugs } from "@/features/catalog/server/queries";
@@ -25,10 +25,10 @@ export async function generateMetadata({
   const { service: slug } = await params;
   const service = await getServiceBySlug(slug);
   if (!service) return {};
-  const title = service.seoTitle ?? `${service.name} — vergelijk vakmannen`;
+  const title = service.seoTitle ?? `${service.name} — vergelijk vakmannen & prijzen`;
   const description =
     service.metaDescription ??
-    `${service.name}: ${service.shortDescription} Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}.`;
+    `${service.name}: ${service.shortDescription} Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}. Vraag nu vrijblijvend aan.`;
   return {
     title,
     description,
@@ -179,6 +179,7 @@ export default async function ServicePage({
             name: service.name,
             description: service.shortDescription,
             path: urls.service(slug),
+            areaServed: regionsSentence(),
             priceFrom: service.priceFrom,
             rating: reviews.count > 0 ? { value: reviews.average, count: reviews.count } : undefined,
             reviews: reviews.latest.map((r) => ({ author: r.authorLabel, rating: r.rating, title: r.title, body: r.body })),
