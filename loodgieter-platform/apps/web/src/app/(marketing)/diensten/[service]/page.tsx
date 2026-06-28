@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { brand, regionsSentence } from "@repo/core";
 import { urls, breadcrumbLd, serviceLd, faqLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
+import { priceFromFor } from "@/lib/format";
 import { getServiceBySlug, getAllServiceSlugs } from "@/features/catalog/server/queries";
 import { getTopCities } from "@/features/geo/server/queries";
 import { getReviewsForService } from "@/features/reviews/server/aggregation";
@@ -74,8 +75,8 @@ const euro = (n: number) => "€" + n.toLocaleString("nl-NL");
 // Redactionele FAQ-sets voor de belangrijkste dienst-categorieën (AEO/SEO).
 const CURATED_FAQS: Record<string, { question: string; answer: string }[]> = {
   cv: [
-    { question: "Wat kost een nieuwe CV-ketel in 2026?", answer: "Een nieuwe CV-ketel kost in 2026 gemiddeld €1.250 tot €2.800 inclusief btw en montage. De prijs hangt af van het vermogen, het merk (zoals Intergas, Remeha, Nefit, Vaillant of ATAG), het type (combi of solo) en de complexiteit van de aansluiting. Vergelijk offertes voor een prijs op maat." },
-    { question: "Wat kost het vervangen van een CV-ketel?", answer: "Het vervangen van een CV-ketel kost doorgaans €1.250 tot €2.500 inclusief installatie en het milieuverantwoord afvoeren van de oude ketel. De exacte prijs hangt af van het model en of de bestaande aansluitingen geschikt zijn. Vraag vrijblijvend meerdere offertes aan om te vergelijken." },
+    { question: "Wat kost een nieuwe CV-ketel in 2026?", answer: "Een nieuwe CV-ketel kost in 2026 gemiddeld €1.850 tot €2.800 inclusief btw en montage. De prijs hangt af van het vermogen, het merk (zoals Intergas, Remeha, Nefit, Vaillant of ATAG), het type (combi of solo) en de complexiteit van de aansluiting. Vergelijk offertes voor een prijs op maat." },
+    { question: "Wat kost het vervangen van een CV-ketel?", answer: "Het vervangen van een CV-ketel kost doorgaans €1.850 tot €2.800 inclusief installatie en het milieuverantwoord afvoeren van de oude ketel. De exacte prijs hangt af van het model en of de bestaande aansluitingen geschikt zijn. Vraag vrijblijvend meerdere offertes aan om te vergelijken." },
     { question: "Hoe lang gaat een CV-ketel mee?", answer: "Een CV-ketel gaat gemiddeld 12 tot 15 jaar mee bij goed jaarlijks onderhoud. Neemt het rendement af, ontstaan er storingen of stijgt je gasverbruik, dan is vervanging vaak voordeliger dan blijven repareren. Een installateur adviseert op basis van leeftijd en staat van je ketel." },
     { question: "Hoe lang duurt het plaatsen van een nieuwe CV-ketel?", answer: "Het plaatsen van een nieuwe CV-ketel duurt meestal een halve tot een hele werkdag wanneer de bestaande aansluitingen geschikt zijn. Is er extra leidingwerk of een nieuwe rookgasafvoer nodig, dan kan het langer duren. De vakman zorgt voor montage, inbedrijfstelling en uitleg." },
     { question: "Hoeveel garantie krijg ik op een CV-ketel?", answer: "Op een nieuwe CV-ketel krijg je doorgaans 2 tot 5 jaar fabrieksgarantie, afhankelijk van merk en of je een onderhoudscontract afsluit. Daarnaast geldt garantie op de installatie zelf. Controleer altijd de garantievoorwaarden in de offerte van de installateur." },
@@ -228,10 +229,11 @@ export default async function ServicePage({
   const specialists = installers.items.slice(0, 3);
 
   const rating = reviews.count > 0 ? reviews.average.toFixed(1).replace(".", ",") : "9,4";
-  const fromPrice = service.priceFrom != null ? euro(service.priceFrom) : null;
+  const effFrom = priceFromFor(slug, service.priceFrom);
+  const fromPrice = effFrom != null ? euro(effFrom) : null;
   const priceSpan =
-    service.priceFrom != null && service.priceTo != null
-      ? `${euro(service.priceFrom)} – ${euro(service.priceTo)}`
+    effFrom != null && service.priceTo != null && service.priceTo > effFrom
+      ? `${euro(effFrom)} – ${euro(service.priceTo)}`
       : fromPrice
         ? `vanaf ${fromPrice}`
         : "Op aanvraag";

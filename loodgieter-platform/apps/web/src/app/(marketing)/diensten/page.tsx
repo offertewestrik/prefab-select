@@ -5,6 +5,7 @@ import { brand } from "@repo/core";
 import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { C, HEAD, BODY, PAGE_BG, CONTAINER, euro, IcArrow, IcCategory } from "@/components/marketing/ds";
+import { priceFromFor } from "@/lib/format";
 import { BrandWall } from "@/components/marketing/trust/brand-wall";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 
@@ -143,7 +144,8 @@ export default async function ServicesPage() {
                 style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 18 }}
               >
                 {cat.services.map((s) => {
-                  const from = s.priceFrom != null ? `vanaf ${euro(s.priceFrom)}` : "Op aanvraag";
+                  const eff = priceFromFor(s.slug, s.priceFrom);
+                  const from = eff != null ? `vanaf ${euro(eff)}` : "Op aanvraag";
                   return (
                     <Link
                       key={s.slug}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { urls } from "@repo/seo";
-import { priceRange } from "@/lib/format";
+import { priceRange, priceFromFor } from "@/lib/format";
 
 /** Kiest een passende (gecommitte) categoriefoto op basis van dienstnaam/slug. */
 function photoForService(slug: string, name: string): string {
@@ -50,7 +50,7 @@ export function ServiceCard({
         <p className="mt-1 line-clamp-2 text-sm text-neutral-500">{service.shortDescription}</p>
         <div className="mt-4 flex items-center justify-between">
           <span className="text-sm font-medium text-primary-700">
-            {priceRange(service.priceFrom, service.priceTo, service.priceUnit)}
+            {priceRange(priceFromFor(service.slug, service.priceFrom), service.priceTo, service.priceUnit)}
           </span>
           <ArrowRight className="h-4 w-4 text-neutral-500 transition-transform group-hover:translate-x-0.5" />
         </div>
