@@ -1,0 +1,31 @@
+# Loodgieterplatform.nl
+
+> Loodgieterplatform.nl is het Nederlandse marktplatform dat particulieren en bedrijven koppelt aan geverifieerde, lokale loodgieters en installateurs. Bezoekers vergelijken vakmannen per dienst en stad, lezen onafhankelijke informatie in de kennisbank en vragen vrijblijvend offertes aan. Vakmannen ontvangen gerichte aanvragen uit hun eigen werkgebied.
+
+## Diensten
+- [Diensten](https://loodgieterplatform.nl/diensten): Overzicht van alle loodgieters- en installatiediensten (o.a. lekkage, ontstopping, cv-ketel, sanitair, riolering).
+
+## Vakmannen
+- [Vakmannen](https://loodgieterplatform.nl/vakmannen): Geverifieerde loodgieters en installateurs, te filteren op dienst en stad.
+
+## Steden
+- [Steden](https://loodgieterplatform.nl/steden): Loodgieters per gemeente en stad in Nederland.
+
+## Kennisbank
+- [Kennisbank](https://loodgieterplatform.nl/kennisbank): Onafhankelijke artikelen, uitleg en kostenindicaties over loodgieterswerk en installatietechniek.
+
+## Merken
+- [Merken](https://loodgieterplatform.nl/merken): Informatie over installatiemerken (cv-ketels, sanitair, kranen) en bijbehorende vakmannen.
+
+## Keurmerken
+- [Keurmerken](https://loodgieterplatform.nl/keurmerken): Uitleg over erkenningen en keurmerken waarmee de kwaliteit van vakmannen wordt geborgd.
+
+## Voor vakmannen
+- [Voor vakmannen](https://loodgieterplatform.nl/voor-vakmannen): Voor installateurs die zich willen aansluiten en aanvragen uit hun werkgebied willen ontvangen.
+
+## Over en contact
+- [Over ons](https://loodgieterplatform.nl/over-ons): Wie we zijn, hoe het platform werkt en hoe vakmannen worden geverifieerd.
+- [Contact](https://loodgieterplatform.nl/contact): Contactmogelijkheden voor bezoekers en vakmannen.
+
+## Optional
+- [Sitemap](https://loodgieterplatform.nl/sitemap.xml): Volledige sitemap-index met alle publieke pagina's (diensten, steden, vakmannen, kennisbank, dienst×stad-combinaties).
