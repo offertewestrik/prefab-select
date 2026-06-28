@@ -33,14 +33,14 @@ export function CertificationWall({
           {keurmerken.map((k) => (
             <div
               key={k.file}
-              className="flex h-16 items-center justify-center rounded-[var(--radius-md)] border border-neutral-200 bg-white px-3"
+              className="flex h-24 items-center justify-center rounded-[var(--radius-md)] border border-neutral-200 bg-white px-4"
             >
               <Image
                 src={`/keurmerken/${k.file}`}
                 alt={`${k.name} keurmerk`}
                 width={420}
                 height={180}
-                className="h-10 w-auto max-w-[120px] object-contain"
+                className="h-16 w-auto max-w-[160px] object-contain"
               />
             </div>
           ))}
@@ -62,13 +62,13 @@ export function CertificationWall({
               key={k.file}
               className="flex flex-col items-center rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-5 text-center"
             >
-              <div className="flex h-16 items-center justify-center">
+              <div className="flex h-24 items-center justify-center">
                 <Image
                   src={`/keurmerken/${k.file}`}
                   alt={`${k.name} keurmerk`}
                   width={420}
                   height={180}
-                  className="h-14 w-auto max-w-[140px] object-contain"
+                  className="h-20 w-auto max-w-[180px] object-contain"
                 />
               </div>
               {withDescriptions && (

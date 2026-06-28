@@ -56,7 +56,15 @@ const MONO = [
   { bg: "#E9F7EF", fg: "#16A34A" },
 ];
 
-const FALLBACK_BRANDS = ["Remeha", "Nefit", "Vaillant", "Intergas", "Daikin", "ATAG", "Bosch"];
+const MERK_LOGOS = [
+  { file: "intergas.png", name: "Intergas" },
+  { file: "remeha.png", name: "Remeha" },
+  { file: "nefit.png", name: "Nefit" },
+  { file: "vaillant.png", name: "Vaillant" },
+  { file: "atag.png", name: "ATAG" },
+  { file: "bosch.png", name: "Bosch" },
+  { file: "awb.png", name: "AWB" },
+];
 
 type PopularService = {
   slug: string;
@@ -424,7 +432,10 @@ export default async function HomePage() {
       .lph-home [data-steparrow]{display:none !important}
       .lph-home [data-reviews]{grid-template-columns:1fr !important}
       .lph-home [data-statgrid]{grid-template-columns:1fr 1fr !important}
-      .lph-home [data-merken]{gap:14px 24px !important}
+      .lph-home [data-merken]{gap:18px 28px !important}
+      .lph-home .lph-merk{filter:grayscale(1);opacity:.62;transition:filter .25s ease, opacity .25s ease}
+      .lph-home .lph-merk:hover{filter:none;opacity:1}
+      @media (max-width:520px){ .lph-home .lph-merk{height:34px !important} }
     }
     @media (max-width:520px){
       .lph-home [data-svcgrid]{grid-template-columns:1fr !important}
@@ -580,10 +591,10 @@ export default async function HomePage() {
           </div>
 
           {/* Merken-row */}
-          <div data-merken style={{ marginTop: 34, display: "flex", alignItems: "center", justifyContent: "center", gap: "14px 44px", flexWrap: "wrap", padding: 22, borderTop: `1px solid ${C.line2}`, borderBottom: `1px solid ${C.line2}` }}>
-            <span style={{ fontSize: 12.5, fontWeight: 700, color: C.muted4, letterSpacing: ".04em", textTransform: "uppercase", marginRight: 8 }}>Wij installeren o.a.</span>
-            {FALLBACK_BRANDS.map((b) => (
-              <span key={b} style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 18, color: "#AEB9CC" }}>{b}</span>
+          <div data-merken style={{ marginTop: 34, display: "flex", alignItems: "center", justifyContent: "center", gap: "20px 40px", flexWrap: "wrap", padding: "28px 22px", borderTop: `1px solid ${C.line2}`, borderBottom: `1px solid ${C.line2}` }}>
+            <span style={{ fontSize: 12.5, fontWeight: 700, color: C.muted4, letterSpacing: ".04em", textTransform: "uppercase", marginRight: 4 }}>Wij installeren o.a.</span>
+            {MERK_LOGOS.map((m) => (
+              <Image key={m.file} src={`/merken/${m.file}`} alt={`${m.name} logo`} width={320} height={160} className="lph-merk" style={{ height: 44, width: "auto", objectFit: "contain" }} />
             ))}
           </div>
         </div>
