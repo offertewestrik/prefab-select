@@ -69,6 +69,9 @@ async function aggregate(where: Prisma.ReviewWhereInput): Promise<ReviewAggregat
   };
 }
 
+/** Globale, goedgekeurde reviews (nieuwste eerst) — voor de homepage-sectie. */
+export const getLatestReviews = () => aggregate({});
+
 export const getReviewsForService = (serviceSlug: string) => aggregate({ serviceSlug });
 export const getReviewsForCity = (cityName: string) => aggregate({ cityName });
 export const getReviewsForServiceCity = (serviceSlug: string, cityName: string) =>
