@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   La Vigor design tokens — warm, premium, modern café.
+   Espresso brown · dark chocolate · cream · warm beige · soft caramel.
+---------------------------------------------------------------------------- */
+@theme {
+  --color-cream: #faf3e8;
+  --color-cream-soft: #f3e7d6;
+  --color-beige: #e8d6bf;
+  --color-sand: #d8bfa0;
+  --color-caramel: #c98a4b;
+  --color-caramel-bright: #e0a45e;
+  --color-coffee: #6f4a32;
+  --color-espresso: #3b2417;
+  --color-choco: #271810;
+  --color-choco-deep: #1b110b;
+  --color-ink: #20140d;
+
+  --font-display: var(--font-display), "Georgia", serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+
+  --shadow-warm: 0 24px 60px -30px rgba(59, 36, 23, 0.55);
+  --shadow-glow: 0 0 60px -15px rgba(224, 164, 94, 0.55);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  overflow-x: hidden;
+}
+
+/* Account for the fixed header when jumping to in-page anchors. */
+section[id],
+div[id].scroll-anchor {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Light glass — cards on cream backgrounds */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(243, 231, 214, 0.5) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-warm);
+}
+
+/* Dark glass — cards on espresso/chocolate sections */
+.glass-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(224, 164, 94, 0.05) 100%
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(224, 164, 94, 0.18);
+}
+
+/* Caramel gradient text */
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-caramel-bright),
+    var(--color-caramel) 60%,
+    var(--color-coffee)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle grain/warmth overlay helper */
+.warm-radial {
+  background:
+    radial-gradient(
+      ellipse at 20% 0%,
+      rgba(224, 164, 94, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 90% 20%,
+      rgba(201, 138, 75, 0.14),
+      transparent 50%
+    );
+}
+
+/* Hide scrollbar on horizontal category nav while keeping it scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Respect reduced-motion preferences for all framer-motion content */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,9 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La Vigor">
+  <g transform="translate(4,8)">
+    <path d="M4 6h22a6 6 0 0 1 0 12h-2v2a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8V6z" fill="#3b2417"/>
+    <path d="M24 9h2a3 3 0 0 1 0 6h-2V9z" fill="#c98a4b"/>
+    <path d="M10 0c0 2-2 2-2 4M16 0c0 2-2 2-2 4M22 0c0 2-2 2-2 4" stroke="#c98a4b" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <text x="46" y="32" font-family="Georgia, serif" font-size="22" font-weight="800" fill="#3b2417">La Vigor</text>
+  <circle cx="151" cy="30" r="3" fill="#c98a4b"/>
+</svg>
