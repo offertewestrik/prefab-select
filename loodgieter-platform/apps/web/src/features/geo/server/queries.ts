@@ -67,6 +67,31 @@ export async function getNearbyCities(
     .slice(0, limit);
 }
 
+/**
+ * Aantal publiek-zichtbare, goedgekeurde vakmannen met dekking per provincie.
+ * Read-only — voedt de dekkingskaart op de homepage. Wijzigt niets aan logica.
+ */
+export async function getInstallerCountByProvince(): Promise<
+  { slug: string; name: string; count: number }[]
+> {
+  const provinces = await prisma.province.findMany({
+    select: { id: true, slug: true, name: true },
+    orderBy: { name: "asc" },
+  });
+  const counts = await Promise.all(
+    provinces.map((p) =>
+      prisma.installerCompany.count({
+        where: {
+          status: "APPROVED",
+          publicVisible: true,
+          coverage: { some: { municipality: { provinceId: p.id } } },
+        },
+      }),
+    ),
+  );
+  return provinces.map((p, i) => ({ slug: p.slug, name: p.name, count: counts[i] ?? 0 }));
+}
+
 /** Aantal actieve vakmannen dat een dienst in een gemeente aanbiedt. */
 export async function countInstallersFor(serviceId: string, municipalityId: string) {
   return prisma.installerCompany.count({

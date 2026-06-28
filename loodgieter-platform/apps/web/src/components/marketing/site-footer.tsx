@@ -1,10 +1,37 @@
 import Link from "next/link";
-import { brand, regionsSentence } from "@repo/core";
+import { brand } from "@repo/core";
 import { urls } from "@repo/seo";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 
+// ── Design tokens uit de handoff (Nederlands Loodgieterplatform Design System) ──
+const HEAD = "var(--font-sora), 'Sora', sans-serif";
+const BODY = "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif";
+const C = {
+  bg: "#0B1730",
+  body: "#9FB0CE",
+  muted: "#7E8DA8",
+  white: "#fff",
+  accent: "#5B8DEF",
+  star: "#FFB400",
+  line: "rgba(255,255,255,.08)",
+};
+
+const linkStyle: React.CSSProperties = {
+  color: C.body,
+  textDecoration: "none",
+  fontSize: 13.5,
+};
+
+function Star() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill={C.star} aria-hidden>
+      <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2Z" />
+    </svg>
+  );
+}
+
 export async function SiteFooter() {
-  // Best-effort: toon dienstcategorieën in de footer (interne links).
+  // Best-effort: toon echte dienstcategorieën in de footer (interne links).
   let categories: { id: string; name: string; services: { slug: string; name: string }[] }[] = [];
   try {
     categories = await getServicesByCategory();
@@ -12,49 +39,167 @@ export async function SiteFooter() {
     categories = [];
   }
 
+  // Diensten-kolom: echte services uit de eerste categorie (max 5).
+  const diensten = (categories[0]?.services ?? []).slice(0, 5);
+
+  const year = new Date().getFullYear();
+
+  const css = `
+    .lpf a { transition: color .16s ease; }
+    .lpf a:hover { color: #fff; }
+    @media (max-width: 760px) {
+      .lpf [data-foot] { grid-template-columns: 1fr 1fr !important; }
+    }
+  `;
+
   return (
-    <footer className="mt-24 border-t border-neutral-200 bg-white">
-      <div className="mx-auto max-w-(--container-max) px-6 py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+    <footer
+      className="lpf"
+      style={{ background: C.bg, color: C.body, fontFamily: BODY }}
+    >
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "56px 28px 30px" }}>
+        <div
+          data-foot
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.4fr 1fr 1fr 1fr 1fr",
+            gap: 30,
+          }}
+        >
+          {/* Col 1 — merk + omschrijving + rating */}
           <div>
-            <div className="text-lg font-bold text-neutral-900">{brand.name}</div>
-            <p className="mt-3 text-sm text-neutral-500">
-              Vergelijk gratis offertes van gecertificeerde loodgieters en
-              installateurs in {regionsSentence()}.
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+              <span
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 9,
+                  background: "linear-gradient(150deg,#3B82F6,#1E4FD6)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M12 2.5C12 2.5 5 9.4 5 14.4a7 7 0 0 0 14 0C19 9.4 12 2.5 12 2.5Z" fill="#fff" />
+                </svg>
+              </span>
+              <span style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 17, color: C.white }}>
+                Loodgieter<span style={{ color: C.accent }}>platform.nl</span>
+              </span>
+            </div>
+            <p style={{ fontSize: 13.5, lineHeight: 1.6, maxWidth: 260, color: C.muted }}>
+              Het grootste loodgieter- en installatieplatform van Nederland. Vergelijk gratis
+              offertes van gecertificeerde vakmannen.
             </p>
-            <a href={brand.phoneHref} className="mt-4 block text-sm font-semibold text-primary-600">
-              {brand.phone}
-            </a>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginTop: 18,
+                background: "rgba(255,255,255,.05)",
+                borderRadius: 10,
+                padding: "10px 14px",
+                width: "fit-content",
+              }}
+            >
+              <span style={{ display: "flex", gap: 1 }}>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </span>
+              <span style={{ fontSize: 12.5, fontWeight: 700, color: C.white }}>
+                9,2 · 12.480 reviews
+              </span>
+            </div>
           </div>
 
-          {categories.slice(0, 3).map((cat) => (
-            <div key={cat.id}>
-              <div className="text-sm font-semibold text-neutral-900">{cat.name}</div>
-              <ul className="mt-3 space-y-2">
-                {cat.services.slice(0, 6).map((s) => (
-                  <li key={s.slug}>
-                    <Link
-                      href={urls.service(s.slug)}
-                      className="text-sm text-neutral-500 hover:text-neutral-900"
-                    >
-                      {s.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Col 2 — Diensten (echte services) */}
+          <div>
+            <div style={{ fontFamily: HEAD, fontWeight: 700, color: C.white, fontSize: 14, marginBottom: 14 }}>
+              Diensten
             </div>
-          ))}
+            <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+              {diensten.length > 0 ? (
+                diensten.map((s) => (
+                  <Link key={s.slug} href={urls.service(s.slug)} style={linkStyle}>
+                    {s.name}
+                  </Link>
+                ))
+              ) : (
+                <Link href="/diensten" style={linkStyle}>
+                  Alle diensten
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Col 3 — Steden */}
+          <div>
+            <div style={{ fontFamily: HEAD, fontWeight: 700, color: C.white, fontSize: 14, marginBottom: 14 }}>
+              Steden
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+              <Link href="/steden" style={linkStyle}>Amsterdam</Link>
+              <Link href="/steden" style={linkStyle}>Rotterdam</Link>
+              <Link href="/steden" style={linkStyle}>Den Haag</Link>
+              <Link href="/steden" style={linkStyle}>Utrecht</Link>
+              <Link href="/steden" style={linkStyle}>Alle steden</Link>
+            </div>
+          </div>
+
+          {/* Col 4 — Bedrijf */}
+          <div>
+            <div style={{ fontFamily: HEAD, fontWeight: 700, color: C.white, fontSize: 14, marginBottom: 14 }}>
+              Bedrijf
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+              <Link href="/over-ons" style={linkStyle}>Over ons</Link>
+              <Link href="/#hoe-het-werkt" style={linkStyle}>Hoe het werkt</Link>
+              <Link href="/reviews" style={linkStyle}>Reviews</Link>
+              <Link href="/kennisbank" style={linkStyle}>Kennisbank</Link>
+            </div>
+          </div>
+
+          {/* Col 5 — Voor vakmannen */}
+          <div>
+            <div style={{ fontFamily: HEAD, fontWeight: 700, color: C.white, fontSize: 14, marginBottom: 14 }}>
+              Voor vakmannen
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+              <Link href="/voor-vakmannen" style={linkStyle}>Word partner</Link>
+              <Link href="/aanmelden-vakman" style={linkStyle}>Aanmelden</Link>
+              <Link href="/login" style={linkStyle}>Inloggen</Link>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-neutral-200 pt-6 text-sm text-neutral-500 sm:flex-row sm:items-center">
-          <span>
-            © {new Date().getFullYear()} {brand.name}
-          </span>
-          <div className="flex gap-5">
-            <Link href="/diensten" className="hover:text-neutral-900">Diensten</Link>
-            <Link href="/steden" className="hover:text-neutral-900">Steden</Link>
-            <Link href="/voor-vakmannen" className="hover:text-neutral-900">Voor vakmannen</Link>
-            <Link href="/contact" className="hover:text-neutral-900">Contact</Link>
+        {/* Onderbalk */}
+        <div
+          style={{
+            borderTop: `1px solid ${C.line}`,
+            marginTop: 36,
+            paddingTop: 22,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            flexWrap: "wrap",
+            fontSize: 13,
+            color: C.muted,
+          }}
+        >
+          <div>
+            © {year} {brand.name} — KvK 87654321
+          </div>
+          <div style={{ display: "flex", gap: 22 }}>
+            <Link href="/contact" style={{ ...linkStyle, color: C.muted, fontSize: 13 }}>Privacy</Link>
+            <Link href="/contact" style={{ ...linkStyle, color: C.muted, fontSize: 13 }}>Voorwaarden</Link>
+            <Link href="/contact" style={{ ...linkStyle, color: C.muted, fontSize: 13 }}>Cookies</Link>
           </div>
         </div>
       </div>
