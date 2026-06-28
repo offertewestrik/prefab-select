@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { MapPin, Star, ShieldCheck, Wrench, Zap } from "lucide-react";
 import { Button } from "@repo/ui";
 import { urls } from "@repo/seo";
+import { C, HEAD, monogram, IcStar, IcPin, IcShield } from "@/components/marketing/ds";
 import type { InstallerCardData } from "@/features/installers/server/directory";
 
 /** Eén vakman-kaart in het overzicht. Toont uitsluitend publieke gegevens. */
@@ -13,88 +13,205 @@ export function InstallerCard({ c }: { c: InstallerCardData }) {
   const quoteHref = quoteParams.toString() ? `/aanvraag?${quoteParams}` : "/aanvraag";
 
   return (
-    <article className="flex flex-col rounded-[var(--radius-xl)] border border-neutral-200 bg-white p-5">
-      <div className="flex items-start gap-4">
+    <article
+      className="lph-card"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        background: "#fff",
+        border: `1px solid ${C.line}`,
+        borderRadius: 16,
+        padding: 20,
+        boxShadow: "0 6px 18px rgba(15,27,51,.05)",
+      }}
+    >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `.lph-card{transition:transform .25s ease, box-shadow .25s ease}.lph-card:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(15,27,51,.12)}`,
+        }}
+      />
+
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
         {c.logoUrl ? (
-          <img src={c.logoUrl} alt={c.name} className="h-14 w-14 shrink-0 rounded-[var(--radius-lg)] object-cover" />
+          <img
+            src={c.logoUrl}
+            alt={c.name}
+            style={{ width: 54, height: 54, flexShrink: 0, borderRadius: 13, objectFit: "cover" }}
+          />
         ) : (
-          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-[var(--radius-lg)] bg-primary-50 text-primary-600">
-            <Wrench className="h-6 w-6" />
-          </div>
+          <span
+            aria-hidden
+            style={{
+              width: 54,
+              height: 54,
+              flexShrink: 0,
+              borderRadius: 13,
+              background: "#EFF4FF",
+              color: C.blueDark,
+              fontFamily: HEAD,
+              fontWeight: 800,
+              fontSize: 18,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {monogram(c.name)}
+          </span>
         )}
-        <div className="min-w-0">
-          <h3 className="truncate text-lg font-semibold text-neutral-900">
-            <Link href={profileHref} className="hover:text-primary-700">
+
+        <div style={{ minWidth: 0, flex: 1 }}>
+          <h3
+            style={{
+              fontFamily: HEAD,
+              fontWeight: 700,
+              fontSize: 17,
+              color: C.ink,
+              lineHeight: 1.25,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <Link href={profileHref} style={{ color: "inherit", textDecoration: "none" }}>
               {c.name}
             </Link>
           </h3>
-          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-neutral-500">
+          <div
+            style={{
+              marginTop: 6,
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "5px 12px",
+              fontSize: 13,
+              color: C.muted,
+            }}
+          >
             {c.ratingCount > 0 ? (
-              <span className="inline-flex items-center gap-1 text-trust">
-                <Star className="h-4 w-4 fill-current" /> {c.ratingAvg.toFixed(1)}
-                <span className="text-neutral-400">({c.ratingCount} reviews)</span>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                  background: "#FFF8E8",
+                  border: "1px solid #FCE9C0",
+                  borderRadius: 8,
+                  padding: "3px 8px",
+                  fontSize: 12.5,
+                  fontWeight: 800,
+                  color: C.ink,
+                }}
+              >
+                <IcStar /> {c.ratingAvg.toFixed(1).replace(".", ",")}
+                <span style={{ color: C.muted3, fontWeight: 600 }}>({c.ratingCount})</span>
               </span>
             ) : (
-              <span className="text-neutral-400">Nog geen reviews</span>
+              <span style={{ color: C.muted3, fontWeight: 600 }}>Nog geen reviews</span>
             )}
             {c.city && (
-              <span className="inline-flex items-center gap-1">
-                <MapPin className="h-4 w-4" /> {c.city}
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                <IcPin s={15} /> {c.city}
               </span>
             )}
             {c.distanceKm != null && (
-              <span className="inline-flex items-center gap-1 font-medium text-primary-700">
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontWeight: 700, color: C.blueDark }}>
                 ± {Math.round(c.distanceKm)} km
               </span>
             )}
           </div>
         </div>
+
         {c.emergencyService && (
-          <span className="ml-auto inline-flex shrink-0 items-center gap-1 rounded-full bg-accent-500/10 px-2 py-0.5 text-xs font-medium text-accent-600">
-            <Zap className="h-3 w-3" /> 24/7 spoed
+          <span
+            style={{
+              marginLeft: "auto",
+              flexShrink: 0,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 5,
+              background: "#FFF3E9",
+              border: "1px solid #FBE0CB",
+              borderRadius: 999,
+              padding: "4px 10px",
+              fontSize: 11.5,
+              fontWeight: 800,
+              color: C.orange,
+            }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill={C.orange} aria-hidden>
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8Z" />
+            </svg>
+            24/7 spoed
           </span>
         )}
       </div>
 
       {c.shortDescription && (
-        <p className="mt-3 line-clamp-2 text-sm text-neutral-600">{c.shortDescription}</p>
+        <p
+          style={{
+            marginTop: 13,
+            fontSize: 13.5,
+            lineHeight: 1.55,
+            color: C.muted,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {c.shortDescription}
+        </p>
       )}
 
       {c.services.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-1.5">
+        <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 6 }}>
           {c.services.slice(0, 5).map((s) => (
-            <span key={s.slug} className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-xs text-neutral-700">
+            <span
+              key={s.slug}
+              style={{
+                background: "#F4F7FB",
+                border: "1px solid #E6ECF5",
+                borderRadius: 8,
+                padding: "4px 10px",
+                fontSize: 12,
+                fontWeight: 600,
+                color: "#475069",
+              }}
+            >
               {s.name}
             </span>
           ))}
           {c.services.length > 5 && (
-            <span className="px-1 text-xs text-neutral-400">+{c.services.length - 5}</span>
+            <span style={{ alignSelf: "center", padding: "0 2px", fontSize: 12, color: C.muted3, fontWeight: 600 }}>
+              +{c.services.length - 5}
+            </span>
           )}
         </div>
       )}
 
-      <div className="mt-3 space-y-1 text-sm text-neutral-500">
+      <div style={{ marginTop: 13, display: "flex", flexDirection: "column", gap: 6, fontSize: 13, color: C.muted }}>
         {c.provinces.length > 0 && (
-          <p>
-            <span className="text-neutral-400">Werkgebied:</span> {c.provinces.join(", ")}
+          <p style={{ margin: 0 }}>
+            <span style={{ color: C.muted3 }}>Werkgebied:</span> {c.provinces.join(", ")}
             {c.coverageCount > 0 && ` · ${c.coverageCount} gemeenten`}
           </p>
         )}
         {c.certifications.length > 0 && (
-          <p className="inline-flex flex-wrap items-center gap-1.5">
-            <ShieldCheck className="h-4 w-4 text-success-500" />
+          <p style={{ margin: 0, display: "inline-flex", flexWrap: "wrap", alignItems: "center", gap: 6 }}>
+            <IcShield stroke={C.green} s={15} />
             {c.certifications.slice(0, 4).join(", ")}
           </p>
         )}
       </div>
 
-      <div className="mt-5 flex gap-2 pt-2">
-        <Link href={profileHref} className="flex-1">
+      <div style={{ marginTop: 18, display: "flex", gap: 10, paddingTop: 6 }}>
+        <Link href={profileHref} style={{ flex: 1 }}>
           <Button variant="outline" className="w-full">
             Bekijk profiel
           </Button>
         </Link>
-        <Link href={quoteHref} className="flex-1">
+        <Link href={quoteHref} style={{ flex: 1 }}>
           <Button variant="accent" className="w-full">
             Vraag offerte aan
           </Button>
