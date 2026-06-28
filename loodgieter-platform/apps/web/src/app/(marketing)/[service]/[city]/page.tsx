@@ -15,8 +15,9 @@ export const revalidate = 86400;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  // Alleen high-value combinaties pre-renderen; de rest via on-demand ISR.
-  return getPriorityServiceCityPairs(30, 50);
+  // Alleen een kleine seed pre-renderen om de build-tijd DB-belasting laag te
+  // houden (Supabase-pooler); de rest komt via on-demand ISR (dynamicParams).
+  return (await getPriorityServiceCityPairs(30, 50)).slice(0, 10);
 }
 
 export async function generateMetadata({

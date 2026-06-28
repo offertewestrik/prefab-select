@@ -18,8 +18,10 @@ export const dynamicParams = true;
 
 /** Prerender van high-value dienst×stad-combinaties; rest via on-demand ISR. */
 export async function generateStaticParams() {
+  // Kleine seed pre-renderen (build-tijd DB-belasting laag voor Supabase-pooler);
+  // de rest komt via on-demand ISR (dynamicParams).
   const pairs = await getPriorityServiceCityPairs(20, 30);
-  return pairs.map((p) => ({ slug: p.service, city: p.city }));
+  return pairs.slice(0, 10).map((p) => ({ slug: p.service, city: p.city }));
 }
 
 async function resolve(serviceSlug: string, citySlug: string) {
