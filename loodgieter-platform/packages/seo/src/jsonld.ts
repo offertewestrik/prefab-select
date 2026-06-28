@@ -10,11 +10,22 @@ export function organizationLd(): Json {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteUrl("/")}#organization`,
     name: brand.name,
     url: siteUrl("/"),
     email: brand.email,
     telephone: brand.phone,
+    description: `${brand.name}: vergelijk gratis offertes van gecertificeerde loodgieters en installateurs in heel Nederland.`,
+    slogan: brand.tagline,
     areaServed: brand.regions,
+    address: { "@type": "PostalAddress", addressCountry: "NL" },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: brand.phoneHref.replace("tel:", ""),
+      contactType: "customer service",
+      areaServed: "NL",
+      availableLanguage: ["Dutch"],
+    },
   };
 }
 
@@ -22,11 +33,17 @@ export function websiteLd(): Json {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteUrl("/")}#website`,
     name: brand.name,
     url: siteUrl("/"),
+    publisher: { "@id": `${siteUrl("/")}#organization` },
+    inLanguage: "nl-NL",
     potentialAction: {
       "@type": "SearchAction",
-      target: `${siteUrl("/")}?q={search_term_string}`,
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteUrl("/vakmannen")}?q={search_term_string}`,
+      },
       "query-input": "required name=search_term_string",
     },
   };

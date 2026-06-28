@@ -69,6 +69,17 @@ const STEPS = [
 ];
 
 const euro = (n: number) => "€" + n.toLocaleString("nl-NL");
+
+// Generieke FAQ-fallback per dienst (als er nog geen redactionele FAQ in de DB staat).
+function genericFaqs(name: string, lname: string, priceSpan: string): { question: string; answer: string }[] {
+  return [
+    { question: `Wat kost ${lname} gemiddeld?`, answer: `De richtprijs voor ${lname} ligt rond ${priceSpan} inclusief btw en montage. De exacte prijs hangt af van je situatie, de gekozen materialen en de regio. Vergelijk vrijblijvend meerdere offertes voor een prijs op maat.` },
+    { question: `Hoe snel kan ${lname} worden uitgevoerd?`, answer: `Vaak kun je al binnen enkele dagen terecht en bij spoed soms dezelfde dag. Je ontvangt meestal binnen enkele uren tot één werkdag offertes van beschikbare vakmannen uit jouw regio.` },
+    { question: `Zijn de vakmannen voor ${name.toLowerCase()} gecertificeerd?`, answer: `Ja. Alle aangesloten vakmannen zijn gescreend, verzekerd en beschikken over de relevante erkenningen en keurmerken (zoals InstallQ, Kiwa, OK CV, STEK of VCA), afhankelijk van het werk.` },
+    { question: `Is het aanvragen van offertes gratis en vrijblijvend?`, answer: `Zeker. Het aanvragen en vergelijken van offertes voor ${lname} is 100% gratis en vrijblijvend. Je zit nergens aan vast en kiest zelf met welke vakman je in zee gaat.` },
+    { question: `Krijg ik garantie op ${lname}?`, answer: `Ja. Je krijgt garantie op de uitvoering door de vakman en, waar van toepassing, fabrieksgarantie op de gebruikte materialen. De voorwaarden staan helder in de offerte.` },
+  ];
+}
 const monogram = (name: string) => {
   const w = name.trim().split(/\s+/).filter(Boolean);
   const letters = w.map((x) => x[0] ?? "").join("");
@@ -151,6 +162,10 @@ export default async function ServicePage({
         ? `vanaf ${fromPrice}`
         : "Op aanvraag";
   const lname = service.name.toLowerCase();
+  const faqs =
+    service.faqs.length > 0
+      ? service.faqs.map((f) => ({ question: f.question, answer: f.answer }))
+      : genericFaqs(service.name, lname, priceSpan);
 
   const css = `
     .svc *{box-sizing:border-box}
@@ -184,7 +199,7 @@ export default async function ServicePage({
             rating: reviews.count > 0 ? { value: reviews.average, count: reviews.count } : undefined,
             reviews: reviews.latest.map((r) => ({ author: r.authorLabel, rating: r.rating, title: r.title, body: r.body })),
           }),
-          ...(service.faqs.length ? [faqLd(service.faqs.map((f) => ({ question: f.question, answer: f.answer })))] : []),
+          faqLd(faqs),
         ]}
       />
 
@@ -396,13 +411,13 @@ export default async function ServicePage({
       )}
 
       {/* FAQ */}
-      {service.faqs.length > 0 && (
+      {faqs.length > 0 && (
         <section style={{ position: "relative", maxWidth: 1120, margin: "0 auto", padding: "104px 28px", background: "#fff", boxShadow: "0 0 0 100vw #fff", clipPath: "inset(0 -100vw)" }}>
           <h2 style={{ fontFamily: HEAD, fontSize: 26, fontWeight: 800, letterSpacing: "-.02em", color: C.ink, marginBottom: 8 }}>Veelgestelde vragen</h2>
           <p style={{ fontSize: 14.5, color: C.muted, marginBottom: 22 }}>Over {lname}.</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 820 }}>
-            {service.faqs.map((f, i) => (
-              <details key={f.id} open={i === 0} style={{ background: "#fff", border: `1px solid ${C.line}`, borderRadius: 13, overflow: "hidden" }}>
+            {faqs.map((f, i) => (
+              <details key={f.question} open={i === 0} style={{ background: "#fff", border: `1px solid ${C.line}`, borderRadius: 13, overflow: "hidden" }}>
                 <summary style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, padding: "17px 20px", cursor: "pointer" }}>
                   <span style={{ fontFamily: HEAD, fontWeight: 700, fontSize: 15.5, color: C.ink }}>{f.question}</span>
                   <span className="svc-chev" style={{ display: "flex", flexShrink: 0, transition: "transform .2s ease" }} aria-hidden>

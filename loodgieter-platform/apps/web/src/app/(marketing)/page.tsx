@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { organizationLd, websiteLd, urls } from "@repo/seo";
+import { organizationLd, websiteLd, faqLd, urls } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { CoverageMap } from "@/components/marketing/home/coverage-map";
 import { HouseExplorer } from "@/components/marketing/home/house-explorer";
@@ -135,6 +135,15 @@ const WHY = [
   { t: "Gratis & vrijblijvend", p: "Binnen 2 minuten je aanvraag de deur uit." },
   { t: "Snel geholpen", p: "Vaak dezelfde week een vakman beschikbaar." },
   { t: "Vergelijk offertes", p: "Kies zelf de beste vakman en prijs." },
+];
+
+// Veelgestelde vragen (homepage) — gevisualiseerd én als FAQPage JSON-LD.
+const FAQ_HOME: { q: string; a: string }[] = [
+  { q: "Hoe werkt Loodgieterplatform.nl?", a: "Je plaatst gratis en vrijblijvend een aanvraag met je klus en postcode. Binnen korte tijd ontvang je tot 3 offertes van gecertificeerde loodgieters en installateurs uit jouw regio. Je vergelijkt prijs, reviews en beschikbaarheid en kiest zelf met wie je in zee gaat." },
+  { q: "Is offertes vergelijken via Loodgieterplatform.nl gratis?", a: "Ja, het aanvragen en vergelijken van offertes is volledig gratis en vrijblijvend. Je zit nergens aan vast en bepaalt zelf of en met welke vakman je verder gaat. Je betaalt alleen de installateur die je uiteindelijk kiest, volgens diens offerte." },
+  { q: "Zijn de loodgieters op het platform gecertificeerd?", a: "Ja, we werken met gecertificeerde en verzekerde vakmannen. Afhankelijk van het werk beschikken zij over erkenningen zoals InstallQ, Kiwa, OK CV, STEK of VCA. Op de pagina Keurmerken lees je wat elk keurmerk garandeert." },
+  { q: "Hoe snel ontvang ik offertes?", a: "Meestal ontvang je binnen enkele uren tot één werkdag de eerste offertes, afhankelijk van de klus en je regio. Bij spoed, zoals een lekkage of uitgevallen CV-ketel, kun je aangeven dat het dringend is zodat beschikbare vakmannen sneller reageren." },
+  { q: "In welke regio's is Loodgieterplatform.nl actief?", a: "Loodgieterplatform.nl bemiddelt in heel Nederland, met veel vakmannen in onder meer Noord-Brabant, Gelderland, Zuid-Holland, Noord-Holland en Utrecht. Vul je postcode in bij de aanvraag; we koppelen je aan gecertificeerde vakmannen die in jouw gemeente werkzaam zijn." },
 ];
 
 const DISCOVER = [
@@ -337,6 +346,10 @@ export default async function HomePage() {
     .lph-home input:focus,.lph-home select:focus{border-color:${C.blue} !important;box-shadow:0 0 0 4px rgba(37,99,235,.13)}
     .lph-home [data-lift]{transition:transform .25s ease, box-shadow .25s ease}
     .lph-home [data-lift]:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(15,27,51,.12)}
+    .lph-home details>summary{list-style:none;cursor:pointer}
+    .lph-home details>summary::-webkit-details-marker{display:none}
+    .lph-home .lph-faq-chev{transition:transform .2s ease}
+    .lph-home details[open] .lph-faq-chev{transform:rotate(180deg)}
     @media (max-width:1180px){
       .lph-home [data-hero]{flex-direction:column !important}
       .lph-home [data-hero-left]{order:1 !important;width:100% !important;max-width:none !important;flex:none !important}
@@ -382,7 +395,7 @@ export default async function HomePage() {
   return (
     <main className="lph-home" style={{ background: PAGE_BG, fontFamily: BODY, color: C.body, overflowX: "hidden" }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <JsonLd data={[organizationLd(), websiteLd()]} />
+      <JsonLd data={[organizationLd(), websiteLd(), faqLd(FAQ_HOME.map((f) => ({ question: f.q, answer: f.a })))]} />
 
       {/* ── 1. HERO ── */}
       <section style={{ background: "radial-gradient(1100px 520px at 16% -8%,#E6EFFF 0%,rgba(232,240,255,0) 58%),linear-gradient(180deg,#F3F8FF 0%,#FFFFFF 80%)", padding: "42px 0 28px" }}>
@@ -806,6 +819,27 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── 10b. Veelgestelde vragen ── */}
+      <section style={{ position: "relative", ...container, padding: "112px 28px", background: "#fff", boxShadow: "0 0 0 100vw #fff", clipPath: "inset(0 -100vw)" }}>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <span style={eyebrow}>Veelgestelde vragen</span>
+          <h2 style={h2}>Alles wat je wilt weten</h2>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 820, margin: "0 auto" }}>
+          {FAQ_HOME.map((f, i) => (
+            <details key={f.q} open={i === 0} style={{ ...cardBase, borderRadius: 13, overflow: "hidden" }}>
+              <summary style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, padding: "17px 20px" }}>
+                <span style={{ fontFamily: HEAD, fontWeight: 700, fontSize: 15.5, color: C.ink }}>{f.q}</span>
+                <span className="lph-faq-chev" style={{ display: "flex", flexShrink: 0 }} aria-hidden>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke={C.blue} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </span>
+              </summary>
+              <p style={{ padding: "0 20px 18px", fontSize: 14.5, color: C.muted, lineHeight: 1.6 }}>{f.a}</p>
+            </details>
+          ))}
         </div>
       </section>
 
