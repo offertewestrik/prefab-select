@@ -53,18 +53,18 @@ export function BrandWall({
           <h2 className="text-2xl font-bold text-neutral-900">{title}</h2>
           <p className="mt-2 text-neutral-500">{subtitle}</p>
         </div>
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {merken.map((m) => (
             <div
               key={m.file}
-              className="flex h-28 items-center justify-center rounded-[var(--radius-lg)] border border-neutral-200 bg-white px-5 transition-shadow hover:shadow-sm"
+              className="flex h-36 items-center justify-center rounded-[var(--radius-lg)] border border-neutral-200 bg-white px-6 transition-shadow hover:shadow-sm"
             >
               <Image
                 src={`/merken/${m.file}`}
                 alt={`${m.name} logo`}
                 width={320}
                 height={160}
-                className="h-20 w-auto max-w-[180px] object-contain"
+                className="h-28 w-auto max-w-[240px] object-contain"
               />
             </div>
           ))}
