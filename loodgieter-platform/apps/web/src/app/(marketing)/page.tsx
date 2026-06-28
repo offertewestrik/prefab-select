@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { organizationLd, websiteLd, faqLd, urls } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { CoverageMap } from "@/components/marketing/home/coverage-map";
@@ -151,6 +152,58 @@ const DISCOVER = [
   { title: "Steden", desc: "Vind een vakman in jouw stad", href: "/steden" },
   { title: "Merken", desc: "Remeha, Nefit, Vaillant en meer", href: "/merken" },
   { title: "Kennisbank", desc: "Tips, kosten en uitleg", href: "/kennisbank" },
+];
+
+// Diensten in beeld — fotokaarten (foto's staan in /public/foto/...).
+const SHOWCASE: { title: string; desc: string; img: string; alt: string }[] = [
+  {
+    title: "CV-ketel vervangen",
+    desc: "Een nieuwe, zuinige cv-ketel, vakkundig geplaatst.",
+    img: "/foto/cv-ketels/cv-ketels-01.jpg",
+    alt: "Vakman installeert een nieuwe, zuinige cv-ketel in een woning",
+  },
+  {
+    title: "Badkamer & sanitair",
+    desc: "Van kraan tot complete badkamerrenovatie.",
+    img: "/foto/badkamers/badkamers-01.jpg",
+    alt: "Modern afgewerkte badkamer met nieuw sanitair geïnstalleerd door een vakman",
+  },
+  {
+    title: "Radiatoren",
+    desc: "Plaatsen of vervangen, in elke ruimte.",
+    img: "/foto/radiatoren/radiatoren-01.jpg",
+    alt: "Nieuw geplaatste radiator tegen de muur in een woonkamer",
+  },
+  {
+    title: "Vloerverwarming",
+    desc: "Comfortabele, gelijkmatige warmte door het hele huis.",
+    img: "/foto/vloerverwarming/vloerverwarming-01.jpg",
+    alt: "Aanleg van vloerverwarming met leidingen in de dekvloer",
+  },
+  {
+    title: "Keuken & leidingwerk",
+    desc: "Aanleg en aanpassing van waterleidingen.",
+    img: "/foto/keukenleidingen/keukenleidingen-01.jpg",
+    alt: "Vakman legt waterleidingen aan onder een keuken",
+  },
+  {
+    title: "Lekkages & spoed",
+    desc: "Snel opsporen en verhelpen, ook bij spoed.",
+    img: "/foto/lekkages/lekkages-01.jpg",
+    alt: "Loodgieter spoort een waterlekkage op en verhelpt deze",
+  },
+  {
+    title: "Dakwerk & zink",
+    desc: "Daken, dakgoten en zinkwerk in vakkundige handen.",
+    img: "/foto/dakwerk/dakwerk-01.jpg",
+    alt: "Vakman voert dakwerk en zinkwerk uit op een hellend dak",
+  },
+  {
+    title: "Zonnepanelen & warmtepomp",
+    desc: "Verduurzaam je woning met advies op maat.",
+    img: "/foto/zonnepanelen/zonnepanelen-01.jpg",
+    alt: "Zonnepanelen op een dak geïnstalleerd voor een duurzame woning",
+  },
 ];
 
 // ── Dienst-iconen (paden) + korte omschrijving op trefwoord ──
@@ -359,6 +412,7 @@ export default async function HomePage() {
     @media (max-width:980px){
       .lph-home [data-svcgrid]{grid-template-columns:repeat(2,1fr) !important}
       .lph-home [data-allesvc]{grid-template-columns:repeat(2,1fr) !important}
+      .lph-home [data-showcase]{grid-template-columns:repeat(2,1fr) !important}
       .lph-home [data-pros]{grid-template-columns:repeat(2,1fr) !important}
       .lph-home [data-why]{grid-template-columns:repeat(2,1fr) !important}
       .lph-home [data-seogrid]{grid-template-columns:repeat(2,1fr) !important}
@@ -375,6 +429,7 @@ export default async function HomePage() {
     @media (max-width:520px){
       .lph-home [data-svcgrid]{grid-template-columns:1fr !important}
       .lph-home [data-allesvc]{grid-template-columns:1fr !important}
+      .lph-home [data-showcase]{grid-template-columns:1fr !important}
       .lph-home [data-pros]{grid-template-columns:1fr !important}
       .lph-home [data-why]{grid-template-columns:1fr !important}
       .lph-home [data-seogrid]{grid-template-columns:1fr !important}
@@ -440,6 +495,14 @@ export default async function HomePage() {
             {/* Midden — gradient-paneel met overlay-chips */}
             <div data-hero-mid style={{ flex: 1, minWidth: 0, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 452, borderRadius: 22, overflow: "hidden", boxShadow: "0 34px 70px rgba(15,27,51,.16)", background: "linear-gradient(135deg,#1E4FD6 0%,#2563EB 45%,#0E1F45 100%)" }}>
+                <Image
+                  src="/foto/hero/hero-01.jpg"
+                  alt="Luxe afgewerkte badkamer door een vakman via Loodgieterplatform.nl"
+                  fill
+                  priority
+                  sizes="(max-width:1180px) 100vw, 40vw"
+                  style={{ objectFit: "cover" }}
+                />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(150deg,rgba(8,18,40,.10) 0%,rgba(8,18,40,0) 38%,rgba(8,18,40,.58) 100%)", pointerEvents: "none" }} />
 
                 <div style={{ position: "absolute", top: 16, left: 16, zIndex: 5, display: "flex", alignItems: "center", gap: 7, background: "rgba(255,255,255,.92)", backdropFilter: "blur(6px)", borderRadius: 999, padding: "6px 12px", boxShadow: "0 8px 20px rgba(15,27,51,.18)", fontSize: 12, fontWeight: 700, color: C.ink }}>
@@ -597,6 +660,39 @@ export default async function HomePage() {
               </span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ── 4a. Diensten in beeld ── */}
+      <section style={{ position: "relative", background: "linear-gradient(180deg,#F7F9FD 0%,#F1F4F9 100%)", boxShadow: "0 0 0 100vw #F4F7FB", clipPath: "inset(0 -100vw)" }}>
+        <div style={{ ...container, padding: "112px 28px" }}>
+          <div style={{ marginBottom: 36 }}>
+            <span style={eyebrow}>Diensten in beeld</span>
+            <h2 style={h2}>Vakwerk voor elke klus in huis</h2>
+          </div>
+          <div data-showcase style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
+            {SHOWCASE.map((s) => (
+              <Link key={s.title} href="/diensten" data-lift style={{ ...cardBase, borderRadius: 18, overflow: "hidden", textDecoration: "none", display: "flex", flexDirection: "column" }}>
+                <div style={{ position: "relative", width: "100%", aspectRatio: "1376 / 768", overflow: "hidden", background: "#E8EEF7" }}>
+                  <Image
+                    src={s.img}
+                    alt={s.alt}
+                    width={1376}
+                    height={768}
+                    sizes="(max-width:520px) 100vw, (max-width:980px) 50vw, 25vw"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", flex: 1, padding: "18px 18px 20px" }}>
+                  <h3 style={{ fontFamily: HEAD, fontWeight: 700, fontSize: 17, letterSpacing: "-.01em", color: C.ink, lineHeight: 1.25 }}>{s.title}</h3>
+                  <p style={{ fontSize: 13.5, color: C.muted2, lineHeight: 1.5, marginTop: 7 }}>{s.desc}</p>
+                  <span style={{ marginTop: "auto", paddingTop: 14, display: "inline-flex", alignItems: "center", gap: 6, fontWeight: 700, fontSize: 13.5, color: C.blue }}>
+                    Vergelijk vakmannen <IcArrow stroke={C.blue} s={15} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
