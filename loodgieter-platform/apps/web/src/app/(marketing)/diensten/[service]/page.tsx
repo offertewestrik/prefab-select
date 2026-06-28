@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { brand, regionsSentence } from "@repo/core";
 import { urls, breadcrumbLd, serviceLd, faqLd } from "@repo/seo";
@@ -114,6 +115,24 @@ const CURATED_FAQS: Record<string, { question: string; answer: string }[]> = {
   ],
 };
 
+/** Passende (gecommitte) categoriefoto voor de dienst-hero. */
+function dienstFoto(slug: string, name: string): string {
+  const s = `${slug} ${name}`.toLowerCase();
+  let cat = "cv-ketels";
+  if (/(zonne|solar|laadpaal|pv|batterij|elektra|meterkast)/.test(s)) cat = "zonnepanelen";
+  else if (/(dak|zink|goot|pannen|bitumen)/.test(s)) cat = "dakwerk";
+  else if (/warmtepomp/.test(s)) cat = "warmtepompen";
+  else if (/(airco|koel)/.test(s)) cat = "warmtepompen";
+  else if (/vloerverwarming/.test(s)) cat = "vloerverwarming";
+  else if (/radiator/.test(s)) cat = "radiatoren";
+  else if (/(badkamer|sanitair|toilet|douche|wastafel|kraan|wc)/.test(s)) cat = "badkamers";
+  else if (/keuken/.test(s)) cat = "keukenleidingen";
+  else if (/(lek|spoed|ontstop|riool|afvoer|verstop|storing)/.test(s)) cat = "lekkages";
+  else if (/(leiding|loodgiet)/.test(s)) cat = "leidingwerk";
+  else if (/(cv|ketel|geiser|verwarm|boiler|warm.?water)/.test(s)) cat = "cv-ketels";
+  return `/foto/${cat}/${cat}-01.jpg`;
+}
+
 function curatedFaqKey(slug: string, name: string): string | null {
   const s = `${slug} ${name}`.toLowerCase();
   if (/warmtepomp/.test(s)) return "warmtepomp";
@@ -217,6 +236,8 @@ export default async function ServicePage({
         ? `vanaf ${fromPrice}`
         : "Op aanvraag";
   const lname = service.name.toLowerCase();
+  const heroVideo = /(cv|ketel|geiser)/.test(`${slug} ${service.name}`.toLowerCase()) ? "/video/dienst-cv.mp4" : null;
+  const heroPhoto = dienstFoto(slug, service.name);
   const curatedKey = curatedFaqKey(slug, service.name);
   const curated = curatedKey ? CURATED_FAQS[curatedKey] : undefined;
   const faqs =
@@ -274,8 +295,15 @@ export default async function ServicePage({
         <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 28px" }}>
           <div data-2col style={{ display: "grid", gridTemplateColumns: "1.3fr 0.7fr", gap: 36, alignItems: "start" }}>
             <div>
-              {/* Hero-visual (gradient i.p.v. foto) */}
+              {/* Hero-visual: video (cv-ketel) of categoriefoto */}
               <div style={{ position: "relative", borderRadius: 16, overflow: "hidden", boxShadow: "0 18px 40px rgba(15,27,51,.13)", marginBottom: 18, background: "linear-gradient(135deg,#1E4FD6 0%,#2563EB 45%,#0E1F45 100%)" }}>
+                {heroVideo ? (
+                  <video autoPlay muted loop playsInline poster="/foto/_posters/dienst-cv.jpg" preload="metadata" aria-hidden style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}>
+                    <source src={heroVideo} type="video/mp4" />
+                  </video>
+                ) : (
+                  <Image src={heroPhoto} alt={`${service.name} — vakwerk via ${brand.name}`} fill sizes="(max-width:920px) 100vw, 40vw" style={{ objectFit: "cover" }} />
+                )}
                 <div style={{ position: "relative", height: 232, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 15, background: "linear-gradient(125deg,rgba(8,18,40,.10),rgba(8,18,40,0) 42%,rgba(8,18,40,.46))" }}>
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     <span style={{ display: "flex", alignItems: "center", gap: 6, background: C.blue, color: "#fff", borderRadius: 999, padding: "6px 12px", fontSize: 12, fontWeight: 700, boxShadow: "0 8px 18px rgba(37,99,235,.4)" }}>
