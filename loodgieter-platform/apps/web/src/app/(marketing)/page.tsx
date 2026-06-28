@@ -206,16 +206,16 @@ const SVC_DESC: Record<string, string> = {
 // 12 hoofddiensten met (marketing) vakman-aantallen — zoals het ontwerp.
 const HOOFDDIENSTEN: { name: string; sub: string; icon: string; accent?: boolean }[] = [
   { name: "CV-ketels", sub: "412 vakmannen", icon: "cv" },
+  { name: "Lekkages", sub: "389 vakmannen", icon: "lekkage" },
+  { name: "Ontstoppingen", sub: "247 vakmannen", icon: "ontstopping" },
+  { name: "Radiatoren", sub: "331 vakmannen", icon: "radiator" },
   { name: "Warmtepompen", sub: "286 vakmannen", icon: "warmtepomp" },
   { name: "Vloerverwarming", sub: "178 vakmannen", icon: "vloer" },
   { name: "Badkamers", sub: "524 vakmannen", icon: "badkamer" },
-  { name: "Radiatoren", sub: "331 vakmannen", icon: "radiator" },
-  { name: "Lekkages", sub: "389 vakmannen", icon: "lekkage" },
-  { name: "Ontstoppingen", sub: "247 vakmannen", icon: "ontstopping" },
   { name: "Spoedservice", sub: "24/7 beschikbaar", icon: "spoed", accent: true },
-  { name: "Airco", sub: "163 vakmannen", icon: "airco" },
   { name: "Boiler", sub: "205 vakmannen", icon: "boiler" },
   { name: "Leidingwerk", sub: "298 vakmannen", icon: "leidingwerk" },
+  { name: "Airco", sub: "163 vakmannen", icon: "airco" },
   { name: "Dakgoten / zinkwerk", sub: "156 vakmannen", icon: "dak" },
 ];
 

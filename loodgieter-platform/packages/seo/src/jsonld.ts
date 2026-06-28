@@ -17,7 +17,7 @@ export function organizationLd(): Json {
     telephone: brand.phone,
     description: `${brand.name}: vergelijk gratis offertes van gecertificeerde loodgieters en installateurs in heel Nederland.`,
     slogan: brand.tagline,
-    areaServed: brand.regions,
+    areaServed: { "@type": "Country", name: "Nederland" },
     address: { "@type": "PostalAddress", addressCountry: "NL" },
     contactPoint: {
       "@type": "ContactPoint",

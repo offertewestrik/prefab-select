@@ -70,6 +70,61 @@ const STEPS = [
 
 const euro = (n: number) => "€" + n.toLocaleString("nl-NL");
 
+// Redactionele FAQ-sets voor de belangrijkste dienst-categorieën (AEO/SEO).
+const CURATED_FAQS: Record<string, { question: string; answer: string }[]> = {
+  cv: [
+    { question: "Wat kost een nieuwe CV-ketel in 2026?", answer: "Een nieuwe CV-ketel kost in 2026 gemiddeld €1.250 tot €2.800 inclusief btw en montage. De prijs hangt af van het vermogen, het merk (zoals Intergas, Remeha, Nefit, Vaillant of ATAG), het type (combi of solo) en de complexiteit van de aansluiting. Vergelijk offertes voor een prijs op maat." },
+    { question: "Wat kost het vervangen van een CV-ketel?", answer: "Het vervangen van een CV-ketel kost doorgaans €1.250 tot €2.500 inclusief installatie en het milieuverantwoord afvoeren van de oude ketel. De exacte prijs hangt af van het model en of de bestaande aansluitingen geschikt zijn. Vraag vrijblijvend meerdere offertes aan om te vergelijken." },
+    { question: "Hoe lang gaat een CV-ketel mee?", answer: "Een CV-ketel gaat gemiddeld 12 tot 15 jaar mee bij goed jaarlijks onderhoud. Neemt het rendement af, ontstaan er storingen of stijgt je gasverbruik, dan is vervanging vaak voordeliger dan blijven repareren. Een installateur adviseert op basis van leeftijd en staat van je ketel." },
+    { question: "Hoe lang duurt het plaatsen van een nieuwe CV-ketel?", answer: "Het plaatsen van een nieuwe CV-ketel duurt meestal een halve tot een hele werkdag wanneer de bestaande aansluitingen geschikt zijn. Is er extra leidingwerk of een nieuwe rookgasafvoer nodig, dan kan het langer duren. De vakman zorgt voor montage, inbedrijfstelling en uitleg." },
+    { question: "Hoeveel garantie krijg ik op een CV-ketel?", answer: "Op een nieuwe CV-ketel krijg je doorgaans 2 tot 5 jaar fabrieksgarantie, afhankelijk van merk en of je een onderhoudscontract afsluit. Daarnaast geldt garantie op de installatie zelf. Controleer altijd de garantievoorwaarden in de offerte van de installateur." },
+  ],
+  warmtepomp: [
+    { question: "Wat kost een warmtepomp installeren in 2026?", answer: "Een warmtepomp installeren kost in 2026 ongeveer €4.250 tot €12.000, afhankelijk van het type en systeem. Een hybride warmtepomp ligt rond €3.500–€7.000, een lucht-water warmtepomp rond €6.000–€14.000. Vaak is ISDE-subsidie mogelijk, wat de netto kosten flink verlaagt." },
+    { question: "Wat is een hybride warmtepomp?", answer: "Een hybride warmtepomp is een combinatie van een elektrische warmtepomp en je bestaande CV-ketel. De warmtepomp neemt het grootste deel van de verwarming over en de ketel springt bij op koude dagen. Zo bespaar je fors op gas zonder je hele installatie te vervangen." },
+    { question: "Kom ik in aanmerking voor ISDE-subsidie op een warmtepomp?", answer: "Veel huiseigenaren komen in aanmerking voor ISDE-subsidie bij de aanschaf van een warmtepomp, mits het toestel op de RVO-apparatenlijst staat en wordt geïnstalleerd door een erkend bedrijf. De hoogte hangt af van type en vermogen. Een gecertificeerde installateur helpt met de keuze en aanvraag." },
+    { question: "Hybride of volledig elektrische warmtepomp — wat is beter?", answer: "Kies een hybride warmtepomp bij een bestaande gasaansluiting en gemiddelde isolatie: lagere investering, snelle gasbesparing. Kies een volledige lucht-water warmtepomp bij een goed geïsoleerde woning met vloerverwarming of lage-temperatuurradiatoren. Een installateur berekent de warmtebehoefte en adviseert." },
+    { question: "Hoe lang duurt het installeren van een warmtepomp?", answer: "Het installeren van een warmtepomp duurt gemiddeld 1 tot 3 werkdagen, afhankelijk van het type, de plaatsing van de buitenunit en eventuele aanpassingen aan het afgiftesysteem. De installateur verzorgt de warmtebehoefteberekening, montage, inbedrijfstelling en uitleg over het gebruik." },
+  ],
+  lekkage: [
+    { question: "Wat kost een loodgieter bij spoed of een lekkage?", answer: "Een spoedbezoek voor een lekkage kost doorgaans €90 tot €350, afhankelijk van het tijdstip, de aanrijkosten en de aard van het probleem. 's Nachts en in het weekend gelden vaak hogere tarieven. Vraag vooraf naar het voorrijtarief en uurloon zodat je niet voor verrassingen staat." },
+    { question: "Wat moet ik doen bij een waterlekkage?", answer: "Sluit bij een waterlekkage eerst de hoofdwaterkraan (meterkast) om verdere schade te beperken en vang lekkend water op. Schakel daarna snel een loodgieter in om de oorzaak op te sporen en te herstellen. Maak foto's voor je verzekering voordat je iets opruimt." },
+    { question: "Kan ik 's nachts of in het weekend een loodgieter krijgen?", answer: "Ja, voor spoedgevallen zoals lekkages, gaslucht of een uitgevallen CV-ketel zijn er loodgieters met een 24/7 spoeddienst. Geef bij je aanvraag aan dat het dringend is; beschikbare vakmannen in jouw regio reageren dan met voorrang, vaak nog dezelfde dag of nacht." },
+    { question: "Hoe snel kan een spoedloodgieter ter plaatse zijn?", answer: "Bij spoed kan een beschikbare loodgieter vaak binnen enkele uren ter plaatse zijn, afhankelijk van het tijdstip, je regio en de drukte. Vermeld duidelijk wat er aan de hand is en je postcode, zodat de dichtstbijzijnde vakman snel kan inschatten en uitrukken." },
+  ],
+  radiator: [
+    { question: "Wat kost het plaatsen van een radiator?", answer: "Een radiator laten plaatsen kost gemiddeld €150 tot €500 per radiator inclusief arbeid, exclusief de radiator zelf. De prijs hangt af van het type, de aansluitingen en of er extra leidingwerk nodig is. Vraag een offerte aan voor een prijs op maat." },
+    { question: "Wat kost het vervangen van een radiator?", answer: "Het vervangen van een bestaande radiator kost doorgaans €120 tot €350 per stuk inclusief montage, mits de aansluitingen op dezelfde plek blijven. Moeten leidingen worden verlegd, dan lopen de kosten op. Vergelijk vrijblijvend meerdere offertes." },
+    { question: "Welke radiator past het best bij mijn woning?", answer: "Dat hangt af van de warmtebehoefte van de ruimte en je verwarmingssysteem. Bij lage-temperatuurverwarming (warmtepomp) zijn grotere of speciale radiatoren nodig. Een installateur berekent het benodigde vermogen en adviseert het juiste type en formaat." },
+    { question: "Kan ik radiatoren combineren met een warmtepomp?", answer: "Ja, mits de radiatoren geschikt zijn voor lage-temperatuurverwarming of worden vervangen door grotere exemplaren. Een installateur beoordeelt of je huidige radiatoren voldoen en adviseert eventuele aanpassingen voor een efficiënte combinatie." },
+    { question: "Hoe lang duurt het plaatsen van radiatoren?", answer: "Eén radiator vervangen duurt vaak 1 tot 2 uur; meerdere radiatoren of nieuw leidingwerk een halve tot hele werkdag. De vakman zorgt voor montage, aansluiten, ontluchten en een controle op lekkage." },
+  ],
+  ontstopping: [
+    { question: "Wat kost een ontstopping?", answer: "Een afvoer of riool laten ontstoppen kost doorgaans €90 tot €250, afhankelijk van de ernst, de locatie en het tijdstip. Bij spoed of 's nachts gelden hogere tarieven. Vraag vooraf naar het voorrij- en uurtarief zodat je niet voor verrassingen staat." },
+    { question: "Wat kan ik zelf doen bij een verstopping?", answer: "Probeer bij een lichte verstopping eerst een ontstopper (plopper) of een ontstoppingsveer; vermijd agressieve chemische middelen die leidingen aantasten. Helpt dit niet of zit de verstopping dieper in het riool, schakel dan een vakman met professioneel materieel in." },
+    { question: "Hoe snel kan een ontstopper langskomen?", answer: "Bij spoed kan een beschikbare vakman vaak binnen enkele uren ter plaatse zijn. Geef je postcode en de aard van de verstopping door, dan reageert de dichtstbijzijnde ontstoppingsspecialist met voorrang — vaak nog dezelfde dag." },
+    { question: "Hoe wordt een verstopping verholpen?", answer: "Een vakman lokaliseert de verstopping, vaak met een rioolcamera, en verhelpt deze met hogedrukreiniging, een veer of mechanische reiniging. Daarna wordt gecontroleerd of de afvoer weer vrij doorloopt en krijg je advies om herhaling te voorkomen." },
+    { question: "Wie betaalt de ontstopping: huurder of verhuurder?", answer: "Een eenvoudige verstopping door dagelijks gebruik komt vaak voor rekening van de huurder; verstoppingen door een gebrek aan de leiding of het riool zijn meestal voor de verhuurder. Controleer je huurcontract en maak bij twijfel vooraf afspraken." },
+  ],
+  badkamer: [
+    { question: "Wat kost een nieuwe badkamer in 2026?", answer: "Een complete badkamerrenovatie kost in 2026 grofweg €6.000 tot €15.000 of meer, afhankelijk van grootte, materialen, tegelwerk en sanitair. Het installatie- en loodgieterswerk (leidingen, afvoeren, kranen, toilet) is hiervan een deel. Vraag offertes op maat aan om de kosten te vergelijken." },
+    { question: "Hoe lang duurt het verbouwen van een badkamer?", answer: "Een badkamerverbouwing duurt gemiddeld 1 tot 3 weken, afhankelijk van de omvang, sloopwerk, tegelwerk en droogtijden. Het loodgieters- en installatiewerk is daarbinnen meestal enkele dagen. Een goede planning met de vakman voorkomt vertraging en stemt de werkzaamheden op elkaar af." },
+    { question: "Wat kost het vervangen van een kraan of toilet?", answer: "Het vervangen van een kraan kost meestal €80 tot €200 inclusief arbeid, een toilet vervangen ongeveer €150 tot €450, exclusief het sanitair zelf. De prijs hangt af van bereikbaarheid van de aansluitingen en het type. Vraag een vakman om een offerte voor een exacte prijs." },
+    { question: "Welke garantie krijg ik op badkamerwerk?", answer: "Op installatie- en loodgieterswerk in de badkamer geldt doorgaans garantie van de uitvoerende vakman, vaak 1 tot 5 jaar afhankelijk van het werk. Op sanitair en kranen geldt daarnaast fabrieksgarantie. Leg de garantievoorwaarden altijd vast in de offerte of opdrachtbevestiging." },
+  ],
+};
+
+function curatedFaqKey(slug: string, name: string): string | null {
+  const s = `${slug} ${name}`.toLowerCase();
+  if (/warmtepomp/.test(s)) return "warmtepomp";
+  if (/radiator/.test(s)) return "radiator";
+  if (/(ontstop|riool|afvoer|verstop)/.test(s)) return "ontstopping";
+  if (/(cv|ketel|geiser|verwarm)/.test(s)) return "cv";
+  if (/(lek|spoed|storing)/.test(s)) return "lekkage";
+  if (/(badkamer|sanitair|toilet|douche|kraan)/.test(s)) return "badkamer";
+  return null;
+}
+
 // Generieke FAQ-fallback per dienst (als er nog geen redactionele FAQ in de DB staat).
 function genericFaqs(name: string, lname: string, priceSpan: string): { question: string; answer: string }[] {
   return [
@@ -162,10 +217,12 @@ export default async function ServicePage({
         ? `vanaf ${fromPrice}`
         : "Op aanvraag";
   const lname = service.name.toLowerCase();
+  const curatedKey = curatedFaqKey(slug, service.name);
+  const curated = curatedKey ? CURATED_FAQS[curatedKey] : undefined;
   const faqs =
     service.faqs.length > 0
       ? service.faqs.map((f) => ({ question: f.question, answer: f.answer }))
-      : genericFaqs(service.name, lname, priceSpan);
+      : (curated ?? genericFaqs(service.name, lname, priceSpan));
 
   const css = `
     .svc *{box-sizing:border-box}

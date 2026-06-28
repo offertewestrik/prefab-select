@@ -59,15 +59,15 @@ export function CoverageMap({ data }: { data: ProvinceCount[] }) {
     >
       <div style={{ textAlign: "center", marginBottom: 40 }}>
         <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: ".08em", textTransform: "uppercase", color: "#2563EB" }}>
-          Heel Nederland
+          Landelijke dekking
         </span>
         <h2 style={{ fontFamily: HEAD, fontSize: 32, fontWeight: 800, letterSpacing: "-.02em", color: "#0E1B33", marginTop: 8 }}>
-          Vakmannen in elke provincie
+          In elke regio een vakman in de buurt
         </h2>
         <p style={{ fontSize: 15.5, color: "#56627C", marginTop: 10, maxWidth: 560, marginInline: "auto" }}>
           {total > 0
-            ? `${total.toLocaleString("nl-NL")} aangesloten vakmannen, actief in alle 12 provincies. Beweeg over de kaart of kies je provincie.`
-            : "Aangesloten vakmannen, actief in alle 12 provincies. Beweeg over de kaart of kies je provincie."}
+            ? `Landelijke dekking met ${total.toLocaleString("nl-NL")} aangesloten vakmannen, actief in alle 12 provincies — van Groningen tot Zeeland. Beweeg over de kaart of kies je provincie.`
+            : "Landelijke dekking: in alle 12 provincies staan gecertificeerde vakmannen voor je klaar. Beweeg over de kaart of kies je provincie."}
         </p>
       </div>
 
