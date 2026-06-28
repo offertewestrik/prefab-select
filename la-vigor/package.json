@@ -1,0 +1,19 @@
+{
+  "name": "la-vigor-design-system",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "La Vigor — the design system for a luxury coffee house. Tokens, theme, and component recipes only (no pages).",
+  "keywords": ["design-system", "design-tokens", "coffee", "tailwind", "luxury"],
+  "main": "design-system/design-tokens.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.4.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.8.2"
+  }
+}

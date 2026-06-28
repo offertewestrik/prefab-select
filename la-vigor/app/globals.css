@@ -1,0 +1,372 @@
+/* ════════════════════════════════════════════════════════════════════════
+   LA VIGOR — globals.css
+   The runtime layer of the design system. Tailwind v4 `@theme` tokens,
+   semantic CSS variables (light + dark), base typography, brand utilities,
+   glassmorphism, keyframes, focus & reduced-motion contracts.
+   This file is AUTHORITATIVE at runtime; keep in sync with the /design-system
+   TypeScript modules and tailwind.config.ts.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@import 'tailwindcss';
+
+/* Fonts: load via this @import OR a <link> in the document head.
+   (Self-hosting with next/font is preferred in production for performance.) */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300..800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ──────────────────────────────────────────────────────────────────────
+   1 · @theme — design tokens exposed as Tailwind v4 utilities
+   ────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* — Color · espresso scale — */
+  --color-espresso-50: #fbf7f2;
+  --color-espresso-100: #f4e9dc;
+  --color-espresso-200: #e7d2bb;
+  --color-espresso-300: #d5b591;
+  --color-espresso-400: #c0926a;
+  --color-espresso-500: #a8744a;
+  --color-espresso-600: #8c5a38;
+  --color-espresso-700: #6e4429;
+  --color-espresso-800: #4a2c1a;
+  --color-espresso-900: #2e1b11;
+  --color-espresso-950: #1a0f09;
+
+  /* — Color · cream scale — */
+  --color-cream-50: #fdfbf7;
+  --color-cream-100: #f8f2e8;
+  --color-cream-200: #e7dac4;
+  --color-cream-300: #dacbaf;
+  --color-cream-400: #c9b796;
+  --color-cream-500: #b09a77;
+  --color-cream-600: #8f7b5d;
+  --color-cream-700: #6e5e47;
+  --color-cream-800: #4d4231;
+  --color-cream-900: #2f291e;
+
+  /* — Color · gold scale — */
+  --color-gold-50: #fbf4e6;
+  --color-gold-100: #f4e6c8;
+  --color-gold-200: #e8d29c;
+  --color-gold-300: #c8a063;
+  --color-gold-400: #b98a47;
+  --color-gold-500: #a1742f;
+  --color-gold-600: #835d24;
+  --color-gold-700: #65481d;
+
+  /* — Color · semantic brand aliases — */
+  --color-coffee-black: #171411;
+  --color-espresso-brown: #3b2a1e;
+  --color-chocolate: #43291a;
+  --color-caramel: #a8743e;
+  --color-latte: #d9c5a6;
+  --color-golden-sand: #c8a063;
+  --color-warm-beige: #e7dac4;
+  --color-olive: #6a6a47;
+  --color-wood: #8a5e3b;
+
+  /* — Color · state — */
+  --color-success: #5e8c61;
+  --color-success-soft: #e7f0e6;
+  --color-error: #b24a40;
+  --color-error-soft: #f6e2df;
+  --color-warning: #d89b3c;
+  --color-warning-soft: #fbefd8;
+  --color-info: #5a7d8c;
+  --color-info-soft: #e3ecef;
+
+  /* — Typography — */
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Manrope', 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* — Radius — */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
+  --radius-3xl: 3rem;
+  --radius-4xl: 4rem;
+
+  /* — Shadows (warm ink) — */
+  --shadow-soft: 0 1px 2px rgba(46, 27, 17, 0.04), 0 2px 8px rgba(46, 27, 17, 0.05);
+  --shadow-medium: 0 2px 4px rgba(46, 27, 17, 0.04), 0 8px 20px rgba(46, 27, 17, 0.07);
+  --shadow-large: 0 8px 16px rgba(46, 27, 17, 0.06), 0 24px 48px rgba(46, 27, 17, 0.1);
+  --shadow-floating: 0 12px 24px rgba(46, 27, 17, 0.08), 0 32px 64px rgba(46, 27, 17, 0.14);
+  --shadow-premium: 0 16px 32px rgba(46, 27, 17, 0.1), 0 48px 96px rgba(46, 27, 17, 0.18);
+  --shadow-glow: 0 0 0 1px rgba(200, 160, 99, 0.35), 0 8px 40px rgba(200, 160, 99, 0.28);
+
+  /* — Motion — */
+  --ease-signature: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-base: 320ms;
+  --duration-smooth: 500ms;
+  --duration-slow: 700ms;
+
+  /* — Container — */
+  --spacing-gutter: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   2 · Semantic role variables  (light = default, .dark = After Hours)
+   Reference these in custom CSS; Tailwind utilities map to the @theme scale.
+   ────────────────────────────────────────────────────────────────────── */
+:root {
+  --lv-bg: #f8f2e8;
+  --lv-bg-subtle: #fdfbf7;
+  --lv-surface: #fdfbf7;
+  --lv-surface-raised: #ffffff;
+  --lv-surface-sunken: #e7dac4;
+  --lv-text-primary: #1a0f09;
+  --lv-text-secondary: #6e4429;
+  --lv-text-muted: #8f7b5d;
+  --lv-text-accent: #a1742f;
+  --lv-border: rgba(74, 44, 26, 0.12);
+  --lv-border-strong: rgba(74, 44, 26, 0.22);
+  --lv-border-accent: rgba(200, 160, 99, 0.55);
+  --lv-hover: rgba(74, 44, 26, 0.05);
+  --lv-active: rgba(74, 44, 26, 0.13);
+  --lv-primary: #2e1b11;
+  --lv-accent: #c8a063;
+  --lv-focus: 0 0 0 3px rgba(200, 160, 99, 0.55);
+  color-scheme: light;
+}
+
+.dark {
+  --lv-bg: #120d09;
+  --lv-bg-subtle: #1a0f09;
+  --lv-surface: #1e1611;
+  --lv-surface-raised: #261c15;
+  --lv-surface-sunken: #150f0a;
+  --lv-text-primary: #f8f2e8;
+  --lv-text-secondary: #c9b79b;
+  --lv-text-muted: #8f7b5d;
+  --lv-text-accent: #c8a063;
+  --lv-border: rgba(248, 242, 232, 0.1);
+  --lv-border-strong: rgba(248, 242, 232, 0.18);
+  --lv-border-accent: rgba(200, 160, 99, 0.45);
+  --lv-hover: rgba(248, 242, 232, 0.06);
+  --lv-active: rgba(248, 242, 232, 0.14);
+  --lv-primary: #c8a063;
+  --lv-accent: #c8a063;
+  --lv-focus: 0 0 0 3px rgba(248, 242, 232, 0.7);
+  color-scheme: dark;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   3 · Base layer
+   ────────────────────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--lv-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--lv-bg);
+    color: var(--lv-text-primary);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-feature-settings: 'ss01', 'cv11';
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--lv-text-primary);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  /* Optical sizing for the variable serif. */
+  .font-display,
+  h1, h2 {
+    font-optical-sizing: auto;
+  }
+
+  ::selection {
+    background: rgba(200, 160, 99, 0.3);
+    color: var(--lv-text-primary);
+  }
+
+  /* Tabular figures for prices. */
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Visible, on-brand focus for keyboard users only. */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--lv-focus);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   4 · Brand utilities
+   ────────────────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Gold gradient text — for accent words & numerals. */
+  .text-gradient-gold {
+    background: linear-gradient(100deg, #a1742f 0%, #c8a063 45%, #e8d29c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* The script-style accent ("Where", "Our Story"). */
+  .script-accent {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-optical-sizing: auto;
+    letter-spacing: 0;
+  }
+
+  /* Eyebrow / overline label. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lv-text-accent);
+  }
+
+  /* — Glassmorphism — */
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 32px rgba(46, 27, 17, 0.12);
+  }
+  .glass-warm {
+    background: rgba(248, 242, 232, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(200, 160, 99, 0.3);
+  }
+  .glass-dark {
+    background: rgba(23, 20, 17, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(217, 197, 166, 0.16);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  /* — Candlelight auras for section backgrounds — */
+  .aura-warm {
+    background:
+      radial-gradient(60% 55% at 18% 12%, rgba(200, 160, 99, 0.18), transparent 60%),
+      radial-gradient(50% 50% at 88% 20%, rgba(168, 116, 62, 0.12), transparent 55%),
+      radial-gradient(65% 65% at 50% 100%, rgba(217, 197, 166, 0.16), transparent 60%);
+  }
+  .aura-dark {
+    background:
+      radial-gradient(50% 50% at 25% 18%, rgba(200, 160, 99, 0.16), transparent 60%),
+      radial-gradient(45% 45% at 82% 82%, rgba(168, 116, 62, 0.18), transparent 55%);
+  }
+
+  /* Hero scrim overlay (place over imagery). */
+  .hero-scrim::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(23, 20, 17, 0.1) 0%, rgba(23, 20, 17, 0.55) 55%, rgba(23, 20, 17, 0.85) 100%);
+    pointer-events: none;
+  }
+
+  /* Fine gold hairline divider. */
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200, 160, 99, 0.4), transparent);
+  }
+
+  /* Content container with system gutter. */
+  .container-lv {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  /* Loading spinner (used by button.loading). */
+  .spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 1.15em;
+    height: 1.15em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 9999px;
+    opacity: 0;
+    animation: spin-slow 0.7s linear infinite;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   5 · Keyframes
+   ────────────────────────────────────────────────────────────────────── */
+@keyframes steam-rise {
+  0% { opacity: 0; transform: translateY(0) scaleX(1); }
+  40% { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-26px) scaleX(1.6); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 160, 99, 0); }
+  50% { box-shadow: 0 0 36px 4px rgba(200, 160, 99, 0.35); }
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-steam { animation: steam-rise 4s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 0.5s var(--ease-signature) both; }
+
+/* ──────────────────────────────────────────────────────────────────────
+   6 · Custom scrollbar (warm)
+   ────────────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--lv-bg-subtle); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-espresso-600), var(--color-espresso-800));
+  border-radius: 9999px;
+  border: 3px solid var(--lv-bg-subtle);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-espresso-900); }
+
+/* ──────────────────────────────────────────────────────────────────────
+   7 · Reduced-motion contract (accessibility)
+   ────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
