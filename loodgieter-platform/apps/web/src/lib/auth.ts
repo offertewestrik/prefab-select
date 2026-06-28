@@ -4,18 +4,19 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@repo/db";
-import type { UserRole } from "@repo/core";
+import { authConfig } from "./auth.config";
 
 const credsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
 
+// Volledige config (Node-runtime): edge-veilige basis + Prisma-adapter en de
+// Credentials provider die bcrypt gebruikt. De middleware gebruikt alleen
+// authConfig (zie auth.config.ts) en laadt dus geen bcrypt/Prisma in de Edge.
 const nextAuth = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" }, // vereist i.c.m. Credentials provider
-  trustHost: true, // self-hosted achter proxy (Vercel/Cloudflare)
-  pages: { signIn: "/login" },
   providers: [
     Credentials({
       credentials: { email: {}, password: {} },
@@ -30,19 +31,6 @@ const nextAuth = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt: async ({ token, user }) => {
-      if (user) token.role = (user as { role?: UserRole }).role ?? "HOMEOWNER";
-      return token;
-    },
-    session: async ({ session, token }) => {
-      if (session.user) {
-        session.user.id = token.sub as string;
-        (session.user as { role?: UserRole }).role = token.role as UserRole;
-      }
-      return session;
-    },
-  },
 });
 
 // Expliciete annotaties i.v.m. NextAuth v5 + pnpm type-portabiliteit (TS2742).

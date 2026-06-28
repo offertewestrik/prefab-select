@@ -1,5 +1,10 @@
+import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { authConfig } from "@/lib/auth.config";
+
+// Edge-veilige auth-instance: alleen authConfig, dus geen bcrypt/Prisma in de
+// Edge Runtime. De volledige auth (met Credentials provider) staat in lib/auth.ts.
+const { auth } = NextAuth(authConfig);
 
 // Rol-gebaseerde toegang (zie docs/01 §5).
 // /dashboard → INSTALLER, /admin → ADMIN. Overige routes zijn publiek.
