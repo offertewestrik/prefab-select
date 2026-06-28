@@ -144,3 +144,50 @@ production for best performance.
 
 _Designed to be re-themed per venue via `cssVariables()` only — component
 recipes never change. One language, many cafes._
+
+---
+
+## Phase 2 — The Hero Experience
+
+A cinematic, 100vh homepage hero built on this design system. Only the hero is
+built; menu/gallery/reviews/contact/footer are intentionally not yet.
+
+**Stack:** Next.js 15 (static export) · TypeScript · Tailwind v4 · Framer Motion
+· GSAP (ScrollTrigger) · Lenis smooth scroll · Lucide.
+
+```
+app/            layout.tsx · page.tsx · globals.css (design-system runtime)
+components/
+  brand/        Logo.tsx (Fraunces wordmark + SVG "LV" badge)
+  hero/         Hero · Navbar · Preloader · HeroBackground · HeroProduct
+                Steam · FloatingBeans · ScrollIndicator · FeatureStrip
+  providers/    SmoothScroll.tsx (Lenis ⇄ GSAP, MotionConfig)
+  icons/        Bean.tsx
+lib/            site.ts · motion.ts · utils.ts · useImageExists.ts
+public/hero/    drop-in slots: hero-bg.jpg · product.png  (see that README)
+```
+
+**Run**
+
+```bash
+cd la-vigor
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static export → ./out
+```
+
+**What it does**
+
+- Premium preloader (gold meter → curtain lift) → orchestrated hero entrance.
+- Sticky glass nav (frosts on scroll), EN/AR switch, animated mobile drawer.
+- Headline mask-reveal, subtitle fade-up, staggered CTAs.
+- Slow-floating, pointer-tilt product · rising steam · parallax floating beans
+  · GSAP background slow-zoom · animated scroll cue · bottom feature strip.
+- Fully responsive (390 → 1440+), no horizontal overflow, reduced-motion safe.
+
+**Imagery** — the hero is art-directed entirely in code (gradients, golden
+light, steam, beans, a CSS iced-caramel-mocha + donut), so it needs **no image
+assets**. To upgrade with real photography, drop `hero-bg.jpg` and/or
+`product.png` into `public/hero/` — they're picked up automatically. A Canva
+starter ("Iced Caramel Mocha with Chocolate Donut") was generated to your
+account; export it from the Canva UI or use Runway, per `public/hero/README.md`.
