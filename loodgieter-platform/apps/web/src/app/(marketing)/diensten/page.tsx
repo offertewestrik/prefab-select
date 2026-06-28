@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { brand } from "@repo/core";
 import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
@@ -8,6 +9,24 @@ import { BrandWall } from "@/components/marketing/trust/brand-wall";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 
 export const revalidate = 3600;
+
+/** Passende (gecommitte) categoriefoto per dienst, op trefwoord. */
+function dienstFoto(slug: string, name: string): string {
+  const s = `${slug} ${name}`.toLowerCase();
+  let cat = "cv-ketels";
+  if (/(zonne|solar|laadpaal|pv|batterij|elektra|meterkast)/.test(s)) cat = "zonnepanelen";
+  else if (/(dak|zink|goot|pannen|bitumen)/.test(s)) cat = "dakwerk";
+  else if (/warmtepomp/.test(s)) cat = "warmtepompen";
+  else if (/(airco|koel)/.test(s)) cat = "warmtepompen";
+  else if (/vloerverwarming/.test(s)) cat = "vloerverwarming";
+  else if (/radiator/.test(s)) cat = "radiatoren";
+  else if (/(badkamer|sanitair|toilet|douche|wastafel|kraan|wc)/.test(s)) cat = "badkamers";
+  else if (/keuken/.test(s)) cat = "keukenleidingen";
+  else if (/(lek|spoed|ontstop|riool|afvoer|verstop|storing)/.test(s)) cat = "lekkages";
+  else if (/(leiding|loodgiet)/.test(s)) cat = "leidingwerk";
+  else if (/(cv|ketel|geiser|verwarm|boiler|warm.?water)/.test(s)) cat = "cv-ketels";
+  return `/foto/${cat}/${cat}-01.jpg`;
+}
 
 const metaTitle = "Alle installatie- & loodgietersdiensten";
 const metaDescription = `Bekijk alle installatie- en loodgietersdiensten van ${brand.name}: van CV-ketel en warmtepomp tot lekkage en ontstopping. Vraag gratis offertes aan.`;
@@ -140,31 +159,15 @@ export default async function ServicesPage() {
                         textDecoration: "none",
                       }}
                     >
-                      {/* Gradient thumbnail (geen foto) */}
-                      <div
-                        style={{
-                          position: "relative",
-                          height: 128,
-                          background:
-                            "linear-gradient(135deg,#1E4FD6 0%,#2563EB 45%,#0E1F45 100%)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <span
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            width: 44,
-                            height: 44,
-                            borderRadius: 12,
-                            background: "rgba(255,255,255,.16)",
-                          }}
-                        >
-                          <IcCategory stroke="#fff" s={22} />
-                        </span>
+                      {/* Categoriefoto */}
+                      <div style={{ position: "relative", height: 150, overflow: "hidden", background: "#eef2f8" }}>
+                        <Image
+                          src={dienstFoto(s.slug, s.name)}
+                          alt={`${s.name} — vakwerk via ${brand.name}`}
+                          fill
+                          sizes="(max-width:520px) 100vw, (max-width:760px) 50vw, 25vw"
+                          style={{ objectFit: "cover" }}
+                        />
                       </div>
 
                       {/* Body */}
