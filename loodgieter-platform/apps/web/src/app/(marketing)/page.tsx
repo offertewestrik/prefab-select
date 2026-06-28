@@ -495,14 +495,18 @@ export default async function HomePage() {
             {/* Midden — gradient-paneel met overlay-chips */}
             <div data-hero-mid style={{ flex: 1, minWidth: 0, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 452, borderRadius: 22, overflow: "hidden", boxShadow: "0 34px 70px rgba(15,27,51,.16)", background: "linear-gradient(135deg,#1E4FD6 0%,#2563EB 45%,#0E1F45 100%)" }}>
-                <Image
-                  src="/foto/hero/hero-01.jpg"
-                  alt="Luxe afgewerkte badkamer door een vakman via Loodgieterplatform.nl"
-                  fill
-                  priority
-                  sizes="(max-width:1180px) 100vw, 40vw"
-                  style={{ objectFit: "cover" }}
-                />
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/foto/hero/hero-poster.jpg"
+                  preload="metadata"
+                  aria-hidden
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                >
+                  <source src="/video/hero-loop.mp4" type="video/mp4" />
+                </video>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(150deg,rgba(8,18,40,.10) 0%,rgba(8,18,40,0) 38%,rgba(8,18,40,.58) 100%)", pointerEvents: "none" }} />
 
                 <div style={{ position: "absolute", top: 16, left: 16, zIndex: 5, display: "flex", alignItems: "center", gap: 7, background: "rgba(255,255,255,.92)", backdropFilter: "blur(6px)", borderRadius: 999, padding: "6px 12px", boxShadow: "0 8px 20px rgba(15,27,51,.18)", fontSize: 12, fontWeight: 700, color: C.ink }}>
