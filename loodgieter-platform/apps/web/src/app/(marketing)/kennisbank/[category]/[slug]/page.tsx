@@ -74,6 +74,25 @@ export default async function ArticlePage({
   const updatedIso = a.updated ? new Date(a.updated).toISOString() : undefined;
   const related = (await getArticles(category)).filter((r) => r.slug !== slug).slice(0, 3);
 
+  // Stap-voor-stap-gidsen krijgen HowTo-schema → kans op rich results in Google.
+  const isHowTo = /stappenplan|zo doe je|wat te doen|ontluchten|bijvullen|opsporen|aanleggen|plaatsen/i.test(
+    `${a.title} ${a.slug}`,
+  );
+  const howToLd = isHowTo
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: a.title,
+        description: a.excerpt,
+        step: a.body.map((s, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: s.heading,
+          text: s.text.replace(/\s+/g, " ").trim().slice(0, 320),
+        })),
+      }
+    : null;
+
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <JsonLd
@@ -92,6 +111,7 @@ export default async function ArticlePage({
             updatedAt: updatedIso,
           }),
           faqLd(a.faqs ?? []),
+          ...(howToLd ? [howToLd] : []),
         ]}
       />
 
