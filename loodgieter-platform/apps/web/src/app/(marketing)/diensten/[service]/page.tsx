@@ -10,6 +10,7 @@ import { getServiceBySlug, getAllServiceSlugs } from "@/features/catalog/server/
 import { getTopCities } from "@/features/geo/server/queries";
 import { getReviewsForService } from "@/features/reviews/server/aggregation";
 import { searchInstallers } from "@/features/installers/server/directory";
+import { serviceImage as dienstFoto } from "@/features/catalog/service-image";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -116,26 +117,6 @@ const CURATED_FAQS: Record<string, { question: string; answer: string }[]> = {
   ],
 };
 
-/** Passende (gecommitte) categoriefoto voor de dienst-hero. */
-function dienstFoto(slug: string, name: string): string {
-  const s = `${slug} ${name}`.toLowerCase();
-  let cat = "cv-ketels";
-  if (/(zonne|solar|laadpaal|pv|batterij|elektra|meterkast)/.test(s)) cat = "zonnepanelen";
-  else if (/(goot|zink)/.test(s)) cat = "dak-goten";
-  else if (/(pannendak|dakpannen|pannen|dakrenovat|leien)/.test(s)) cat = "dak-pannen";
-  else if (/(bitumen|epdm|plat.?dak)/.test(s)) cat = "dak-bitumen";
-  else if (/dak/.test(s)) cat = "dakwerk";
-  else if (/warmtepomp/.test(s)) cat = "warmtepompen";
-  else if (/(airco|koel)/.test(s)) cat = "warmtepompen";
-  else if (/vloerverwarming/.test(s)) cat = "vloerverwarming";
-  else if (/radiator/.test(s)) cat = "radiatoren";
-  else if (/(badkamer|sanitair|toilet|douche|wastafel|kraan|wc)/.test(s)) cat = "badkamers";
-  else if (/keuken/.test(s)) cat = "keukenleidingen";
-  else if (/(lek|spoed|ontstop|riool|afvoer|verstop|storing)/.test(s)) cat = "lekkages";
-  else if (/(leiding|loodgiet)/.test(s)) cat = "leidingwerk";
-  else if (/(cv|ketel|geiser|verwarm|boiler|warm.?water)/.test(s)) cat = "cv-ketels";
-  return `/foto/${cat}/${cat}-01.jpg`;
-}
 
 function curatedFaqKey(slug: string, name: string): string | null {
   const s = `${slug} ${name}`.toLowerCase();

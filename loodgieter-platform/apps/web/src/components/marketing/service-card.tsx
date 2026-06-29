@@ -3,27 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { urls } from "@repo/seo";
 import { priceRange, priceFromFor } from "@/lib/format";
-
-/** Kiest een passende (gecommitte) categoriefoto op basis van dienstnaam/slug. */
-function photoForService(slug: string, name: string): string {
-  const s = `${slug} ${name}`.toLowerCase();
-  let cat = "cv-ketels";
-  if (/(zonne|solar|laadpaal|pv|batterij|elektra|meterkast)/.test(s)) cat = "zonnepanelen";
-  else if (/(goot|zink)/.test(s)) cat = "dak-goten";
-  else if (/(pannendak|dakpannen|pannen|dakrenovat|leien)/.test(s)) cat = "dak-pannen";
-  else if (/(bitumen|epdm|plat.?dak)/.test(s)) cat = "dak-bitumen";
-  else if (/dak/.test(s)) cat = "dakwerk";
-  else if (/warmtepomp/.test(s)) cat = "warmtepompen";
-  else if (/(airco|koel)/.test(s)) cat = "warmtepompen";
-  else if (/vloerverwarming/.test(s)) cat = "vloerverwarming";
-  else if (/radiator/.test(s)) cat = "radiatoren";
-  else if (/(badkamer|sanitair|toilet|douche|wastafel|kraan|wc)/.test(s)) cat = "badkamers";
-  else if (/keuken/.test(s)) cat = "keukenleidingen";
-  else if (/(lek|spoed|ontstop|riool|afvoer|verstop|storing)/.test(s)) cat = "lekkages";
-  else if (/(leiding|loodgiet)/.test(s)) cat = "leidingwerk";
-  else if (/(cv|ketel|geiser|verwarm|boiler|warm.?water)/.test(s)) cat = "cv-ketels";
-  return `/foto/${cat}/${cat}-01.jpg`;
-}
+import { serviceImage as photoForService } from "@/features/catalog/service-image";
 
 export function ServiceCard({
   service,
