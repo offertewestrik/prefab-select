@@ -9,7 +9,10 @@ function photoForService(slug: string, name: string): string {
   const s = `${slug} ${name}`.toLowerCase();
   let cat = "cv-ketels";
   if (/(zonne|solar|laadpaal|pv|batterij|elektra|meterkast)/.test(s)) cat = "zonnepanelen";
-  else if (/(dak|zink|goot|pannen|bitumen)/.test(s)) cat = "dakwerk";
+  else if (/(goot|zink)/.test(s)) cat = "dak-goten";
+  else if (/(pannendak|dakpannen|pannen|dakrenovat|leien)/.test(s)) cat = "dak-pannen";
+  else if (/(bitumen|epdm|plat.?dak)/.test(s)) cat = "dak-bitumen";
+  else if (/dak/.test(s)) cat = "dakwerk";
   else if (/warmtepomp/.test(s)) cat = "warmtepompen";
   else if (/(airco|koel)/.test(s)) cat = "warmtepompen";
   else if (/vloerverwarming/.test(s)) cat = "vloerverwarming";

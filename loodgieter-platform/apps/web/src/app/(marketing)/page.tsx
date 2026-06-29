@@ -324,6 +324,65 @@ const PROVINCE_BASE: Record<string, number> = {
   zeeland: 142,
 };
 
+// Statische fallback zodat de dienst-keuze nooit leeg is (bv. als de ISR-build
+// de database niet kon bereiken). Bij een geslaagde query wordt dit overschreven.
+const SERVICE_FALLBACK: { slug: string; name: string }[] = [
+  { slug: "cv-ketel-vervangen", name: "CV-ketel vervangen" },
+  { slug: "nieuwe-cv-ketel", name: "Nieuwe CV-ketel" },
+  { slug: "cv-onderhoud", name: "CV-ketel onderhoud" },
+  { slug: "cv-reparatie", name: "CV-ketel reparatie" },
+  { slug: "cv-storing", name: "CV-ketel storing verhelpen" },
+  { slug: "warmtepomp", name: "Warmtepomp installeren" },
+  { slug: "hybride-warmtepomp", name: "Hybride warmtepomp" },
+  { slug: "lucht-water-warmtepomp", name: "Lucht-water warmtepomp" },
+  { slug: "airco", name: "Airco installeren" },
+  { slug: "airco-onderhoud", name: "Airco onderhoud" },
+  { slug: "airco-reparatie", name: "Airco reparatie" },
+  { slug: "radiator-plaatsen", name: "Radiator plaatsen" },
+  { slug: "radiator-vervangen", name: "Radiator vervangen" },
+  { slug: "radiator-ontluchten", name: "Radiator ontluchten" },
+  { slug: "vloerverwarming-leggen", name: "Vloerverwarming leggen" },
+  { slug: "vloerverwarming-infrezen", name: "Vloerverwarming infrezen" },
+  { slug: "elektrische-vloerverwarming", name: "Elektrische vloerverwarming" },
+  { slug: "verdeler-vervangen", name: "Verdeler vervangen" },
+  { slug: "badkamer-renovatie", name: "Badkamer renovatie" },
+  { slug: "toilet-renovatie", name: "Toilet renovatie" },
+  { slug: "leidingwerk", name: "Leidingwerk" },
+  { slug: "waterleiding", name: "Waterleiding aanleggen of repareren" },
+  { slug: "gasleiding", name: "Gasleiding aanleggen of aanpassen" },
+  { slug: "lekkage", name: "Lekkage verhelpen" },
+  { slug: "waterlekkage", name: "Waterlekkage" },
+  { slug: "daklekkage", name: "Daklekkage" },
+  { slug: "gaslekkage", name: "Gaslekkage" },
+  { slug: "spoed-loodgieter", name: "Spoed loodgieter" },
+  { slug: "24-7-loodgieter", name: "24/7 loodgieter" },
+  { slug: "ontstopping", name: "Ontstopping" },
+  { slug: "riolering", name: "Riolering" },
+  { slug: "afvoer", name: "Afvoer aanleggen of repareren" },
+  { slug: "pannendak-vervangen", name: "Pannendak vervangen" },
+  { slug: "dakpannen-repareren", name: "Dakpannen repareren of vervangen" },
+  { slug: "dakrenovatie", name: "Dakrenovatie" },
+  { slug: "plat-dak-bitumen", name: "Bitumen dakbedekking (plat dak)" },
+  { slug: "plat-dak-epdm", name: "EPDM dakbedekking (plat dak)" },
+  { slug: "dakgoot", name: "Dakgoot repareren of vervangen" },
+  { slug: "zinkwerk", name: "Zinkwerk" },
+  { slug: "loodwerk", name: "Loodwerk en loodslabben" },
+  { slug: "dakisolatie", name: "Dakisolatie" },
+  { slug: "dakkapel-plaatsen", name: "Dakkapel plaatsen" },
+  { slug: "dakraam-plaatsen", name: "Dakraam plaatsen" },
+  { slug: "boiler", name: "Boiler plaatsen of vervangen" },
+  { slug: "geiser", name: "Geiser vervangen" },
+  { slug: "zonnepanelen", name: "Zonnepanelen" },
+  { slug: "laadpalen", name: "Laadpaal installeren" },
+  { slug: "thuisbatterij", name: "Thuisbatterij" },
+  { slug: "meterkast", name: "Meterkast vervangen of uitbreiden" },
+  { slug: "elektra", name: "Elektra" },
+];
+const POPULAR_FALLBACK_SLUGS = [
+  "cv-ketel-vervangen", "warmtepomp", "badkamer-renovatie", "lekkage",
+  "ontstopping", "airco", "zonnepanelen", "dakgoot",
+];
+
 export default async function HomePage() {
   // Alle data komt uit de bestaande queries — niets aan de backend gewijzigd.
   let popular: PopularService[] = [];
@@ -345,6 +404,15 @@ export default async function HomePage() {
     serviceOptions = all.map((s) => ({ slug: s.slug, name: s.name }));
   } catch {
     /* graceful: lege staat */
+  }
+
+  // Fallback: nooit een lege dienst-keuze tonen (bv. als de build de DB niet bereikte).
+  if (serviceOptions.length === 0) serviceOptions = SERVICE_FALLBACK;
+  if (popular.length === 0) {
+    popular = POPULAR_FALLBACK_SLUGS
+      .map((slug) => SERVICE_FALLBACK.find((s) => s.slug === slug))
+      .filter((s): s is { slug: string; name: string } => Boolean(s))
+      .map((s) => ({ slug: s.slug, name: s.name, shortDescription: "", priceFrom: null, priceTo: null, priceUnit: null }));
   }
 
   try {

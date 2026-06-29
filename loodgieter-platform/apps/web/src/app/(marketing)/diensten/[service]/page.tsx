@@ -121,7 +121,10 @@ function dienstFoto(slug: string, name: string): string {
   const s = `${slug} ${name}`.toLowerCase();
   let cat = "cv-ketels";
   if (/(zonne|solar|laadpaal|pv|batterij|elektra|meterkast)/.test(s)) cat = "zonnepanelen";
-  else if (/(dak|zink|goot|pannen|bitumen)/.test(s)) cat = "dakwerk";
+  else if (/(goot|zink)/.test(s)) cat = "dak-goten";
+  else if (/(pannendak|dakpannen|pannen|dakrenovat|leien)/.test(s)) cat = "dak-pannen";
+  else if (/(bitumen|epdm|plat.?dak)/.test(s)) cat = "dak-bitumen";
+  else if (/dak/.test(s)) cat = "dakwerk";
   else if (/warmtepomp/.test(s)) cat = "warmtepompen";
   else if (/(airco|koel)/.test(s)) cat = "warmtepompen";
   else if (/vloerverwarming/.test(s)) cat = "vloerverwarming";
@@ -238,6 +241,7 @@ export default async function ServicePage({
         ? `vanaf ${fromPrice}`
         : "Op aanvraag";
   const lname = service.name.toLowerCase();
+  const isCv = /(cv|ketel|geiser|verwarm|boiler|warm.?water)/.test(`${slug} ${service.name}`.toLowerCase());
   const heroVideo = /(cv|ketel|geiser)/.test(`${slug} ${service.name}`.toLowerCase()) ? "/video/dienst-cv.mp4" : null;
   const heroPhoto = dienstFoto(slug, service.name);
   const curatedKey = curatedFaqKey(slug, service.name);
@@ -399,6 +403,33 @@ export default async function ServicePage({
           </div>
         </div>
       </section>
+
+      {/* CV-ketel in beeld — Intergas CW4 (alleen voor cv-diensten) */}
+      {isCv && (
+        <section style={{ maxWidth: 1120, margin: "0 auto", padding: "8px 28px 8px" }}>
+          <h2 style={{ fontFamily: HEAD, fontSize: 26, fontWeight: 800, letterSpacing: "-.02em", color: C.ink }}>De cv-ketel in beeld</h2>
+          <p style={{ fontSize: 15, color: C.muted, marginTop: 8, maxWidth: 640 }}>
+            Onze monteurs werken dagelijks aan cv-ketels van topmerken zoals Intergas. Van jaarlijks onderhoud tot het verhelpen van een storing — vakwerk dat je ketel veilig en zuinig houdt.
+          </p>
+          <div data-grid3 style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginTop: 22 }}>
+            {[
+              { img: "/foto/diensten-cv/intergas-cw4-onderhoud.jpg", t: "Onderhoud", p: "Reiniging en controle voor een zuinige, veilige werking." },
+              { img: "/foto/diensten-cv/intergas-cw4-reparatie.jpg", t: "Reparatie", p: "Vakkundig herstel van onderdelen door een gecertificeerde monteur." },
+              { img: "/foto/diensten-cv/intergas-cw4-storing.jpg", t: "Storing verhelpen", p: "Snelle diagnose van foutcodes en een doeltreffende oplossing." },
+            ].map((c) => (
+              <div key={c.t} style={{ background: "#fff", border: `1px solid ${C.line}`, borderRadius: 16, overflow: "hidden", boxShadow: "0 6px 18px rgba(15,27,51,.05)" }}>
+                <div style={{ position: "relative", width: "100%", aspectRatio: "3 / 2" }}>
+                  <Image src={c.img} alt={`Intergas CW4 cv-ketel — ${c.t.toLowerCase()}`} fill sizes="(max-width:680px) 100vw, 33vw" style={{ objectFit: "cover" }} />
+                </div>
+                <div style={{ padding: "16px 18px" }}>
+                  <div style={{ fontFamily: HEAD, fontWeight: 700, fontSize: 16, color: C.ink }}>{c.t}</div>
+                  <p style={{ fontSize: 13.5, lineHeight: 1.55, color: C.muted2, marginTop: 5 }}>{c.p}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Prijzen */}
       <section style={{ maxWidth: 1120, margin: "0 auto", padding: "100px 28px" }}>
