@@ -162,6 +162,7 @@ export async function SiteFooter() {
               <Link href="/#hoe-het-werkt" style={linkStyle}>Hoe het werkt</Link>
               <Link href="/reviews" style={linkStyle}>Reviews</Link>
               <Link href="/kennisbank" style={linkStyle}>Kennisbank</Link>
+              <Link href="/energie-install" style={linkStyle}>Verduurzamen</Link>
               <a href="https://www.prefabselect.nl" style={linkStyle}>Verbouwen? Prefab Select</a>
             </div>
           </div>

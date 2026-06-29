@@ -24,6 +24,7 @@ const AboutPage = lazy(() => import('./pages/About'));
 const FAQPage = lazy(() => import('./pages/FAQPage'));
 const Werkwijze = lazy(() => import('./pages/Werkwijze'));
 const Loodgieterplatform = lazy(() => import('./pages/Loodgieterplatform'));
+const EnergieInstall = lazy(() => import('./pages/EnergieInstall'));
 const ZeelandLandingPage = lazy(() => import('./pages/ZeelandLandingPage'));
 const ZeelandSchuurtjesProject = lazy(() => import('./pages/ZeelandSchuurtjesProject'));
 const HalsterenLandingPage = lazy(() => import('./pages/HalsterenLandingPage'));
@@ -3423,6 +3424,7 @@ function Footer() {
               <li><Link to="/faq" className="hover:text-white transition-colors">Veelgestelde Vragen</Link></li>
               <li><Link to="/over-ons" className="hover:text-white transition-colors">Over ons</Link></li>
               <li><Link to="/loodgieterplatform" className="hover:text-white transition-colors">Loodgieterplatform</Link></li>
+              <li><Link to="/energie-install" className="hover:text-white transition-colors">Energie Install</Link></li>
             </ul>
           </div>
 
@@ -5425,6 +5427,8 @@ export default function App() {
           <Route path="/werkwijze" element={<Werkwijze />} />
           <Route path="/loodgieterplatform" element={<Loodgieterplatform />} />
           <Route path="/loodgieter" element={<Loodgieterplatform />} />
+          <Route path="/energie-install" element={<EnergieInstall />} />
+          <Route path="/verduurzamen" element={<EnergieInstall />} />
           <Route path="/over-ons" element={<AboutPage />} />
           <Route path="/wie-wij-zijn" element={<AboutPage />} />
           <Route path="/waarom-prefab-select" element={<WhyChooseUsPage />} />

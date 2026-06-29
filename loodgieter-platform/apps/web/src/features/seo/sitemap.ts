@@ -23,7 +23,7 @@ export async function getSitemapSegments(): Promise<string[]> {
 /** URL's voor één segment. */
 export async function getSegmentUrls(segment: string): Promise<SitemapUrl[]> {
   if (segment === "paginas") {
-    return [urls.home(), urls.services(), urls.cities(), urls.installers(), "/voor-vakmannen", "/over-ons", "/contact", "/reviews"].map(
+    return [urls.home(), urls.services(), urls.cities(), urls.installers(), "/voor-vakmannen", "/over-ons", "/contact", "/reviews", "/energie-install"].map(
       (p) => ({ loc: siteUrl(p) }),
     );
   }
