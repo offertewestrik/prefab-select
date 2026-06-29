@@ -29,8 +29,11 @@ export async function generateMetadata({
   const data = await getServiceCityData(service, city);
   if (!data) return {};
   const title =
-    data.override?.seoTitle ?? `${data.service.name} in ${data.city.name} — vergelijk vakmannen`;
+    data.article?.seoTitle ??
+    data.override?.seoTitle ??
+    `${data.service.name} in ${data.city.name} — vergelijk vakmannen`;
   const description =
+    data.article?.metaDescription ??
     data.override?.metaDescription ??
     `${data.service.name} in ${data.city.name} nodig? ${data.service.shortDescription} Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}.`;
   return buildMetadata({ title, description, path: urls.serviceCity(service, city) });
@@ -77,9 +80,11 @@ export default async function ServiceCityPage({
             rating: reviews.count > 0 ? { value: reviews.average, count: reviews.count } : undefined,
             reviews: reviews.latest.map((r) => ({ author: r.authorLabel, rating: r.rating, title: r.title, body: r.body })),
           }),
-          ...(data.service.faqs.length
-            ? [faqLd(data.service.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
-            : []),
+          ...(data.article && data.article.faqs.length
+            ? [faqLd(data.article.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
+            : data.service.faqs.length
+              ? [faqLd(data.service.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
+              : []),
         ]}
       />
       <ServiceCityTemplate data={data} links={links} />

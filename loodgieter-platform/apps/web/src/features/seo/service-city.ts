@@ -2,6 +2,7 @@ import "server-only";
 import { prisma } from "@/lib/prisma";
 import { isReservedSlug } from "@repo/core";
 import { countInstallersFor, getNearbyCities } from "@/features/geo/server/queries";
+import { getServiceCityArticle } from "@/features/seo/service-city-content";
 
 /**
  * Haalt alle data voor een dienst×stad-pagina op. Geeft null bij een ongeldige
@@ -38,7 +39,10 @@ export async function getServiceCityData(serviceSlug: string, citySlug: string) 
 
   const related = service.relatedFrom.map((r) => r.to).filter((t) => t.publish === "ACTIVE").slice(0, 6);
 
-  return { service, city, override, installerCount, nearby, related };
+  // Uniek long-form artikel voor deze combinatie (bv. spoed-loodgieter × stad).
+  const article = getServiceCityArticle(serviceSlug, citySlug);
+
+  return { service, city, override, article, installerCount, nearby, related };
 }
 
 export type ServiceCityData = NonNullable<Awaited<ReturnType<typeof getServiceCityData>>>;

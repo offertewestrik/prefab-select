@@ -1,12 +1,34 @@
 import Link from "next/link";
-import { Check, MapPin, Users } from "lucide-react";
+import { Check, MapPin, Users, Phone, Clock } from "lucide-react";
 import { brand } from "@repo/core";
 import { LeadCta } from "@/components/marketing/lead-cta";
 import { priceRange } from "@/lib/format";
 import type { ServiceCityData } from "@/features/seo/service-city";
 import type { LinkItem } from "@/features/seo/internal-links";
 
-// Tijdelijke basis-layout. Visuele afwerking volgt via Claude Design.
+/** Platte tekst met eenvoudige opmaak: ## subkop, "- " lijst, lege regel = alinea. */
+function RichText({ text }: { text: string }) {
+  const blocks = text.split(/\n\n+/).map((b) => b.trim()).filter(Boolean);
+  return (
+    <>
+      {blocks.map((block, i) => {
+        const lines = block.split("\n").map((l) => l.trim());
+        if (lines.every((l) => l.startsWith("- "))) {
+          return (
+            <ul key={i} className="my-4 list-disc space-y-1 pl-5 text-neutral-700">
+              {lines.map((l, j) => <li key={j}>{l.replace(/^-\s+/, "")}</li>)}
+            </ul>
+          );
+        }
+        if (lines.length === 1 && lines[0]!.startsWith("## ")) {
+          return <h3 key={i} className="mt-6 text-lg font-bold text-neutral-900">{lines[0]!.replace(/^##\s+/, "")}</h3>;
+        }
+        return <p key={i} className="my-4 leading-relaxed text-neutral-700">{block}</p>;
+      })}
+    </>
+  );
+}
+
 export function ServiceCityTemplate({
   data,
   links,
@@ -14,8 +36,10 @@ export function ServiceCityTemplate({
   data: ServiceCityData;
   links: { hubs: LinkItem[]; nearbyCities: LinkItem[]; relatedServices: LinkItem[] };
 }) {
-  const { service, city, installerCount, override } = data;
-  const h1 = override?.seoTitle ?? `${service.name} in ${city.name}`;
+  const { service, city, installerCount, override, article } = data;
+  const h1 = article?.seoTitle ?? override?.seoTitle ?? `${service.name} in ${city.name}`;
+  const isEmergency = /(spoed|24-7|lekkage|ontstop|storing|gaslek)/.test(service.slug);
+  const faqs = article && article.faqs.length > 0 ? article.faqs : service.faqs;
 
   return (
     <main>
@@ -51,13 +75,40 @@ export function ServiceCityTemplate({
         </div>
       </section>
 
+      {isEmergency && (
+        <div className="border-b border-red-100 bg-red-50">
+          <div className="mx-auto flex max-w-(--container-max) flex-wrap items-center justify-between gap-4 px-6 py-4">
+            <div className="flex items-center gap-3 text-sm font-medium text-red-900">
+              <Clock className="h-5 w-5 shrink-0 text-red-600" />
+              <span>Spoed in {city.name}? Dag en nacht een loodgieter bereikbaar — vaak binnen enkele uren ter plaatse.</span>
+            </div>
+            <a
+              href={brand.phoneHref}
+              className="inline-flex shrink-0 items-center gap-2 rounded-[var(--radius-md)] bg-red-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-red-700"
+            >
+              <Phone className="h-4 w-4" /> Bel direct: {brand.phone}
+            </a>
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto grid max-w-(--container-max) gap-12 px-6 py-12 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-8">
-          <article className="prose prose-neutral max-w-none">
-            {override?.introHtml ? (
-              <div dangerouslySetInnerHTML={{ __html: override.introHtml }} />
-            ) : (
+          <article className="max-w-none">
+            {article ? (
               <>
+                <p className="text-lg leading-relaxed text-neutral-700">{article.intro}</p>
+                {article.body.map((section, i) => (
+                  <section key={i}>
+                    <h2 className="mt-8 text-2xl font-bold tracking-tight text-neutral-900">{section.heading}</h2>
+                    <RichText text={section.text} />
+                  </section>
+                ))}
+              </>
+            ) : override?.introHtml ? (
+              <div className="prose prose-neutral max-w-none" dangerouslySetInnerHTML={{ __html: override.introHtml }} />
+            ) : (
+              <div className="prose prose-neutral max-w-none">
                 <p className="text-neutral-700">{service.longDescription}</p>
                 <p className="text-neutral-700">
                   Zoek je {service.name.toLowerCase()} in {city.name}? Via {brand.name} ontvang
@@ -65,18 +116,18 @@ export function ServiceCityTemplate({
                   {city.name} en omgeving. Zo vergelijk je prijs, beschikbaarheid en
                   beoordelingen, en kies je zelf de beste vakman.
                 </p>
-              </>
+              </div>
             )}
           </article>
 
-          {service.faqs.length > 0 && (
+          {faqs.length > 0 && (
             <div>
               <h2 className="text-xl font-bold text-neutral-900">
                 Veelgestelde vragen over {service.name.toLowerCase()} in {city.name}
               </h2>
               <div className="mt-4 divide-y divide-neutral-200 rounded-[var(--radius-xl)] border border-neutral-200 bg-white">
-                {service.faqs.map((f) => (
-                  <details key={f.id} className="group p-5">
+                {faqs.map((f, i) => (
+                  <details key={i} className="group p-5">
                     <summary className="cursor-pointer list-none font-medium text-neutral-900">{f.question}</summary>
                     <p className="mt-2 text-sm text-neutral-500">{f.answer}</p>
                   </details>
