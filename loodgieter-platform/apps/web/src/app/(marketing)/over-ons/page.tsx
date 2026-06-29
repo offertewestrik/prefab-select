@@ -128,6 +128,30 @@ export default function AboutPage() {
               opdrachten zonder loze leads. Zo wint iedereen.
             </p>
           </div>
+
+          <div>
+            <h2 style={h2}>Onderdeel van Prefab Select</h2>
+            <p style={{ ...para, marginTop: 12 }}>
+              Loodgieterplatform.nl komt voort uit de bouw- en verbouwwereld. Ons zusterbedrijf{" "}
+              <a
+                href="https://www.prefabselect.nl"
+                style={{ color: C.blue, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+              >
+                Prefab Select
+              </a>{" "}
+              realiseert circulaire, modulaire uitbouwen, aanbouwen en mantelzorgwoningen door heel
+              Nederland. Daar zagen we van dichtbij hoe belangrijk goed installatiewerk is — en hoe lastig
+              het soms is om als huiseigenaar een betrouwbare loodgieter te vinden. Loodgieterplatform.nl is
+              ons antwoord daarop. Ga je{" "}
+              <a
+                href="https://www.prefabselect.nl"
+                style={{ color: C.blue, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+              >
+                verbouwen of uitbouwen
+              </a>
+              ? Dan helpt Prefab Select je graag verder.
+            </p>
+          </div>
         </div>
       </section>
 
