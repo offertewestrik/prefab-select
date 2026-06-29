@@ -9,6 +9,7 @@ import { getServicesByCategory } from "@/features/catalog/server/queries";
 import { getReviewsForCity } from "@/features/reviews/server/aggregation";
 import { ReviewsSection } from "@/components/marketing/reviews-section";
 import { cityIntro, cityBody, cityFaqs } from "@/features/geo/content/city-content";
+import { getCityArticle } from "@/features/geo/content/city-article";
 import { C, HEAD, BODY, PAGE_BG, IcStar, IcCheck, IcArrow, IcPin, IcShield } from "@/components/marketing/ds";
 
 export const revalidate = 86400;
@@ -47,9 +48,11 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
 
   const facts = { name: city.name, province: city.province.name, population: city.population };
   const nearbyNames = nearby.map((n) => n.name);
-  const intro = cityIntro(facts);
-  const body = cityBody(facts);
-  const faqs = cityFaqs(facts, nearbyNames);
+  // Uniek long-form artikel indien beschikbaar; anders de gegenereerde module-content.
+  const article = getCityArticle(slug);
+  const intro = article ? article.intro : cityIntro(facts);
+  const body = article ? article.body : cityBody(facts).map((b) => ({ heading: b.heading, text: b.body }));
+  const faqs = article && article.faqs.length > 0 ? article.faqs : cityFaqs(facts, nearbyNames);
 
   const serviceList = categories.flatMap((cat) =>
     cat.services.map((s) => ({
@@ -130,7 +133,9 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           {body.map((block) => (
             <div key={block.heading}>
               <h2 style={{ fontFamily: HEAD, fontSize: 24, fontWeight: 800, letterSpacing: "-.02em", color: C.ink, margin: 0 }}>{block.heading}</h2>
-              <p style={{ fontSize: 15.5, lineHeight: 1.7, color: C.body, marginTop: 12, marginBottom: 0 }}>{block.body}</p>
+              {block.text.split(/\n\n+/).map((para, i) => (
+                <p key={i} style={{ fontSize: 15.5, lineHeight: 1.7, color: C.body, marginTop: 12, marginBottom: 0 }}>{para}</p>
+              ))}
             </div>
           ))}
         </div>
