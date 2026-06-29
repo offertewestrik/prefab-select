@@ -1,33 +1,50 @@
 import "server-only";
-import { prisma } from "@/lib/prisma";
+import {
+  allKbArticles,
+  kbArticleBySlug,
+  kbArticlesByCategory,
+  kbCategories,
+  kbCategoryName,
+  type KbArticle,
+} from "@/features/content/kennisbank-files";
+
+/**
+ * De kennisbank wordt gevoed door versie-beheerde JSON-bestanden
+ * (src/content/kennisbank/*.json), net als de stadspagina's. Zo blijft de
+ * content reviewbaar in Git en hoeft er niets in de database te staan.
+ */
+
+function toListItem(a: KbArticle) {
+  return {
+    id: a.slug,
+    slug: a.slug,
+    title: a.title,
+    excerpt: a.excerpt,
+    coverImageUrl: null as string | null,
+    publishedAt: a.updated ? new Date(a.updated) : null,
+    category: { id: a.category, slug: a.category, name: a.categoryName },
+  };
+}
 
 /** Gepubliceerde artikelen, optioneel per categorie. */
 export async function getArticles(categorySlug?: string) {
-  return prisma.article.findMany({
-    where: {
-      status: "PUBLISHED",
-      ...(categorySlug ? { category: { slug: categorySlug } } : {}),
-    },
-    orderBy: { publishedAt: "desc" },
-    include: { category: true, author: true },
-  });
+  const rows = categorySlug ? kbArticlesByCategory(categorySlug) : allKbArticles();
+  return rows.map(toListItem);
 }
 
 export async function getArticleCategories() {
-  return prisma.articleCategory.findMany({ orderBy: { name: "asc" } });
+  return kbCategories().map((c) => ({ id: c.slug, slug: c.slug, name: c.name }));
 }
 
-export async function getArticleBySlug(slug: string) {
-  return prisma.article.findFirst({
-    where: { slug, status: "PUBLISHED" },
-    include: { category: true, author: true, tags: { include: { tag: true } } },
-  });
+export async function getArticleCategory(slug: string) {
+  const name = kbCategoryName(slug);
+  return name ? { id: slug, slug, name } : null;
+}
+
+export async function getArticleBySlug(slug: string): Promise<KbArticle | null> {
+  return kbArticleBySlug(slug);
 }
 
 export async function getAllArticleParams() {
-  const rows = await prisma.article.findMany({
-    where: { status: "PUBLISHED" },
-    select: { slug: true, category: { select: { slug: true } } },
-  });
-  return rows.filter((r) => r.category).map((r) => ({ category: r.category!.slug, slug: r.slug }));
+  return allKbArticles().map((a) => ({ category: a.category, slug: a.slug }));
 }

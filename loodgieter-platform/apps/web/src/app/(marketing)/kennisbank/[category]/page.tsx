@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { urls, breadcrumbLd, itemListLd } from "@repo/seo";
-import { prisma } from "@/lib/prisma";
 import { JsonLd } from "@/components/json-ld";
 import { buildMetadata } from "@/features/seo/metadata";
-import { getArticles } from "@/features/content/server/queries";
+import { getArticles, getArticleCategories, getArticleCategory } from "@/features/content/server/queries";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const cats = await prisma.articleCategory.findMany({ select: { slug: true } });
+  const cats = await getArticleCategories();
   return cats.map((c) => ({ category: c.slug }));
 }
 
@@ -21,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
   const { category } = await params;
-  const cat = await prisma.articleCategory.findUnique({ where: { slug: category } });
+  const cat = await getArticleCategory(category);
   if (!cat) return {};
   return buildMetadata({
     title: `${cat.name} — Kennisbank`,
@@ -32,7 +31,7 @@ export async function generateMetadata({
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
-  const cat = await prisma.articleCategory.findUnique({ where: { slug: category } });
+  const cat = await getArticleCategory(category);
   if (!cat) notFound();
   const articles = await getArticles(category);
 

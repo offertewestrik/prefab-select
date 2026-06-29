@@ -71,13 +71,8 @@ export async function getSegmentUrls(segment: string): Promise<SitemapUrl[]> {
   }
 
   if (segment === "kennisbank") {
-    const rows = await prisma.article.findMany({
-      where: { status: "PUBLISHED" },
-      select: { slug: true, updatedAt: true, category: { select: { slug: true } } },
-    });
-    return rows
-      .filter((r) => r.category)
-      .map((r) => ({ loc: siteUrl(urls.article(r.category!.slug, r.slug)), lastmod: r.updatedAt.toISOString() }));
+    const { allKbArticles } = await import("@/features/content/kennisbank-files");
+    return allKbArticles().map((a) => ({ loc: siteUrl(urls.article(a.category, a.slug)) }));
   }
 
   if (segment.startsWith("combinaties-")) {
