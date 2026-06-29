@@ -36,7 +36,16 @@ export async function generateMetadata({
     data.article?.metaDescription ??
     data.override?.metaDescription ??
     `${data.service.name} in ${data.city.name} nodig? ${data.service.shortDescription} Vergelijk gratis offertes van gecertificeerde vakmannen via ${brand.name}.`;
-  return buildMetadata({ title, description, path: urls.serviceCity(service, city) });
+  // SEO-bescherming: alleen combinaties met unieke content (eigen artikel of
+  // admin-override) laten indexeren. Dunne, getemplate combinaties → noindex,
+  // zodat een jong domein niet afgestraft wordt voor "scaled content".
+  const hasUniqueContent = Boolean(data.article || data.override?.introHtml);
+  return buildMetadata({
+    title,
+    description,
+    path: urls.serviceCity(service, city),
+    noindex: !hasUniqueContent,
+  });
 }
 
 export default async function ServiceCityPage({

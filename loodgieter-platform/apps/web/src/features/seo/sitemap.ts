@@ -5,19 +5,11 @@ import { getPriorityServiceCityPairs } from "@/features/catalog/server/queries";
 
 export type SitemapUrl = { loc: string; lastmod?: string };
 
-const COMBO_CHUNK = 5000;
-
 /** Lijst van deel-sitemap-segmenten voor de sitemap-index. */
 export async function getSitemapSegments(): Promise<string[]> {
-  const [serviceCount, cityCount] = await Promise.all([
-    prisma.service.count({ where: { publish: "ACTIVE" } }),
-    prisma.municipality.count({ where: { publish: "ACTIVE" } }),
-  ]);
-  const comboChunks = Math.max(1, Math.ceil((serviceCount * cityCount) / COMBO_CHUNK));
-
-  const segments = ["paginas", "diensten", "steden", "merken", "kennisbank", "vakmannen"];
-  for (let i = 0; i < comboChunks; i++) segments.push(`combinaties-${i}`);
-  return segments;
+  // Bewust GEEN volledige dienst×stad-matrix meer (16k+ dunne pagina's). Alleen
+  // combinaties met unieke content komen in de sitemap (segment "combinaties").
+  return ["paginas", "diensten", "steden", "merken", "kennisbank", "vakmannen", "combinaties"];
 }
 
 /** URL's voor één segment. */
@@ -75,23 +67,25 @@ export async function getSegmentUrls(segment: string): Promise<SitemapUrl[]> {
     return allKbArticles().map((a) => ({ loc: siteUrl(urls.article(a.category, a.slug)) }));
   }
 
-  if (segment.startsWith("combinaties-")) {
-    const chunk = Number(segment.split("-")[1] ?? 0);
-    const [services, cities] = await Promise.all([
-      prisma.service.findMany({ where: { publish: "ACTIVE" }, select: { slug: true }, orderBy: { slug: "asc" } }),
-      prisma.municipality.findMany({ where: { publish: "ACTIVE" }, select: { slug: true }, orderBy: { slug: "asc" } }),
-    ]);
-    const start = chunk * COMBO_CHUNK;
-    const end = start + COMBO_CHUNK;
+  if (segment === "combinaties") {
+    // Alleen dienst×stad-combinaties met unieke content (eigen artikel of admin-
+    // override). Dunne, getemplate combinaties houden we uit de sitemap én op
+    // noindex, zodat Google geen 16k bijna-identieke pagina's te zien krijgt.
+    const { listServiceCityArticles } = await import("@/features/seo/service-city-content");
+    const fromFiles = listServiceCityArticles().map((p) => ({ service: p.service, city: p.city }));
+
+    const overrides = await prisma.landingContent
+      .findMany({ select: { service: { select: { slug: true } }, municipality: { select: { slug: true } } } })
+      .catch(() => [] as { service: { slug: string }; municipality: { slug: string } }[]);
+    const fromDb = overrides.map((o) => ({ service: o.service.slug, city: o.municipality.slug }));
+
+    const seen = new Set<string>();
     const out: SitemapUrl[] = [];
-    let i = 0;
-    for (const s of services) {
-      for (const c of cities) {
-        if (i >= start && i < end) out.push({ loc: siteUrl(urls.serviceCity(s.slug, c.slug)) });
-        i++;
-        if (i >= end) break;
-      }
-      if (i >= end) break;
+    for (const p of [...fromFiles, ...fromDb]) {
+      const key = `${p.service}/${p.city}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ loc: siteUrl(urls.serviceCity(p.service, p.city)) });
     }
     return out;
   }

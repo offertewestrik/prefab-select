@@ -20,6 +20,27 @@ const cache = new Map<string, ServiceCityArticle | null>();
  * src/content/dienst-stad/<service>/<city>.json. Geeft null als er (nog) geen
  * unieke tekst is — dan valt de pagina terug op de standaardtemplate.
  */
+/** Alle dienst×stad-combinaties waarvoor een uniek artikel-bestand bestaat. */
+export function listServiceCityArticles(): { service: string; city: string }[] {
+  const out: { service: string; city: string }[] = [];
+  let services: string[] = [];
+  try {
+    services = fs.readdirSync(DIR, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
+  } catch {
+    return out;
+  }
+  for (const service of services) {
+    let files: string[] = [];
+    try {
+      files = fs.readdirSync(path.join(DIR, service)).filter((f) => f.endsWith(".json"));
+    } catch {
+      files = [];
+    }
+    for (const f of files) out.push({ service, city: f.replace(/\.json$/, "") });
+  }
+  return out;
+}
+
 export function getServiceCityArticle(service: string, city: string): ServiceCityArticle | null {
   const key = `${service}/${city}`;
   const cached = cache.get(key);

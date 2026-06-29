@@ -8,6 +8,8 @@ interface BaseMeta {
   description: string;
   path: string;
   ogImageUrl?: string;
+  /** Forceer noindex (bv. dunne dienst×stad-combinaties zonder unieke content). */
+  noindex?: boolean;
 }
 
 /**
@@ -27,7 +29,7 @@ export async function buildMetadata(base: BaseMeta): Promise<Metadata> {
     title,
     description,
     alternates: { canonical },
-    robots: override?.noindex ? { index: false, follow: true } : { index: true, follow: true },
+    robots: override?.noindex || base.noindex ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       title,
       description,
