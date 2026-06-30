@@ -40,6 +40,20 @@ export async function getAllCitySlugs() {
   });
 }
 
+/**
+ * Seed voor build-time prerender: alleen de grootste steden vooraf renderen.
+ * De rest komt on-demand via ISR (dynamicParams=true) en wordt daarna gecachet.
+ * Houdt de build snel en de Vercel-deploywachtrij kort.
+ */
+export async function getSeedCitySlugs(limit = 40) {
+  return prisma.municipality.findMany({
+    where: { publish: "ACTIVE" },
+    orderBy: { population: "desc" },
+    take: limit,
+    select: { slug: true },
+  });
+}
+
 /** Nabije gemeenten o.b.v. geografische afstand (Haversine, in JS). */
 export async function getNearbyCities(
   lat: number,

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { urls, breadcrumbLd, itemListLd, faqLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { buildMetadata } from "@/features/seo/metadata";
-import { getCityBySlug, getAllCitySlugs, getNearbyCities } from "@/features/geo/server/queries";
+import { getCityBySlug, getSeedCitySlugs, getNearbyCities } from "@/features/geo/server/queries";
 import { getServicesByCategory } from "@/features/catalog/server/queries";
 import { getReviewsForCity } from "@/features/reviews/server/aggregation";
 import { ReviewsSection } from "@/components/marketing/reviews-section";
@@ -16,7 +16,8 @@ export const revalidate = 86400;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const cities = await getAllCitySlugs();
+  // Alleen de grootste steden vooraf renderen; de rest komt on-demand via ISR.
+  const cities = await getSeedCitySlugs(40);
   return cities.map((c) => ({ city: c.slug }));
 }
 
