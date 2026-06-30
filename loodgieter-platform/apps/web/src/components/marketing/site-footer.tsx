@@ -159,7 +159,7 @@ export async function SiteFooter() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
               <Link href="/over-ons" style={linkStyle}>Over ons</Link>
-              <Link href="/#hoe-het-werkt" style={linkStyle}>Hoe het werkt</Link>
+              <Link href="/hoe-het-werkt" style={linkStyle}>Hoe het werkt</Link>
               <Link href="/reviews" style={linkStyle}>Reviews</Link>
               <Link href="/kennisbank" style={linkStyle}>Kennisbank</Link>
               <Link href="/energie-install" style={linkStyle}>Verduurzamen</Link>

@@ -20,7 +20,7 @@ const C = {
 const nav = [
   { label: "Diensten", href: "/diensten", chevron: true },
   { label: "Vakmannen", href: "/vakmannen" },
-  { label: "Hoe het werkt", href: "/#hoe-het-werkt" },
+  { label: "Hoe het werkt", href: "/hoe-het-werkt" },
   { label: "Reviews", href: "/reviews" },
   { label: "Keurmerken", href: "/keurmerken" },
   { label: "Voor vakmannen", href: "/voor-vakmannen" },

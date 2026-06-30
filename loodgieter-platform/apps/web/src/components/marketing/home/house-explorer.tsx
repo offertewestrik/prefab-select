@@ -15,6 +15,7 @@ type Service = {
   name: string;
   desc: string;
   iconPath: string;
+  img: string;
   pos: { top: string; left: string };
 };
 
@@ -25,6 +26,7 @@ const SERVICES: readonly Service[] = [
     desc: "Vervangen of onderhoud van je CV-ketel, vaak binnen 48 uur.",
     iconPath:
       "M12 3c1.5 2.5 3.5 3.5 3.5 6.5a3.5 3.5 0 1 1-7 0c0-1.2.5-2 1.3-2.8.2 1 .9 1.6 1.7 1.8.1-2-.5-3.6-.5-5.5Z",
+    img: "/images/services/cv-ketel-onderhoud.webp",
     pos: { top: "20%", left: "30%" },
   },
   {
@@ -32,6 +34,7 @@ const SERVICES: readonly Service[] = [
     name: "Warmtepomp",
     desc: "Duurzaam verwarmen met een energiezuinige warmtepomp.",
     iconPath: "M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9",
+    img: "/images/services/hybride-warmtepomp.webp",
     pos: { top: "16%", left: "64%" },
   },
   {
@@ -40,6 +43,7 @@ const SERVICES: readonly Service[] = [
     desc: "Comfortabele, gelijkmatige warmte door het hele huis.",
     iconPath:
       "M3 8c2.5 0 2.5 2 5 2s2.5-2 5-2 2.5 2 5 2M3 14c2.5 0 2.5 2 5 2s2.5-2 5-2 2.5 2 5 2",
+    img: "/images/services/vloerverwarming-leggen.webp",
     pos: { top: "70%", left: "40%" },
   },
   {
@@ -47,6 +51,7 @@ const SERVICES: readonly Service[] = [
     name: "Radiatoren",
     desc: "Plaatsen of vervangen van radiatoren in elke ruimte.",
     iconPath: "M5 5v14M9.5 5v14M14 5v14M18.5 5v14M4 8.5h15M4 15.5h15",
+    img: "/images/services/design-radiator.webp",
     pos: { top: "44%", left: "22%" },
   },
   {
@@ -54,6 +59,7 @@ const SERVICES: readonly Service[] = [
     name: "Badkamer",
     desc: "Complete renovatie van je badkamer, van ontwerp tot oplevering.",
     iconPath: "M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-3ZM7 12V6.5a2 2 0 0 1 4 0",
+    img: "/images/services/badkamer-renovatie.webp",
     pos: { top: "52%", left: "70%" },
   },
   {
@@ -61,6 +67,7 @@ const SERVICES: readonly Service[] = [
     name: "Lekkage",
     desc: "Snel opsporen en verhelpen van lekkages.",
     iconPath: "M12 3s6 6 6 10a6 6 0 1 1-12 0c0-4 6-10 6-10Z",
+    img: "/foto/lekkages/lekkages-01.jpg",
     pos: { top: "34%", left: "50%" },
   },
   {
@@ -69,6 +76,7 @@ const SERVICES: readonly Service[] = [
     desc: "Verstopte afvoer of riool? Snel weer vrij.",
     iconPath:
       "M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.5 2.5-2.3-2.3 2.5-2.5Z",
+    img: "/foto/leidingwerk/leidingwerk-01.jpg",
     pos: { top: "82%", left: "64%" },
   },
   {
@@ -76,6 +84,7 @@ const SERVICES: readonly Service[] = [
     name: "Leidingwerk",
     desc: "Aanleg en aanpassing van waterleidingen.",
     iconPath: "M6 4v8a3 3 0 0 0 3 3h9M18 11l3 4-3 4",
+    img: "/images/services/waterleiding-aanleggen-repareren.webp",
     pos: { top: "60%", left: "50%" },
   },
 ] as const;
@@ -250,13 +259,30 @@ export function HouseExplorer() {
             boxShadow: "0 30px 60px -30px rgba(14,31,69,.6)",
           }}
         >
-          {/* subtiele inner-shadow overlay */}
+          {/* foto van de actieve dienst als achtergrond */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={current.img}
+            alt={current.name}
+            loading="lazy"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+
+          {/* donkere overlay zodat hotspots en kaart leesbaar blijven */}
           <div
             aria-hidden
             style={{
               position: "absolute",
               inset: 0,
               borderRadius: 22,
+              background:
+                "linear-gradient(150deg, rgba(14,31,69,.55), rgba(30,79,214,.32) 45%, rgba(14,31,69,.72))",
               boxShadow: "inset 0 1px 0 rgba(255,255,255,.14), inset 0 -60px 120px rgba(14,31,69,.45)",
               pointerEvents: "none",
             }}
