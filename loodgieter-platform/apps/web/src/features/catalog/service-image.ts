@@ -1,6 +1,4 @@
 import "server-only";
-import fs from "node:fs";
-import path from "node:path";
 
 /**
  * Eén bron van waarheid voor de foto per dienst.
@@ -9,9 +7,48 @@ import path from "node:path";
  * Bestaat dat (nog) niet, dan valt de functie netjes terug op de bestaande
  * Intergas-overrides en daarna op een categoriefoto — zo breekt er nooit een
  * afbeelding terwijl de webp-set wordt aangevuld.
+ *
+ * We gebruiken bewust GEEN fs-check meer: op Vercel is het bestandssysteem
+ * tijdens (on-demand) rendering niet gegarandeerd beschikbaar, waardoor foto's
+ * konden wegvallen. In plaats daarvan een vaste lijst van aanwezige webp's
+ * (= de bestanden in public/images/services/). Voeg je een webp toe? Zet de
+ * naam ook in AVAILABLE_WEBP.
  */
 
-const SERVICES_DIR = path.join(process.cwd(), "public/images/services");
+const AVAILABLE_WEBP = new Set<string>([
+  "adv-24-7-loodgieter",
+  "adv-daklekkage",
+  "adv-gaslek",
+  "adv-lekkage-verhelpen",
+  "airco-onderhoud",
+  "airco-reparatie",
+  "airco-smart-bediening",
+  "badkamer-renovatie",
+  "bitumen-dakbedekking",
+  "cv-ketel-onderhoud",
+  "dakkapel-plaatsen",
+  "dakraam-plaatsen",
+  "design-radiator",
+  "elektrische-vloerverwarming",
+  "gasleiding-aanleggen-aanpassen",
+  "hybride-warmtepomp",
+  "laadpaal-installeren",
+  "lage-convector-radiator",
+  "leidingwerk",
+  "loodslabben",
+  "lucht-water-warmtepomp",
+  "meterkast-vervangen-uitbreiden",
+  "pannendak-vervangen",
+  "radiator-paneel",
+  "radiator-type22",
+  "thuisbatterij-installatie",
+  "toilet-renovatie",
+  "verdeler-vervangen",
+  "vloerverwarming-infrezen",
+  "vloerverwarming-leggen",
+  "waterleiding-aanleggen-repareren",
+  "zonnepanelen-installeren",
+]);
 
 // DB-slug -> bestandsnaam (zonder extensie), exact zoals aangeleverd.
 const SERVICE_IMAGE_FILE: Record<string, string> = {
@@ -96,24 +133,10 @@ function categoryPhoto(slug: string, name: string): string {
   return `/foto/${cat}/${cat}-01.jpg`;
 }
 
-const existsCache = new Map<string, boolean>();
-function webpExists(file: string): boolean {
-  const cached = existsCache.get(file);
-  if (cached !== undefined) return cached;
-  let ok = false;
-  try {
-    ok = fs.existsSync(path.join(SERVICES_DIR, `${file}.webp`));
-  } catch {
-    ok = false;
-  }
-  existsCache.set(file, ok);
-  return ok;
-}
-
 /** Beste beschikbare foto-URL voor een dienst. */
 export function serviceImage(slug: string, name: string): string {
   const file = SERVICE_IMAGE_FILE[slug];
-  if (file && webpExists(file)) return `/images/services/${file}.webp`;
+  if (file && AVAILABLE_WEBP.has(file)) return `/images/services/${file}.webp`;
   const override = PHOTO_BY_SLUG[slug];
   if (override) return override;
   return categoryPhoto(slug, name);
