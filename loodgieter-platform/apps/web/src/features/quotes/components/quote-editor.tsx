@@ -132,6 +132,15 @@ export function QuoteEditor({
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-4">
+        <a
+          href={`/dashboard/offertes/${quoteId}/pdf`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-neutral-200 bg-white px-3 py-2 text-sm font-medium text-neutral-700 hover:border-neutral-300"
+        >
+          📄 PDF bekijken / downloaden
+        </a>
+        {!readOnly && <p className="-mt-2 text-xs text-neutral-500">Tip: sla eerst op zodat de PDF de laatste wijzigingen toont.</p>}
         {readOnly && (
           <div className="rounded-[var(--radius-md)] bg-neutral-100 p-3 text-sm text-neutral-600">
             Status: <strong>{quoteStatusLabels[status as QuoteStatus] ?? status}</strong> —{" "}

@@ -7,6 +7,8 @@ import { saveQuoteSchema, sendQuoteSchema } from "../schema";
 import { euro } from "@/lib/format";
 import { computeTotals, makeAccessToken } from "./service";
 import { parseLineItems } from "./queries";
+import { renderQuotePdf } from "./pdf";
+import type { EmailAttachment } from "@/features/notifications/email/send";
 import { sendQuoteSent, sendQuoteAccepted, sendQuoteRejected, sendQuoteExpired, sendAdminNotification } from "@/features/notifications/email/send";
 import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
 import { createReviewInviteForQuote } from "@/features/reviews/server/service";
@@ -79,6 +81,45 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
     data: { status: "SENT", sentAt: new Date(), accessToken: token },
   });
 
+  // PDF als bijlage meesturen (best-effort — een render-fout mag versturen niet blokkeren).
+  let attachments: EmailAttachment[] | undefined;
+  try {
+    const pdf = await renderQuotePdf({
+      number: quote.number,
+      title: quote.title,
+      introText: quote.introText,
+      createdAt: quote.createdAt,
+      validUntil: quote.validUntil,
+      company: {
+        name: quote.company.name,
+        email: quote.company.email,
+        phone: quote.company.phone,
+        logoUrl: quote.company.logoUrl,
+        street: quote.company.street,
+        postcode: quote.company.postcode,
+        city: quote.company.city,
+        kvk: quote.company.kvk,
+        vatNumber: quote.company.vatNumber,
+      },
+      customer: {
+        name: quote.customerName ?? quote.lead?.contactName,
+        email: quote.customerEmail ?? quote.lead?.contactEmail,
+        phone: quote.customerPhone ?? quote.lead?.contactPhone,
+        address: quote.customerAddress ?? [quote.lead?.street, quote.lead?.postcode, quote.lead?.city].filter(Boolean).join(" "),
+      },
+      lineItems: parseLineItems(quote.lineItems),
+      subtotalCents: quote.subtotalCents,
+      discountCents: quote.discountCents,
+      vatRate: quote.vatRate,
+      vatCents: quote.vatCents,
+      totalCents: quote.totalCents,
+      terms: quote.terms,
+    });
+    attachments = [{ filename: `offerte-${quote.number}.pdf`, content: pdf }];
+  } catch (err) {
+    console.error("[sendQuote] PDF-bijlage renderen faalde:", err);
+  }
+
   await sendQuoteSent({
     to: customerEmail,
     companyName: quote.company.name,
@@ -86,6 +127,7 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
     totalText: euro(quote.totalCents / 100),
     validUntil: quote.validUntil ? quote.validUntil.toLocaleDateString("nl-NL") : undefined,
     url: siteUrl(`/offertes/${quoteId}?token=${token}`),
+    attachments,
   });
   return { ok: true };
 }

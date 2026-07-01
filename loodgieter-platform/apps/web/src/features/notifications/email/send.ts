@@ -9,14 +9,20 @@ const sender = process.env.RESEND_SENDER_EMAIL || "onboarding@resend.dev";
 const adminEmail = process.env.CONTACT_RECEIVER_EMAIL || brand.email;
 
 export type SendResult = "success" | "failed" | "not_sent";
+export interface EmailAttachment { filename: string; content: Buffer }
 
 /** Centrale verzendfunctie: stuurt via Resend (met fallback-afzender) en logt in EmailLog. */
-export async function sendEmail(to: string, content: t.EmailContent, replyTo?: string): Promise<SendResult> {
+export async function sendEmail(
+  to: string,
+  content: t.EmailContent,
+  replyTo?: string,
+  attachments?: EmailAttachment[],
+): Promise<SendResult> {
   let status: SendResult = "not_sent";
   if (resend) {
     for (const from of [sender, "onboarding@resend.dev"]) {
       try {
-        const res = await resend.emails.send({ from: `${brand.shortName} <${from}>`, to, subject: content.subject, html: content.html, replyTo });
+        const res = await resend.emails.send({ from: `${brand.shortName} <${from}>`, to, subject: content.subject, html: content.html, replyTo, attachments });
         if (res.error) throw new Error(res.error.message);
         status = "success";
         break;
@@ -36,8 +42,8 @@ export const sendLeadConfirmation = (i: Parameters<typeof t.leadConfirmation>[0]
 export const sendLeadAvailable = (i: Parameters<typeof t.leadAvailable>[0] & { to: string }) =>
   sendEmail(i.to, t.leadAvailable(i));
 
-export const sendQuoteSent = (i: Parameters<typeof t.quoteSent>[0] & { to: string }) =>
-  sendEmail(i.to, t.quoteSent(i));
+export const sendQuoteSent = (i: Parameters<typeof t.quoteSent>[0] & { to: string; attachments?: EmailAttachment[] }) =>
+  sendEmail(i.to, t.quoteSent(i), undefined, i.attachments);
 
 export const sendQuoteAccepted = (i: Parameters<typeof t.quoteAccepted>[0] & { to: string }) =>
   sendEmail(i.to, t.quoteAccepted(i));

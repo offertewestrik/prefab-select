@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@repo/ui", "@repo/core", "@repo/seo", "@repo/db", "@repo/config", "@repo/content"],
-  serverExternalPackages: ["@prisma/client", "bcryptjs"],
+  serverExternalPackages: ["@prisma/client", "bcryptjs", "@react-pdf/renderer"],
   // Prisma's query-engine (.so.node) wordt door de bundler niet automatisch
   // naast de serverless-functie gekopieerd in een pnpm-monorepo. Zonder deze
   // include mist "libquery_engine-rhel-openssl-3.0.x.so.node" op de Vercel
