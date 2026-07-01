@@ -14,15 +14,19 @@
     },
     {
       "heading": "De soorten airco op een rij",
-      "text": "Er zijn grofweg drie hoofdtypen:\n\n- Mobiele airco (monoblock): een los apparaat op wieltjes met een slang door het raam. Goedkoop en direct inzetbaar, maar minder efficiënt, luider en niet geschikt om structureel te verwarmen.\n- Single split: één binnenunit en één buitenunit. De populairste keuze om één ruimte — meestal de woonkamer — te koelen én te verwarmen.\n- Multisplit: één buitenunit met meerdere binnenunits, voor meerdere ruimtes.\n\nDe binnenunit bestaat in verschillende uitvoeringen: het bekende wandmodel, een vloermodel, een plafond-/cassette-unit of een weggewerkte kanaaluitvoering. Welk type en hoeveel units u nodig heeft, hangt af van uw woning en welke ruimtes u wilt koelen en verwarmen."
+      "text": "Er zijn grofweg twee hoofdtypen vaste airco, plus een variant voor bijzondere situaties:\n\n- Single split: één binnenunit en één buitenunit. De populairste keuze om één ruimte — meestal de woonkamer — te koelen én te verwarmen.\n- Multisplit: één buitenunit met meerdere binnenunits, voor meerdere ruimtes.\n- Airco zonder buitenunit (monoblock): een vast gemonteerd toestel dat warmte via roosters in de buitenmuur uitwisselt. Een nichekeuze voor als een buitenunit niet mag, bijvoorbeeld bij een monument of VvE.\n\nDe binnenunit bestaat in verschillende uitvoeringen: het bekende wandmodel, een vloermodel, een plafond-/cassette-unit of een weggewerkte kanaaluitvoering. Welk type en hoeveel units u nodig heeft, hangt af van uw woning en welke ruimtes u wilt koelen en verwarmen."
     },
     {
       "heading": "Wat kost een airco?",
-      "text": "De aanschaf hangt sterk af van het type en de installatie. Grove richtprijzen voor 2026, inclusief montage:\n\n- Mobiele airco: circa € 200 – € 600.\n- Single split (koelen én verwarmen), één ruimte: circa € 1.500 – € 2.500.\n- Multisplit voor meerdere ruimtes: circa € 3.000 – € 6.000 of meer.\n\nDe prijs loopt op door de afstand tussen binnen- en buitenunit, doorvoer door gevel of spouwmuur, extra binnenunits en aanpassingen aan de elektra. Naast de aanschaf zijn er gebruikskosten (stroom) en onderhoud. Verwarmen met een airco kost per kWh warmte indicatief € 0,075 tegenover € 0,18 voor gas. Vraag altijd meerdere offertes op, want prijzen tussen installateurs en merken verschillen fors."
+      "text": "De aanschaf hangt sterk af van het type en de installatie. Grove richtprijzen voor 2026, inclusief montage:\n\n- Single split (koelen én verwarmen), één ruimte: circa € 1.500 – € 2.500.\n- Multisplit voor meerdere ruimtes: circa € 3.000 – € 6.000 of meer.\n- Airco zonder buitenunit: circa € 1.000 – € 2.000.\n\nDe prijs loopt op door de afstand tussen binnen- en buitenunit, doorvoer door gevel of spouwmuur, extra binnenunits en aanpassingen aan de elektra. Naast de aanschaf zijn er gebruikskosten (stroom) en onderhoud. Verwarmen met een airco kost per kWh warmte indicatief € 0,075 tegenover € 0,18 voor gas. Vraag altijd meerdere offertes op, want prijzen tussen installateurs en merken verschillen fors."
     },
     {
       "heading": "Welke airco kiezen? Waar u op let",
       "text": "Wilt u de airco ook serieus gebruiken om te verwarmen, kies dan op andere punten dan bij alleen koelen. De belangrijkste:\n\n- SCOP (seizoensrendement verwarming): streef naar 4,0 – 5,1 en let op energielabel A+++ voor verwarming, niet alleen voor koelen.\n- Vermogen (kW): moet passen bij het volume en de isolatie van de ruimte; laat dit berekenen.\n- Prestaties bij vorst: sommige toestellen houden tot ver onder nul een goed rendement vast.\n- Invertertechniek, geluidsniveau (dB(A)) van binnen- en buitenunit, en handige extra's zoals wifi of een slimme thermostaat.\n\nEen iets duurder toestel met een hogere SCOP verdient het verschil vaak terug via lagere stookkosten. Kies dus niet puur op aanschafprijs."
+    },
+    {
+      "heading": "Welke airco-merken zijn er?",
+      "text": "De bekendste A-merken hebben zich in Nederland bewezen op zuinigheid, geluid en betrouwbaarheid. De meest gekozen merken voor woningen zijn:\n\n- Daikin: marktleider, breed assortiment en een fijnmazig servicenetwerk.\n- Mitsubishi Electric (en Mitsubishi Heavy Industries): bekend om stille, efficiënte toestellen.\n- LG: goede prijs-kwaliteitverhouding en slimme (wifi-)bediening.\n- Toshiba en Panasonic: betrouwbare toestellen met sterke verwarmingsprestaties.\n- Samsung en Gree/Tosot: van design-units tot voordelige modellen.\n\nEen A-merk is doorgaans stiller, zuiniger en gaat langer mee dan een budgetmerk, en heeft betere garantie en onderdelenvoorziening. Belangrijker dan het merk alleen is dat het toestel qua vermogen en SCOP bij uw woning past én dat een erkende installateur het plaatst. Vraag uw installateur welk merk en model het beste bij uw situatie en budget passen."
     },
     {
       "heading": "Airco of warmtepomp?",
@@ -46,7 +50,6 @@
     }
   ],
   "priceTable": [
-    { "label": "Mobiele airco (aanschaf)", "price": "€ 200 – € 600" },
     { "label": "Single split, koelen én verwarmen (incl. montage)", "price": "€ 1.500 – € 2.500" },
     { "label": "Multisplit meerdere ruimtes (incl. montage)", "price": "€ 3.000 – € 6.000+" },
     { "label": "Onderhoudsbeurt", "price": "€ 90 – € 150" },
@@ -60,7 +63,7 @@
     },
     {
       "question": "Wat kost een airco gemiddeld?",
-      "answer": "Een mobiele airco kost circa € 200 – € 600, een single split die koelt én verwarmt circa € 1.500 – € 2.500 inclusief montage, en een multisplit voor meerdere ruimtes € 3.000 – € 6.000 of meer. De exacte prijs hangt af van uw woning en installatie; vraag meerdere offertes op."
+      "answer": "Een single split die koelt én verwarmt kost circa € 1.500 – € 2.500 inclusief montage, en een multisplit voor meerdere ruimtes € 3.000 – € 6.000 of meer. Een airco zonder buitenunit ligt rond € 1.000 – € 2.000. De exacte prijs hangt af van uw woning en installatie; vraag meerdere offertes op."
     },
     {
       "question": "Welke airco is het beste voor mijn woning?",
@@ -81,6 +84,10 @@
     {
       "question": "Krijg ik subsidie op een airco?",
       "answer": "Doorgaans niet. De ISDE-subsidie geldt in de regel niet voor lucht-luchtwarmtepompen, en een verwarmende airco is dat. Een lucht-waterwarmtepomp komt vaak wél in aanmerking. Controleer de actuele voorwaarden bij RVO."
+    },
+    {
+      "question": "Wat is het beste airco-merk?",
+      "answer": "Er is geen universeel 'beste' merk, maar Daikin, Mitsubishi Electric, LG, Toshiba en Panasonic behoren tot de meest gekozen A-merken voor woningen — zuinig, stil en betrouwbaar, met goede garantie. Belangrijker dan het merk is dat het toestel qua vermogen en SCOP bij uw woning past en door een erkende installateur wordt geplaatst."
     }
   ],
   "readingTime": 10,

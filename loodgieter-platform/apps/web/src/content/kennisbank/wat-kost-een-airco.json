@@ -14,11 +14,11 @@
     },
     {
       "heading": "Richtprijzen per type airco",
-      "text": "Niet elke airco kost evenveel. De prijs hangt sterk af van het type systeem dat bij uw woning past.\n\n## Mobiele airco\nDit is de goedkoopste oplossing en vereist geen installatie. U koopt zo'n apparaat vanaf circa 200 tot 600 euro en zet hem zelf neer, met een slang door een kierende deur of raam. Het nadeel: ze zijn luidruchtig, minder efficiënt en koelen meestal maar één kamer matig.\n\n## Single-split airco\nDe populairste keuze voor woningen: één buitenunit gekoppeld aan één binnenunit. Inclusief installatie betaalt u hiervoor doorgaans tussen de 1.200 en 2.200 euro. Ideaal voor een woonkamer of slaapkamer.\n\n## Multi-split airco\nWilt u meerdere ruimtes koelen vanaf één buitenunit? Dan komt u bij een multi-split systeem uit. Reken op 2.500 tot 5.000 euro of meer, afhankelijk van het aantal binnenunits (meestal twee tot vijf).\n\n## Airco met warmtepompfunctie\nVeel moderne split-airco's kunnen ook verwarmen. Dit kost weinig extra in aanschaf, maar levert in de winter een flinke besparing op de stookkosten op. Een interessante optie als u toch al een airco overweegt."
+      "text": "Niet elke airco kost evenveel. De prijs hangt sterk af van het type systeem dat bij uw woning past.\n\n## Single-split airco\nDe populairste keuze voor woningen: één buitenunit gekoppeld aan één binnenunit. Inclusief installatie betaalt u hiervoor doorgaans tussen de 1.500 en 2.500 euro. Ideaal voor een woonkamer of slaapkamer.\n\n## Multi-split airco\nWilt u meerdere ruimtes koelen vanaf één buitenunit? Dan komt u bij een multi-split systeem uit. Reken op 3.000 tot 6.000 euro of meer, afhankelijk van het aantal binnenunits (meestal twee tot vijf).\n\n## Airco zonder buitenunit\nMag er geen buitenunit worden geplaatst, bijvoorbeeld bij een monument of vanwege VvE-regels? Dan is er de vast gemonteerde airco zonder buitenunit (monoblock), indicatief 1.000 tot 2.000 euro. Het rendement ligt lager dan bij een split.\n\n## Airco met warmtepompfunctie\nVeel moderne split-airco's kunnen ook verwarmen. Dit kost weinig extra in aanschaf, maar levert in de winter een flinke besparing op de stookkosten op. Een interessante optie als u toch al een airco overweegt."
     },
     {
       "heading": "Welke factoren maken de installatie duurder of goedkoper?",
-      "text": "Twee identieke apparaten kunnen toch heel verschillend uitpakken op de eindfactuur. Dat komt door de omstandigheden bij u thuis.\n\n- Afstand tussen binnen- en buitenunit: hoe langer de leiding, hoe meer materiaal en arbeid. Een buitenunit ver van de binnenunit kan honderden euro's extra kosten.\n- Montagehoogte: een buitenunit op de begane grond is sneller geplaatst dan een unit hoog tegen de gevel, waarvoor een hoogwerker of steiger nodig is.\n- Doorvoeren: moet er door dik metselwerk of beton geboord worden, dan kost dat extra tijd.\n- Aantal binnenunits: elke extra unit betekent meer leidingwerk en montage-uren.\n- Afwerking: wilt u de leidingen netjes weggewerkt hebben in een koker of in de muur, dan loopt de prijs op.\n- Merk en kwaliteit: A-merken zoals Daikin, Mitsubishi of Panasonic zijn duurder dan budgetmerken, maar gaan langer mee en zijn stiller en zuiniger."
+      "text": "Twee identieke apparaten kunnen toch heel verschillend uitpakken op de eindfactuur. Dat komt door de omstandigheden bij u thuis.\n\n- Afstand tussen binnen- en buitenunit: hoe langer de leiding, hoe meer materiaal en arbeid. Een buitenunit ver van de binnenunit kan honderden euro's extra kosten.\n- Montagehoogte: een buitenunit op de begane grond is sneller geplaatst dan een unit hoog tegen de gevel, waarvoor een hoogwerker of steiger nodig is.\n- Doorvoeren: moet er door dik metselwerk of beton geboord worden, dan kost dat extra tijd.\n- Aantal binnenunits: elke extra unit betekent meer leidingwerk en montage-uren.\n- Afwerking: wilt u de leidingen netjes weggewerkt hebben in een koker of in de muur, dan loopt de prijs op.\n- Merk en kwaliteit: A-merken zoals Daikin, Mitsubishi Electric, LG, Toshiba en Panasonic zijn duurder dan budgetmerken, maar gaan langer mee en zijn stiller en zuiniger."
     },
     {
       "heading": "Eenmalige kosten en terugkerende kosten",
@@ -39,16 +39,16 @@
   ],
   "priceTable": [
     {
-      "label": "Mobiele airco (geen installatie nodig)",
-      "price": "€ 200 – € 600"
-    },
-    {
       "label": "Single-split airco incl. installatie",
-      "price": "€ 1.200 – € 2.200"
+      "price": "€ 1.500 – € 2.500"
     },
     {
       "label": "Multi-split airco (2-5 binnenunits) incl. installatie",
-      "price": "€ 2.500 – € 5.000"
+      "price": "€ 3.000 – € 6.000+"
+    },
+    {
+      "label": "Airco zonder buitenunit incl. installatie",
+      "price": "€ 1.000 – € 2.000"
     },
     {
       "label": "Uurtarief gecertificeerde installateur",
@@ -74,7 +74,7 @@
     },
     {
       "question": "Mag ik een airco zelf installeren om kosten te besparen?",
-      "answer": "U mag zelf een mobiele airco neerzetten, want die vereist geen montage. Een vaste split-airco installeren is echter een ander verhaal. Het aansluiten en vullen van het koudemiddel mag wettelijk uitsluitend door een F-gassen gecertificeerde monteur gebeuren. Doet u dit zelf of laat u het door iemand zonder certificaat doen, dan riskeert u boetes, een ongeldige garantie en milieuschade. De besparing weegt niet op tegen de risico's. Het ophangen van de units zelf mag u wel voorbereiden, maar de daadwerkelijke aansluiting hoort bij een vakman."
+      "answer": "Een vaste split-airco installeren mag u niet zelf: het aansluiten en vullen van het koudemiddel mag wettelijk uitsluitend door een F-gassen gecertificeerde monteur gebeuren. Doet u dit zelf of laat u het door iemand zonder certificaat doen, dan riskeert u boetes, een ongeldige garantie en milieuschade. De besparing weegt niet op tegen de risico's. Kies daarom altijd een erkende installateur; via Loodgieterplatform.nl vergelijkt u gratis offertes van gecertificeerde vakmensen."
     },
     {
       "question": "Hoeveel kost het onderhoud van een airco per jaar?",
