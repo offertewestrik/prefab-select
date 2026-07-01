@@ -1,73 +1,100 @@
 {
   "slug": "soorten-airco",
-  "title": "Soorten airco: split, multisplit en types op een rij",
-  "excerpt": "Van single split tot multisplit en airco zonder buitenunit: ontdek welke soorten airco er zijn, welk type binnenunit bij u past en wat elk kost.",
-  "seoTitle": "Soorten airco: split, multisplit & types (2026)",
-  "metaDescription": "Welke soorten airco zijn er? Vergelijk single split, multisplit en airco zonder buitenunit, plus de binnenunit-types, geschiktheid en kosten.",
+  "title": "Soorten airco: split, multisplit en mobiel vergeleken",
+  "excerpt": "Van mobiele airco tot single split, multisplit en cassette: ontdek welk type airco past bij jouw ruimte, budget en installatiewensen.",
+  "seoTitle": "Soorten airco vergeleken: split, multisplit & mobiel",
+  "metaDescription": "Welke airco past bij jou? Vergelijk mobiele airco, single split, multisplit en binnenunit-types op prijs, geluid, koelen/verwarmen en installatie.",
   "category": "airco",
   "categoryName": "Airco",
-  "intro": "Wie een airco voor de woning zoekt, komt al snel begrippen tegen als single split, multisplit en verschillende binnenunits. Welke soort airco past bij uw huis, hangt af van hoeveel ruimtes u wilt koelen en verwarmen, uw indeling en uw budget. In dit artikel zetten we de soorten airco overzichtelijk op een rij: de single split voor één ruimte, de multisplit voor meerdere ruimtes, de airco zonder buitenunit voor situaties waarin een buitenunit niet mag of kan, en de verschillende types binnenunit (wand, vloer, cassette en kanaal). Per soort leest u de geschiktheid, of hij ook kan verwarmen, wat het globaal kost en waar u op moet letten. Zo weet u welke airco het beste bij uw situatie past — en vergelijkt u daarna gratis en vrijblijvend offertes van gecertificeerde installateurs via Loodgieterplatform.nl.",
+  "intro": "Een airco kiezen begint met de vraag welk type bij jouw situatie past. Grofweg zijn er twee hoofdgroepen: mobiele airco's die je zelf neerzet, en vaste split-systemen met een buitenunit die door een vakman worden geplaatst. Binnen de vaste systemen kies je tussen een single split (één binnen- en één buitenunit) voor één ruimte, of een multisplit (één buitenunit voor meerdere binnenunits) als je meerdere kamers wilt koelen en verwarmen. Daarnaast bepaal je het binnenunit-type: een wandmodel, vloermodel, cassette in het plafond of een weggewerkte kanaalunit. Elk type verschilt in prijs, geluid, koel- en verwarmingscapaciteit en de eisen aan de installatie. Een mobiele airco kost al vanaf circa €200, terwijl een professioneel geplaatst split-systeem vanaf ongeveer €1.500 begint. In dit artikel vergelijken we alle soorten airco op de punten die er echt toe doen, zodat je gericht de juiste keuze maakt voor je slaapkamer, woonkamer of het hele huis.",
   "body": [
     {
-      "heading": "Single split of multisplit: de hoofdkeuze",
-      "text": "De belangrijkste keuze bij een vaste airco is die tussen een single split en een multisplit. Beide bestaan uit een buitenunit en een of meer binnenunits, verbonden door koelleidingen, en beide kunnen koelen én verwarmen.\n\n- Single split: één buitenunit en één binnenunit. Ideaal als u één ruimte wilt doen, meestal de woonkamer of een slaapkamer.\n- Multisplit: één buitenunit met meerdere binnenunits. Handig als u meerdere ruimtes wilt koelen en verwarmen zonder voor elke kamer een aparte buitenunit op te hangen.\n\nOmdat warme of koele lucht zich niet vanzelf naar andere kamers verspreidt, bepaalt het aantal ruimtes dat u wilt doen hoeveel binnenunits u nodig heeft."
+      "heading": "De twee hoofdgroepen: mobiel of vast split-systeem",
+      "text": "Alle airco's vallen in de kern in twee categorieën, en die keuze bepaalt bijna al het andere.\n\n- Mobiele airco's: een losstaand apparaat dat je zelf neerzet en op het stopcontact aansluit. Geen vaste installatie nodig, maar wel minder efficiënt en vaak luidruchtiger.\n- Vaste split-systemen: een binnenunit (of meerdere) verbonden met een buitenunit via koudemiddelleidingen. Stiller, krachtiger en zuiniger, maar de plaatsing moet door een gecertificeerd bedrijf gebeuren.\n\nDe belangrijkste reden voor dit onderscheid is het koudemiddel. Zodra een airco met een gesloten koudemiddelsysteem tussen binnen- en buitenunit werkt, valt de installatie onder de F-gassenregelgeving en mag alleen een F-gassen- of STEK-gecertificeerd bedrijf de leidingen aansluiten en vacumeren. Een mobiele monoblock-airco is fabrieksmatig gevuld en gesloten, waardoor je die zelf mag gebruiken.\n\nWil je een structurele oplossing voor comfort in de zomer én verwarming in de winter, dan is een vast split-systeem vrijwel altijd de betere investering. Zoek je iets tijdelijks of huur je een woning, dan is een mobiele airco een praktisch alternatief."
     },
     {
-      "heading": "De single split airco",
-      "text": "Een single split airco is de populairste keuze voor Nederlandse woningen. Eén binnenunit koelt in de zomer en verwarmt in het tussenseizoen efficiënt, terwijl de buitenunit de warmte uitwisselt met de buitenlucht.\n\nDe single split is de voordeligste en meest efficiënte oplossing als u zich op één belangrijke leefruimte richt. Inclusief montage betaalt u indicatief tussen de € 1.500 en € 2.500, afhankelijk van het vermogen, het merk en de complexiteit van de installatie (leidinglengte, doorvoer). Kies een toestel met een hoge SEER (koelen) en SCOP (verwarmen) voor de laagste energiekosten."
+      "heading": "Mobiele airco (monoblock met slang): voor- en nadelen",
+      "text": "Een mobiele airco is een monoblock-apparaat op wieltjes met een afvoerslang die je door een kier in een raam of via een raamafdichting naar buiten leidt. Alle techniek zit in één kast, dus er is geen buitenunit en geen installateur nodig.\n\nVoordelen:\n- Direct te gebruiken: uitpakken, slang naar buiten, stekker erin.\n- Geen installatiekosten en geen ingreep aan de gevel.\n- Verplaatsbaar tussen kamers en geschikt voor huurwoningen.\n- Lage aanschafprijs, indicatief circa €200 tot €600.\n\nNadelen:\n- Minder efficiënt: de warme slang en de kier in het raam laten warmte terugstromen.\n- Relatief luidruchtig, omdat de compressor in de kamer staat (vaak circa 50-65 dB).\n- Beperkte koelcapaciteit, geschikt voor één kleinere ruimte.\n- Neemt vloeroppervlak in en de slang is een obstakel.\n\nMobiele modellen die alleen koelen zijn er volop; er bestaan ook varianten met een verwarmingsfunctie. Voor incidenteel gebruik in een slaapkamer of thuiskantoor is een mobiele airco prima. Voor dagelijks comfort in een woonkamer schiet hij meestal tekort."
     },
     {
-      "heading": "De multisplit airco",
-      "text": "Wilt u meerdere ruimtes koelen en verwarmen — bijvoorbeeld de woonkamer én twee slaapkamers — dan is een multisplit airco de logische keuze. Op één buitenunit sluit u meerdere binnenunits aan (vaak twee tot vijf).\n\nDat bespaart gevelruimte en buitenunits, maar de investering is hoger: reken indicatief op € 3.000 tot € 6.000 of meer, afhankelijk van het aantal binnenunits en het benodigde vermogen. Een multisplit is soms iets minder efficiënt dan losse toestellen, maar wint op ruimte en uniformiteit. Laat een installateur berekenen hoeveel binnenunits en welk vermogen bij uw woning passen."
+      "heading": "Single split: één binnenunit, één buitenunit",
+      "text": "De single split is het meest gekozen systeem voor één ruimte. Je hebt één binnenunit die is verbonden met één buitenunit. De buitenunit doet het zware werk (compressor), waardoor de binnenunit fluisterstil is, vaak rond de 19-30 dB op de laagste stand.\n\nGeschiktheid: ideaal voor één afgebakende ruimte zoals een woonkamer, slaapkamer of thuiskantoor. Een single split levert forse koelcapaciteit en kan in de winter ook verwarmen.\n\nKoelen én verwarmen: vrijwel elke moderne single split is een lucht-luchtwarmtepomp en kan dus koelen én verwarmen. Verwarmen met een airco is bovendien voordelig: de kosten liggen indicatief rond €0,075 per kWh warmte, tegenover ongeveer €0,18 per kWh bij gas.\n\nGeluid: binnen zeer stil, buiten geldt sinds 2021 een geluidsnorm op de perceelgrens. Een goede plaatsing van de buitenunit is daarom belangrijk.\n\nInstallatie: verplicht door een F-gassen-/STEK-gecertificeerd bedrijf. De prijs inclusief montage begint indicatief rond €1.500 tot €2.500, afhankelijk van capaciteit, merk en de complexiteit van de leidingloop. Let op: lucht-lucht (airco) valt doorgaans niet onder de ISDE-subsidie."
     },
     {
-      "heading": "Airco zonder buitenunit",
-      "text": "Mag of kan er geen buitenunit worden geplaatst — bijvoorbeeld bij een monument, in beschermd stadsgezicht of vanwege VvE-regels — dan is er de vast gemonteerde airco zonder buitenunit (monoblock). Bij dit type zit alle techniek in één binnenunit; de warmte wordt via twee kleine roosters in de buitenmuur uitgewisseld.\n\nHet voordeel is dat u geen buitenunit aan de gevel heeft. Nadelen zijn een doorgaans lager rendement, meer geluid binnen en een beperkter koel- en verwarmvermogen dan een split. Indicatief kost zo'n toestel inclusief montage circa € 1.000 tot € 2.000. Het is een nichekeuze voor situaties waarin een buitenunit echt niet kan; kan dat wél, dan is een split vrijwel altijd efficiënter."
+      "heading": "Multisplit: één buitenunit voor meerdere binnenunits",
+      "text": "Wil je meerdere kamers koelen en verwarmen, dan is een multisplit vaak de slimste keuze. Eén buitenunit bedient dan twee tot meestal vijf binnenunits, elk met een eigen thermostaat en instelling per ruimte.\n\nGeschiktheid: perfect voor een woning waar je bijvoorbeeld de woonkamer én twee slaapkamers wilt voorzien, of voor situaties waarin je maar één plek aan de gevel wilt gebruiken voor een buitenunit.\n\nVoordelen:\n- Slechts één buitenunit, dus minder impact op de gevel en het aanzicht.\n- Per kamer regelbaar: de een koelt, de ander verwarmt of staat uit.\n- Je kunt verschillende binnenunit-types combineren (bijvoorbeeld wandmodel in de slaapkamer, cassette in de woonkamer).\n\nAandachtspunten:\n- Hogere aanschaf: indicatief circa €3.000 tot €6.000 of meer, afhankelijk van het aantal binnenunits.\n- De buitenunit moet qua capaciteit passen bij het totaal aantal binnenunits.\n- Ook hier is installatie door een gecertificeerd bedrijf verplicht.\n\nNet als de single split zijn multisplits lucht-luchtwarmtepompen die het hele jaar door koelen en verwarmen."
     },
     {
-      "heading": "Types binnenunit: wand, vloer, cassette en kanaal",
-      "text": "Naast het systeem kiest u het type binnenunit. De uitvoering bepaalt het uiterlijk, de plaatsing en deels het comfort:\n\n- Wandmodel: het bekende model hoog aan de muur. Voordelig, veelzijdig en het meest gekozen.\n- Vloermodel: laag geplaatst, blaast warmte op leefniveau — prettig als u de airco vooral wilt gebruiken om te verwarmen.\n- Cassette (plafond): weggewerkt in het plafond, verdeelt de lucht in meerdere richtingen. Fraai en gelijkmatig, maar vraagt een verlaagd plafond.\n- Kanaal/inbouw: volledig uit het zicht, met roosters. De meest onopvallende oplossing, maar de duurste en meest ingrijpende.\n\nWelk type past, hangt af van de ruimte, uw wensen en het budget. Een installateur adviseert op basis van uw situatie."
+      "heading": "Monoblock airco zonder buitenunit",
+      "text": "Er bestaat ook een vast systeem zonder buitenunit: de monoblock-wandairco. Hier zit de complete techniek in de binnenunit, die via twee kleine gaten in de buitenmuur lucht aan- en afvoert. Aan de buitenkant zie je alleen twee roosters, geen kast aan de gevel.\n\nGeschiktheid: interessant als een buitenunit niet mag of niet gewenst is, bijvoorbeeld bij monumentale panden, een VvE die geen units aan de gevel toestaat, of een appartement zonder geschikte buitenmuur voor een split.\n\nVoor- en nadelen:\n- Voordeel: geen buitenunit, minder discussie over aanzicht en perceelgrens-geluid.\n- Voordeel: het is een gesloten fabriekssysteem, waardoor de F-gassen-eisen voor het aansluiten van leidingen minder zwaar wegen dan bij een split.\n- Nadeel: doorgaans minder efficiënt dan een split-systeem.\n- Nadeel: de compressor zit in de kamer, dus het geluidsniveau binnen ligt hoger dan bij een split.\n- Nadeel: er zijn twee muurdoorvoeren nodig en de roosters zijn zichtbaar aan de buitenkant.\n\nVeel monoblock-wandairco's kunnen zowel koelen als verwarmen. Qua prijs zitten ze indicatief tussen een mobiele airco en een single split in."
     },
     {
-      "heading": "Het juiste vermogen en aantal units",
-      "text": "Welke soort airco u ook kiest, het vermogen moet kloppen. Een te licht toestel haalt de gewenste temperatuur op warme of koude dagen niet; een te zwaar toestel is duurder en schakelt te vaak. Het benodigde koel- en verwarmingsvermogen (in kW) hangt af van het volume van de ruimte, de isolatie, het aantal buitenmuren en de beglazing.\n\nBij een multisplit telt daarnaast het totale vermogen van de buitenunit ten opzichte van de gezamenlijke binnenunits. Laat dit altijd berekenen door een gecertificeerde installateur — een goede dimensionering is bepalend voor comfort én energiekosten."
+      "heading": "Binnenunit-types: wand, vloer, cassette en kanaal",
+      "text": "Bij een vast split- of multisplit-systeem kies je ook het type binnenunit. Dit bepaalt het uiterlijk, de luchtverdeling en de installatie-eisen.\n\n- Wandmodel: hangt hoog aan de muur. Verreweg het meest gekozen, betaalbaar, stil en snel te plaatsen. Geschikt voor bijna elke ruimte.\n- Vloermodel: staat laag tegen de muur, vergelijkbaar met een radiator. Prettig als verwarming (warme lucht komt laag binnen) en handig waar geen wandruimte hoog is. Ideaal onder een venster of in ruimtes met veel raampartijen.\n- Plafond/cassette-model: wordt in een verlaagd plafond ingebouwd en blaast in meerdere richtingen. Gelijkmatige luchtverdeling en discreet, maar vereist voldoende plafondruimte. Populair in grotere woonkamers en kantoren.\n- Kanaal-/inbouwmodel: volledig weggewerkt boven het plafond, met alleen roosters zichtbaar. De meest onopvallende oplossing, geschikt om meerdere ruimtes via kanalen te bedienen. De installatie is het meest ingrijpend en daarmee ook het duurst.\n\nVoor de meeste huishoudens is een wandmodel de beste balans tussen prijs, geluid en gemak. Wil je een strakke, onzichtbare afwerking, dan lonen cassette- of kanaalunits, mits de bouwkundige situatie het toelaat."
     },
     {
-      "heading": "Welke soort airco past bij u?",
-      "text": "Kort samengevat:\n\n- Eén ruimte koelen en verwarmen? Kies een single split — voordelig en efficiënt.\n- Meerdere ruimtes? Kies een multisplit met het juiste aantal binnenunits.\n- Geen buitenunit mogelijk (monument, VvE)? Overweeg een airco zonder buitenunit, met de kanttekening dat het rendement lager ligt.\n- Let bij elk type op de SEER en SCOP, het geluidsniveau en een erkende installateur.\n\nWilt u weten welk type en vermogen het beste bij uw woning passen en wat het kost? Via Loodgieterplatform.nl vergelijkt u gratis en vrijblijvend offertes van gecertificeerde installateurs bij u in de buurt."
+      "heading": "Welke airco past bij jouw situatie?",
+      "text": "De juiste keuze hangt af van hoeveel ruimtes je wilt voorzien, je budget en of je een buitenunit kunt of wilt plaatsen.\n\n- Eén kamer, structureel comfort, koelen én verwarmen: kies een single split met wandmodel. Beste prijs-kwaliteitverhouding voor de meeste mensen.\n- Meerdere kamers: kies een multisplit en combineer eventueel verschillende binnenunit-types per ruimte.\n- Geen buitenunit mogelijk (VvE, monument, aanzicht): overweeg een monoblock-wandairco zonder buitenunit.\n- Tijdelijk gebruik, huurwoning of klein budget: een mobiele airco is de snelste en goedkoopste oplossing.\n- Strakke, onzichtbare afwerking gewenst: kijk naar een cassette- of kanaalunit.\n\nHoud bij vaste systemen rekening met twee vaste voorwaarden: de installatie moet door een F-gassen-/STEK-gecertificeerd bedrijf gebeuren, en de buitenunit moet voldoen aan de geluidsnorm op de perceelgrens die sinds 2021 geldt. Een erkende installateur adviseert je over capaciteit, plaatsing en de beste unit voor jouw ruimte.\n\nWil je weten wat een split- of multisplit-airco in jouw situatie kost? Via Loodgieterplatform.nl vergelijk je gratis en vrijblijvend offertes van gecertificeerde airco-installateurs bij jou in de buurt."
     }
   ],
   "priceTable": [
-    { "label": "Single split airco (incl. montage)", "price": "€ 1.500 – € 2.500" },
-    { "label": "Multisplit 2 binnenunits (incl. montage)", "price": "€ 2.500 – € 3.500" },
-    { "label": "Multisplit 3–4 binnenunits (incl. montage)", "price": "€ 3.200 – € 6.000+" },
-    { "label": "Airco zonder buitenunit (incl. montage)", "price": "€ 1.000 – € 2.000" },
-    { "label": "Onderhoudsbeurt", "price": "€ 90 – € 150" }
+    {
+      "label": "Mobiele airco (monoblock met slang)",
+      "price": "circa €200 - €600"
+    },
+    {
+      "label": "Monoblock airco zonder buitenunit (incl. plaatsing)",
+      "price": "indicatief €1.000 - €2.000"
+    },
+    {
+      "label": "Single split incl. montage",
+      "price": "vanaf ~€1.500 - €2.500"
+    },
+    {
+      "label": "Multisplit (2+ binnenunits) incl. montage",
+      "price": "~€3.000 - €6.000+"
+    },
+    {
+      "label": "Onderhoudsbeurt airco",
+      "price": "circa €90 - €150"
+    },
+    {
+      "label": "Kosten per kWh warmte (airco vs. gas)",
+      "price": "~€0,075 vs. ~€0,18"
+    }
   ],
   "faqs": [
     {
-      "question": "Wat is het verschil tussen een single split en een multisplit airco?",
-      "answer": "Een single split heeft één binnen- en één buitenunit en doet één ruimte. Een multisplit heeft één buitenunit met meerdere binnenunits en doet meerdere ruimtes. Single split is voordeliger en efficiënter voor één kamer; multisplit bespaart buitenunits bij meerdere ruimtes."
+      "question": "Wat is beter: een mobiele airco of een split-airco?",
+      "answer": "Voor structureel comfort is een split-airco vrijwel altijd beter: hij is stiller, zuiniger en krachtiger, omdat de luidruchtige compressor buiten staat. Een mobiele airco is goedkoper (circa €200-€600) en direct te gebruiken zonder installateur, maar minder efficiënt en luidruchtiger. Kies mobiel voor tijdelijk gebruik of een huurwoning, en split voor een vaste, comfortabele oplossing."
     },
     {
-      "question": "Hoeveel binnenunits kan ik op één buitenunit aansluiten?",
-      "answer": "Bij een multisplit doorgaans twee tot vijf binnenunits, afhankelijk van het model en het vermogen van de buitenunit. Een installateur bepaalt hoeveel units en welk vermogen bij uw woning en warmtevraag passen."
+      "question": "Hoeveel binnenunits kan één buitenunit aansturen?",
+      "answer": "Bij een multisplit bedient één buitenunit meestal twee tot vijf binnenunits, afhankelijk van het model en de totale capaciteit. Elke binnenunit is afzonderlijk regelbaar per ruimte. De buitenunit moet qua vermogen passen bij het aantal en de grootte van de aangesloten binnenunits, dus laat een installateur de capaciteit berekenen."
     },
     {
       "question": "Bestaat er een airco zonder buitenunit?",
-      "answer": "Ja, de vast gemonteerde airco zonder buitenunit (monoblock) wisselt warmte uit via roosters in de buitenmuur. Handig als een buitenunit niet mag (monument, VvE), maar het rendement is lager en het geluid binnen hoger dan bij een split."
+      "answer": "Ja, een monoblock-wandairco heeft geen buitenunit. De volledige techniek zit in de binnenunit, die via twee kleine gaten in de buitenmuur lucht aan- en afvoert; buiten zie je alleen twee roosters. Dit is handig als een buitenunit niet mag of niet gewenst is, bijvoorbeeld bij een VvE of monument. Nadeel is dat de compressor binnen zit, dus het geluid binnen ligt hoger dan bij een split."
     },
     {
       "question": "Welke airco is het beste voor een slaapkamer?",
-      "answer": "Voor één slaapkamer is een single split met een stille binnenunit meestal ideaal. Let op een laag geluidsniveau (dB(A)) en een vermogen dat past bij de kamer. Wilt u ook andere kamers doen, dan is een multisplit te overwegen."
+      "answer": "Voor een slaapkamer is een single split met wandmodel meestal ideaal: de binnenunit is fluisterstil (vaak 19-30 dB), koelt in de zomer en verwarmt in de winter. Wil je geen buitenunit, dan is een monoblock-wandairco een alternatief, al is die binnen wat luidruchtiger. Een mobiele airco kan tijdelijk, maar is voor de nachtrust vaak te luid."
     },
     {
-      "question": "Kunnen alle soorten airco ook verwarmen?",
-      "answer": "Vrijwel alle moderne split- en multisplit-airco's kunnen koelen én verwarmen; ze werken dan als lucht-luchtwarmtepomp. Let op de SCOP en het verwarmingslabel als u de airco serieus wilt gebruiken om te verwarmen."
+      "question": "Welke airco past het best in een woonkamer?",
+      "answer": "In een woonkamer voldoet een single split met wandmodel goed. Wil je meer kamers voorzien, dan is een multisplit slimmer. Voor een grote of strak afgewerkte woonkamer zijn een cassette- of vloermodel aantrekkelijk: een cassette verdeelt de lucht gelijkmatig vanuit het plafond, een vloermodel warmt aangenaam op vanaf de vloer. Laat de capaciteit afstemmen op de oppervlakte en raampartijen."
     },
     {
-      "question": "Wie mag een airco installeren?",
-      "answer": "Alleen een F-gassen- en STEK-gecertificeerd bedrijf mag een split- of multisplit-airco plaatsen en het koelcircuit vullen. Via Loodgieterplatform.nl vergelijkt u gratis offertes van gecertificeerde installateurs bij u in de buurt."
+      "question": "Kan elke airco ook verwarmen?",
+      "answer": "De meeste moderne split- en multisplit-airco's kunnen zowel koelen als verwarmen; zo'n verwarmende airco is technisch een lucht-luchtwarmtepomp. Verwarmen is bovendien voordelig: indicatief circa €0,075 per kWh warmte tegenover ongeveer €0,18 bij gas. Niet elke mobiele airco kan verwarmen, dus controleer dat per model."
+    },
+    {
+      "question": "Mag ik een split-airco zelf installeren?",
+      "answer": "Nee. Een split- of multisplit-systeem werkt met koudemiddel en valt onder de F-gassenregelgeving. Het aansluiten en vacumeren van de leidingen mag daarom alleen door een F-gassen- of STEK-gecertificeerd bedrijf gebeuren. Een mobiele monoblock-airco is fabrieksmatig gevuld en gesloten, die mag je wel zelf gebruiken."
+    },
+    {
+      "question": "Krijg ik subsidie op een airco?",
+      "answer": "Voor een lucht-luchtsysteem (de gewone airco) is doorgaans geen ISDE-subsidie beschikbaar; die regeling richt zich vooral op lucht-water- en andere warmtepompen. Ga voor jouw situatie altijd de actuele voorwaarden na, want subsidieregelingen kunnen wijzigen. Reken bij een airco dus in principe niet op subsidie bij je budget."
     }
   ],
   "readingTime": 8,
