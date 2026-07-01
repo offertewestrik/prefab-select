@@ -72,7 +72,28 @@ export default async function ArticlePage({
   if (!a || a.category !== category) notFound();
 
   const updatedIso = a.updated ? new Date(a.updated).toISOString() : undefined;
-  const related = (await getArticles(category)).filter((r) => r.slug !== slug).slice(0, 3);
+  // "Lees ook": binnen dezelfde categorie, maar bij voorkeur de artikelen die
+  // qua onderwerp het dichtst bij dit artikel staan (gedeelde trefwoorden in
+  // titel/slug). Zo ontstaat een strakke topic-cluster met echte interne links
+  // i.p.v. een alfabetische greep — belangrijk voor de SEO-samenhang.
+  const STOP = new Set([
+    "een", "de", "het", "van", "met", "voor", "en", "of", "je", "zo", "wat", "kost", "in",
+    "om", "te", "hoe", "per", "bij", "doe", "maken", "uitgelegd", "gids", "complete", "2025", "2026",
+  ]);
+  const tokens = (s: string) =>
+    new Set(s.toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length > 2 && !STOP.has(t)));
+  const self = tokens(`${a.slug} ${a.title}`);
+  const related = (await getArticles(category))
+    .filter((r) => r.slug !== slug)
+    .map((r) => {
+      const t = tokens(`${r.slug} ${r.title}`);
+      let score = 0;
+      for (const tok of t) if (self.has(tok)) score++;
+      return { r, score };
+    })
+    .sort((x, y) => y.score - x.score) // stabiele sort: gelijke score behoudt de bestaande (alfabetische) volgorde
+    .slice(0, 3)
+    .map((x) => x.r);
 
   // Stap-voor-stap-gidsen krijgen HowTo-schema → kans op rich results in Google.
   const isHowTo = /stappenplan|zo doe je|wat te doen|ontluchten|bijvullen|opsporen|aanleggen|plaatsen/i.test(
