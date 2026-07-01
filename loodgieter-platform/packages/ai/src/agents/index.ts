@@ -2,6 +2,7 @@ import type { AgentDefinition } from "./agent";
 import { leadAnalyzer } from "./lead-analyzer";
 import { priceAdvisor } from "./price-advisor";
 import { quoteAssistant } from "./quote-assistant";
+import { quoteImprover } from "./quote-improver";
 import { seoWriter } from "./seo-writer";
 import { photoAnalyzer } from "./photo-analyzer";
 import { fraudDetector } from "./fraud-detector";
@@ -14,6 +15,7 @@ export {
   leadAnalyzer,
   priceAdvisor,
   quoteAssistant,
+  quoteImprover,
   seoWriter,
   photoAnalyzer,
   fraudDetector,

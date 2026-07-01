@@ -6,7 +6,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@repo/ui";
 import { quoteStatusLabels, type QuoteStatus } from "@repo/core";
 import { computeTotals } from "../server/service";
-import { saveQuoteAction, sendQuoteAction, aiQuoteDraftAction } from "../server/actions";
+import { saveQuoteAction, sendQuoteAction, aiImproveQuoteAction } from "../server/actions";
 import { QuotePreview } from "./quote-preview";
 import type { LineItem, QuoteItemKind } from "../schema";
 
@@ -116,9 +116,11 @@ export function QuoteEditor({
       if (r.ok) router.refresh();
     });
   }
-  function onAiDraft() {
+  function onAiImprove() {
     start(async () => {
-      const r = await aiQuoteDraftAction(quoteId, {}, new FormData());
+      // Sla eerst de huidige staat op zodat de AI de laatste inhoud verbetert.
+      await saveQuoteAction(quoteId, {}, fd());
+      const r = await aiImproveQuoteAction(quoteId, {}, new FormData());
       setMsg({ ok: !!r.ok, text: r.message ?? "" });
       if (r.ok) router.refresh();
     });
@@ -209,10 +211,10 @@ export function QuoteEditor({
         {!readOnly && (
           <div className="space-y-3">
             <div className="rounded-[var(--radius-md)] border border-primary-200 bg-primary-50/50 p-3">
-              <button type="button" onClick={onAiDraft} disabled={pending} className="text-sm font-medium text-primary-700 hover:underline disabled:opacity-60">
+              <button type="button" onClick={onAiImprove} disabled={pending} className="text-sm font-medium text-primary-700 hover:underline disabled:opacity-60">
                 ✨ Offerte verbeteren met AI
               </button>
-              <p className="mt-1 text-xs text-neutral-500">Vult/verbetert titel, werkzaamheden en voorwaarden als concept. Controleer altijd zelf vóór verzenden.</p>
+              <p className="mt-1 text-xs text-neutral-500">Maakt titel, intro en regelomschrijvingen professioneler, controleert op ontbrekende zaken en schrijft een begeleidende e-mail (bij ‘notities’). Bedragen blijven ongewijzigd. Controleer altijd zelf vóór verzenden.</p>
             </div>
             <div className="flex items-center gap-3">
               <Button variant="outline" onClick={onSave} disabled={pending}>Concept opslaan</Button>

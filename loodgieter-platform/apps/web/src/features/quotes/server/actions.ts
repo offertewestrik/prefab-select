@@ -3,10 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireRole, getCurrentCompany, getSessionUser } from "@/lib/guards";
-import { quoteAssistant } from "@repo/ai";
+import { quoteAssistant, quoteImprover } from "@repo/ai";
 import { prisma } from "@/lib/prisma";
 import { runAgent } from "@/features/ai/run";
-import { getQuoteForViewer } from "./queries";
+import { getQuoteForViewer, parseLineItems } from "./queries";
+import type { Prisma } from "@repo/db";
 import { saveDraft, sendQuote, applyDecision, duplicateQuote, type MutResult } from "./mutations";
 import { createQuoteFromTemplate } from "./templates";
 
@@ -113,6 +114,65 @@ export async function aiQuoteDraftAction(quoteId: string, _prev: ActionState, _f
   });
   revalidatePath(`/dashboard/offertes/${quoteId}`);
   return msg(result, "AI-voorstel ingevuld als concept. Controleer en verstuur zelf.");
+}
+
+/**
+ * Verbetert de BESTAANDE offerte met AI: nettere titel/intro, verzorgde
+ * regelomschrijvingen (zonder bedragen/aantallen te wijzigen), een
+ * ontbreekt-check en een begeleidende e-mailtekst. Alles blijft concept; de
+ * installateur controleert en verstuurt zelf.
+ */
+export async function aiImproveQuoteAction(quoteId: string, _prev: ActionState, _formData: FormData): Promise<ActionState> {
+  const company = await companyGuard();
+  const quote = await prisma.quote.findUnique({
+    where: { id: quoteId },
+    include: { lead: { include: { service: true } } },
+  });
+  if (!quote || quote.companyId !== company.id) return { ok: false, message: MESSAGES.not_found };
+  if (quote.status !== "DRAFT") return { ok: false, message: MESSAGES.not_draft };
+
+  const items = parseLineItems(quote.lineItems);
+  const serviceName = quote.lead?.service.name ?? quote.title ?? "Installatiewerk";
+  const res = await runAgent(
+    quoteImprover,
+    {
+      service: serviceName,
+      title: quote.title ?? "",
+      introText: quote.introText ?? "",
+      customerName: quote.customerName ?? quote.lead?.contactName ?? undefined,
+      items: items.map((it) => ({ description: it.description, kind: it.kind, optional: it.optional })),
+    },
+    { summary: `AI-verbeter offerte ${quote.number}`, companyId: company.id, leadId: quote.leadId },
+  );
+  if (!res.ok || !res.data) return { ok: false, message: "AI kon de offerte niet verbeteren. Probeer het later opnieuw." };
+
+  // Verbeterde regelomschrijvingen terugmappen (volgorde behouden; bedragen/aantallen ongewijzigd).
+  const improvedByOriginal = new Map(res.data.items.map((x) => [x.original, x.improved]));
+  const newLineItems = items.map((it, idx) => ({
+    ...it,
+    description: res.data!.items[idx]?.improved || improvedByOriginal.get(it.description) || it.description,
+  }));
+
+  // Begeleidende e-mail + ontbreekt-check bewaren in de interne notities.
+  const extras = [
+    "── AI-suggestie: begeleidende e-mail ──",
+    res.data.coverEmail,
+    res.data.missing.length ? `\n── AI-controle: mogelijk ontbrekend ──\n- ${res.data.missing.join("\n- ")}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  await prisma.quote.update({
+    where: { id: quoteId },
+    data: {
+      title: res.data.title || quote.title,
+      introText: res.data.introText || quote.introText,
+      lineItems: newLineItems as unknown as Prisma.InputJsonValue,
+      notes: extras,
+    },
+  });
+  revalidatePath(`/dashboard/offertes/${quoteId}`);
+  return { ok: true, message: "Offerte verbeterd met AI. Controleer de teksten en de begeleidende e-mail bij 'notities'." };
 }
 
 export async function acceptQuoteAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
