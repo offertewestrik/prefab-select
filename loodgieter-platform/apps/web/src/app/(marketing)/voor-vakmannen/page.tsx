@@ -48,9 +48,12 @@ export default function ForProfessionalsPage() {
             Sluit je aan bij {brand.name} en ontvang aanvragen van huiseigenaren
             uit jouw regio. Jij bepaalt je werkgebied en diensten.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link href="/aanmelden-vakman">
               <Button size="lg" variant="accent">Word partner</Button>
+            </Link>
+            <Link href="/voor-vakmannen/badge" className="text-sm font-medium text-white/80 underline-offset-4 hover:text-white hover:underline">
+              Al partner? Haal je gratis website-badge
             </Link>
           </div>
         </div>

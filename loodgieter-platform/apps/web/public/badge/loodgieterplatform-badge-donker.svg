@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="64" viewBox="0 0 280 64" role="img" aria-label="Aangesloten bij Loodgieterplatform.nl">
+  <rect width="280" height="64" rx="10" fill="#0F2A47"/>
+  <circle cx="34" cy="32" r="14" fill="#22C55E"/>
+  <path d="M27.5 32.5l4 4 8-8.5" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="27" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="600" letter-spacing="1.2" fill="#93A4BD">AANGESLOTEN BIJ</text>
+  <text x="60" y="46" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">Loodgieterplatform.nl</text>
+</svg>
