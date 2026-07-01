@@ -42,7 +42,7 @@ export function ServiceCityTemplate({
   const faqs = article && article.faqs.length > 0 ? article.faqs : service.faqs;
 
   return (
-    <main>
+    <main className={isEmergency ? "pb-16 md:pb-0" : undefined}>
       {/* Hero */}
       <section className="border-b border-neutral-200 bg-gradient-to-b from-primary-50/60 to-white">
         <div className="mx-auto max-w-(--container-max) px-6 py-14">
@@ -185,6 +185,23 @@ export function ServiceCityTemplate({
           title={`${service.name} in ${city.name} nodig?`}
         />
       </div>
+
+      {/* Sticky spoed-belbalk — alleen mobiel, altijd zichtbaar. Spoedzoekers
+          zijn overwegend mobiel; direct bellen is dé conversie. */}
+      {isEmergency && (
+        <a
+          href={brand.phoneHref}
+          aria-label={`Bel direct met spoed: ${brand.phone}`}
+          className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center gap-2.5 bg-red-600 px-4 py-3.5 text-sm font-bold text-white shadow-[0_-4px_16px_rgba(0,0,0,0.15)] md:hidden"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/70" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
+          </span>
+          <Phone className="h-4 w-4" />
+          24/7 spoed — bel {brand.phone}
+        </a>
+      )}
     </main>
   );
 }

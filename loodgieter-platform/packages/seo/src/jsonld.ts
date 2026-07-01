@@ -109,6 +109,48 @@ export function serviceLd(input: {
   return ld;
 }
 
+/**
+ * 24/7 spoed-dienst in een specifieke plaats. Type EmergencyService is een
+ * LocalBusiness-subtype: Google kan hierdoor "24 uur geopend" tonen en de
+ * pagina als noodhulp herkennen — cruciaal voor spoed-CTR waar Ads geblokkeerd
+ * is. Alleen gebruiken op écht 24/7 bereikbare spoedpagina's.
+ */
+export function emergencyServiceLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  areaServed?: string;
+  priceFrom?: number | null;
+}): Json {
+  const alwaysOpen = {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "00:00",
+    closes: "23:59",
+  };
+  const ld: Json = {
+    "@context": "https://schema.org",
+    "@type": "EmergencyService",
+    name: input.name,
+    description: input.description,
+    url: siteUrl(input.path),
+    telephone: brand.phoneHref.replace("tel:", ""),
+    provider: { "@type": "Organization", name: brand.name, "@id": `${siteUrl("/")}#organization` },
+    availableLanguage: ["Dutch"],
+    openingHoursSpecification: alwaysOpen,
+    hoursAvailable: alwaysOpen,
+  };
+  if (input.areaServed) ld.areaServed = { "@type": "City", name: input.areaServed };
+  if (input.priceFrom)
+    ld.offers = {
+      "@type": "Offer",
+      priceCurrency: "EUR",
+      price: input.priceFrom,
+      priceSpecification: { "@type": "PriceSpecification", minPrice: input.priceFrom, priceCurrency: "EUR" },
+    };
+  return ld;
+}
+
 /** Geordende lijst (ItemList) — voor overzichts-/directorypagina's. */
 export function itemListLd(items: { name: string; path: string }[]): Json {
   return {

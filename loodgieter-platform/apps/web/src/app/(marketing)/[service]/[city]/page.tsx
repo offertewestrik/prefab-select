@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { brand } from "@repo/core";
-import { urls, breadcrumbLd, serviceLd, faqLd } from "@repo/seo";
+import { urls, breadcrumbLd, serviceLd, faqLd, emergencyServiceLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import { ServiceCityTemplate } from "@/components/templates/service-city-template";
 import { buildMetadata } from "@/features/seo/metadata";
@@ -69,6 +69,7 @@ export default async function ServiceCityPage({
 
   const path = urls.serviceCity(service, city);
   const reviews = await getReviewsForServiceCity(data.service.slug, data.city.name);
+  const isEmergency = /(spoed|24-7|lekkage|ontstop|storing|gaslek)/.test(data.service.slug);
 
   return (
     <>
@@ -94,6 +95,17 @@ export default async function ServiceCityPage({
             : data.service.faqs.length
               ? [faqLd(data.service.faqs.map((f) => ({ question: f.question, answer: f.answer })))]
               : []),
+          ...(isEmergency
+            ? [
+                emergencyServiceLd({
+                  name: `${data.service.name} in ${data.city.name} — 24/7 spoed`,
+                  description: data.service.shortDescription,
+                  path,
+                  areaServed: data.city.name,
+                  priceFrom: data.service.priceFrom,
+                }),
+              ]
+            : []),
         ]}
       />
       <ServiceCityTemplate data={data} links={links} />
