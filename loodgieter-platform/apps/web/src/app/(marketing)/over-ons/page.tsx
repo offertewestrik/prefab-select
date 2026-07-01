@@ -5,7 +5,7 @@ import { siteUrl, breadcrumbLd, organizationLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import {
   C, HEAD, BODY, PAGE_BG, CONTAINER,
-  IcShield, IcCheck, IcCheckRing, IcPin, IcArrow, IcStar,
+  IcShield, IcCheck, IcCheckRing, IcPin, IcArrow,
 } from "@/components/marketing/ds";
 
 export const revalidate = 86400;
@@ -37,8 +37,8 @@ const STEPS = [
 
 const STATS = [
   { v: "4.200+", l: "aangesloten vakmannen" },
-  { v: "9,2", l: "gemiddelde beoordeling", star: true },
-  { v: "12.480", l: "klantbeoordelingen" },
+  { v: "Gratis", l: "en vrijblijvend" },
+  { v: "2 min", l: "aanvraag klaar" },
   { v: "12", l: "provincies gedekt" },
 ];
 
@@ -195,7 +195,7 @@ export default function AboutPage() {
           {STATS.map((s) => (
             <div key={s.l} style={{ textAlign: "center" }}>
               <div style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 30, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-                {s.star && <IcStar s={22} />}{s.v}
+                {s.v}
               </div>
               <div style={{ fontSize: 13, color: "#9FB0CE", marginTop: 4, fontWeight: 600 }}>{s.l}</div>
             </div>

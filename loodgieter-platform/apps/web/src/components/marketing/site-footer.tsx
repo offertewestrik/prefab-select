@@ -22,14 +22,6 @@ const linkStyle: React.CSSProperties = {
   fontSize: 13.5,
 };
 
-function Star() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill={C.star} aria-hidden>
-      <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2Z" />
-    </svg>
-  );
-}
-
 export async function SiteFooter() {
   // Best-effort: toon echte dienstcategorieën in de footer (interne links).
   let categories: { id: string; name: string; services: { slug: string; name: string }[] }[] = [];
@@ -105,15 +97,8 @@ export async function SiteFooter() {
                 width: "fit-content",
               }}
             >
-              <span style={{ display: "flex", gap: 1 }}>
-                <Star />
-                <Star />
-                <Star />
-                <Star />
-                <Star />
-              </span>
               <span style={{ fontSize: 12.5, fontWeight: 700, color: C.white }}>
-                9,2 · 12.480 reviews
+                Gecertificeerde vakmensen · gratis &amp; vrijblijvend
               </span>
             </div>
           </div>

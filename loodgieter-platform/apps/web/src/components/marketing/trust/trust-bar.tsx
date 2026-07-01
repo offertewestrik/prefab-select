@@ -2,7 +2,7 @@ import { ShieldCheck, Star, MapPin, Euro, Clock3 } from "lucide-react";
 
 const items = [
   { icon: ShieldCheck, label: "Erkende vakmannen" },
-  { icon: Star, label: "4,9/5 beoordeling" },
+  { icon: Star, label: "Vrijblijvend vergelijken" },
   { icon: MapPin, label: "Landelijke dekking" },
   { icon: Euro, label: "Gratis offertes" },
   { icon: Clock3, label: "24/7 spoedservice" },

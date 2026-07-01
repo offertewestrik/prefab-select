@@ -64,10 +64,11 @@ export function SiteHeader() {
               4.200+ aangesloten vakmannen
             </span>
             <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill={C.star} aria-hidden>
-                <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2Z" />
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M12 3l7 3v5c0 4.2-2.9 7.4-7 8.5-4.1-1.1-7-4.3-7-8.5V6l7-3Z" stroke="#5B8DEF" strokeWidth="1.7" strokeLinejoin="round" />
+                <path d="M9 12l2 2 4-4" stroke="#5B8DEF" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Gem. 9,2 uit 12.480 reviews
+              Gecertificeerde vakmensen
             </span>
             <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>

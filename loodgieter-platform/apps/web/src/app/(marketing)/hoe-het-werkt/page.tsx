@@ -5,7 +5,7 @@ import { siteUrl, breadcrumbLd, faqLd } from "@repo/seo";
 import { JsonLd } from "@/components/json-ld";
 import {
   C, HEAD, BODY, PAGE_BG, CONTAINER,
-  IcShield, IcCheck, IcCheckRing, IcStar, IcArrow, IcLock,
+  IcShield, IcCheck, IcCheckRing, IcArrow, IcLock,
 } from "@/components/marketing/ds";
 
 export const revalidate = 86400;
@@ -181,7 +181,7 @@ export default function HoeHetWerktPage() {
             </Link>
           </div>
           <div style={{ marginTop: 18, display: "flex", gap: 18, justifyContent: "center", flexWrap: "wrap", fontSize: 12.5, fontWeight: 600, color: "rgba(255,255,255,.7)" }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><IcStar s={13} /> Gem. 9,2</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><IcCheck stroke="#fff" s={13} w={3} /> Gecertificeerde vakmensen</span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><IcCheck stroke="#fff" s={13} w={3} /> 100% gratis</span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}><IcCheck stroke="#fff" s={13} w={3} /> Vrijblijvend</span>
           </div>

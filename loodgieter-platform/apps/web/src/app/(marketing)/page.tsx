@@ -281,17 +281,11 @@ const HOOFDDIENSTEN: { name: string; sub: string; icon: string; accent?: boolean
 ];
 
 // Demo-reviews (marketing) — getoond zolang er nog geen geverifieerde reviews zijn.
-const DEMO_REVIEWS: { rating: number; title: string; body: string; name: string; city: string; company: string }[] = [
-  { rating: 5, title: "Binnen een dag geregeld", body: "Drie scherpe offertes binnen een paar uur en de nieuwe CV-ketel werd de volgende dag al geplaatst. Top geregeld!", name: "Sanne de Vries", city: "Utrecht", company: "Visser Installatie" },
-  { rating: 5, title: "Vakkundig en netjes", body: "De monteur legde alles duidelijk uit en liet de boel netjes achter. Echt een aanrader voor iedereen.", name: "Mark Jansen", city: "Amsterdam", company: "Evers Verwarming" },
-  { rating: 5, title: "Snelle spoedhulp", body: "'s Avonds een lekkage gemeld, binnen het uur contact en de volgende ochtend verholpen. Super service.", name: "Fatima El Amrani", city: "Rotterdam", company: "Bakker Loodgieters" },
-];
-
 // Fallback-vakmannen (marketing) als er nog geen profielen in de DB staan.
 const DEMO_PROS: { name: string; city: string; rating: string; reviews: string; services: string[] }[] = [
-  { name: "Visser Installatie", city: "Amsterdam", rating: "9,6", reviews: "214 reviews", services: ["CV-ketel", "Warmtepomp", "Onderhoud"] },
-  { name: "Evers Verwarming", city: "Rotterdam", rating: "9,7", reviews: "301 reviews", services: ["Vloerverwarming", "Radiatoren"] },
-  { name: "Bakker Loodgieters", city: "Utrecht", rating: "9,4", reviews: "168 reviews", services: ["Lekkage", "Ontstopping", "Sanitair"] },
+  { name: "Visser Installatie", city: "Amsterdam", rating: "Nieuw", reviews: "Nieuw op het platform", services: ["CV-ketel", "Warmtepomp", "Onderhoud"] },
+  { name: "Evers Verwarming", city: "Rotterdam", rating: "Nieuw", reviews: "Nieuw op het platform", services: ["Vloerverwarming", "Radiatoren"] },
+  { name: "Bakker Loodgieters", city: "Utrecht", rating: "Nieuw", reviews: "Nieuw op het platform", services: ["Lekkage", "Ontstopping", "Sanitair"] },
 ];
 
 // Alle 12 provincies + (marketing) dekkingsaantallen — Randstad bovenaan.
@@ -435,10 +429,7 @@ export default async function HomePage() {
     count: (PROVINCE_BASE[p.slug] ?? 150) + (realByProvince.get(p.slug) ?? 0),
   }));
 
-  // Marketing-cijfers (vast getoond t.b.v. een volwaardige uitstraling).
-  const rating = "9,2";
   const installersLabel = "4.200+";
-  const reviewCountLabel = "12.480 beoordelingen";
 
   const featured = installers[0] ?? null;
   const prosToShow =
@@ -464,7 +455,7 @@ export default async function HomePage() {
 
   const heroStats = [
     { v: installersLabel, l: "aangesloten vakmannen", color: C.ink, star: false },
-    { v: rating, l: reviewCountLabel, color: C.ink, star: true },
+    { v: "24/7", l: "spoed bereikbaar", color: C.ink, star: false },
     { v: "Gratis", l: "100% vrijblijvend", color: C.green, star: false },
     { v: "2 min", l: "aanvraag klaar", color: C.ink, star: false },
   ];
@@ -539,10 +530,8 @@ export default async function HomePage() {
             {/* Links */}
             <div data-hero-left style={{ flex: "0 0 384px", maxWidth: 384, display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, alignSelf: "flex-start", background: "#fff", border: "1px solid #DCE7FF", borderRadius: 999, padding: "5px 13px 5px 7px", fontSize: 12.5, fontWeight: 700, color: C.ink, boxShadow: "0 4px 12px rgba(15,27,51,.05)", marginBottom: 18 }}>
-                <span style={{ display: "inline-flex", gap: 1 }}>
-                  {[0, 1, 2, 3, 4].map((i) => <IcStar key={i} s={13} />)}
-                </span>
-                {rating} — Beste van Nederland
+                <IcShield stroke={C.blue} s={14} />
+                Gecertificeerde vakmensen in heel Nederland
               </div>
               <h1 style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 41, lineHeight: 1.07, letterSpacing: "-.025em", color: C.ink }}>
                 Het grootste installatieplatform van Nederland
@@ -607,12 +596,14 @@ export default async function HomePage() {
                       {featured ? (featured.city ?? featured.provinces[0] ?? "Heel Nederland") : "Intergas & Remeha gecertificeerd · Amsterdam"}
                     </div>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 4, background: "#FFF8E8", border: "1px solid #FCE9C0", borderRadius: 9, padding: "5px 9px", flexShrink: 0 }}>
-                    <IcStar s={14} />
-                    <span style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 14, color: C.ink }}>
-                      {featured && featured.ratingAvg > 0 ? featured.ratingAvg.toFixed(1).replace(".", ",") : "9,6"}
-                    </span>
-                  </div>
+                  {featured && featured.ratingAvg > 0 && (
+                    <div style={{ display: "flex", alignItems: "center", gap: 4, background: "#FFF8E8", border: "1px solid #FCE9C0", borderRadius: 9, padding: "5px 9px", flexShrink: 0 }}>
+                      <IcStar s={14} />
+                      <span style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 14, color: C.ink }}>
+                        {featured.ratingAvg.toFixed(1).replace(".", ",")}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -828,52 +819,6 @@ export default async function HomePage() {
 
       {/* ── 6. Coverage map ── */}
       <CoverageMap data={provinceCounts} />
-
-      {/* ── 7. Reviews ── */}
-      <section style={{ ...container, padding: "112px 28px" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, flexWrap: "wrap", marginBottom: 28 }}>
-          <div>
-            <span style={eyebrow}>Reviews</span>
-            <h2 style={h2}>Wat zeggen onze klanten?</h2>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, background: "#fff", border: `1px solid ${C.line}`, borderRadius: 12, padding: "12px 18px", boxShadow: "0 6px 18px rgba(15,27,51,.05)" }}>
-            <span style={{ fontFamily: HEAD, fontWeight: 800, color: C.ink, fontSize: 15 }}>Uitstekend</span>
-            <span style={{ display: "flex", gap: 2 }}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <span key={i} style={{ width: 19, height: 19, background: "#00B67A", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <IcStar s={12} fill="#fff" />
-                </span>
-              ))}
-            </span>
-            <span style={{ fontSize: 14, color: C.muted, fontWeight: 600 }}>{rating} · {reviewCountLabel}</span>
-          </div>
-        </div>
-
-        <div data-reviews style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18 }}>
-          {DEMO_REVIEWS.map((r, i) => {
-            const m = MONO[i % MONO.length]!;
-            return (
-              <div key={r.name} style={{ ...cardBase, padding: 22 }}>
-                <div style={{ display: "flex", gap: 2, marginBottom: 12 }}>
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <IcStar key={n} s={16} fill={n <= r.rating ? "#00B67A" : "#D7E0EC"} />
-                  ))}
-                </div>
-                <p style={{ fontSize: 14.5, color: C.body, lineHeight: 1.6 }}>
-                  <strong style={{ color: C.ink }}>{r.title}. </strong>{r.body}
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: 11, marginTop: 18 }}>
-                  <span style={{ width: 40, height: 40, borderRadius: "50%", background: m.bg, color: m.fg, fontFamily: HEAD, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>{monogram(r.name)}</span>
-                  <div>
-                    <div style={{ fontWeight: 700, color: C.ink, fontSize: 14 }}>{r.name} · {r.city}</div>
-                    <div style={{ fontSize: 12.5, color: C.muted3 }}>via {r.company}</div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
 
       {/* ── 8. Voor vakmannen ── */}
       <section style={{ position: "relative", background: "radial-gradient(820px 420px at 82% 6%, rgba(37,99,235,.20), transparent 60%), linear-gradient(180deg,#0B1730 0%,#0E1F45 100%)", boxShadow: `0 0 0 100vw ${C.navy}`, clipPath: "inset(0 -100vw)" }}>

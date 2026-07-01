@@ -212,7 +212,7 @@ export default async function ServicePage({
   const brandList = brands.length ? brands.slice(0, 6) : ["Remeha", "Nefit", "Vaillant", "Intergas", "ATAG", "Bosch"];
   const specialists = installers.items.slice(0, 3);
 
-  const rating = reviews.count > 0 ? reviews.average.toFixed(1).replace(".", ",") : "9,4";
+  const rating = reviews.count > 0 ? reviews.average.toFixed(1).replace(".", ",") : null;
   const effFrom = priceFromFor(slug, service.priceFrom);
   const fromPrice = effFrom != null ? euro(effFrom) : null;
   const priceSpan =
@@ -308,7 +308,7 @@ export default async function ServicePage({
               </div>
 
               <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "#EFF4FF", borderRadius: 999, padding: "5px 12px", fontSize: 12.5, fontWeight: 700, color: C.blueDark, marginBottom: 14 }}>
-                <IcStar s={13} />{rating} · {installers.total > 0 ? `${installers.total} vakmannen beschikbaar` : "gemiddelde beoordeling"}
+                <IcStar s={13} />{reviews.count > 0 ? `${rating} · ${reviews.count} reviews · ` : ""}{installers.total > 0 ? `${installers.total} vakmannen beschikbaar` : "Gecertificeerde vakmannen"}
               </div>
               <h1 style={{ fontFamily: HEAD, fontWeight: 800, fontSize: 38, lineHeight: 1.1, letterSpacing: "-.025em", color: C.ink }}>{service.name}</h1>
               <p style={{ marginTop: 14, fontSize: 16, lineHeight: 1.6, color: C.muted, maxWidth: 540 }}>{service.shortDescription}</p>
@@ -334,7 +334,7 @@ export default async function ServicePage({
                 {[
                   { ic: <IcShield stroke={C.green} />, t: "Gecertificeerd & verzekerd" },
                   { ic: <IcCheckRing stroke={C.blue} s={15} />, t: "Tot 5 jaar garantie" },
-                  { ic: <IcStar s={14} />, t: reviews.count > 0 ? `${rating} · ${reviews.count} reviews` : `${rating} gemiddeld` },
+                  { ic: <IcStar s={14} />, t: reviews.count > 0 ? `${rating} · ${reviews.count} reviews` : "Gecontroleerde vakmensen" },
                   { ic: <IcLock />, t: "Veilig betalen via platform" },
                 ].map((chip, i) => (
                   <span key={i} style={{ display: "flex", alignItems: "center", gap: 7, background: "#fff", border: "1px solid #EAEFF6", borderRadius: 10, padding: "9px 13px", fontSize: 12.5, fontWeight: 700, color: "#1F2A45", boxShadow: "0 3px 10px rgba(15,27,51,.04)" }}>

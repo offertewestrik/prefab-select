@@ -5,7 +5,7 @@ import {
 
 const usps = [
   { icon: ShieldCheck, label: "Erkende vakmannen" },
-  { icon: Star, label: "Gemiddeld 4,9/5 beoordeling" },
+  { icon: Star, label: "Zorgvuldig geselecteerde vakmensen" },
   { icon: CalendarCheck, label: "Binnen 24 uur contact" },
   { icon: Wrench, label: "Meer dan 500 aangesloten loodgieters" },
   { icon: MapPin, label: "Landelijke dekking" },
