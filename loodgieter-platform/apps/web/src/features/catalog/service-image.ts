@@ -78,6 +78,7 @@ const SERVICE_IMAGE_FILE: Record<string, string> = {
   "toilet-renovatie": "toilet-renovatie",
   gasleiding: "gasleiding-aanleggen-aanpassen",
   leidingwerk: "leidingwerk",
+  buitenkraan: "leidingwerk",
   waterleiding: "waterleiding-aanleggen-repareren",
   "24-7-loodgieter": "adv-24-7-loodgieter",
   daklekkage: "adv-daklekkage",
