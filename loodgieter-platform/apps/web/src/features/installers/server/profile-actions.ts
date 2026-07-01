@@ -57,5 +57,6 @@ export async function setVisibilityAction(formData: FormData): Promise<void> {
   if (companyId) {
     await setVisibility(companyId, visible);
     revalidatePath(`/admin/installers/${companyId}`);
+    revalidatePath("/admin/installers");
   }
 }

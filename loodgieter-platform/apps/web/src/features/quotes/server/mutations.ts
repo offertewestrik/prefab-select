@@ -159,7 +159,7 @@ export async function expireQuotes(now: Date = new Date()): Promise<{ scanned: n
 }
 
 /** Uniek offertenummer voor een bedrijf (OFF-JAAR-0001), botsingsvrij. */
-async function nextQuoteNumber(companyId: string): Promise<string> {
+export async function nextQuoteNumber(companyId: string): Promise<string> {
   const year = new Date().getFullYear();
   const base = await prisma.quote.count({ where: { companyId } });
   for (let i = base + 1; ; i++) {

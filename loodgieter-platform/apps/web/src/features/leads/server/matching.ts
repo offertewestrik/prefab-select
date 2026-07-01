@@ -10,9 +10,13 @@ import { notifyCompany } from "@/features/notifications/server/service";
  * Match-criteria voor v1:
  *  - dienst:            bedrijf biedt de dienst aan (CompanyService)
  *  - stad/werkgebied:   leadgemeente valt in CompanyCoverage
- *  - installateurstatus: alleen ACTIVE bedrijven
- *  - beschikbaarheid:    voldoende creditsaldo om de lead te kunnen kopen
+ *  - installateurstatus: alleen APPROVED bedrijven
  * Maakt LeadMatch-records (OFFERED) voor de top-N (maxBuyers).
+ *
+ * NB: we filteren hier bewust NIET op creditsaldo. De lead wordt aan elke
+ * geschikte installateur AANGEBODEN; het saldo wordt pas bij aankoop
+ * gecontroleerd (buyLead). Anders krijgt een net goedgekeurde vakman met
+ * saldo 0 nooit een lead te zien en kan hij dus ook nooit credits kopen.
  */
 export async function matchLead(leadId: string): Promise<number> {
   const lead = await prisma.leadRequest.findUnique({
@@ -26,7 +30,6 @@ export async function matchLead(leadId: string): Promise<number> {
       status: "APPROVED",
       services: { some: { serviceId: lead.serviceId } },
       coverage: { some: { municipalityId: lead.municipalityId } },
-      creditBalance: { gte: lead.priceCredits },
     },
     // Ranking: hoogste rating eerst (later: abonnement/voorrang, responstijd).
     orderBy: [{ ratingAvg: "desc" }, { ratingCount: "desc" }],

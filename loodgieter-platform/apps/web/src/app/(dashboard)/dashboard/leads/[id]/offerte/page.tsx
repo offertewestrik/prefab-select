@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireRole, getCurrentCompany } from "@/lib/guards";
+import { nextQuoteNumber } from "@/features/quotes/server/mutations";
 
 // Zorgt dat er een concept-offerte bestaat voor deze (gekochte) lead en gaat
 // door naar de editor. Alleen toegankelijk voor de installateur die de lead kocht.
@@ -22,8 +23,7 @@ export default async function NewQuoteForLead({ params }: { params: Promise<{ id
 
   let quoteId = existing?.id;
   if (!quoteId) {
-    const count = await prisma.quote.count({ where: { companyId: company.id } });
-    const number = `OFF-${new Date().getFullYear()}-${String(count + 1).padStart(4, "0")}`;
+    const number = await nextQuoteNumber(company.id);
     const created = await prisma.quote.create({
       data: { companyId: company.id, leadId, number, lineItems: [], status: "DRAFT" },
     });

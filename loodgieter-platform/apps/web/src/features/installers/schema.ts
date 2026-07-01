@@ -31,8 +31,10 @@ export const profileSchema = z.object({
   shortDescription: z.string().max(300).optional().default(""),
   description: z.string().max(5000).optional().default(""),
   specialties: z.string().max(500).optional().default(""), // komma-gescheiden
-  yearsExperience: z.coerce.number().int().min(0).max(200).optional(),
-  employees: z.coerce.number().int().min(0).max(100000).optional(),
+  // Leeg laten → undefined (blijft leeg), niet 0. Een leeg formulierveld
+  // stuurt "" mee; zonder deze preprocess maakt z.coerce daar 0 van.
+  yearsExperience: z.preprocess((v) => (v === "" || v == null ? undefined : v), z.coerce.number().int().min(0).max(200).optional()),
+  employees: z.preprocess((v) => (v === "" || v == null ? undefined : v), z.coerce.number().int().min(0).max(100000).optional()),
   kvk: z.string().max(20).optional().default(""),
   vatNumber: z.string().max(20).optional().default(""),
   phone: z.string().min(8, "Vul een geldig telefoonnummer in"),

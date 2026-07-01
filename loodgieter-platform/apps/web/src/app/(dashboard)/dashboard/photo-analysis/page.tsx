@@ -1,15 +1,18 @@
 import { PageHeading, EmptyState } from "@/components/dashboard/sidebar-layout";
-import { getCurrentCompany } from "@/lib/guards";
+import { getCurrentCompany, getSessionUser } from "@/lib/guards";
 import { listPhotoAnalyses } from "@/features/photo-ai/service";
 
 export const dynamic = "force-dynamic";
 
 // Placeholder (Fase 21.1): zichtbaar voor de installateur; upload-UI volgt later.
 export default async function DashboardPhotoAnalysis() {
-  const company = await getCurrentCompany();
+  const [company, user] = await Promise.all([getCurrentCompany(), getSessionUser()]);
   if (!company) return <EmptyState>Je account is nog niet aan een bedrijf gekoppeld.</EmptyState>;
 
-  const analyses = await listPhotoAnalyses({ take: 50 });
+  // Belangrijk: alleen de eigen analyses tonen (createdBy). Zonder deze filter
+  // zou een installateur de foto-analyses van het hele platform zien.
+  const userId = (user as { id?: string } | null)?.id;
+  const analyses = userId ? await listPhotoAnalyses({ createdBy: userId, take: 50 }) : [];
 
   return (
     <div>

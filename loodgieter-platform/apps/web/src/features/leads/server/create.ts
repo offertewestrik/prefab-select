@@ -7,6 +7,7 @@ import { notifyAdmins } from "@/features/notifications/server/service";
 import { computeLeadPriceCredits } from "./pricing";
 import { leadConfirmation, adminNotification } from "@/features/notifications/email/templates";
 import { enqueue } from "@/features/jobs/queue";
+import { matchLead } from "./matching";
 import { detectorForService, createPendingPhotoAnalysis } from "@/features/photo-ai/service";
 
 export interface CreateLeadResult {
@@ -95,10 +96,20 @@ export async function createLead(
 
   await Promise.all([
     enqueue("lead.enrich_ai", { leadId: lead.id }),
-    enqueue("lead.notify_matches", { leadId: lead.id }),
     enqueue("email.send", { to: input.contactEmail, subject: confirmation.subject, html: confirmation.html }),
     enqueue("email.send", { to: adminEmail, subject: adminMail.subject, html: adminMail.html }),
   ]);
+
+  // Matching draaien we synchroon (niet via de dagelijkse cron): een lead is
+  // tijdgevoelig, dus geschikte vakmannen moeten hem meteen in hun dashboard
+  // zien. matchLead is idempotent (upsert) en faalt best-effort — een fout in
+  // matching mag het aanmaken van de lead niet blokkeren.
+  let matched = 0;
+  try {
+    matched = await matchLead(lead.id);
+  } catch (err) {
+    console.error("[createLead] synchrone matching faalde:", err);
+  }
 
   // 5. Foto-analyse: PENDING-record aanmaken + photo.analyze-job (buiten de hot path).
   if (input.photos?.length) {
@@ -114,6 +125,5 @@ export async function createLead(
     }
   }
 
-  // Matching gebeurt nu asynchroon; geen synchroon aantal meer.
-  return { id: lead.id, matched: 0 };
+  return { id: lead.id, matched };
 }

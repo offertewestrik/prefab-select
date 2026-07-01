@@ -62,6 +62,8 @@ export async function adminAdjustAction(_prev: AdjustState, formData: FormData):
 
   const result = await adjustCredits(companyId, Math.trunc(amount), reason);
   revalidatePath("/admin/payments");
+  revalidatePath("/admin/installers");
+  revalidatePath(`/admin/installers/${companyId}`);
   return result.ok
     ? { ok: true, message: `Saldo bijgewerkt naar ${result.balanceAfter} credits.` }
     : { ok: false, message: "Correctie mislukt." };

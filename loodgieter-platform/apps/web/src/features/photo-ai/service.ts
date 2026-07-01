@@ -295,6 +295,7 @@ export async function getPhotoAnalyzerStats() {
 /** Recente analyses (ADMIN-overzicht / dashboard) met optionele filters. */
 export function listPhotoAnalyses(opts?: {
   leadId?: string;
+  createdBy?: string;
   take?: number;
   provider?: string;
   status?: "PENDING" | "COMPLETED" | "FAILED";
@@ -304,6 +305,7 @@ export function listPhotoAnalyses(opts?: {
   return prisma.photoAnalysis.findMany({
     where: {
       ...(opts?.leadId ? { leadId: opts.leadId } : {}),
+      ...(opts?.createdBy ? { createdBy: opts.createdBy } : {}),
       ...(opts?.provider ? { provider: opts.provider } : {}),
       ...(opts?.status ? { status: opts.status } : {}),
       ...(opts?.detector ? { detector: opts.detector } : {}),

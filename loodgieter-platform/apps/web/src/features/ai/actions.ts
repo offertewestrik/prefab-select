@@ -9,7 +9,7 @@ import { runDailyReport, summarizeCompanyReviews } from "./services";
 
 // Representatieve demo-input per agent voor een "test run" vanuit het dashboard.
 const DEMO_INPUTS: Record<AgentKey, unknown> = {
-  "lead-analyzer": { service: "CV-ketel vervangen", city: "Eindhoven", urgency: "NORMAAL", description: "Mijn cv-ketel is 15 jaar oud en maakt lawaai. Graag vervangingsadvies.", attachmentCount: 0 },
+  "lead-analyzer": { service: "CV-ketel vervangen", city: "Eindhoven", urgency: "BINNEN_WEEK", description: "Mijn cv-ketel is 15 jaar oud en maakt lawaai. Graag vervangingsadvies.", attachmentCount: 0 },
   "price-advisor": { service: "CV-ketel vervangen", region: "Noord-Brabant", scope: "Standaard combiketel inclusief montage", priceFromCents: 180000 },
   "quote-assistant": { service: "CV-ketel vervangen", city: "Eindhoven", description: "Vervangen combiketel", marketPriceCents: 200000 },
   "seo-writer": { kind: "service", topic: "warmtepomp installeren", context: "Noord-Brabant" },
