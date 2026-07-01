@@ -4,8 +4,8 @@
   "excerpt": "Verwarmen met een airco kost per kWh warmte ongeveer de helft van gas. Wat dat per jaar oplevert hangt af van uw SCOP, isolatie en hoeveel u de airco laat stoken — we rekenen het voor.",
   "seoTitle": "Wat kost verwarmen met een airco? Verbruik 2026",
   "metaDescription": "Wat kost verwarmen met een airco per uur, maand en jaar? Bekijk het verbruik, realistische rekenvoorbeelden en de besparing t.o.v. gas in 2026.",
-  "category": "warmtepompen",
-  "categoryName": "Warmtepompen",
+  "category": "airco",
+  "categoryName": "Airco",
   "intro": "Een airco die ook verwarmt is populair om één reden: het is vaak flink goedkoper dan stoken op gas. Maar hoeveel precies? Dat hangt af van hoe efficiënt uw toestel is (de SCOP), hoe goed uw woning geïsoleerd is en hoeveel u de airco daadwerkelijk laat verwarmen in plaats van de cv-ketel. In dit artikel rekenen we het verbruik en de kosten stap voor stap voor: per kilowattuur warmte, per stookuur en per jaar, met realistische rekenvoorbeelden voor een appartement, een tussenwoning en een vrijstaand huis. Ook laten we zien wanneer de besparing tegenvalt en geven we concrete tips om uw verbruik laag te houden. Alle bedragen zijn richtprijzen voor 2026; reken altijd met uw eigen energietarief en toestel na. Zo weet u wat verwarmen met een airco in úw situatie oplevert.",
   "body": [
     {
@@ -38,12 +38,30 @@
     }
   ],
   "priceTable": [
-    { "label": "Kosten per kWh warmte — airco (SCOP 4)", "price": "± € 0,075" },
-    { "label": "Kosten per kWh warmte — cv-ketel op gas", "price": "± € 0,18" },
-    { "label": "Verbruik per uur woonkamer (indicatie)", "price": "± € 0,15 – € 0,25" },
-    { "label": "Jaarkosten airco-verwarmen appartement (indicatie)", "price": "± € 300" },
-    { "label": "Jaarkosten airco-verwarmen tussenwoning (indicatie)", "price": "± € 480" },
-    { "label": "Onderhoudsbeurt airco", "price": "€ 90 – € 150" }
+    {
+      "label": "Kosten per kWh warmte — airco (SCOP 4)",
+      "price": "± € 0,075"
+    },
+    {
+      "label": "Kosten per kWh warmte — cv-ketel op gas",
+      "price": "± € 0,18"
+    },
+    {
+      "label": "Verbruik per uur woonkamer (indicatie)",
+      "price": "± € 0,15 – € 0,25"
+    },
+    {
+      "label": "Jaarkosten airco-verwarmen appartement (indicatie)",
+      "price": "± € 300"
+    },
+    {
+      "label": "Jaarkosten airco-verwarmen tussenwoning (indicatie)",
+      "price": "± € 480"
+    },
+    {
+      "label": "Onderhoudsbeurt airco",
+      "price": "€ 90 – € 150"
+    }
   ],
   "faqs": [
     {

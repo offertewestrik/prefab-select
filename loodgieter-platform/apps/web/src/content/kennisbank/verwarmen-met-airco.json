@@ -4,8 +4,8 @@
   "excerpt": "Een moderne airco koelt in de zomer én verwarmt in de winter. Als lucht-luchtwarmtepomp haalt hij uit 1 kWh stroom al snel 3 tot 5 kWh warmte — vaak goedkoper dan verwarmen op gas.",
   "seoTitle": "Verwarmen met airco: koelen én verwarmen (2026)",
   "metaDescription": "Kan een airco verwarmen? Ja. Lees hoe koelen én verwarmen met een airco werkt, wat het verbruik en de kosten zijn en wanneer het rendabel is.",
-  "category": "warmtepompen",
-  "categoryName": "Warmtepompen",
+  "category": "airco",
+  "categoryName": "Airco",
   "intro": "Veel mensen kopen een airco om de zomer door te komen, maar vergeten dat vrijwel elke moderne split-airco ook kan verwarmen. En niet zuinig ook: technisch gezien is een verwarmende airco een lucht-luchtwarmtepomp. Hij haalt warmte uit de buitenlucht — zelfs bij vriezen — en brengt die naar binnen. Uit één kilowattuur stroom haalt zo'n toestel al gauw drie tot vijf kilowattuur warmte. Daardoor kunt u in het voor- en najaar, en soms de hele winter, uw cv-ketel grotendeels uit laten. In deze gids leggen we uit hoe verwarmen met een airco werkt, wat de COP en SCOP betekenen, wat het verbruik en de kosten in de praktijk zijn, wanneer het écht rendabel is en waar u op moet letten bij plaatsing, onderhoud en subsidie. Zo weet u of koelen én verwarmen met één toestel bij uw woning past.",
   "body": [
     {
@@ -54,12 +54,30 @@
     }
   ],
   "priceTable": [
-    { "label": "Kosten per kWh warmte — airco (SCOP 4)", "price": "± € 0,075" },
-    { "label": "Kosten per kWh warmte — cv-ketel op gas", "price": "± € 0,18" },
-    { "label": "Split-airco koelen én verwarmen, 1 ruimte (incl. montage)", "price": "€ 1.500 – € 2.500" },
-    { "label": "Multisplit meerdere ruimtes (incl. montage)", "price": "€ 3.000 – € 6.000+" },
-    { "label": "Typische SCOP (verwarming) goede toestellen", "price": "4,0 – 5,1" },
-    { "label": "Onderhoudsbeurt airco", "price": "€ 90 – € 150" }
+    {
+      "label": "Kosten per kWh warmte — airco (SCOP 4)",
+      "price": "± € 0,075"
+    },
+    {
+      "label": "Kosten per kWh warmte — cv-ketel op gas",
+      "price": "± € 0,18"
+    },
+    {
+      "label": "Split-airco koelen én verwarmen, 1 ruimte (incl. montage)",
+      "price": "€ 1.500 – € 2.500"
+    },
+    {
+      "label": "Multisplit meerdere ruimtes (incl. montage)",
+      "price": "€ 3.000 – € 6.000+"
+    },
+    {
+      "label": "Typische SCOP (verwarming) goede toestellen",
+      "price": "4,0 – 5,1"
+    },
+    {
+      "label": "Onderhoudsbeurt airco",
+      "price": "€ 90 – € 150"
+    }
   ],
   "faqs": [
     {

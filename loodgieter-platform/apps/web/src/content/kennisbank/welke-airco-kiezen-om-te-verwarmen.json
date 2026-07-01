@@ -4,8 +4,8 @@
   "excerpt": "Wilt u met uw airco ook goed verwarmen, let dan op de SCOP, het verwarmingsvermogen en de prestaties bij kou. Deze koopgids helpt u het juiste toestel kiezen.",
   "seoTitle": "Welke airco kiezen om te verwarmen? Gids 2026",
   "metaDescription": "Een airco kiezen om mee te verwarmen? Let op SCOP, vermogen, prestaties bij vorst en single vs multisplit. Complete koopgids met tips voor 2026.",
-  "category": "warmtepompen",
-  "categoryName": "Warmtepompen",
+  "category": "airco",
+  "categoryName": "Airco",
   "intro": "Bijna elke split-airco kan tegenwoordig verwarmen, maar niet elk toestel doet dat even goed of zuinig. Wilt u de airco serieus als (bij)verwarming gebruiken, dan kiest u op andere punten dan wanneer u alleen wilt koelen. Een verwarmende airco is namelijk een lucht-luchtwarmtepomp, en de efficiëntie waarmee hij warmte uit koude buitenlucht haalt verschilt sterk per model. In deze koopgids lopen we langs de zaken die er echt toe doen: de SCOP en het energielabel voor verwarming, het juiste vermogen, de prestaties bij vorst, de keuze tussen single- en multisplit, het type binnenunit, geluid en handige extra's. Zo kiest u een toestel dat niet alleen koelt in de zomer, maar ook betrouwbaar en goedkoop verwarmt in het tussenseizoen en de winter. Vergelijk daarna gratis offertes van gecertificeerde installateurs via Loodgieterplatform.nl.",
   "body": [
     {
@@ -38,12 +38,30 @@
     }
   ],
   "priceTable": [
-    { "label": "Aanbevolen SCOP (verwarming)", "price": "4,0 – 5,1" },
-    { "label": "Energielabel verwarming (streven)", "price": "A+++" },
-    { "label": "Typisch vermogen woonkamer", "price": "2,5 – 3,5 kW" },
-    { "label": "Single split koelen én verwarmen (incl. montage)", "price": "€ 1.500 – € 2.500" },
-    { "label": "Multisplit meerdere ruimtes (incl. montage)", "price": "€ 3.000 – € 6.000+" },
-    { "label": "Onderhoudsbeurt airco", "price": "€ 90 – € 150" }
+    {
+      "label": "Aanbevolen SCOP (verwarming)",
+      "price": "4,0 – 5,1"
+    },
+    {
+      "label": "Energielabel verwarming (streven)",
+      "price": "A+++"
+    },
+    {
+      "label": "Typisch vermogen woonkamer",
+      "price": "2,5 – 3,5 kW"
+    },
+    {
+      "label": "Single split koelen én verwarmen (incl. montage)",
+      "price": "€ 1.500 – € 2.500"
+    },
+    {
+      "label": "Multisplit meerdere ruimtes (incl. montage)",
+      "price": "€ 3.000 – € 6.000+"
+    },
+    {
+      "label": "Onderhoudsbeurt airco",
+      "price": "€ 90 – € 150"
+    }
   ],
   "faqs": [
     {

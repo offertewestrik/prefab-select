@@ -45,6 +45,7 @@ function loadAll(): KbArticle[] {
 
 /** Categorie-volgorde voor een logische weergave. */
 const CATEGORY_ORDER = [
+  "airco",
   "kosten-prijzen",
   "cv-verwarming",
   "warmtepompen",

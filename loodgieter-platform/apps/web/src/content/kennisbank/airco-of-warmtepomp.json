@@ -4,8 +4,8 @@
   "excerpt": "Een airco (lucht-lucht) en een lucht-waterwarmtepomp verwarmen allebei elektrisch en efficiënt, maar passen bij verschillende woningen en doelen. We zetten de verschillen, kosten en keuzevragen op een rij.",
   "seoTitle": "Airco of warmtepomp? De juiste keuze maken (2026)",
   "metaDescription": "Airco of warmtepomp: wat past bij uw huis? Vergelijk verwarmen, koelen, kosten, subsidie en tapwater en maak in 2026 de juiste keuze.",
-  "category": "warmtepompen",
-  "categoryName": "Warmtepompen",
+  "category": "airco",
+  "categoryName": "Airco",
   "intro": "Airco of warmtepomp — het is een van de meestgestelde vragen bij het verduurzamen van een woning. Verwarrend is dat een verwarmende airco technisch óók een warmtepomp is: een lucht-luchtwarmtepomp. Als mensen \"warmtepomp\" zeggen, bedoelen ze meestal een lucht-waterwarmtepomp die op uw cv-systeem is aangesloten. Beide halen warmte uit de buitenlucht en zijn een stuk zuiniger dan een cv-ketel, maar ze verschillen sterk in wat ze doen, wat ze kosten en voor welke woning ze geschikt zijn. In deze gids vergelijken we de airco en de lucht-waterwarmtepomp op koelen, verwarmen, warm tapwater, kosten, subsidie en comfort — en helpen we u met een paar heldere vragen naar de keuze die bij úw situatie past.",
   "body": [
     {
@@ -46,12 +46,30 @@
     }
   ],
   "priceTable": [
-    { "label": "Split-airco koelen én verwarmen, 1 ruimte (incl. montage)", "price": "€ 1.500 – € 2.500" },
-    { "label": "Multisplit airco meerdere ruimtes (incl. montage)", "price": "€ 3.000 – € 6.000+" },
-    { "label": "Lucht-waterwarmtepomp (incl. montage)", "price": "€ 8.000 – € 18.000" },
-    { "label": "Koelen in de zomer", "price": "Airco: sterk · Warmtepomp: beperkt" },
-    { "label": "Warm tapwater", "price": "Airco: nee · Warmtepomp: ja" },
-    { "label": "ISDE-subsidie", "price": "Airco: doorgaans nee · Warmtepomp: vaak wel" }
+    {
+      "label": "Split-airco koelen én verwarmen, 1 ruimte (incl. montage)",
+      "price": "€ 1.500 – € 2.500"
+    },
+    {
+      "label": "Multisplit airco meerdere ruimtes (incl. montage)",
+      "price": "€ 3.000 – € 6.000+"
+    },
+    {
+      "label": "Lucht-waterwarmtepomp (incl. montage)",
+      "price": "€ 8.000 – € 18.000"
+    },
+    {
+      "label": "Koelen in de zomer",
+      "price": "Airco: sterk · Warmtepomp: beperkt"
+    },
+    {
+      "label": "Warm tapwater",
+      "price": "Airco: nee · Warmtepomp: ja"
+    },
+    {
+      "label": "ISDE-subsidie",
+      "price": "Airco: doorgaans nee · Warmtepomp: vaak wel"
+    }
   ],
   "faqs": [
     {
