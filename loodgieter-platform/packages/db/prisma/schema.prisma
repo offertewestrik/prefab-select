@@ -273,6 +273,9 @@ model InstallerCompany {
   quotes         Quote[]
   payments       Payment[]
   subscription   Subscription?
+  quoteTemplates     QuoteTemplate[]
+  customers          Customer[]
+  contractorSettings ContractorSettings?
 
   @@index([status])
 }
@@ -413,6 +416,7 @@ model Service {
   leads        LeadRequest[]
   landing      LandingContent[]
   companies    CompanyService[]
+  quoteTemplates QuoteTemplate[]
 
   @@index([categoryId])
 }
@@ -662,14 +666,22 @@ model Quote {
   id            String           @id @default(cuid())
   companyId     String
   leadId        String?
+  customerId    String?          // optioneel: klant uit het adresboek
+  templateId    String?          // optioneel: gebruikte template (herkomst)
   number        String           @unique
   title         String?
   introText     String?          @db.Text
-  lineItems     Json             // [{ description, qty, unitPriceCents }]
+  lineItems     Json             // [{ description, qty, unitPriceCents, kind, optional, hours }]
   subtotalCents Int              @default(0)
+  discountCents Int              @default(0) // korting op het subtotaal (excl. btw)
   vatRate       Int              @default(21) // btw-percentage
   vatCents      Int              @default(0)
   totalCents    Int              @default(0)
+  // Gedenormaliseerde klantgegevens — zodat een offerte zonder lead/customer kan bestaan.
+  customerName    String?
+  customerEmail   String?
+  customerPhone   String?
+  customerAddress String?
   terms         String?          @db.Text
   notes         String?          @db.Text
   status        QuoteStatus      @default(DRAFT)
@@ -684,9 +696,93 @@ model Quote {
   updatedAt     DateTime         @updatedAt
   company       InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
   lead          LeadRequest?     @relation(fields: [leadId], references: [id])
+  customer      Customer?        @relation(fields: [customerId], references: [id])
+  template      QuoteTemplate?   @relation(fields: [templateId], references: [id])
 
   @@index([companyId])
   @@index([leadId])
+  @@index([customerId])
+}
+
+enum QuoteItemKind {
+  LABOUR
+  MATERIAL
+  OTHER
+}
+
+/// Vaste offerte-template per dienst. companyId = null → platform-standaard
+/// (zichtbaar voor alle vakmannen); gevuld → eigen template van een bedrijf.
+model QuoteTemplate {
+  id             String              @id @default(cuid())
+  companyId      String?
+  serviceId      String?
+  slug           String              @unique
+  title          String
+  description    String?             @db.Text
+  defaultVatRate Int                 @default(21)
+  warrantyText   String?             @db.Text
+  termsText      String?             @db.Text
+  priceFromCents Int?
+  priceToCents   Int?
+  active         Boolean             @default(true)
+  order          Int                 @default(0)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  company        InstallerCompany?   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  service        Service?            @relation(fields: [serviceId], references: [id])
+  items          QuoteTemplateItem[]
+  quotes         Quote[]
+
+  @@index([companyId])
+  @@index([serviceId])
+}
+
+model QuoteTemplateItem {
+  id             String        @id @default(cuid())
+  templateId     String
+  kind           QuoteItemKind @default(LABOUR)
+  description    String
+  qty            Float         @default(1)
+  unitPriceCents Int           @default(0)
+  hours          Float?
+  optional       Boolean       @default(false)
+  order          Int           @default(0)
+  template       QuoteTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@index([templateId])
+}
+
+/// Klantenboek per bedrijf (voor losse offertes zonder lead).
+model Customer {
+  id        String           @id @default(cuid())
+  companyId String
+  name      String
+  email     String?
+  phone     String?
+  street    String?
+  postcode  String?
+  city      String?
+  notes     String?          @db.Text
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  company   InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  quotes    Quote[]
+
+  @@index([companyId])
+}
+
+/// Offerte-/bedrijfsinstellingen per bedrijf (standaardwaarden voor nieuwe offertes).
+model ContractorSettings {
+  companyId          String           @id
+  defaultVatRate     Int              @default(21)
+  defaultValidityDays Int             @default(30)
+  defaultTerms       String?          @db.Text
+  defaultWarranty    String?          @db.Text
+  quotePrefix        String           @default("OFF")
+  iban               String?
+  footerNote         String?          @db.Text
+  updatedAt          DateTime         @updatedAt
+  company            InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
 }
 
 model LeadMatch {

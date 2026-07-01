@@ -25,7 +25,11 @@ export async function saveDraft(companyId: string, quoteId: string, payload: unk
   const parsed = saveQuoteSchema.safeParse(payload);
   if (!parsed.success) return { ok: false, reason: "invalid" };
 
-  const { subtotalCents, vatCents, totalCents } = computeTotals(parsed.data.lineItems, parsed.data.vatRate);
+  const { subtotalCents, discountCents, vatCents, totalCents } = computeTotals(
+    parsed.data.lineItems,
+    parsed.data.vatRate,
+    parsed.data.discountCents,
+  );
   await prisma.quote.update({
     where: { id: quoteId },
     data: {
@@ -36,7 +40,12 @@ export async function saveDraft(companyId: string, quoteId: string, payload: unk
       terms: parsed.data.terms,
       notes: parsed.data.notes,
       validUntil: parsed.data.validUntil ? new Date(parsed.data.validUntil) : null,
+      customerName: parsed.data.customerName || null,
+      customerEmail: parsed.data.customerEmail || null,
+      customerPhone: parsed.data.customerPhone || null,
+      customerAddress: parsed.data.customerAddress || null,
       subtotalCents,
+      discountCents,
       vatCents,
       totalCents,
     },
@@ -60,7 +69,9 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
     validUntil: quote.validUntil ? quote.validUntil.toISOString() : "",
   });
   if (!validation.success) return { ok: false, reason: validation.error.issues[0]?.message ?? "invalid" };
-  if (!quote.lead?.contactEmail) return { ok: false, reason: "no_email" };
+  // Klant-e-mail: losse offerte (customerEmail) of, bij lead-offerte, de lead-contact.
+  const customerEmail = quote.customerEmail || quote.lead?.contactEmail;
+  if (!customerEmail) return { ok: false, reason: "no_email" };
 
   const token = quote.accessToken ?? makeAccessToken(quote.id);
   await prisma.quote.update({
@@ -69,7 +80,7 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
   });
 
   await sendQuoteSent({
-    to: quote.lead.contactEmail,
+    to: customerEmail,
     companyName: quote.company.name,
     quoteNumber: quote.number,
     totalText: euro(quote.totalCents / 100),

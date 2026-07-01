@@ -8,6 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { runAgent } from "@/features/ai/run";
 import { getQuoteForViewer } from "./queries";
 import { saveDraft, sendQuote, applyDecision, duplicateQuote, type MutResult } from "./mutations";
+import { createQuoteFromTemplate } from "./templates";
 
 export type ActionState = { ok?: boolean; message?: string };
 
@@ -48,6 +49,21 @@ export async function sendQuoteAction(quoteId: string, _prev: ActionState, _form
   revalidatePath(`/dashboard/offertes/${quoteId}`);
   revalidatePath("/dashboard/quotes");
   return msg(result, "Offerte verstuurd naar de klant.");
+}
+
+/** Maakt een nieuw concept vanuit een template (of leeg) + klantgegevens en opent de editor. */
+export async function createQuoteFromTemplateAction(formData: FormData): Promise<void> {
+  const company = await companyGuard();
+  const templateId = String(formData.get("templateId") ?? "") || undefined;
+  const customer = {
+    name: String(formData.get("customerName") ?? "") || undefined,
+    email: String(formData.get("customerEmail") ?? "") || undefined,
+    phone: String(formData.get("customerPhone") ?? "") || undefined,
+    address: String(formData.get("customerAddress") ?? "") || undefined,
+  };
+  const result = await createQuoteFromTemplate(company.id, { templateId, customer });
+  revalidatePath("/dashboard/offertes");
+  if (result.ok) redirect(`/dashboard/offertes/${result.quoteId}`);
 }
 
 /** Dupliceert een (bijv. verlopen) offerte naar een nieuw concept en opent de editor. */

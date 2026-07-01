@@ -11,6 +11,7 @@ export interface QuotePreviewData {
   customer: { name: string; city?: string | null; street?: string | null; postcode?: string | null };
   lineItems: LineItem[];
   subtotalCents: number;
+  discountCents?: number;
   vatRate: number;
   vatCents: number;
   totalCents: number;
@@ -77,10 +78,13 @@ export function QuotePreview({ data }: { data: QuotePreviewData }) {
         <tbody>
           {data.lineItems.map((li, i) => (
             <tr key={i} className="border-b border-neutral-100">
-              <td className="py-2 text-neutral-900">{li.description}</td>
+              <td className="py-2 text-neutral-900">
+                {li.description}
+                {li.optional && <span className="ml-2 rounded bg-neutral-100 px-1.5 py-0.5 text-xs text-neutral-500">optioneel</span>}
+              </td>
               <td className="py-2 text-right">{li.qty}</td>
               <td className="py-2 text-right">{euro(li.unitPriceCents / 100)}</td>
-              <td className="py-2 text-right">{euro((li.qty * li.unitPriceCents) / 100)}</td>
+              <td className="py-2 text-right">{li.optional ? "—" : euro((li.qty * li.unitPriceCents) / 100)}</td>
             </tr>
           ))}
           {data.lineItems.length === 0 && (
@@ -92,6 +96,9 @@ export function QuotePreview({ data }: { data: QuotePreviewData }) {
       {/* Totalen */}
       <div className="mt-4 ml-auto w-full max-w-xs space-y-1 text-sm">
         <Row label="Subtotaal (excl. btw)" value={euro(data.subtotalCents / 100)} />
+        {!!data.discountCents && data.discountCents > 0 && (
+          <Row label="Korting" value={`− ${euro(data.discountCents / 100)}`} />
+        )}
         <Row label={`Btw (${data.vatRate}%)`} value={euro(data.vatCents / 100)} />
         <div className="flex justify-between border-t border-neutral-200 pt-2 text-base font-bold text-neutral-900">
           <span>Totaal incl. btw</span>

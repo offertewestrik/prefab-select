@@ -22,21 +22,20 @@ export default async function QuoteEditorPage({ params }: { params: Promise<{ id
         quoteId={quote.id}
         number={quote.number}
         status={quote.status}
-        company={{ name: quote.company.name, email: quote.company.email, phone: quote.company.phone }}
-        customer={{
-          name: lead?.contactName ?? "Klant",
-          city: lead?.city,
-          street: lead?.street,
-          postcode: lead?.postcode,
-        }}
+        company={{ name: quote.company.name, email: quote.company.email, phone: quote.company.phone, logoUrl: quote.company.logoUrl }}
         initial={{
           title: quote.title ?? "",
           introText: quote.introText ?? "",
           lineItems: parseLineItems(quote.lineItems),
           vatRate: quote.vatRate,
+          discountCents: quote.discountCents ?? 0,
           validUntil: quote.validUntil ? quote.validUntil.toISOString().slice(0, 10) : "",
           terms: quote.terms ?? "",
           notes: quote.notes ?? "",
+          customerName: quote.customerName ?? lead?.contactName ?? "",
+          customerEmail: quote.customerEmail ?? lead?.contactEmail ?? "",
+          customerPhone: quote.customerPhone ?? lead?.contactPhone ?? "",
+          customerAddress: quote.customerAddress ?? [lead?.street, lead?.postcode, lead?.city].filter(Boolean).join(" ") ?? "",
         }}
       />
     </div>

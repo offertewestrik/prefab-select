@@ -1,10 +1,15 @@
 import type { LineItem } from "../schema";
 
-export function computeTotals(lineItems: LineItem[], vatRate: number) {
-  const subtotalCents = lineItems.reduce((sum, li) => sum + Math.round(li.qty * li.unitPriceCents), 0);
-  const vatCents = Math.round((subtotalCents * vatRate) / 100);
-  const totalCents = subtotalCents + vatCents;
-  return { subtotalCents, vatCents, totalCents };
+export function computeTotals(lineItems: LineItem[], vatRate: number, discountCents = 0) {
+  // Optionele meerwerkregels tellen niet mee in het totaal (klant kiest zelf).
+  const subtotalCents = lineItems
+    .filter((li) => !li.optional)
+    .reduce((sum, li) => sum + Math.round(li.qty * li.unitPriceCents), 0);
+  const discount = Math.min(Math.max(0, Math.round(discountCents)), subtotalCents);
+  const taxableCents = subtotalCents - discount;
+  const vatCents = Math.round((taxableCents * vatRate) / 100);
+  const totalCents = taxableCents + vatCents;
+  return { subtotalCents, discountCents: discount, vatCents, totalCents };
 }
 
 /** Genereert een eenvoudig, niet-radend toegangstoken voor de klant-link. */
