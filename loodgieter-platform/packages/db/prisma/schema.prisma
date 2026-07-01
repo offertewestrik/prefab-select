@@ -1,6 +1,11 @@
 // Loodgieterplatform.nl — datamodel (zie docs/03-datamodel.md)
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // "native" voor lokaal; "rhel-openssl-3.0.x" is de query-engine die de
+  // Vercel serverless runtime (AWS Lambda) nodig heeft. Zonder deze target
+  // ontbreekt de engine op runtime → PrismaClientInitializationError op elke
+  // DB-pagina, terwijl build (native) wél werkt.
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
