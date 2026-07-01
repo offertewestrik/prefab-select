@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "@repo/config/theme.css";
 
+/* Tailwind v4 scant standaard alleen dit project. Gedeelde packages met eigen
+   classes (zoals de Button in @repo/ui) moeten expliciet worden meegenomen,
+   anders ontbreken utilities die daar exclusief worden gebruikt (bv. h-12,
+   px-7) en renderen componenten half-gestyled. */
+@source "../../../../packages/ui/src/**/*.{ts,tsx}";
+
 :root {
   color-scheme: light;
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
