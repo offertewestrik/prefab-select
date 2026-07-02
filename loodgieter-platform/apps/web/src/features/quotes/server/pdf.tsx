@@ -42,6 +42,9 @@ const eur = (c: number) => `€ ${(c / 100).toLocaleString("nl-NL", { minimumFra
 const date = (d: Date) => d.toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" });
 
 // ── Kleurhelpers voor de per-vakman accentkleur ──
+// NB: destructureer geen Array.map()-resultaat (number[]) — onder
+// noUncheckedIndexedAccess worden de waarden number|undefined en breekt tsc.
+// Gebruik daarom de vaste tuple uit toRgb().
 function normHex(v?: string | null): string | null {
   if (!v) return null;
   const m = v.trim().replace(/^#/, "");
