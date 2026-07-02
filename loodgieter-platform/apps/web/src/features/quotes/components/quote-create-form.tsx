@@ -16,7 +16,15 @@ export interface TemplateOption {
 
 const euro0 = (c: number) => `€ ${Math.round(c / 100).toLocaleString("nl-NL")}`;
 
-export function QuoteCreateForm({ templates }: { templates: TemplateOption[] }) {
+export interface CustomerPreset {
+  customerId?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+}
+
+export function QuoteCreateForm({ templates, preset }: { templates: TemplateOption[]; preset?: CustomerPreset }) {
   const [templateId, setTemplateId] = useState<string>("");
 
   const groups = useMemo(() => {
@@ -30,6 +38,7 @@ export function QuoteCreateForm({ templates }: { templates: TemplateOption[] }) 
 
   return (
     <form action={createQuoteFromTemplateAction} className="mt-4 space-y-8">
+      <input type="hidden" name="customerId" value={preset?.customerId ?? ""} />
       {/* Stap 1: template kiezen */}
       <section>
         <h2 className="text-sm font-semibold text-neutral-900">1. Kies een template</h2>
@@ -89,12 +98,14 @@ export function QuoteCreateForm({ templates }: { templates: TemplateOption[] }) 
       {/* Stap 2: klantgegevens */}
       <section>
         <h2 className="text-sm font-semibold text-neutral-900">2. Klantgegevens</h2>
-        <p className="mb-3 text-sm text-neutral-500">Optioneel — je kunt dit ook later in de offerte invullen.</p>
+        <p className="mb-3 text-sm text-neutral-500">
+          {preset?.customerId ? "Gekoppeld aan een bestaande klant uit je klantenbestand." : "Optioneel — je kunt dit ook later in de offerte invullen."}
+        </p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <Input name="customerName" label="Naam klant" placeholder="Bijv. Jan Jansen" />
-          <Input name="customerEmail" label="E-mailadres" type="email" placeholder="klant@voorbeeld.nl" />
-          <Input name="customerPhone" label="Telefoon" placeholder="06 12345678" />
-          <Input name="customerAddress" label="Adres" placeholder="Straat 1, 1234 AB Plaats" />
+          <Input name="customerName" label="Naam klant" placeholder="Bijv. Jan Jansen" defaultValue={preset?.name} />
+          <Input name="customerEmail" label="E-mailadres" type="email" placeholder="klant@voorbeeld.nl" defaultValue={preset?.email} />
+          <Input name="customerPhone" label="Telefoon" placeholder="06 12345678" defaultValue={preset?.phone} />
+          <Input name="customerAddress" label="Adres" placeholder="Straat 1, 1234 AB Plaats" defaultValue={preset?.address} />
         </div>
       </section>
 
@@ -108,11 +119,11 @@ export function QuoteCreateForm({ templates }: { templates: TemplateOption[] }) 
   );
 }
 
-function Input({ name, label, type = "text", placeholder }: { name: string; label: string; type?: string; placeholder?: string }) {
+function Input({ name, label, type = "text", placeholder, defaultValue }: { name: string; label: string; type?: string; placeholder?: string; defaultValue?: string }) {
   return (
     <label className="block">
       <span className="mb-1 block text-sm font-medium text-neutral-900">{label}</span>
-      <input name={name} type={type} placeholder={placeholder} className="qcf-inp" />
+      <input name={name} type={type} placeholder={placeholder} defaultValue={defaultValue} className="qcf-inp" />
     </label>
   );
 }

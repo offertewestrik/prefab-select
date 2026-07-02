@@ -4,14 +4,30 @@ import { ArrowLeft } from "lucide-react";
 import { PageHeading } from "@/components/dashboard/sidebar-layout";
 import { requireRole, getCurrentCompany } from "@/lib/guards";
 import { listQuoteTemplates } from "@/features/quotes/server/templates";
-import { QuoteCreateForm, type TemplateOption } from "@/features/quotes/components/quote-create-form";
+import { getCustomer } from "@/features/customers/server/queries";
+import { QuoteCreateForm, type TemplateOption, type CustomerPreset } from "@/features/quotes/components/quote-create-form";
 
 export const dynamic = "force-dynamic";
 
-export default async function NewQuotePage() {
+export default async function NewQuotePage({ searchParams }: { searchParams: Promise<{ customerId?: string }> }) {
   await requireRole("INSTALLER");
   const company = await getCurrentCompany();
   if (!company) redirect("/dashboard");
+
+  const { customerId } = await searchParams;
+  let preset: CustomerPreset | undefined;
+  if (customerId) {
+    const c = await getCustomer(customerId, company.id);
+    if (c) {
+      preset = {
+        customerId: c.id,
+        name: c.name,
+        email: c.email ?? undefined,
+        phone: c.phone ?? undefined,
+        address: [c.street, [c.postcode, c.city].filter(Boolean).join(" ")].filter(Boolean).join(", ") || undefined,
+      };
+    }
+  }
 
   const templates = await listQuoteTemplates(company.id);
   const options: TemplateOption[] = templates.map((t) => ({
@@ -29,7 +45,7 @@ export default async function NewQuotePage() {
         <ArrowLeft className="h-4 w-4" /> Terug naar offertes
       </Link>
       <PageHeading title="Nieuwe offerte" subtitle="Kies een template als startpunt en vul de klantgegevens in." />
-      <QuoteCreateForm templates={options} />
+      <QuoteCreateForm templates={options} preset={preset} />
     </div>
   );
 }

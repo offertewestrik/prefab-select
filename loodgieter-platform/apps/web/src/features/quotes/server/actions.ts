@@ -57,6 +57,7 @@ export async function createQuoteFromTemplateAction(formData: FormData): Promise
   const company = await companyGuard();
   const templateId = String(formData.get("templateId") ?? "") || undefined;
   const customer = {
+    customerId: String(formData.get("customerId") ?? "") || undefined,
     name: String(formData.get("customerName") ?? "") || undefined,
     email: String(formData.get("customerEmail") ?? "") || undefined,
     phone: String(formData.get("customerPhone") ?? "") || undefined,
