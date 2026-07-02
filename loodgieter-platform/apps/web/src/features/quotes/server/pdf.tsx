@@ -1,5 +1,5 @@
 import "server-only";
-import { Document, Page, Text, View, StyleSheet, Image, renderToBuffer } from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Image, Svg, Polygon, renderToBuffer } from "@react-pdf/renderer";
 import type { LineItem } from "../schema";
 
 export interface QuotePdfInput {
@@ -50,11 +50,16 @@ function normHex(v?: string | null): string | null {
 function toRgb(hex: string): [number, number, number] {
   return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)) as [number, number, number];
 }
+const hex2 = (n: number) => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, "0");
 /** Meng met wit (w = 0..1) voor een zachte tint als achtergrond. */
 function mixWhite(hex: string, w: number): string {
   const [r, g, b] = toRgb(hex);
-  const f = (c: number) => Math.round(c * (1 - w) + 255 * w).toString(16).padStart(2, "0");
-  return `#${f(r)}${f(g)}${f(b)}`;
+  return `#${hex2(r * (1 - w) + 255 * w)}${hex2(g * (1 - w) + 255 * w)}${hex2(b * (1 - w) + 255 * w)}`;
+}
+/** Meng met zwart (w = 0..1) voor een donkerder accent (diepte in de vormen). */
+function mixBlack(hex: string, w: number): string {
+  const [r, g, b] = toRgb(hex);
+  return `#${hex2(r * (1 - w))}${hex2(g * (1 - w))}${hex2(b * (1 - w))}`;
 }
 function luminance(hex: string): number {
   const [r, g, b] = toRgb(hex).map((c) => {
@@ -68,50 +73,59 @@ function readableOn(hex: string): string {
   return luminance(hex) > 0.55 ? "#0E1B33" : "#FFFFFF";
 }
 
-// ── Huisstijl-kleuren (gelijk aan de website) ──
+// ── Huisstijl-basiskleuren ──
 const C = {
+  navy: "#0E1B33",
   ink: "#0E1B33",
   text: "#1F2A45",
   muted: "#6B7280",
   faint: "#9AA6BC",
+  onDark: "#FFFFFF",
+  onDarkMuted: "#B7C0D6",
   blue: "#2563EB",
-  blueSoft: "#EEF3FB",
   orange: "#F26A1B",
   orangeSoft: "#FFF4EC",
   line: "#E7ECF3",
   zebra: "#FAFBFD",
-  card: "#F6F9FE",
 };
 
-const s = StyleSheet.create({
-  page: { fontSize: 9.5, color: C.text, fontFamily: "Helvetica", lineHeight: 1.45, paddingBottom: 64 },
+const PAGE_W = 595.28; // A4-breedte in pt
+const HEADER_H = 120;
+const FOOTER_H = 82;
 
-  // Kop (briefpapier-masthead met zachte accent-tint)
-  accentBar: { height: 5, backgroundColor: C.blue },
-  masthead: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingHorizontal: 40, paddingTop: 26, paddingBottom: 22 },
-  logo: { height: 40, marginBottom: 8, objectFit: "contain" },
-  companyName: { fontSize: 15, fontFamily: "Helvetica-Bold", color: C.ink },
+const s = StyleSheet.create({
+  page: { fontSize: 9.5, color: C.text, fontFamily: "Helvetica", lineHeight: 1.45, paddingBottom: FOOTER_H + 18 },
+
+  // Kopgrafiek
+  header: { height: HEADER_H, position: "relative" },
+  headerSvg: { position: "absolute", top: 0, left: 0 },
+  headerLeft: { position: "absolute", top: 24, left: 40, maxWidth: 330 },
+  companyName: { fontSize: 15, fontFamily: "Helvetica-Bold", color: C.onDark },
+  onDarkLine: { color: C.onDarkMuted, fontSize: 9, marginTop: 2 },
+  logoTile: { position: "absolute", top: 20, right: 40, backgroundColor: "#FFFFFF", borderRadius: 6, padding: 6, maxWidth: 160, alignItems: "center" },
+  logoImg: { height: 34, objectFit: "contain" },
+
+  content: { paddingHorizontal: 40, paddingTop: 22 },
+
+  // Bovenrij: klant links, documentgegevens rechts
+  topRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
+  card: { alignSelf: "flex-start", minWidth: 230, maxWidth: 300, borderRadius: 6, padding: 12, borderLeftWidth: 3 },
+  label: { fontSize: 7, textTransform: "uppercase", color: C.faint, marginBottom: 3, letterSpacing: 0.6, fontFamily: "Helvetica-Bold" },
+  strong: { fontFamily: "Helvetica-Bold", color: C.ink },
   muted: { color: C.muted },
-  faint: { color: C.faint, fontSize: 8.5 },
-  docType: { fontSize: 22, fontFamily: "Helvetica-Bold", color: C.blue, letterSpacing: 1, lineHeight: 1 },
+  docBlock: { alignItems: "flex-end" },
+  docType: { fontSize: 22, fontFamily: "Helvetica-Bold", letterSpacing: 1, lineHeight: 1 },
   docNum: { fontSize: 10.5, fontFamily: "Helvetica-Bold", color: C.ink, marginTop: 5 },
   metaRow: { flexDirection: "row", justifyContent: "flex-end", marginTop: 6 },
   metaLabel: { color: C.faint, fontSize: 8.5, textAlign: "right" },
   metaVal: { color: C.text, fontSize: 8.5, textAlign: "right", marginLeft: 6, fontFamily: "Helvetica-Bold" },
-
-  content: { paddingHorizontal: 40, paddingTop: 24 },
-
-  // Klantkaart
-  card: { marginTop: 18, alignSelf: "flex-start", minWidth: 230, maxWidth: 300, backgroundColor: C.card, borderRadius: 6, padding: 12, borderLeftWidth: 3, borderLeftColor: C.blue },
-  label: { fontSize: 7, textTransform: "uppercase", color: C.faint, marginBottom: 3, letterSpacing: 0.6, fontFamily: "Helvetica-Bold" },
-  strong: { fontFamily: "Helvetica-Bold", color: C.ink },
 
   // Titel / intro
   title: { fontSize: 14, fontFamily: "Helvetica-Bold", color: C.ink, marginTop: 20 },
   intro: { marginTop: 4, color: C.text },
 
   // Tabel
-  tHead: { flexDirection: "row", backgroundColor: C.blueSoft, paddingVertical: 6, paddingHorizontal: 8, borderRadius: 4, marginTop: 18 },
+  tHead: { flexDirection: "row", paddingVertical: 6, paddingHorizontal: 8, borderRadius: 4, marginTop: 18 },
   tHeadCell: { fontFamily: "Helvetica-Bold", color: C.ink, fontSize: 8.5 },
   tRow: { flexDirection: "row", paddingVertical: 6, paddingHorizontal: 8, borderBottomWidth: 1, borderBottomColor: C.line },
   tRowAlt: { backgroundColor: C.zebra },
@@ -124,9 +138,9 @@ const s = StyleSheet.create({
   // Totalen
   totals: { marginTop: 14, marginLeft: "auto", width: 250 },
   tLine: { flexDirection: "row", justifyContent: "space-between", paddingVertical: 3 },
-  grand: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: C.blue, borderRadius: 6, paddingVertical: 9, paddingHorizontal: 12, marginTop: 8 },
-  grandLabel: { color: "#FFFFFF", fontFamily: "Helvetica-Bold", fontSize: 10.5 },
-  grandVal: { color: "#FFFFFF", fontFamily: "Helvetica-Bold", fontSize: 13 },
+  grand: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderRadius: 6, paddingVertical: 9, paddingHorizontal: 12, marginTop: 8 },
+  grandLabel: { fontFamily: "Helvetica-Bold", fontSize: 10.5 },
+  grandVal: { fontFamily: "Helvetica-Bold", fontSize: 13 },
 
   // Voorwaarden
   terms: { marginTop: 22, backgroundColor: "#F8FAFC", borderRadius: 6, padding: 12, borderLeftWidth: 3, borderLeftColor: C.faint },
@@ -135,12 +149,14 @@ const s = StyleSheet.create({
   callout: { marginTop: 14, backgroundColor: C.orangeSoft, borderRadius: 6, padding: 12, borderLeftWidth: 3, borderLeftColor: C.orange },
   calloutTitle: { fontFamily: "Helvetica-Bold", color: C.ink, marginBottom: 2 },
 
-  // Footer (briefpapier-voet: zakelijke gegevens + voettekst + paginanummer)
-  footer: { position: "absolute", bottom: 22, left: 40, right: 40, borderTopWidth: 1, borderTopColor: C.line, paddingTop: 7 },
-  footerLegal: { fontSize: 7.5, color: C.text, textAlign: "center", marginBottom: 2, fontFamily: "Helvetica-Bold" },
-  footerNote: { fontSize: 7.5, color: C.faint, textAlign: "center", marginBottom: 3 },
-  footerRow: { flexDirection: "row", justifyContent: "space-between" },
-  footerText: { fontSize: 7.5, color: C.faint },
+  // Voetgrafiek
+  footer: { position: "absolute", bottom: 0, left: 0, right: 0, height: FOOTER_H },
+  footerSvg: { position: "absolute", top: 0, left: 0 },
+  footerCenter: { position: "absolute", top: 40, left: 40, right: 40, alignItems: "center" },
+  footerLegal: { fontSize: 7.5, color: C.onDark, textAlign: "center", fontFamily: "Helvetica-Bold" },
+  footerNote: { fontSize: 7.5, color: C.onDarkMuted, textAlign: "center", marginTop: 2 },
+  footerRow: { position: "absolute", bottom: 10, left: 40, right: 40, flexDirection: "row", justifyContent: "space-between" },
+  footerText: { fontSize: 7.5, color: C.onDarkMuted },
 });
 
 function MetaLine({ label, value }: { label: string; value: string }) {
@@ -152,11 +168,41 @@ function MetaLine({ label, value }: { label: string; value: string }) {
   );
 }
 
+/** Decoratieve kopgrafiek: hoekige navy + accent-vormen (briefpapier-stijl). */
+function HeaderGraphic({ navy, accent, accentDark }: { navy: string; accent: string; accentDark: string }) {
+  return (
+    <Svg width={PAGE_W} height={HEADER_H} viewBox={`0 0 ${PAGE_W} ${HEADER_H}`} style={s.headerSvg}>
+      {/* navy basisband met schuine onderrand */}
+      <Polygon points={`0,0 ${PAGE_W},0 ${PAGE_W},100 0,82`} fill={navy} />
+      {/* accent-driehoek rechts (steekt onder de band uit) */}
+      <Polygon points={`${PAGE_W},40 ${PAGE_W},${HEADER_H} 452,100`} fill={accent} />
+      {/* donkerder accent voor diepte */}
+      <Polygon points={`${PAGE_W},74 ${PAGE_W},${HEADER_H} 520,110`} fill={accentDark} />
+      {/* accent-tab linksonder */}
+      <Polygon points={`0,82 96,94 0,108`} fill={accent} />
+    </Svg>
+  );
+}
+
+/** Decoratieve voetgrafiek: spiegelt de kop. */
+function FooterGraphic({ navy, accent, accentDark }: { navy: string; accent: string; accentDark: string }) {
+  return (
+    <Svg width={PAGE_W} height={FOOTER_H} viewBox={`0 0 ${PAGE_W} ${FOOTER_H}`} style={s.footerSvg}>
+      {/* navy band met licht schuine bovenrand (hoog genoeg voor leesbare tekst) */}
+      <Polygon points={`0,${FOOTER_H} ${PAGE_W},${FOOTER_H} ${PAGE_W},22 0,34`} fill={navy} />
+      {/* accent-driehoek rechtsboven de band */}
+      <Polygon points={`${PAGE_W},2 ${PAGE_W},40 470,22`} fill={accent} />
+      <Polygon points={`${PAGE_W},2 ${PAGE_W},26 540,12`} fill={accentDark} />
+      {/* accent-tab linksboven */}
+      <Polygon points={`0,34 96,22 0,10`} fill={accent} />
+    </Svg>
+  );
+}
+
 function QuoteDoc({ q }: { q: QuotePdfInput }) {
   const isInvoice = q.kind === "invoice";
   const companyAddr = [q.company.street, [q.company.postcode, q.company.city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
   const contact = [q.company.phone, q.company.email].filter(Boolean).join("  ·  ");
-  // Zakelijke gegevens onderaan (briefpapier-voet).
   const legal = [
     q.company.kvk && `KVK ${q.company.kvk}`,
     q.company.vatNumber && `BTW ${q.company.vatNumber}`,
@@ -167,39 +213,45 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
   // Per-vakman huisstijlkleur (valt terug op platform-blauw).
   const accent = normHex(q.accentColor) ?? C.blue;
   const accentSoft = mixWhite(accent, 0.9);
+  const accentDark = mixBlack(accent, 0.22);
   const accentText = luminance(accent) > 0.7 ? C.ink : accent; // leesbaar op wit
   const onAccent = readableOn(accent);
 
   return (
     <Document title={`${isInvoice ? "Factuur" : "Offerte"} ${q.number}`} author={q.company.name}>
       <Page size="A4" style={s.page}>
-        <View style={[s.accentBar, { backgroundColor: accent }]} />
-
-        {/* Briefpapier-masthead: bedrijf links, document rechts (zachte accent-tint) */}
-        <View style={[s.masthead, { backgroundColor: accentSoft }]}>
-          <View style={{ maxWidth: 320 }}>
-            {q.company.logoUrl ? <Image style={s.logo} src={q.company.logoUrl} /> : null}
+        {/* Kopgrafiek met bedrijfsnaam/contact (wit) + logo */}
+        <View style={s.header}>
+          <HeaderGraphic navy={C.navy} accent={accent} accentDark={accentDark} />
+          <View style={s.headerLeft}>
             <Text style={s.companyName}>{q.company.name}</Text>
-            {companyAddr ? <Text style={s.muted}>{companyAddr}</Text> : null}
-            {contact ? <Text style={s.muted}>{contact}</Text> : null}
+            {companyAddr ? <Text style={s.onDarkLine}>{companyAddr}</Text> : null}
+            {contact ? <Text style={s.onDarkLine}>{contact}</Text> : null}
           </View>
-          <View style={{ alignItems: "flex-end" }}>
-            <Text style={[s.docType, { color: accentText }]}>{isInvoice ? "FACTUUR" : "OFFERTE"}</Text>
-            <Text style={s.docNum}>{q.number}</Text>
-            <MetaLine label="Datum" value={date(q.createdAt)} />
-            {q.validUntil ? <MetaLine label={isInvoice ? "Vervaldatum" : "Geldig tot"} value={date(q.validUntil)} /> : null}
-          </View>
+          {q.company.logoUrl ? (
+            <View style={s.logoTile}>
+              <Image style={s.logoImg} src={q.company.logoUrl} />
+            </View>
+          ) : null}
         </View>
 
         <View style={s.content}>
-          {/* Klantgegevens */}
-          <View style={[s.card, { backgroundColor: accentSoft, borderLeftColor: accent }]}>
-            <Text style={s.label}>{isInvoice ? "Factuuradres" : "Offerte voor"}</Text>
-            <Text style={s.strong}>{q.customer.name || "Klant"}</Text>
-            {q.customer.address ? <Text>{q.customer.address}</Text> : null}
-            {(q.customer.phone || q.customer.email) ? (
-              <Text style={s.muted}>{[q.customer.phone, q.customer.email].filter(Boolean).join("  ·  ")}</Text>
-            ) : null}
+          {/* Bovenrij: klant links, documentgegevens rechts */}
+          <View style={s.topRow}>
+            <View style={[s.card, { backgroundColor: accentSoft, borderLeftColor: accent }]}>
+              <Text style={s.label}>{isInvoice ? "Factuuradres" : "Offerte voor"}</Text>
+              <Text style={s.strong}>{q.customer.name || "Klant"}</Text>
+              {q.customer.address ? <Text>{q.customer.address}</Text> : null}
+              {(q.customer.phone || q.customer.email) ? (
+                <Text style={s.muted}>{[q.customer.phone, q.customer.email].filter(Boolean).join("  ·  ")}</Text>
+              ) : null}
+            </View>
+            <View style={s.docBlock}>
+              <Text style={[s.docType, { color: accentText }]}>{isInvoice ? "FACTUUR" : "OFFERTE"}</Text>
+              <Text style={s.docNum}>{q.number}</Text>
+              <MetaLine label="Datum" value={date(q.createdAt)} />
+              {q.validUntil ? <MetaLine label={isInvoice ? "Vervaldatum" : "Geldig tot"} value={date(q.validUntil)} /> : null}
+            </View>
           </View>
 
           {q.title ? <Text style={s.title}>{q.title}</Text> : null}
@@ -267,10 +319,13 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
           </View>
         </View>
 
-        {/* Briefpapier-voet: zakelijke gegevens + voettekst + paginanummer */}
+        {/* Voetgrafiek met zakelijke gegevens + paginanummer */}
         <View style={s.footer} fixed>
-          {legal ? <Text style={s.footerLegal}>{legal}</Text> : null}
-          {q.footerNote ? <Text style={s.footerNote}>{q.footerNote}</Text> : null}
+          <FooterGraphic navy={C.navy} accent={accent} accentDark={accentDark} />
+          <View style={s.footerCenter}>
+            {legal ? <Text style={s.footerLegal}>{legal}</Text> : null}
+            {q.footerNote ? <Text style={s.footerNote}>{q.footerNote}</Text> : null}
+          </View>
           <View style={s.footerRow}>
             <Text style={s.footerText}>{q.company.name}</Text>
             <Text style={s.footerText} fixed render={({ pageNumber, totalPages }) => `Pagina ${pageNumber} van ${totalPages}`} />
