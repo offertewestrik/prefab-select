@@ -50,6 +50,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     terms: quote.terms,
     iban: settings?.iban,
     footerNote: settings?.footerNote,
+    accentColor: settings?.accentColor,
   });
 
   return new Response(new Uint8Array(pdf), {

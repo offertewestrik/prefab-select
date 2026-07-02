@@ -789,6 +789,7 @@ model ContractorSettings {
   quotePrefix        String           @default("OFF")
   iban               String?
   footerNote         String?          @db.Text
+  accentColor        String?          // Hex-huisstijlkleur (bijv. #2563EB) voor offerte-/factuur-PDF
   updatedAt          DateTime         @updatedAt
   company            InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
 }
