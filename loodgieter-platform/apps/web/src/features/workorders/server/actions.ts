@@ -7,6 +7,7 @@ import type { Prisma } from "@repo/db";
 import { requireRole, getCurrentCompany } from "@/lib/guards";
 import { prisma } from "@/lib/prisma";
 import { createWorkOrder } from "./service";
+import { createReviewInviteForQuote } from "@/features/reviews/server/service";
 
 export type WorkOrderState = { ok?: boolean; message?: string };
 
@@ -74,6 +75,8 @@ export async function signWorkOrderAction(workOrderId: string, _prev: WorkOrderS
     where: { id: workOrderId },
     data: { signedByName: name, signedAt: new Date(), status: "SIGNED", performedAt: wo.performedAt ?? new Date() },
   });
+  // Werk afgerond en afgetekend → stuur automatisch een reviewverzoek (idempotent).
+  if (wo.quoteId) void createReviewInviteForQuote(wo.quoteId);
   revalidatePath(`/dashboard/werkbonnen/${workOrderId}`);
   return { ok: true, message: "Werkbon ondertekend en vastgezet." };
 }
