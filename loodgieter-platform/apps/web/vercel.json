@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "pnpm --filter @repo/db generate && next build",
+  "ignoreCommand": "if [ \"$VERCEL_PROJECT_ID\" = \"prj_a4d6Rvx0EJSPsIdilBAh8jgsMJ7w\" ] || [ \"$VERCEL_PROJECT_ID\" = \"prj_BQyJUh2ZpDPiamzGVCngXYK2nDhV\" ]; then echo 'Skip build: alleen loodgieterplatform0412 deployt deze repo'; exit 0; else exit 1; fi",
   "crons": [
     {
       "path": "/api/cron/expire-quotes",
