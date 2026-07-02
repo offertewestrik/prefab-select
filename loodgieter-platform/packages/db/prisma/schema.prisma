@@ -690,6 +690,7 @@ model Quote {
   pdfUrl        String?
   accessToken   String?          @unique // beveiligde klant-link
   sentAt        DateTime?
+  followUpSentAt DateTime?
   acceptedAt    DateTime?
   rejectedAt    DateTime?
   expiredAt     DateTime?

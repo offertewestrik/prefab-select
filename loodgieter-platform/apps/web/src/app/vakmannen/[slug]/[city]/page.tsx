@@ -11,6 +11,7 @@ import {
   getDirectoryFilterOptions,
   parseDirectoryParams,
 } from "@/features/installers/server/directory";
+import { staticParamsOrEmpty } from "@/lib/static-params";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -19,8 +20,10 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   // Kleine seed pre-renderen (build-tijd DB-belasting laag voor Supabase-pooler);
   // de rest komt via on-demand ISR (dynamicParams).
-  const pairs = await getPriorityServiceCityPairs(20, 30);
-  return pairs.slice(0, 10).map((p) => ({ slug: p.service, city: p.city }));
+  return staticParamsOrEmpty(async () => {
+    const pairs = await getPriorityServiceCityPairs(20, 30);
+    return pairs.slice(0, 10).map((p) => ({ slug: p.service, city: p.city }));
+  });
 }
 
 async function resolve(serviceSlug: string, citySlug: string) {

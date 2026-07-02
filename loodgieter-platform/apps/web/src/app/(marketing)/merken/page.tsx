@@ -24,7 +24,14 @@ export const metadata: Metadata = {
 };
 
 export default async function BrandsPage() {
-  const brands = await getAllBrands();
+  // Build-robuust: valt de DB tijdens `next build` weg, dan renderen we een
+  // lege lijst i.p.v. de build te breken; ISR vult dit runtime alsnog.
+  let brands: Awaited<ReturnType<typeof getAllBrands>> = [];
+  try {
+    brands = await getAllBrands();
+  } catch {
+    brands = [];
+  }
   return (
     <main className="mx-auto max-w-(--container-max) px-6 py-16">
       <JsonLd

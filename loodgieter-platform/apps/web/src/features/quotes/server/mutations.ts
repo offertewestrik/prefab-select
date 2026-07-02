@@ -9,7 +9,7 @@ import { computeTotals, makeAccessToken } from "./service";
 import { parseLineItems } from "./queries";
 import { renderQuotePdf } from "./pdf";
 import type { EmailAttachment } from "@/features/notifications/email/send";
-import { sendQuoteSent, sendQuoteAccepted, sendQuoteRejected, sendQuoteExpired, sendAdminNotification } from "@/features/notifications/email/send";
+import { sendQuoteSent, sendQuoteReminder, sendQuoteAccepted, sendQuoteRejected, sendQuoteExpired, sendAdminNotification } from "@/features/notifications/email/send";
 import { notifyCompany, notifyAdmins } from "@/features/notifications/server/service";
 import { createReviewInviteForQuote } from "@/features/reviews/server/service";
 
@@ -209,6 +209,54 @@ export async function expireQuotes(now: Date = new Date()): Promise<{ scanned: n
   }
 
   return { scanned: candidates.length, expired };
+}
+
+/**
+ * Stuurt één follow-up/herinnering voor SENT-offertes die al enkele dagen open
+ * staan en nog geldig zijn. Idempotent via de atomaire `followUpSentAt`-guard:
+ * alleen de run die de overgang daadwerkelijk zet (count === 1) mailt.
+ */
+export async function followUpQuotes(now: Date = new Date(), afterDays = 3): Promise<{ scanned: number; reminded: number }> {
+  const cutoff = new Date(now.getTime() - afterDays * 24 * 60 * 60 * 1000);
+  const candidates = await prisma.quote.findMany({
+    where: {
+      status: "SENT",
+      followUpSentAt: null,
+      sentAt: { not: null, lt: cutoff },
+      OR: [{ validUntil: null }, { validUntil: { gt: now } }],
+    },
+    include: { company: true, lead: true },
+  });
+
+  let reminded = 0;
+  for (const quote of candidates) {
+    const res = await prisma.quote.updateMany({
+      where: { id: quote.id, status: "SENT", followUpSentAt: null },
+      data: { followUpSentAt: now },
+    });
+    if (res.count !== 1) continue; // andere run was eerder
+    reminded++;
+
+    const customerEmail = quote.customerEmail || quote.lead?.contactEmail;
+    const url = quote.accessToken ? siteUrl(`/offertes/${quote.id}?token=${quote.accessToken}`) : siteUrl(`/offertes/${quote.id}`);
+    if (customerEmail) {
+      void sendQuoteReminder({
+        to: customerEmail,
+        companyName: quote.company.name,
+        quoteNumber: quote.number,
+        validUntil: quote.validUntil ? quote.validUntil.toLocaleDateString("nl-NL") : undefined,
+        url,
+      });
+    }
+    await notifyCompany(quote.companyId, {
+      type: "quote.followup",
+      title: `Herinnering verstuurd: offerte ${quote.number}`,
+      body: quote.customerName ?? quote.lead?.contactName ?? "klant",
+      href: "/dashboard/offertes",
+    });
+  }
+
+  return { scanned: candidates.length, reminded };
 }
 
 /** Uniek offertenummer voor een bedrijf (OFF-JAAR-0001), botsingsvrij. */

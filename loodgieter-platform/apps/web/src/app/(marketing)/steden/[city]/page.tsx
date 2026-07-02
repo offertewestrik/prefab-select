@@ -11,14 +11,17 @@ import { ReviewsSection } from "@/components/marketing/reviews-section";
 import { cityIntro, cityBody, cityFaqs } from "@/features/geo/content/city-content";
 import { getCityArticle } from "@/features/geo/content/city-article";
 import { C, HEAD, BODY, PAGE_BG, IcStar, IcCheck, IcArrow, IcPin, IcShield } from "@/components/marketing/ds";
+import { staticParamsOrEmpty } from "@/lib/static-params";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
   // Alleen de grootste steden vooraf renderen; de rest komt on-demand via ISR.
-  const cities = await getSeedCitySlugs(40);
-  return cities.map((c) => ({ city: c.slug }));
+  return staticParamsOrEmpty(async () => {
+    const cities = await getSeedCitySlugs(40);
+    return cities.map((c) => ({ city: c.slug }));
+  });
 }
 
 export async function generateMetadata({

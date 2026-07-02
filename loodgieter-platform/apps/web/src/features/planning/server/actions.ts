@@ -75,6 +75,8 @@ export async function setAppointmentStatusAction(formData: FormData): Promise<vo
     data: { status: status as (typeof APPT_STATUSES)[number] },
   });
   revalidatePath("/dashboard/planning");
+  revalidatePath("/dashboard/monteur");
+  revalidatePath(`/dashboard/monteur/${id}`);
 }
 
 /** Afspraak verwijderen. */

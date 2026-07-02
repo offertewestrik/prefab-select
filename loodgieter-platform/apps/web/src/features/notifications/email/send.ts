@@ -45,6 +45,9 @@ export const sendLeadAvailable = (i: Parameters<typeof t.leadAvailable>[0] & { t
 export const sendQuoteSent = (i: Parameters<typeof t.quoteSent>[0] & { to: string; attachments?: EmailAttachment[] }) =>
   sendEmail(i.to, t.quoteSent(i), undefined, i.attachments);
 
+export const sendQuoteReminder = (i: Parameters<typeof t.quoteReminder>[0] & { to: string }) =>
+  sendEmail(i.to, t.quoteReminder(i));
+
 export const sendQuoteAccepted = (i: Parameters<typeof t.quoteAccepted>[0] & { to: string }) =>
   sendEmail(i.to, t.quoteAccepted(i));
 

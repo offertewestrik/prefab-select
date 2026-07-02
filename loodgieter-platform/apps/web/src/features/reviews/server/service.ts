@@ -15,25 +15,36 @@ export interface ReviewFormInput {
   customerName?: string;
 }
 
-/** Maakt (idempotent) een review-uitnodiging voor een geaccepteerde offerte + mailt de klant. */
+/**
+ * Maakt (idempotent) een review-uitnodiging voor een afgeronde/geaccepteerde
+ * offerte en mailt de klant één keer. Werkt zowel voor offertes uit een lead
+ * als voor losse offertes (klant-e-mail uit de offerte zelf). Als er al een
+ * uitnodiging is verstuurd (`sentAt`), wordt er niet nogmaals gemaild — zo
+ * levert accepteren én de werkbon-ondertekening samen niet twee verzoeken op.
+ */
 export async function createReviewInviteForQuote(quoteId: string): Promise<void> {
   const quote = await prisma.quote.findUnique({
     where: { id: quoteId },
     include: { company: true, lead: true },
   });
-  if (!quote || !quote.lead) return;
+  if (!quote) return;
+
+  const customerEmail = quote.lead?.contactEmail ?? quote.customerEmail ?? null;
+  if (!customerEmail) return; // zonder e-mailadres kunnen we niet uitnodigen
 
   const existing = await prisma.reviewInvite.findUnique({ where: { quoteId } });
+  if (existing?.sentAt) return; // al eerder uitgenodigd → niet nog eens mailen
+
   const token = existing?.token ?? makeAccessToken(`review:${quoteId}`);
   if (!existing) {
     await prisma.reviewInvite.create({
-      data: { companyId: quote.companyId, leadId: quote.leadId, quoteId, token, customerEmail: quote.lead.contactEmail },
+      data: { companyId: quote.companyId, leadId: quote.leadId, quoteId, token, customerEmail },
     });
   }
-  await prisma.reviewInvite.update({ where: { quoteId }, data: { sentAt: new Date() } });
+  await prisma.reviewInvite.update({ where: { quoteId }, data: { sentAt: new Date(), customerEmail } });
 
   const url = siteUrl(`/reviews/${token}`);
-  await sendEmail(quote.lead.contactEmail, reviewThanks({ companyName: quote.company.name, url, kind: "invite" }));
+  await sendEmail(customerEmail, reviewThanks({ companyName: quote.company.name, url, kind: "invite" }));
 }
 
 async function loadQuoteContext(quoteId: string) {
@@ -57,7 +68,7 @@ async function persistReview(
   const existing = await prisma.review.findFirst({ where: { quoteId: ctx.id } });
   if (existing) return { ok: false, reason: "already_reviewed" };
 
-  const customerName = input.customerName?.trim() || ctx.lead?.contactName || "Klant";
+  const customerName = input.customerName?.trim() || ctx.lead?.contactName || ctx.customerName || "Klant";
 
   const review = await prisma.review.create({
     data: {
@@ -88,7 +99,8 @@ async function persistReview(
   await notifyCompany(ctx.companyId, { type: "review.new", title: "Nieuwe review ontvangen", body: `${input.rating}★ van ${customerName}`, href: "/dashboard/reviews" });
   await notifyAdmins({ type: "review.pending", title: "Review wacht op goedkeuring", body: ctx.company.name, href: "/admin/reviews" });
   void sendAdminNotification({ title: "Nieuwe review wacht op goedkeuring", lines: [`Vakman: ${ctx.company.name}`, `Score: ${input.rating}★`], url: siteUrl("/admin/reviews") });
-  void sendEmail(ctx.lead!.contactEmail, reviewThanks({ companyName: ctx.company.name, url: "", kind: "thanks" }));
+  const thanksEmail = ctx.lead?.contactEmail ?? ctx.customerEmail ?? null;
+  if (thanksEmail) void sendEmail(thanksEmail, reviewThanks({ companyName: ctx.company.name, url: "", kind: "thanks" }));
 
   return { ok: true };
 }

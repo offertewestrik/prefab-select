@@ -91,6 +91,26 @@ export function quoteSent(input: {
   };
 }
 
+// 3b. Klant — vriendelijke herinnering aan een openstaande offerte
+export function quoteReminder(input: {
+  companyName: string;
+  quoteNumber: string;
+  validUntil?: string;
+  url: string;
+}): EmailContent {
+  return {
+    subject: `Herinnering: je offerte ${input.quoteNumber} van ${input.companyName}`,
+    html: layout({
+      heading: "Nog even een herinnering",
+      bodyHtml:
+        p(`Eerder ontving je offerte <strong>${input.quoteNumber}</strong> van ${input.companyName}.`) +
+        p("Heb je nog vragen, of wil je de werkzaamheden inplannen? We horen graag van je.") +
+        (input.validUntil ? muted(`Deze offerte is geldig tot ${input.validUntil}.`) : ""),
+      cta: { label: "Bekijk je offerte", url: input.url },
+    }),
+  };
+}
+
 // 4. Installateur — offerte geaccepteerd (met klantgegevens, want eigen klant)
 export function quoteAccepted(input: {
   quoteNumber: string;

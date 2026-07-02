@@ -14,6 +14,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   const nav: NavItem[] = [
     { label: "Overzicht", href: "/dashboard" },
+    { label: "Aan de slag", href: "/dashboard/onboarding" },
     { label: "Nieuwe leads", href: "/dashboard/leads" },
     { label: "Mijn leads", href: "/dashboard/mijn-leads" },
     { label: "Offertes", href: "/dashboard/offertes" },
@@ -21,8 +22,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
     { label: "Werkbonnen", href: "/dashboard/werkbonnen" },
     { label: "Klanten", href: "/dashboard/klanten" },
     { label: "Planning", href: "/dashboard/planning" },
+    { label: "Monteurmodus", href: "/dashboard/monteur" },
+    { label: "Coach", href: "/dashboard/coach" },
     { label: "Credits", href: "/dashboard/credits" },
     { label: "Profiel", href: "/dashboard/profiel" },
+    { label: "Prijzen", href: "/dashboard/prijzen" },
     { label: "Diensten", href: "/dashboard/diensten" },
     { label: "Werkgebied", href: "/dashboard/werkgebied" },
     { label: "Meldingen", href: "/dashboard/meldingen", badge: unread },

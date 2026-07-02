@@ -3,6 +3,7 @@ import { leadAnalyzer } from "./lead-analyzer";
 import { priceAdvisor } from "./price-advisor";
 import { quoteAssistant } from "./quote-assistant";
 import { quoteImprover } from "./quote-improver";
+import { businessCoach } from "./business-coach";
 import { seoWriter } from "./seo-writer";
 import { photoAnalyzer } from "./photo-analyzer";
 import { fraudDetector } from "./fraud-detector";
@@ -11,11 +12,13 @@ import { supportAssistant } from "./support-assistant";
 import { adminAi } from "./admin-ai";
 
 export * from "./agent";
+export type { BusinessCoachInput, BusinessCoachOutput } from "./business-coach";
 export {
   leadAnalyzer,
   priceAdvisor,
   quoteAssistant,
   quoteImprover,
+  businessCoach,
   seoWriter,
   photoAnalyzer,
   fraudDetector,
