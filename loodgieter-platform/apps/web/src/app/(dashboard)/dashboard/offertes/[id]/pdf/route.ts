@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { getSessionUser, getCurrentCompany } from "@/lib/guards";
 import { getQuoteForCompany, parseLineItems } from "@/features/quotes/server/queries";
 import { renderQuotePdf } from "@/features/quotes/server/pdf";
@@ -16,6 +17,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   if (!quote) return new Response("Niet gevonden", { status: 404 });
 
   const lead = quote.lead;
+  const settings = await prisma.contractorSettings.findUnique({ where: { companyId: quote.companyId } });
   const pdf = await renderQuotePdf({
     number: quote.number,
     title: quote.title,
@@ -46,6 +48,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     vatCents: quote.vatCents,
     totalCents: quote.totalCents,
     terms: quote.terms,
+    iban: settings?.iban,
+    footerNote: settings?.footerNote,
   });
 
   return new Response(new Uint8Array(pdf), {

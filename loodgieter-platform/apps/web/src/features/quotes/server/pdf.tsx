@@ -28,6 +28,9 @@ export interface QuotePdfInput {
   vatCents: number;
   totalCents: number;
   terms?: string | null;
+  /** Uit ContractorSettings — getoond in het betaalblok (factuur) en de footer. */
+  iban?: string | null;
+  footerNote?: string | null;
 }
 
 const eur = (c: number) => `€ ${(c / 100).toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -102,7 +105,9 @@ const s = StyleSheet.create({
   calloutTitle: { fontFamily: "Helvetica-Bold", color: C.ink, marginBottom: 2 },
 
   // Footer
-  footer: { position: "absolute", bottom: 26, left: 40, right: 40, borderTopWidth: 1, borderTopColor: C.line, paddingTop: 6, flexDirection: "row", justifyContent: "space-between" },
+  footer: { position: "absolute", bottom: 24, left: 40, right: 40, borderTopWidth: 1, borderTopColor: C.line, paddingTop: 6 },
+  footerNote: { fontSize: 7.5, color: C.faint, textAlign: "center", marginBottom: 3 },
+  footerRow: { flexDirection: "row", justifyContent: "space-between" },
   footerText: { fontSize: 7.5, color: C.faint },
 });
 
@@ -205,6 +210,9 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
                 <Text style={s.muted}>
                   Gelieve het totaalbedrag {q.validUntil ? `vóór ${date(q.validUntil)} ` : ""}over te maken onder vermelding van factuurnummer {q.number}.
                 </Text>
+                {q.iban ? (
+                  <Text style={[s.strong, { marginTop: 4 }]}>IBAN: {q.iban}   ·   t.n.v. {q.company.name}</Text>
+                ) : null}
               </>
             ) : (
               <>
@@ -220,8 +228,14 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
 
         {/* Footer met paginanummer */}
         <View style={s.footer} fixed>
-          <Text style={s.footerText}>{q.company.name} · {isInvoice ? "Factuur" : "Offerte"} {q.number}</Text>
-          <Text style={s.footerText} fixed render={({ pageNumber, totalPages }) => `Pagina ${pageNumber} van ${totalPages}`} />
+          {q.footerNote ? <Text style={s.footerNote}>{q.footerNote}</Text> : null}
+          <View style={s.footerRow}>
+            <Text style={s.footerText}>
+              {q.company.name}
+              {q.iban ? ` · IBAN ${q.iban}` : ""}
+            </Text>
+            <Text style={s.footerText} fixed render={({ pageNumber, totalPages }) => `Pagina ${pageNumber} van ${totalPages}`} />
+          </View>
         </View>
       </Page>
     </Document>
