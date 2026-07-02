@@ -3,6 +3,7 @@ import { Document, Page, Text, View, StyleSheet, Image, renderToBuffer } from "@
 import type { LineItem } from "../schema";
 
 export interface QuotePdfInput {
+  kind?: "quote" | "invoice";
   number: string;
   title?: string | null;
   introText?: string | null;
@@ -72,10 +73,10 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
             {meta ? <Text style={s.muted}>{meta}</Text> : null}
           </View>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.hTitle}>OFFERTE</Text>
+            <Text style={s.hTitle}>{q.kind === "invoice" ? "FACTUUR" : "OFFERTE"}</Text>
             <Text style={s.muted}>{q.number}</Text>
             <Text style={s.muted}>Datum: {date(q.createdAt)}</Text>
-            {q.validUntil ? <Text style={s.muted}>Geldig tot: {date(q.validUntil)}</Text> : null}
+            {q.validUntil ? <Text style={s.muted}>{q.kind === "invoice" ? "Vervaldatum" : "Geldig tot"}: {date(q.validUntil)}</Text> : null}
           </View>
         </View>
 
@@ -121,15 +122,26 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
         ) : null}
 
         <View style={s.accept}>
-          <Text style={{ fontFamily: "Helvetica-Bold" }}>Akkoord</Text>
-          <Text style={s.muted}>
-            Gaat u akkoord met deze offerte? Antwoord op de e-mail of gebruik de akkoordknop in de online offerte.
-            Na akkoord plannen wij de werkzaamheden in overleg met u in.
-          </Text>
+          {q.kind === "invoice" ? (
+            <>
+              <Text style={{ fontFamily: "Helvetica-Bold" }}>Betaling</Text>
+              <Text style={s.muted}>
+                Gelieve het totaalbedrag {q.validUntil ? `vóór ${date(q.validUntil)} ` : ""}over te maken onder vermelding van factuurnummer {q.number}.
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={{ fontFamily: "Helvetica-Bold" }}>Akkoord</Text>
+              <Text style={s.muted}>
+                Gaat u akkoord met deze offerte? Antwoord op de e-mail of gebruik de akkoordknop in de online offerte.
+                Na akkoord plannen wij de werkzaamheden in overleg met u in.
+              </Text>
+            </>
+          )}
         </View>
 
         <Text style={s.footer} fixed>
-          {q.company.name} — offerte {q.number}
+          {q.company.name} — {q.kind === "invoice" ? "factuur" : "offerte"} {q.number}
         </Text>
       </Page>
     </Document>

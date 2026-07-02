@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { euro } from "@/lib/format";
 import { QuoteStatusBadge } from "@/features/quotes/components/quote-status-badge";
 import { duplicateQuoteAction } from "@/features/quotes/server/actions";
+import { createInvoiceFromQuoteAction } from "@/features/invoices/server/actions";
+import { createWorkOrderAction } from "@/features/workorders/server/actions";
 
 export const dynamic = "force-dynamic";
 
@@ -65,6 +67,18 @@ export default async function DashboardOffertes() {
                           <input type="hidden" name="quoteId" value={q.id} />
                           <button className="font-medium text-neutral-600 hover:underline">Dupliceren</button>
                         </form>
+                      )}
+                      {q.status === "ACCEPTED" && (
+                        <>
+                          <form action={createInvoiceFromQuoteAction}>
+                            <input type="hidden" name="quoteId" value={q.id} />
+                            <button className="font-medium text-neutral-600 hover:underline">Factuur</button>
+                          </form>
+                          <form action={createWorkOrderAction}>
+                            <input type="hidden" name="quoteId" value={q.id} />
+                            <button className="font-medium text-neutral-600 hover:underline">Werkbon</button>
+                          </form>
+                        </>
                       )}
                       <Link href={`/dashboard/offertes/${q.id}`} className="font-medium text-primary-600 hover:underline">
                         {q.status === "DRAFT" ? "Bewerken" : "Bekijken"}
