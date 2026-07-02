@@ -101,6 +101,7 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
         city: quote.company.city,
         kvk: quote.company.kvk,
         vatNumber: quote.company.vatNumber,
+        website: quote.company.website,
       },
       customer: {
         name: quote.customerName ?? quote.lead?.contactName,

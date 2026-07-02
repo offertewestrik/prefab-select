@@ -33,6 +33,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       city: inv.company.city,
       kvk: inv.company.kvk,
       vatNumber: inv.company.vatNumber,
+      website: inv.company.website,
     },
     customer: { name: inv.customerName ?? inv.customer?.name, email: inv.customerEmail, address: inv.customerAddress },
     lineItems: parseLineItems(inv.lineItems),
