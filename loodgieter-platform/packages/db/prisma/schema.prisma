@@ -698,6 +698,7 @@ model Quote {
   lead          LeadRequest?     @relation(fields: [leadId], references: [id])
   customer      Customer?        @relation(fields: [customerId], references: [id])
   template      QuoteTemplate?   @relation(fields: [templateId], references: [id])
+  appointments  Appointment[]
 
   @@index([companyId])
   @@index([leadId])
@@ -767,6 +768,7 @@ model Customer {
   updatedAt DateTime         @updatedAt
   company   InstallerCompany @relation(fields: [companyId], references: [id], onDelete: Cascade)
   quotes    Quote[]
+  appointments Appointment[]
 
   @@index([companyId])
 }
@@ -817,16 +819,24 @@ model LeadPurchase {
 
 model Appointment {
   id          String            @id @default(cuid())
-  leadId      String
+  leadId      String?
+  customerId  String?
+  quoteId     String?
   companyId   String
+  title       String?
+  address     String?
   scheduledAt DateTime
+  durationMin Int               @default(60)
   status      AppointmentStatus @default(PLANNED)
   notes       String?
   createdAt   DateTime          @default(now())
-  lead        LeadRequest       @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  lead        LeadRequest?      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  customer    Customer?         @relation(fields: [customerId], references: [id])
+  quote       Quote?            @relation(fields: [quoteId], references: [id])
   company     InstallerCompany  @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   @@index([companyId])
+  @@index([companyId, scheduledAt])
 }
 
 // ───────────────────────────── Billing ────────────────────────────
