@@ -41,6 +41,7 @@ export default async function DashboardSettings() {
                 defaultWarranty: settings?.defaultWarranty ?? "",
                 defaultTerms: settings?.defaultTerms ?? "",
                 footerNote: settings?.footerNote ?? "",
+                accentColor: settings?.accentColor ?? "#2563EB",
               }}
             />
           </div>

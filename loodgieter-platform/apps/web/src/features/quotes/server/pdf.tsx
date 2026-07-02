@@ -31,10 +31,41 @@ export interface QuotePdfInput {
   /** Uit ContractorSettings — getoond in het betaalblok (factuur) en de footer. */
   iban?: string | null;
   footerNote?: string | null;
+  /** Hex-huisstijlkleur van de vakman (bijv. #2563EB); valt terug op platform-blauw. */
+  accentColor?: string | null;
 }
 
 const eur = (c: number) => `€ ${(c / 100).toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const date = (d: Date) => d.toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" });
+
+// ── Kleurhelpers voor de per-vakman accentkleur ──
+function normHex(v?: string | null): string | null {
+  if (!v) return null;
+  const m = v.trim().replace(/^#/, "");
+  if (/^[0-9a-fA-F]{6}$/.test(m)) return `#${m.toLowerCase()}`;
+  if (/^[0-9a-fA-F]{3}$/.test(m)) return `#${m.split("").map((c) => c + c).join("").toLowerCase()}`;
+  return null;
+}
+function toRgb(hex: string): [number, number, number] {
+  return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)) as [number, number, number];
+}
+/** Meng met wit (w = 0..1) voor een zachte tint als achtergrond. */
+function mixWhite(hex: string, w: number): string {
+  const [r, g, b] = toRgb(hex);
+  const f = (c: number) => Math.round(c * (1 - w) + 255 * w).toString(16).padStart(2, "0");
+  return `#${f(r)}${f(g)}${f(b)}`;
+}
+function luminance(hex: string): number {
+  const [r, g, b] = toRgb(hex).map((c) => {
+    const x = c / 255;
+    return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+/** Leesbare tekstkleur (wit of donker) op een gevulde accentachtergrond. */
+function readableOn(hex: string): string {
+  return luminance(hex) > 0.55 ? "#0E1B33" : "#FFFFFF";
+}
 
 // ── Huisstijl-kleuren (gelijk aan de website) ──
 const C = {
@@ -126,10 +157,16 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
   const meta = [q.company.kvk && `KVK ${q.company.kvk}`, q.company.vatNumber && `BTW ${q.company.vatNumber}`].filter(Boolean).join("  ·  ");
   const contact = [q.company.phone, q.company.email].filter(Boolean).join("  ·  ");
 
+  // Per-vakman huisstijlkleur (valt terug op platform-blauw).
+  const accent = normHex(q.accentColor) ?? C.blue;
+  const accentSoft = mixWhite(accent, 0.9);
+  const accentText = luminance(accent) > 0.7 ? C.ink : accent; // leesbaar op wit
+  const onAccent = readableOn(accent);
+
   return (
     <Document title={`${isInvoice ? "Factuur" : "Offerte"} ${q.number}`} author={q.company.name}>
       <Page size="A4" style={s.page}>
-        <View style={s.accentBar} />
+        <View style={[s.accentBar, { backgroundColor: accent }]} />
 
         {/* Kop: bedrijf links, document rechts */}
         <View style={s.header}>
@@ -141,7 +178,7 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
             {meta ? <Text style={s.faint}>{meta}</Text> : null}
           </View>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={s.docType}>{isInvoice ? "FACTUUR" : "OFFERTE"}</Text>
+            <Text style={[s.docType, { color: accentText }]}>{isInvoice ? "FACTUUR" : "OFFERTE"}</Text>
             <Text style={s.docNum}>{q.number}</Text>
             <MetaLine label="Datum" value={date(q.createdAt)} />
             {q.validUntil ? <MetaLine label={isInvoice ? "Vervaldatum" : "Geldig tot"} value={date(q.validUntil)} /> : null}
@@ -152,7 +189,7 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
 
         <View style={s.content}>
           {/* Klantgegevens */}
-          <View style={s.card}>
+          <View style={[s.card, { backgroundColor: accentSoft, borderLeftColor: accent }]}>
             <Text style={s.label}>{isInvoice ? "Factuuradres" : "Offerte voor"}</Text>
             <Text style={s.strong}>{q.customer.name || "Klant"}</Text>
             {q.customer.address ? <Text>{q.customer.address}</Text> : null}
@@ -165,7 +202,7 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
           {q.introText ? <Text style={s.intro}>{q.introText}</Text> : null}
 
           {/* Regels */}
-          <View style={s.tHead}>
+          <View style={[s.tHead, { backgroundColor: accentSoft }]}>
             <Text style={[s.cDesc, s.tHeadCell]}>Omschrijving</Text>
             <Text style={[s.cQty, s.tHeadCell]}>Aantal</Text>
             <Text style={[s.cPrice, s.tHeadCell]}>Stukprijs</Text>
@@ -188,9 +225,9 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
             <View style={s.tLine}><Text style={s.muted}>Subtotaal (excl. btw)</Text><Text>{eur(q.subtotalCents)}</Text></View>
             {q.discountCents > 0 ? <View style={s.tLine}><Text style={s.muted}>Korting</Text><Text>{"− " + eur(q.discountCents)}</Text></View> : null}
             <View style={s.tLine}><Text style={s.muted}>Btw ({q.vatRate}%)</Text><Text>{eur(q.vatCents)}</Text></View>
-            <View style={s.grand}>
-              <Text style={s.grandLabel}>Totaal incl. btw</Text>
-              <Text style={s.grandVal}>{eur(q.totalCents)}</Text>
+            <View style={[s.grand, { backgroundColor: accent }]}>
+              <Text style={[s.grandLabel, { color: onAccent }]}>Totaal incl. btw</Text>
+              <Text style={[s.grandVal, { color: onAccent }]}>{eur(q.totalCents)}</Text>
             </View>
           </View>
 

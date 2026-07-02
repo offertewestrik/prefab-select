@@ -117,6 +117,7 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
       terms: quote.terms,
       iban: settings?.iban,
       footerNote: settings?.footerNote,
+      accentColor: settings?.accentColor,
     });
     attachments = [{ filename: `offerte-${quote.number}.pdf`, content: pdf }];
   } catch (err) {
