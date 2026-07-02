@@ -9,3 +9,5 @@ De publieke marketingsite en het vakman-dashboard.
 
 Draait op Vercel (project `loodgieterplatform0412`); alleen dat project deployt
 deze repo (zie `apps/web/vercel.json`).
+
+<!-- productie-deploy trigger: verse build van de gefixte main (huisstijl-features live) -->
