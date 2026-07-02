@@ -46,6 +46,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     iban: settings?.iban,
     footerNote: settings?.footerNote,
     accentColor: settings?.accentColor,
+    secondaryColor: settings?.secondaryColor,
   });
 
   return new Response(new Uint8Array(pdf), {
