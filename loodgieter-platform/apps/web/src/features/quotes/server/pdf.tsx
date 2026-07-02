@@ -64,11 +64,12 @@ function mixBlack(hex: string, w: number): string {
   return `#${hex2(r * (1 - w))}${hex2(g * (1 - w))}${hex2(b * (1 - w))}`;
 }
 function luminance(hex: string): number {
-  const [r, g, b] = toRgb(hex).map((c) => {
+  const lin = (c: number) => {
     const x = c / 255;
     return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
-  });
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const [r, g, b] = toRgb(hex);
+  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
 }
 /** Leesbare tekstkleur (wit of donker) op een gevulde accentachtergrond. */
 function readableOn(hex: string): string {
