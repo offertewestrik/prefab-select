@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { expireQuotes } from "@/features/quotes/server/mutations";
+import { expireQuotes, followUpQuotes } from "@/features/quotes/server/mutations";
 
 export const dynamic = "force-dynamic";
 
@@ -26,8 +26,10 @@ async function handle(req: Request): Promise<Response> {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  const result = await expireQuotes();
-  return NextResponse.json({ ok: true, ...result });
+  // Verloop + follow-up in één dagelijkse run (bespaart een aparte cron op Hobby).
+  const expired = await expireQuotes();
+  const followUp = await followUpQuotes();
+  return NextResponse.json({ ok: true, ...expired, followUp });
 }
 
 export const GET = handle;
