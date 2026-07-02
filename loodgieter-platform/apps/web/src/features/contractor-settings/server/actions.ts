@@ -16,6 +16,7 @@ const schema = z.object({
   defaultTerms: z.string().max(5000).optional().default(""),
   footerNote: z.string().max(1000).optional().default(""),
   accentColor: z.string().trim().max(9).optional().default(""),
+  secondaryColor: z.string().trim().max(9).optional().default(""),
 });
 
 /** Offerte-/factuurinstellingen van het bedrijf opslaan (upsert). */
@@ -33,12 +34,15 @@ export async function saveContractorSettingsAction(_prev: SettingsState, formDat
     defaultTerms: formData.get("defaultTerms"),
     footerNote: formData.get("footerNote"),
     accentColor: formData.get("accentColor"),
+    secondaryColor: formData.get("secondaryColor"),
   });
   if (!parsed.success) return { ok: false, message: parsed.error.issues[0]?.message ?? "Controleer de velden." };
   const d = parsed.data;
 
-  // Alleen een geldige hex-kleur (#rrggbb) opslaan; anders leeg → platform-standaard.
-  const accentColor = /^#[0-9a-fA-F]{6}$/.test(d.accentColor) ? d.accentColor.toLowerCase() : null;
+  // Alleen geldige hex-kleuren (#rrggbb) opslaan; anders leeg → platform-standaard.
+  const hex = (v: string) => (/^#[0-9a-fA-F]{6}$/.test(v) ? v.toLowerCase() : null);
+  const accentColor = hex(d.accentColor);
+  const secondaryColor = hex(d.secondaryColor);
 
   const data = {
     defaultVatRate: d.defaultVatRate,
@@ -49,6 +53,7 @@ export async function saveContractorSettingsAction(_prev: SettingsState, formDat
     defaultTerms: d.defaultTerms || null,
     footerNote: d.footerNote || null,
     accentColor,
+    secondaryColor,
   };
 
   await prisma.contractorSettings.upsert({

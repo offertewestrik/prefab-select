@@ -42,6 +42,7 @@ export default async function DashboardSettings() {
                 defaultTerms: settings?.defaultTerms ?? "",
                 footerNote: settings?.footerNote ?? "",
                 accentColor: settings?.accentColor ?? "#2563EB",
+                secondaryColor: settings?.secondaryColor ?? "#0E1B33",
               }}
             />
           </div>

@@ -34,6 +34,8 @@ export interface QuotePdfInput {
   footerNote?: string | null;
   /** Hex-huisstijlkleur van de vakman (bijv. #2563EB); valt terug op platform-blauw. */
   accentColor?: string | null;
+  /** Hex-kleur voor de kop-/voetbalk (bijv. #0E1B33); valt terug op navy. */
+  secondaryColor?: string | null;
 }
 
 const eur = (c: number) => `€ ${(c / 100).toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -210,23 +212,27 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
     q.company.website,
   ].filter(Boolean).join("   ·   ");
 
-  // Per-vakman huisstijlkleur (valt terug op platform-blauw).
+  // Per-vakman huisstijlkleuren (accent + balkkleur), met platform-fallbacks.
   const accent = normHex(q.accentColor) ?? C.blue;
   const accentSoft = mixWhite(accent, 0.9);
   const accentDark = mixBlack(accent, 0.22);
   const accentText = luminance(accent) > 0.7 ? C.ink : accent; // leesbaar op wit
   const onAccent = readableOn(accent);
+  // Kop-/voetbalkkleur + leesbare tekst daarop.
+  const band = normHex(q.secondaryColor) ?? C.navy;
+  const onBand = readableOn(band);
+  const onBandMuted = luminance(band) > 0.55 ? "#5B6472" : "#B7C0D6";
 
   return (
     <Document title={`${isInvoice ? "Factuur" : "Offerte"} ${q.number}`} author={q.company.name}>
       <Page size="A4" style={s.page}>
         {/* Kopgrafiek met bedrijfsnaam/contact (wit) + logo */}
         <View style={s.header}>
-          <HeaderGraphic navy={C.navy} accent={accent} accentDark={accentDark} />
+          <HeaderGraphic navy={band} accent={accent} accentDark={accentDark} />
           <View style={s.headerLeft}>
-            <Text style={s.companyName}>{q.company.name}</Text>
-            {companyAddr ? <Text style={s.onDarkLine}>{companyAddr}</Text> : null}
-            {contact ? <Text style={s.onDarkLine}>{contact}</Text> : null}
+            <Text style={[s.companyName, { color: onBand }]}>{q.company.name}</Text>
+            {companyAddr ? <Text style={[s.onDarkLine, { color: onBandMuted }]}>{companyAddr}</Text> : null}
+            {contact ? <Text style={[s.onDarkLine, { color: onBandMuted }]}>{contact}</Text> : null}
           </View>
           {q.company.logoUrl ? (
             <View style={s.logoTile}>
@@ -321,14 +327,14 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
 
         {/* Voetgrafiek met zakelijke gegevens + paginanummer */}
         <View style={s.footer} fixed>
-          <FooterGraphic navy={C.navy} accent={accent} accentDark={accentDark} />
+          <FooterGraphic navy={band} accent={accent} accentDark={accentDark} />
           <View style={s.footerCenter}>
-            {legal ? <Text style={s.footerLegal}>{legal}</Text> : null}
-            {q.footerNote ? <Text style={s.footerNote}>{q.footerNote}</Text> : null}
+            {legal ? <Text style={[s.footerLegal, { color: onBand }]}>{legal}</Text> : null}
+            {q.footerNote ? <Text style={[s.footerNote, { color: onBandMuted }]}>{q.footerNote}</Text> : null}
           </View>
           <View style={s.footerRow}>
-            <Text style={s.footerText}>{q.company.name}</Text>
-            <Text style={s.footerText} fixed render={({ pageNumber, totalPages }) => `Pagina ${pageNumber} van ${totalPages}`} />
+            <Text style={[s.footerText, { color: onBandMuted }]}>{q.company.name}</Text>
+            <Text style={[s.footerText, { color: onBandMuted }]} fixed render={({ pageNumber, totalPages }) => `Pagina ${pageNumber} van ${totalPages}`} />
           </View>
         </View>
       </Page>
