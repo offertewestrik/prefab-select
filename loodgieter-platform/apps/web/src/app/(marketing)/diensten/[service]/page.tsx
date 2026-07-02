@@ -11,13 +11,16 @@ import { getTopCities } from "@/features/geo/server/queries";
 import { getReviewsForService } from "@/features/reviews/server/aggregation";
 import { searchInstallers } from "@/features/installers/server/directory";
 import { serviceImage as dienstFoto } from "@/features/catalog/service-image";
+import { staticParamsOrEmpty } from "@/lib/static-params";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const services = await getAllServiceSlugs();
-  return services.map((s) => ({ service: s.slug }));
+  return staticParamsOrEmpty(async () => {
+    const services = await getAllServiceSlugs();
+    return services.map((s) => ({ service: s.slug }));
+  });
 }
 
 export async function generateMetadata({

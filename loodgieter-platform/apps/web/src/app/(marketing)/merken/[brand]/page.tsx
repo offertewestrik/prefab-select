@@ -7,13 +7,16 @@ import { ServiceCard } from "@/components/marketing/service-card";
 import { LeadCta } from "@/components/marketing/lead-cta";
 import { buildMetadata } from "@/features/seo/metadata";
 import { getBrandBySlug, getAllBrands } from "@/features/catalog/server/queries";
+import { staticParamsOrEmpty } from "@/lib/static-params";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const brands = await getAllBrands();
-  return brands.map((b) => ({ brand: b.slug }));
+  return staticParamsOrEmpty(async () => {
+    const brands = await getAllBrands();
+    return brands.map((b) => ({ brand: b.slug }));
+  });
 }
 
 export async function generateMetadata({

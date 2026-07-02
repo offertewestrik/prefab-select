@@ -32,7 +32,14 @@ const css = `
 `;
 
 export default async function ServicesPage() {
-  const categories = await getServicesByCategory();
+  // Build-robuust: onbereikbare DB tijdens `next build` mag de build niet
+  // breken. We renderen dan een lege lijst; ISR vult dit runtime alsnog.
+  let categories: Awaited<ReturnType<typeof getServicesByCategory>> = [];
+  try {
+    categories = await getServicesByCategory();
+  } catch {
+    categories = [];
+  }
 
   const serviceCount = categories.reduce((n, c) => n + c.services.length, 0);
 

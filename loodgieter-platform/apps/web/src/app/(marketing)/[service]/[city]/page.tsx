@@ -10,6 +10,7 @@ import { serviceCityLinks } from "@/features/seo/internal-links";
 import { getPriorityServiceCityPairs } from "@/features/catalog/server/queries";
 import { getReviewsForServiceCity } from "@/features/reviews/server/aggregation";
 import { ReviewsSection } from "@/components/marketing/reviews-section";
+import { staticParamsOrEmpty } from "@/lib/static-params";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -17,7 +18,9 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   // Alleen een kleine seed pre-renderen om de build-tijd DB-belasting laag te
   // houden (Supabase-pooler); de rest komt via on-demand ISR (dynamicParams).
-  return (await getPriorityServiceCityPairs(30, 50)).slice(0, 10);
+  return staticParamsOrEmpty(async () =>
+    (await getPriorityServiceCityPairs(30, 50)).slice(0, 10),
+  );
 }
 
 export async function generateMetadata({

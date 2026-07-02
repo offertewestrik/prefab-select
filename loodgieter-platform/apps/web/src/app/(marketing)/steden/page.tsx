@@ -18,7 +18,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CitiesPage() {
-  const provinces = await getCitiesByProvince();
+  // Build-robuust: onbereikbare DB tijdens `next build` mag de build niet
+  // breken. We renderen dan een lege lijst; ISR vult dit runtime alsnog.
+  let provinces: Awaited<ReturnType<typeof getCitiesByProvince>> = [];
+  try {
+    provinces = await getCitiesByProvince();
+  } catch {
+    provinces = [];
+  }
 
   const totalCities = provinces.reduce((acc, p) => acc + p.municipalities.length, 0);
 

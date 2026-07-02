@@ -19,21 +19,24 @@ import {
   resolveDirectorySegment,
   type DirectorySegment,
 } from "@/features/installers/server/directory";
+import { staticParamsOrEmpty } from "@/lib/static-params";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
 
 /** Prerender: dienst- en stadfilters + goedgekeurde bedrijfsprofielen. */
 export async function generateStaticParams() {
-  const [services, cities, companies] = await Promise.all([
-    prisma.service.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
-    prisma.municipality.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
-    prisma.installerCompany.findMany({
-      where: { status: "APPROVED", publicVisible: true },
-      select: { slug: true },
-    }),
-  ]);
-  return [...services, ...cities, ...companies].map((r) => ({ slug: r.slug }));
+  return staticParamsOrEmpty(async () => {
+    const [services, cities, companies] = await Promise.all([
+      prisma.service.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
+      prisma.municipality.findMany({ where: { publish: "ACTIVE" }, select: { slug: true } }),
+      prisma.installerCompany.findMany({
+        where: { status: "APPROVED", publicVisible: true },
+        select: { slug: true },
+      }),
+    ]);
+    return [...services, ...cities, ...companies].map((r) => ({ slug: r.slug }));
+  });
 }
 
 function facetCopy(seg: DirectorySegment) {
