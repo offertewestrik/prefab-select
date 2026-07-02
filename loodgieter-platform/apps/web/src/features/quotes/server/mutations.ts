@@ -82,6 +82,7 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
   });
 
   // PDF als bijlage meesturen (best-effort — een render-fout mag versturen niet blokkeren).
+  const settings = await prisma.contractorSettings.findUnique({ where: { companyId: quote.companyId } });
   let attachments: EmailAttachment[] | undefined;
   try {
     const pdf = await renderQuotePdf({
@@ -114,6 +115,8 @@ export async function sendQuote(companyId: string, quoteId: string): Promise<Mut
       vatCents: quote.vatCents,
       totalCents: quote.totalCents,
       terms: quote.terms,
+      iban: settings?.iban,
+      footerNote: settings?.footerNote,
     });
     attachments = [{ filename: `offerte-${quote.number}.pdf`, content: pdf }];
   } catch (err) {

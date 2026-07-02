@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { getSessionUser, getCurrentCompany } from "@/lib/guards";
 import { getInvoiceForCompany } from "@/features/invoices/server/service";
 import { parseLineItems } from "@/features/quotes/server/queries";
@@ -12,6 +13,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const company = await getCurrentCompany();
   const inv = company ? await getInvoiceForCompany(id, company.id) : null;
   if (!inv) return new Response("Niet gevonden", { status: 404 });
+
+  const settings = await prisma.contractorSettings.findUnique({ where: { companyId: inv.companyId } });
 
   const pdf = await renderQuotePdf({
     kind: "invoice",
@@ -39,6 +42,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     vatCents: inv.vatCents,
     totalCents: inv.amountCents,
     terms: inv.terms,
+    iban: settings?.iban,
+    footerNote: settings?.footerNote,
   });
 
   return new Response(new Uint8Array(pdf), {
