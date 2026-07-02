@@ -77,7 +77,8 @@ export default async function DashboardOverview() {
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-neutral-100">
               <div className="h-full bg-primary-500" style={{ width: `${completeness}%` }} />
             </div>
-            <div className="mt-3 flex gap-4 text-sm">
+            <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
+              <Link href="/dashboard/onboarding" className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] bg-primary-600 px-3 py-1.5 font-semibold text-white hover:bg-primary-700">Aan de slag →</Link>
               <Link href="/dashboard/diensten" className="font-medium text-primary-600 hover:underline">Diensten beheren</Link>
               <Link href="/dashboard/werkgebied" className="font-medium text-primary-600 hover:underline">Werkgebied beheren</Link>
             </div>
