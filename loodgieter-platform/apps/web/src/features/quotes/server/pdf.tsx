@@ -19,6 +19,7 @@ export interface QuotePdfInput {
     city?: string | null;
     kvk?: string | null;
     vatNumber?: string | null;
+    website?: string | null;
   };
   customer: { name?: string | null; email?: string | null; phone?: string | null; address?: string | null };
   lineItems: LineItem[];
@@ -85,10 +86,10 @@ const C = {
 const s = StyleSheet.create({
   page: { fontSize: 9.5, color: C.text, fontFamily: "Helvetica", lineHeight: 1.45, paddingBottom: 64 },
 
-  // Kop
+  // Kop (briefpapier-masthead met zachte accent-tint)
   accentBar: { height: 5, backgroundColor: C.blue },
-  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingHorizontal: 40, paddingTop: 30, paddingBottom: 14 },
-  logo: { height: 38, marginBottom: 8, objectFit: "contain" },
+  masthead: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingHorizontal: 40, paddingTop: 26, paddingBottom: 22 },
+  logo: { height: 40, marginBottom: 8, objectFit: "contain" },
   companyName: { fontSize: 15, fontFamily: "Helvetica-Bold", color: C.ink },
   muted: { color: C.muted },
   faint: { color: C.faint, fontSize: 8.5 },
@@ -98,8 +99,7 @@ const s = StyleSheet.create({
   metaLabel: { color: C.faint, fontSize: 8.5, textAlign: "right" },
   metaVal: { color: C.text, fontSize: 8.5, textAlign: "right", marginLeft: 6, fontFamily: "Helvetica-Bold" },
 
-  rule: { borderBottomWidth: 1, borderBottomColor: C.line, marginHorizontal: 40 },
-  content: { paddingHorizontal: 40 },
+  content: { paddingHorizontal: 40, paddingTop: 24 },
 
   // Klantkaart
   card: { marginTop: 18, alignSelf: "flex-start", minWidth: 230, maxWidth: 300, backgroundColor: C.card, borderRadius: 6, padding: 12, borderLeftWidth: 3, borderLeftColor: C.blue },
@@ -135,8 +135,9 @@ const s = StyleSheet.create({
   callout: { marginTop: 14, backgroundColor: C.orangeSoft, borderRadius: 6, padding: 12, borderLeftWidth: 3, borderLeftColor: C.orange },
   calloutTitle: { fontFamily: "Helvetica-Bold", color: C.ink, marginBottom: 2 },
 
-  // Footer
-  footer: { position: "absolute", bottom: 24, left: 40, right: 40, borderTopWidth: 1, borderTopColor: C.line, paddingTop: 6 },
+  // Footer (briefpapier-voet: zakelijke gegevens + voettekst + paginanummer)
+  footer: { position: "absolute", bottom: 22, left: 40, right: 40, borderTopWidth: 1, borderTopColor: C.line, paddingTop: 7 },
+  footerLegal: { fontSize: 7.5, color: C.text, textAlign: "center", marginBottom: 2, fontFamily: "Helvetica-Bold" },
   footerNote: { fontSize: 7.5, color: C.faint, textAlign: "center", marginBottom: 3 },
   footerRow: { flexDirection: "row", justifyContent: "space-between" },
   footerText: { fontSize: 7.5, color: C.faint },
@@ -154,8 +155,14 @@ function MetaLine({ label, value }: { label: string; value: string }) {
 function QuoteDoc({ q }: { q: QuotePdfInput }) {
   const isInvoice = q.kind === "invoice";
   const companyAddr = [q.company.street, [q.company.postcode, q.company.city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
-  const meta = [q.company.kvk && `KVK ${q.company.kvk}`, q.company.vatNumber && `BTW ${q.company.vatNumber}`].filter(Boolean).join("  ·  ");
   const contact = [q.company.phone, q.company.email].filter(Boolean).join("  ·  ");
+  // Zakelijke gegevens onderaan (briefpapier-voet).
+  const legal = [
+    q.company.kvk && `KVK ${q.company.kvk}`,
+    q.company.vatNumber && `BTW ${q.company.vatNumber}`,
+    q.iban && `IBAN ${q.iban}`,
+    q.company.website,
+  ].filter(Boolean).join("   ·   ");
 
   // Per-vakman huisstijlkleur (valt terug op platform-blauw).
   const accent = normHex(q.accentColor) ?? C.blue;
@@ -168,14 +175,13 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
       <Page size="A4" style={s.page}>
         <View style={[s.accentBar, { backgroundColor: accent }]} />
 
-        {/* Kop: bedrijf links, document rechts */}
-        <View style={s.header}>
-          <View style={{ maxWidth: 300 }}>
+        {/* Briefpapier-masthead: bedrijf links, document rechts (zachte accent-tint) */}
+        <View style={[s.masthead, { backgroundColor: accentSoft }]}>
+          <View style={{ maxWidth: 320 }}>
             {q.company.logoUrl ? <Image style={s.logo} src={q.company.logoUrl} /> : null}
             <Text style={s.companyName}>{q.company.name}</Text>
             {companyAddr ? <Text style={s.muted}>{companyAddr}</Text> : null}
             {contact ? <Text style={s.muted}>{contact}</Text> : null}
-            {meta ? <Text style={s.faint}>{meta}</Text> : null}
           </View>
           <View style={{ alignItems: "flex-end" }}>
             <Text style={[s.docType, { color: accentText }]}>{isInvoice ? "FACTUUR" : "OFFERTE"}</Text>
@@ -184,8 +190,6 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
             {q.validUntil ? <MetaLine label={isInvoice ? "Vervaldatum" : "Geldig tot"} value={date(q.validUntil)} /> : null}
           </View>
         </View>
-
-        <View style={s.rule} />
 
         <View style={s.content}>
           {/* Klantgegevens */}
@@ -263,14 +267,12 @@ function QuoteDoc({ q }: { q: QuotePdfInput }) {
           </View>
         </View>
 
-        {/* Footer met paginanummer */}
+        {/* Briefpapier-voet: zakelijke gegevens + voettekst + paginanummer */}
         <View style={s.footer} fixed>
+          {legal ? <Text style={s.footerLegal}>{legal}</Text> : null}
           {q.footerNote ? <Text style={s.footerNote}>{q.footerNote}</Text> : null}
           <View style={s.footerRow}>
-            <Text style={s.footerText}>
-              {q.company.name}
-              {q.iban ? ` · IBAN ${q.iban}` : ""}
-            </Text>
+            <Text style={s.footerText}>{q.company.name}</Text>
             <Text style={s.footerText} fixed render={({ pageNumber, totalPages }) => `Pagina ${pageNumber} van ${totalPages}`} />
           </View>
         </View>
